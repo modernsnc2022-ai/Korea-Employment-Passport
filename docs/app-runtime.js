@@ -777,6 +777,57 @@ function wizardFieldSearchRows(query,stageId){
   return rows;
 }
 
+function findScopedAnswerChoices(query,stageId){
+  if(!stageId||!exactAnswers?.answers?.length||selectedScope(stageId))return [];
+  const q=normalizeSearch(query);
+  if(!q)return [];
+  const tokens=q.split(' ').filter(token=>token.length>1);
+  const rows=exactAnswers.answers
+    .filter(item=>item.stages?.includes(stageId)&&item.scopeType==='cohort'&&item.scopeKey)
+    .map(item=>{
+      const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
+      let score=0;
+      if(hay.includes(q))score+=20;
+      tokens.forEach(token=>{if(hay.includes(token))score+=2});
+      return {item,score};
+    })
+    .filter(row=>row.score>=8)
+    .sort((a,b)=>b.score-a.score);
+  const scopes=new Map();
+  rows.forEach(row=>{
+    const key=row.item.scopeKey;
+    const current=scopes.get(key);
+    if(!current||row.score>current.score)scopes.set(key,row);
+  });
+  return [...scopes.values()].slice(0,5).map(row=>row.item);
+}
+
+function renderScopeChoiceForQuestion(query,out,onChosen){
+  const stage=currentStage();
+  const choices=findScopedAnswerChoices(query,stage?.id);
+  if(!choices.length)return false;
+  out.className='result warn';
+  out.hidden=false;
+  out.innerHTML='<strong>Satu hal dulu: nama Anda ada di pengumuman yang mana?</strong><p>Pilih pengumuman yang benar. Setelah itu jawaban akan menyesuaikan otomatis.</p><div class="scope-choice-list">'+choices.map(item=>
+    '<button type="button" class="scope-choice" data-scope="'+escapeHtml(item.scopeKey)+'">'+escapeHtml(item.scopeLabel||'Pengumuman ini')+'</button>'
+  ).join('')+'</div><small class="muted">Kalau tidak yakin, jangan pilih sembarang. Buka pengumuman resmi dan pastikan nama Anda ada di sana.</small>';
+  out.querySelectorAll('[data-scope]').forEach(btn=>btn.addEventListener('click',()=>{
+    const state=read(KEYS.scopeSelections,{});
+    state[stage.id]=btn.dataset.scope;
+    write(KEYS.scopeSelections,state);
+    renderScopePicker(stage);
+    renderBqcStatus();
+    renderDocuments();
+    if(activeStage?.id===stage.id){
+      renderStageBqc(activeStage);
+      renderExactAnswers(activeStage);
+      renderPreSubmitGate(activeStage);
+    }
+    onChosen?.();
+  }));
+  return true;
+}
+
 function findExactFieldAnswers(query){
   const q=normalizeSearch(query);
   if(!q)return [];
@@ -882,6 +933,7 @@ function answerBrokerLikeQuestion(){
     return;
   }
 
+  if(renderScopeChoiceForQuestion(query,out,answerBrokerLikeQuestion))return;
   const matches=findExactFieldAnswers(query);
   if(matches.length){
     out.classList.add('safe');
