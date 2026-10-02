@@ -3,8 +3,9 @@ const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
+const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -14,26 +15,162 @@ const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
 const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
+const PHASES=[
+  {
+    id:'prepare',
+    label:'Persiapan & pendaftaran',
+    short:'Persiapan',
+    stages:['eligibility','registration','exam_fee','biometric','document_verify','exam_card']
+  },
+  {
+    id:'test',
+    label:'Ujian & seleksi',
+    short:'Ujian',
+    stages:['eps_topik','skill_competency','final_selection','psychology_pre_job','mcu1']
+  },
+  {
+    id:'matching',
+    label:'Lamaran & pemilihan perusahaan',
+    short:'Lamaran',
+    stages:['job_application','roster','employer_selection']
+  },
+  {
+    id:'contract_departure',
+    label:'SLC, visa & keberangkatan',
+    short:'SLC & berangkat',
+    stages:['slc','post_slc_requirements','visa_docs','predeparture_training','mcu3_departure','departure']
+  },
+  {
+    id:'korea',
+    label:'Masuk Korea & bekerja',
+    short:'Di Korea',
+    stages:['korea_entry_training','employer_handover','residence_registration','eps_insurance_check','first_payroll_check','labor_support_ready','employment_maintenance']
+  }
+];
+
+const TOOL_META={
+  eligibility:{view:'eligibility',label:'Cek kelayakan',desc:'Periksa syarat rute resmi'},
+  documents:{view:'documents',label:'Periksa dokumen',desc:'Format, ukuran dan checklist'},
+  fees:{view:'fees',label:'Cek biaya',desc:'Nominal, penerima dan catatan'},
+  contract:{view:'contract',label:'Periksa SLC',desc:'Kontrak dan gaji pertama'},
+  workplace:{view:'workplace',label:'Cek tempat kerja',desc:'Perusahaan, lokasi dan asrama'},
+  payroll:{view:'payroll',label:'Periksa gaji pertama',desc:'Slip gaji, transfer dan potongan'},
+  gaps:{view:'gaps',label:'Broker Guardian',desc:'Pesan, biaya dan celah bantuan'}
+};
+
+const STAGE_TOOLS={
+  eligibility:['eligibility','documents'],
+  registration:['documents','fees'],
+  exam_fee:['fees'],
+  biometric:['documents'],
+  document_verify:['documents'],
+  exam_card:['documents'],
+  eps_topik:[],
+  skill_competency:[],
+  final_selection:[],
+  psychology_pre_job:['fees','documents'],
+  mcu1:['fees','documents'],
+  job_application:['documents'],
+  roster:['gaps'],
+  employer_selection:['gaps'],
+  slc:['contract','workplace'],
+  post_slc_requirements:['documents','fees'],
+  visa_docs:['documents','fees'],
+  predeparture_training:['documents','fees'],
+  mcu3_departure:['documents','fees'],
+  departure:['documents','fees'],
+  korea_entry_training:['documents'],
+  employer_handover:['workplace'],
+  residence_registration:['documents'],
+  eps_insurance_check:['fees'],
+  first_payroll_check:['payroll'],
+  labor_support_ready:['gaps'],
+  employment_maintenance:['gaps']
+};
+
+function currentStage(){
+  if(!route)return null;
+  const done=new Set(read(KEYS.done,[]));
+  return route.stages.find(stage=>!done.has(stage.id))||null;
+}
+
+function phaseForStage(stageId){
+  return PHASES.find(phase=>phase.stages.includes(stageId))||PHASES[0];
+}
+
+function phaseStats(phase,done){
+  const existing=phase.stages.filter(id=>route.stages.some(stage=>stage.id===id));
+  const complete=existing.filter(id=>done.has(id)).length;
+  return {total:existing.length,complete};
+}
+
+function renderPhaseNav(){
+  if(!route)return;
+  const done=new Set(read(KEYS.done,[]));
+  const current=currentStage();
+  const currentPhase=phaseForStage(current?.id||route.stages.at(-1)?.id);
+  const wrap=$('phaseNav');
+  wrap.innerHTML='';
+  PHASES.forEach((phase,index)=>{
+    const stats=phaseStats(phase,done);
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='phase-btn'+(phase.id===currentPhase.id?' active':'')+(stats.total>0&&stats.complete===stats.total?' done':'');
+    button.innerHTML=`
+      <span class="phase-num">${stats.total>0&&stats.complete===stats.total?'✓':index+1}</span>
+      <span class="phase-copy"><strong>${escapeHtml(phase.short)}</strong><small>${escapeHtml(phase.label)}</small></span>
+      <span class="phase-count">${stats.complete}/${stats.total}</span>`;
+    button.addEventListener('click',()=>{
+      switchView('journey',false);
+      document.querySelector('[data-phase-group="'+phase.id+'"]')?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    wrap.appendChild(button);
+  });
+}
+
+function renderContextTools(stage){
+  const box=$('contextTools');
+  if(!stage){box.hidden=true;box.innerHTML='';return}
+  const toolsForStage=STAGE_TOOLS[stage.id]||[];
+  box.hidden=false;
+  const toolButtons=toolsForStage.map(key=>{
+    const meta=TOOL_META[key];
+    return `<button type="button" class="context-tool" data-tool-view="${meta.view}"><strong>${escapeHtml(meta.label)}</strong><small>${escapeHtml(meta.desc)}</small></button>`;
+  }).join('');
+  box.innerHTML=`
+    <div class="context-tools-head">
+      <strong>Alat untuk tahap ini</strong>
+      <small>${toolsForStage.length?'Buka hanya yang diperlukan':'Tidak ada alat tambahan'}</small>
+    </div>
+    <div class="context-tool-grid">
+      ${toolButtons||'<div class="context-tool"><strong>Ikuti sumber resmi</strong><small>Buka tahap untuk instruksi dan tautan resmi.</small></div>'}
+    </div>`;
+  box.querySelectorAll('[data-tool-view]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.toolView)));
+}
+
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
       fetch(CONTRACT_URL,{cache:'no-store'}),
-      fetch(WORKPLACE_URL,{cache:'no-store'})
+      fetch(WORKPLACE_URL,{cache:'no-store'}),
+      fetch(DOCUMENT_PACKS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
     contractRules=await contractRes.json();
     workplaceRules=await workplaceRes.json();
+    documentPacks=await documentPacksRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
     renderJourney();
     renderCurrentStageSelector();
+    renderPhaseNav();
     renderNextAction();
     renderEligibility();
     renderDocuments();
@@ -69,6 +206,9 @@ function renderCurrentStageSelector(){
     option.textContent=(index+1)+'. '+stageTitle(stage);
     select.appendChild(option);
   });
+  const current=currentStage();
+  const index=current?route.stages.findIndex(stage=>stage.id===current.id):-1;
+  if(index>=0)select.value=String(index);
 }
 
 $('setCurrentStageBtn').addEventListener('click',()=>{
@@ -78,28 +218,66 @@ $('setCurrentStageBtn').addEventListener('click',()=>{
   const done=route.stages.slice(0,index).map(s=>s.id);
   write(KEYS.done,done);
   renderJourney();
+  renderPhaseNav();
   renderNextAction();
+  renderDocuments();
   updateProgress();
 });
 
 function renderJourney(){
   const done=new Set(read(KEYS.done,[]));
-  $('stageList').innerHTML='';
-  route.stages.forEach((stage,index)=>{
-    const card=document.createElement('article');
-    card.className='stage'+(done.has(stage.id)?' done':'');
-    card.innerHTML=`
-      <div class="step-no">${done.has(stage.id)?'✓':index+1}</div>
-      <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(stage.authority)}</p></div>
-      <span class="status">${done.has(stage.id)?'Selesai':'Belum selesai'}</span>`;
-    card.addEventListener('click',()=>openStage(stage));
-    $('stageList').appendChild(card);
+  const current=currentStage();
+  const currentPhase=phaseForStage(current?.id||route.stages.at(-1)?.id);
+  const wrap=$('stageList');
+  wrap.innerHTML='';
+
+  PHASES.forEach((phase,phaseIndex)=>{
+    const stages=phase.stages.map(id=>route.stages.find(stage=>stage.id===id)).filter(Boolean);
+    if(!stages.length)return;
+    const stats=phaseStats(phase,done);
+    const group=document.createElement('section');
+    const isCurrent=phase.id===currentPhase.id;
+    const isDone=stats.complete===stats.total;
+    group.className='phase-group'+(isCurrent?' current':'')+(isDone?' done':'');
+    group.dataset.phaseGroup=phase.id;
+
+    const details=document.createElement('details');
+    details.open=isCurrent;
+    const summary=document.createElement('summary');
+    summary.innerHTML=`
+      <span class="phase-summary-main">
+        <span class="phase-num">${isDone?'✓':phaseIndex+1}</span>
+        <span><strong>${escapeHtml(phase.label)}</strong><small>${stats.total} tahap</small></span>
+      </span>
+      <span class="phase-summary-status">${isDone?'Selesai':isCurrent?'Sedang berjalan':stats.complete+'/'+stats.total}</span>`;
+    details.appendChild(summary);
+
+    const list=document.createElement('div');
+    list.className='phase-stage-list';
+    stages.forEach(stage=>{
+      const index=route.stages.findIndex(item=>item.id===stage.id);
+      const isStageDone=done.has(stage.id);
+      const isStageCurrent=current?.id===stage.id;
+      const card=document.createElement('article');
+      card.className='stage'+(isStageDone?' done':'')+(isStageCurrent?' current':'');
+      card.innerHTML=`
+        <div class="step-no">${isStageDone?'✓':index+1}</div>
+        <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(stage.authority)}</p></div>
+        <span class="status">${isStageDone?'Selesai':isStageCurrent?'Sekarang':'Berikutnya'}</span>`;
+      card.addEventListener('click',()=>openStage(stage));
+      list.appendChild(card);
+    });
+    details.appendChild(list);
+    group.appendChild(details);
+    wrap.appendChild(group);
   });
 }
 
 function openStage(stage){
   activeStage=stage;
-  $('stageKind').textContent=stage.kind.replaceAll('_',' ');
+  const index=route.stages.findIndex(item=>item.id===stage.id);
+  const phase=phaseForStage(stage.id);
+  $('stageKind').textContent='Tahap '+(index+1)+' dari '+route.stages.length+' · '+phase.short;
   $('stageTitle').textContent=stageTitle(stage);
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
@@ -108,7 +286,7 @@ function openStage(stage){
   const warning=stageWarning(stage);
   if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
   const done=new Set(read(KEYS.done,[]));
-  $('stageDoneBtn').textContent=done.has(stage.id)?'Batalkan tanda selesai':'Tandai selesai';
+  $('stageDoneBtn').textContent=done.has(stage.id)?'Batalkan tanda selesai':'Tandai selesai & lanjut';
   $('stageDialog').showModal();
 }
 
@@ -120,8 +298,13 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
   write(KEYS.done,[...done]);
   $('stageDialog').close();
   renderJourney();
+  renderPhaseNav();
   renderNextAction();
+  renderDocuments();
+  renderCurrentStageSelector();
   updateProgress();
+  switchView('journey',false);
+  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
 function renderNextAction(){
@@ -132,22 +315,26 @@ function renderNextAction(){
   box.hidden=false;
 
   if(done.size===0&&rules.registration.status==='closed'){
-    box.innerHTML='<small>LANGKAH BERIKUTNYA</small><h2>Persiapkan siklus rekrutmen resmi berikutnya</h2><p>Pendaftaran umum manufaktur 2026 sudah ditutup. Periksa kelayakan dan kualitas dokumen sekarang; jangan membayar atau mendaftar melalui calo untuk siklus berikutnya.</p><button class="primary" data-go="eligibility">Buka Cek Kelayakan</button>';
+    box.innerHTML='<small>LANGKAH BERIKUTNYA</small><h2>Persiapkan siklus rekrutmen resmi berikutnya</h2><p>Pendaftaran umum manufaktur 2026 sudah ditutup. Mulai dari cek kelayakan, lalu siapkan dokumen sesuai pengumuman siklus berikutnya.</p><button class="primary" data-go="eligibility">Mulai dari Cek Kelayakan</button>';
+    renderContextTools(route.stages[0]);
   }else if(next){
-    if(next.id==='slc'){
-      box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-go="contract">Periksa SLC saya</button>`;
-    }else{
-      box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
-    }
+    const toolKeys=STAGE_TOOLS[next.id]||[];
+    const firstTool=toolKeys.length?TOOL_META[toolKeys[0]]:null;
+    const actionButton=firstTool
+      ? `<button class="primary" data-go="${firstTool.view}">${escapeHtml(firstTool.label)}</button><button class="secondary" data-stage="${escapeHtml(next.id)}">Lihat instruksi tahap</button>`
+      : `<button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
+    box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p>${actionButton}`;
+    renderContextTools(next);
   }else{
     box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
+    renderContextTools(null);
   }
 
-  box.querySelector('[data-go]')?.addEventListener('click',e=>switchView(e.currentTarget.dataset.go));
-  box.querySelector('[data-stage]')?.addEventListener('click',e=>{
+  box.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',e=>switchView(e.currentTarget.dataset.go)));
+  box.querySelectorAll('[data-stage]').forEach(btn=>btn.addEventListener('click',e=>{
     const stage=route.stages.find(s=>s.id===e.currentTarget.dataset.stage);
     if(stage)openStage(stage);
-  });
+  }));
 }
 
 function updateProgress(){
@@ -226,41 +413,91 @@ function readImageRatio(file){
   });
 }
 
+function documentPackForStage(stageId){
+  if(!documentPacks?.packs?.length)return null;
+  return documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId))||null;
+}
+
 function renderDocuments(){
+  if(!documentPacks||!route)return;
   const checked=new Set(read(KEYS.docs,[]));
-  $('docList').innerHTML='';
-  rules.documents.forEach(doc=>{
+  const stage=currentStage()||route.stages.at(-1);
+  const pack=documentPackForStage(stage?.id);
+  const context=$('docStageContext');
+  const list=$('docList');
+  list.innerHTML='';
+
+  if(!pack){
+    context.innerHTML=`<strong>Belum ada paket dokumen untuk tahap ini.</strong><p class="muted">Buka sumber resmi tahap ${escapeHtml(stageTitle(stage))} dan jangan gunakan checklist dari tahap lain.</p><a class="source" href="${stage.sourceUrl}" target="_blank" rel="noopener">Buka sumber resmi ↗</a>`;
+    return;
+  }
+
+  const statusLabel={
+    verified:'Terverifikasi untuk pendaftaran 2026',
+    verified_general_2026:'Terverifikasi pada proses reguler 2026',
+    verified_call_2026:'Berdasarkan panggilan keberangkatan 2026',
+    awaiting_sector_notice:'Menunggu pengumuman manufaktur yang sesuai',
+    source_guided:'Sumber resmi saja — rincian belum dikunci',
+    verified_practice:'Checklist bukti kerja'
+  }[pack.status]||pack.status;
+
+  context.innerHTML=`
+    <div class="doc-context-head">
+      <div><small>TAHAP SEKARANG</small><strong>${escapeHtml(stageTitle(stage))}</strong></div>
+      <span class="doc-status">${escapeHtml(statusLabel)}</span>
+    </div>
+    <h3>${escapeHtml(pack.title)}</h3>
+    <p>${escapeHtml(pack.message||'')}</p>
+    <a class="source" href="${pack.sourceUrl}" target="_blank" rel="noopener">Buka sumber resmi paket ini ↗</a>`;
+
+  if(!pack.items?.length){
+    list.innerHTML='<article><div><h3>Jangan gunakan daftar dari tahap/sector lain</h3><p>Checklist sengaja dikosongkan sampai sumber yang sesuai dengan rute ini terverifikasi. Ini mencegah dokumen lama atau sektor lain dianggap sebagai persyaratan resmi.</p></div></article>';
+    return;
+  }
+
+  pack.items.forEach(doc=>{
     const article=document.createElement('article');
-    const optional=doc.required?'Wajib pada pengumuman 2026':'Jika tersedia / bersyarat';
-    const accept=doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg';
-    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · maks. ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p><div class="doc-tools"><input class="doc-file" type="file" accept="${accept}"><span class="file-status">Belum ada file yang diperiksa</span></div></div>`;
+    const optional=doc.required?'Wajib / perlu disiapkan':'Jika tersedia / bersyarat';
+    const formatLabel=doc.format?' · '+doc.format:'';
+    const maxSize=pack.maxFileSizeMb||null;
+    const sizeLabel=maxSize?' · maks. '+maxSize+' MB':'';
+    const fileTools=doc.validation==='file'
+      ? `<div class="doc-tools"><input class="doc-file" type="file" accept="${doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg'}"><span class="file-status">Belum ada file yang diperiksa</span></div>`
+      : '';
+
+    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)}${formatLabel}</h3><p>${escapeHtml(optional)}${sizeLabel}. ${escapeHtml(doc.note||'')}</p>${fileTools}</div>`;
+
     article.querySelector('.doc-check').addEventListener('change',(e)=>{
       const state=new Set(read(KEYS.docs,[]));
       e.target.checked?state.add(doc.id):state.delete(doc.id);
       write(KEYS.docs,[...state]);
     });
-    article.querySelector('.doc-file').addEventListener('change',async(e)=>{
-      const file=e.target.files?.[0];
-      const status=article.querySelector('.file-status');
-      if(!file){status.textContent='No file checked yet';status.className='file-status';return}
-      const errors=[];
-      if(file.size>rules.maxFileSizeMb*1024*1024)errors.push('larger than '+rules.maxFileSizeMb+' MB');
-      const lower=file.name.toLowerCase();
-      if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('expected PDF');
-      if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('format harus JPG/JPEG');
-      if(doc.id==='photo'&&!errors.length){
-        try{
-          const ratio=await readImageRatio(file);
-          const target=3.5/4.5;
-          if(Math.abs(ratio-target)>0.04)errors.push('rasio foto tidak mendekati 3.5 × 4.5');
-        }catch{
-          errors.push('dimensi foto tidak dapat dibaca');
+
+    const fileInput=article.querySelector('.doc-file');
+    if(fileInput){
+      fileInput.addEventListener('change',async(e)=>{
+        const file=e.target.files?.[0];
+        const status=article.querySelector('.file-status');
+        if(!file){status.textContent='Belum ada file yang diperiksa';status.className='file-status';return}
+        const errors=[];
+        if(maxSize&&file.size>maxSize*1024*1024)errors.push('ukuran lebih dari '+maxSize+' MB');
+        const lower=file.name.toLowerCase();
+        if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('format harus PDF');
+        if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('format harus JPG/JPEG');
+        if(/photo/i.test(doc.id)&&!errors.length){
+          try{
+            const ratio=await readImageRatio(file);
+            const target=3.5/4.5;
+            if(Math.abs(ratio-target)>0.04)errors.push('rasio foto tidak mendekati 3.5 × 4.5');
+          }catch{
+            errors.push('dimensi foto tidak dapat dibaca');
+          }
         }
-      }
-      status.className='file-status '+(errors.length?'bad':'ok');
-      status.textContent=errors.length?'Periksa ulang: '+errors.join('; '):'Format/ukuran lolos pemeriksaan · '+(file.size/1024/1024).toFixed(2)+' MB';
-    });
-    $('docList').appendChild(article);
+        status.className='file-status '+(errors.length?'bad':'ok');
+        status.textContent=errors.length?'Periksa ulang: '+errors.join('; '):'Format/ukuran lolos pemeriksaan · '+(file.size/1024/1024).toFixed(2)+' MB';
+      });
+    }
+    list.appendChild(article);
   });
 }
 $('resetDocs').addEventListener('click',()=>{write(KEYS.docs,[]);renderDocuments()});
@@ -751,12 +988,29 @@ $('emailGapsBtn').addEventListener('click',()=>{
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
-function switchView(viewId){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===viewId));
-  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===viewId));
-  document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
+function switchView(viewId,scroll=true){
+  const utilityOwner={
+    eligibility:'journey',
+    contract:'journey',
+    workplace:'journey',
+    payroll:'journey'
+  }[viewId]||viewId;
+
+  document.querySelectorAll('.utility-tab').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.view===utilityOwner);
+  });
+  document.querySelectorAll('.view').forEach(view=>{
+    view.classList.toggle('active',view.id===viewId);
+  });
+  if(scroll)document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
 }
-document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+document.querySelectorAll('.process-return').forEach(btn=>btn.addEventListener('click',()=>{
+  switchView('journey');
+  const current=currentStage();
+  const phase=phaseForStage(current?.id||route?.stages?.[0]?.id);
+  document.querySelector('[data-phase-group="'+phase.id+'"]')?.scrollIntoView({behavior:'smooth',block:'start'});
+}));
 
 window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredInstall=e;$('installBtn').hidden=false});
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});

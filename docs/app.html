@@ -32,29 +32,46 @@
     </section>
 
     <div id="cycleStatus" class="cycle-status" hidden></div>
-    <section id="nextAction" class="next-action" hidden></section>
 
-    <nav class="tabs" aria-label="Main">
-      <button class="tab active" data-view="journey">Perjalanan</button>
-      <button class="tab" data-view="eligibility">Kelayakan</button>
-      <button class="tab" data-view="documents">Dokumen</button>
-      <button class="tab" data-view="fees">Cek Biaya</button>
-      <button class="tab" data-view="contract">SLC</button>
-      <button class="tab" data-view="workplace">Tempat Kerja</button>
-      <button class="tab" data-view="gaps">Celah Calo</button>
+    <section class="flow-dashboard" aria-label="Proses resmi">
+      <aside class="phase-panel">
+        <div class="phase-panel-head">
+          <span class="eyebrow dark">PROSES RESMI</span>
+          <strong>Posisi Anda sekarang</strong>
+        </div>
+        <div id="phaseNav" class="phase-nav"></div>
+      </aside>
+
+      <div class="action-column">
+        <section id="nextAction" class="next-action" hidden></section>
+        <section id="contextTools" class="context-tools" hidden></section>
+      </div>
+    </section>
+
+    <nav class="utility-nav" aria-label="Alat utama">
+      <button class="utility-tab active" data-view="journey"><span>01</span>Proses</button>
+      <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
+      <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
+      <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
     </nav>
 
     <section id="journey" class="view active">
-      <div class="section-head">
-        <h2>Perjalanan resmi Anda</h2>
-        <p>Buka setiap tahap untuk melihat lembaga, tindakan, peringatan, dan sumber resmi. Jika Anda sudah berada di tengah proses 2026, pilih tahap Anda sekarang tanpa menandai semua tahap sebelumnya satu per satu.</p>
-      </div>
-      <div class="panel current-stage-panel">
-        <label>Tahap saya sekarang
-          <select id="currentStageSelect"></select>
-        </label>
-        <button id="setCurrentStageBtn" class="secondary">Tetapkan tahap sekarang</button>
-        <small>Tahap sebelumnya akan ditandai selesai hanya di perangkat ini. Anda tetap dapat mengubah tiap tahap secara manual.</small>
+      <div class="section-head journey-head">
+        <div>
+          <span class="eyebrow dark">LANGKAH DEMI LANGKAH</span>
+          <h2>Perjalanan resmi Anda</h2>
+          <p>Selesaikan tahap sesuai urutan. Tahap yang sedang berjalan dibuka otomatis, sedangkan tahap lain tetap dapat dilihat kapan saja.</p>
+        </div>
+        <details class="jump-stage">
+          <summary>Saya sudah berada di tengah proses</summary>
+          <div class="jump-stage-body">
+            <label>Tahap saya sekarang
+              <select id="currentStageSelect"></select>
+            </label>
+            <button id="setCurrentStageBtn" class="secondary">Tetapkan tahap sekarang</button>
+            <small>Tahap sebelumnya akan ditandai selesai hanya di perangkat ini. Anda tetap dapat mengubah tiap tahap secara manual.</small>
+          </div>
+        </details>
       </div>
       <div id="stageList" class="stage-list"></div>
     </section>
@@ -72,8 +89,9 @@
     <section id="documents" class="view">
       <div class="section-head">
         <h2>Document Copilot</h2>
-        <p>Gunakan sebagai pemeriksaan awal. Pengumuman resmi siklus berjalan selalu lebih tinggi daripada checklist ini. Pemeriksaan file hanya berjalan di perangkat Anda; file tidak diunggah atau disimpan oleh beta ini.</p>
+        <p>Checklist berubah mengikuti tahap Anda sekarang. Pengumuman resmi cohort/siklus selalu lebih tinggi daripada data aplikasi. File yang dipilih hanya diperiksa di perangkat Anda.</p>
       </div>
+      <div id="docStageContext" class="panel doc-context"></div>
       <div id="docList" class="check-list"></div>
       <button id="resetDocs" class="secondary">Reset checklist dokumen</button>
     </section>
@@ -160,39 +178,7 @@
         <p><a id="contractSource" class="source" href="#" target="_blank" rel="noopener">Buka formulir SLC resmi ↗</a></p>
       </div>
 
-      <div class="section-head">
-        <h2>Periksa gaji pertama</h2>
-        <p>Bandingkan slip gaji pertama dengan SLC. Pemeriksaan ini hanya mendeteksi ketidaksesuaian dasar dan bukan keputusan hukum.</p>
-      </div>
-      <div class="panel">
-        <label>Apakah ini periode gaji penuh?
-          <select id="payrollFullPeriod">
-            <option value="">Pilih</option>
-            <option value="yes">Ya</option>
-            <option value="no">Tidak / bulan masuk kerja parsial</option>
-          </select>
-        </label>
-        <label>Jumlah gaji bruto pada slip (KRW)
-          <input id="payrollGross" inputmode="numeric">
-        </label>
-        <label>Jumlah yang benar-benar masuk rekening (KRW)
-          <input id="payrollDeposit" inputmode="numeric">
-        </label>
-        <label>Total potongan pada slip (KRW)
-          <input id="payrollDeductions" inputmode="numeric">
-        </label>
-        <label>Jumlah potongan yang Anda pahami / dapat dijelaskan (KRW)
-          <input id="payrollExplained" inputmode="numeric">
-        </label>
-        <label>Jumlah jam yang dipakai untuk cek upah minimum
-          <input id="payrollHours" inputmode="decimal" placeholder="Contoh 209">
-        </label>
-        <label>Jumlah upah yang menurut slip dihitung untuk upah minimum (KRW)
-          <input id="payrollMinimumBase" inputmode="numeric">
-        </label>
-        <button id="checkPayrollBtn" class="primary">Periksa slip gaji</button>
-        <div id="payrollResult" class="result" hidden></div>
-      </div>
+
     </section>
 
     <section id="workplace" class="view">
@@ -223,6 +209,44 @@
         <button id="requestScoutBtn" class="primary">Minta pemeriksaan lapangan</button>
         <p class="muted">Permintaan hanya berisi nama perusahaan, alamat kerja, dan item yang belum terverifikasi. Jangan kirim paspor, ARC, atau dokumen kesehatan.</p>
       </div>
+    </section>
+
+    <section id="payroll" class="view">
+      <div class="section-head">
+        <span class="eyebrow dark">SETELAH MULAI BEKERJA</span>
+        <h2>Periksa gaji pertama</h2>
+        <p>Bandingkan slip gaji pertama dengan SLC setelah Anda benar-benar mulai bekerja di Korea. Pemeriksaan ini mendeteksi ketidaksesuaian dasar, bukan keputusan hukum.</p>
+      </div>
+      <div class="panel">
+        <label>Apakah ini periode gaji penuh?
+          <select id="payrollFullPeriod">
+            <option value="">Pilih</option>
+            <option value="yes">Ya</option>
+            <option value="no">Tidak / bulan masuk kerja parsial</option>
+          </select>
+        </label>
+        <label>Jumlah gaji bruto pada slip (KRW)
+          <input id="payrollGross" inputmode="numeric">
+        </label>
+        <label>Jumlah yang benar-benar masuk rekening (KRW)
+          <input id="payrollDeposit" inputmode="numeric">
+        </label>
+        <label>Total potongan pada slip (KRW)
+          <input id="payrollDeductions" inputmode="numeric">
+        </label>
+        <label>Jumlah potongan yang Anda pahami / dapat dijelaskan (KRW)
+          <input id="payrollExplained" inputmode="numeric">
+        </label>
+        <label>Jumlah jam yang dipakai untuk cek upah minimum
+          <input id="payrollHours" inputmode="decimal" placeholder="Contoh 209">
+        </label>
+        <label>Jumlah upah yang menurut slip dihitung untuk upah minimum (KRW)
+          <input id="payrollMinimumBase" inputmode="numeric">
+        </label>
+        <button id="checkPayrollBtn" class="primary">Periksa slip gaji</button>
+        <div id="payrollResult" class="result" hidden></div>
+      </div>
+      <button class="secondary process-return" type="button">← Kembali ke perjalanan</button>
     </section>
 
     <section id="gaps" class="view">
