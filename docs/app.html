@@ -33,6 +33,7 @@
 
     <div id="cycleStatus" class="cycle-status" hidden></div>
     <div id="freshnessStatus" class="freshness-status" hidden></div>
+    <div id="bqcStatus" class="bqc-status" hidden></div>
 
     <section class="flow-dashboard" aria-label="Proses resmi">
       <aside class="phase-panel">
@@ -339,6 +340,17 @@
       <h3>Apa yang harus dilakukan</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
+      <section id="stageBqcSection" class="stage-bqc-section" hidden>
+        <div class="stage-bqc-head">
+          <div>
+            <span class="eyebrow dark">BROKER QUESTION COVERAGE</span>
+            <strong id="stageBqcText"></strong>
+          </div>
+          <span id="stageBqcBadge" class="bqc-badge"></span>
+        </div>
+        <div class="coverage-bar"><span id="stageBqcBar"></span></div>
+        <div id="stageBqcQuestions" class="stage-bqc-questions"></div>
+      </section>
       <section id="exactAnswerSection" class="exact-answer-section" hidden>
         <div class="exact-answer-head">
           <span class="eyebrow dark">JAWABAN PASTI</span>

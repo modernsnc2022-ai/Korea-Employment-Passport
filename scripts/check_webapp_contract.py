@@ -13,6 +13,7 @@ i18n = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026_id.json").
 document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json").read_text(encoding="utf-8"))
 exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json").read_text(encoding="utf-8"))
 document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
+broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
 
 errors = []
 
@@ -156,6 +157,41 @@ if bad_sample_sources:
 if bad_sample_content:
     errors.append("document examples missing required content: " + ", ".join(sorted(bad_sample_content)))
 
+question_ids = []
+bad_question_stage_refs = []
+bad_question_answer_refs = []
+bad_question_content = []
+exact_id_set = set(exact_ids)
+for question in broker_questions.get("questions", []):
+    question_id = question.get("id", "")
+    question_ids.append(question_id)
+    stage_id = question.get("stageId")
+    if stage_id not in known_stage_ids:
+        bad_question_stage_refs.append(f"{question_id}->{stage_id}")
+    answer_id = question.get("answerId")
+    if answer_id and answer_id not in exact_id_set:
+        bad_question_answer_refs.append(f"{question_id}->{answer_id}")
+    for required in ("question", "severity", "category"):
+        if not str(question.get(required, "")).strip():
+            bad_question_content.append(f"{question_id}:{required}")
+    if question.get("severity") not in {"high", "medium", "low"}:
+        bad_question_content.append(f"{question_id}:severity_invalid")
+    if question.get("severity") == "high" and not question.get("blocksZeroBrokerReady", False):
+        bad_question_content.append(f"{question_id}:high_not_blocking")
+
+question_dupes = [key for key, count in Counter(question_ids).items() if key and count > 1]
+if question_dupes:
+    errors.append("duplicate broker-question ids: " + ", ".join(sorted(question_dupes)))
+
+if bad_question_stage_refs:
+    errors.append("broker questions reference unknown stages: " + ", ".join(sorted(bad_question_stage_refs)))
+
+if bad_question_answer_refs:
+    errors.append("broker questions reference missing exact answers: " + ", ".join(sorted(bad_question_answer_refs)))
+
+if bad_question_content:
+    errors.append("broker questions missing/invalid required content: " + ", ".join(sorted(bad_question_content)))
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -170,5 +206,6 @@ print(
     f"document_packs={len(document_packs.get('packs', []))}",
     f"exact_answers={len(exact_answers.get('answers', []))}",
     f"document_examples={len(document_examples.get('samples', []))}",
+    f"broker_questions={len(broker_questions.get('questions', []))}",
     f"js_literal_refs={len(literal_refs)}",
 )

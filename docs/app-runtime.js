@@ -7,8 +7,9 @@ const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
 const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
+const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -153,7 +154,7 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
@@ -162,9 +163,10 @@ async function boot(){
       fetch(DOCUMENT_PACKS_URL,{cache:'no-store'}),
       fetch(EXACT_ANSWERS_URL,{cache:'no-store'}),
       fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'}),
-      fetch(FRESHNESS_URL,{cache:'no-store'})
+      fetch(FRESHNESS_URL,{cache:'no-store'}),
+      fetch(BROKER_QUESTION_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -174,10 +176,12 @@ async function boot(){
     exactAnswers=await exactAnswersRes.json();
     documentExamples=await documentExamplesRes.json();
     freshnessPolicy=await freshnessRes.json();
+    brokerQuestions=await brokerQuestionRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
     renderFreshnessStatus();
+    renderBqcStatus();
     renderJourney();
     renderCurrentStageSelector();
     renderPhaseNav();
@@ -216,6 +220,78 @@ function renderFreshnessStatus(){
     <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(String(freshnessPolicy.monitorCadence||'').toUpperCase())}</span>
     <span><strong>Aturan tidak diperbarui otomatis.</strong> Perubahan sumber harus ditinjau sebelum dipublikasikan.</span>
     <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
+}
+
+function exactAnswerIdSet(){
+  return new Set((exactAnswers?.answers||[]).map(item=>item.id));
+}
+
+function bqcQuestionsForStage(stageId){
+  const answerIds=exactAnswerIdSet();
+  const base=(brokerQuestions?.questions||[])
+    .filter(item=>item.stageId===stageId)
+    .map(item=>({...item,resolved:Boolean(item.answerId&&answerIds.has(item.answerId))}));
+  const local=read(KEYS.fieldQuestions,[])
+    .filter(item=>item.stageId===stageId)
+    .map(item=>({
+      id:item.key,
+      stageId,
+      question:item.question,
+      severity:'high',
+      category:'user_discovered',
+      answerId:null,
+      resolved:false,
+      blocksZeroBrokerReady:true,
+      discoveredBy:'user'
+    }));
+  const seen=new Set();
+  return [...base,...local].filter(item=>{
+    const key=normalizeSearch(item.question);
+    if(seen.has(key))return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function bqcStageStats(stageId){
+  const items=bqcQuestionsForStage(stageId);
+  const answered=items.filter(item=>item.resolved).length;
+  const blockers=items.filter(item=>!item.resolved&&item.blocksZeroBrokerReady).length;
+  const pct=items.length?Math.round(answered/items.length*100):0;
+  return {items,answered,total:items.length,blockers,pct,ready:items.length>0&&blockers===0&&answered===items.length};
+}
+
+function renderBqcStatus(){
+  const box=$('bqcStatus');
+  if(!brokerQuestions||!route){box.hidden=true;return}
+  const stageIds=route.stages.map(stage=>stage.id);
+  const all=stageIds.flatMap(id=>bqcQuestionsForStage(id));
+  const answered=all.filter(item=>item.resolved).length;
+  const blockers=all.filter(item=>!item.resolved&&item.blocksZeroBrokerReady).length;
+  const pct=all.length?Math.round(answered/all.length*100):0;
+  box.hidden=false;
+  box.innerHTML=`
+    <div><strong>Broker Question Coverage</strong><small>${answered}/${all.length} pertanyaan mikro sudah punya jawaban pasti</small></div>
+    <div class="bqc-meter"><span style="width:${pct}%"></span></div>
+    <div class="bqc-value">${pct}% · ${blockers} blocker</div>`;
+}
+
+function renderStageBqc(stage){
+  const section=$('stageBqcSection');
+  if(!brokerQuestions){section.hidden=true;return}
+  const stats=bqcStageStats(stage.id);
+  section.hidden=false;
+  $('stageBqcText').textContent=`${stats.answered}/${stats.total} jawaban pasti · ${stats.blockers} blocker`;
+  $('stageBqcBar').style.width=stats.pct+'%';
+  const badge=$('stageBqcBadge');
+  badge.className='bqc-badge'+(stats.ready?' ready':'');
+  badge.textContent=stats.ready?'ZERO-BROKER READY':'BELUM READY';
+
+  const unresolved=stats.items.filter(item=>!item.resolved);
+  $('stageBqcQuestions').innerHTML=unresolved.length
+    ? unresolved.slice(0,6).map(item=>`<div class="stage-bqc-question ${item.severity==='high'?'high':''}"><strong>${item.severity==='high'?'Harus dijawab sebelum dianggap siap':'Perlu jawaban'}</strong>${escapeHtml(item.question)}</div>`).join('')+
+      (unresolved.length>6?`<div class="stage-bqc-question">+${unresolved.length-6} pertanyaan lain belum terverifikasi</div>`:'')
+    : '<div class="stage-bqc-question"><strong>Semua pertanyaan yang ditemukan sudah punya jawaban terverifikasi.</strong></div>';
 }
 
 function renderCurrentStageSelector(){
@@ -352,6 +428,7 @@ function openStage(stage){
     officialAction.href='#';
     officialAction.textContent='Buka layanan resmi ↗';
   }
+  renderStageBqc(stage);
   renderExactAnswers(stage);
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
@@ -569,6 +646,8 @@ function saveUnresolvedQuestion(query,origin='micro_help'){
     });
     write(KEYS.fieldQuestions,list);
     renderUnresolvedFieldQuestions();
+    renderBqcStatus();
+    if(activeStage?.id===stage?.id)renderStageBqc(activeStage);
   }
   return key;
 }
