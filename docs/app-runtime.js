@@ -1031,7 +1031,8 @@ function renderFormWizardCard(form,index){
   intro.innerHTML='<strong>'+escapeHtml(form.title)+'</strong>'+
     '<ul>'+((form.intro||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join(''))+'</ul>'+
     (form.attention?'<div class="wizard-attention"><strong>Perhatian:</strong> '+escapeHtml(form.attention)+'</div>':'')+
-    '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>';
+    '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>'+
+    '<div class="wizard-source-links"><a href="'+escapeHtml(form.sourceUrl)+'" target="_blank" rel="noopener">Buka formulir resmi ↗</a><a href="'+escapeHtml(form.guidanceUrl)+'" target="_blank" rel="noopener">Buka petunjuk resmi ↗</a></div>';
 
   const total=form.fields.length;
   const safeIndex=Math.max(0,Math.min(index,total));
