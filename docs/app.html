@@ -13,9 +13,9 @@
   <header class="topbar">
     <div>
       <strong>Korea Employment Passport</strong>
-      <small>Indonesia → E-9 → Manufacturing</small>
+      <small>Indonesia → E-9 → Manufaktur</small>
     </div>
-    <button id="installBtn" class="ghost" hidden>Install</button>
+    <button id="installBtn" class="ghost" hidden>Pasang</button>
   </header>
 
   <main class="shell">
@@ -35,100 +35,100 @@
     <section id="nextAction" class="next-action" hidden></section>
 
     <nav class="tabs" aria-label="Main">
-      <button class="tab active" data-view="journey">Journey</button>
-      <button class="tab" data-view="eligibility">Eligibility</button>
-      <button class="tab" data-view="documents">Documents</button>
-      <button class="tab" data-view="fees">Fee Check</button>
-      <button class="tab" data-view="gaps">Broker Gap</button>
+      <button class="tab active" data-view="journey">Perjalanan</button>
+      <button class="tab" data-view="eligibility">Kelayakan</button>
+      <button class="tab" data-view="documents">Dokumen</button>
+      <button class="tab" data-view="fees">Cek Biaya</button>
+      <button class="tab" data-view="gaps">Celah Calo</button>
     </nav>
 
     <section id="journey" class="view active">
       <div class="section-head">
-        <h2>Your official journey</h2>
-        <p>Tap a step to see the authority, action, warning and official source. If you are already in the 2026 process, set your current stage once instead of marking every earlier step manually.</p>
+        <h2>Perjalanan resmi Anda</h2>
+        <p>Buka setiap tahap untuk melihat lembaga, tindakan, peringatan, dan sumber resmi. Jika Anda sudah berada di tengah proses 2026, pilih tahap Anda sekarang tanpa menandai semua tahap sebelumnya satu per satu.</p>
       </div>
       <div class="panel current-stage-panel">
-        <label>My current stage
+        <label>Tahap saya sekarang
           <select id="currentStageSelect"></select>
         </label>
-        <button id="setCurrentStageBtn" class="secondary">Set current stage</button>
-        <small>Setting a current stage marks earlier steps as completed on this device. You can still adjust individual steps afterward.</small>
+        <button id="setCurrentStageBtn" class="secondary">Tetapkan tahap sekarang</button>
+        <small>Tahap sebelumnya akan ditandai selesai hanya di perangkat ini. Anda tetap dapat mengubah tiap tahap secara manual.</small>
       </div>
       <div id="stageList" class="stage-list"></div>
     </section>
 
     <section id="eligibility" class="view">
       <div class="section-head">
-        <h2>Eligibility Checker</h2>
-        <p>This is a self-check against the official 2026 general manufacturing criteria. It is not an official eligibility decision.</p>
+        <h2>Cek Kelayakan</h2>
+        <p>Pemeriksaan mandiri berdasarkan kriteria resmi manufaktur umum 2026. Hasil ini bukan keputusan resmi.</p>
       </div>
       <div id="eligibilityForm" class="panel"></div>
-      <button id="checkEligibilityBtn" class="primary">Check eligibility</button>
+      <button id="checkEligibilityBtn" class="primary">Periksa kelayakan</button>
       <div id="eligibilityResult" class="result" hidden></div>
     </section>
 
     <section id="documents" class="view">
       <div class="section-head">
         <h2>Document Copilot</h2>
-        <p>Use this as a pre-check. The current-cycle official notice always overrides this checklist. File validation runs only on your device; selected files are not uploaded or stored by this beta.</p>
+        <p>Gunakan sebagai pemeriksaan awal. Pengumuman resmi siklus berjalan selalu lebih tinggi daripada checklist ini. Pemeriksaan file hanya berjalan di perangkat Anda; file tidak diunggah atau disimpan oleh beta ini.</p>
       </div>
       <div id="docList" class="check-list"></div>
-      <button id="resetDocs" class="secondary">Reset document checklist</button>
+      <button id="resetDocs" class="secondary">Reset checklist dokumen</button>
     </section>
 
     <section id="fees" class="view">
       <div class="section-head">
-        <h2>Check This Fee</h2>
-        <p>Amount alone is never enough. Verify amount + payee + stage + official source.</p>
+        <h2>Cek Biaya Ini</h2>
+        <p>Nominal saja tidak cukup. Periksa nominal + penerima + tahap + sumber resmi.</p>
       </div>
       <div class="panel">
-        <label>Amount requested (Rp)
+        <label>Nominal yang diminta (Rp)
           <input id="feeAmount" inputmode="numeric" placeholder="e.g. 472161">
         </label>
-        <label>Who asked you to pay?
+        <label>Siapa yang meminta pembayaran?
           <select id="feePayee">
-            <option value="">Select</option>
-            <option value="official">Official institution / approved provider</option>
-            <option value="bank">Designated bank / KVAC</option>
-            <option value="lpk">LPK / training center</option>
-            <option value="broker">Individual / broker / agent</option>
-            <option value="unknown">Not sure</option>
+            <option value="">Pilih</option>
+            <option value="official">Lembaga resmi / penyedia yang disetujui</option>
+            <option value="bank">Bank yang ditunjuk / KVAC</option>
+            <option value="lpk">LPK / pusat pelatihan</option>
+            <option value="broker">Individu / calo / agen</option>
+            <option value="unknown">Tidak yakin</option>
           </select>
         </label>
-        <label>What is it for?
-          <input id="feePurpose" placeholder="Psychology test, visa, job guarantee…">
+        <label>Pembayaran untuk apa?
+          <input id="feePurpose" placeholder="Tes psikologi, visa, jaminan kerja…">
         </label>
-        <button id="checkFeeBtn" class="primary">Check fee</button>
+        <button id="checkFeeBtn" class="primary">Periksa biaya</button>
         <div id="feeResult" class="result" hidden></div>
       </div>
     </section>
 
     <section id="gaps" class="view">
       <div class="section-head">
-        <h2>Broker Gap</h2>
-        <p>If you still need an LPK, agent, friend or broker for a task, record it here. Any required private-broker task means this route is not finished.</p>
+        <h2>Celah Calo / Perantara</h2>
+        <p>Jika masih ada tugas yang membuat Anda harus bergantung pada LPK, agen, teman, atau calo, catat di sini. Satu kebutuhan calo swasta saja berarti rute ini belum selesai.</p>
       </div>
       <div class="panel">
-        <label>Current stage
+        <label>Tahap sekarang
           <select id="gapStage"></select>
         </label>
-        <label>What task can you not do alone?
-          <textarea id="gapTask" rows="4" placeholder="Explain the task and why you need help."></textarea>
+        <label>Tugas apa yang belum bisa Anda lakukan sendiri?
+          <textarea id="gapTask" rows="4" placeholder="Jelaskan tugas dan mengapa Anda masih membutuhkan bantuan."></textarea>
         </label>
-        <label>Who do you need help from?
+        <label>Anda masih membutuhkan bantuan siapa?
           <select id="gapHelper">
-            <option>LPK / training center</option>
-            <option>Private broker / agent</option>
-            <option>Friend / senior worker</option>
-            <option>Official institution</option>
-            <option>Licensed professional</option>
-            <option>Other</option>
+            <option>LPK / pusat pelatihan</option>
+            <option>Calo / agen swasta</option>
+            <option>Teman / pekerja senior</option>
+            <option>Lembaga resmi</option>
+            <option>Profesional berizin</option>
+            <option>Lainnya</option>
           </select>
         </label>
-        <button id="saveGapBtn" class="primary">Save gap on this device</button>
+        <button id="saveGapBtn" class="primary">Simpan celah di perangkat ini</button>
       </div>
       <div id="gapList" class="gap-list"></div>
-      <button id="emailGapsBtn" class="secondary">Send gaps to beta team</button>
+      <button id="emailGapsBtn" class="secondary">Kirim celah ke tim beta</button>
     </section>
   </main>
 
@@ -138,18 +138,18 @@
       <span id="stageKind" class="pill"></span>
       <h2 id="stageTitle"></h2>
       <p id="stageAuthority" class="muted"></p>
-      <h3>What to do</h3>
+      <h3>Apa yang harus dilakukan</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
-      <a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Open official source ↗</a>
-      <button id="stageDoneBtn" value="default" class="primary full">Mark complete</button>
+      <a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Buka sumber resmi ↗</a>
+      <button id="stageDoneBtn" value="default" class="primary full">Tandai selesai</button>
     </form>
   </dialog>
 
   <footer>
-    <span>Not a government service. No job guarantee.</span>
-    <a href="index.html">Beta home</a>
-    <a href="privacy.html">Privacy</a>
+    <span>Bukan layanan pemerintah. Tidak ada jaminan pekerjaan.</span>
+    <a href="index.html">Beranda beta</a>
+    <a href="privacy.html">Privasi</a>
   </footer>
 
   <script src="app-runtime.js"></script>

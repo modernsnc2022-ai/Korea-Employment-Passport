@@ -1,24 +1,30 @@
 const ROUTE_URL='data/id_e9_manufacturing_2026.json';
 const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
+const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps'};
-let route=null,rules=null,activeStage=null,deferredInstall=null;
+let route=null,rules=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
 const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
+const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
+const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
 async function boot(){
   try{
-    const [routeRes,rulesRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
-      fetch(RULES_URL,{cache:'no-store'})
+      fetch(RULES_URL,{cache:'no-store'}),
+      fetch(I18N_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
+    i18n=await i18nRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
-    $('routeMeta').textContent=`E-9 · Manufacturing · 2026 · pack ${route.packVersion} · verified ${route.lastVerified}`;
+    $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
     renderJourney();
     renderCurrentStageSelector();
@@ -29,7 +35,7 @@ async function boot(){
     renderGaps();
     updateProgress();
   }catch(err){
-    $('routeMeta').textContent='Unable to load verified route. Reconnect and retry.';
+    $('routeMeta').textContent='Data rute terverifikasi tidak dapat dimuat. Sambungkan internet dan coba lagi.';
     console.error(err);
   }
 }
@@ -38,19 +44,19 @@ function renderCycleStatus(){
   const box=$('cycleStatus');
   box.hidden=false;
   if(rules.registration.status==='closed'){
-    box.innerHTML=`<strong>2026 general manufacturing registration is closed.</strong> ${escapeHtml(rules.registration.statusMessage)} <a href="${rules.source.url}" target="_blank" rel="noopener">Official notice ↗</a>`;
+    box.innerHTML=`<strong>Pendaftaran umum manufaktur 2026 sudah ditutup.</strong> ${escapeHtml(rules.registration.statusMessage)} <a href="${rules.source.url}" target="_blank" rel="noopener">Pengumuman resmi ↗</a>`;
   }else{
-    box.textContent=rules.registration.statusMessage||'Check the latest official recruitment notice.';
+    box.textContent=rules.registration.statusMessage||'Periksa pengumuman rekrutmen resmi terbaru.';
   }
 }
 
 function renderCurrentStageSelector(){
   const select=$('currentStageSelect');
-  select.innerHTML='<option value="">Choose current stage</option>';
+  select.innerHTML='<option value="">Pilih tahap sekarang</option>';
   route.stages.forEach((stage,index)=>{
     const option=document.createElement('option');
     option.value=String(index);
-    option.textContent=(index+1)+'. '+stage.title;
+    option.textContent=(index+1)+'. '+stageTitle(stage);
     select.appendChild(option);
   });
 }
@@ -74,8 +80,8 @@ function renderJourney(){
     card.className='stage'+(done.has(stage.id)?' done':'');
     card.innerHTML=`
       <div class="step-no">${done.has(stage.id)?'✓':index+1}</div>
-      <div><h3>${escapeHtml(stage.title)}</h3><p>${escapeHtml(stage.authority)}</p></div>
-      <span class="status">${done.has(stage.id)?'Completed':'Open'}</span>`;
+      <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(stage.authority)}</p></div>
+      <span class="status">${done.has(stage.id)?'Selesai':'Belum selesai'}</span>`;
     card.addEventListener('click',()=>openStage(stage));
     $('stageList').appendChild(card);
   });
@@ -84,14 +90,15 @@ function renderJourney(){
 function openStage(stage){
   activeStage=stage;
   $('stageKind').textContent=stage.kind.replaceAll('_',' ');
-  $('stageTitle').textContent=stage.title;
+  $('stageTitle').textContent=stageTitle(stage);
   $('stageAuthority').textContent=stage.authority;
-  $('stageAction').textContent=stage.action;
+  $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
   const warn=$('stageWarning');
-  if(stage.warning){warn.hidden=false;warn.textContent='⚠ '+stage.warning}else{warn.hidden=true;warn.textContent=''}
+  const warning=stageWarning(stage);
+  if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
   const done=new Set(read(KEYS.done,[]));
-  $('stageDoneBtn').textContent=done.has(stage.id)?'Mark not complete':'Mark complete';
+  $('stageDoneBtn').textContent=done.has(stage.id)?'Batalkan tanda selesai':'Tandai selesai';
   $('stageDialog').showModal();
 }
 
@@ -115,11 +122,11 @@ function renderNextAction(){
   box.hidden=false;
 
   if(done.size===0&&rules.registration.status==='closed'){
-    box.innerHTML='<small>NEXT ACTION</small><h2>Prepare for the next official recruitment cycle</h2><p>The 2026 general manufacturing registration is closed. Check your eligibility and prepare document quality now; do not pay or register through a private broker for a future cycle.</p><button class="primary" data-go="eligibility">Open Eligibility Checker</button>';
+    box.innerHTML='<small>LANGKAH BERIKUTNYA</small><h2>Persiapkan siklus rekrutmen resmi berikutnya</h2><p>Pendaftaran umum manufaktur 2026 sudah ditutup. Periksa kelayakan dan kualitas dokumen sekarang; jangan membayar atau mendaftar melalui calo untuk siklus berikutnya.</p><button class="primary" data-go="eligibility">Buka Cek Kelayakan</button>';
   }else if(next){
-    box.innerHTML=`<small>NEXT ACTION</small><h2>${escapeHtml(next.title)}</h2><p>${escapeHtml(next.action)}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Open this step</button>`;
+    box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
   }else{
-    box.innerHTML='<small>ROUTE COMPLETE</small><h2>All tracked stages are marked complete</h2><p>Review any Broker Gaps before treating the route as zero-broker complete.</p><button class="primary" data-go="gaps">Review Broker Gaps</button>';
+    box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
   }
 
   box.querySelector('[data-go]')?.addEventListener('click',e=>switchView(e.currentTarget.dataset.go));
@@ -150,11 +157,11 @@ function renderEligibility(){
     if(rule.type==='date_range'){
       input=document.createElement('input');
       input.type='date'; input.id='elig_'+rule.id;
-      info.innerHTML+=`<div class="hint">2026 accepted birth dates: ${rule.min} to ${rule.max}</div>`;
+      info.innerHTML+=`<div class="hint">Rentang tanggal lahir 2026: ${rule.min} sampai ${rule.max}</div>`;
     }else if(rule.type==='number_max'){
       input=document.createElement('input');
       input.type='number'; input.min='0'; input.step='0.1'; input.placeholder='0'; input.id='elig_'+rule.id;
-      info.innerHTML+=`<div class="hint">Maximum under the 2026 rule: ${rule.max} years</div>`;
+      info.innerHTML+=`<div class="hint">Maksimum menurut aturan 2026: ${rule.max} tahun</div>`;
     }else{
       input=document.createElement('select');
       input.id='elig_'+rule.id;
@@ -183,15 +190,15 @@ $('checkEligibilityBtn').addEventListener('click',()=>{
   out.hidden=false;out.className='result';
   if(unknown.length){
     out.classList.add('warn');
-    out.innerHTML=`<strong>Incomplete self-check.</strong> Answer all items before using the result. Nothing from this checker is saved.`;
+    out.innerHTML=`<strong>Pemeriksaan belum lengkap.</strong> Jawab semua item terlebih dahulu. Jawaban pada pemeriksaan ini tidak disimpan.`;
     return;
   }
   if(failures.length){
     out.classList.add('risk');
-    out.innerHTML='<strong>Does not match one or more 2026 general manufacturing criteria:</strong><br>'+failures.map(x=>'• '+escapeHtml(x)).join('<br>')+'<br><br>This is not an official decision. Check the official notice.';
+    out.innerHTML='<strong>Ada satu atau lebih kriteria manufaktur umum 2026 yang tidak terpenuhi:</strong><br>'+failures.map(x=>'• '+escapeHtml(x)).join('<br>')+'<br><br>Ini bukan keputusan resmi. Periksa pengumuman resmi.';
   }else{
     out.classList.add('safe');
-    out.innerHTML='<strong>Matches the listed 2026 general manufacturing criteria in this self-check.</strong><br>The 2026 registration is already closed, so this result is for preparation only. Wait for the next official KP2MI/HRD Korea recruitment notice because future criteria can change.';
+    out.innerHTML='<strong>Sesuai dengan kriteria manufaktur umum 2026 yang tercantum pada pemeriksaan ini.</strong><br>Pendaftaran 2026 sudah ditutup, jadi hasil ini hanya untuk persiapan. Tunggu pengumuman resmi KP2MI/HRD Korea berikutnya karena persyaratan dapat berubah.';
   }
 });
 
@@ -200,9 +207,9 @@ function renderDocuments(){
   $('docList').innerHTML='';
   rules.documents.forEach(doc=>{
     const article=document.createElement('article');
-    const optional=doc.required?'Required in 2026 notice':'If available / conditional';
+    const optional=doc.required?'Wajib pada pengumuman 2026':'Jika tersedia / bersyarat';
     const accept=doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg';
-    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · max ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p><div class="doc-tools"><input class="doc-file" type="file" accept="${accept}"><span class="file-status">No file checked yet</span></div></div>`;
+    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · maks. ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p><div class="doc-tools"><input class="doc-file" type="file" accept="${accept}"><span class="file-status">Belum ada file yang diperiksa</span></div></div>`;
     article.querySelector('.doc-check').addEventListener('change',(e)=>{
       const state=new Set(read(KEYS.docs,[]));
       e.target.checked?state.add(doc.id):state.delete(doc.id);
@@ -262,9 +269,10 @@ $('saveGapBtn').addEventListener('click',()=>{
 });
 function renderGaps(){
   const gaps=read(KEYS.gaps,[]);$('gapList').innerHTML='';
-  if(!gaps.length){$('gapList').innerHTML='<div class="gap-item"><p>No Broker Gaps recorded on this device yet.</p></div>';return}
+  if(!gaps.length){$('gapList').innerHTML='<div class="gap-item"><p>Belum ada Celah Calo yang dicatat pada perangkat ini.</p></div>';return}
   gaps.forEach(g=>{
-    const stage=route?.stages.find(s=>s.id===g.stage)?.title||g.stage;
+    const found=route?.stages.find(s=>s.id===g.stage);
+    const stage=found?stageTitle(found):g.stage;
     const el=document.createElement('article');el.className='gap-item';
     el.innerHTML=`<h3>${escapeHtml(stage)}</h3><p>${escapeHtml(g.task)}</p><p><strong>Helper:</strong> ${escapeHtml(g.helper)}</p><div class="gap-actions"><button>Delete</button></div>`;
     el.querySelector('button').addEventListener('click',()=>{write(KEYS.gaps,read(KEYS.gaps,[]).filter(x=>x.id!==g.id));renderGaps()});
