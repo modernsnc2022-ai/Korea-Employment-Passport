@@ -81,6 +81,7 @@ footer{max-width:1180px;margin:auto;padding:24px 20px 45px;border-top:1px solid 
 @media(max-width:960px){
   .shell{padding-left:16px;padding-right:16px}
   .flow-dashboard{grid-template-columns:1fr}
+  .action-column{order:1}.phase-panel{order:2}
   .phase-panel{padding:14px}.phase-nav{display:flex;overflow-x:auto;gap:8px;padding-bottom:2px;scrollbar-width:none}.phase-nav::-webkit-scrollbar{display:none}
   .phase-btn{min-width:220px}
   .context-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}

@@ -244,13 +244,24 @@ function exactAnswerIdSet(stageId){
   return new Set((exactAnswers?.answers||[]).filter(item=>exactAnswerApplies(item,stageId)).map(item=>item.id));
 }
 
+function wizardFieldRefSet(stageId){
+  const refs=new Set();
+  (formWizards?.forms||[]).filter(form=>form.stages?.includes(stageId)).forEach(form=>{
+    (form.fields||[]).forEach(field=>refs.add(form.id+':'+field.id));
+  });
+  return refs;
+}
+
 function bqcQuestionsForStage(stageId){
   const answerIds=exactAnswerIdSet(stageId);
+  const wizardRefs=wizardFieldRefSet(stageId);
   const base=(brokerQuestions?.questions||[])
     .filter(item=>item.stageId===stageId)
     .map(item=>{
       const candidates=item.answerIds?.length?item.answerIds:(item.answerId?[item.answerId]:[]);
-      return {...item,resolved:candidates.some(id=>answerIds.has(id))};
+      const resolvedByExact=candidates.some(id=>answerIds.has(id));
+      const resolvedByWizard=Boolean(item.wizardRef&&wizardRefs.has(item.wizardRef));
+      return {...item,resolved:resolvedByExact||resolvedByWizard};
     });
   const local=read(KEYS.fieldQuestions,[])
     .filter(item=>item.stageId===stageId)

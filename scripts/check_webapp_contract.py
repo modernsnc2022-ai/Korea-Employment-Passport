@@ -192,9 +192,15 @@ if bad_sample_content:
 if bad_sample_scope:
     errors.append("cohort document examples missing scope metadata: " + ", ".join(sorted(bad_sample_scope)))
 
+wizard_ref_set = {
+    f"{form.get('id')}:{field.get('id')}"
+    for form in form_wizards.get("forms", [])
+    for field in form.get("fields", [])
+}
 question_ids = []
 bad_question_stage_refs = []
 bad_question_answer_refs = []
+bad_question_wizard_refs = []
 bad_question_content = []
 exact_id_set = set(exact_ids)
 for question in broker_questions.get("questions", []):
@@ -209,6 +215,9 @@ for question in broker_questions.get("questions", []):
     for answer_ref in question.get("answerIds", []):
         if answer_ref not in exact_id_set:
             bad_question_answer_refs.append(f"{question_id}->{answer_ref}")
+    wizard_ref = question.get("wizardRef")
+    if wizard_ref and wizard_ref not in wizard_ref_set:
+        bad_question_wizard_refs.append(f"{question_id}->{wizard_ref}")
     for required in ("question", "severity", "category"):
         if not str(question.get(required, "")).strip():
             bad_question_content.append(f"{question_id}:{required}")
@@ -226,6 +235,9 @@ if bad_question_stage_refs:
 
 if bad_question_answer_refs:
     errors.append("broker questions reference missing exact answers: " + ", ".join(sorted(bad_question_answer_refs)))
+
+if bad_question_wizard_refs:
+    errors.append("broker questions reference missing form-wizard fields: " + ", ".join(sorted(bad_question_wizard_refs)))
 
 if bad_question_content:
     errors.append("broker questions missing/invalid required content: " + ", ".join(sorted(bad_question_content)))
