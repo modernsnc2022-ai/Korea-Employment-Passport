@@ -288,6 +288,16 @@ function openStage(stage){
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
+  const officialAction=$('stageOfficialAction');
+  if(stage.officialActionUrl){
+    officialAction.hidden=false;
+    officialAction.href=stage.officialActionUrl;
+    officialAction.textContent=(stage.officialActionLabel||'Buka layanan resmi')+' ↗';
+  }else{
+    officialAction.hidden=true;
+    officialAction.href='#';
+    officialAction.textContent='Buka layanan resmi ↗';
+  }
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
   if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
