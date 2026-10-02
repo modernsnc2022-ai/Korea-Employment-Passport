@@ -42,7 +42,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
 .utility-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 6px}.utility-tab{border:1px solid var(--line);background:#fff;padding:11px 12px;border-radius:12px;font-weight:800;color:var(--muted);cursor:pointer}.utility-tab span{display:none}.utility-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-.view{display:none;min-width:0}.view.active{display:block}
+.view{display:none;min-width:0}.view.active{display:block}.all-journey{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:var(--shadow)}.all-journey>summary{cursor:pointer;padding:14px 16px;font-weight:850;color:var(--muted)}.all-journey[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}.all-journey-body{padding:0 16px 16px}
 .section-head{margin:26px 0 16px}.section-head h2{margin:0 0 7px;font-size:clamp(1.4rem,3vw,1.7rem);letter-spacing:-.025em}.section-head p{margin:0;color:var(--muted)}
 .journey-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,340px);gap:18px;align-items:start}
 .jump-stage{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.jump-stage summary{cursor:pointer;padding:13px 15px;font-weight:800}.jump-stage-body{display:grid;gap:10px;padding:0 15px 15px}.jump-stage-body label{display:grid;gap:6px;font-size:.86rem;font-weight:800}.jump-stage-body small{color:var(--muted)}

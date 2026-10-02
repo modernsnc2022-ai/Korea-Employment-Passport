@@ -72,31 +72,36 @@
     </section>
 
     <nav class="utility-nav" aria-label="Alat utama">
-      <button class="utility-tab active" data-view="journey"><span>01</span>Proses</button>
+      <button class="utility-tab active" data-view="journey"><span>01</span>Sekarang</button>
       <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
       <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
       <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
     </nav>
 
     <section id="journey" class="view active">
-      <div class="section-head journey-head">
-        <div>
-          <span class="eyebrow dark">LANGKAH DEMI LANGKAH</span>
-          <h2>Perjalanan resmi Anda</h2>
-          <p>Selesaikan tahap sesuai urutan. Tahap yang sedang berjalan dibuka otomatis, sedangkan tahap lain tetap dapat dilihat kapan saja.</p>
-        </div>
-        <details class="jump-stage">
-          <summary>Saya sudah berada di tengah proses</summary>
-          <div class="jump-stage-body">
-            <label>Tahap saya sekarang
-              <select id="currentStageSelect"></select>
-            </label>
-            <button id="setCurrentStageBtn" class="secondary">Tetapkan tahap sekarang</button>
-            <small>Tahap sebelumnya akan ditandai selesai hanya di perangkat ini. Anda tetap dapat mengubah tiap tahap secara manual.</small>
+      <details id="allJourneyDetails" class="all-journey">
+        <summary>Lihat semua tahap / ubah posisi saya</summary>
+        <div class="all-journey-body">
+          <div class="section-head journey-head">
+            <div>
+              <span class="eyebrow dark">LANGKAH DEMI LANGKAH</span>
+              <h2>Perjalanan resmi Anda</h2>
+              <p>Anda tidak perlu menghafal semuanya. Buka bagian ini hanya untuk melihat seluruh proses atau mengubah posisi Anda.</p>
+            </div>
+            <details class="jump-stage">
+              <summary>Saya sudah berada di tengah proses</summary>
+              <div class="jump-stage-body">
+                <label>Tahap saya sekarang
+                  <select id="currentStageSelect"></select>
+                </label>
+                <button id="setCurrentStageBtn" class="secondary">Tetapkan tahap sekarang</button>
+                <small>Tahap sebelumnya akan ditandai selesai hanya di perangkat ini. Anda tetap dapat mengubahnya nanti.</small>
+              </div>
+            </details>
           </div>
-        </details>
-      </div>
-      <div id="stageList" class="stage-list"></div>
+          <div id="stageList" class="stage-list"></div>
+        </div>
+      </details>
     </section>
 
     <section id="eligibility" class="view">

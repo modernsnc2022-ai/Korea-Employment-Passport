@@ -127,6 +127,8 @@ function renderPhaseNav(){
       <span class="phase-count">${stats.complete}/${stats.total}</span>`;
     button.addEventListener('click',()=>{
       switchView('journey',false);
+      const allJourney=$('allJourneyDetails');
+      if(allJourney)allJourney.open=true;
       document.querySelector('[data-phase-group="'+phase.id+'"]')?.scrollIntoView({behavior:'smooth',block:'start'});
     });
     wrap.appendChild(button);
@@ -1895,6 +1897,8 @@ function switchView(viewId,scroll=true){
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
 document.querySelectorAll('.process-return').forEach(btn=>btn.addEventListener('click',()=>{
   switchView('journey');
+  const allJourney=$('allJourneyDetails');
+  if(allJourney)allJourney.open=true;
   const current=currentStage();
   const phase=phaseForStage(current?.id||route?.stages?.[0]?.id);
   document.querySelector('[data-phase-group="'+phase.id+'"]')?.scrollIntoView({behavior:'smooth',block:'start'});
