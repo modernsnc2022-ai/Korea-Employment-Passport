@@ -12,6 +12,7 @@ route = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json").re
 i18n = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026_id.json").read_text(encoding="utf-8"))
 document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json").read_text(encoding="utf-8"))
 exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json").read_text(encoding="utf-8"))
+document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
 
 errors = []
 
@@ -120,6 +121,36 @@ if bad_exact_sources:
 if bad_exact_content:
     errors.append("exact answers missing required content: " + ", ".join(sorted(bad_exact_content)))
 
+sample_ids = []
+bad_sample_stage_refs = []
+bad_sample_sources = []
+bad_sample_content = []
+for sample in document_examples.get("samples", []):
+    sample_id = sample.get("id", "")
+    sample_ids.append(sample_id)
+    for stage_id in sample.get("stages", []):
+        if stage_id not in known_stage_ids:
+            bad_sample_stage_refs.append(f"{sample_id}->{stage_id}")
+    if not str(sample.get("sourceUrl", "")).startswith("http"):
+        bad_sample_sources.append(sample_id or "<missing>")
+    if not str(sample.get("title", "")).strip():
+        bad_sample_content.append(f"{sample_id}:title")
+    if not sample.get("rows"):
+        bad_sample_content.append(f"{sample_id}:rows")
+
+sample_dupes = [key for key, count in Counter(sample_ids).items() if key and count > 1]
+if sample_dupes:
+    errors.append("duplicate document example ids: " + ", ".join(sorted(sample_dupes)))
+
+if bad_sample_stage_refs:
+    errors.append("document examples reference unknown stages: " + ", ".join(sorted(bad_sample_stage_refs)))
+
+if bad_sample_sources:
+    errors.append("document examples missing source URL: " + ", ".join(sorted(bad_sample_sources)))
+
+if bad_sample_content:
+    errors.append("document examples missing required content: " + ", ".join(sorted(bad_sample_content)))
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -133,5 +164,6 @@ print(
     f"stages={len(stage_ids)}",
     f"document_packs={len(document_packs.get('packs', []))}",
     f"exact_answers={len(exact_answers.get('answers', []))}",
+    f"document_examples={len(document_examples.get('samples', []))}",
     f"js_literal_refs={len(literal_refs)}",
 )

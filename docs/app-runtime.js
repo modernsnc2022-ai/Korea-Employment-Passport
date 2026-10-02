@@ -5,8 +5,9 @@ const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
 const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
 const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
+const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,exactAnswers=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -151,16 +152,17 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
       fetch(CONTRACT_URL,{cache:'no-store'}),
       fetch(WORKPLACE_URL,{cache:'no-store'}),
       fetch(DOCUMENT_PACKS_URL,{cache:'no-store'}),
-      fetch(EXACT_ANSWERS_URL,{cache:'no-store'})
+      fetch(EXACT_ANSWERS_URL,{cache:'no-store'}),
+      fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -168,6 +170,7 @@ async function boot(){
     workplaceRules=await workplaceRes.json();
     documentPacks=await documentPacksRes.json();
     exactAnswers=await exactAnswersRes.json();
+    documentExamples=await documentExamplesRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -587,6 +590,41 @@ $('fieldHelpQuery').addEventListener('keydown',(event)=>{
   }
 });
 
+function renderDocumentExamples(stageId){
+  const section=$('documentExampleSection');
+  const list=$('documentExampleList');
+  if(!documentExamples?.samples?.length){
+    section.hidden=true;
+    list.innerHTML='';
+    return;
+  }
+
+  const samples=documentExamples.samples.filter(sample=>sample.stages?.includes(stageId));
+  if(!samples.length){
+    section.hidden=true;
+    list.innerHTML='';
+    return;
+  }
+
+  section.hidden=false;
+  list.innerHTML=samples.map((sample,index)=>{
+    const rows=(sample.rows||[]).map(([label,value])=>`
+      <div class="example-row"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(value)}</span></div>`
+    ).join('');
+    const checks=(sample.checks||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join('');
+    return `<details class="example-card" ${index===0?'open':''}>
+      <summary><span>${escapeHtml(sample.title)}</span><span>Contoh</span></summary>
+      <div class="example-banner">${escapeHtml(documentExamples.policy?.banner||'DATA CONTOH — JANGAN DISALIN')}</div>
+      <div class="example-body">
+        <div class="example-table">${rows}</div>
+        ${checks?'<ul class="example-checks">'+checks+'</ul>':''}
+        <p class="example-note">${escapeHtml(documentExamples.policy?.note||'Ganti semua data contoh dengan data Anda sendiri.')}</p>
+        <a class="source" href="${sample.sourceUrl}" target="_blank" rel="noopener">Dasar resmi contoh ↗</a>
+      </div>
+    </details>`;
+  }).join('');
+}
+
 function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
   return documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId))||null;
@@ -597,6 +635,7 @@ function renderDocuments(){
   const checked=new Set(read(KEYS.docs,[]));
   const stage=currentStage()||route.stages.at(-1);
   const pack=documentPackForStage(stage?.id);
+  renderDocumentExamples(stage?.id);
   const context=$('docStageContext');
   const list=$('docList');
   list.innerHTML='';
