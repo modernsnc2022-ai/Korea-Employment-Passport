@@ -28,25 +28,37 @@ class TextExtractor(HTMLParser):
             if text:
                 self.parts.append(text)
 
-def fetch_text(url):
+def fetch_fingerprint(url):
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.0 (+GitHub Actions)",
+            "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.1 (+GitHub Actions)",
             "Accept-Language": "ko,en;q=0.8,id;q=0.7",
         },
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         raw = resp.read()
+        content_type = (resp.headers.get_content_type() or "").lower()
         charset = resp.headers.get_content_charset() or "utf-8"
+
+    if content_type == "application/pdf" or url.lower().split("?", 1)[0].endswith(".pdf"):
+        return {
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "contentLength": len(raw),
+            "mode": "binary",
+            "contentType": content_type or "application/pdf",
+        }
+
     html = raw.decode(charset, errors="replace")
     extractor = TextExtractor()
     extractor.feed(html)
     normalized = re.sub(r"\s+", " ", " ".join(extractor.parts)).strip()
-    return normalized
-
-def digest(text):
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return {
+        "sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
+        "contentLength": len(normalized),
+        "mode": "normalized_text",
+        "contentType": content_type or "text/html",
+    }
 
 def main():
     p = argparse.ArgumentParser()
@@ -65,12 +77,14 @@ def main():
     failures = []
     for source in sources:
         try:
-            text = fetch_text(source["url"])
+            fingerprint = fetch_fingerprint(source["url"])
             current[source["id"]] = {
-                "sha256": digest(text),
+                "sha256": fingerprint["sha256"],
                 "agency": source["agency"],
                 "url": source["url"],
-                "textLength": len(text),
+                "contentLength": fingerprint["contentLength"],
+                "mode": fingerprint["mode"],
+                "contentType": fingerprint["contentType"],
             }
         except Exception as exc:
             failures.append({"id": source["id"], "url": source["url"], "error": str(exc)})

@@ -6,8 +6,9 @@ const WORKPLACE_URL='data/workplace_reality_v1.json';
 const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
 const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
+const FRESHNESS_URL='data/freshness_policy_v1.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -152,7 +153,7 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
@@ -160,9 +161,10 @@ async function boot(){
       fetch(WORKPLACE_URL,{cache:'no-store'}),
       fetch(DOCUMENT_PACKS_URL,{cache:'no-store'}),
       fetch(EXACT_ANSWERS_URL,{cache:'no-store'}),
-      fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'})
+      fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'}),
+      fetch(FRESHNESS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -171,9 +173,11 @@ async function boot(){
     documentPacks=await documentPacksRes.json();
     exactAnswers=await exactAnswersRes.json();
     documentExamples=await documentExamplesRes.json();
+    freshnessPolicy=await freshnessRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
+    renderFreshnessStatus();
     renderJourney();
     renderCurrentStageSelector();
     renderPhaseNav();
@@ -202,6 +206,16 @@ function renderCycleStatus(){
   }else{
     box.textContent=rules.registration.statusMessage||'Periksa pengumuman rekrutmen resmi terbaru.';
   }
+}
+
+function renderFreshnessStatus(){
+  const box=$('freshnessStatus');
+  if(!freshnessPolicy||!route){box.hidden=true;return}
+  box.hidden=false;
+  box.innerHTML=`
+    <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(String(freshnessPolicy.monitorCadence||'').toUpperCase())}</span>
+    <span><strong>Aturan tidak diperbarui otomatis.</strong> Perubahan sumber harus ditinjau sebelum dipublikasikan.</span>
+    <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
 }
 
 function renderCurrentStageSelector(){
@@ -538,6 +552,27 @@ function findExactFieldAnswers(query){
     .map(row=>row.item);
 }
 
+
+function saveUnresolvedQuestion(query,origin='micro_help'){
+  const stage=currentStage();
+  const list=read(KEYS.fieldQuestions,[]);
+  const key=normalizeSearch(query)+'|'+(stage?.id||'unknown');
+  if(!list.some(item=>item.key===key)){
+    list.unshift({
+      key,
+      question:query,
+      stageId:stage?.id||'unknown',
+      stageTitle:stage?stageTitle(stage):'Unknown',
+      createdAt:new Date().toISOString(),
+      status:'needs_official_verification',
+      origin
+    });
+    write(KEYS.fieldQuestions,list);
+    renderUnresolvedFieldQuestions();
+  }
+  return key;
+}
+
 $('fieldHelpBtn').addEventListener('click',()=>{
   const query=$('fieldHelpQuery').value.trim();
   const out=$('fieldHelpResult');
@@ -563,21 +598,7 @@ $('fieldHelpBtn').addEventListener('click',()=>{
 
   const saveUnresolvedBtn=out.querySelector('#saveUnresolvedFieldBtn');
   saveUnresolvedBtn?.addEventListener('click',()=>{
-    const stage=currentStage();
-    const list=read(KEYS.fieldQuestions,[]);
-    const key=normalizeSearch(query)+'|'+(stage?.id||'unknown');
-    if(!list.some(item=>item.key===key)){
-      list.unshift({
-        key,
-        question:query,
-        stageId:stage?.id||'unknown',
-        stageTitle:stage?stageTitle(stage):'Unknown',
-        createdAt:new Date().toISOString(),
-        status:'needs_official_verification'
-      });
-      write(KEYS.fieldQuestions,list);
-      renderUnresolvedFieldQuestions();
-    }
+    saveUnresolvedQuestion(query,'field_copilot');
     saveUnresolvedBtn.disabled=true;
     saveUnresolvedBtn.textContent='Tersimpan — jangan submit sampai terverifikasi';
   });
@@ -587,6 +608,47 @@ $('fieldHelpQuery').addEventListener('keydown',(event)=>{
   if(event.key==='Enter'){
     event.preventDefault();
     $('fieldHelpBtn').click();
+  }
+});
+
+
+function answerBrokerLikeQuestion(){
+  const query=$('brokerLikeQuestion').value.trim();
+  const out=$('brokerLikeQuestionResult');
+  out.hidden=false;
+  out.className='result';
+
+  if(!query){
+    out.classList.add('warn');
+    out.textContent='Tulis pertanyaan kecil yang membuat Anda ragu.';
+    return;
+  }
+
+  const matches=findExactFieldAnswers(query);
+  if(matches.length){
+    out.classList.add('safe');
+    out.innerHTML='<strong>Jawaban terverifikasi ditemukan.</strong><div class="field-match-list">'+matches.map(fieldAnswerHtml).join('')+'</div>';
+    return;
+  }
+
+  out.classList.add('warn');
+  out.innerHTML=`<strong>Belum ada jawaban resmi yang cukup spesifik untuk “${escapeHtml(query)}”.</strong>
+    <p>Jangan menebak dan jangan submit dulu. Simpan pertanyaan ini agar diverifikasi terhadap form/pengumuman resmi yang tepat.</p>
+    <button id="saveBrokerLikeQuestionBtn" class="secondary" type="button">Simpan sebagai pertanyaan wajib diverifikasi</button>`;
+
+  const saveBtn=out.querySelector('#saveBrokerLikeQuestionBtn');
+  saveBtn?.addEventListener('click',()=>{
+    saveUnresolvedQuestion(query,'global_broker_like_help');
+    saveBtn.disabled=true;
+    saveBtn.textContent='Tersimpan — jangan submit sampai ada jawaban resmi';
+  });
+}
+
+$('brokerLikeQuestionBtn').addEventListener('click',answerBrokerLikeQuestion);
+$('brokerLikeQuestion').addEventListener('keydown',(event)=>{
+  if(event.key==='Enter'){
+    event.preventDefault();
+    answerBrokerLikeQuestion();
   }
 });
 
