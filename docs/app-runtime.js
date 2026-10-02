@@ -9,7 +9,7 @@ const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const FORM_WIZARDS_URL='data/form_wizards_2026.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',quickSetup:'kep.quickSetupDone'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
@@ -19,6 +19,22 @@ const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':
 const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
 const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
+
+const QUICK_MILESTONES=[
+  {label:'Pendaftaran resmi sudah saya kirim',nextStage:'exam_fee'},
+  {label:'Biaya ujian EPS-TOPIK sudah saya bayar',nextStage:'biometric'},
+  {label:'Biometrik sudah selesai',nextStage:'document_verify'},
+  {label:'Verifikasi dokumen sudah selesai',nextStage:'exam_card'},
+  {label:'Saya sudah ikut EPS-TOPIK',nextStage:'skill_competency'},
+  {label:'Saya sudah lulus seleksi akhir',nextStage:'psychology_pre_job'},
+  {label:'Lamaran kerja online sudah terkirim',nextStage:'roster'},
+  {label:'Saya sudah dipilih perusahaan Korea',nextStage:'slc'},
+  {label:'SLC sudah terbit / saya terima',nextStage:'post_slc_requirements'},
+  {label:'Berkas visa sudah selesai',nextStage:'predeparture_training'},
+  {label:'Saya sudah berangkat dan tiba di Korea',nextStage:'korea_entry_training'},
+  {label:'Saya sudah diserahkan ke perusahaan',nextStage:'residence_registration'},
+  {label:'Saya sudah menerima gaji pertama',nextStage:'labor_support_ready'}
+];
 
 const PHASES=[
   {
@@ -186,6 +202,7 @@ async function boot(){
     renderCycleStatus();
     renderFreshnessStatus();
     renderBqcStatus();
+    renderQuickStart();
     renderJourney();
     renderCurrentStageSelector();
     renderPhaseNav();
@@ -328,6 +345,55 @@ function renderStageBqc(stage){
     : '<div class="stage-bqc-question"><strong>Semua pertanyaan yang ditemukan sudah punya jawaban terverifikasi.</strong></div>';
 }
 
+function refreshProgressViews(){
+  renderJourney();
+  renderCurrentStageSelector();
+  renderPhaseNav();
+  renderNextAction();
+  renderDocuments();
+  updateProgress();
+}
+
+function applyCurrentStage(stageId,finishQuickSetup=true){
+  if(!route)return;
+  const index=route.stages.findIndex(stage=>stage.id===stageId);
+  if(index<0)return;
+  write(KEYS.done,route.stages.slice(0,index).map(stage=>stage.id));
+  if(finishQuickSetup)write(KEYS.quickSetup,true);
+  refreshProgressViews();
+  renderQuickStart();
+}
+
+function renderQuickStart(){
+  const box=$('quickStart');
+  const select=$('lastMilestoneSelect');
+  if(!box||!route)return;
+  const hasProgress=read(KEYS.done,[]).length>0;
+  const finished=read(KEYS.quickSetup,false);
+  if(hasProgress||finished){
+    box.hidden=true;
+    return;
+  }
+  box.hidden=false;
+  select.innerHTML='<option value="">Pilih hal terakhir yang sudah selesai</option>'+
+    QUICK_MILESTONES.map(item=>'<option value="'+escapeHtml(item.nextStage)+'">'+escapeHtml(item.label)+'</option>').join('');
+}
+
+$('setMilestoneBtn').addEventListener('click',()=>{
+  const stageId=$('lastMilestoneSelect').value;
+  if(!stageId)return;
+  applyCurrentStage(stageId,true);
+  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+$('startFromBeginningBtn').addEventListener('click',()=>{
+  write(KEYS.done,[]);
+  write(KEYS.quickSetup,true);
+  refreshProgressViews();
+  renderQuickStart();
+  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
 function renderCurrentStageSelector(){
   const select=$('currentStageSelect');
   select.innerHTML='<option value="">Pilih tahap sekarang</option>';
@@ -345,14 +411,9 @@ function renderCurrentStageSelector(){
 $('setCurrentStageBtn').addEventListener('click',()=>{
   const value=$('currentStageSelect').value;
   if(value==='')return;
-  const index=Number(value);
-  const done=route.stages.slice(0,index).map(s=>s.id);
-  write(KEYS.done,done);
-  renderJourney();
-  renderPhaseNav();
-  renderNextAction();
-  renderDocuments();
-  updateProgress();
+  const stage=route.stages[Number(value)];
+  if(!stage)return;
+  applyCurrentStage(stage.id,true);
 });
 
 function renderJourney(){
