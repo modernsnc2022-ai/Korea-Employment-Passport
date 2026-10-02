@@ -277,6 +277,12 @@ function openStage(stage){
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
   const phase=phaseForStage(stage.id);
+  const done=new Set(read(KEYS.done,[]));
+  const firstIncompleteIndex=route.stages.findIndex(item=>!done.has(item.id));
+  const isDone=done.has(stage.id);
+  const canComplete=isDone||firstIncompleteIndex===-1||index<=firstIncompleteIndex;
+  const next=route.stages[index+1]||null;
+
   $('stageKind').textContent='Tahap '+(index+1)+' dari '+route.stages.length+' · '+phase.short;
   $('stageTitle').textContent=stageTitle(stage);
   $('stageAuthority').textContent=stage.authority;
@@ -285,8 +291,22 @@ function openStage(stage){
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
   if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
-  const done=new Set(read(KEYS.done,[]));
-  $('stageDoneBtn').textContent=done.has(stage.id)?'Batalkan tanda selesai':'Tandai selesai & lanjut';
+
+  const hint=$('stageNextHint');
+  if(isDone){
+    hint.innerHTML='<strong>Sudah selesai.</strong> Jika dibatalkan, tahap ini dan semua tahap setelahnya akan dibuka kembali agar urutan tetap konsisten.';
+  }else if(!canComplete){
+    const current=route.stages[firstIncompleteIndex];
+    hint.innerHTML='<strong>Belum dapat ditandai selesai.</strong> Selesaikan tahap sekarang terlebih dahulu: '+escapeHtml(stageTitle(current))+'.';
+  }else if(next){
+    hint.innerHTML='<strong>Setelah tahap ini:</strong> '+escapeHtml(stageTitle(next));
+  }else{
+    hint.innerHTML='<strong>Ini tahap terakhir.</strong> Setelah selesai, periksa kembali apakah masih ada Celah Calo.';
+  }
+
+  const doneBtn=$('stageDoneBtn');
+  doneBtn.disabled=!canComplete;
+  doneBtn.textContent=isDone?'Batalkan tahap ini & setelahnya':canComplete?'Tandai selesai & lanjut':'Selesaikan tahap sebelumnya dulu';
   $('stageDialog').showModal();
 }
 
@@ -294,7 +314,16 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
   event.preventDefault();
   if(!activeStage)return;
   const done=new Set(read(KEYS.done,[]));
-  done.has(activeStage.id)?done.delete(activeStage.id):done.add(activeStage.id);
+  const index=route.stages.findIndex(stage=>stage.id===activeStage.id);
+  const firstIncompleteIndex=route.stages.findIndex(stage=>!done.has(stage.id));
+
+  if(done.has(activeStage.id)){
+    route.stages.slice(index).forEach(stage=>done.delete(stage.id));
+  }else{
+    if(firstIncompleteIndex!==-1&&index!==firstIncompleteIndex)return;
+    done.add(activeStage.id);
+  }
+
   write(KEYS.done,[...done]);
   $('stageDialog').close();
   renderJourney();
