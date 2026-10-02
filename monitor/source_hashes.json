@@ -22,5 +22,29 @@
     "agency": "Korea Minimum Wage Commission",
     "url": "https://www.minimumwage.go.kr/index.jsp",
     "textLength": 1885
+  },
+  "immigration_registration_law": {
+    "sha256": "dba1922acacbffb0e40accdfdc9544c7deaf71518d74e9eaaaa30d1659ceb05d",
+    "agency": "Korea Immigration / law.go.kr",
+    "url": "https://law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1015626265",
+    "textLength": 905
+  },
+  "eps_insurances": {
+    "sha256": "96d5052ae3bb94c34028b40f75a1d7de8a7639170cefe5ad6ce562c17830e645",
+    "agency": "HRD Korea EPS",
+    "url": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+    "textLength": 2141
+  },
+  "labor_portal": {
+    "sha256": "a74f20f1b61d3d950158e6f8b507e567b77243b684ef92a60a3dbcd12789b998",
+    "agency": "Ministry of Employment and Labor",
+    "url": "https://labor.moel.go.kr/",
+    "textLength": 4
+  },
+  "workplace_change_guidance": {
+    "sha256": "249ffc5e3fb11193cc89a93867b9a028a9d029929be2ba70c417c01730cc9f4c",
+    "agency": "MOEL 1350",
+    "url": "https://1350.moel.go.kr/rtmview.do?id=1000302820&page=2&type=ALL",
+    "textLength": 544
   }
 }
