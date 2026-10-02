@@ -8,8 +8,9 @@ const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,i18n={},activeStage=null,deferredInstall=null;
+const FORM_WIZARDS_URL='data/form_wizards_2026.json';
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard'};
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -134,27 +135,26 @@ function renderPhaseNav(){
 
 function renderContextTools(stage){
   const box=$('contextTools');
-  if(!stage){box.hidden=true;box.innerHTML='';return}
+  if(!stage){box.hidden=true;box.innerHTML='';box.open=false;return}
   const toolsForStage=STAGE_TOOLS[stage.id]||[];
+  if(!toolsForStage.length){box.hidden=true;box.innerHTML='';box.open=false;return}
   box.hidden=false;
+  box.open=false;
   const toolButtons=toolsForStage.map(key=>{
     const meta=TOOL_META[key];
     return `<button type="button" class="context-tool" data-tool-view="${meta.view}"><strong>${escapeHtml(meta.label)}</strong><small>${escapeHtml(meta.desc)}</small></button>`;
   }).join('');
   box.innerHTML=`
-    <div class="context-tools-head">
-      <strong>Alat untuk tahap ini</strong>
-      <small>${toolsForStage.length?'Buka hanya yang diperlukan':'Tidak ada alat tambahan'}</small>
-    </div>
-    <div class="context-tool-grid">
-      ${toolButtons||'<div class="context-tool"><strong>Ikuti sumber resmi</strong><small>Buka tahap untuk instruksi dan tautan resmi.</small></div>'}
+    <summary>Perlu bantuan tambahan untuk langkah ini?</summary>
+    <div class="context-tools-body">
+      <div class="context-tool-grid">${toolButtons}</div>
     </div>`;
   box.querySelectorAll('[data-tool-view]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.toolView)));
 }
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
@@ -164,9 +164,10 @@ async function boot(){
       fetch(EXACT_ANSWERS_URL,{cache:'no-store'}),
       fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'}),
       fetch(FRESHNESS_URL,{cache:'no-store'}),
-      fetch(BROKER_QUESTION_URL,{cache:'no-store'})
+      fetch(BROKER_QUESTION_URL,{cache:'no-store'}),
+      fetch(FORM_WIZARDS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -177,6 +178,7 @@ async function boot(){
     documentExamples=await documentExamplesRes.json();
     freshnessPolicy=await freshnessRes.json();
     brokerQuestions=await brokerQuestionRes.json();
+    formWizards=await formWizardRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -290,9 +292,9 @@ function renderBqcStatus(){
   const pct=all.length?Math.round(answered/all.length*100):0;
   box.hidden=false;
   box.innerHTML=`
-    <div><strong>Broker Question Coverage</strong><small>${answered}/${all.length} pertanyaan mikro sudah punya jawaban pasti</small></div>
+    <div><strong>Kelengkapan jawaban</strong><small>${answered}/${all.length} pertanyaan kecil sudah punya jawaban pasti</small></div>
     <div class="bqc-meter"><span style="width:${pct}%"></span></div>
-    <div class="bqc-value">${pct}% · ${blockers} blocker</div>`;
+    <div class="bqc-value">${pct}% · ${blockers} belum pasti</div>`;
 }
 
 function renderStageBqc(stage){
@@ -300,11 +302,11 @@ function renderStageBqc(stage){
   if(!brokerQuestions){section.hidden=true;return}
   const stats=bqcStageStats(stage.id);
   section.hidden=false;
-  $('stageBqcText').textContent=`${stats.answered}/${stats.total} jawaban pasti · ${stats.blockers} blocker`;
+  $('stageBqcText').textContent=`${stats.answered}/${stats.total} sudah pasti · ${stats.blockers} belum pasti`;
   $('stageBqcBar').style.width=stats.pct+'%';
   const badge=$('stageBqcBadge');
   badge.className='bqc-badge'+(stats.ready?' ready':'');
-  badge.textContent=stats.ready?'ZERO-BROKER READY':'BELUM READY';
+  badge.textContent=stats.ready?'SUDAH LENGKAP':'MASIH ADA YANG BELUM PASTI';
 
   const unresolved=stats.items.filter(item=>!item.resolved);
   $('stageBqcQuestions').innerHTML=unresolved.length
@@ -410,7 +412,7 @@ function renderScopePicker(stage){
     return;
   }
   section.hidden=false;
-  select.innerHTML='<option value="">Belum tahu / cohort lain</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  select.innerHTML='<option value="">Belum tahu / pengumuman lain</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
 }
 
@@ -429,7 +431,7 @@ $('scopePicker').addEventListener('change',()=>{
 });
 
 function exactScopeLabel(item){
-  if(item.scopeType==='cohort')return item.scopeLabel||'Khusus cohort';
+  if(item.scopeType==='cohort')return item.scopeLabel||'Khusus pengumuman tertentu';
   if(item.scopeType==='current_rule')return 'Aturan resmi yang sedang berlaku';
   if(item.scopeType==='route_2026')return 'Rute Indonesia E-9 2026';
   return 'Periksa cakupan sumber';
@@ -440,7 +442,7 @@ function exactVerificationLabel(item){
   if(v.startsWith('verified_current'))return 'Terverifikasi · aturan aktif';
   if(v.startsWith('verified_across'))return 'Terverifikasi · konsisten di beberapa pengumuman 2026';
   if(v.startsWith('verified'))return 'Terverifikasi';
-  if(v.startsWith('cohort_specific'))return 'Terverifikasi · khusus cohort';
+  if(v.startsWith('cohort_specific'))return 'Terverifikasi · khusus pengumuman tertentu';
   return 'Perlu cek cakupan';
 }
 
@@ -509,7 +511,7 @@ function evaluatePreSubmit(stage){
   if(!pack){
     issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
   }else if(['awaiting_sector_notice','source_guided','scope_required'].includes(pack.status)){
-    issues.push('Checklist dokumen tahap ini belum cukup spesifik untuk rute/manufaktur/cohort Anda.');
+    issues.push('Checklist dokumen tahap ini belum cukup spesifik untuk pengumuman yang berlaku bagi Anda.');
   }else{
     const checked=new Set(read(KEYS.docs,[]));
     const missing=(pack.items||[]).filter(item=>item.required&&!checked.has(item.id));
@@ -526,7 +528,7 @@ $('preSubmitBtn').addEventListener('click',()=>{
   result.hidden=false;
   result.className='result '+(check.ready?'safe':'risk');
   if(check.ready){
-    result.innerHTML='<strong>SIAP MENURUT PEMERIKSAAN APLIKASI.</strong><p>Tidak ada blocker yang terdeteksi dari aturan dan checklist yang saat ini sudah terverifikasi. Tetap cocokkan dengan pengumuman resmi cohort Anda sebelum menekan tombol submit di situs resmi.</p>';
+    result.innerHTML='<strong>SIAP MENURUT PEMERIKSAAN APLIKASI.</strong><p>Tidak ada hal penting yang belum pasti dari aturan dan checklist yang saat ini sudah terverifikasi. Tetap cocokkan dengan pengumuman resmi yang memuat nama Anda sebelum menekan tombol submit.</p>';
   }else{
     result.innerHTML='<strong>JANGAN SUBMIT DULU.</strong><p>Ada hal yang belum cukup aman untuk dilewati:</p><ul class="pre-submit-list">'+check.issues.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
   }
@@ -906,6 +908,95 @@ function renderDocumentExamples(stageId){
   }).join('');
 }
 
+
+function formsForStage(stageId){
+  return (formWizards?.forms||[]).filter(form=>form.stages?.includes(stageId));
+}
+
+function renderFormWizardCard(form,index){
+  const card=$('formWizardCard');
+  const intro=$('formWizardIntro');
+  if(!form){
+    card.hidden=true;
+    intro.innerHTML='';
+    return;
+  }
+
+  intro.innerHTML='<strong>'+escapeHtml(form.title)+'</strong>'+
+    '<ul>'+((form.intro||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join(''))+'</ul>'+
+    (form.attention?'<div class="wizard-attention"><strong>Perhatian:</strong> '+escapeHtml(form.attention)+'</div>':'')+
+    '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>';
+
+  const total=form.fields.length;
+  const safeIndex=Math.max(0,Math.min(index,total));
+  const state={formId:form.id,index:safeIndex};
+  write(KEYS.formWizard,state);
+
+  card.hidden=false;
+  if(safeIndex>=total){
+    $('formWizardProgress').textContent='Panduan selesai';
+    $('formWizardLabel').textContent='Periksa kembali formulir Anda';
+    $('formWizardInstruction').textContent='Bandingkan semua kolom dengan formulir asli dan pengumuman yang memuat nama Anda sebelum menyerahkan dokumen.';
+    $('formWizardExample').textContent='Jangan submit hanya karena semua langkah sudah dibaca.';
+    $('formWizardDont').innerHTML='<strong>Terakhir:</strong> Periksa nama, tanggal, nomor paspor, NIK, alamat, tanda tangan, materai, dan kolom yang memang harus kosong.';
+    $('formWizardPrev').disabled=false;
+    $('formWizardNext').hidden=true;
+    return;
+  }
+
+  const field=form.fields[safeIndex];
+  $('formWizardProgress').textContent='Kolom '+(safeIndex+1)+' dari '+total;
+  $('formWizardLabel').textContent=field.label;
+  $('formWizardInstruction').textContent=field.instruction;
+  $('formWizardExample').textContent=field.example||'';
+  $('formWizardDont').innerHTML=field.dont?'<strong>Jangan:</strong> '+escapeHtml(field.dont):'';
+  $('formWizardPrev').disabled=safeIndex===0;
+  $('formWizardNext').hidden=false;
+  $('formWizardNext').textContent=safeIndex===total-1?'Selesai panduan →':'Berikutnya →';
+}
+
+function renderFormWizard(stage){
+  const section=$('formWizardSection');
+  const select=$('formWizardSelect');
+  if(!formWizards||!stage){section.hidden=true;return}
+  const forms=formsForStage(stage.id);
+  if(!forms.length){
+    section.hidden=true;
+    select.innerHTML='';
+    $('formWizardCard').hidden=true;
+    return;
+  }
+
+  section.hidden=false;
+  const saved=read(KEYS.formWizard,{});
+  const selected=forms.some(form=>form.id===saved.formId)?saved.formId:forms[0].id;
+  select.innerHTML=forms.map(form=>'<option value="'+escapeHtml(form.id)+'">'+escapeHtml(form.title)+'</option>').join('');
+  select.value=selected;
+  const form=forms.find(item=>item.id===selected);
+  renderFormWizardCard(form,saved.formId===selected?Number(saved.index||0):0);
+}
+
+$('formWizardSelect').addEventListener('change',()=>{
+  const stage=currentStage()||route?.stages?.at(-1);
+  if(!stage)return;
+  const form=formsForStage(stage.id).find(item=>item.id===$('formWizardSelect').value);
+  if(form)renderFormWizardCard(form,0);
+});
+
+$('formWizardPrev').addEventListener('click',()=>{
+  const state=read(KEYS.formWizard,{});
+  const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
+  if(!form)return;
+  renderFormWizardCard(form,Math.max(0,Number(state.index||0)-1));
+});
+
+$('formWizardNext').addEventListener('click',()=>{
+  const state=read(KEYS.formWizard,{});
+  const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
+  if(!form)return;
+  renderFormWizardCard(form,Math.min(form.fields.length,Number(state.index||0)+1));
+});
+
 function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
   const selected=selectedScope(stageId);
@@ -926,7 +1017,7 @@ function renderDocumentScopePicker(stage){
     return;
   }
   wrap.hidden=false;
-  select.innerHTML='<option value="">Belum pilih / cohort lain</option>'+options.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  select.innerHTML='<option value="">Belum pilih / pengumuman lain</option>'+options.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
 }
 
@@ -954,6 +1045,7 @@ function renderDocuments(){
   const stage=currentStage()||route.stages.at(-1);
   const pack=documentPackForStage(stage?.id);
   renderDocumentScopePicker(stage);
+  renderFormWizard(stage);
   renderDocumentExamples(stage?.id);
   const context=$('docStageContext');
   const list=$('docList');
@@ -971,7 +1063,7 @@ function renderDocuments(){
     awaiting_sector_notice:'Menunggu pengumuman manufaktur yang sesuai',
     source_guided:'Sumber resmi saja — rincian belum dikunci',
     verified_practice:'Checklist bukti kerja',
-    scope_required:'Pilih panggilan / cohort terlebih dahulu',
+    scope_required:'Pilih pengumuman yang memuat nama Anda terlebih dahulu',
     verified_notice_2026_05_26:'Terverifikasi untuk panggilan 26 Mei 2026',
     verified_notice_2026_06_19:'Terverifikasi untuk panggilan 19 Juni 2026',
     verified_notice_2026_09_08:'Terverifikasi untuk panggilan 8 September 2026'

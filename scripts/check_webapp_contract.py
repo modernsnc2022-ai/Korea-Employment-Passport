@@ -14,6 +14,7 @@ document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json"
 exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json").read_text(encoding="utf-8"))
 document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
 broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
+form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").read_text(encoding="utf-8"))
 
 errors = []
 
@@ -217,6 +218,49 @@ if bad_question_answer_refs:
 if bad_question_content:
     errors.append("broker questions missing/invalid required content: " + ", ".join(sorted(bad_question_content)))
 
+form_ids = []
+wizard_field_ids = []
+bad_form_stage_refs = []
+bad_form_sources = []
+bad_form_content = []
+for form in form_wizards.get("forms", []):
+    form_id = form.get("id", "")
+    form_ids.append(form_id)
+    if not str(form.get("sourceUrl", "")).startswith("http"):
+        bad_form_sources.append(f"{form_id}:sourceUrl")
+    if not str(form.get("guidanceUrl", "")).startswith("http"):
+        bad_form_sources.append(f"{form_id}:guidanceUrl")
+    for stage_id in form.get("stages", []):
+        if stage_id not in known_stage_ids:
+            bad_form_stage_refs.append(f"{form_id}->{stage_id}")
+    if not str(form.get("title", "")).strip():
+        bad_form_content.append(f"{form_id}:title")
+    if not form.get("fields"):
+        bad_form_content.append(f"{form_id}:fields")
+    for field in form.get("fields", []):
+        field_id = field.get("id", "")
+        wizard_field_ids.append(f"{form_id}:{field_id}")
+        for required in ("id", "label", "instruction", "example"):
+            if not str(field.get(required, "")).strip():
+                bad_form_content.append(f"{form_id}:{field_id}:{required}")
+
+form_dupes = [key for key, count in Counter(form_ids).items() if key and count > 1]
+if form_dupes:
+    errors.append("duplicate form-wizard ids: " + ", ".join(sorted(form_dupes)))
+
+field_dupes = [key for key, count in Counter(wizard_field_ids).items() if key and count > 1]
+if field_dupes:
+    errors.append("duplicate form-wizard field ids: " + ", ".join(sorted(field_dupes)))
+
+if bad_form_stage_refs:
+    errors.append("form wizards reference unknown stages: " + ", ".join(sorted(bad_form_stage_refs)))
+
+if bad_form_sources:
+    errors.append("form wizards missing official URLs: " + ", ".join(sorted(bad_form_sources)))
+
+if bad_form_content:
+    errors.append("form wizards missing required content: " + ", ".join(sorted(bad_form_content)))
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -232,5 +276,7 @@ print(
     f"exact_answers={len(exact_answers.get('answers', []))}",
     f"document_examples={len(document_examples.get('samples', []))}",
     f"broker_questions={len(broker_questions.get('questions', []))}",
+    f"form_wizards={len(form_wizards.get('forms', []))}",
+    f"form_fields={sum(len(form.get('fields', [])) for form in form_wizards.get('forms', []))}",
     f"js_literal_refs={len(literal_refs)}",
 )
