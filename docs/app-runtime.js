@@ -742,14 +742,48 @@ function fieldAnswerHtml(item){
   </article>`;
 }
 
+function wizardFieldSearchRows(query,stageId){
+  if(!formWizards?.forms?.length)return [];
+  const q=normalizeSearch(query);
+  if(!q)return [];
+  const tokens=q.split(' ').filter(token=>token.length>1);
+  const rows=[];
+  for(const form of formWizards.forms){
+    if(stageId&&!form.stages?.includes(stageId))continue;
+    for(const field of form.fields||[]){
+      const hay=normalizeSearch([form.title,field.label,field.instruction,field.example,field.dont||''].join(' '));
+      let score=0;
+      if(hay.includes(q))score+=24;
+      tokens.forEach(token=>{if(hay.includes(token))score+=2});
+      if(score>0){
+        rows.push({
+          item:{
+            id:'wizard:'+form.id+':'+field.id,
+            question:form.title+' — '+field.label,
+            answer:field.instruction,
+            writeExactly:field.instruction,
+            why:'Berdasarkan Petunjuk Pemberkasan Dokumen Visa resmi 2026 untuk formulir ini.',
+            doNotDo:field.dont?[field.dont]:[],
+            sourceUrl:form.guidanceUrl||form.sourceUrl,
+            verifiedAt:formWizards.verifiedAt||'2026-10-02',
+            verificationStatus:'verified_form_guidance',
+            scopeType:'route_2026'
+          },
+          score
+        });
+      }
+    }
+  }
+  return rows;
+}
+
 function findExactFieldAnswers(query){
-  if(!exactAnswers?.answers?.length)return [];
   const q=normalizeSearch(query);
   if(!q)return [];
   const tokens=q.split(' ').filter(token=>token.length>1);
   const current=currentStage();
   const stageId=current?.id||null;
-  return exactAnswers.answers
+  const exactRows=(exactAnswers?.answers||[])
     .filter(item=>!stageId||exactAnswerApplies(item,stageId))
     .map(item=>{
       const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
@@ -759,8 +793,17 @@ function findExactFieldAnswers(query){
       tokens.forEach(token=>{if(hay.includes(token))score+=2});
       return {item,score};
     })
-    .filter(row=>row.score>0)
+    .filter(row=>row.score>0);
+  const wizardRows=wizardFieldSearchRows(query,stageId);
+  const seen=new Set();
+  return [...exactRows,...wizardRows]
     .sort((a,b)=>b.score-a.score)
+    .filter(row=>{
+      const key=normalizeSearch(row.item.question);
+      if(seen.has(key))return false;
+      seen.add(key);
+      return true;
+    })
     .slice(0,5)
     .map(row=>row.item);
 }

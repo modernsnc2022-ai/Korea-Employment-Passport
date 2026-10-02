@@ -18,6 +18,18 @@ form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").re
 
 errors = []
 
+# Keep the default user journey simple even as the internal rules grow.
+if 'class="how-to-use"' not in html:
+    errors.append("simple UX lock missing 3-step usage strip")
+if '<details id="contextTools"' not in html:
+    errors.append("simple UX lock requires contextual tools collapsed by default")
+if '<details class="trust-panel"' not in html:
+    errors.append("simple UX lock requires technical trust details collapsed")
+if 'id="formWizardCard"' not in html:
+    errors.append("simple UX lock requires one-field-at-a-time form wizard")
+if "cohort" in html.lower():
+    errors.append("user-facing HTML contains internal jargon: cohort")
+
 ids = re.findall(r'\bid="([^"]+)"', html)
 dupes = [key for key, count in Counter(ids).items() if count > 1]
 if dupes:
