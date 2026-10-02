@@ -1,1 +1,26 @@
-{}
+{
+  "eps_employment_process": {
+    "sha256": "0ef21ec22c4a1482e23c2ab97de374ce12f8fd5372b65d5f54697e03209f764d",
+    "agency": "HRD Korea EPS",
+    "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessLabor",
+    "textLength": 1808
+  },
+  "eps_entry_departure": {
+    "sha256": "63fe9cd1bd0c149523115cc4b9ea3450e3ec85faddc216fe5fc6ca09adbb04d2",
+    "agency": "HRD Korea EPS",
+    "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+    "textLength": 1594
+  },
+  "eps_topik_exam": {
+    "sha256": "4cc95f31841e0fd4e3637fc7055a7b877b093d89885dddc5b2821ccd4b6cb152",
+    "agency": "HRD Korea EPS-TOPIK",
+    "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectTopikDesc.do?lang=ko",
+    "textLength": 1442
+  },
+  "minimum_wage": {
+    "sha256": "c99474032bbce435844cbf20714f438ac215643890ce6d3823a2903c272dbe8e",
+    "agency": "Korea Minimum Wage Commission",
+    "url": "https://www.minimumwage.go.kr/index.jsp",
+    "textLength": 1885
+  }
+}
