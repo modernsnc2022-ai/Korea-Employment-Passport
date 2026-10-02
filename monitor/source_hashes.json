@@ -23,6 +23,22 @@
     "mode": "normalized_text",
     "contentType": "text/html"
   },
+  "minimum_wage": {
+    "sha256": "c99474032bbce435844cbf20714f438ac215643890ce6d3823a2903c272dbe8e",
+    "agency": "Korea Minimum Wage Commission",
+    "url": "https://www.minimumwage.go.kr/index.jsp",
+    "contentLength": 1885,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
+  "immigration_registration_law": {
+    "sha256": "dba1922acacbffb0e40accdfdc9544c7deaf71518d74e9eaaaa30d1659ceb05d",
+    "agency": "Korea Immigration / law.go.kr",
+    "url": "https://law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1015626265",
+    "contentLength": 905,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
   "eps_insurances": {
     "sha256": "96d5052ae3bb94c34028b40f75a1d7de8a7639170cefe5ad6ce562c17830e645",
     "agency": "HRD Korea EPS",
@@ -31,11 +47,35 @@
     "mode": "normalized_text",
     "contentType": "text/html"
   },
+  "labor_portal": {
+    "sha256": "a74f20f1b61d3d950158e6f8b507e567b77243b684ef92a60a3dbcd12789b998",
+    "agency": "Ministry of Employment and Labor",
+    "url": "https://labor.moel.go.kr/",
+    "contentLength": 4,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
   "workplace_change_guidance": {
     "sha256": "249ffc5e3fb11193cc89a93867b9a028a9d029929be2ba70c417c01730cc9f4c",
     "agency": "MOEL 1350",
     "url": "https://1350.moel.go.kr/rtmview.do?id=1000302820&page=2&type=ALL",
     "contentLength": 544,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
+  "labor_standards_wage_statement": {
+    "sha256": "4cfd5356dcfbb877401dff5d8f758426760b3111bf6835c64f51762b71803e00",
+    "agency": "Korea Law Information Center",
+    "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+    "contentLength": 397,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
+  "moel_minimum_wage_2026": {
+    "sha256": "ba0c428b8fb8c3977cf6374e3b38859bb1a9a2469036bb4419e0ed502f974f96",
+    "agency": "Ministry of Employment and Labor",
+    "url": "https://moel.go.kr/news/enews/report/enewsView.do?bbs_id=12&news_seq=18144&pageIndex=1&pageUnit=10&searchField=3",
+    "contentLength": 4472,
     "mode": "normalized_text",
     "contentType": "text/html"
   }
