@@ -304,6 +304,29 @@
       <button id="emailFieldQuestionsBtn" class="secondary">Kirim pertanyaan ini untuk diverifikasi</button>
 
       <div class="section-head">
+        <h2>Rejection Lab</h2>
+        <p>Jika formulir, dokumen, atau proses Anda pernah ditolak, simpan alasan persisnya. Alasan kecil ini menjadi aturan pencegahan untuk pengguna berikutnya.</p>
+      </div>
+      <div class="panel">
+        <label>Tahap yang ditolak
+          <select id="rejectStage"></select>
+        </label>
+        <label>Kolom / dokumen yang bermasalah
+          <input id="rejectField" placeholder="Contoh: nama paspor, foto, SKCK, rekening BNI">
+        </label>
+        <label>Pesan/alasan penolakan persis
+          <textarea id="rejectReason" rows="5" placeholder="Tempel teks penolakan atau tulis alasan yang disampaikan petugas. Hapus nomor paspor/ID sensitif."></textarea>
+        </label>
+        <label>Bagaimana akhirnya diperbaiki? (jika sudah tahu)
+          <textarea id="rejectFix" rows="3" placeholder="Contoh: nama disamakan persis dengan paspor lalu upload ulang"></textarea>
+        </label>
+        <button id="saveRejectBtn" class="primary">Simpan kasus penolakan</button>
+        <div id="rejectSuggest" class="result" hidden></div>
+      </div>
+      <div id="rejectList" class="gap-list"></div>
+      <button id="emailRejectsBtn" class="secondary">Kirim kasus penolakan untuk dijadikan aturan</button>
+
+      <div class="section-head">
         <h2>Celah Calo / Perantara</h2>
         <p>Jika masih ada tugas yang membuat Anda harus bergantung pada LPK, agen, teman, atau calo, catat di sini. Satu kebutuhan calo swasta saja berarti rute ini belum selesai.</p>
       </div>

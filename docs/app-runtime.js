@@ -8,7 +8,7 @@ const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
@@ -193,6 +193,8 @@ async function boot(){
     renderPayroll();
     renderWorkplace();
     renderGapStage();
+    renderRejectionStage();
+    renderRejections();
     renderGaps();
     renderUnresolvedFieldQuestions();
     updateProgress();
@@ -1401,6 +1403,121 @@ $('emailFieldQuestionsBtn').addEventListener('click',()=>{
     'Pertanyaan field yang belum punya jawaban terverifikasi:\n\n'+
     lines+
     '\n\nMohon verifikasi berdasarkan form/pengumuman resmi yang sesuai. Jangan jawab berdasarkan tebakan atau sektor/siklus lain.'
+  );
+  location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
+});
+
+function renderRejectionStage(){
+  const select=$('rejectStage');
+  if(!select||!route)return;
+  select.innerHTML='';
+  route.stages.forEach(stage=>{
+    const option=document.createElement('option');
+    option.value=stage.id;
+    option.textContent=stageTitle(stage);
+    select.appendChild(option);
+  });
+  const current=currentStage();
+  if(current)select.value=current.id;
+}
+
+function renderRejections(){
+  const wrap=$('rejectList');
+  if(!wrap)return;
+  const items=read(KEYS.rejections,[]);
+  wrap.innerHTML='';
+  if(!items.length){
+    wrap.innerHTML='<div class="gap-item"><p>Belum ada kasus penolakan yang disimpan.</p></div>';
+    return;
+  }
+  items.forEach(item=>{
+    const article=document.createElement('article');
+    article.className='gap-item';
+    article.innerHTML=`
+      <h3>${escapeHtml(item.field||'Alasan penolakan')}</h3>
+      <p><strong>Tahap:</strong> ${escapeHtml(item.stageTitle||item.stageId)}</p>
+      <p><strong>Penolakan:</strong> ${escapeHtml(item.reason)}</p>
+      ${item.fix?'<p><strong>Perbaikan:</strong> '+escapeHtml(item.fix)+'</p>':''}
+      <div class="gap-actions"><button type="button">Hapus</button></div>`;
+    article.querySelector('button').addEventListener('click',()=>{
+      write(KEYS.rejections,read(KEYS.rejections,[]).filter(row=>row.id!==item.id));
+      renderRejections();
+    });
+    wrap.appendChild(article);
+  });
+}
+
+$('saveRejectBtn').addEventListener('click',()=>{
+  const stageId=$('rejectStage').value;
+  const stage=route?.stages.find(item=>item.id===stageId);
+  const field=$('rejectField').value.trim();
+  const reason=$('rejectReason').value.trim();
+  const fix=$('rejectFix').value.trim();
+  const out=$('rejectSuggest');
+  if(!stageId||!reason){
+    out.hidden=false;
+    out.className='result warn';
+    out.textContent='Pilih tahap dan masukkan alasan penolakan.';
+    return;
+  }
+
+  const items=read(KEYS.rejections,[]);
+  const id=Date.now();
+  items.unshift({
+    id,stageId,stageTitle:stage?stageTitle(stage):stageId,
+    field,reason,fix,createdAt:new Date().toISOString()
+  });
+  write(KEYS.rejections,items);
+  renderRejections();
+
+  const query=[field,reason].filter(Boolean).join(' ');
+  const matches=findExactFieldAnswers(query);
+  out.hidden=false;
+  if(matches.length){
+    out.className='result safe';
+    out.innerHTML='<strong>Ada aturan yang mungkin sudah relevan.</strong><div class="field-match-list">'+matches.slice(0,3).map(fieldAnswerHtml).join('')+'</div>';
+  }else{
+    out.className='result warn';
+    out.innerHTML='<strong>Belum ada aturan pasti yang cocok.</strong><p>Kasus ini ditandai sebagai celah baru. Jangan mengulangi submit dengan tebakan yang sama sampai penyebabnya diverifikasi.</p>';
+    const question='Kasus penolakan — '+(field||'kolom/dokumen')+': '+reason;
+    const currentBefore=currentStage();
+    if(stage){
+      const list=read(KEYS.fieldQuestions,[]);
+      const key=normalizeSearch(question)+'|'+stage.id;
+      if(!list.some(row=>row.key===key)){
+        list.unshift({
+          key,question,stageId:stage.id,stageTitle:stageTitle(stage),
+          createdAt:new Date().toISOString(),
+          status:'needs_official_verification',
+          origin:'rejection_lab'
+        });
+        write(KEYS.fieldQuestions,list);
+        renderUnresolvedFieldQuestions();
+        renderBqcStatus();
+        if(activeStage?.id===stage.id)renderStageBqc(activeStage);
+      }
+    }
+  }
+
+  $('rejectField').value='';
+  $('rejectReason').value='';
+  $('rejectFix').value='';
+});
+
+$('emailRejectsBtn').addEventListener('click',()=>{
+  const items=read(KEYS.rejections,[]);
+  if(!items.length)return;
+  const bodyLines=items.map((item,index)=>
+    (index+1)+'. ['+(item.stageTitle||item.stageId)+']\n'+
+    'Field/Document: '+(item.field||'-')+'\n'+
+    'Rejection: '+item.reason+'\n'+
+    'Fix: '+(item.fix||'belum diketahui')
+  ).join('\n\n');
+  const subject=encodeURIComponent('[KEP Beta] Rejection cases for rule update');
+  const body=encodeURIComponent(
+    'Kasus penolakan untuk diverifikasi dan dijadikan aturan pencegahan:\n\n'+
+    bodyLines+
+    '\n\nData sensitif (nomor paspor/KTP/ARC) tidak boleh disertakan.'
   );
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
