@@ -39,6 +39,7 @@
       <button class="tab" data-view="eligibility">Kelayakan</button>
       <button class="tab" data-view="documents">Dokumen</button>
       <button class="tab" data-view="fees">Cek Biaya</button>
+      <button class="tab" data-view="contract">SLC</button>
       <button class="tab" data-view="gaps">Celah Calo</button>
     </nav>
 
@@ -100,6 +101,24 @@
         </label>
         <button id="checkFeeBtn" class="primary">Periksa biaya</button>
         <div id="feeResult" class="result" hidden></div>
+      </div>
+    </section>
+
+    <section id="contract" class="view">
+      <div class="section-head">
+        <h2>Contract Guardian — SLC</h2>
+        <p>Masukkan isi utama SLC Anda. Data kontrak tetap di perangkat ini dan tidak dikirim ke server oleh beta ini.</p>
+      </div>
+      <div class="panel">
+        <div id="contractForm" class="contract-grid"></div>
+        <button id="checkContractBtn" class="primary">Periksa kontrak</button>
+        <button id="resetContractBtn" class="secondary">Hapus data kontrak dari perangkat</button>
+        <div id="contractResult" class="result" hidden></div>
+      </div>
+      <div class="panel">
+        <h3>Aturan penting</h3>
+        <ul id="contractNotes"></ul>
+        <p><a id="contractSource" class="source" href="#" target="_blank" rel="noopener">Buka formulir SLC resmi ↗</a></p>
       </div>
     </section>
 

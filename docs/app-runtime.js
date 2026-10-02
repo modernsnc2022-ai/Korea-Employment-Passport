@@ -1,8 +1,9 @@
 const ROUTE_URL='data/id_e9_manufacturing_2026.json';
 const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps'};
-let route=null,rules=null,i18n={},activeStage=null,deferredInstall=null;
+const CONTRACT_URL='data/slc_guardian_2026.json';
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract'};
+let route=null,rules=null,contractRules=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -14,15 +15,17 @@ const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
-      fetch(I18N_URL,{cache:'no-store'})
+      fetch(I18N_URL,{cache:'no-store'}),
+      fetch(CONTRACT_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
+    contractRules=await contractRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -31,6 +34,7 @@ async function boot(){
     renderNextAction();
     renderEligibility();
     renderDocuments();
+    renderContract();
     renderGapStage();
     renderGaps();
     updateProgress();
@@ -124,7 +128,11 @@ function renderNextAction(){
   if(done.size===0&&rules.registration.status==='closed'){
     box.innerHTML='<small>LANGKAH BERIKUTNYA</small><h2>Persiapkan siklus rekrutmen resmi berikutnya</h2><p>Pendaftaran umum manufaktur 2026 sudah ditutup. Periksa kelayakan dan kualitas dokumen sekarang; jangan membayar atau mendaftar melalui calo untuk siklus berikutnya.</p><button class="primary" data-go="eligibility">Buka Cek Kelayakan</button>';
   }else if(next){
-    box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
+    if(next.id==='slc'){
+      box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-go="contract">Periksa SLC saya</button>`;
+    }else{
+      box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
+    }
   }else{
     box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
   }
@@ -257,6 +265,99 @@ $('checkFeeBtn').addEventListener('click',()=>{
   }
   out.classList.add('warn');
   out.innerHTML='<strong>Nominal ini tidak cocok dengan daftar biaya resmi yang sudah diverifikasi untuk rute ini.</strong> Jangan bayar dulu. Periksa nominal, penerima, tujuan, tahap, dan sumber resmi terbaru.';
+});
+
+
+function renderContract(){
+  if(!contractRules)return;
+  const saved=read(KEYS.contract,{});
+  const wrap=$('contractForm');
+  wrap.innerHTML='';
+  contractRules.fields.forEach(field=>{
+    const label=document.createElement('label');
+    if(['enterpriseName','enterpriseLocation','workplace','jobDescription','holidays'].includes(field.id)) label.className='wide';
+    label.append(document.createTextNode(field.label));
+    let input;
+    if(field.type==='select'){
+      input=document.createElement('select');
+      input.innerHTML='<option value="">Pilih</option>'+field.options.map(o=>`<option>${escapeHtml(o)}</option>`).join('');
+    }else{
+      input=document.createElement('input');
+      input.type=field.type==='number'?'number':field.type==='time'?'time':'text';
+      if(field.type==='number')input.min='0';
+    }
+    input.id='contract_'+field.id;
+    input.value=saved[field.id]??'';
+    input.addEventListener('change',saveContractLocally);
+    label.appendChild(input);
+    wrap.appendChild(label);
+  });
+  $('contractNotes').innerHTML=contractRules.notes.map(n=>'<li>'+escapeHtml(n)+'</li>').join('');
+  $('contractSource').href=contractRules.source.law;
+}
+
+function saveContractLocally(){
+  const data={};
+  contractRules.fields.forEach(field=>{data[field.id]=$('contract_'+field.id)?.value??''});
+  write(KEYS.contract,data);
+  return data;
+}
+
+function contractWorkingHours(data){
+  if(!data.workStart||!data.workEnd)return null;
+  const [sh,sm]=data.workStart.split(':').map(Number);
+  const [eh,em]=data.workEnd.split(':').map(Number);
+  let minutes=(eh*60+em)-(sh*60+sm);
+  if(minutes<0)minutes+=24*60;
+  minutes-=Number(data.breakMinutes||0);
+  return Math.max(0,minutes/60);
+}
+
+$('checkContractBtn').addEventListener('click',()=>{
+  if(!contractRules)return;
+  const data=saveContractLocally();
+  const risks=[],warnings=[],ok=[];
+  contractRules.fields.filter(f=>f.required).forEach(field=>{
+    if(!String(data[field.id]??'').trim())warnings.push('Belum diisi: '+field.label);
+  });
+
+  const monthly=Number(data.monthlyWage||0);
+  const base=Number(data.basePay||0);
+  const min=contractRules.minimumWage2026.monthly209h;
+  if(monthly>0&&monthly<min){
+    risks.push('Upah normal bulanan '+monthly.toLocaleString('ko-KR')+' won berada di bawah acuan minimum 2026 sebesar '+min.toLocaleString('ko-KR')+' won untuk skenario 209 jam/bulan. Jam kerja aktual harus diperiksa sebelum mengambil kesimpulan.');
+  }else if(monthly>=min){
+    ok.push('Upah normal bulanan tidak berada di bawah acuan 2026 untuk 209 jam/bulan.');
+  }
+  if(base>0&&monthly>0&&base>monthly)warnings.push('Gaji pokok lebih besar daripada upah normal bulanan. Periksa kembali angka yang dimasukkan.');
+
+  const hours=contractWorkingHours(data);
+  if(hours!==null){
+    if(hours>8)warnings.push('Jam kerja bersih yang dimasukkan sekitar '+hours.toFixed(1)+' jam/hari. Periksa pembagian jam normal, lembur, dan waktu istirahat pada SLC.');
+    else ok.push('Jam kerja bersih yang dimasukkan sekitar '+hours.toFixed(1)+' jam/hari.');
+  }
+
+  if(data.paymentMethod==='Lainnya')warnings.push('Cara pembayaran tidak jelas sebagai transfer ke rekening pekerja atau pembayaran langsung. Pastikan tertulis dengan jelas.');
+  if(data.roomProvided==='Ya'&&!String(data.roomCost??'').trim())warnings.push('Akomodasi disediakan tetapi biaya yang ditanggung pekerja belum diisi. Pastikan apakah gratis atau ada potongan.');
+  if(data.mealsProvided==='Ya'&&!String(data.mealCost??'').trim())warnings.push('Makan disediakan tetapi biaya yang ditanggung pekerja belum diisi. Pastikan apakah gratis atau ada potongan.');
+  if(data.enterpriseName&&data.workplace&&!data.enterpriseLocation)warnings.push('Nama perusahaan ada, tetapi alamat perusahaan belum diisi.');
+  if(!risks.length&&!warnings.length)ok.push('Tidak ada celah dasar yang terdeteksi dari kolom yang diperiksa.');
+
+  const out=$('contractResult');
+  out.hidden=false;
+  out.className='result '+(risks.length?'risk':warnings.length?'warn':'safe');
+  const items=[
+    ...risks.map(x=>'<div class="contract-flag risk"><strong>Perlu perhatian:</strong> '+escapeHtml(x)+'</div>'),
+    ...warnings.map(x=>'<div class="contract-flag warn"><strong>Periksa:</strong> '+escapeHtml(x)+'</div>'),
+    ...ok.map(x=>'<div class="contract-flag"><strong>OK:</strong> '+escapeHtml(x)+'</div>')
+  ].join('');
+  out.innerHTML='<strong>Hasil pemeriksaan SLC</strong><div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>';
+});
+
+$('resetContractBtn').addEventListener('click',()=>{
+  localStorage.removeItem(KEYS.contract);
+  renderContract();
+  $('contractResult').hidden=true;
 });
 
 function renderGapStage(){
