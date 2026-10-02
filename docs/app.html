@@ -159,6 +159,40 @@
         <ul id="contractNotes"></ul>
         <p><a id="contractSource" class="source" href="#" target="_blank" rel="noopener">Buka formulir SLC resmi ↗</a></p>
       </div>
+
+      <div class="section-head">
+        <h2>Periksa gaji pertama</h2>
+        <p>Bandingkan slip gaji pertama dengan SLC. Pemeriksaan ini hanya mendeteksi ketidaksesuaian dasar dan bukan keputusan hukum.</p>
+      </div>
+      <div class="panel">
+        <label>Apakah ini periode gaji penuh?
+          <select id="payrollFullPeriod">
+            <option value="">Pilih</option>
+            <option value="yes">Ya</option>
+            <option value="no">Tidak / bulan masuk kerja parsial</option>
+          </select>
+        </label>
+        <label>Jumlah gaji bruto pada slip (KRW)
+          <input id="payrollGross" inputmode="numeric">
+        </label>
+        <label>Jumlah yang benar-benar masuk rekening (KRW)
+          <input id="payrollDeposit" inputmode="numeric">
+        </label>
+        <label>Total potongan pada slip (KRW)
+          <input id="payrollDeductions" inputmode="numeric">
+        </label>
+        <label>Jumlah potongan yang Anda pahami / dapat dijelaskan (KRW)
+          <input id="payrollExplained" inputmode="numeric">
+        </label>
+        <label>Jumlah jam yang dipakai untuk cek upah minimum
+          <input id="payrollHours" inputmode="decimal" placeholder="Contoh 209">
+        </label>
+        <label>Jumlah upah yang menurut slip dihitung untuk upah minimum (KRW)
+          <input id="payrollMinimumBase" inputmode="numeric">
+        </label>
+        <button id="checkPayrollBtn" class="primary">Periksa slip gaji</button>
+        <div id="payrollResult" class="result" hidden></div>
+      </div>
     </section>
 
     <section id="workplace" class="view">

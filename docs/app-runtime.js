@@ -3,7 +3,7 @@ const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
@@ -39,6 +39,7 @@ async function boot(){
     renderDocuments();
     renderCostLedger();
     renderContract();
+    renderPayroll();
     renderWorkplace();
     renderGapStage();
     renderGaps();
@@ -284,7 +285,8 @@ $('checkFeeBtn').addEventListener('click',()=>{
     }
     const payeeMatches=payee===known.payeeCategory;
     out.classList.add(payeeMatches?'safe':'warn');
-    out.innerHTML=`<strong>Nominal cocok dengan data resmi 2026:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} — ${escapeHtml(known.purpose)}. Jalur pembayaran: ${escapeHtml(known.payee)}. ${payeeMatches?'Penerima yang Anda pilih cocok dengan kategori resmi.':'Nominal cocok, tetapi kategori penerima tidak cocok; jangan bayar sebelum diverifikasi.'} <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
+    const scopeNote=known.conditional&&known.scope?' <strong>Berlaku bersyarat:</strong> '+escapeHtml(known.scope)+'.':'';
+    out.innerHTML=`<strong>Nominal cocok dengan data resmi 2026:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} — ${escapeHtml(known.purpose)}. Jalur pembayaran: ${escapeHtml(known.payee)}. ${payeeMatches?'Penerima yang Anda pilih cocok dengan kategori resmi.':'Nominal cocok, tetapi kategori penerima tidak cocok; jangan bayar sebelum diverifikasi.'}${scopeNote} <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
     return;
   }
   out.classList.add('warn');
@@ -308,7 +310,8 @@ function renderCostLedger(){
   if(!rules)return;
   $('knownCostList').innerHTML=rules.fees.map(f=>{
     const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Biaya resmi';
-    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p><p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
+    const scope=f.conditional&&f.scope?'<p><strong>Bersyarat:</strong> '+escapeHtml(f.scope)+'</p>':'';
+    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p>${scope}<p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
   }).join('');
 
   const entries=read(KEYS.ledger,[]);
@@ -523,6 +526,68 @@ $('resetContractBtn').addEventListener('click',()=>{
   $('contractResult').hidden=true;
 });
 
+
+
+function renderPayroll(){
+  const saved=read(KEYS.payroll,{});
+  const fields=['payrollFullPeriod','payrollGross','payrollDeposit','payrollDeductions','payrollExplained','payrollHours','payrollMinimumBase'];
+  fields.forEach(id=>{ if($(id)) $(id).value=saved[id]??''; });
+}
+
+function savePayroll(){
+  const data={};
+  ['payrollFullPeriod','payrollGross','payrollDeposit','payrollDeductions','payrollExplained','payrollHours','payrollMinimumBase'].forEach(id=>{
+    data[id]=$(id)?.value??'';
+  });
+  write(KEYS.payroll,data);
+  return data;
+}
+
+$('checkPayrollBtn').addEventListener('click',()=>{
+  const data=savePayroll();
+  const contract=read(KEYS.contract,{});
+  const gross=Number((data.payrollGross||'').replace(/[^0-9.]/g,''))||0;
+  const deposit=Number((data.payrollDeposit||'').replace(/[^0-9.]/g,''))||0;
+  const deductions=Number((data.payrollDeductions||'').replace(/[^0-9.]/g,''))||0;
+  const explained=Number((data.payrollExplained||'').replace(/[^0-9.]/g,''))||0;
+  const hours=Number((data.payrollHours||'').replace(/[^0-9.]/g,''))||0;
+  const minBase=Number((data.payrollMinimumBase||'').replace(/[^0-9.]/g,''))||0;
+  const contracted=Number(contract.monthlyWage||0);
+  const minHourly=contractRules.minimumWage2026.hourly;
+  const risks=[],warnings=[],ok=[];
+
+  if(!gross||!deposit)warnings.push('Masukkan gaji bruto dan jumlah yang benar-benar masuk rekening.');
+  if(data.payrollFullPeriod==='yes'&&contracted>0&&gross>0){
+    if(gross<contracted)risks.push('Gaji bruto periode penuh lebih rendah daripada upah normal bulanan pada SLC ('+contracted.toLocaleString('ko-KR')+' won). Periksa slip, absensi, dan alasan potongan.');
+    else ok.push('Gaji bruto tidak lebih rendah daripada upah normal bulanan pada SLC.');
+  }
+  if(gross>0&&deposit>0&&deductions>=0){
+    const expected=Math.max(0,gross-deductions);
+    if(Math.abs(expected-deposit)>1000)warnings.push('Gaji bruto - total potongan tidak sama dengan jumlah yang masuk rekening. Selisih sekitar '+Math.abs(expected-deposit).toLocaleString('ko-KR')+' won perlu dijelaskan.');
+    else ok.push('Gaji bruto, potongan, dan jumlah masuk rekening konsisten secara aritmetika.');
+  }
+  const unexplained=Math.max(0,deductions-explained);
+  if(unexplained>0)warnings.push('Ada sekitar '+unexplained.toLocaleString('ko-KR')+' won potongan yang belum Anda pahami atau belum dijelaskan.');
+  if(hours>0&&minBase>0){
+    const implied=minBase/hours;
+    if(implied<minHourly)risks.push('Upah per jam tersirat sekitar '+Math.round(implied).toLocaleString('ko-KR')+' won, di bawah upah minimum 2026 '+minHourly.toLocaleString('ko-KR')+' won. Komponen upah dan jam yang masuk perhitungan harus dikonfirmasi.');
+    else ok.push('Upah per jam tersirat dari angka yang Anda masukkan tidak berada di bawah acuan minimum 2026.');
+  }
+  if(!risks.length&&!warnings.length)ok.push('Tidak ada ketidaksesuaian dasar yang terdeteksi dari angka yang dimasukkan.');
+
+  const out=$('payrollResult');
+  out.hidden=false;
+  out.className='result '+(risks.length?'risk':warnings.length?'warn':'safe');
+  out.innerHTML='<strong>Hasil pemeriksaan slip gaji</strong><div class="contract-flags">'+[
+    ...risks.map(x=>'<div class="contract-flag risk"><strong>Perlu perhatian:</strong> '+escapeHtml(x)+'</div>'),
+    ...warnings.map(x=>'<div class="contract-flag warn"><strong>Periksa:</strong> '+escapeHtml(x)+'</div>'),
+    ...ok.map(x=>'<div class="contract-flag"><strong>OK:</strong> '+escapeHtml(x)+'</div>')
+  ].join('')+'</div><p class="muted">Jika ada kekurangan upah atau potongan yang tidak dapat dijelaskan, simpan SLC, slip gaji, mutasi rekening, dan catatan jam kerja lalu gunakan jalur resmi 1350/Labor Portal.</p>';
+});
+
+['payrollFullPeriod','payrollGross','payrollDeposit','payrollDeductions','payrollExplained','payrollHours','payrollMinimumBase'].forEach(id=>{
+  $(id)?.addEventListener('change',savePayroll);
+});
 
 function renderWorkplace(){
   if(!workplaceRules)return;
