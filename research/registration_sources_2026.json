@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "verifiedAt": "2026-10-03",
+  "parentSourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+  "note": "Official attachment PDFs were used for rule extraction; binaries are not committed.",
+  "sources": [
+    {
+      "filename": "registration_juknis_2026.pdf",
+      "pages": 14,
+      "bytes": 1797803,
+      "sha256": "31eb8ccdd139fb36c04b1865c84c5083c38dafff9a1a97698bd595915cfd3b72"
+    },
+    {
+      "filename": "registration_scan_examples_2026.pdf",
+      "pages": 7,
+      "bytes": 2096901,
+      "sha256": "ea17f874ccb5c87db3fd169bf9885949878b781fc4f65d2d915cf2bac783cf12"
+    }
+  ]
+}

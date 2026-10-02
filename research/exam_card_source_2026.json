@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "verifiedAt": "2026-10-03",
+  "parentSourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pemanggilan-perekaman-biometrik-dan-verifikasi-dokumen-online-peserta-pendaftar-program-g-to-g-korea-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+  "note": "Official attachment used for rule extraction; binary not committed.",
+  "sources": [
+    {
+      "filename": "exam_card_print_2026.pdf",
+      "pages": 6,
+      "bytes": 712688,
+      "sha256": "91af7d320f40568ff7b9a6ee02ac3684a2f6ed644e7dcb0c3a9474aab0ed9403"
+    }
+  ]
+}
