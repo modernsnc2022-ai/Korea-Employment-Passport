@@ -45,7 +45,14 @@
     <section id="journey" class="view active">
       <div class="section-head">
         <h2>Your official journey</h2>
-        <p>Tap a step to see the authority, action, warning and official source. Mark a step complete only after the official action is actually done.</p>
+        <p>Tap a step to see the authority, action, warning and official source. If you are already in the 2026 process, set your current stage once instead of marking every earlier step manually.</p>
+      </div>
+      <div class="panel current-stage-panel">
+        <label>My current stage
+          <select id="currentStageSelect"></select>
+        </label>
+        <button id="setCurrentStageBtn" class="secondary">Set current stage</button>
+        <small>Setting a current stage marks earlier steps as completed on this device. You can still adjust individual steps afterward.</small>
       </div>
       <div id="stageList" class="stage-list"></div>
     </section>

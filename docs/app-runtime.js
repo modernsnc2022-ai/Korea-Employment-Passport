@@ -21,6 +21,7 @@ async function boot(){
     $('routeMeta').textContent=`E-9 · Manufacturing · 2026 · pack ${route.packVersion} · verified ${route.lastVerified}`;
     renderCycleStatus();
     renderJourney();
+    renderCurrentStageSelector();
     renderNextAction();
     renderEligibility();
     renderDocuments();
@@ -42,6 +43,28 @@ function renderCycleStatus(){
     box.textContent=rules.registration.statusMessage||'Check the latest official recruitment notice.';
   }
 }
+
+function renderCurrentStageSelector(){
+  const select=$('currentStageSelect');
+  select.innerHTML='<option value="">Choose current stage</option>';
+  route.stages.forEach((stage,index)=>{
+    const option=document.createElement('option');
+    option.value=String(index);
+    option.textContent=(index+1)+'. '+stage.title;
+    select.appendChild(option);
+  });
+}
+
+$('setCurrentStageBtn').addEventListener('click',()=>{
+  const value=$('currentStageSelect').value;
+  if(value==='')return;
+  const index=Number(value);
+  const done=route.stages.slice(0,index).map(s=>s.id);
+  write(KEYS.done,done);
+  renderJourney();
+  renderNextAction();
+  updateProgress();
+});
 
 function renderJourney(){
   const done=new Set(read(KEYS.done,[]));
