@@ -1,0 +1,81 @@
+name: official-source-monitor
+
+on:
+  schedule:
+    - cron: '17 0 * * *'
+  workflow_dispatch:
+    inputs:
+      accept_current:
+        description: 'Accept current official pages as the new reviewed baseline'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check official sources
+        run: |
+          EXTRA=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.accept_current }}" = "true" ]; then
+            EXTRA="--accept-current"
+          fi
+          python scripts/check_official_sources.py --init-if-empty $EXTRA
+
+      - name: Read result
+        id: result
+        run: |
+          echo "changed=$(jq '.changed | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "failures=$(jq '.failures | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "initialized=$(jq -r '.initialized' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "accepted=$(jq -r '.acceptedCurrent' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit reviewed/initial baseline
+        if: steps.result.outputs.initialized == 'true' || steps.result.outputs.accepted == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add monitor/source_hashes.json
+          git diff --cached --quiet || git commit -m "chore: update official source baseline"
+          git push
+
+      - name: Open review issue when an official page changes
+        if: steps.result.outputs.changed != '0' && steps.result.outputs.accepted != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --state open --search "Official source change detected in:title" --json number --jq '.[0].number // empty')
+          cat > /tmp/body.txt <<'EOF'
+          An official page used by Korea Employment Passport has changed.
+
+          The app data has **not** been updated automatically.
+
+          Review the latest official-source-monitor workflow result, compare the official notice with the currently published route/rules, update the structured data only after review, then run official-source-monitor with accept_current=true to approve the new baseline.
+
+          This is intentionally human-gated.
+          EOF
+          if [ -z "$EXISTING" ]; then
+            gh issue create --title "Official source change detected — review required" --body-file /tmp/body.txt
+          else
+            gh issue comment "$EXISTING" --body "Another scheduled check detected official-source changes. Review the latest official-source-monitor run."
+          fi
+
+      - name: Job summary
+        run: |
+          echo "## Official source monitor" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Changed: ${{ steps.result.outputs.changed }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Fetch failures: ${{ steps.result.outputs.failures }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Auto-publish: **disabled**" >> "$GITHUB_STEP_SUMMARY"
