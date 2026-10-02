@@ -237,28 +237,32 @@ $('checkFeeBtn').addEventListener('click',()=>{
   const payee=$('feePayee').value;
   const purpose=$('feePurpose').value.trim().toLowerCase();
   const out=$('feeResult');out.hidden=false;out.className='result';
-  if(!amount||!payee){out.classList.add('warn');out.textContent='Enter both the amount and who asked you to pay.';return}
+  if(!amount||!payee){out.classList.add('warn');out.textContent='Masukkan nominal dan siapa yang meminta pembayaran.';return}
   if(payee==='broker'||/guarantee|jamin|job|kerja pasti|slc pasti|penempatan pasti/.test(purpose)){
     out.classList.add('risk');
-    out.innerHTML='<strong>High risk.</strong> A private payment cannot be treated as an official EPS employer-selection guarantee. Verify the purpose and official source before paying.';
+    out.innerHTML='<strong>Risiko tinggi.</strong> Pembayaran kepada calo/individu tidak dapat dianggap sebagai jaminan resmi pemilihan perusahaan EPS. Periksa tujuan dan sumber resmi sebelum membayar.';
     return;
   }
   const known=rules.fees.find(f=>f.amountIdr===amount);
   if(known){
-    const expectedBank=/bni/i.test(known.payee);
-    const payeeMatches=expectedBank?payee==='bank':payee==='official';
+    if(known.kind==='minimum_balance'){
+      out.classList.add(payee==='bank'?'safe':'risk');
+      out.innerHTML=`<strong>Ini bukan biaya.</strong> Rp${known.amountIdr.toLocaleString('id-ID')} adalah jumlah saldo minimum yang harus tersedia di rekening BNI milik pemohon untuk proses visa 2026. Jangan menyerahkan jumlah ini kepada calo atau individu. <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
+      return;
+    }
+    const payeeMatches=payee===known.payeeCategory;
     out.classList.add(payeeMatches?'safe':'warn');
-    out.innerHTML=`<strong>Exact match in the verified 2026 general-route snapshot:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} for ${escapeHtml(known.purpose)}. Official payment path: ${escapeHtml(known.payee)}. The 2026 registration is closed; do not reuse this amount for a future cycle without a new official notice.`;
+    out.innerHTML=`<strong>Nominal cocok dengan data resmi 2026:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} — ${escapeHtml(known.purpose)}. Jalur pembayaran: ${escapeHtml(known.payee)}. ${payeeMatches?'Penerima yang Anda pilih cocok dengan kategori resmi.':'Nominal cocok, tetapi kategori penerima tidak cocok; jangan bayar sebelum diverifikasi.'} <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
     return;
   }
   out.classList.add('warn');
-  out.innerHTML='<strong>No exact match in this route’s verified official fee snapshot.</strong> Do not pay yet. Verify amount, payee, purpose, stage and the latest official source.';
+  out.innerHTML='<strong>Nominal ini tidak cocok dengan daftar biaya resmi yang sudah diverifikasi untuk rute ini.</strong> Jangan bayar dulu. Periksa nominal, penerima, tujuan, tahap, dan sumber resmi terbaru.';
 });
 
 function renderGapStage(){
   $('gapStage').innerHTML='';
   route.stages.forEach(s=>{
-    const o=document.createElement('option');o.value=s.id;o.textContent=s.title;$('gapStage').appendChild(o);
+    const o=document.createElement('option');o.value=s.id;o.textContent=stageTitle(s);$('gapStage').appendChild(o);
   });
 }
 $('saveGapBtn').addEventListener('click',()=>{
@@ -274,7 +278,7 @@ function renderGaps(){
     const found=route?.stages.find(s=>s.id===g.stage);
     const stage=found?stageTitle(found):g.stage;
     const el=document.createElement('article');el.className='gap-item';
-    el.innerHTML=`<h3>${escapeHtml(stage)}</h3><p>${escapeHtml(g.task)}</p><p><strong>Helper:</strong> ${escapeHtml(g.helper)}</p><div class="gap-actions"><button>Delete</button></div>`;
+    el.innerHTML=`<h3>${escapeHtml(stage)}</h3><p>${escapeHtml(g.task)}</p><p><strong>Pembantu:</strong> ${escapeHtml(g.helper)}</p><div class="gap-actions"><button>Hapus</button></div>`;
     el.querySelector('button').addEventListener('click',()=>{write(KEYS.gaps,read(KEYS.gaps,[]).filter(x=>x.id!==g.id));renderGaps()});
     $('gapList').appendChild(el);
   });
