@@ -4,8 +4,9 @@ const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
 const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,i18n={},activeStage=null,deferredInstall=null;
+const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions'};
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,exactAnswers=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -150,21 +151,23 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
       fetch(CONTRACT_URL,{cache:'no-store'}),
       fetch(WORKPLACE_URL,{cache:'no-store'}),
-      fetch(DOCUMENT_PACKS_URL,{cache:'no-store'})
+      fetch(DOCUMENT_PACKS_URL,{cache:'no-store'}),
+      fetch(EXACT_ANSWERS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
     contractRules=await contractRes.json();
     workplaceRules=await workplaceRes.json();
     documentPacks=await documentPacksRes.json();
+    exactAnswers=await exactAnswersRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -180,6 +183,7 @@ async function boot(){
     renderWorkplace();
     renderGapStage();
     renderGaps();
+    renderUnresolvedFieldQuestions();
     updateProgress();
   }catch(err){
     $('routeMeta').textContent='Data rute terverifikasi tidak dapat dimuat. Sambungkan internet dan coba lagi.';
@@ -273,6 +277,39 @@ function renderJourney(){
   });
 }
 
+function renderExactAnswers(stage){
+  const section=$('exactAnswerSection');
+  const list=$('exactAnswerList');
+  if(!exactAnswers?.answers?.length){
+    section.hidden=true;
+    list.innerHTML='';
+    return;
+  }
+
+  const answers=exactAnswers.answers.filter(item=>item.stages?.includes(stage.id));
+  if(!answers.length){
+    section.hidden=true;
+    list.innerHTML='';
+    return;
+  }
+
+  section.hidden=false;
+  list.innerHTML=answers.map((item,index)=>{
+    const blocks=(item.doNotDo||[]).map(text=>'• '+escapeHtml(text)).join('<br>');
+    return `<details class="exact-card" ${index===0?'open':''}>
+      <summary>${escapeHtml(item.question)}</summary>
+      <div class="exact-body">
+        <div class="exact-line answer"><strong>Jawaban:</strong>${escapeHtml(item.answer)}</div>
+        <div class="exact-line write"><strong>Tulis / lakukan seperti ini:</strong>${escapeHtml(item.writeExactly)}</div>
+        <div class="exact-line"><strong>Mengapa:</strong>${escapeHtml(item.why)}</div>
+        ${blocks?'<div class="exact-line block"><strong>Jangan:</strong>'+blocks+'</div>':''}
+        <div class="exact-line"><strong>Status:</strong>${item.verificationStatus==='verified'?'Terverifikasi':'Perlu cek ulang cohort'} · diperiksa ${escapeHtml(item.verifiedAt||'')}</div>
+        <a class="source" href="${item.sourceUrl}" target="_blank" rel="noopener">Lihat dasar resmi ↗</a>
+      </div>
+    </details>`;
+  }).join('');
+}
+
 function openStage(stage){
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
@@ -298,6 +335,7 @@ function openStage(stage){
     officialAction.href='#';
     officialAction.textContent='Buka layanan resmi ↗';
   }
+  renderExactAnswers(stage);
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
   if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
@@ -451,6 +489,103 @@ function readImageRatio(file){
     img.src=url;
   });
 }
+
+
+function normalizeSearch(value){
+  return String(value||'')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function fieldAnswerHtml(item){
+  const dont=(item.doNotDo||[]).map(text=>'• '+escapeHtml(text)).join('<br>');
+  return `<article class="field-match">
+    <strong>${escapeHtml(item.question)}</strong>
+    <div class="write-this">${escapeHtml(item.answer)}</div>
+    <div class="exact-body">
+      <div class="exact-line write"><strong>Tulis / lakukan seperti ini:</strong>${escapeHtml(item.writeExactly)}</div>
+      <div class="exact-line"><strong>Mengapa:</strong>${escapeHtml(item.why)}</div>
+      ${dont?'<div class="exact-line block"><strong>Jangan:</strong>'+dont+'</div>':''}
+      <a class="source" href="${item.sourceUrl}" target="_blank" rel="noopener">Dasar resmi ↗</a>
+    </div>
+  </article>`;
+}
+
+function findExactFieldAnswers(query){
+  if(!exactAnswers?.answers?.length)return [];
+  const q=normalizeSearch(query);
+  if(!q)return [];
+  const tokens=q.split(' ').filter(token=>token.length>1);
+  const current=currentStage();
+  return exactAnswers.answers
+    .map(item=>{
+      const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
+      let score=0;
+      if(current&&item.stages?.includes(current.id))score+=10;
+      if(hay.includes(q))score+=20;
+      tokens.forEach(token=>{if(hay.includes(token))score+=2});
+      return {item,score};
+    })
+    .filter(row=>row.score>0)
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,5)
+    .map(row=>row.item);
+}
+
+$('fieldHelpBtn').addEventListener('click',()=>{
+  const query=$('fieldHelpQuery').value.trim();
+  const out=$('fieldHelpResult');
+  out.hidden=false;
+  out.className='result';
+  if(!query){
+    out.classList.add('warn');
+    out.textContent='Ketik nama kolom atau hal yang membingungkan terlebih dahulu.';
+    return;
+  }
+
+  const matches=findExactFieldAnswers(query);
+  if(matches.length){
+    out.classList.add('safe');
+    out.innerHTML='<strong>Jawaban terverifikasi ditemukan.</strong><div class="field-match-list">'+matches.map(fieldAnswerHtml).join('')+'</div>';
+    return;
+  }
+
+  out.classList.add('warn');
+  out.innerHTML=`<strong>Belum ada jawaban terverifikasi untuk “${escapeHtml(query)}”.</strong>
+    <p>Jangan isi berdasarkan tebakan, aturan lama, atau jawaban sektor lain. Simpan pertanyaan ini untuk diverifikasi sebelum submit.</p>
+    <button id="saveUnresolvedFieldBtn" class="secondary" type="button">Simpan pertanyaan yang belum terjawab</button>`;
+
+  const saveUnresolvedBtn=out.querySelector('#saveUnresolvedFieldBtn');
+  saveUnresolvedBtn?.addEventListener('click',()=>{
+    const stage=currentStage();
+    const list=read(KEYS.fieldQuestions,[]);
+    const key=normalizeSearch(query)+'|'+(stage?.id||'unknown');
+    if(!list.some(item=>item.key===key)){
+      list.unshift({
+        key,
+        question:query,
+        stageId:stage?.id||'unknown',
+        stageTitle:stage?stageTitle(stage):'Unknown',
+        createdAt:new Date().toISOString(),
+        status:'needs_official_verification'
+      });
+      write(KEYS.fieldQuestions,list);
+      renderUnresolvedFieldQuestions();
+    }
+    saveUnresolvedBtn.disabled=true;
+    saveUnresolvedBtn.textContent='Tersimpan — jangan submit sampai terverifikasi';
+  });
+});
+
+$('fieldHelpQuery').addEventListener('keydown',(event)=>{
+  if(event.key==='Enter'){
+    event.preventDefault();
+    $('fieldHelpBtn').click();
+  }
+});
 
 function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
@@ -993,6 +1128,44 @@ $('analyzeBrokerBtn').addEventListener('click',()=>{
   const amountHtml=amountFindings.map(f=>'<div class="contract-flag '+(f.level==='warn'?'warn':'')+'">'+escapeHtml(f.text)+'</div>').join('');
 
   out.innerHTML='<strong>Hasil Broker Guardian</strong><div class="contract-flags">'+signalHtml+amountHtml+'</div><p class="muted">Deteksi ini bukan bukti bahwa seseorang melakukan penipuan. Verifikasi proses, penerima, tujuan, dan nominal terhadap sumber resmi sebelum membayar.</p>';
+});
+
+function renderUnresolvedFieldQuestions(){
+  const list=read(KEYS.fieldQuestions,[]);
+  const wrap=$('unresolvedFieldList');
+  wrap.innerHTML='';
+  if(!list.length){
+    wrap.innerHTML='<div class="gap-item"><p>Belum ada pertanyaan field yang menunggu verifikasi.</p></div>';
+    return;
+  }
+
+  list.forEach(item=>{
+    const article=document.createElement('article');
+    article.className='gap-item';
+    article.innerHTML=`
+      <h3>${escapeHtml(item.question)}</h3>
+      <p><strong>Tahap:</strong> ${escapeHtml(item.stageTitle||item.stageId)}</p>
+      <p><strong>Status:</strong> Jangan submit berdasarkan tebakan — perlu verifikasi resmi.</p>
+      <div class="gap-actions"><button type="button">Hapus</button></div>`;
+    article.querySelector('button').addEventListener('click',()=>{
+      write(KEYS.fieldQuestions,read(KEYS.fieldQuestions,[]).filter(row=>row.key!==item.key));
+      renderUnresolvedFieldQuestions();
+    });
+    wrap.appendChild(article);
+  });
+}
+
+$('emailFieldQuestionsBtn').addEventListener('click',()=>{
+  const list=read(KEYS.fieldQuestions,[]);
+  if(!list.length)return;
+  const lines=list.map((item,index)=>`${index+1}. [${item.stageTitle||item.stageId}] ${item.question}`).join('\n');
+  const subject=encodeURIComponent('[KEP Beta] Exact field questions needing verification');
+  const body=encodeURIComponent(
+    'Pertanyaan field yang belum punya jawaban terverifikasi:\n\n'+
+    lines+
+    '\n\nMohon verifikasi berdasarkan form/pengumuman resmi yang sesuai. Jangan jawab berdasarkan tebakan atau sektor/siklus lain.'
+  );
+  location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
 function renderGapStage(){

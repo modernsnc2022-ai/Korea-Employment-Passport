@@ -11,6 +11,7 @@ js = (ROOT / "docs" / "app-runtime.js").read_text(encoding="utf-8")
 route = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json").read_text(encoding="utf-8"))
 i18n = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026_id.json").read_text(encoding="utf-8"))
 document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json").read_text(encoding="utf-8"))
+exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json").read_text(encoding="utf-8"))
 
 errors = []
 
@@ -90,6 +91,35 @@ if bad_pack_stage_refs:
 if bad_pack_sources:
     errors.append("document packs missing source URL: " + ", ".join(sorted(bad_pack_sources)))
 
+exact_ids = []
+bad_exact_stage_refs = []
+bad_exact_sources = []
+bad_exact_content = []
+for item in exact_answers.get("answers", []):
+    item_id = item.get("id", "")
+    exact_ids.append(item_id)
+    for stage_id in item.get("stages", []):
+        if stage_id not in known_stage_ids:
+            bad_exact_stage_refs.append(f"{item_id}->{stage_id}")
+    if not str(item.get("sourceUrl", "")).startswith("http"):
+        bad_exact_sources.append(item_id or "<missing>")
+    for required in ("question", "answer", "writeExactly", "why", "verifiedAt", "verificationStatus"):
+        if not str(item.get(required, "")).strip():
+            bad_exact_content.append(f"{item_id}:{required}")
+
+exact_dupes = [key for key, count in Counter(exact_ids).items() if key and count > 1]
+if exact_dupes:
+    errors.append("duplicate exact-answer ids: " + ", ".join(sorted(exact_dupes)))
+
+if bad_exact_stage_refs:
+    errors.append("exact answers reference unknown stages: " + ", ".join(sorted(bad_exact_stage_refs)))
+
+if bad_exact_sources:
+    errors.append("exact answers missing source URL: " + ", ".join(sorted(bad_exact_sources)))
+
+if bad_exact_content:
+    errors.append("exact answers missing required content: " + ", ".join(sorted(bad_exact_content)))
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -102,5 +132,6 @@ print(
     f"views={len(view_ids)}",
     f"stages={len(stage_ids)}",
     f"document_packs={len(document_packs.get('packs', []))}",
+    f"exact_answers={len(exact_answers.get('answers', []))}",
     f"js_literal_refs={len(literal_refs)}",
 )

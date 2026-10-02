@@ -91,6 +91,20 @@
         <h2>Document Copilot</h2>
         <p>Checklist berubah mengikuti tahap Anda sekarang. Pengumuman resmi cohort/siklus selalu lebih tinggi daripada data aplikasi. File yang dipilih hanya diperiksa di perangkat Anda.</p>
       </div>
+
+      <div class="panel field-copilot">
+        <div>
+          <span class="eyebrow dark">FIELD COPILOT</span>
+          <h3>“Kolom ini harus diisi apa?”</h3>
+          <p class="muted">Ketik kata yang ada pada kolom/form. Jika jawabannya sudah terverifikasi, aplikasi memberi jawaban pasti. Jika belum, aplikasi tidak menebak.</p>
+        </div>
+        <label>Kata/kolom yang membingungkan
+          <input id="fieldHelpQuery" placeholder="Contoh: buku tabungan, pasfoto, biaya visa, map manufaktur">
+        </label>
+        <button id="fieldHelpBtn" class="primary">Cari jawaban pasti</button>
+        <div id="fieldHelpResult" class="result" hidden></div>
+      </div>
+
       <div id="docStageContext" class="panel doc-context"></div>
       <div id="docList" class="check-list"></div>
       <button id="resetDocs" class="secondary">Reset checklist dokumen</button>
@@ -263,6 +277,13 @@
       </div>
 
       <div class="section-head">
+        <h2>Pertanyaan field yang belum terverifikasi</h2>
+        <p>Ini adalah kolom kecil yang belum punya jawaban pasti. Jangan submit berdasarkan tebakan sampai ada dasar resmi yang sesuai.</p>
+      </div>
+      <div id="unresolvedFieldList" class="gap-list"></div>
+      <button id="emailFieldQuestionsBtn" class="secondary">Kirim pertanyaan ini untuk diverifikasi</button>
+
+      <div class="section-head">
         <h2>Celah Calo / Perantara</h2>
         <p>Jika masih ada tugas yang membuat Anda harus bergantung pada LPK, agen, teman, atau calo, catat di sini. Satu kebutuhan calo swasta saja berarti rute ini belum selesai.</p>
       </div>
@@ -299,6 +320,13 @@
       <h3>Apa yang harus dilakukan</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
+      <section id="exactAnswerSection" class="exact-answer-section" hidden>
+        <div class="exact-answer-head">
+          <span class="eyebrow dark">JAWABAN PASTI</span>
+          <h3>Hal kecil yang sering membuat salah isi</h3>
+        </div>
+        <div id="exactAnswerList" class="exact-answer-list"></div>
+      </section>
       <a id="stageOfficialAction" class="primary full official-action" href="#" target="_blank" rel="noopener" hidden>Buka layanan resmi ↗</a>
       <a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Baca pengumuman / sumber resmi ↗</a>
       <div id="stageNextHint" class="stage-next-hint"></div>
