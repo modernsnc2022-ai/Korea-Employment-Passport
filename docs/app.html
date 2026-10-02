@@ -31,8 +31,11 @@
       </div>
     </section>
 
+    <div id="cycleStatus" class="cycle-status" hidden></div>
+
     <nav class="tabs" aria-label="Main">
       <button class="tab active" data-view="journey">Journey</button>
+      <button class="tab" data-view="eligibility">Eligibility</button>
       <button class="tab" data-view="documents">Documents</button>
       <button class="tab" data-view="fees">Fee Check</button>
       <button class="tab" data-view="gaps">Broker Gap</button>
@@ -44,6 +47,16 @@
         <p>Tap a step to see the authority, action, warning and official source. Mark a step complete only after the official action is actually done.</p>
       </div>
       <div id="stageList" class="stage-list"></div>
+    </section>
+
+    <section id="eligibility" class="view">
+      <div class="section-head">
+        <h2>Eligibility Checker</h2>
+        <p>This is a self-check against the official 2026 general manufacturing criteria. It is not an official eligibility decision.</p>
+      </div>
+      <div id="eligibilityForm" class="panel"></div>
+      <button id="checkEligibilityBtn" class="primary">Check eligibility</button>
+      <div id="eligibilityResult" class="result" hidden></div>
     </section>
 
     <section id="documents" class="view">
@@ -62,7 +75,7 @@
       </div>
       <div class="panel">
         <label>Amount requested (Rp)
-          <input id="feeAmount" inputmode="numeric" placeholder="e.g. 350000">
+          <input id="feeAmount" inputmode="numeric" placeholder="e.g. 472161">
         </label>
         <label>Who asked you to pay?
           <select id="feePayee">

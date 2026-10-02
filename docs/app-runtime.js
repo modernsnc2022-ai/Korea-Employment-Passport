@@ -1,30 +1,44 @@
 const ROUTE_URL='data/id_e9_manufacturing_2026.json';
+const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps'};
-let route=null,activeStage=null,deferredInstall=null;
+let route=null,rules=null,activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
 const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
-
-const documents=[
-  {id:'identity',title:'Identity data matches everywhere',detail:'Compare spelling, date of birth and other identity fields before any official submission.'},
-  {id:'photo',title:'Photo matches current notice',detail:'Check current background, framing, dimensions and file requirements before upload.'},
-  {id:'education',title:'Education proof is readable',detail:'Use the exact education document required by the current recruitment notice.'},
-  {id:'scan',title:'Documents are scanned clearly',detail:'Avoid cropped pages, glare, blur and unreadable text. Use scans where the official notice requires scans.'},
-  {id:'current_notice',title:'Current-cycle checklist rechecked',detail:'Do not rely on an old LPK checklist. Recheck the current KP2MI / HRD Korea notice for this stage.'}
-];
+const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
 async function boot(){
   try{
-    const res=await fetch(ROUTE_URL,{cache:'no-store'});
-    if(!res.ok)throw new Error('route '+res.status);
-    route=await res.json();
+    const [routeRes,rulesRes]=await Promise.all([
+      fetch(ROUTE_URL,{cache:'no-store'}),
+      fetch(RULES_URL,{cache:'no-store'})
+    ]);
+    if(!routeRes.ok||!rulesRes.ok) throw new Error('verified data unavailable');
+    route=await routeRes.json();
+    rules=await rulesRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufacturing · 2026 · pack ${route.packVersion} · verified ${route.lastVerified}`;
-    renderJourney();renderDocuments();renderGapStage();renderGaps();updateProgress();
+    renderCycleStatus();
+    renderJourney();
+    renderEligibility();
+    renderDocuments();
+    renderGapStage();
+    renderGaps();
+    updateProgress();
   }catch(err){
     $('routeMeta').textContent='Unable to load verified route. Reconnect and retry.';
     console.error(err);
+  }
+}
+
+function renderCycleStatus(){
+  const box=$('cycleStatus');
+  box.hidden=false;
+  if(rules.registration.status==='closed'){
+    box.innerHTML=`<strong>2026 general manufacturing registration is closed.</strong> ${escapeHtml(rules.registration.statusMessage)} <a href="${rules.source.url}" target="_blank" rel="noopener">Official notice ↗</a>`;
+  }else{
+    box.textContent=rules.registration.statusMessage||'Check the latest official recruitment notice.';
   }
 }
 
@@ -64,7 +78,8 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
   done.has(activeStage.id)?done.delete(activeStage.id):done.add(activeStage.id);
   write(KEYS.done,[...done]);
   $('stageDialog').close();
-  renderJourney();updateProgress();
+  renderJourney();
+  updateProgress();
 });
 
 function updateProgress(){
@@ -76,12 +91,70 @@ function updateProgress(){
   $('progressText').textContent=`${count} / ${route.stages.length} · ${pct}%`;
 }
 
+function renderEligibility(){
+  const wrap=$('eligibilityForm');
+  wrap.innerHTML='';
+  rules.eligibility.forEach(rule=>{
+    const row=document.createElement('div');
+    row.className='elig-row';
+    const info=document.createElement('div');
+    info.innerHTML=`<strong>${escapeHtml(rule.label)}</strong>`;
+    let input;
+    if(rule.type==='date_range'){
+      input=document.createElement('input');
+      input.type='date'; input.id='elig_'+rule.id;
+      info.innerHTML+=`<div class="hint">2026 accepted birth dates: ${rule.min} to ${rule.max}</div>`;
+    }else if(rule.type==='number_max'){
+      input=document.createElement('input');
+      input.type='number'; input.min='0'; input.step='0.1'; input.placeholder='0'; input.id='elig_'+rule.id;
+      info.innerHTML+=`<div class="hint">Maximum under the 2026 rule: ${rule.max} years</div>`;
+    }else{
+      input=document.createElement('select');
+      input.id='elig_'+rule.id;
+      input.innerHTML='<option value="">Pilih</option><option value="yes">Ya, memenuhi</option><option value="no">Tidak / tidak yakin</option>';
+    }
+    row.append(info,input);
+    wrap.appendChild(row);
+  });
+}
+
+$('checkEligibilityBtn').addEventListener('click',()=>{
+  const failures=[],unknown=[];
+  rules.eligibility.forEach(rule=>{
+    const el=$('elig_'+rule.id);
+    const value=el?.value||'';
+    if(!value){unknown.push(rule.label);return}
+    if(rule.type==='date_range'){
+      if(value<rule.min||value>rule.max)failures.push(rule.fail||rule.label);
+    }else if(rule.type==='number_max'){
+      if(Number(value)>Number(rule.max))failures.push(rule.fail||rule.label);
+    }else if(value!=='yes'){
+      failures.push(rule.label);
+    }
+  });
+  const out=$('eligibilityResult');
+  out.hidden=false;out.className='result';
+  if(unknown.length){
+    out.classList.add('warn');
+    out.innerHTML=`<strong>Incomplete self-check.</strong> Answer all items before using the result. Nothing from this checker is saved.`;
+    return;
+  }
+  if(failures.length){
+    out.classList.add('risk');
+    out.innerHTML='<strong>Does not match one or more 2026 general manufacturing criteria:</strong><br>'+failures.map(x=>'• '+escapeHtml(x)).join('<br>')+'<br><br>This is not an official decision. Check the official notice.';
+  }else{
+    out.classList.add('safe');
+    out.innerHTML='<strong>Matches the listed 2026 general manufacturing criteria in this self-check.</strong><br>The 2026 registration is already closed, so this result is for preparation only. Wait for the next official KP2MI/HRD Korea recruitment notice because future criteria can change.';
+  }
+});
+
 function renderDocuments(){
   const checked=new Set(read(KEYS.docs,[]));
   $('docList').innerHTML='';
-  documents.forEach(doc=>{
+  rules.documents.forEach(doc=>{
     const article=document.createElement('article');
-    article.innerHTML=`<input type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)}</h3><p>${escapeHtml(doc.detail)}</p></div>`;
+    const optional=doc.required?'Required in 2026 notice':'If available / conditional';
+    article.innerHTML=`<input type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · max ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p></div>`;
     article.querySelector('input').addEventListener('change',(e)=>{
       const state=new Set(read(KEYS.docs,[]));
       e.target.checked?state.add(doc.id):state.delete(doc.id);
@@ -98,28 +171,21 @@ $('checkFeeBtn').addEventListener('click',()=>{
   const purpose=$('feePurpose').value.trim().toLowerCase();
   const out=$('feeResult');out.hidden=false;out.className='result';
   if(!amount||!payee){out.classList.add('warn');out.textContent='Enter both the amount and who asked you to pay.';return}
-  if(payee==='broker'||/guarantee|jamin|job|kerja pasti|slc pasti/.test(purpose)){
+  if(payee==='broker'||/guarantee|jamin|job|kerja pasti|slc pasti|penempatan pasti/.test(purpose)){
     out.classList.add('risk');
-    out.innerHTML='<strong>High risk.</strong> Do not treat a private payment as an official EPS fee or employer-selection guarantee. Verify the purpose and official source before paying.';
+    out.innerHTML='<strong>High risk.</strong> A private payment cannot be treated as an official EPS employer-selection guarantee. Verify the purpose and official source before paying.';
     return;
   }
-  if(amount===350000){
-    out.classList.add(payee==='official'?'safe':'warn');
-    out.innerHTML='<strong>Known rule snapshot:</strong> Rp350,000 matches the 2026 psychology-test fee found in the KP2MI/HIMPSI rule. It is valid only with the correct stage and official/approved payee. Recheck the current notice before payment.';
-    return;
-  }
-  if(amount===1260000){
-    out.classList.add(payee==='bank'?'safe':'warn');
-    out.innerHTML='<strong>Known rule snapshot:</strong> Rp1,260,000 matches the visa + KVAC administration amount used for relevant 2026 cohorts. Verify the current cohort notice and designated payment channel.';
-    return;
-  }
-  if(amount>=1500000&&amount<1600000){
-    out.classList.add('warn');
-    out.innerHTML='<strong>Possible confusion:</strong> this range may correspond to a required bank balance rather than a fee. Do not transfer it to a person or broker. Verify the current official notice.';
+  const known=rules.fees.find(f=>f.amountIdr===amount);
+  if(known){
+    const expectedBank=/bni/i.test(known.payee);
+    const payeeMatches=expectedBank?payee==='bank':payee==='official';
+    out.classList.add(payeeMatches?'safe':'warn');
+    out.innerHTML=`<strong>Exact match in the verified 2026 general-route snapshot:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} for ${escapeHtml(known.purpose)}. Official payment path: ${escapeHtml(known.payee)}. The 2026 registration is closed; do not reuse this amount for a future cycle without a new official notice.`;
     return;
   }
   out.classList.add('warn');
-  out.innerHTML='<strong>No exact match in the current verified snapshot.</strong> Do not pay yet. Verify amount, payee, purpose, stage and the latest official source.';
+  out.innerHTML='<strong>No exact match in this route’s verified official fee snapshot.</strong> Do not pay yet. Verify amount, payee, purpose, stage and the latest official source.';
 });
 
 function renderGapStage(){
@@ -162,5 +228,4 @@ window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredI
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(console.error));
 
-function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 boot();
