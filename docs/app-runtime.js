@@ -662,6 +662,63 @@ $('requestScoutBtn').addEventListener('click',()=>{
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
+
+$('analyzeBrokerBtn').addEventListener('click',()=>{
+  const text=($('brokerText').value||'').trim();
+  const out=$('brokerResult');
+  out.hidden=false;
+  out.className='result';
+  if(!text){
+    out.classList.add('warn');
+    out.textContent='Tempel pesan atau teks tagihan terlebih dahulu.';
+    return;
+  }
+
+  const lower=text.toLowerCase();
+  const signals=[];
+  const strong=[
+    [/(dijamin|jaminan|pasti).{0,30}(kerja|slc|berangkat|perusahaan|dipilih)/i,'Janji hasil/penempatan yang dijamin'],
+    [/(jalur\s*(cepat|khusus)|orang\s*dalam|koneksi\s*khusus|prioritas\s*khusus)/i,'Klaim jalur khusus atau koneksi orang dalam'],
+    [/(tanpa|tidak perlu).{0,25}(ujian|eps-?topik|skill\s*test|proses\s*resmi)/i,'Klaim dapat melewati proses resmi'],
+    [/(rekening\s*pribadi|transfer.{0,35}atas\s*nama\s*(pribadi|perorangan))/i,'Permintaan pembayaran ke rekening pribadi'],
+    [/(jangan\s*(bilang|cerita)|rahasia|diam-diam)/i,'Permintaan merahasiakan proses atau pembayaran']
+  ];
+  const medium=[
+    [/(hari\s*ini|sekarang\s*juga|segera\s*bayar|slot\s*terbatas)/i,'Tekanan waktu untuk segera membayar'],
+    [/(fee\s*(job|penempatan)|biaya\s*(jaminan|penempatan)|uang\s*pelicin)/i,'Biaya penempatan/jaminan yang perlu diverifikasi'],
+    [/(cepat|percepat).{0,25}(slc|berangkat|dipilih|perusahaan)/i,'Janji mempercepat hasil resmi']
+  ];
+  strong.forEach(([re,label])=>{if(re.test(lower))signals.push({level:'risk',label})});
+  medium.forEach(([re,label])=>{if(re.test(lower))signals.push({level:'warn',label})});
+
+  const amounts=[];
+  const re=/\bRp\s*([0-9][0-9.,\s]{2,})/gi;
+  let m;
+  while((m=re.exec(text))!==null){
+    const amount=Number(m[1].replace(/[^0-9]/g,''));
+    if(amount>0&&!amounts.includes(amount))amounts.push(amount);
+  }
+
+  const amountFindings=amounts.map(amount=>{
+    const known=rules.fees.find(f=>f.amountIdr===amount);
+    if(!known)return {level:'warn',text:'Rp'+amount.toLocaleString('id-ID')+' tidak cocok dengan daftar nominal resmi yang sudah diverifikasi untuk rute ini.'};
+    if(known.kind==='minimum_balance')return {level:'warn',text:'Rp'+amount.toLocaleString('id-ID')+' cocok dengan saldo minimum BNI, bukan biaya yang harus diberikan kepada seseorang.'};
+    const scope=known.conditional&&known.scope?' Berlaku hanya pada kondisi: '+known.scope+'.':'';
+    return {level:'ok',text:'Rp'+amount.toLocaleString('id-ID')+' sama dengan nominal resmi: '+known.purpose+'. Kesamaan nominal saja tidak membuktikan penerima pembayaran benar.'+scope};
+  });
+
+  const hasRisk=signals.some(s=>s.level==='risk');
+  const hasWarn=signals.some(s=>s.level==='warn')||amountFindings.some(s=>s.level==='warn');
+  out.classList.add(hasRisk?'risk':hasWarn?'warn':'safe');
+
+  const signalHtml=signals.length
+    ? signals.map(s=>'<div class="contract-flag '+(s.level==='risk'?'risk':'warn')+'"><strong>'+(s.level==='risk'?'Risiko tinggi':'Periksa')+':</strong> '+escapeHtml(s.label)+'</div>').join('')
+    : '<div class="contract-flag"><strong>Tidak ada pola janji berisiko yang terdeteksi secara otomatis.</strong></div>';
+  const amountHtml=amountFindings.map(f=>'<div class="contract-flag '+(f.level==='warn'?'warn':'')+'">'+escapeHtml(f.text)+'</div>').join('');
+
+  out.innerHTML='<strong>Hasil Broker Guardian</strong><div class="contract-flags">'+signalHtml+amountHtml+'</div><p class="muted">Deteksi ini bukan bukti bahwa seseorang melakukan penipuan. Verifikasi proses, penerima, tujuan, dan nominal terhadap sumber resmi sebelum membayar.</p>';
+});
+
 function renderGapStage(){
   $('gapStage').innerHTML='';
   route.stages.forEach(s=>{
