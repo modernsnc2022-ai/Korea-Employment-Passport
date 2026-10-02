@@ -8,7 +8,7 @@ const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
@@ -224,15 +224,32 @@ function renderFreshnessStatus(){
     <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
 }
 
-function exactAnswerIdSet(){
-  return new Set((exactAnswers?.answers||[]).map(item=>item.id));
+function selectedScope(stageId){
+  return read(KEYS.scopeSelections,{})[stageId]||'';
+}
+
+function exactAnswerById(answerId){
+  return (exactAnswers?.answers||[]).find(item=>item.id===answerId)||null;
+}
+
+function exactAnswerApplies(item,stageId){
+  if(!item?.stages?.includes(stageId))return false;
+  if(item.scopeType!=='cohort')return true;
+  return selectedScope(stageId)===item.scopeKey;
+}
+
+function exactAnswerIdSet(stageId){
+  return new Set((exactAnswers?.answers||[]).filter(item=>exactAnswerApplies(item,stageId)).map(item=>item.id));
 }
 
 function bqcQuestionsForStage(stageId){
-  const answerIds=exactAnswerIdSet();
+  const answerIds=exactAnswerIdSet(stageId);
   const base=(brokerQuestions?.questions||[])
     .filter(item=>item.stageId===stageId)
-    .map(item=>({...item,resolved:Boolean(item.answerId&&answerIds.has(item.answerId))}));
+    .map(item=>{
+      const candidates=item.answerIds?.length?item.answerIds:(item.answerId?[item.answerId]:[]);
+      return {...item,resolved:candidates.some(id=>answerIds.has(id))};
+    });
   const local=read(KEYS.fieldQuestions,[])
     .filter(item=>item.stageId===stageId)
     .map(item=>({
@@ -372,6 +389,61 @@ function renderJourney(){
   });
 }
 
+function scopeOptionsForStage(stageId){
+  const answerScopes=(exactAnswers?.answers||[])
+    .filter(item=>item.stages?.includes(stageId)&&item.scopeType==='cohort'&&item.scopeKey)
+    .map(item=>[item.scopeKey,{key:item.scopeKey,label:item.scopeLabel||item.scopeKey}]);
+  const packScopes=(documentPacks?.packs||[])
+    .filter(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeType==='cohort'&&pack.scopeKey)
+    .map(pack=>[pack.scopeKey,{key:pack.scopeKey,label:pack.scopeLabel||pack.scopeKey}]);
+  return [...new Map([...answerScopes,...packScopes]).values()];
+}
+
+function renderScopePicker(stage){
+  const section=$('scopePickerSection');
+  const select=$('scopePicker');
+  if(!exactAnswers?.answers?.length){section.hidden=true;select.innerHTML='';return}
+  const scoped=scopeOptionsForStage(stage.id);
+  if(!scoped.length){
+    section.hidden=true;
+    select.innerHTML='';
+    return;
+  }
+  section.hidden=false;
+  select.innerHTML='<option value="">Belum tahu / cohort lain</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  select.value=selectedScope(stage.id);
+}
+
+$('scopePicker').addEventListener('change',()=>{
+  if(!activeStage)return;
+  const state=read(KEYS.scopeSelections,{});
+  const value=$('scopePicker').value;
+  if(value)state[activeStage.id]=value;
+  else delete state[activeStage.id];
+  write(KEYS.scopeSelections,state);
+  renderStageBqc(activeStage);
+  renderExactAnswers(activeStage);
+  renderPreSubmitGate(activeStage);
+  renderDocuments();
+  renderBqcStatus();
+});
+
+function exactScopeLabel(item){
+  if(item.scopeType==='cohort')return item.scopeLabel||'Khusus cohort';
+  if(item.scopeType==='current_rule')return 'Aturan resmi yang sedang berlaku';
+  if(item.scopeType==='route_2026')return 'Rute Indonesia E-9 2026';
+  return 'Periksa cakupan sumber';
+}
+
+function exactVerificationLabel(item){
+  const v=String(item.verificationStatus||'');
+  if(v.startsWith('verified_current'))return 'Terverifikasi · aturan aktif';
+  if(v.startsWith('verified_across'))return 'Terverifikasi · konsisten di beberapa pengumuman 2026';
+  if(v.startsWith('verified'))return 'Terverifikasi';
+  if(v.startsWith('cohort_specific'))return 'Terverifikasi · khusus cohort';
+  return 'Perlu cek cakupan';
+}
+
 function renderExactAnswers(stage){
   const section=$('exactAnswerSection');
   const list=$('exactAnswerList');
@@ -381,7 +453,7 @@ function renderExactAnswers(stage){
     return;
   }
 
-  const answers=exactAnswers.answers.filter(item=>item.stages?.includes(stage.id));
+  const answers=exactAnswers.answers.filter(item=>exactAnswerApplies(item,stage.id));
   if(!answers.length){
     section.hidden=true;
     list.innerHTML='';
@@ -398,7 +470,8 @@ function renderExactAnswers(stage){
         <div class="exact-line write"><strong>Tulis / lakukan seperti ini:</strong>${escapeHtml(item.writeExactly)}</div>
         <div class="exact-line"><strong>Mengapa:</strong>${escapeHtml(item.why)}</div>
         ${blocks?'<div class="exact-line block"><strong>Jangan:</strong>'+blocks+'</div>':''}
-        <div class="exact-line"><strong>Status:</strong>${item.verificationStatus==='verified'?'Terverifikasi':'Perlu cek ulang cohort'} · diperiksa ${escapeHtml(item.verifiedAt||'')}</div>
+        <div class="exact-line"><strong>Berlaku untuk:</strong>${escapeHtml(exactScopeLabel(item))}</div>
+        <div class="exact-line"><strong>Status:</strong>${escapeHtml(exactVerificationLabel(item))} · diperiksa ${escapeHtml(item.verifiedAt||'')}</div>
         <a class="source" href="${item.sourceUrl}" target="_blank" rel="noopener">Lihat dasar resmi ↗</a>
       </div>
     </details>`;
@@ -435,7 +508,7 @@ function evaluatePreSubmit(stage){
   const pack=documentPackForStage(stage.id);
   if(!pack){
     issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
-  }else if(['awaiting_sector_notice','source_guided'].includes(pack.status)){
+  }else if(['awaiting_sector_notice','source_guided','scope_required'].includes(pack.status)){
     issues.push('Checklist dokumen tahap ini belum cukup spesifik untuk rute/manufaktur/cohort Anda.');
   }else{
     const checked=new Set(read(KEYS.docs,[]));
@@ -484,6 +557,7 @@ function openStage(stage){
     officialAction.href='#';
     officialAction.textContent='Buka layanan resmi ↗';
   }
+  renderScopePicker(stage);
   renderStageBqc(stage);
   renderPreSubmitGate(stage);
   renderExactAnswers(stage);
@@ -659,6 +733,7 @@ function fieldAnswerHtml(item){
     <div class="exact-body">
       <div class="exact-line write"><strong>Tulis / lakukan seperti ini:</strong>${escapeHtml(item.writeExactly)}</div>
       <div class="exact-line"><strong>Mengapa:</strong>${escapeHtml(item.why)}</div>
+      <div class="exact-line"><strong>Berlaku untuk:</strong>${escapeHtml(exactScopeLabel(item))}</div>
       ${dont?'<div class="exact-line block"><strong>Jangan:</strong>'+dont+'</div>':''}
       <a class="source" href="${item.sourceUrl}" target="_blank" rel="noopener">Dasar resmi ↗</a>
     </div>
@@ -671,11 +746,13 @@ function findExactFieldAnswers(query){
   if(!q)return [];
   const tokens=q.split(' ').filter(token=>token.length>1);
   const current=currentStage();
+  const stageId=current?.id||null;
   return exactAnswers.answers
+    .filter(item=>!stageId||exactAnswerApplies(item,stageId))
     .map(item=>{
       const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
       let score=0;
-      if(current&&item.stages?.includes(current.id))score+=10;
+      if(current&&item.stages?.includes(current.id))score+=12;
       if(hay.includes(q))score+=20;
       tokens.forEach(token=>{if(hay.includes(token))score+=2});
       return {item,score};
@@ -797,7 +874,11 @@ function renderDocumentExamples(stageId){
     return;
   }
 
-  const samples=documentExamples.samples.filter(sample=>sample.stages?.includes(stageId));
+  const samples=documentExamples.samples.filter(sample=>{
+    if(!sample.stages?.includes(stageId))return false;
+    if(sample.scopeType!=='cohort')return true;
+    return selectedScope(stageId)===sample.scopeKey;
+  });
   if(!samples.length){
     section.hidden=true;
     list.innerHTML='';
@@ -827,14 +908,52 @@ function renderDocumentExamples(stageId){
 
 function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
-  return documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId))||null;
+  const selected=selectedScope(stageId);
+  if(selected){
+    const scoped=documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeKey===selected);
+    if(scoped)return scoped;
+  }
+  return documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&!pack.scopeKey)||null;
 }
+
+function renderDocumentScopePicker(stage){
+  const wrap=$('docScopeWrap');
+  const select=$('docScopeSelect');
+  const options=scopeOptionsForStage(stage.id);
+  if(!options.length){
+    wrap.hidden=true;
+    select.innerHTML='';
+    return;
+  }
+  wrap.hidden=false;
+  select.innerHTML='<option value="">Belum pilih / cohort lain</option>'+options.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  select.value=selectedScope(stage.id);
+}
+
+$('docScopeSelect').addEventListener('change',()=>{
+  const stage=currentStage()||route?.stages?.at(-1);
+  if(!stage)return;
+  const state=read(KEYS.scopeSelections,{});
+  const value=$('docScopeSelect').value;
+  if(value)state[stage.id]=value;
+  else delete state[stage.id];
+  write(KEYS.scopeSelections,state);
+  renderDocuments();
+  renderBqcStatus();
+  if(activeStage?.id===stage.id){
+    renderScopePicker(activeStage);
+    renderStageBqc(activeStage);
+    renderExactAnswers(activeStage);
+    renderPreSubmitGate(activeStage);
+  }
+});
 
 function renderDocuments(){
   if(!documentPacks||!route)return;
   const checked=new Set(read(KEYS.docs,[]));
   const stage=currentStage()||route.stages.at(-1);
   const pack=documentPackForStage(stage?.id);
+  renderDocumentScopePicker(stage);
   renderDocumentExamples(stage?.id);
   const context=$('docStageContext');
   const list=$('docList');
@@ -851,7 +970,11 @@ function renderDocuments(){
     verified_call_2026:'Berdasarkan panggilan keberangkatan 2026',
     awaiting_sector_notice:'Menunggu pengumuman manufaktur yang sesuai',
     source_guided:'Sumber resmi saja — rincian belum dikunci',
-    verified_practice:'Checklist bukti kerja'
+    verified_practice:'Checklist bukti kerja',
+    scope_required:'Pilih panggilan / cohort terlebih dahulu',
+    verified_notice_2026_05_26:'Terverifikasi untuk panggilan 26 Mei 2026',
+    verified_notice_2026_06_19:'Terverifikasi untuk panggilan 19 Juni 2026',
+    verified_notice_2026_09_08:'Terverifikasi untuk panggilan 8 September 2026'
   }[pack.status]||pack.status;
 
   context.innerHTML=`

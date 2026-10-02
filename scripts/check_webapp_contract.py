@@ -69,10 +69,13 @@ pack_ids = []
 item_ids = []
 bad_pack_stage_refs = []
 bad_pack_sources = []
+bad_pack_scope = []
 for pack in document_packs.get("packs", []):
     pack_ids.append(pack.get("id", ""))
     if not str(pack.get("sourceUrl", "")).startswith("http"):
         bad_pack_sources.append(pack.get("id", "<missing>"))
+    if pack.get("scopeType") == "cohort" and (not pack.get("scopeKey") or not pack.get("scopeLabel")):
+        bad_pack_scope.append(pack.get("id", "<missing>"))
     for stage_id in pack.get("appliesTo", []):
         if stage_id not in known_stage_ids:
             bad_pack_stage_refs.append(f"{pack.get('id')}->{stage_id}")
@@ -93,13 +96,23 @@ if bad_pack_stage_refs:
 if bad_pack_sources:
     errors.append("document packs missing source URL: " + ", ".join(sorted(bad_pack_sources)))
 
+if bad_pack_scope:
+    errors.append("cohort document packs missing scope metadata: " + ", ".join(sorted(bad_pack_scope)))
+
 exact_ids = []
 bad_exact_stage_refs = []
 bad_exact_sources = []
 bad_exact_content = []
+bad_exact_scope = []
+allowed_scope_types = {"route_2026", "current_rule", "cohort"}
 for item in exact_answers.get("answers", []):
     item_id = item.get("id", "")
     exact_ids.append(item_id)
+    scope_type = item.get("scopeType")
+    if scope_type not in allowed_scope_types:
+        bad_exact_scope.append(f"{item_id}:scopeType")
+    if scope_type == "cohort" and (not item.get("scopeKey") or not item.get("scopeLabel")):
+        bad_exact_scope.append(f"{item_id}:cohort_metadata")
     for stage_id in item.get("stages", []):
         if stage_id not in known_stage_ids:
             bad_exact_stage_refs.append(f"{item_id}->{stage_id}")
@@ -122,13 +135,19 @@ if bad_exact_sources:
 if bad_exact_content:
     errors.append("exact answers missing required content: " + ", ".join(sorted(bad_exact_content)))
 
+if bad_exact_scope:
+    errors.append("exact answers missing/invalid scope metadata: " + ", ".join(sorted(bad_exact_scope)))
+
 sample_ids = []
 bad_sample_stage_refs = []
 bad_sample_sources = []
 bad_sample_content = []
+bad_sample_scope = []
 for sample in document_examples.get("samples", []):
     sample_id = sample.get("id", "")
     sample_ids.append(sample_id)
+    if sample.get("scopeType") == "cohort" and (not sample.get("scopeKey") or not sample.get("scopeLabel")):
+        bad_sample_scope.append(sample_id or "<missing>")
     for stage_id in sample.get("stages", []):
         if stage_id not in known_stage_ids:
             bad_sample_stage_refs.append(f"{sample_id}->{stage_id}")
@@ -157,6 +176,9 @@ if bad_sample_sources:
 if bad_sample_content:
     errors.append("document examples missing required content: " + ", ".join(sorted(bad_sample_content)))
 
+if bad_sample_scope:
+    errors.append("cohort document examples missing scope metadata: " + ", ".join(sorted(bad_sample_scope)))
+
 question_ids = []
 bad_question_stage_refs = []
 bad_question_answer_refs = []
@@ -171,6 +193,9 @@ for question in broker_questions.get("questions", []):
     answer_id = question.get("answerId")
     if answer_id and answer_id not in exact_id_set:
         bad_question_answer_refs.append(f"{question_id}->{answer_id}")
+    for answer_ref in question.get("answerIds", []):
+        if answer_ref not in exact_id_set:
+            bad_question_answer_refs.append(f"{question_id}->{answer_ref}")
     for required in ("question", "severity", "category"):
         if not str(question.get(required, "")).strip():
             bad_question_content.append(f"{question_id}:{required}")
