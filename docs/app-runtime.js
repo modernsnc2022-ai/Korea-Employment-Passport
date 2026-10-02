@@ -403,6 +403,60 @@ function renderExactAnswers(stage){
   }).join('');
 }
 
+const PRE_SUBMIT_STAGES=new Set([
+  'registration','document_verify','job_application','visa_docs','predeparture_training','residence_registration'
+]);
+
+function renderPreSubmitGate(stage){
+  const section=$('preSubmitSection');
+  const result=$('preSubmitResult');
+  if(!PRE_SUBMIT_STAGES.has(stage.id)){
+    section.hidden=true;
+    result.hidden=true;
+    result.innerHTML='';
+    return;
+  }
+  section.hidden=false;
+  result.hidden=true;
+  result.innerHTML='';
+}
+
+function evaluatePreSubmit(stage){
+  const issues=[];
+  const stats=bqcStageStats(stage.id);
+  const unresolvedHigh=stats.items.filter(item=>!item.resolved&&item.blocksZeroBrokerReady);
+  if(unresolvedHigh.length){
+    issues.push(...unresolvedHigh.slice(0,8).map(item=>'Belum ada jawaban pasti: '+item.question));
+    if(unresolvedHigh.length>8)issues.push('+'+(unresolvedHigh.length-8)+' pertanyaan blocker lain belum terverifikasi.');
+  }
+
+  const pack=documentPackForStage(stage.id);
+  if(!pack){
+    issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
+  }else if(['awaiting_sector_notice','source_guided'].includes(pack.status)){
+    issues.push('Checklist dokumen tahap ini belum cukup spesifik untuk rute/manufaktur/cohort Anda.');
+  }else{
+    const checked=new Set(read(KEYS.docs,[]));
+    const missing=(pack.items||[]).filter(item=>item.required&&!checked.has(item.id));
+    missing.forEach(item=>issues.push('Dokumen wajib belum ditandai siap: '+item.title));
+  }
+
+  return {issues,ready:issues.length===0};
+}
+
+$('preSubmitBtn').addEventListener('click',()=>{
+  if(!activeStage)return;
+  const result=$('preSubmitResult');
+  const check=evaluatePreSubmit(activeStage);
+  result.hidden=false;
+  result.className='result '+(check.ready?'safe':'risk');
+  if(check.ready){
+    result.innerHTML='<strong>SIAP MENURUT PEMERIKSAAN APLIKASI.</strong><p>Tidak ada blocker yang terdeteksi dari aturan dan checklist yang saat ini sudah terverifikasi. Tetap cocokkan dengan pengumuman resmi cohort Anda sebelum menekan tombol submit di situs resmi.</p>';
+  }else{
+    result.innerHTML='<strong>JANGAN SUBMIT DULU.</strong><p>Ada hal yang belum cukup aman untuk dilewati:</p><ul class="pre-submit-list">'+check.issues.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+  }
+});
+
 function openStage(stage){
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
@@ -429,6 +483,7 @@ function openStage(stage){
     officialAction.textContent='Buka layanan resmi ↗';
   }
   renderStageBqc(stage);
+  renderPreSubmitGate(stage);
   renderExactAnswers(stage);
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
