@@ -21,6 +21,7 @@ async function boot(){
     $('routeMeta').textContent=`E-9 · Manufacturing · 2026 · pack ${route.packVersion} · verified ${route.lastVerified}`;
     renderCycleStatus();
     renderJourney();
+    renderNextAction();
     renderEligibility();
     renderDocuments();
     renderGapStage();
@@ -79,8 +80,31 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
   write(KEYS.done,[...done]);
   $('stageDialog').close();
   renderJourney();
+  renderNextAction();
   updateProgress();
 });
+
+function renderNextAction(){
+  if(!route||!rules)return;
+  const done=new Set(read(KEYS.done,[]));
+  const next=route.stages.find(s=>!done.has(s.id));
+  const box=$('nextAction');
+  box.hidden=false;
+
+  if(done.size===0&&rules.registration.status==='closed'){
+    box.innerHTML='<small>NEXT ACTION</small><h2>Prepare for the next official recruitment cycle</h2><p>The 2026 general manufacturing registration is closed. Check your eligibility and prepare document quality now; do not pay or register through a private broker for a future cycle.</p><button class="primary" data-go="eligibility">Open Eligibility Checker</button>';
+  }else if(next){
+    box.innerHTML=`<small>NEXT ACTION</small><h2>${escapeHtml(next.title)}</h2><p>${escapeHtml(next.action)}</p><button class="primary" data-stage="${escapeHtml(next.id)}">Open this step</button>`;
+  }else{
+    box.innerHTML='<small>ROUTE COMPLETE</small><h2>All tracked stages are marked complete</h2><p>Review any Broker Gaps before treating the route as zero-broker complete.</p><button class="primary" data-go="gaps">Review Broker Gaps</button>';
+  }
+
+  box.querySelector('[data-go]')?.addEventListener('click',e=>switchView(e.currentTarget.dataset.go));
+  box.querySelector('[data-stage]')?.addEventListener('click',e=>{
+    const stage=route.stages.find(s=>s.id===e.currentTarget.dataset.stage);
+    if(stage)openStage(stage);
+  });
+}
 
 function updateProgress(){
   if(!route)return;
@@ -154,11 +178,24 @@ function renderDocuments(){
   rules.documents.forEach(doc=>{
     const article=document.createElement('article');
     const optional=doc.required?'Required in 2026 notice':'If available / conditional';
-    article.innerHTML=`<input type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · max ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p></div>`;
-    article.querySelector('input').addEventListener('change',(e)=>{
+    const accept=doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg';
+    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)} · ${escapeHtml(doc.format)}</h3><p>${escapeHtml(optional)} · max ${rules.maxFileSizeMb} MB. ${escapeHtml(doc.note)}</p><div class="doc-tools"><input class="doc-file" type="file" accept="${accept}"><span class="file-status">No file checked yet</span></div></div>`;
+    article.querySelector('.doc-check').addEventListener('change',(e)=>{
       const state=new Set(read(KEYS.docs,[]));
       e.target.checked?state.add(doc.id):state.delete(doc.id);
       write(KEYS.docs,[...state]);
+    });
+    article.querySelector('.doc-file').addEventListener('change',(e)=>{
+      const file=e.target.files?.[0];
+      const status=article.querySelector('.file-status');
+      if(!file){status.textContent='No file checked yet';status.className='file-status';return}
+      const errors=[];
+      if(file.size>rules.maxFileSizeMb*1024*1024)errors.push('larger than '+rules.maxFileSizeMb+' MB');
+      const lower=file.name.toLowerCase();
+      if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('expected PDF');
+      if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('expected JPG/JPEG');
+      status.className='file-status '+(errors.length?'bad':'ok');
+      status.textContent=errors.length?'Check failed: '+errors.join('; '):'Format/size check passed · '+(file.size/1024/1024).toFixed(2)+' MB';
     });
     $('docList').appendChild(article);
   });
@@ -219,10 +256,12 @@ $('emailGapsBtn').addEventListener('click',()=>{
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
-document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));
-  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===btn.dataset.view));
-}));
+function switchView(viewId){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===viewId));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===viewId));
+  document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
 
 window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredInstall=e;$('installBtn').hidden=false});
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});

@@ -1,4 +1,4 @@
-const CACHE='kep-v1';
+const CACHE='kep-v2';
 const CORE=['./','./index.html','./app.html','./app-shell.css','./app-runtime.js','./manifest.webmanifest','./icon.svg','./privacy.html','./data/id_e9_manufacturing_2026.json','./data/id_e9_manufacturing_2026_rules.json'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
