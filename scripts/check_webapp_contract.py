@@ -137,6 +137,11 @@ for sample in document_examples.get("samples", []):
         bad_sample_content.append(f"{sample_id}:title")
     if not sample.get("rows"):
         bad_sample_content.append(f"{sample_id}:rows")
+    for file in sample.get("officialFiles", []):
+        if not str(file.get("url", "")).startswith("http"):
+            bad_sample_content.append(f"{sample_id}:officialFiles.url")
+        if not str(file.get("label", "")).strip():
+            bad_sample_content.append(f"{sample_id}:officialFiles.label")
 
 sample_dupes = [key for key, count in Counter(sample_ids).items() if key and count > 1]
 if sample_dupes:

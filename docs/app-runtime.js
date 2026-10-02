@@ -612,6 +612,7 @@ function renderDocumentExamples(stageId){
       <div class="example-row"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(value)}</span></div>`
     ).join('');
     const checks=(sample.checks||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join('');
+    const officialFiles=(sample.officialFiles||[]).map(file=>`<a class="example-file-link" href="${file.url}" target="_blank" rel="noopener">${escapeHtml(file.label)} ↗</a>`).join('');
     return `<details class="example-card" ${index===0?'open':''}>
       <summary><span>${escapeHtml(sample.title)}</span><span>Contoh</span></summary>
       <div class="example-banner">${escapeHtml(documentExamples.policy?.banner||'DATA CONTOH — JANGAN DISALIN')}</div>
@@ -619,6 +620,7 @@ function renderDocumentExamples(stageId){
         <div class="example-table">${rows}</div>
         ${checks?'<ul class="example-checks">'+checks+'</ul>':''}
         <p class="example-note">${escapeHtml(documentExamples.policy?.note||'Ganti semua data contoh dengan data Anda sendiri.')}</p>
+        ${officialFiles?'<div class="example-files"><strong>Bandingkan dengan file resmi:</strong>'+officialFiles+'</div>':''}
         <a class="source" href="${sample.sourceUrl}" target="_blank" rel="noopener">Dasar resmi contoh ↗</a>
       </div>
     </details>`;
