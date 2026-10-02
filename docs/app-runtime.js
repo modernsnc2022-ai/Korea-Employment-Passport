@@ -3,7 +3,7 @@ const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
@@ -37,6 +37,7 @@ async function boot(){
     renderNextAction();
     renderEligibility();
     renderDocuments();
+    renderCostLedger();
     renderContract();
     renderWorkplace();
     renderGapStage();
@@ -271,6 +272,67 @@ $('checkFeeBtn').addEventListener('click',()=>{
   out.innerHTML='<strong>Nominal ini tidak cocok dengan daftar biaya resmi yang sudah diverifikasi untuk rute ini.</strong> Jangan bayar dulu. Periksa nominal, penerima, tujuan, tahap, dan sumber resmi terbaru.';
 });
 
+
+
+function classifyLedgerEntry(entry){
+  const known=rules.fees.find(f=>f.amountIdr===entry.amount);
+  if(known?.kind==='minimum_balance')return {kind:'balance',label:'Saldo minimum, bukan biaya',known};
+  if(known){
+    const payeeMatches=entry.payee===known.payeeCategory;
+    return {kind:payeeMatches?'official':'mismatch',label:payeeMatches?'Cocok dengan biaya resmi':'Nominal resmi, penerima tidak cocok',known};
+  }
+  if(entry.payee==='broker'||entry.payee==='lpk')return {kind:'private',label:'Biaya privat / belum terverifikasi'};
+  return {kind:'unknown',label:'Belum ditemukan pada daftar resmi'};
+}
+
+function renderCostLedger(){
+  if(!rules)return;
+  $('knownCostList').innerHTML=rules.fees.map(f=>{
+    const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Biaya resmi';
+    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p><p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
+  }).join('');
+
+  const entries=read(KEYS.ledger,[]);
+  let official=0,privateUnknown=0,balance=0;
+  $('ledgerList').innerHTML='';
+  if(!entries.length)$('ledgerList').innerHTML='<div class="gap-item"><p>Belum ada pembayaran yang dicatat.</p></div>';
+
+  entries.forEach(entry=>{
+    const classification=classifyLedgerEntry(entry);
+    if(classification.kind==='official')official+=entry.amount;
+    else if(classification.kind==='balance')balance+=entry.amount;
+    else privateUnknown+=entry.amount;
+
+    const item=document.createElement('article');
+    item.className='gap-item';
+    item.innerHTML=`<h3>Rp${entry.amount.toLocaleString('id-ID')} · ${escapeHtml(entry.purpose||'Tanpa keterangan')}</h3><p><strong>Status:</strong> ${escapeHtml(classification.label)}</p><p><strong>Penerima:</strong> ${escapeHtml(entry.payee)}</p><p class="muted">${new Date(entry.createdAt).toLocaleDateString('id-ID')}</p><div class="gap-actions"><button>Hapus</button></div>`;
+    item.querySelector('button').addEventListener('click',()=>{
+      write(KEYS.ledger,read(KEYS.ledger,[]).filter(x=>x.id!==entry.id));
+      renderCostLedger();
+    });
+    $('ledgerList').appendChild(item);
+  });
+
+  $('costSummary').innerHTML=`
+    <article><strong>Rp${official.toLocaleString('id-ID')}</strong><span>cocok dengan biaya resmi</span></article>
+    <article><strong>Rp${privateUnknown.toLocaleString('id-ID')}</strong><span>privat / tidak terjelaskan</span></article>
+    <article><strong>Rp${balance.toLocaleString('id-ID')}</strong><span>saldo minimum, bukan pengeluaran</span></article>`;
+}
+
+$('addLedgerBtn').addEventListener('click',()=>{
+  const amount=Number(($('ledgerAmount').value||'').replace(/[^0-9]/g,''));
+  const purpose=$('ledgerPurpose').value.trim();
+  const payee=$('ledgerPayee').value;
+  if(!amount||!payee)return;
+  const entries=read(KEYS.ledger,[]);
+  entries.unshift({id:Date.now(),amount,purpose,payee,createdAt:new Date().toISOString()});
+  write(KEYS.ledger,entries);
+  $('ledgerAmount').value='';
+  $('ledgerPurpose').value='';
+  $('ledgerPayee').value='';
+  renderCostLedger();
+}
+);
 
 function renderContract(){
   if(!contractRules)return;

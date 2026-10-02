@@ -103,6 +103,38 @@
         <button id="checkFeeBtn" class="primary">Periksa biaya</button>
         <div id="feeResult" class="result" hidden></div>
       </div>
+
+      <div class="section-head">
+        <h2>Biaya resmi yang sudah diverifikasi</h2>
+        <p>Nominal di bawah hanya berlaku pada sumber/siklus yang tercantum. Jangan gunakan ulang untuk siklus berikutnya tanpa pengumuman baru.</p>
+      </div>
+      <div id="knownCostList" class="cost-list"></div>
+
+      <div class="section-head">
+        <h2>Catatan pembayaran saya</h2>
+        <p>Simpan catatan nominal dan tujuan pembayaran di perangkat ini untuk melihat biaya yang tidak dapat dijelaskan oleh jalur resmi.</p>
+      </div>
+      <div class="panel">
+        <label>Nominal (Rp)
+          <input id="ledgerAmount" inputmode="numeric">
+        </label>
+        <label>Tujuan pembayaran
+          <input id="ledgerPurpose" placeholder="Contoh: tes psikologi, MCU, jasa LPK">
+        </label>
+        <label>Dibayar kepada
+          <select id="ledgerPayee">
+            <option value="">Pilih</option>
+            <option value="official">Lembaga resmi / penyedia yang disetujui</option>
+            <option value="bank">Bank yang ditunjuk / KVAC</option>
+            <option value="lpk">LPK / pusat pelatihan</option>
+            <option value="broker">Calo / agen / individu</option>
+            <option value="unknown">Tidak yakin</option>
+          </select>
+        </label>
+        <button id="addLedgerBtn" class="primary">Tambahkan pembayaran</button>
+      </div>
+      <div id="costSummary" class="cost-summary"></div>
+      <div id="ledgerList" class="gap-list"></div>
     </section>
 
     <section id="contract" class="view">
