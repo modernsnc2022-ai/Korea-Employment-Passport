@@ -1,0 +1,13 @@
+{
+  "name":"Korea Employment Passport",
+  "short_name":"KEP",
+  "start_url":"./app.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f6f8fc",
+  "theme_color":"#071a36",
+  "description":"Official-route companion for Indonesia → Korea E-9 manufacturing, designed to eliminate private-broker dependency.",
+  "icons":[
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
