@@ -109,6 +109,66 @@
       "id": "kp2mi_mcu2_visa_2026_06_19",
       "agency": "KP2MI",
       "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-pemeriksaan-medical-check-up-mcu-ii-tanggal-19-juni-2026-dan-persiapan-pemberkasan-dokumen-visa-bagi-calon-pekerja-migran-indonesia-reguler-program-g-to-g-ke-korea-selatan"
+    },
+    {
+      "id": "kp2mi_departure_2026_09_15",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-15-september-2026"
+    },
+    {
+      "id": "eps_immigration_company",
+      "agency": "HRD Korea EPS",
+      "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationCompany"
+    },
+    {
+      "id": "moel_workplace_change_2026",
+      "agency": "Ministry of Employment and Labor",
+      "url": "https://www.moel.go.kr/policyitrd/policyItrdView.do?policy_itrd_sn=42"
+    },
+    {
+      "id": "foreign_worker_employment_rule_change_docs",
+      "agency": "Korea Law Information Center",
+      "url": "https://www.law.go.kr/DRF/lawService.do?MST=271599&OC=unicpla&efYd=20250602&mobileYn=Y&target=law&type=HTML"
+    },
+    {
+      "id": "kp2mi_psychology_rules_2026",
+      "agency": "KP2MI",
+      "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026"
+    },
+    {
+      "id": "eps_foreign_worker_counseling",
+      "agency": "HRD Korea EPS",
+      "url": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=workerCounseling"
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "agency": "MOEL 1350",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000317748"
+    },
+    {
+      "id": "eps_entry_to_departure",
+      "agency": "HRD Korea EPS",
+      "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor"
+    },
+    {
+      "id": "eps_employment_management",
+      "agency": "HRD Korea EPS",
+      "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employManageCompnay"
+    },
+    {
+      "id": "standard_labor_contract_form",
+      "agency": "Korea Law Information Center",
+      "url": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun="
+    },
+    {
+      "id": "immigration_foreigner_registration_info",
+      "agency": "Korea Immigration Service",
+      "url": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do"
+    },
+    {
+      "id": "immigration_residence_change_law",
+      "agency": "Korea Law Information Center",
+      "url": "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031822293"
     }
   ]
 }
