@@ -40,6 +40,7 @@
       <button class="tab" data-view="documents">Dokumen</button>
       <button class="tab" data-view="fees">Cek Biaya</button>
       <button class="tab" data-view="contract">SLC</button>
+      <button class="tab" data-view="workplace">Tempat Kerja</button>
       <button class="tab" data-view="gaps">Celah Calo</button>
     </nav>
 
@@ -112,6 +113,7 @@
       <div class="panel">
         <div id="contractForm" class="contract-grid"></div>
         <button id="checkContractBtn" class="primary">Periksa kontrak</button>
+        <button id="openWorkplaceBtn" class="secondary">Lanjut ke Workplace Reality Check</button>
         <button id="resetContractBtn" class="secondary">Hapus data kontrak dari perangkat</button>
         <div id="contractResult" class="result" hidden></div>
       </div>
@@ -119,6 +121,36 @@
         <h3>Aturan penting</h3>
         <ul id="contractNotes"></ul>
         <p><a id="contractSource" class="source" href="#" target="_blank" rel="noopener">Buka formulir SLC resmi ↗</a></p>
+      </div>
+    </section>
+
+    <section id="workplace" class="view">
+      <div class="section-head">
+        <h2>Workplace Reality Check</h2>
+        <p>Periksa apakah perusahaan, lokasi kerja, akomodasi, dan kondisi praktis yang Anda pahami sebelum berangkat sesuai dengan bukti yang tersedia.</p>
+      </div>
+      <div class="panel">
+        <label>Nama perusahaan
+          <input id="wpCompany" placeholder="Nama pada SLC">
+        </label>
+        <label>Alamat tempat kerja
+          <input id="wpAddress" placeholder="Alamat pada SLC">
+        </label>
+        <label>Alamat / informasi asrama
+          <input id="wpDorm" placeholder="Jika sudah diketahui">
+        </label>
+        <div class="map-actions">
+          <a id="naverMapLink" class="secondary link-button" href="#" target="_blank" rel="noopener">Naver Map</a>
+          <a id="kakaoMapLink" class="secondary link-button" href="#" target="_blank" rel="noopener">Kakao Map</a>
+          <a id="googleMapLink" class="secondary link-button" href="#" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </div>
+      <div id="realityChecks" class="check-list"></div>
+      <div class="panel">
+        <div class="coverage-head"><strong>Bukti yang sudah diperiksa</strong><span id="coverageText">0%</span></div>
+        <div class="coverage-bar"><span id="coverageBar"></span></div>
+        <button id="requestScoutBtn" class="primary">Minta pemeriksaan lapangan</button>
+        <p class="muted">Permintaan hanya berisi nama perusahaan, alamat kerja, dan item yang belum terverifikasi. Jangan kirim paspor, ARC, atau dokumen kesehatan.</p>
       </div>
     </section>
 

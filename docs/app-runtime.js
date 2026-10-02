@@ -2,8 +2,9 @@ const ROUTE_URL='data/id_e9_manufacturing_2026.json';
 const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract'};
-let route=null,rules=null,contractRules=null,i18n={},activeStage=null,deferredInstall=null;
+const WORKPLACE_URL='data/workplace_reality_v1.json';
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace'};
+let route=null,rules=null,contractRules=null,workplaceRules=null,i18n={},activeStage=null,deferredInstall=null;
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -15,17 +16,19 @@ const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
-      fetch(CONTRACT_URL,{cache:'no-store'})
+      fetch(CONTRACT_URL,{cache:'no-store'}),
+      fetch(WORKPLACE_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
     contractRules=await contractRes.json();
+    workplaceRules=await workplaceRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -35,6 +38,7 @@ async function boot(){
     renderEligibility();
     renderDocuments();
     renderContract();
+    renderWorkplace();
     renderGapStage();
     renderGaps();
     updateProgress();
@@ -354,10 +358,89 @@ $('checkContractBtn').addEventListener('click',()=>{
   out.innerHTML='<strong>Hasil pemeriksaan SLC</strong><div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>';
 });
 
+$('openWorkplaceBtn').addEventListener('click',()=>{
+  renderWorkplace();
+  switchView('workplace');
+});
+
 $('resetContractBtn').addEventListener('click',()=>{
   localStorage.removeItem(KEYS.contract);
   renderContract();
   $('contractResult').hidden=true;
+});
+
+
+function renderWorkplace(){
+  if(!workplaceRules)return;
+  const saved=read(KEYS.workplace,{checks:[]});
+  const contract=read(KEYS.contract,{});
+  $('wpCompany').value=saved.company||contract.enterpriseName||'';
+  $('wpAddress').value=saved.address||contract.workplace||contract.enterpriseLocation||'';
+  $('wpDorm').value=saved.dorm||'';
+  updateMapLinks();
+
+  const selected=new Set(saved.checks||[]);
+  const wrap=$('realityChecks');
+  wrap.innerHTML='';
+  workplaceRules.checks.forEach(check=>{
+    const article=document.createElement('article');
+    article.innerHTML=`<input type="checkbox" ${selected.has(check.id)?'checked':''}><div><h3>${escapeHtml(check.title)}</h3><p>${escapeHtml(check.detail)}</p></div>`;
+    article.querySelector('input').addEventListener('change',saveWorkplace);
+    wrap.appendChild(article);
+  });
+
+  ['wpCompany','wpAddress','wpDorm'].forEach(id=>{
+    const el=$(id);
+    el.oninput=()=>{saveWorkplace();updateMapLinks()};
+  });
+  updateCoverage();
+}
+
+function saveWorkplace(){
+  const checked=[];
+  [...$('realityChecks').querySelectorAll('article')].forEach((article,index)=>{
+    if(article.querySelector('input')?.checked)checked.push(workplaceRules.checks[index].id);
+  });
+  const data={company:$('wpCompany').value.trim(),address:$('wpAddress').value.trim(),dorm:$('wpDorm').value.trim(),checks:checked};
+  write(KEYS.workplace,data);
+  updateCoverage();
+  return data;
+}
+
+function updateMapLinks(){
+  const query=[$('wpCompany').value.trim(),$('wpAddress').value.trim()].filter(Boolean).join(' ');
+  const q=encodeURIComponent(query||'Korea');
+  $('naverMapLink').href='https://map.naver.com/p/search/'+q;
+  $('kakaoMapLink').href='https://map.kakao.com/?q='+q;
+  $('googleMapLink').href='https://www.google.com/maps/search/?api=1&query='+q;
+}
+
+function updateCoverage(){
+  if(!workplaceRules)return;
+  const state=read(KEYS.workplace,{checks:[]});
+  const count=(state.checks||[]).length;
+  const total=workplaceRules.checks.length;
+  const pct=total?Math.round(count/total*100):0;
+  $('coverageText').textContent=pct+'%';
+  $('coverageBar').style.width=pct+'%';
+}
+
+$('requestScoutBtn').addEventListener('click',()=>{
+  const data=saveWorkplace();
+  if(!data.company&&!data.address)return;
+  const checked=new Set(data.checks||[]);
+  const missing=workplaceRules.checks.filter(c=>!checked.has(c.id)).map(c=>'• '+c.title).join('\n');
+  const subject=encodeURIComponent('[KEP Beta] Workplace Reality Check request');
+  const body=encodeURIComponent(
+    'Halo Korea Employment Passport Beta,\n\n'+
+    'Saya ingin meminta pemeriksaan lapangan / reality check untuk:\n'+
+    'Perusahaan: '+(data.company||'-')+'\n'+
+    'Alamat kerja: '+(data.address||'-')+'\n'+
+    'Info asrama: '+(data.dorm||'-')+'\n\n'+
+    'Yang belum terverifikasi:\n'+(missing||'Semua checklist sudah ditandai.')+'\n\n'+
+    'Saya memahami pemeriksaan harus dilakukan secara legal: tanpa masuk area privat tanpa izin, tanpa merekam rahasia dagang, dan tanpa mengirim dokumen pribadi sensitif.'
+  );
+  location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
 function renderGapStage(){
