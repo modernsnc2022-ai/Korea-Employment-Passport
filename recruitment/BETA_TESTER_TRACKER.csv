@@ -1,0 +1,3 @@
+tester_id,created_at,source_channel,nickname,contact,role,current_stage,in_korea,e9_experience,broker_used,broker_name_or_type,broker_tasks,amount_paid_idr,documents_confusing,official_process_gap,workplace_info_needed,interview_status,broker_gap_status,retest_status,notes
+KEP-0001,,,,,,,,,,,,,,,,new,open,pending,
+KEP-0002,,,,,,,,,,,,,,,,new,open,pending,
