@@ -215,6 +215,16 @@ $('checkEligibilityBtn').addEventListener('click',()=>{
   }
 });
 
+function readImageRatio(file){
+  return new Promise((resolve,reject)=>{
+    const url=URL.createObjectURL(file);
+    const img=new Image();
+    img.onload=()=>{const ratio=img.width/img.height;URL.revokeObjectURL(url);resolve(ratio)};
+    img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('image read failed'))};
+    img.src=url;
+  });
+}
+
 function renderDocuments(){
   const checked=new Set(read(KEYS.docs,[]));
   $('docList').innerHTML='';
@@ -228,7 +238,7 @@ function renderDocuments(){
       e.target.checked?state.add(doc.id):state.delete(doc.id);
       write(KEYS.docs,[...state]);
     });
-    article.querySelector('.doc-file').addEventListener('change',(e)=>{
+    article.querySelector('.doc-file').addEventListener('change',async(e)=>{
       const file=e.target.files?.[0];
       const status=article.querySelector('.file-status');
       if(!file){status.textContent='No file checked yet';status.className='file-status';return}
@@ -236,9 +246,18 @@ function renderDocuments(){
       if(file.size>rules.maxFileSizeMb*1024*1024)errors.push('larger than '+rules.maxFileSizeMb+' MB');
       const lower=file.name.toLowerCase();
       if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('expected PDF');
-      if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('expected JPG/JPEG');
+      if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('format harus JPG/JPEG');
+      if(doc.id==='photo'&&!errors.length){
+        try{
+          const ratio=await readImageRatio(file);
+          const target=3.5/4.5;
+          if(Math.abs(ratio-target)>0.04)errors.push('rasio foto tidak mendekati 3.5 × 4.5');
+        }catch{
+          errors.push('dimensi foto tidak dapat dibaca');
+        }
+      }
       status.className='file-status '+(errors.length?'bad':'ok');
-      status.textContent=errors.length?'Check failed: '+errors.join('; '):'Format/size check passed · '+(file.size/1024/1024).toFixed(2)+' MB';
+      status.textContent=errors.length?'Periksa ulang: '+errors.join('; '):'Format/ukuran lolos pemeriksaan · '+(file.size/1024/1024).toFixed(2)+' MB';
     });
     $('docList').appendChild(article);
   });
@@ -361,6 +380,79 @@ function renderContract(){
   $('contractNotes').innerHTML=contractRules.notes.map(n=>'<li>'+escapeHtml(n)+'</li>').join('');
   $('contractSource').href=contractRules.source.law;
 }
+
+
+function extractSlcValue(text, patterns){
+  for(const pattern of patterns){
+    const match=text.match(pattern);
+    if(match?.[1])return match[1].trim().replace(/[|]+$/,'').trim();
+  }
+  return '';
+}
+
+$('parseSlcBtn').addEventListener('click',()=>{
+  const text=$('slcText').value||'';
+  const out=$('parseSlcResult');
+  out.hidden=false;
+  out.className='result';
+  if(!text.trim()){
+    out.classList.add('warn');
+    out.textContent='Tempel teks SLC terlebih dahulu.';
+    return;
+  }
+
+  const extracted={
+    enterpriseName:extractSlcValue(text,[
+      /(?:업체명|Name of the enterprise)\s*[:：-]?\s*([^\n\r]{2,80}?)(?=\s*(?:전화번호|Phone number|소재지|Location of the enterprise|$))/i
+    ]),
+    enterpriseLocation:extractSlcValue(text,[
+      /(?:소재지|Location of the enterprise)\s*[:：-]?\s*([^\n\r]{4,140}?)(?=\s*(?:성명|Name of the employer|근로자|Employee|$))/i
+    ]),
+    workplace:extractSlcValue(text,[
+      /(?:근로장소|Place of employment)\s*[:：-]?\s*([^\n\r]{3,140})/i
+    ]),
+    industry:extractSlcValue(text,[
+      /(?:업종|Industry)\s*[:：-]?\s*([^\n\r]{2,80})/i
+    ]),
+    jobDescription:extractSlcValue(text,[
+      /(?:직무내용|Job description)\s*[:：-]?\s*([^\n\r]{2,140})/i
+    ]),
+    contractMonths:extractSlcValue(text,[
+      /(?:신규\s*또는\s*재입국자|Newcomer|Re-entering employee)[\s\S]{0,80}?(\d{1,2})\s*(?:개월|month)/i
+    ]),
+    monthlyWage:(extractSlcValue(text,[
+      /(?:월\s*통상임금|Monthly Normal wages?)[\s\S]{0,100}?([\d,]{5,})\s*(?:원|won)/i
+    ])||'').replace(/,/g,''),
+    basePay:(extractSlcValue(text,[
+      /(?:기본급|Basic pay)[\s\S]{0,100}?([\d,]{5,})\s*(?:원|won)/i
+    ])||'').replace(/,/g,''),
+    payDate:extractSlcValue(text,[
+      /매월\s*(\d{1,2})\s*일/i,
+      /Every\s+(\d{1,2})(?:st|nd|rd|th)?\s+day/i
+    ]),
+    breakMinutes:extractSlcValue(text,[
+      /(?:휴게시간|Recess hours?)[\s\S]{0,80}?(\d{1,3})\s*(?:분|minutes?)/i
+    ])
+  };
+
+  const time=text.match(/(?:근로시간|Working hours?)[\s\S]{0,160}?(\d{1,2}:\d{2})\s*(?:부터|~|-|to)\s*(\d{1,2}:\d{2})/i);
+  if(time){extracted.workStart=time[1];extracted.workEnd=time[2]}
+
+  if(/통장\s*입금|direct\s+deposit|bank\s+transfer/i.test(text))extracted.paymentMethod='Transfer ke rekening pekerja';
+  else if(/직접\s*지급|in\s+person/i.test(text))extracted.paymentMethod='Tunai langsung';
+
+  let count=0;
+  Object.entries(extracted).forEach(([key,value])=>{
+    if(!value)return;
+    const el=$('contract_'+key);
+    if(el){el.value=value;count++}
+  });
+  saveContractLocally();
+  out.classList.add(count?'safe':'warn');
+  out.innerHTML=count
+    ? '<strong>'+count+' kolom berhasil diisi otomatis.</strong> Periksa setiap nilai terhadap SLC asli sebelum menggunakan hasil pemeriksaan.'
+    : '<strong>Belum ada kolom yang dapat diekstrak dengan aman.</strong> Isi kolom secara manual atau gunakan teks OCR yang lebih jelas.';
+});
 
 function saveContractLocally(){
   const data={};

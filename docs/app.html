@@ -143,6 +143,11 @@
         <p>Masukkan isi utama SLC Anda. Data kontrak tetap di perangkat ini dan tidak dikirim ke server oleh beta ini.</p>
       </div>
       <div class="panel">
+        <label>Teks SLC (opsional)
+          <textarea id="slcText" rows="7" placeholder="Tempel teks hasil copy/OCR dari SLC. Teks diproses hanya di perangkat ini."></textarea>
+        </label>
+        <button id="parseSlcBtn" class="secondary">Isi otomatis dari teks</button>
+        <div id="parseSlcResult" class="result" hidden></div>
         <div id="contractForm" class="contract-grid"></div>
         <button id="checkContractBtn" class="primary">Periksa kontrak</button>
         <button id="openWorkplaceBtn" class="secondary">Lanjut ke Workplace Reality Check</button>
