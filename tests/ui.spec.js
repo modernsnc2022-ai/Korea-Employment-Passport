@@ -1086,3 +1086,58 @@ test('retrospective worker evidence records experience year before stage validat
 
   expect(errors).toEqual([]);
 });
+
+
+test('retrospective worker year keeps prior-cycle evidence out of 2026 route PASS', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const state = await page.evaluate(() => {
+    write(KEYS.betaTesterId, 'KEP-0031');
+    write(KEYS.betaWorkerExperienceYear, '2024');
+    const allPass = Object.fromEntries(
+      route.stages.map(stage => [stage.id, {
+        stageId: stage.id,
+        status: 'no_private_help',
+        updatedAt: '2026-10-04T00:00:00.000Z'
+      }])
+    );
+    write(KEYS.betaChecks, allPass);
+    const prior = betaValidationStats();
+
+    write(KEYS.betaWorkerExperienceYear, '2026');
+    const current = betaValidationStats();
+
+    return {
+      prior: {
+        checkpointComplete: prior.checkpointComplete,
+        currentRouteEligible: prior.currentRouteEligible,
+        retrospectiveOnly: prior.retrospectiveOnly,
+        routePass: prior.routePass
+      },
+      current: {
+        checkpointComplete: current.checkpointComplete,
+        currentRouteEligible: current.currentRouteEligible,
+        retrospectiveOnly: current.retrospectiveOnly,
+        routePass: current.routePass
+      }
+    };
+  });
+
+  expect(state.prior).toEqual({
+    checkpointComplete: true,
+    currentRouteEligible: false,
+    retrospectiveOnly: true,
+    routePass: false
+  });
+  expect(state.current).toEqual({
+    checkpointComplete: true,
+    currentRouteEligible: true,
+    retrospectiveOnly: false,
+    routePass: true
+  });
+  expect(errors).toEqual([]);
+});
