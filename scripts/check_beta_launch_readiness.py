@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--allow-source-review-pending",
+    action="store_true",
+    help="Validate product/static integrity without requiring official-source launch readiness.",
+)
+args = parser.parse_args()
 
 EXPECTED_STAGES = [
     "eligibility","registration","exam_fee","biometric","document_verify","exam_card",
@@ -95,11 +104,19 @@ for q in questions:
             f"{q.get('id')} must stay on the verified-wait answer until an official Manufacturing 2026 notice exists",
         )
 
-require(source.get("state") == "clean", f"official-source monitor state is {source.get('state')!r}, expected 'clean'")
-require(source.get("configured") == source.get("checked") and int(source.get("configured", 0)) > 0,
-        "official-source monitor must have checked every configured source")
-require(not source.get("reviewRequiredUrls"), "official-source reviewRequiredUrls is not empty")
-require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
+require(source.get("autoPublishRules") is False, "official-source rules must never auto-publish")
+require(int(source.get("configured", 0)) > 0, "official-source monitor must configure at least one source")
+if args.allow_source_review_pending:
+    require(
+        source.get("state") in {"clean", "review_required", "fetch_warning"},
+        f"unsupported official-source monitor state: {source.get('state')!r}",
+    )
+else:
+    require(source.get("state") == "clean", f"official-source monitor state is {source.get('state')!r}, expected 'clean'")
+    require(source.get("configured") == source.get("checked"),
+            "official-source monitor must have checked every configured source")
+    require(not source.get("reviewRequiredUrls"), "official-source reviewRequiredUrls is not empty")
+    require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
 
 document_packs = load_json("docs/data/document_packs_2026.json")
 mcu1_candidates = [
@@ -228,4 +245,6 @@ print(
     f"workplace_worker={len(worker_checks)} "
     "public_beta=30 free_months=6"
 )
+if args.allow_source_review_pending and source.get("state") != "clean":
+    print(f"PRODUCT_CI_SOURCE_HOLD state={source.get('state')} launch gate remains blocked")
 print("MANUAL_LAUNCH_GATES_REMAIN: fresh Manufacturing notice re-check, mobile release review, open-defect review, real-user evidence")
