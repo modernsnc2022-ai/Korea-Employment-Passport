@@ -816,3 +816,52 @@ test('progress backup preserves reviewed form fields without beta evidence', asy
   expect(result.progressKeys).not.toContain('betaChecks');
   expect(errors).toEqual([]);
 });
+
+
+test('workplace worker evidence empty state is neutral and privacy safe', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await freshPage(page);
+  await page.evaluate(() => switchView('workplace', false));
+
+  await page.locator('#wpCompany').fill('Contoh Manufacturing Co');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('BELUM ADA KECOCOKAN');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('bukan temuan negatif');
+  await expect(page.locator('#workplaceWorkerEvidence')).not.toContainText('palsu');
+
+  const overflow = await page.evaluate(() => ({
+    scrollWidth: document.documentElement.scrollWidth,
+    innerWidth: window.innerWidth
+  }));
+  expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
+  expect(errors).toEqual([]);
+});
+
+test('workplace worker evidence renders only summarized verified facts', async ({ page }) => {
+  const errors = await freshPage(page);
+  await page.evaluate(() => switchView('workplace', false));
+  await page.locator('#wpCompany').fill('Demo Factory');
+
+  await page.evaluate(() => {
+    workplaceWorkerEvidence = {
+      status:'beta_collection',
+      displayPolicy:{noEvidenceMeaning:'No evidence is not a negative finding.'},
+      records:[{
+        evidenceId:'WPE-0001',
+        companyName:'Demo Factory',
+        companyAliases:['DEMO FACTORY'],
+        verificationStatus:'single_verified_worker',
+        verifiedAt:'2026-10-04',
+        facts:[
+          {topic:'Pembayaran gaji',summary:'Dalam pengalaman yang diverifikasi, gaji masuk sesuai tanggal yang dilaporkan.',basis:'worker_experience'}
+        ],
+        media:[]
+      }]
+    };
+    renderWorkplaceWorkerEvidence();
+  });
+
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('1 CATATAN');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('Pembayaran gaji');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('bukan jaminan kondisi semua pekerja');
+  expect(errors).toEqual([]);
+});
