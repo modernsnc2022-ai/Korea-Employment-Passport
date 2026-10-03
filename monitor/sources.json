@@ -184,6 +184,16 @@
       "id": "kp2mi_departure_2026_08_24_25",
       "agency": "KP2MI",
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-24-dan-25-agustus-2026"
+    },
+    {
+      "id": "moel_payroll_evidence_2026",
+      "agency": "MOEL 1350",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000323154"
+    },
+    {
+      "id": "moel_wage_evidence_guidance",
+      "agency": "Ministry of Employment and Labor",
+      "url": "https://www.moel.go.kr/minwon/fastcounsel/fastcounselView.do?inetDcssMngId=202505090333334120312"
     }
   ]
 }
