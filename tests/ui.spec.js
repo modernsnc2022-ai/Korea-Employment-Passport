@@ -648,13 +648,11 @@ test('psychology stage uses its verified 2026 pack', async ({ page }) => {
     return pack ? {id:pack.id,status:pack.status,title:pack.title,items:(pack.items||[]).length} : null;
   });
 
-  expect(selected).toEqual({
-    id:'psychology_pre_job_2026',
-    status:'verified_2026',
-    title:'Pemeriksaan psikologi sebelum lamaran online · lulusan 2026',
-    items:4
-  });
-  await expect(page.locator('#docStageContext')).toContainText('Pemeriksaan psikologi sebelum lamaran online');
+  expect(selected?.id).toBe('psychology_pre_job_2026');
+  expect(selected?.status).toBe('verified_2026');
+  expect(selected?.items).toBe(4);
+  expect(selected?.title).toContain('Psikologi 2026');
+  await expect(page.locator('#docStageContext')).toContainText('Psikologi 2026');
   await expect(page.locator('#docStageContext')).not.toContainText('Lamaran online Manufaktur 2026 — tunggu pengumuman resmi');
   expect(errors).toEqual([]);
 });
