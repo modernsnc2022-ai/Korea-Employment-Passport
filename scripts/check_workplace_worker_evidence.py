@@ -80,6 +80,9 @@ for row in data.get("records", []):
                 f"it already maps to a different canonical company"
             )
         company_name_owners[normalized]=canonical
+    experience_year=str(row.get("experienceYear", "")).strip()
+    if experience_year != "unknown" and not re.fullmatch(r"20(?:0[4-9]|1\d|2[0-6])", experience_year):
+        fail(f"{evidence_id}: experienceYear must be 2004..2026 or unknown")
     if row.get("verificationStatus") not in ALLOWED_STATUS:
         fail(f"{evidence_id}: invalid verificationStatus")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(row.get("verifiedAt", ""))):
