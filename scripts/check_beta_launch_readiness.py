@@ -198,6 +198,8 @@ require("PUBLISHABLE_STATUS = {\"single_verified_worker\"}" in publisher,
         "worker evidence publisher must not let one interview claim multi-worker verification")
 require("metadataRemoved" in publisher and "reviewConfirmed" in publisher,
         "worker evidence publisher must require privacy review and metadata removal")
+require("contributorConsent" in publisher,
+        "worker evidence publisher must require explicit contributor consent for public summaries")
 require("experienceYear" in publisher and "workplace_evidence_status" in publisher,
         "worker evidence publishing must preserve experience cycle and separate publish status")
 require("experience_year" in beta_tracker and "workplace_evidence_status" in beta_tracker,
