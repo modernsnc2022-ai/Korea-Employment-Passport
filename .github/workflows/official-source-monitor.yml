@@ -3,6 +3,11 @@ name: official-source-monitor
 on:
   schedule:
     - cron: '17 */6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'monitor/source_hashes.json'
+      - 'scripts/check_official_sources.py'
   workflow_dispatch:
     inputs:
       accept_current:
