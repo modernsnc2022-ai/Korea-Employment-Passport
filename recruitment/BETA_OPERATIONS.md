@@ -77,3 +77,8 @@ For KEP-0031..KEP-0050, keep these states separate:
 Publishing a WPE record sets `workplace_evidence_status=published_single_verified_worker`; it must not be inferred merely from `interview_status=completed`. The public WPE record also carries `experienceYear` so older experience is visibly retrospective.
 
 The public CSV is deliberately categorical. Keep `notes` empty. If `broker_tasks`, `documents_confusing`, or `official_process_gap` are used, store only semicolon-separated 27-stage IDs; never store a broker/person name or narrative interview text in those cells.
+
+
+### Public-summary consent
+
+Completing a retrospective interview does not by itself authorize public company-level publication. Before `publish_worker_evidence.py` can prepare a WPE record, the private intake must record `contributorConsent=true` for the de-identified public summary. Keep the consent record outside the public registry. Media still requires its own explicit consent, privacy review, and metadata removal.
