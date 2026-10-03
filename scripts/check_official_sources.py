@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 import argparse
 import hashlib
+import http.client
 import json
 import re
+import ssl
 import sys
 import time
 import urllib.request
+from datetime import date
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from html.parser import HTMLParser
 from pathlib import Path
 from threading import Semaphore
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 class TextExtractor(HTMLParser):
     def __init__(self):
@@ -32,25 +35,97 @@ class TextExtractor(HTMLParser):
             if text:
                 self.parts.append(text)
 
-def fetch_fingerprint(url):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.1 (+GitHub Actions)",
-            "Accept-Language": "ko,en;q=0.8,id;q=0.7",
-        },
-    )
+REQUEST_HEADERS = {
+    "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.2 (+GitHub Actions)",
+    "Accept-Language": "ko,en;q=0.8,id;q=0.7",
+}
+
+def _verified_fetch(url):
+    req = urllib.request.Request(url, headers=REQUEST_HEADERS)
     with urllib.request.urlopen(req, timeout=30) as resp:
         raw = resp.read()
         content_type = (resp.headers.get_content_type() or "").lower()
         charset = resp.headers.get_content_charset() or "utf-8"
+        final_url = resp.geturl()
+    return raw, content_type, charset, final_url, "ca_verified"
 
-    if content_type == "application/pdf" or url.lower().split("?", 1)[0].endswith(".pdf"):
+def _pin_record(host, tls_pins):
+    return (tls_pins or {}).get("hosts", {}).get(host.lower())
+
+def _validate_pin_record(host, pin):
+    if not pin:
+        raise ssl.SSLCertVerificationError(f"No reviewed TLS pin is configured for {host}")
+    valid_until = pin.get("validUntil")
+    if not valid_until:
+        raise ssl.SSLCertVerificationError(f"TLS pin for {host} has no validUntil")
+    if date.today() > date.fromisoformat(valid_until):
+        raise ssl.SSLCertVerificationError(f"Reviewed TLS pin for {host} expired on {valid_until}")
+    hashes = {str(x).lower() for x in pin.get("leafSha256", []) if x}
+    if not hashes:
+        raise ssl.SSLCertVerificationError(f"TLS pin for {host} has no leafSha256")
+    return hashes
+
+def _pinned_fetch(url, tls_pins, redirects=3):
+    if redirects < 0:
+        raise RuntimeError("Too many redirects while using pinned TLS fallback")
+    parsed = urlparse(url)
+    if parsed.scheme.lower() != "https":
+        raise RuntimeError("Pinned TLS fallback is only allowed for HTTPS URLs")
+    host = parsed.hostname or ""
+    pin = _pin_record(host, tls_pins)
+    allowed_hashes = _validate_pin_record(host, pin)
+
+    context = ssl._create_unverified_context()
+    conn = http.client.HTTPSConnection(host, port=parsed.port or 443, timeout=30, context=context)
+    try:
+        conn.connect()
+        der = conn.sock.getpeercert(binary_form=True)
+        actual_hash = hashlib.sha256(der).hexdigest().lower()
+        if actual_hash not in allowed_hashes:
+            raise ssl.SSLCertVerificationError(
+                f"TLS pin mismatch for {host}: expected one of {sorted(allowed_hashes)}, got {actual_hash}"
+            )
+
+        path = parsed.path or "/"
+        if parsed.query:
+            path += "?" + parsed.query
+        conn.request("GET", path, headers=REQUEST_HEADERS)
+        resp = conn.getresponse()
+        raw = resp.read()
+        location = resp.getheader("Location")
+        status = resp.status
+        content_type = (resp.headers.get_content_type() or "").lower()
+        charset = resp.headers.get_content_charset() or "utf-8"
+    finally:
+        conn.close()
+
+    if status in {301, 302, 303, 307, 308} and location:
+        return _fetch_response(urljoin(url, location), tls_pins, redirects=redirects - 1)
+    if status >= 400:
+        raise RuntimeError(f"HTTP {status} from pinned official source {url}")
+    return raw, content_type, charset, url, "pinned_leaf"
+
+def _fetch_response(url, tls_pins, redirects=3):
+    try:
+        return _verified_fetch(url)
+    except Exception as exc:
+        if "CERTIFICATE_VERIFY_FAILED" not in str(exc):
+            raise
+        host = (urlparse(url).hostname or "").lower()
+        if not _pin_record(host, tls_pins):
+            raise
+        return _pinned_fetch(url, tls_pins, redirects=redirects)
+
+def fetch_fingerprint(url, tls_pins=None):
+    raw, content_type, charset, final_url, tls_mode = _fetch_response(url, tls_pins or {})
+
+    if content_type == "application/pdf" or final_url.lower().split("?", 1)[0].endswith(".pdf"):
         return {
             "sha256": hashlib.sha256(raw).hexdigest(),
             "contentLength": len(raw),
             "mode": "binary",
             "contentType": content_type or "application/pdf",
+            "tlsMode": tls_mode,
         }
 
     html = raw.decode(charset, errors="replace")
@@ -65,6 +140,7 @@ def fetch_fingerprint(url):
         "contentLength": len(normalized),
         "mode": "normalized_text",
         "contentType": content_type or "text/html",
+        "tlsMode": tls_mode,
     }
 
 def main():
@@ -72,6 +148,7 @@ def main():
     p.add_argument("--sources", default="monitor/sources.json")
     p.add_argument("--baseline", default="monitor/source_hashes.json")
     p.add_argument("--output", default="monitor/check_result.json")
+    p.add_argument("--tls-pins", default="monitor/tls_pins.json")
     p.add_argument("--accept-current", action="store_true")
     p.add_argument("--init-if-empty", action="store_true")
     p.add_argument("--workers", type=int, default=4, help="Concurrent source fetches across different hosts (1-8)")
@@ -81,6 +158,8 @@ def main():
     attempts = max(1, min(args.retries, 3))
 
     sources = json.loads(Path(args.sources).read_text(encoding="utf-8-sig"))["sources"]
+    tls_pins_path = Path(args.tls_pins)
+    tls_pins = json.loads(tls_pins_path.read_text(encoding="utf-8-sig")) if tls_pins_path.exists() else {"hosts": {}}
     baseline_path = Path(args.baseline)
     baseline = json.loads(baseline_path.read_text(encoding="utf-8-sig")) if baseline_path.exists() else {}
 
@@ -98,7 +177,7 @@ def main():
         with host_gates[host]:
             for attempt in range(1, attempts + 1):
                 try:
-                    return source["id"], fetch_fingerprint(url)
+                    return source["id"], fetch_fingerprint(url, tls_pins)
                 except Exception as exc:
                     last_error = exc
                     if "CERTIFICATE_VERIFY_FAILED" in str(exc) or attempt >= attempts:
@@ -131,6 +210,7 @@ def main():
             "contentLength": fingerprint["contentLength"],
             "mode": fingerprint["mode"],
             "contentType": fingerprint["contentType"],
+            "tlsMode": fingerprint.get("tlsMode", "ca_verified"),
         }
 
     changed = []
@@ -175,6 +255,7 @@ def main():
         "configured": len(sources),
         "workers": workers,
         "attempts": attempts,
+        "pinnedFallbacks": [source_id for source_id, row in current.items() if row.get("tlsMode") == "pinned_leaf"],
     }
     Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))

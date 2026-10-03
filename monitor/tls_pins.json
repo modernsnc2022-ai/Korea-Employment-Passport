@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "policy": "Normal CA verification is always attempted first. Pinned fallback is allowed only for listed government hosts when the public server presents the exact reviewed leaf certificate and the pin is not past its reviewed validity date.",
+  "hosts": {
+    "kp2mi.go.id": {
+      "leafSha256": [
+        "5066303bd0bbe8c3e0379ec518f0cef0daff8803d38ab08229b6c42dc15b9f03"
+      ],
+      "validUntil": "2026-12-03",
+      "subject": "*.kp2mi.go.id",
+      "issuer": "GeoTrust TLS RSA CA G1 / DigiCert Inc"
+    },
+    "www.kp2mi.go.id": {
+      "leafSha256": [
+        "5066303bd0bbe8c3e0379ec518f0cef0daff8803d38ab08229b6c42dc15b9f03"
+      ],
+      "validUntil": "2026-12-03",
+      "subject": "*.kp2mi.go.id",
+      "issuer": "GeoTrust TLS RSA CA G1 / DigiCert Inc"
+    },
+    "qcode.kdca.go.kr": {
+      "leafSha256": [
+        "8896ff76d3dec64ca1132aa08ee49e8aa4bfe8e82c9b56b854afceae1b238f10"
+      ],
+      "validUntil": "2026-12-20",
+      "subject": "*.kdca.go.kr",
+      "issuer": "TuringSign RSA Secure CA 2"
+    },
+    "travelhealth.kdca.go.kr": {
+      "leafSha256": [
+        "8896ff76d3dec64ca1132aa08ee49e8aa4bfe8e82c9b56b854afceae1b238f10"
+      ],
+      "validUntil": "2026-12-20",
+      "subject": "*.kdca.go.kr",
+      "issuer": "TuringSign RSA Secure CA 2"
+    }
+  }
+}

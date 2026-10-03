@@ -16,6 +16,7 @@ document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.j
 broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
 form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").read_text(encoding="utf-8"))
 source_review = json.loads((ROOT / "docs" / "data" / "source_review_status.json").read_text(encoding="utf-8-sig"))
+tls_pins = json.loads((ROOT / "monitor" / "tls_pins.json").read_text(encoding="utf-8-sig"))
 
 errors = []
 
@@ -381,6 +382,29 @@ elif review_state == "review_required" and not source_review.get("reviewRequired
 elif review_state == "fetch_warning" and not source_review.get("fetchFailureUrls"):
     errors.append("fetch_warning source state must list fetchFailureUrls")
 
+pin_hosts = tls_pins.get("hosts", {})
+if not isinstance(pin_hosts, dict) or not pin_hosts:
+    errors.append("TLS pin configuration must define at least one reviewed host")
+else:
+    for host, pin in pin_hosts.items():
+        if not host or "://" in host or "/" in host:
+            errors.append(f"invalid TLS pin host: {host}")
+            continue
+        hashes = pin.get("leafSha256")
+        if not isinstance(hashes, list) or not hashes:
+            errors.append(f"TLS pin host {host} must define leafSha256")
+        else:
+            for value in hashes:
+                if not re.fullmatch(r"[0-9a-fA-F]{64}", str(value)):
+                    errors.append(f"TLS pin host {host} has invalid SHA-256: {value}")
+        valid_until = str(pin.get("validUntil", ""))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", valid_until):
+            errors.append(f"TLS pin host {host} has invalid validUntil: {valid_until}")
+        if not str(pin.get("subject", "")).strip():
+            errors.append(f"TLS pin host {host} missing reviewed subject")
+        if not str(pin.get("issuer", "")).strip():
+            errors.append(f"TLS pin host {host} missing reviewed issuer")
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -401,5 +425,6 @@ print(
     f"form_validators={sum(1 for form in form_wizards.get('forms', []) for field in form.get('fields', []) if field.get('validator'))}",
     f"source_review_state={source_review.get('state')}",
     f"source_review_checked={source_review.get('checked')}/{source_review.get('configured')}",
+    f"tls_pins={len(pin_hosts)}",
     f"js_literal_refs={len(literal_refs)}",
 )

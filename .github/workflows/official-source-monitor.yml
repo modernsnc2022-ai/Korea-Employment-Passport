@@ -43,6 +43,7 @@ jobs:
           echo "initialized=$(jq -r '.initialized' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "accepted=$(jq -r '.acceptedCurrent' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "acceptance_blocked=$(jq -r '.acceptanceBlocked // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "pinned_fallbacks=$(jq '.pinnedFallbacks | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
 
       - name: Publish app review status
         run: python scripts/write_source_review_status.py
@@ -79,6 +80,16 @@ jobs:
             gh issue comment "$EXISTING" --body "Another scheduled check detected official-source changes. Review the latest official-source-monitor run."
           fi
 
+      - name: Close resolved source-review issue
+        if: steps.result.outputs.accepted == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --state open --search "Official source change detected in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --comment "Reviewed source changes were accepted into the monitored baseline. Closing this review alert."
+          fi
+
       - name: Job summary
         run: |
           echo "## Official source monitor" >> "$GITHUB_STEP_SUMMARY"
@@ -86,6 +97,7 @@ jobs:
           echo "- Fetch failures: ${{ steps.result.outputs.failures }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Accepted reviewed baseline: ${{ steps.result.outputs.accepted }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Acceptance blocked: ${{ steps.result.outputs.acceptance_blocked }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Pinned TLS fallbacks: ${{ steps.result.outputs.pinned_fallbacks }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Auto-publish: **disabled**" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Fail blocked baseline acceptance
