@@ -349,9 +349,9 @@ test('anonymous beta ID links feedback to tracker without identity data', async 
   await expect(page.locator('#betaTesterIdStatus')).toContainText('KEP-0042');
 
   const result = await page.evaluate(() => {
-    localStorage.setItem('kep.brokerGaps', JSON.stringify([
+    write(KEYS.gaps, [
       {id:4, stage:'eligibility', task:'Masih membutuhkan bantuan', helper:'Teman / pekerja senior'}
-    ]));
+    ]);
     const bundle=buildBetaFeedbackBundle();
     const href=betaFeedbackBundleMailto(bundle);
     return {
@@ -388,6 +388,34 @@ test('beta invite URL immediately confirms the assigned anonymous tester', async
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
   await expect(page.locator('#betaModeBanner')).toBeHidden();
   expect(await page.evaluate(() => localStorage.getItem('kep.betaTesterId'))).toBeNull();
+
+  expect(errors).toEqual([]);
+});
+
+
+test('beta evidence stays isolated when a browser switches tester IDs', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html?beta=KEP-0001', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  await page.evaluate(() => {
+    const checks={eligibility:{stageId:'eligibility',status:'no_private_help',updatedAt:new Date().toISOString()}};
+    write(KEYS.betaChecks,checks);
+    write(KEYS.gaps,[{id:1,stage:'eligibility',task:'Gap tester satu',helper:'Teman'}]);
+  });
+  expect(await page.evaluate(() => betaValidationStats().tested)).toBe(1);
+  expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).toContain('Gap tester satu');
+
+  await page.goto('/app.html?beta=KEP-0002', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  expect(await page.evaluate(() => betaValidationStats().tested)).toBe(0);
+  expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).not.toContain('Gap tester satu');
+
+  await page.goto('/app.html?beta=KEP-0001', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  expect(await page.evaluate(() => betaValidationStats().tested)).toBe(1);
+  expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).toContain('Gap tester satu');
 
   expect(errors).toEqual([]);
 });
