@@ -421,6 +421,33 @@ test('beta evidence stays isolated when a browser switches tester IDs', async ({
 });
 
 
+test('manual beta ID switch removes the previous tester evidence from view', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel').evaluate((el) => { el.open = true; });
+
+  await page.locator('#betaTesterId').fill('KEP-0001');
+  await page.locator('#saveBetaTesterIdBtn').click();
+  await page.evaluate(() => {
+    write(KEYS.gaps,[{id:11,stage:'eligibility',task:'Gap hanya tester satu',helper:'Teman'}]);
+    renderGaps();
+  });
+  await expect(page.locator('#gapList')).toContainText('Gap hanya tester satu');
+
+  await page.locator('#betaTesterId').fill('KEP-0002');
+  await page.locator('#saveBetaTesterIdBtn').click();
+  await expect(page.locator('#gapList')).not.toContainText('Gap hanya tester satu');
+  expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).not.toContain('Gap hanya tester satu');
+
+  await page.locator('#betaTesterId').fill('KEP-0001');
+  await page.locator('#saveBetaTesterIdBtn').click();
+  await expect(page.locator('#gapList')).toContainText('Gap hanya tester satu');
+
+  expect(errors).toEqual([]);
+});
+
+
 test('unexperienced beta stage never counts as zero-broker evidence', async ({ page }) => {
   const errors = await freshPage(page);
   await setStage(page, 'eligibility');
