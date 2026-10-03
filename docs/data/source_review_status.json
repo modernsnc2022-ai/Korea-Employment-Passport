@@ -1,22 +1,12 @@
 {
   "version": "1.1.0",
-  "state": "review_required",
+  "state": "clean",
   "autoPublishRules": false,
   "configured": 57,
-  "checked": 55,
-  "reviewRequiredUrls": [
-    "https://moel.go.kr/news/enews/report/enewsView.do?bbs_id=12&news_seq=18144&pageIndex=1&pageUnit=10&searchField=3"
-  ],
-  "reviewRequiredSourceIds": [
-    "moel_minimum_wage_2026"
-  ],
-  "fetchFailureUrls": [
-    "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
-    "https://www.immigration.go.kr/immigration/3509/subview.do"
-  ],
-  "fetchFailureSourceIds": [
-    "immigration_foreigner_registration_info",
-    "korea_earrival_immigration_guide"
-  ],
-  "message": "Official source changed; affected guidance must be reviewed before being treated as exact."
+  "checked": 57,
+  "reviewRequiredUrls": [],
+  "reviewRequiredSourceIds": [],
+  "fetchFailureUrls": [],
+  "fetchFailureSourceIds": [],
+  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
 }
