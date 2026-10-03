@@ -107,7 +107,8 @@
           "required": true,
           "note": "Hasil resmi dikirim dari SIAP HIMPSI ke Sisko P2MI dan dipakai KP2MI untuk menentukan apakah Anda dapat lanjut ke MCU I."
         }
-      ]
+      ],
+      "officialActionUrl": "https://himpsi.or.id/cpmi/daily-cpmi-korea-2026"
     },
     {
       "id": "job_application_manufacturing",
