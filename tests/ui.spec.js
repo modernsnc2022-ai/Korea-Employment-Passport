@@ -678,3 +678,32 @@ test('post SLC stage exposes verified psychology and MCU II checklist', async ({
   await expect(page.locator('#docList')).toContainText('KTP asli');
   expect(errors).toEqual([]);
 });
+
+
+test('departure scope picker includes partial verified 2026 registry', async ({ page }) => {
+  const errors = await freshPage(page);
+
+  const result = await page.evaluate(() => {
+    const departure=scopeOptionsForStage('departure');
+    const mcu3=scopeOptionsForStage('mcu3_departure');
+    return {
+      departureKeys:departure.map(row=>row.key),
+      mcu3Keys:mcu3.map(row=>row.key),
+      jan5:departure.find(row=>row.key==='departure_2026_01_05')||null,
+      aug24:mcu3.find(row=>row.key==='departure_2026_08_24')||null
+    };
+  });
+
+  expect(result.departureKeys.length).toBeGreaterThanOrEqual(15);
+  expect(result.departureKeys).toContain('departure_2026_01_05');
+  expect(result.departureKeys).toContain('departure_2026_04_27');
+  expect(result.departureKeys).toContain('departure_2026_09_15');
+  expect(result.mcu3Keys).toContain('departure_2026_08_10');
+  expect(result.mcu3Keys).toContain('departure_2026_08_24');
+  expect(result.mcu3Keys).toContain('departure_2026_08_25');
+  expect(result.mcu3Keys).toContain('departure_2026_08_31');
+  expect(result.mcu3Keys).toContain('departure_2026_09_15');
+  expect(result.jan5?.sourceUrl).toContain('kp2mi.go.id');
+  expect(result.aug24?.sourceUrl).toContain('kp2mi.go.id');
+  expect(errors).toEqual([]);
+});
