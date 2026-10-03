@@ -20,6 +20,7 @@ jobs:
         run: |
           node --check docs/app.js
           node --check docs/app-runtime.js
+          node --check docs/beta.js
           node --check docs/sw.js
       - name: Validate JSON data
         run: |
@@ -37,6 +38,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/form_lineage_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/source_review_status.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/official_help_channels_v1.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/beta_program_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/tls_pins.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_form_sources_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_legacy_forms_field_audit_2026.json','utf8'))"
@@ -59,5 +61,8 @@ jobs:
         run: |
           test -f docs/index.html
           test -f docs/app.html
+          test -f docs/beta.html
+          test -f docs/beta.css
+          test -f docs/beta.js
           test -f docs/privacy.html
           test -f docs/.nojekyll
