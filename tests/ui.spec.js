@@ -228,3 +228,39 @@ test('beta feedback removes sensitive-looking identifiers before email draft', a
   expect(result.mailBody).toContain('[DIHAPUS:');
   expect(errors).toEqual([]);
 });
+
+
+test('beta feedback bundle combines all gap types and redacts them in one draft', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+
+  const result = await page.evaluate(() => {
+    localStorage.setItem('kep.unresolvedFieldQuestions', JSON.stringify([
+      {stageId:'registration', stageTitle:'Pendaftaran', question:'Konfirmasi ke tester@example.com'}
+    ]));
+    localStorage.setItem('kep.rejectionCases', JSON.stringify([
+      {id:1, stageId:'visa_docs', stageTitle:'Visa', field:'Paspor A1234567', reason:'Hubungi +62 812-3456-7890', fix:'NIK 3174123456789012'}
+    ]));
+    localStorage.setItem('kep.brokerGaps', JSON.stringify([
+      {id:2, stage:'eligibility', task:'Diminta bayar ke 081234567890', helper:'Calo / agen swasta'}
+    ]));
+    const bundle=buildBetaFeedbackBundle();
+    const href=betaFeedbackBundleMailto(bundle);
+    const body=decodeURIComponent(href.split('&body=')[1]);
+    switchView('gaps', false);
+    return {count:bundle.count, rawBody:bundle.rawBody, body};
+  });
+
+  expect(result.count).toBe(3);
+  expect(result.rawBody).toContain('PERTANYAAN YANG BELUM TERVERIFIKASI');
+  expect(result.rawBody).toContain('KASUS PENOLAKAN');
+  expect(result.rawBody).toContain('CELAH CALO / PERANTARA');
+  expect(result.body).toContain('Catatan privasi');
+  expect(result.body).not.toContain('tester@example.com');
+  expect(result.body).not.toContain('A1234567');
+  expect(result.body).not.toContain('+62 812-3456-7890');
+  expect(result.body).not.toContain('3174123456789012');
+  expect(result.body).not.toContain('081234567890');
+  await expect(page.locator('#emailAllBetaFeedbackBtn')).toBeVisible();
+  expect(errors).toEqual([]);
+});

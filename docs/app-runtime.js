@@ -2753,6 +2753,67 @@ function encodeSanitizedBetaBody(rawBody){
   return encodeURIComponent(notice+safe.text);
 }
 
+function buildBetaFeedbackBundle(){
+  const fieldQuestions=read(KEYS.fieldQuestions,[]);
+  const rejections=read(KEYS.rejections,[]);
+  const gaps=read(KEYS.gaps,[]);
+  const sections=[];
+
+  if(fieldQuestions.length){
+    sections.push(
+      'PERTANYAAN YANG BELUM TERVERIFIKASI\n'+
+      fieldQuestions.map((item,index)=>`${index+1}. [${item.stageTitle||item.stageId}] ${item.question}`).join('\n')
+    );
+  }
+  if(rejections.length){
+    sections.push(
+      'KASUS PENOLAKAN\n'+
+      rejections.map((item,index)=>
+        `${index+1}. [${item.stageTitle||item.stageId}] ${item.field||'kolom/dokumen'}\n`+
+        `   Penolakan: ${item.reason}\n`+
+        `   Perbaikan: ${item.fix||'belum diketahui'}`
+      ).join('\n')
+    );
+  }
+  if(gaps.length){
+    sections.push(
+      'CELAH CALO / PERANTARA\n'+
+      gaps.map((item,index)=>{
+        const stage=route?.stages.find(row=>row.id===item.stage);
+        return `${index+1}. [${stage?stageTitle(stage):item.stage}] ${item.task} — ${item.helper}`;
+      }).join('\n')
+    );
+  }
+
+  const count=fieldQuestions.length+rejections.length+gaps.length;
+  return {
+    count,
+    rawBody:
+      'Temuan beta Korea Employment Passport dari perangkat ini:\n\n'+
+      sections.join('\n\n')+
+      '\n\nMohon verifikasi terhadap sumber resmi sebelum mengubah aturan. Jangan lampirkan dokumen atau nomor identitas sensitif.'
+  };
+}
+
+function betaFeedbackBundleMailto(bundle=buildBetaFeedbackBundle()){
+  const subject=encodeURIComponent(`[KEP Beta] Combined feedback — ${bundle.count} temuan`);
+  const body=encodeSanitizedBetaBody(bundle.rawBody);
+  return 'mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
+}
+
+$('emailAllBetaFeedbackBtn').addEventListener('click',()=>{
+  const out=$('betaFeedbackBundleResult');
+  const bundle=buildBetaFeedbackBundle();
+  if(!bundle.count){
+    out.hidden=false;
+    out.className='result warn';
+    out.textContent='Belum ada pertanyaan, kasus penolakan, atau Celah Calo yang tersimpan di perangkat ini.';
+    return;
+  }
+  out.hidden=true;
+  location.href=betaFeedbackBundleMailto(bundle);
+});
+
 $('emailFieldQuestionsBtn').addEventListener('click',()=>{
   const list=read(KEYS.fieldQuestions,[]);
   if(!list.length)return;
