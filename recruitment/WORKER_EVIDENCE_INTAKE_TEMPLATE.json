@@ -5,6 +5,7 @@
   "companyAliases": [],
   "verificationStatus": "single_verified_worker",
   "verifiedAt": "2026-10-04",
+  "contributorConsent": true,
   "reviewConfirmed": true,
   "facts": [
     {
