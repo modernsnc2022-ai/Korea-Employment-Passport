@@ -209,6 +209,36 @@
       "id": "kdca_qcode_input",
       "agency": "Korea Disease Control and Prevention Agency",
       "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do"
+    },
+    {
+      "id": "kp2mi_visa_form_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_2._Formulir_Pengajuan_Visa_(Print_Warna_Kuning).pdf"
+    },
+    {
+      "id": "kp2mi_e9_statement_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_3._Formulir_Pernyataan_E9.pdf"
+    },
+    {
+      "id": "kp2mi_placement_agreement_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_4._Perjanjian_Penempatan_G_to_G_Korea_Selatan.pdf"
+    },
+    {
+      "id": "kp2mi_visa_debit_power_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_5._Surat_Kuasa_Pemblokiran_dan_Pendebetan_Rekening.pdf"
+    },
+    {
+      "id": "kp2mi_visa_checklist_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_6._Checklist_Pemberkasan.pdf"
+    },
+    {
+      "id": "kp2mi_visa_guidance_aug2026_pdf",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_8._Petunjuk_Pemberkasan_Dokumen_Visa.pdf"
     }
   ]
 }

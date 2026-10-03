@@ -192,15 +192,36 @@ if bad_sample_content:
 if bad_sample_scope:
     errors.append("cohort document examples missing scope metadata: " + ", ".join(sorted(bad_sample_scope)))
 
+pack_scope_keys = {
+    pack.get("scopeKey")
+    for pack in document_packs.get("packs", [])
+    if pack.get("scopeKey")
+}
+exact_scope_keys = {
+    item.get("scopeKey")
+    for item in exact_answers.get("answers", [])
+    if item.get("scopeKey")
+}
+known_scope_keys = pack_scope_keys | exact_scope_keys
+
 wizard_ref_set = {
     f"{form.get('id')}:{field.get('id')}"
     for form in form_wizards.get("forms", [])
     for field in form.get("fields", [])
 }
+wizard_ref_scope = {}
+wizard_ref_stages = {}
+for form in form_wizards.get("forms", []):
+    for field in form.get("fields", []):
+        ref = f"{form.get('id')}:{field.get('id')}"
+        wizard_ref_scope[ref] = form.get("scopeKey")
+        wizard_ref_stages[ref] = set(form.get("stages", []))
+
 question_ids = []
 bad_question_stage_refs = []
 bad_question_answer_refs = []
 bad_question_wizard_refs = []
+bad_question_scope = []
 bad_question_content = []
 exact_id_set = set(exact_ids)
 for question in broker_questions.get("questions", []):
@@ -218,6 +239,22 @@ for question in broker_questions.get("questions", []):
     wizard_ref = question.get("wizardRef")
     if wizard_ref and wizard_ref not in wizard_ref_set:
         bad_question_wizard_refs.append(f"{question_id}->{wizard_ref}")
+    if wizard_ref and wizard_ref in wizard_ref_set:
+        expected_scope = wizard_ref_scope.get(wizard_ref)
+        question_scope = question.get("scopeKey")
+        if expected_scope != question_scope:
+            bad_question_scope.append(
+                f"{question_id}:wizard_scope={expected_scope!r}:question_scope={question_scope!r}"
+            )
+        if stage_id not in wizard_ref_stages.get(wizard_ref, set()):
+            bad_question_wizard_refs.append(f"{question_id}->{wizard_ref}:stage_mismatch")
+    question_scope = question.get("scopeKey")
+    if question_scope and question_scope not in known_scope_keys:
+        bad_question_scope.append(f"{question_id}:unknown_scope={question_scope}")
+    if question_scope and not question.get("scopeLabel"):
+        bad_question_scope.append(f"{question_id}:missing_scope_label")
+    if question.get("scopeLabel") and not question_scope:
+        bad_question_scope.append(f"{question_id}:label_without_scope")
     for required in ("question", "severity", "category"):
         if not str(question.get(required, "")).strip():
             bad_question_content.append(f"{question_id}:{required}")
@@ -237,7 +274,10 @@ if bad_question_answer_refs:
     errors.append("broker questions reference missing exact answers: " + ", ".join(sorted(bad_question_answer_refs)))
 
 if bad_question_wizard_refs:
-    errors.append("broker questions reference missing form-wizard fields: " + ", ".join(sorted(bad_question_wizard_refs)))
+    errors.append("broker questions reference missing/mismatched form-wizard fields: " + ", ".join(sorted(bad_question_wizard_refs)))
+
+if bad_question_scope:
+    errors.append("broker questions have invalid/mismatched scope metadata: " + ", ".join(sorted(bad_question_scope)))
 
 if bad_question_content:
     errors.append("broker questions missing/invalid required content: " + ", ".join(sorted(bad_question_content)))
@@ -247,9 +287,20 @@ wizard_field_ids = []
 bad_form_stage_refs = []
 bad_form_sources = []
 bad_form_content = []
+bad_form_scope = []
 for form in form_wizards.get("forms", []):
     form_id = form.get("id", "")
     form_ids.append(form_id)
+    form_scope_type = form.get("scopeType")
+    form_scope_key = form.get("scopeKey")
+    form_scope_label = form.get("scopeLabel")
+    if form_scope_key or form_scope_label or form_scope_type:
+        if form_scope_type != "cohort":
+            bad_form_scope.append(f"{form_id}:scopeType")
+        if not form_scope_key or not form_scope_label:
+            bad_form_scope.append(f"{form_id}:cohort_metadata")
+        if form_scope_key and form_scope_key not in pack_scope_keys:
+            bad_form_scope.append(f"{form_id}:scope_without_document_pack={form_scope_key}")
     if not str(form.get("sourceUrl", "")).startswith("http"):
         bad_form_sources.append(f"{form_id}:sourceUrl")
     if not str(form.get("guidanceUrl", "")).startswith("http"):
@@ -284,6 +335,9 @@ if bad_form_sources:
 
 if bad_form_content:
     errors.append("form wizards missing required content: " + ", ".join(sorted(bad_form_content)))
+
+if bad_form_scope:
+    errors.append("form wizards have invalid/mismatched scope metadata: " + ", ".join(sorted(bad_form_scope)))
 
 if errors:
     print("WEBAPP_CONTRACT_FAIL")

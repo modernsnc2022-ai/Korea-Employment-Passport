@@ -263,19 +263,31 @@ function exactAnswerIdSet(stageId){
   return new Set((exactAnswers?.answers||[]).filter(item=>exactAnswerApplies(item,stageId)).map(item=>item.id));
 }
 
+function wizardFormApplies(form,stageId){
+  if(!form?.stages?.includes(stageId))return false;
+  if(form.scopeType!=='cohort')return true;
+  return selectedScope(stageId)===form.scopeKey;
+}
+
 function wizardFieldRefSet(stageId){
   const refs=new Set();
-  (formWizards?.forms||[]).filter(form=>form.stages?.includes(stageId)).forEach(form=>{
+  (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId)).forEach(form=>{
     (form.fields||[]).forEach(field=>refs.add(form.id+':'+field.id));
   });
   return refs;
+}
+
+function brokerQuestionApplies(item,stageId){
+  if(item?.stageId!==stageId)return false;
+  if(!item.scopeKey)return true;
+  return selectedScope(stageId)===item.scopeKey;
 }
 
 function bqcQuestionsForStage(stageId){
   const answerIds=exactAnswerIdSet(stageId);
   const wizardRefs=wizardFieldRefSet(stageId);
   const base=(brokerQuestions?.questions||[])
-    .filter(item=>item.stageId===stageId)
+    .filter(item=>brokerQuestionApplies(item,stageId))
     .map(item=>{
       const candidates=item.answerIds?.length?item.answerIds:(item.answerId?[item.answerId]:[]);
       const resolvedByExact=candidates.some(id=>answerIds.has(id));
@@ -1079,7 +1091,7 @@ function renderDocumentExamples(stageId){
 
 
 function formsForStage(stageId){
-  return (formWizards?.forms||[]).filter(form=>form.stages?.includes(stageId));
+  return (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId));
 }
 
 function renderFormWizardCard(form,index){
