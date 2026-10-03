@@ -1,5 +1,7 @@
 # Broker replacement interview
 
+Privacy rule: record the participant only by their assigned `KEP-####` beta ID in this repository. Do not record names, contact details, passport/KTP/ARC numbers, exact addresses, or private intermediary identities here. Capture the **task/problem**, not the person's identity.
+
 Ask every participant:
 1. What stage are you in now?
 2. Which official websites/accounts do you use?
