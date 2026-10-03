@@ -2915,6 +2915,9 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
     localStorage.removeItem(KEYS.betaTesterId);
     renderBetaModeBanner();
     renderBetaValidation();
+    renderRejections();
+    renderGaps();
+    renderUnresolvedFieldQuestions();
     return;
   }
   const testerId=canonicalBetaTesterId(raw);
@@ -2925,6 +2928,9 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   write(KEYS.betaTesterId,testerId);
   renderBetaModeBanner();
   renderBetaValidation();
+  renderRejections();
+  renderGaps();
+  renderUnresolvedFieldQuestions();
 });
 
 $('saveBetaCheckBtn').addEventListener('click',()=>{
