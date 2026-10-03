@@ -289,7 +289,7 @@ function bqcQuestionsForStage(stageId){
   const base=(brokerQuestions?.questions||[])
     .filter(item=>brokerQuestionApplies(item,stageId))
     .map(item=>{
-      const candidates=item.answerIds?.length?item.answerIds:(item.answerId?[item.answerId]:[]);
+      const candidates=[...new Set([item.answerId,...(item.answerIds||[])].filter(Boolean))];
       const resolvedByExact=candidates.some(id=>answerIds.has(id));
       const resolvedByWizard=Boolean(item.wizardRef&&wizardRefs.has(item.wizardRef));
       return {...item,resolved:resolvedByExact||resolvedByWizard};
