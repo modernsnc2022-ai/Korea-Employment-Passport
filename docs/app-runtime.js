@@ -375,6 +375,7 @@ async function boot(){
     renderWorkplace();
     renderGapStage();
     hydrateBetaTesterIdFromUrl();
+    renderBetaModeBanner();
     renderBetaValidation();
     renderRejectionStage();
     renderRejections();
@@ -2766,7 +2767,10 @@ function encodeSanitizedBetaBody(rawBody){
 
 function canonicalBetaTesterId(value){
   const normalized=String(value||'').trim().toUpperCase();
-  return /^KEP-\d{4,6}$/.test(normalized)?normalized:'';
+  const match=/^KEP-(\d{4})$/.exec(normalized);
+  if(!match)return '';
+  const number=Number(match[1]);
+  return number>=1&&number<=50?normalized:'';
 }
 
 function betaTesterIdState(){
@@ -2776,6 +2780,23 @@ function betaTesterIdState(){
 function hydrateBetaTesterIdFromUrl(){
   const fromUrl=canonicalBetaTesterId(new URLSearchParams(location.search).get('beta'));
   if(fromUrl)write(KEYS.betaTesterId,fromUrl);
+}
+
+function renderBetaModeBanner(){
+  const banner=$('betaModeBanner');
+  if(!banner)return;
+  const testerId=betaTesterIdState();
+  if(!testerId){
+    banner.hidden=true;
+    banner.innerHTML='';
+    return;
+  }
+  banner.hidden=false;
+  banner.innerHTML=
+    `<strong>Mode beta ${escapeHtml(testerId)}</strong>`+
+    '<span><b>1</b> Gunakan aplikasi seperti biasa pada tahap Anda</span>'+
+    '<span><b>2</b> Nilai hanya tahap yang benar-benar Anda alami</span>'+
+    '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, atau email</span>';
 }
 
 function betaChecksState(){
@@ -2859,15 +2880,17 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   const raw=String(input?.value||'').trim();
   if(!raw){
     localStorage.removeItem(KEYS.betaTesterId);
+    renderBetaModeBanner();
     renderBetaValidation();
     return;
   }
   const testerId=canonicalBetaTesterId(raw);
   if(!testerId){
-    if(status)status.textContent='Format ID beta tidak valid. Gunakan format seperti KEP-0001.';
+    if(status)status.textContent='ID beta tidak valid. Gunakan kode KEP-0001 sampai KEP-0050.';
     return;
   }
   write(KEYS.betaTesterId,testerId);
+  renderBetaModeBanner();
   renderBetaValidation();
 });
 
