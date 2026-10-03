@@ -51,6 +51,11 @@ holds = {
     if q.get("stageId") == "job_application" and q.get("status") == "answered_hold"
 }
 require(holds == EXPECTED_JOB_HOLDS, f"Manufacturing job-application HOLD set changed: {sorted(holds)}")
+job_stage = next((row for row in route.get("stages", []) if row.get("id") == "job_application"), {})
+require(
+    job_stage.get("brokerReplacement") == "held_official_notice",
+    "job_application must remain explicitly held until the Manufacturing 2026 notice is verified",
+)
 for q in questions:
     if q.get("id") in EXPECTED_JOB_HOLDS:
         require(
