@@ -1211,6 +1211,16 @@ function normalizeSearch(value){
     .trim();
 }
 
+const SEARCH_STOP_WORDS=new Set([
+  'apa','apakah','saya','anda','kamu','yang','dan','atau','untuk','dari','dengan','ini','itu',
+  'harus','boleh','bisa','kalau','jika','bagaimana','gimana','berapa','kapan','dimana','mana',
+  'pilih','memilih','tombol','tolong','mohon','pakai','gunakan'
+]);
+
+function meaningfulSearchTokens(normalizedQuery){
+  return String(normalizedQuery||'').split(' ').filter(token=>token.length>1&&!SEARCH_STOP_WORDS.has(token));
+}
+
 function fieldAnswerHtml(item){
   const dont=(item.doNotDo||[]).map(text=>'• '+escapeHtml(text)).join('<br>');
   return `<article class="field-match">
@@ -1230,7 +1240,7 @@ function wizardFieldSearchRows(query,stageId){
   if(!formWizards?.forms?.length)return [];
   const q=normalizeSearch(query);
   if(!q)return [];
-  const tokens=q.split(' ').filter(token=>token.length>1);
+  const tokens=meaningfulSearchTokens(q);
   const rows=[];
   for(const form of formWizards.forms){
     if(stageId){
@@ -1277,7 +1287,7 @@ function findScopedAnswerChoices(query,stageId){
   if(!stageId||!exactAnswers?.answers?.length||selectedScope(stageId))return [];
   const q=normalizeSearch(query);
   if(!q)return [];
-  const tokens=q.split(' ').filter(token=>token.length>1);
+  const tokens=meaningfulSearchTokens(q);
   const scopeMeta=new Map(scopeOptionsForStage(stageId).map(item=>[item.key,item]));
   const scopes=new Map();
 
@@ -1343,18 +1353,19 @@ function renderScopeChoiceForQuestion(query,out,onChosen){
 function findExactFieldAnswers(query){
   const q=normalizeSearch(query);
   if(!q)return [];
-  const tokens=q.split(' ').filter(token=>token.length>1);
+  const tokens=meaningfulSearchTokens(q);
   const current=currentStage();
   const stageId=current?.id||null;
   const exactRows=(exactAnswers?.answers||[])
     .filter(item=>!stageId||exactAnswerApplies(item,stageId))
     .map(item=>{
       const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
-      let score=0;
-      if(current&&item.stages?.includes(current.id))score+=12;
-      if(hay.includes(q))score+=20;
-      tokens.forEach(token=>{if(hay.includes(token))score+=2});
-      return {item,score};
+      let lexicalScore=0;
+      if(hay.includes(q))lexicalScore+=20;
+      tokens.forEach(token=>{if(hay.includes(token))lexicalScore+=2});
+      if(lexicalScore===0)return {item,score:0};
+      const stageBoost=current&&item.stages?.includes(current.id)?12:0;
+      return {item,score:lexicalScore+stageBoost};
     })
     .filter(row=>row.score>0);
   const wizardRows=wizardFieldSearchRows(query,stageId);

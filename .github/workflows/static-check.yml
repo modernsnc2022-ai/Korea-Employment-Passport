@@ -36,6 +36,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/form_wizards_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/form_lineage_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/source_review_status.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/official_help_channels_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/tls_pins.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_form_sources_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_legacy_forms_field_audit_2026.json','utf8'))"

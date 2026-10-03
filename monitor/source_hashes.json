@@ -610,5 +610,41 @@
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
+  },
+  "kp2mi_contact": {
+    "sha256": "daa4618ec925a2bcb9139d7d0bef2500848bbf3bb7910535c707db8832f03e39",
+    "agency": "KP2MI",
+    "url": "https://kp2mi.go.id/index.php/profil-kontak",
+    "contentLength": 2080,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "hrdk_indonesia_eps_center_contact": {
+    "sha256": "effac90e4a3527b60f9890bf2bae270172ef8cae454db51273a1c20ece9f5f16",
+    "agency": "HRD Korea",
+    "url": "https://vb_seouls.hrdkorea.or.kr/4/1/2/1",
+    "contentLength": 6750,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "curl_ca_verified"
+  },
+  "immigration_1345_contact": {
+    "sha256": "fab9b1720279fda10fe838b65498ebd40ddfe6bf7e0b0e2501a074daa5f7a44d",
+    "agency": "Korea Immigration Service",
+    "url": "https://www.immigration.go.kr/immigration_eng/1862/subview.do",
+    "contentLength": 3036,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "moel_1350_contact": {
+    "sha256": "49a13ada23a2d1d69be3ffc9915fcc7119e68302b49140f73b6f2a4deea0cd8b",
+    "agency": "Ministry of Employment and Labor",
+    "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+    "contentLength": 1041,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
   }
 }

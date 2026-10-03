@@ -46,6 +46,7 @@ jobs:
           echo "partial_acceptance=$(jq -r '.partialAcceptance // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "preserved_failures=$(jq '.preservedFailureSourceIds | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "pinned_fallbacks=$(jq '.pinnedFallbacks | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "curl_ca_fallbacks=$(jq '.curlCaVerifiedFallbacks | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
 
       - name: Publish app review status
         run: python scripts/write_source_review_status.py
@@ -102,6 +103,7 @@ jobs:
           echo "- Failed sources preserved on prior baseline: ${{ steps.result.outputs.preserved_failures }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Acceptance blocked: ${{ steps.result.outputs.acceptance_blocked }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Pinned TLS fallbacks: ${{ steps.result.outputs.pinned_fallbacks }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- CA-verified curl TLS compatibility fallbacks: ${{ steps.result.outputs.curl_ca_fallbacks }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Auto-publish: **disabled**" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Fail blocked baseline acceptance

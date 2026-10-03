@@ -16,6 +16,7 @@ exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json
 document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
 broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
 form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").read_text(encoding="utf-8"))
+official_help = json.loads((ROOT / "docs" / "data" / "official_help_channels_v1.json").read_text(encoding="utf-8"))
 source_review = json.loads((ROOT / "docs" / "data" / "source_review_status.json").read_text(encoding="utf-8-sig"))
 monitor_sources = json.loads((ROOT / "monitor" / "sources.json").read_text(encoding="utf-8-sig"))
 tls_pins = json.loads((ROOT / "monitor" / "tls_pins.json").read_text(encoding="utf-8-sig"))
@@ -114,6 +115,65 @@ if missing_action_labels:
     errors.append("official action URL missing label: " + ", ".join(missing_action_labels))
 
 known_stage_ids = set(stage_ids)
+
+help_channel_ids = []
+bad_help_content = []
+bad_help_stage_refs = []
+bad_help_channel_refs = []
+unmonitored_help_sources = []
+monitored_source_urls = {
+    str(item.get("url", "")).strip()
+    for item in monitor_sources.get("sources", [])
+    if str(item.get("url", "")).strip()
+}
+for channel in official_help.get("channels", []):
+    channel_id = channel.get("id", "")
+    help_channel_ids.append(channel_id)
+    for required in ("id", "name", "label", "sourceUrl"):
+        if not str(channel.get(required, "")).strip():
+            bad_help_content.append(f"{channel_id}:{required}")
+    source_url = str(channel.get("sourceUrl", "")).strip()
+    if source_url and not source_url.startswith("http"):
+        bad_help_content.append(f"{channel_id}:sourceUrl")
+    elif source_url and source_url not in monitored_source_urls:
+        unmonitored_help_sources.append(f"{channel_id}:{source_url}")
+    for phone in channel.get("phones", []):
+        if not str(phone.get("display", "")).strip() or not str(phone.get("href", "")).startswith("tel:"):
+            bad_help_content.append(f"{channel_id}:phone")
+    whatsapp = channel.get("whatsapp")
+    if whatsapp and not str(whatsapp.get("href", "")).startswith("https://wa.me/"):
+        bad_help_content.append(f"{channel_id}:whatsapp")
+    email = channel.get("email")
+    if email and not str(email.get("href", "")).startswith("mailto:"):
+        bad_help_content.append(f"{channel_id}:email")
+
+help_dupes = [key for key, count in Counter(help_channel_ids).items() if key and count > 1]
+if help_dupes:
+    errors.append("duplicate official-help channel ids: " + ", ".join(sorted(help_dupes)))
+
+help_channel_id_set = set(help_channel_ids)
+help_stage_map = official_help.get("stageMap", {})
+missing_help_stages = sorted(known_stage_ids - set(help_stage_map))
+for stage_id, channel_ids in help_stage_map.items():
+    if stage_id not in known_stage_ids:
+        bad_help_stage_refs.append(stage_id)
+    if stage_id in known_stage_ids and not channel_ids:
+        bad_help_channel_refs.append(f"{stage_id}-><none>")
+    for channel_id in channel_ids:
+        if channel_id not in help_channel_id_set:
+            bad_help_channel_refs.append(f"{stage_id}->{channel_id}")
+
+if bad_help_content:
+    errors.append("official-help channels missing/invalid content: " + ", ".join(sorted(bad_help_content)))
+if unmonitored_help_sources:
+    errors.append("official-help sources missing from source monitor: " + ", ".join(sorted(unmonitored_help_sources)))
+if missing_help_stages:
+    errors.append("official-help stage map missing route stages: " + ", ".join(missing_help_stages))
+if bad_help_stage_refs:
+    errors.append("official-help stage map references unknown stages: " + ", ".join(sorted(bad_help_stage_refs)))
+if bad_help_channel_refs:
+    errors.append("official-help stage map references unknown channels: " + ", ".join(sorted(bad_help_channel_refs)))
+
 pack_ids = []
 item_ids = []
 bad_pack_stage_refs = []
@@ -511,6 +571,7 @@ print(
     f"form_wizards={len(form_wizards.get('forms', []))}",
     f"form_fields={sum(len(form.get('fields', [])) for form in form_wizards.get('forms', []))}",
     f"form_validators={sum(1 for form in form_wizards.get('forms', []) for field in form.get('fields', []) if field.get('validator'))}",
+    f"official_help_channels={len(official_help.get('channels', []))}",
     f"source_review_state={source_review.get('state')}",
     f"source_review_checked={source_review.get('checked')}/{source_review.get('configured')}",
     f"tls_pins={len(pin_hosts)}",

@@ -4,8 +4,11 @@ import hashlib
 import http.client
 import json
 import re
+import shutil
 import ssl
+import subprocess
 import sys
+import tempfile
 import time
 import urllib.request
 from datetime import date
@@ -49,6 +52,47 @@ def _verified_fetch(url):
         charset = resp.headers.get_content_charset() or "utf-8"
         final_url = resp.geturl()
     return raw, content_type, charset, final_url, "ca_verified"
+
+def _curl_verified_fetch(url):
+    curl = shutil.which("curl") or shutil.which("curl.exe")
+    if not curl:
+        raise RuntimeError("curl is unavailable for CA-verified TLS compatibility fallback")
+    with tempfile.TemporaryDirectory(prefix="kep-source-") as temp_dir:
+        body_path = Path(temp_dir) / "body.bin"
+        completed = subprocess.run(
+            [
+                curl,
+                "--location",
+                "--fail",
+                "--silent",
+                "--show-error",
+                "--max-time",
+                str(REQUEST_TIMEOUT_SECONDS),
+                "--header",
+                f"User-Agent: {REQUEST_HEADERS['User-Agent']}",
+                "--header",
+                f"Accept-Language: {REQUEST_HEADERS['Accept-Language']}",
+                "--output",
+                str(body_path),
+                "--write-out",
+                "%{content_type}\\n%{url_effective}",
+                url,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=REQUEST_TIMEOUT_SECONDS + 5,
+            check=False,
+        )
+        if completed.returncode != 0:
+            raise RuntimeError("CA-verified curl fallback failed: " + completed.stderr.strip())
+        meta = completed.stdout.splitlines()
+        content_header = meta[0].strip() if meta else ""
+        final_url = meta[1].strip() if len(meta) > 1 else url
+        content_type = content_header.split(";", 1)[0].strip().lower()
+        charset_match = re.search(r"charset=([^;\\s]+)", content_header, flags=re.I)
+        charset = charset_match.group(1).strip('"') if charset_match else "utf-8"
+        return body_path.read_bytes(), content_type, charset, final_url, "curl_ca_verified"
+
 
 def _pin_record(host, tls_pins):
     return (tls_pins or {}).get("hosts", {}).get(host.lower())
@@ -110,7 +154,10 @@ def _fetch_response(url, tls_pins, redirects=3):
     try:
         return _verified_fetch(url)
     except Exception as exc:
-        if "CERTIFICATE_VERIFY_FAILED" not in str(exc):
+        message = str(exc)
+        if "HANDSHAKE_FAILURE" in message.upper():
+            return _curl_verified_fetch(url)
+        if "CERTIFICATE_VERIFY_FAILED" not in message:
             raise
         host = (urlparse(url).hostname or "").lower()
         if not _pin_record(host, tls_pins):
@@ -262,14 +309,24 @@ def main():
             })
             continue
         old_hash = before.get("sha256")
-        if old_hash != now["sha256"]:
+        old_url = before.get("url")
+        hash_changed = old_hash != now["sha256"]
+        url_changed = old_url != now["url"]
+        if hash_changed or url_changed:
+            reason = (
+                "source_url_and_content_changed" if hash_changed and url_changed else
+                "source_url_changed" if url_changed else
+                "content_changed"
+            )
             changed.append({
                 "id": source_id,
                 "agency": now["agency"],
                 "url": now["url"],
                 "before": old_hash,
                 "after": now["sha256"],
-                "reason": "content_changed",
+                "beforeUrl": old_url,
+                "afterUrl": now["url"],
+                "reason": reason,
             })
 
     initialized = False
@@ -319,6 +376,7 @@ def main():
         "perHost": per_host,
         "attempts": attempts,
         "pinnedFallbacks": [source_id for source_id, row in current.items() if row.get("tlsMode") == "pinned_leaf"],
+        "curlCaVerifiedFallbacks": [source_id for source_id, row in current.items() if row.get("tlsMode") == "curl_ca_verified"],
     }
     Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))

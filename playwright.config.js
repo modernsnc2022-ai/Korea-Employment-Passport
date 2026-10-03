@@ -8,7 +8,7 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173',
     browserName: 'chromium',
-    channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
+    channel: process.env.PLAYWRIGHT_CHANNEL || (process.platform === 'win32' ? 'msedge' : undefined),
     serviceWorkers: 'block',
     trace: 'retain-on-failure'
   },

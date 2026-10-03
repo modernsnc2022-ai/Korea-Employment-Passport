@@ -339,6 +339,26 @@
       "id": "immigration_integrated_application_guide",
       "agency": "Korea Immigration Service",
       "url": "https://www.immigration.go.kr/bbs/immigration/213/561864/artclView.do"
+    },
+    {
+      "id": "kp2mi_contact",
+      "agency": "KP2MI",
+      "url": "https://kp2mi.go.id/index.php/profil-kontak"
+    },
+    {
+      "id": "hrdk_indonesia_eps_center_contact",
+      "agency": "HRD Korea",
+      "url": "https://vb_seouls.hrdkorea.or.kr/4/1/2/1"
+    },
+    {
+      "id": "immigration_1345_contact",
+      "agency": "Korea Immigration Service",
+      "url": "https://www.immigration.go.kr/immigration_eng/1862/subview.do"
+    },
+    {
+      "id": "moel_1350_contact",
+      "agency": "Ministry of Employment and Labor",
+      "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do"
     }
   ]
 }

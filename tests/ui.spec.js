@@ -189,3 +189,22 @@ test('form wizard exposes only one actionable field instruction at a time', asyn
 
   expect(errors).toEqual([]);
 });
+
+
+test('unknown broker-like question routes to official human help instead of guessing', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+
+  await page.locator('#brokerLikeQuestion').fill('Apakah saya harus memilih tombol rahasia XYZ?');
+  await page.locator('#brokerLikeQuestionBtn').click();
+
+  const result = page.locator('#brokerLikeQuestionResult');
+  await expect(result).toContainText('Belum ada jawaban resmi yang cukup spesifik');
+  await expect(result.locator('.official-help-fallback')).toBeVisible();
+  await expect(result.locator('.official-help-fallback')).toContainText('KP2MI');
+  await expect(result.locator('.official-help-fallback')).toContainText('bukan calo');
+  await expect(result.locator('.official-help-source').first()).toHaveAttribute('href', 'https://kp2mi.go.id/index.php/profil-kontak');
+
+  expect(errors).toEqual([]);
+});
