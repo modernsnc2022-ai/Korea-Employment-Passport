@@ -1,0 +1,16 @@
+{
+  "testerId": "KEP-0031",
+  "companyName": "COMPANY NAME FROM SLC",
+  "companyAliases": [],
+  "verificationStatus": "single_verified_worker",
+  "verifiedAt": "2026-10-04",
+  "reviewConfirmed": true,
+  "facts": [
+    {
+      "topic": "accommodation",
+      "summary": "Write a de-identified factual summary only. Do not include worker identity or exact dorm/home address.",
+      "basis": "worker_experience"
+    }
+  ],
+  "media": []
+}
