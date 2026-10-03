@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import re
+import unicodedata
 from datetime import date
 from pathlib import Path
 
@@ -34,6 +35,33 @@ PII_PATTERNS = {
 
 def fail(message: str) -> None:
     raise ValueError(message)
+
+
+def normalize_company_name(value: str) -> str:
+    text = unicodedata.normalize("NFKC", str(value or "")).lower()
+    text = re.sub(r"[^a-z0-9가-힣\s]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def assert_no_company_alias_collision(registry: dict, candidate: dict) -> None:
+    candidate_canonical = normalize_company_name(candidate.get("companyName"))
+    candidate_names = {
+        normalize_company_name(value)
+        for value in [candidate.get("companyName"), *candidate.get("companyAliases", [])]
+        if normalize_company_name(value)
+    }
+    for existing in registry.get("records", []):
+        existing_canonical = normalize_company_name(existing.get("companyName"))
+        existing_names = {
+            normalize_company_name(value)
+            for value in [existing.get("companyName"), *existing.get("companyAliases", [])]
+            if normalize_company_name(value)
+        }
+        if candidate_names.intersection(existing_names) and candidate_canonical != existing_canonical:
+            fail(
+                "company name/alias collides with a different canonical company in the public registry; "
+                "use a public branch/location disambiguator and remove ambiguous aliases"
+            )
 
 
 def assert_keys(value: dict, allowed: set[str], path: str) -> None:
@@ -169,6 +197,7 @@ def build_public_record(intake: dict, registry: dict) -> dict:
     if intake.get("media"):
         record["media"] = intake["media"]
     scan_public_text(record)
+    assert_no_company_alias_collision(registry, record)
     return record
 
 
@@ -241,6 +270,20 @@ def self_test() -> None:
         assert "single-interview publisher" in str(exc)
     else:
         raise AssertionError("single interview was allowed to claim multi-worker verification")
+
+    collision_registry = {
+        "records": [{
+            "evidenceId": "WPE-0001",
+            "companyName": "Other Manufacturing",
+            "companyAliases": ["Sample Manufacturing Co."],
+        }]
+    }
+    try:
+        build_public_record(intake, collision_registry)
+    except ValueError as exc:
+        assert "collides with a different canonical company" in str(exc)
+    else:
+        raise AssertionError("ambiguous company alias collision was not rejected")
 
     bad_media = json.loads(json.dumps(intake))
     bad_media["media"] = [{
