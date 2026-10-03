@@ -11,8 +11,9 @@ const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const FORM_WIZARDS_URL='data/form_wizards_2026.json';
 const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,i18n={},activeStage=null,deferredInstall=null;
+const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -23,7 +24,7 @@ const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
 const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
-const SAFE_BACKUP_FIELDS=['done','docs','scopeSelections','formWizard','quickSetup'];
+const SAFE_BACKUP_FIELDS=['done','docs','scopeSelections','formWizard','wizardReviewed','quickSetup'];
 
 function routeBackupKey(){
   if(!route)return 'unknown';
@@ -280,37 +281,73 @@ function renderContextTools(stage){
   box.querySelectorAll('[data-tool-view]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.toolView)));
 }
 
+async function fetchJsonRequired(url){
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw new Error('required data unavailable: '+url);
+  return response.json();
+}
+
+async function fetchJsonOptional(url,fallback,label){
+  try{
+    const response=await fetch(url,{cache:'no-store'});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    return await response.json();
+  }catch(err){
+    console.warn('Optional data unavailable:',label||url,err);
+    return fallback;
+  }
+}
+
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes,formLineageRes,sourceReviewRes]=await Promise.all([
-      fetch(ROUTE_URL,{cache:'no-store'}),
-      fetch(RULES_URL,{cache:'no-store'}),
-      fetch(I18N_URL,{cache:'no-store'}),
-      fetch(CONTRACT_URL,{cache:'no-store'}),
-      fetch(WORKPLACE_URL,{cache:'no-store'}),
-      fetch(DOCUMENT_PACKS_URL,{cache:'no-store'}),
-      fetch(EXACT_ANSWERS_URL,{cache:'no-store'}),
-      fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'}),
-      fetch(FRESHNESS_URL,{cache:'no-store'}),
-      fetch(BROKER_QUESTION_URL,{cache:'no-store'}),
-      fetch(FORM_WIZARDS_URL,{cache:'no-store'}),
-      fetch(FORM_LINEAGE_URL,{cache:'no-store'}),
-      fetch(SOURCE_REVIEW_STATUS_URL,{cache:'no-store'})
+    [
+      route,
+      rules,
+      i18n,
+      contractRules,
+      workplaceRules,
+      documentPacks,
+      exactAnswers,
+      documentExamples,
+      freshnessPolicy,
+      brokerQuestions,
+      formWizards,
+      formLineage,
+      sourceReviewStatus,
+      officialHelp
+    ]=await Promise.all([
+      fetchJsonRequired(ROUTE_URL),
+      fetchJsonRequired(RULES_URL),
+      fetchJsonRequired(I18N_URL),
+      fetchJsonRequired(CONTRACT_URL),
+      fetchJsonRequired(WORKPLACE_URL),
+      fetchJsonRequired(DOCUMENT_PACKS_URL),
+      fetchJsonRequired(EXACT_ANSWERS_URL),
+      fetchJsonRequired(DOCUMENT_EXAMPLES_URL),
+      fetchJsonRequired(FRESHNESS_URL),
+      fetchJsonRequired(BROKER_QUESTION_URL),
+      fetchJsonRequired(FORM_WIZARDS_URL),
+      fetchJsonRequired(FORM_LINEAGE_URL),
+      fetchJsonOptional(
+        SOURCE_REVIEW_STATUS_URL,
+        {
+          state:'fetch_warning',
+          autoPublishRules:false,
+          configured:0,
+          checked:0,
+          reviewRequiredUrls:[],
+          reviewRequiredSourceIds:[],
+          fetchFailureUrls:['source_review_status'],
+          fetchFailureSourceIds:['source_review_status']
+        },
+        'official source review status'
+      ),
+      fetchJsonOptional(
+        OFFICIAL_HELP_URL,
+        {version:'unavailable',verifiedAt:null,channels:[],stageMap:{}},
+        'official help channels'
+      )
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok||!formLineageRes.ok||!sourceReviewRes.ok) throw new Error('verified data unavailable');
-    route=await routeRes.json();
-    rules=await rulesRes.json();
-    i18n=await i18nRes.json();
-    contractRules=await contractRes.json();
-    workplaceRules=await workplaceRes.json();
-    documentPacks=await documentPacksRes.json();
-    exactAnswers=await exactAnswersRes.json();
-    documentExamples=await documentExamplesRes.json();
-    freshnessPolicy=await freshnessRes.json();
-    brokerQuestions=await brokerQuestionRes.json();
-    formWizards=await formWizardRes.json();
-    formLineage=await formLineageRes.json();
-    sourceReviewStatus=await sourceReviewRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -870,6 +907,11 @@ function evaluatePreSubmit(stage){
     issues.push('Data antar dokumen yang Anda bandingkan masih tidak konsisten.');
   }
 
+  const wizardStats=wizardReviewStats(stage.id);
+  if(wizardStats.total&&wizardStats.missing){
+    issues.push('Panduan formulir belum selesai: '+wizardStats.missing+' dari '+wizardStats.total+' kolom belum Anda cek.');
+  }
+
   const availableScopes=scopeOptionsForStage(stage.id);
   if(availableScopes.length&&!selectedScope(stage.id)){
     issues.push('Pilih dulu pengumuman yang benar-benar memuat nama Anda. Aturan tanggal/gelombang tidak boleh ditebak.');
@@ -995,6 +1037,40 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
   document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
+
+function renderQuickQuestionChips(stage){
+  const wrap=$('quickQuestionChips');
+  if(!wrap||!stage||!brokerQuestions){
+    if(wrap){wrap.hidden=true;wrap.innerHTML='';}
+    return;
+  }
+  const candidates=bqcQuestionsForStage(stage.id)
+    .filter(item=>item.resolved)
+    .sort((a,b)=>{
+      const aw=a.severity==='high'?0:a.severity==='medium'?1:2;
+      const bw=b.severity==='high'?0:b.severity==='medium'?1:2;
+      return aw-bw;
+    })
+    .slice(0,4);
+
+  if(!candidates.length){
+    wrap.hidden=true;
+    wrap.innerHTML='';
+    return;
+  }
+
+  wrap.hidden=false;
+  wrap.innerHTML=candidates.map(item=>
+    '<button type="button" class="quick-question-chip" data-quick-question="'+escapeHtml(item.question)+'">'+escapeHtml(item.question)+'</button>'
+  ).join('');
+
+  wrap.querySelectorAll('[data-quick-question]').forEach(btn=>btn.addEventListener('click',()=>{
+    $('brokerLikeQuestion').value=btn.dataset.quickQuestion||'';
+    answerBrokerLikeQuestion();
+    $('brokerLikeQuestionResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }));
+}
+
 function renderNextAction(){
   if(!route||!rules)return;
   const done=new Set(read(KEYS.done,[]));
@@ -1036,6 +1112,7 @@ function renderNextAction(){
     const stage=route.stages.find(s=>s.id===e.currentTarget.dataset.stage);
     if(stage)openStage(stage);
   }));
+  renderQuickQuestionChips(next||null);
 }
 
 function updateProgress(){
@@ -1336,9 +1413,10 @@ $('fieldHelpBtn').addEventListener('click',()=>{
   }
 
   out.classList.add('warn');
+  const helpHtml=officialHelpFallbackHtml(currentStage()?.id);
   out.innerHTML=`<strong>Belum ada jawaban terverifikasi untuk “${escapeHtml(query)}”.</strong>
     <p>Jangan isi berdasarkan tebakan, aturan lama, atau jawaban sektor lain. Simpan pertanyaan ini untuk diverifikasi sebelum submit.</p>
-    <button id="saveUnresolvedFieldBtn" class="secondary" type="button">Simpan pertanyaan yang belum terjawab</button>`;
+    <button id="saveUnresolvedFieldBtn" class="secondary" type="button">Simpan pertanyaan yang belum terjawab</button>${helpHtml}`;
 
   const saveUnresolvedBtn=out.querySelector('#saveUnresolvedFieldBtn');
   saveUnresolvedBtn?.addEventListener('click',()=>{
@@ -1355,6 +1433,36 @@ $('fieldHelpQuery').addEventListener('keydown',(event)=>{
   }
 });
 
+
+function officialHelpChannel(channelId){
+  return (officialHelp?.channels||[]).find(item=>item.id===channelId)||null;
+}
+
+function officialHelpCard(channel){
+  if(!channel)return '';
+  const calls=(channel.phones||[]).map(phone=>
+    '<a class="official-help-link" href="'+escapeHtml(phone.href)+'">'+escapeHtml(phone.label)+': '+escapeHtml(phone.display)+'</a>'
+  ).join('');
+  const whatsapp=channel.whatsapp
+    ? '<a class="official-help-link" href="'+escapeHtml(channel.whatsapp.href)+'" target="_blank" rel="noopener">WhatsApp: '+escapeHtml(channel.whatsapp.display)+'</a>'
+    : '';
+  const email=channel.email
+    ? '<a class="official-help-link" href="'+escapeHtml(channel.email.href)+'">Email: '+escapeHtml(channel.email.display)+'</a>'
+    : '';
+  const hours=channel.hours?'<small>'+escapeHtml(channel.hours)+'</small>':'';
+  return '<div class="official-help-card"><strong>'+escapeHtml(channel.name)+'</strong><span>'+escapeHtml(channel.label||'')+'</span>'+calls+whatsapp+email+hours+'<a class="official-help-source" href="'+escapeHtml(channel.sourceUrl)+'" target="_blank" rel="noopener">Sumber kontak resmi ↗</a></div>';
+}
+
+function officialHelpFallbackHtml(stageId){
+  const ids=officialHelp?.stageMap?.[stageId]||[];
+  const channels=ids.map(officialHelpChannel).filter(Boolean);
+  if(!channels.length)return '';
+  const first=officialHelpCard(channels[0]);
+  const more=channels.slice(1).map(officialHelpCard).join('');
+  return '<div class="official-help-fallback"><strong>Kalau perlu bicara dengan petugas:</strong>'+first+
+    (more?'<details><summary>Pilihan resmi lain</summary>'+more+'</details>':'')+
+    '<p>Gunakan jalur resmi di atas, bukan calo, untuk pertanyaan yang belum bisa dipastikan aplikasi.</p></div>';
+}
 
 function answerBrokerLikeQuestion(){
   const query=$('brokerLikeQuestion').value.trim();
@@ -1377,9 +1485,10 @@ function answerBrokerLikeQuestion(){
   }
 
   out.classList.add('warn');
+  const helpHtml=officialHelpFallbackHtml(currentStage()?.id);
   out.innerHTML=`<strong>Belum ada jawaban resmi yang cukup spesifik untuk “${escapeHtml(query)}”.</strong>
     <p>Jangan menebak dan jangan submit dulu. Simpan pertanyaan ini agar diverifikasi terhadap form/pengumuman resmi yang tepat.</p>
-    <button id="saveBrokerLikeQuestionBtn" class="secondary" type="button">Simpan sebagai pertanyaan wajib diverifikasi</button>`;
+    <button id="saveBrokerLikeQuestionBtn" class="secondary" type="button">Simpan sebagai pertanyaan wajib diverifikasi</button>${helpHtml}`;
 
   const saveBtn=out.querySelector('#saveBrokerLikeQuestionBtn');
   saveBtn?.addEventListener('click',()=>{
@@ -1606,6 +1715,40 @@ function formsForStage(stageId){
   return (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId));
 }
 
+function wizardReviewKey(form,field,stageId){
+  const scope=selectedScope(stageId)||'default';
+  return [stageId,scope,form.id,field.id].join('|');
+}
+
+function reviewedWizardSet(){
+  return new Set(read(KEYS.wizardReviewed,[]));
+}
+
+function markWizardFieldReviewed(form,field,stageId){
+  if(!form||!field||!stageId)return;
+  const state=reviewedWizardSet();
+  state.add(wizardReviewKey(form,field,stageId));
+  write(KEYS.wizardReviewed,[...state]);
+}
+
+function isWizardFieldReviewed(form,field,stageId){
+  return reviewedWizardSet().has(wizardReviewKey(form,field,stageId));
+}
+
+function wizardReviewStats(stageId){
+  const forms=formsForStage(stageId).filter(form=>wizardFormVerified(form));
+  const reviewed=reviewedWizardSet();
+  let total=0,done=0;
+  forms.forEach(form=>{
+    (form.fields||[]).forEach(field=>{
+      if(!field.validator)return;
+      total+=1;
+      if(reviewed.has(wizardReviewKey(form,field,stageId)))done+=1;
+    });
+  });
+  return {total,done,missing:Math.max(0,total-done)};
+}
+
 function validateWizardValue(value,validator){
   const raw=String(value??'');
   const text=raw.trim();
@@ -1781,7 +1924,9 @@ function renderFormWizardCard(form,index){
 
   card.hidden=false;
   if(safeIndex>=total){
-    $('formWizardProgress').textContent='Panduan selesai';
+    const stageId=stage?.id||(form.stages||[])[0]||'';
+    const stats=stageId?wizardReviewStats(stageId):{total:0,done:0,missing:0};
+    $('formWizardProgress').textContent='Panduan selesai · '+stats.done+'/'+stats.total+' kolom dicek';
     $('formWizardLabel').textContent='Periksa kembali formulir Anda';
     $('formWizardInstruction').textContent='Bandingkan semua kolom dengan formulir asli dan pengumuman yang memuat nama Anda sebelum menyerahkan dokumen.';
     $('formWizardExample').textContent='Jangan submit hanya karena semua langkah sudah dibaca.';
@@ -1797,7 +1942,9 @@ function renderFormWizardCard(form,index){
 
   const field=form.fields[safeIndex];
   resetWizardValueCheck(field);
-  $('formWizardProgress').textContent='Kolom '+(safeIndex+1)+' dari '+total;
+  const stageId=stage?.id||(form.stages||[])[0]||'';
+  const reviewed=isWizardFieldReviewed(form,field,stageId);
+  $('formWizardProgress').textContent='Kolom '+(safeIndex+1)+' dari '+total+(reviewed?' · ✓ sudah dicek':'');
   $('formWizardLabel').textContent=field.label;
   $('formWizardInstruction').textContent=field.instruction;
   $('formWizardExample').textContent=field.example||'';
@@ -1871,7 +2018,10 @@ $('formWizardNext').addEventListener('click',()=>{
   const state=read(KEYS.formWizard,{});
   const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
   if(!form)return;
-  renderFormWizardCard(form,Math.min(form.fields.length,Number(state.index||0)+1));
+  const index=Number(state.index||0);
+  const field=form.fields?.[index];
+  if(field&&stage)markWizardFieldReviewed(form,field,stage.id);
+  renderFormWizardCard(form,Math.min(form.fields.length,index+1));
 });
 
 
@@ -1888,6 +2038,11 @@ function checkCurrentWizardValue(){
   out.hidden=false;
   out.className='result '+(checked.ok===true?'safe':checked.ok===false?'risk':'warn');
   out.textContent=checked.message;
+  if(checked.ok===true){
+    const stage=currentStage()||route?.stages?.at(-1);
+    if(stage)markWizardFieldReviewed(form,field,stage.id);
+    renderFormWizardCard(form,Number(state.index||0));
+  }
 }
 
 let formFieldCheckTimer=null;
@@ -1901,6 +2056,9 @@ $('formFieldConfirmBtn').addEventListener('click',()=>{
   out.hidden=false;
   out.className='result safe';
   out.textContent='Dikonfirmasi — Anda sudah memeriksa langkah ini langsung pada formulir asli sesuai petunjuk.';
+  const stage=currentStage()||route?.stages?.at(-1);
+  if(stage)markWizardFieldReviewed(form,field,stage.id);
+  renderFormWizardCard(form,Number(state.index||0));
 });
 $('formFieldValue').addEventListener('input',()=>{
   clearTimeout(formFieldCheckTimer);
