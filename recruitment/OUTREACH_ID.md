@@ -9,7 +9,7 @@ Halo Admin. Kami sedang membuka beta terbatas Korea Employment Passport,
 alat pendamping calon pekerja Indonesia yang mengikuti jalur resmi G-to-G Korea/EPS.
 
 Beta ini dibuka untuk **30 peserta pertama** yang sedang menjalani proses resmi G-to-G Korea/EPS.
-Peserta beta yang diterima akan mendapatkan layanan Korea Employment Passport **gratis selama 12 bulan sejak akun beta diaktifkan**, dengan syarat bersedia menggunakan layanan secara nyata dan memberikan masukan selama proses.
+Peserta beta yang diterima akan mendapatkan layanan Korea Employment Passport **gratis selama 6 bulan sejak akun beta diaktifkan**, dengan syarat bersedia menggunakan layanan secara nyata dan memberikan masukan selama proses.
 
 Tujuan beta ini bukan menjual lowongan dan bukan menjanjikan keberangkatan.
 Kami ingin menguji apakah calon pekerja dapat menjalani proses resmi tanpa calo:
@@ -25,7 +25,7 @@ Kami akan mengikuti aturan grup dan tidak melakukan promosi berbayar.
 Kami membuka beta untuk **30 peserta pertama** yang sedang menjalani proses resmi G-to-G Korea / EPS E-9.
 
 🎁 Peserta beta yang diterima mendapatkan:
-**akses Korea Employment Passport gratis selama 12 bulan sejak akun beta diaktifkan.**
+**akses Korea Employment Passport gratis selama 6 bulan sejak akun beta diaktifkan.**
 
 Syaratnya sederhana:
 • benar-benar sedang menjalani proses G-to-G Korea/EPS;
