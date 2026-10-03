@@ -695,7 +695,7 @@ $('startFromBeginningBtn').addEventListener('click',()=>{
 
 function renderCurrentStageSelector(){
   const select=$('currentStageSelect');
-  select.innerHTML='<option value="">Pilih tahap sekarang</option>';
+  select.innerHTML='<option value="">Pilih tahap paling awal yang belum selesai</option>';
   route.stages.forEach((stage,index)=>{
     const option=document.createElement('option');
     option.value=String(index);
