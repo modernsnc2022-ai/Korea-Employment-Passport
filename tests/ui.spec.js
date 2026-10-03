@@ -1025,7 +1025,7 @@ test('post-entry official help uses Korea foreign worker counseling', async ({ p
   page.on('pageerror', error => errors.push(error.message));
 
   await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
-  await page.waitForFunction(() => window.officialHelp?.channels?.length > 0, null, { timeout: 15000 });
+  await page.waitForFunction(() => typeof officialHelp !== 'undefined' && officialHelp?.channels?.length > 0, null, { timeout: 15000 });
 
   const state = await page.evaluate(() => {
     const channel = officialHelp.channels.find(item => item.id === 'foreign_worker_counseling');
