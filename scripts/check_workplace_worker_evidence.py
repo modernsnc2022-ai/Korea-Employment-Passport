@@ -51,6 +51,8 @@ if data.get("displayPolicy", {}).get("noEvidenceMeaning", "").strip() == "":
     fail("no-evidence interpretation policy is required")
 if data.get("displayPolicy", {}).get("mediaRule", "").strip() == "":
     fail("media privacy rule is required")
+if data.get("displayPolicy", {}).get("summaryConsentRule", "").strip() == "":
+    fail("worker-summary publication consent rule is required")
 
 ids=set()
 company_name_owners={}
