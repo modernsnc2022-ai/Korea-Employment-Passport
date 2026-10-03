@@ -229,10 +229,14 @@ require("Beta terbatas untuk 30 peserta pertama" in beta_page, "beta enrollment 
 require("program.status==='open'" in beta_js, "beta application UI must be gated by OPEN status")
 
 require("number>=1&&number<=50" in runtime, "beta ID range must remain KEP-0001..KEP-0050")
-for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks"]:
+for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks","KEYS.betaWorkerExperienceYear"]:
     require(key in runtime.split("const BETA_SCOPED_KEYS", 1)[1].split(";", 1)[0],
             f"{key} must stay beta-tester scoped")
 require("sanitizedBetaFeedbackText" in runtime, "sanitized beta feedback sharing must remain enabled")
+require("betaWorkerExperienceWrap" in beta_page,
+        "worker validator UI must capture experience-year context")
+require("Tahun pengalaman/proses EPS:" in runtime,
+        "worker validator feedback must preserve experience-year context")
 
 require(departure_calls.get("coverageStatus") == "partial_verified",
         "departure call registry must remain explicitly partial until the full 2026 cycle is verified")
