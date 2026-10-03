@@ -11,6 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
+ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+SUPPORTED_STAGES = {
+    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
+}
 
 def add_months(value: date, months: int) -> date:
     idx = value.month - 1 + months
@@ -31,6 +35,8 @@ def load_tracker():
         return list(reader.fieldnames or []), list(reader)
 
 def assign(rows, received_at, activation_date, current_stage, source_channel):
+    if current_stage not in SUPPORTED_STAGES:
+        raise ValueError(f"unsupported current_stage: {current_stage}")
     received = parse_ts(received_at)
     activation = date.fromisoformat(activation_date)
     public = [r for r in rows if r.get("target_group", "").strip() == "active_applicant"]
@@ -71,6 +77,12 @@ def self_test():
         pass
     else:
         raise AssertionError("out-of-order receipt was not rejected")
+    try:
+        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "not_a_stage", "community")
+    except ValueError as exc:
+        assert "unsupported current_stage" in str(exc)
+    else:
+        raise AssertionError("unsupported stage was not rejected")
     print("BETA_SLOT_ASSIGNMENT_SELF_TEST_PASS")
 
 def main():
