@@ -49,6 +49,23 @@ def render(rows: list[dict[str, str]]) -> str:
 
     interviews_completed = count_value(enrolled_workers, "interview_status", "completed")
     worker_year_context = sum(nonempty(row, "experience_year") for row in enrolled_workers)
+    completed_workers = [
+        row for row in enrolled_workers
+        if (row.get("interview_status") or "").strip() == "completed"
+    ]
+    current_cycle_workers = sum(
+        (row.get("experience_year") or "").strip() == "2026"
+        for row in completed_workers
+    )
+    prior_cycle_workers = sum(
+        (row.get("experience_year") or "").strip().isdigit()
+        and (row.get("experience_year") or "").strip() != "2026"
+        for row in completed_workers
+    )
+    unknown_cycle_workers = sum(
+        (row.get("experience_year") or "").strip() == "unknown"
+        for row in completed_workers
+    )
     workplace_evidence_published = count_value(
         enrolled_workers, "workplace_evidence_status", "published_single_verified_worker"
     )
@@ -99,6 +116,10 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
         f"- E-9 worker interviews completed: {interviews_completed}/20",
         f"- Experience-year context captured: {worker_year_context}/20",
+        f"- Completed interviews from 2026 experience: {current_cycle_workers}",
+        f"- Completed interviews from prior-cycle experience: {prior_cycle_workers}",
+        f"- Completed interviews with unknown experience year: {unknown_cycle_workers}",
+        "- Prior-cycle/unknown worker interviews are retrospective gap evidence only; they are not 2026 route-rule PASS evidence.",
         f"- Privacy-reviewed workplace evidence published: {workplace_evidence_published}",
         "",
         "## Broker replacement evidence",
