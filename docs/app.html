@@ -67,6 +67,16 @@
       <summary>Kenapa jawaban di sini bisa dipercaya?</summary>
       <div id="freshnessStatus" class="freshness-status" hidden></div>
       <div id="bqcStatus" class="bqc-status" hidden></div>
+      <div class="progress-backup">
+        <strong>Simpan progres Anda</strong>
+        <p>Opsional. Backup hanya menyimpan posisi tahap, checklist dokumen, pilihan pengumuman, dan posisi panduan formulir. Teks SLC, data gaji, pesan, dan data sensitif tidak ikut.</p>
+        <div class="progress-backup-actions">
+          <button id="backupProgressBtn" type="button" class="secondary">Simpan backup</button>
+          <button id="restoreProgressBtn" type="button" class="secondary">Buka backup</button>
+          <input id="restoreProgressFile" type="file" accept="application/json,.json" hidden>
+        </div>
+        <div id="backupProgressResult" class="result" hidden></div>
+      </div>
     </details>
 
     <section class="flow-dashboard" aria-label="Proses resmi">

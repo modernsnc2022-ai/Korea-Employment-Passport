@@ -23,6 +23,113 @@ const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
 const stageWarning=(stage)=>i18n[stage.id]?.warning||stage.warning;
 
+const SAFE_BACKUP_FIELDS=['done','docs','scopeSelections','formWizard','quickSetup'];
+
+function routeBackupKey(){
+  if(!route)return 'unknown';
+  return [route.country,route.visa,route.sector,route.cycle].join('-');
+}
+
+function makeProgressBackup(){
+  return {
+    kind:'kep-progress-backup',
+    schemaVersion:1,
+    routeKey:routeBackupKey(),
+    exportedAt:new Date().toISOString(),
+    progress:{
+      done:read(KEYS.done,[]),
+      docs:read(KEYS.docs,[]),
+      scopeSelections:read(KEYS.scopeSelections,{}),
+      formWizard:read(KEYS.formWizard,{}),
+      quickSetup:read(KEYS.quickSetup,false)
+    }
+  };
+}
+
+function safeRestoreProgress(payload){
+  if(!payload||payload.kind!=='kep-progress-backup'||payload.schemaVersion!==1){
+    throw new Error('File ini bukan backup progres Korea Employment Passport yang didukung.');
+  }
+  if(payload.routeKey!==routeBackupKey()){
+    throw new Error('Backup ini berasal dari rute yang berbeda: '+String(payload.routeKey||'unknown'));
+  }
+  const progress=payload.progress||{};
+  const stageIds=new Set((route?.stages||[]).map(stage=>stage.id));
+  const docIds=new Set((documentPacks?.packs||[]).flatMap(pack=>(pack.items||[]).map(item=>item.id)));
+  const formIds=new Set((formWizards?.forms||[]).map(form=>form.id));
+
+  const done=Array.isArray(progress.done)?progress.done.filter(id=>stageIds.has(id)):[];
+  const docs=Array.isArray(progress.docs)?progress.docs.filter(id=>docIds.has(id)):[];
+  const scopes={};
+  if(progress.scopeSelections&&typeof progress.scopeSelections==='object'&&!Array.isArray(progress.scopeSelections)){
+    for(const [stageId,value] of Object.entries(progress.scopeSelections)){
+      if(stageIds.has(stageId)&&typeof value==='string')scopes[stageId]=value;
+    }
+  }
+  const wizard={};
+  if(progress.formWizard&&typeof progress.formWizard==='object'&&!Array.isArray(progress.formWizard)){
+    if(formIds.has(progress.formWizard.formId)){
+      wizard.formId=progress.formWizard.formId;
+      const form=(formWizards?.forms||[]).find(item=>item.id===wizard.formId);
+      const index=Number(progress.formWizard.index||0);
+      wizard.index=Math.max(0,Math.min(Number.isFinite(index)?index:0,form?.fields?.length||0));
+    }
+  }
+
+  write(KEYS.done,done);
+  write(KEYS.docs,docs);
+  write(KEYS.scopeSelections,scopes);
+  write(KEYS.formWizard,wizard);
+  write(KEYS.quickSetup,Boolean(progress.quickSetup));
+}
+
+$('backupProgressBtn').addEventListener('click',()=>{
+  const out=$('backupProgressResult');
+  try{
+    const payload=makeProgressBackup();
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement('a');
+    const date=new Date().toISOString().slice(0,10);
+    link.href=url;
+    link.download='korea-employment-passport-progress-'+date+'.json';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    out.hidden=false;
+    out.className='result safe';
+    out.textContent='Backup progres dibuat. Simpan file ini di tempat yang Anda percaya.';
+  }catch(error){
+    out.hidden=false;
+    out.className='result risk';
+    out.textContent='Backup gagal: '+error.message;
+  }
+});
+
+$('restoreProgressBtn').addEventListener('click',()=>$('restoreProgressFile').click());
+$('restoreProgressFile').addEventListener('change',async(event)=>{
+  const out=$('backupProgressResult');
+  const file=event.target.files?.[0];
+  if(!file)return;
+  try{
+    if(file.size>1024*1024)throw new Error('File backup terlalu besar.');
+    const payload=JSON.parse(await file.text());
+    safeRestoreProgress(payload);
+    out.hidden=false;
+    out.className='result safe';
+    out.textContent='Progres berhasil dipulihkan. Halaman akan dimuat ulang.';
+    setTimeout(()=>location.reload(),500);
+  }catch(error){
+    out.hidden=false;
+    out.className='result risk';
+    out.textContent='Backup tidak dapat dipulihkan: '+error.message;
+  }finally{
+    event.target.value='';
+  }
+});
+
+
 const QUICK_MILESTONES=[
   {label:'Pendaftaran resmi sudah saya kirim',nextStage:'exam_fee'},
   {label:'Biaya ujian EPS-TOPIK sudah saya bayar',nextStage:'biometric'},
@@ -1007,6 +1114,16 @@ function readImageRatio(file){
   });
 }
 
+
+
+async function detectFileSignature(file){
+  const bytes=new Uint8Array(await file.slice(0,8).arrayBuffer());
+  const isPdf=bytes.length>=5&&String.fromCharCode(...bytes.slice(0,5))==='%PDF-';
+  const isJpeg=bytes.length>=3&&bytes[0]===0xFF&&bytes[1]===0xD8&&bytes[2]===0xFF;
+  if(isPdf)return 'PDF';
+  if(isJpeg)return 'JPG';
+  return 'UNKNOWN';
+}
 
 function normalizeSearch(value){
   return String(value||'')
