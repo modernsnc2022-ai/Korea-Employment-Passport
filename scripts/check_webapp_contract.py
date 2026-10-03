@@ -74,6 +74,9 @@ required_runtime_functions = (
     "renderFormWizard",
     "sanitizeBetaFeedback",
     "encodeSanitizedBetaBody",
+    "betaValidationStats",
+    "renderBetaValidation",
+    "buildBetaFeedbackBundle",
 )
 for function_name in required_runtime_functions:
     called = re.search(rf"\b{re.escape(function_name)}\s*\(", js)

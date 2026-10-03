@@ -264,3 +264,68 @@ test('beta feedback bundle combines all gap types and redacts them in one draft'
   await expect(page.locator('#emailAllBetaFeedbackBtn')).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+
+test('beta feedback bundle includes anonymous progress context', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'registration');
+
+  const body = await page.evaluate(() => {
+    localStorage.setItem('kep.doneStages', JSON.stringify(['eligibility']));
+    localStorage.setItem('kep.brokerGaps', JSON.stringify([
+      {id:3, stage:'registration', task:'Masih bingung langkah berikutnya', helper:'Teman / pekerja senior'}
+    ]));
+    if (typeof refreshProgressViews === 'function') refreshProgressViews();
+    return buildBetaFeedbackBundle().rawBody;
+  });
+
+  expect(body).toContain('RINGKASAN SESI TANPA IDENTITAS');
+  expect(body).toContain('Tahap sekarang:');
+  expect(body).toContain('Tahap selesai: 1/27');
+  expect(body).toContain('1 Celah Calo');
+  expect(errors).toEqual([]);
+});
+
+
+test('beta zero-broker checkpoint tracks stage pass and fail without identity data', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel summary').click();
+
+  await page.locator('#betaCheckStage').selectOption('eligibility');
+  await page.locator('#betaCheckOutcome').selectOption('no_private_help');
+  await page.locator('#saveBetaCheckBtn').click();
+  await page.locator('#betaCheckStage').selectOption('registration');
+  await page.locator('#betaCheckOutcome').selectOption('private_help_needed');
+  await page.locator('#saveBetaCheckBtn').click();
+
+  const result = await page.evaluate(() => {
+    const stats=betaValidationStats();
+    const bundle=buildBetaFeedbackBundle();
+    return {
+      tested:stats.tested,
+      passed:stats.passed,
+      failed:stats.failed,
+      routePass:stats.routePass,
+      checkpointCount:bundle.checkpointCount,
+      count:bundle.count,
+      rawBody:bundle.rawBody,
+      saved:JSON.parse(localStorage.getItem('kep.betaZeroBrokerChecks')||'{}')
+    };
+  });
+
+  expect(result.tested).toBe(2);
+  expect(result.passed).toBe(1);
+  expect(result.failed).toBe(1);
+  expect(result.routePass).toBe(false);
+  expect(result.checkpointCount).toBe(2);
+  expect(result.count).toBe(2);
+  expect(Object.keys(result.saved)).toEqual(['eligibility','registration']);
+  expect(result.rawBody).toContain('CHECKPOINT ZERO-BROKER');
+  expect(result.rawBody).toContain('1 PASS');
+  expect(result.rawBody).toContain('1 FAIL');
+  await expect(page.locator('#betaValidationSummary')).toContainText('2/27');
+  await expect(page.locator('#gapStage')).toHaveValue('registration');
+  expect(errors).toEqual([]);
+});

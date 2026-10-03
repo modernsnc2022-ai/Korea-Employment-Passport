@@ -470,6 +470,25 @@
         <div id="brokerResult" class="result" hidden></div>
       </div>
 
+      <details id="betaValidationPanel" class="consistency-check">
+        <summary>Uji beta: apakah tahap selesai tanpa bantuan swasta?</summary>
+        <div class="consistency-body beta-validation-body">
+          <p>Catat hanya hasil tahapnya. Jangan masukkan nama, nomor identitas, atau dokumen pribadi. Satu tahap yang masih membutuhkan calo/agen/LPK/teman berarti rute belum PASS.</p>
+          <label>Tahap yang dinilai
+            <select id="betaCheckStage"></select>
+          </label>
+          <label>Hasil
+            <select id="betaCheckOutcome">
+              <option value="no_private_help">Selesai tanpa bantuan swasta</option>
+              <option value="private_help_needed">Masih membutuhkan bantuan swasta</option>
+            </select>
+          </label>
+          <button id="saveBetaCheckBtn" class="primary" type="button">Simpan hasil tahap</button>
+          <div id="betaValidationSummary" class="result"></div>
+          <div id="betaValidationList" class="gap-list"></div>
+        </div>
+      </details>
+
       <div class="panel beta-feedback-bundle">
         <h3>Kirim semua temuan beta sekaligus</h3>
         <p>Gabungkan pertanyaan yang belum terjawab, kasus penolakan, dan Celah Calo dari perangkat ini. Pola data sensitif akan dihapus otomatis sebelum draft email dibuat.</p>

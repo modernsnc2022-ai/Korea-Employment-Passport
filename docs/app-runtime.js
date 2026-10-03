@@ -12,7 +12,7 @@ const FORM_WIZARDS_URL='data/form_wizards_2026.json';
 const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
@@ -281,10 +281,19 @@ function renderContextTools(stage){
   box.querySelectorAll('[data-tool-view]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.toolView)));
 }
 
-async function fetchJsonRequired(url){
-  const response=await fetch(url,{cache:'no-store'});
-  if(!response.ok)throw new Error('required data unavailable: '+url);
-  return response.json();
+async function fetchJsonRequired(url,attempts=3){
+  let lastError=null;
+  for(let attempt=1;attempt<=attempts;attempt+=1){
+    try{
+      const response=await fetch(url,{cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      return await response.json();
+    }catch(error){
+      lastError=error;
+      if(attempt<attempts)await new Promise(resolve=>setTimeout(resolve,200*attempt));
+    }
+  }
+  throw new Error('required data unavailable: '+url+' — '+String(lastError?.message||lastError||'unknown error'));
 }
 
 async function fetchJsonOptional(url,fallback,label){
@@ -365,6 +374,7 @@ async function boot(){
     renderPayroll();
     renderWorkplace();
     renderGapStage();
+    renderBetaValidation();
     renderRejectionStage();
     renderRejections();
     renderGaps();
@@ -2753,6 +2763,75 @@ function encodeSanitizedBetaBody(rawBody){
   return encodeURIComponent(notice+safe.text);
 }
 
+function betaChecksState(){
+  const value=read(KEYS.betaChecks,{});
+  return value&&typeof value==='object'&&!Array.isArray(value)?value:{};
+}
+
+function betaValidationStats(){
+  const checks=betaChecksState();
+  const rows=(route?.stages||[])
+    .map(stage=>checks[stage.id]?{stage,...checks[stage.id]}:null)
+    .filter(Boolean);
+  const passed=rows.filter(row=>row.status==='no_private_help').length;
+  const failed=rows.filter(row=>row.status==='private_help_needed').length;
+  return {
+    rows,
+    tested:rows.length,
+    passed,
+    failed,
+    total:(route?.stages||[]).length,
+    routePass:Boolean(route?.stages?.length)&&rows.length===route.stages.length&&failed===0
+  };
+}
+
+function renderBetaValidation(){
+  const select=$('betaCheckStage');
+  const summary=$('betaValidationSummary');
+  const list=$('betaValidationList');
+  if(!select||!summary||!list||!route)return;
+  const previous=select.value;
+  select.innerHTML='';
+  route.stages.forEach(stage=>{
+    const option=document.createElement('option');
+    option.value=stage.id;
+    option.textContent=stageTitle(stage);
+    select.appendChild(option);
+  });
+  const preferred=previous||currentStage()?.id||route.stages[0]?.id;
+  if(preferred&&route.stages.some(stage=>stage.id===preferred))select.value=preferred;
+
+  const stats=betaValidationStats();
+  summary.hidden=false;
+  summary.className='result '+(stats.failed?'warn':stats.routePass?'safe':'');
+  summary.innerHTML=`<strong>Checkpoint beta: ${stats.tested}/${stats.total} tahap dinilai.</strong><br>`+
+    `Tanpa bantuan swasta: ${stats.passed} · Masih butuh bantuan swasta: ${stats.failed}. `+
+    (stats.routePass
+      ?'<strong>Checkpoint perangkat ini lengkap: 27/27 tanpa bantuan swasta.</strong> Ini bukti beta perangkat ini, bukan PASS final produk.'
+      :stats.failed
+        ?'Rute belum PASS. Catat tugas yang masih membutuhkan bantuan pada Celah Calo di bawah.'
+        :'Belum cukup untuk menyatakan rute PASS; lanjutkan penilaian tahap yang benar-benar sudah dijalani.');
+
+  list.innerHTML='';
+  stats.rows.forEach(row=>{
+    const article=document.createElement('article');
+    article.className='gap-item';
+    article.innerHTML=`<h3>${escapeHtml(stageTitle(row.stage))}</h3><p>${row.status==='no_private_help'?'✓ Selesai tanpa bantuan swasta':'⚠ Masih membutuhkan bantuan swasta'}</p>`;
+    list.appendChild(article);
+  });
+}
+
+$('saveBetaCheckBtn').addEventListener('click',()=>{
+  const stageId=$('betaCheckStage').value;
+  const status=$('betaCheckOutcome').value;
+  if(!stageId||!['no_private_help','private_help_needed'].includes(status))return;
+  const checks=betaChecksState();
+  checks[stageId]={stageId,status,updatedAt:new Date().toISOString()};
+  write(KEYS.betaChecks,checks);
+  renderBetaValidation();
+  if(status==='private_help_needed'&&$('gapStage'))$('gapStage').value=stageId;
+});
+
 function buildBetaFeedbackBundle(){
   const fieldQuestions=read(KEYS.fieldQuestions,[]);
   const rejections=read(KEYS.rejections,[]);
@@ -2785,18 +2864,43 @@ function buildBetaFeedbackBundle(){
     );
   }
 
-  const count=fieldQuestions.length+rejections.length+gaps.length;
+  const betaStats=betaValidationStats();
+  if(betaStats.tested){
+    sections.unshift(
+      'CHECKPOINT ZERO-BROKER\n'+
+      `Tahap dinilai: ${betaStats.tested}/${betaStats.total}; tanpa bantuan swasta: ${betaStats.passed}; masih butuh bantuan swasta: ${betaStats.failed}; checkpoint lengkap tanpa bantuan swasta: ${betaStats.routePass?'YA':'BELUM'}\n`+
+      betaStats.rows.map((row,index)=>`${index+1}. [${stageTitle(row.stage)}] ${row.status==='no_private_help'?'PASS tanpa bantuan swasta':'FAIL masih membutuhkan bantuan swasta'}`).join('\n')
+    );
+  }
+
+  const findingCount=fieldQuestions.length+rejections.length+gaps.length;
+  const checkpointCount=betaStats.tested;
+  const count=findingCount+checkpointCount;
+  const done=read(KEYS.done,[]);
+  const current=currentStage();
+  const routeLabel=route?[route.country,route.visa,route.sector,route.cycle].filter(Boolean).join(' → '):'route belum dimuat';
+  const sessionSummary=[
+    'RINGKASAN SESI TANPA IDENTITAS',
+    'Rute: '+routeLabel,
+    'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
+    'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
+    'Temuan: '+fieldQuestions.length+' pertanyaan, '+rejections.length+' penolakan, '+gaps.length+' Celah Calo',
+    'Checkpoint zero-broker: '+betaStats.tested+'/'+betaStats.total+' dinilai; '+betaStats.passed+' PASS; '+betaStats.failed+' FAIL'
+  ].join('\n');
   return {
     count,
+    findingCount,
+    checkpointCount,
     rawBody:
       'Temuan beta Korea Employment Passport dari perangkat ini:\n\n'+
+      sessionSummary+'\n\n'+
       sections.join('\n\n')+
       '\n\nMohon verifikasi terhadap sumber resmi sebelum mengubah aturan. Jangan lampirkan dokumen atau nomor identitas sensitif.'
   };
 }
 
 function betaFeedbackBundleMailto(bundle=buildBetaFeedbackBundle()){
-  const subject=encodeURIComponent(`[KEP Beta] Combined feedback — ${bundle.count} temuan`);
+  const subject=encodeURIComponent(`[KEP Beta] Combined feedback — ${bundle.findingCount} temuan, ${bundle.checkpointCount} checkpoint`);
   const body=encodeSanitizedBetaBody(bundle.rawBody);
   return 'mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 }
@@ -2807,7 +2911,7 @@ $('emailAllBetaFeedbackBtn').addEventListener('click',()=>{
   if(!bundle.count){
     out.hidden=false;
     out.className='result warn';
-    out.textContent='Belum ada pertanyaan, kasus penolakan, atau Celah Calo yang tersimpan di perangkat ini.';
+    out.textContent='Belum ada checkpoint beta, pertanyaan, kasus penolakan, atau Celah Calo yang tersimpan di perangkat ini.';
     return;
   }
   out.hidden=true;
