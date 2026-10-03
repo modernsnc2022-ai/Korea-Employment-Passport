@@ -14,12 +14,12 @@ const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
 const DEPARTURE_CALLS_URL='data/departure_calls_2026.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',betaWorkerExperienceYear:'kep.betaWorkerExperienceYear',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
-const BETA_SCOPED_KEYS=new Set([KEYS.gaps,KEYS.fieldQuestions,KEYS.rejections,KEYS.betaChecks]);
+const BETA_SCOPED_KEYS=new Set([KEYS.gaps,KEYS.fieldQuestions,KEYS.rejections,KEYS.betaChecks,KEYS.betaWorkerExperienceYear]);
 function activeBetaTesterIdForStorage(){
   try{return canonicalBetaTesterId(JSON.parse(localStorage.getItem(KEYS.betaTesterId)||'""'))}catch{return ''}
 }
@@ -3094,9 +3094,29 @@ function renderBetaValidation(){
   const testerStatus=$('betaTesterIdStatus');
   if(!select||!summary||!list||!route)return;
   const testerId=betaTesterIdState();
+  const role=betaTesterRole(testerId);
   if(testerInput)testerInput.value=testerId;
+  const workerYearWrap=$('betaWorkerExperienceWrap');
+  const workerYearSelect=$('betaWorkerExperienceYear');
+  const workerYearStatus=$('betaWorkerExperienceStatus');
+  if(workerYearWrap&&workerYearSelect){
+    const isWorker=role==='e9_worker_validator';
+    workerYearWrap.hidden=!isWorker;
+    if(isWorker){
+      const options=Array.from({length:23},(_,index)=>String(2026-index));
+      workerYearSelect.innerHTML='<option value="">Pilih tahun pengalaman</option>'+
+        options.map(year=>'<option value="'+year+'">'+year+'</option>').join('')+
+        '<option value="unknown">Tidak ingat pasti</option>';
+      const savedYear=String(read(KEYS.betaWorkerExperienceYear,'')||'');
+      workerYearSelect.value=options.includes(savedYear)||savedYear==='unknown'?savedYear:'';
+      if(workerYearStatus){
+        workerYearStatus.textContent=workerYearSelect.value
+          ?'Tahun pengalaman tersimpan untuk ID beta ini.'
+          :'Pilih tahun pengalaman sebelum menyimpan penilaian tahap.';
+      }
+    }
+  }
   if(testerStatus){
-    const role=betaTesterRole(testerId);
     testerStatus.textContent=testerId
       ?role==='e9_worker_validator'
         ?`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`
@@ -3165,10 +3185,26 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   renderUnresolvedFieldQuestions();
 });
 
+$('betaWorkerExperienceYear').addEventListener('change',()=>{
+  const value=String($('betaWorkerExperienceYear').value||'');
+  const allowed=value==='unknown'||/^(?:200[4-9]|20[12]\d)$/.test(value);
+  if(!allowed&&value!=='')return;
+  write(KEYS.betaWorkerExperienceYear,value);
+  const status=$('betaWorkerExperienceStatus');
+  if(status)status.textContent=value
+    ?'Tahun pengalaman tersimpan untuk ID beta ini.'
+    :'Pilih tahun pengalaman sebelum menyimpan penilaian tahap.';
+});
+
 $('saveBetaCheckBtn').addEventListener('click',()=>{
   const stageId=$('betaCheckStage').value;
   const status=$('betaCheckOutcome').value;
   if(!stageId||!['no_private_help','private_help_needed','not_experienced'].includes(status))return;
+  if(betaTesterRole()==='e9_worker_validator'&&!String(read(KEYS.betaWorkerExperienceYear,'')||'')){
+    const yearStatus=$('betaWorkerExperienceStatus');
+    if(yearStatus)yearStatus.textContent='Pilih tahun pengalaman (atau “Tidak ingat pasti”) sebelum menyimpan hasil tahap.';
+    return;
+  }
   const checks=betaChecksState();
   checks[stageId]={stageId,status,updatedAt:new Date().toISOString()};
   write(KEYS.betaChecks,checks);
@@ -3230,11 +3266,16 @@ function buildBetaFeedbackBundle(){
   const done=read(KEYS.done,[]);
   const current=currentStage();
   const testerId=betaTesterIdState();
+  const testerRole=betaTesterRole(testerId);
+  const workerExperienceYear=testerRole==='e9_worker_validator'
+    ?String(read(KEYS.betaWorkerExperienceYear,'')||'')
+    :'';
   const routeLabel=route?[route.country,route.visa,route.sector,route.cycle].filter(Boolean).join(' → '):'route belum dimuat';
   const sessionSummary=[
     'RINGKASAN SESI TANPA IDENTITAS',
     ...(testerId?['ID beta anonim: '+testerId]:[]),
-    ...(testerId?['Peran beta: '+(betaTesterRole(testerId)==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
+    ...(testerId?['Peran beta: '+(testerRole==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
+    ...(testerRole==='e9_worker_validator'?['Tahun pengalaman/proses EPS: '+(workerExperienceYear||'belum dicatat')]:[]),
     'Rute: '+routeLabel,
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
     'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
