@@ -177,6 +177,11 @@ require("Recruitment status: **HOLD" in outreach,
         "public recruitment must remain HOLD before the launch gate passes")
 require(beta_program.get("status") == "hold", "beta enrollment program must remain hold before launch")
 require(beta_program.get("publicBeta", {}).get("slots") == 30, "public beta enrollment must preserve 30 slots")
+worker_panel = beta_program.get("retrospectivePanel", {})
+require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
+require(worker_panel.get("separateFromPublicBeta") is True,
+        "E-9 worker panel must remain separate from the 30-person public beta")
+require(worker_panel.get("status") in {"hold", "open"}, "E-9 worker panel must use explicit hold/open status")
 require(beta_program.get("publicBeta", {}).get("freeMonths") == 6, "public beta benefit must remain 6 months")
 require(beta_program.get("publicBeta", {}).get("benefitStarts") == "beta_activation_date",
         "six-month benefit must start from beta activation")
