@@ -1,0 +1,297 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import re
+from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
+REGISTRY = ROOT / "docs" / "data" / "workplace_worker_evidence_v1.json"
+
+ALLOWED_ROOT_KEYS = {
+    "testerId", "companyName", "companyAliases", "verificationStatus",
+    "verifiedAt", "facts", "media", "reviewConfirmed"
+}
+ALLOWED_FACT_KEYS = {"topic", "summary", "basis"}
+ALLOWED_MEDIA_KEYS = {"type", "url", "consent", "privacyReviewed", "metadataRemoved"}
+ALLOWED_STATUS = {
+    "single_verified_worker", "multi_verified_workers", "worker_plus_public_record"
+}
+ALLOWED_BASIS = {"worker_experience", "worker_experience_plus_public_record"}
+FORBIDDEN_KEYS = {
+    "name", "workerName", "worker_name", "email", "phone", "passport",
+    "passportNumber", "ktp", "nik", "arc", "homeAddress", "exactDormAddress",
+    "dormRoom", "rawInterview", "privateContact"
+}
+PII_PATTERNS = {
+    "email": re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I),
+    "phone": re.compile(r"(?<!\w)(?:\+?82|\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)"),
+    "document_id": re.compile(r"\b[A-Z]{1,3}[-\s]?\d{6,12}\b", re.I),
+}
+
+
+def fail(message: str) -> None:
+    raise ValueError(message)
+
+
+def assert_keys(value: dict, allowed: set[str], path: str) -> None:
+    unknown = sorted(set(value) - allowed)
+    if unknown:
+        fail(f"{path}: unsupported fields: {', '.join(unknown)}")
+
+
+def scan_public_text(value, path: str = "$") -> None:
+    if isinstance(value, dict):
+        for key, child in value.items():
+            if key in FORBIDDEN_KEYS:
+                fail(f"{path}.{key}: forbidden identity/private field")
+            scan_public_text(child, f"{path}.{key}")
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            scan_public_text(child, f"{path}[{index}]")
+    elif isinstance(value, str):
+        for label, pattern in PII_PATTERNS.items():
+            if pattern.search(value):
+                fail(f"{path}: possible {label}; public worker evidence must remain de-identified")
+
+
+def validate_worker_row(row: dict[str, str], tester_id: str) -> None:
+    if not re.fullmatch(r"KEP-00(?:3[1-9]|4\d|50)", tester_id):
+        fail("testerId must be KEP-0031 through KEP-0050")
+    if row.get("target_group", "").strip() != "e9_worker_korea":
+        fail(f"{tester_id}: not an E-9 worker panel slot")
+    if row.get("role", "").strip() != "e9_worker_validator":
+        fail(f"{tester_id}: worker validator slot has not been assigned")
+    if not row.get("created_at", "").strip():
+        fail(f"{tester_id}: worker validator slot has not been assigned")
+    if row.get("in_korea", "").strip().lower() != "yes":
+        fail(f"{tester_id}: in_korea must be yes")
+    if row.get("e9_experience", "").strip().lower() != "confirmed":
+        fail(f"{tester_id}: E-9 experience must be confirmed")
+
+
+def validate_intake(intake: dict) -> None:
+    if not isinstance(intake, dict):
+        fail("intake must be a JSON object")
+    assert_keys(intake, ALLOWED_ROOT_KEYS, "$")
+
+    tester_id = str(intake.get("testerId", "")).strip()
+    if not re.fullmatch(r"KEP-00(?:3[1-9]|4\d|50)", tester_id):
+        fail("testerId must be KEP-0031 through KEP-0050")
+
+    company = str(intake.get("companyName", "")).strip()
+    if not company:
+        fail("companyName is required")
+
+    aliases = intake.get("companyAliases", [])
+    if not isinstance(aliases, list) or any(not isinstance(x, str) for x in aliases):
+        fail("companyAliases must be a list of strings")
+
+    status = intake.get("verificationStatus")
+    if status not in ALLOWED_STATUS:
+        fail("verificationStatus is invalid")
+
+    verified_at = str(intake.get("verifiedAt", ""))
+    date.fromisoformat(verified_at)
+
+    if intake.get("reviewConfirmed") is not True:
+        fail("reviewConfirmed must be true before evidence can be prepared")
+
+    facts = intake.get("facts")
+    if not isinstance(facts, list) or not facts:
+        fail("at least one summarized fact is required")
+    for index, fact in enumerate(facts):
+        if not isinstance(fact, dict):
+            fail(f"$.facts[{index}]: must be an object")
+        assert_keys(fact, ALLOWED_FACT_KEYS, f"$.facts[{index}]")
+        if not str(fact.get("topic", "")).strip() or not str(fact.get("summary", "")).strip():
+            fail(f"$.facts[{index}]: topic and summary are required")
+        if fact.get("basis") not in ALLOWED_BASIS:
+            fail(f"$.facts[{index}]: unsupported basis")
+
+    media = intake.get("media", [])
+    if not isinstance(media, list):
+        fail("media must be a list")
+    for index, item in enumerate(media):
+        if not isinstance(item, dict):
+            fail(f"$.media[{index}]: must be an object")
+        assert_keys(item, ALLOWED_MEDIA_KEYS, f"$.media[{index}]")
+        if item.get("type") not in {"photo", "video"}:
+            fail(f"$.media[{index}]: unsupported media type")
+        if item.get("consent") is not True:
+            fail(f"$.media[{index}]: consent=true is required")
+        if item.get("privacyReviewed") is not True:
+            fail(f"$.media[{index}]: privacyReviewed=true is required")
+        if item.get("metadataRemoved") is not True:
+            fail(f"$.media[{index}]: metadataRemoved=true is required")
+        if not str(item.get("url", "")).startswith("https://"):
+            fail(f"$.media[{index}]: HTTPS URL is required")
+
+    public_projection = {
+        "companyName": company,
+        "companyAliases": aliases,
+        "verificationStatus": status,
+        "verifiedAt": verified_at,
+        "facts": facts,
+        "media": media,
+    }
+    scan_public_text(public_projection)
+
+
+def next_evidence_id(registry: dict) -> str:
+    numbers = []
+    for row in registry.get("records", []):
+        match = re.fullmatch(r"WPE-(\d{4})", str(row.get("evidenceId", "")))
+        if not match:
+            fail(f"registry contains invalid evidenceId: {row.get('evidenceId')!r}")
+        numbers.append(int(match.group(1)))
+    numbers.sort()
+    expected = list(range(1, len(numbers) + 1))
+    if numbers != expected:
+        fail("registry evidence IDs must remain contiguous before adding a new record")
+    return f"WPE-{len(numbers) + 1:04d}"
+
+
+def build_public_record(intake: dict, registry: dict) -> dict:
+    validate_intake(intake)
+    record = {
+        "evidenceId": next_evidence_id(registry),
+        "companyName": str(intake["companyName"]).strip(),
+        "companyAliases": [x.strip() for x in intake.get("companyAliases", []) if x.strip()],
+        "verificationStatus": intake["verificationStatus"],
+        "verifiedAt": intake["verifiedAt"],
+        "facts": intake["facts"],
+    }
+    if intake.get("media"):
+        record["media"] = intake["media"]
+    scan_public_text(record)
+    return record
+
+
+def read_tracker() -> tuple[list[str], list[dict[str, str]]]:
+    with TRACKER.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return list(reader.fieldnames or []), list(reader)
+
+
+def write_tracker(fields: list[str], rows: list[dict[str, str]]) -> None:
+    with TRACKER.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def self_test() -> None:
+    rows = [{
+        "tester_id": "KEP-0031",
+        "target_group": "e9_worker_korea",
+        "created_at": "2026-10-04",
+        "role": "e9_worker_validator",
+        "in_korea": "yes",
+        "e9_experience": "confirmed",
+        "interview_status": "new",
+    }]
+    registry = {"records": [{"evidenceId": "WPE-0001"}]}
+    intake = {
+        "testerId": "KEP-0031",
+        "companyName": "Sample Manufacturing Co.",
+        "companyAliases": ["Sample Mfg"],
+        "verificationStatus": "single_verified_worker",
+        "verifiedAt": "2026-10-04",
+        "reviewConfirmed": True,
+        "facts": [{
+            "topic": "accommodation",
+            "summary": "Worker reported employer-provided shared accommodation; cost varies by contract.",
+            "basis": "worker_experience",
+        }],
+        "media": [],
+    }
+    validate_worker_row(rows[0], intake["testerId"])
+    record = build_public_record(intake, registry)
+    assert record["evidenceId"] == "WPE-0002"
+    assert "testerId" not in record and "tester_id" not in record
+
+    bad = json.loads(json.dumps(intake))
+    bad["facts"][0]["summary"] = "Contact worker@example.com"
+    try:
+        build_public_record(bad, registry)
+    except ValueError as exc:
+        assert "possible email" in str(exc)
+    else:
+        raise AssertionError("PII-like email was not rejected")
+
+    bad_media = json.loads(json.dumps(intake))
+    bad_media["media"] = [{
+        "type": "photo",
+        "url": "https://example.invalid/photo.jpg",
+        "consent": True,
+        "privacyReviewed": True,
+        "metadataRemoved": False,
+    }]
+    try:
+        build_public_record(bad_media, registry)
+    except ValueError as exc:
+        assert "metadataRemoved=true" in str(exc)
+    else:
+        raise AssertionError("media without metadata removal was not rejected")
+
+    print("WORKER_EVIDENCE_PUBLISH_SELF_TEST_PASS")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Prepare or publish a privacy-safe E-9 worker evidence record. Dry-run is the default."
+    )
+    parser.add_argument("--intake", help="Path to a private/local JSON intake file; do not commit completed intake files.")
+    parser.add_argument("--write", action="store_true", help="Write sanitized record to public registry and mark interview complete.")
+    parser.add_argument("--self-test", action="store_true")
+    args = parser.parse_args()
+
+    if args.self_test:
+        self_test()
+        return 0
+    if not args.intake:
+        parser.error("--intake is required unless --self-test is used")
+
+    intake_path = Path(args.intake).expanduser().resolve()
+    intake = json.loads(intake_path.read_text(encoding="utf-8-sig"))
+    validate_intake(intake)
+
+    fields, rows = read_tracker()
+    tester_id = str(intake["testerId"]).strip()
+    worker = next((row for row in rows if row.get("tester_id", "").strip() == tester_id), None)
+    if worker is None:
+        raise SystemExit(f"WORKER_EVIDENCE_BLOCKED unknown tester slot: {tester_id}")
+    try:
+        validate_worker_row(worker, tester_id)
+    except ValueError as exc:
+        raise SystemExit("WORKER_EVIDENCE_BLOCKED " + str(exc)) from exc
+
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8-sig"))
+    try:
+        record = build_public_record(intake, registry)
+    except ValueError as exc:
+        raise SystemExit("WORKER_EVIDENCE_BLOCKED " + str(exc)) from exc
+
+    mode = "WRITE" if args.write else "DRY_RUN"
+    print(f"WORKER_EVIDENCE_{mode} tester_id={tester_id} -> {record['evidenceId']}")
+    print(json.dumps(record, ensure_ascii=False, indent=2))
+
+    if not args.write:
+        print("DRY_RUN_ONLY completed intake file was not copied and public files were not changed")
+        return 0
+
+    registry.setdefault("records", []).append(record)
+    worker["interview_status"] = "completed"
+    REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_tracker(fields, rows)
+    print(f"WORKER_EVIDENCE_WRITTEN evidence_id={record['evidenceId']} interview_status=completed")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
