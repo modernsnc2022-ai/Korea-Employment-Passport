@@ -125,9 +125,10 @@ test('notice-specific answers stay hidden until the user selects the matching no
   await expect(page.locator('#stageDialog')).toBeVisible();
   await expect(page.locator('#scopePickerSection')).toBeVisible();
 
-  await expect(page.locator('#exactAnswerList')).not.toContainText('07.00 WIB');
+  const wave10Location='BBPPMPV Bisnis dan Pariwisata, Sawangan';
+  await expect(page.locator('#exactAnswerList')).not.toContainText(wave10Location);
   await page.locator('#scopePicker').selectOption('opp_sawangan_wave10_2026');
-  await expect(page.locator('#exactAnswerList')).toContainText('07.00 WIB');
+  await expect(page.locator('#exactAnswerList')).toContainText(wave10Location);
 
   expect(errors).toEqual([]);
 });

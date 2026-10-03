@@ -56,9 +56,3 @@ jobs:
           test -f docs/app.html
           test -f docs/privacy.html
           test -f docs/.nojekyll
-      - name: Install UI test dependencies
-        run: npm ci
-      - name: Install Chromium for UI smoke tests
-        run: npx playwright install --with-deps chromium
-      - name: Run responsive UI smoke tests
-        run: npm run test:ui

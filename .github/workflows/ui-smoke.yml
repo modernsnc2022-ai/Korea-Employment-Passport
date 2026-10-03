@@ -7,6 +7,7 @@ on:
       - 'docs/**'
       - 'tests/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'playwright.config.js'
       - '.github/workflows/ui-smoke.yml'
   workflow_dispatch:
@@ -23,8 +24,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install test dependency
-        run: npm install --no-audit --no-fund
+      - name: Install locked test dependencies
+        run: npm ci
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Start static site

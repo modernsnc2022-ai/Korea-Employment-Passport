@@ -1770,6 +1770,10 @@ function renderFormWizardCard(form,index){
     '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>'+
     '<div class="wizard-source-links"><a href="'+escapeHtml(wizardSourceUrl(form))+'" target="_blank" rel="noopener">Buka formulir resmi ↗</a><a href="'+escapeHtml(wizardGuidanceUrl(form))+'" target="_blank" rel="noopener">Buka petunjuk resmi ↗</a></div>';
 
+  const stage=currentStage()||route?.stages?.at(-1);
+  const stageForms=stage?formsForStage(stage.id):[form];
+  const foundFormIndex=stageForms.findIndex(item=>item.id===form.id);
+  const formIndex=foundFormIndex>=0?foundFormIndex:0;
   const total=form.fields.length;
   const safeIndex=Math.max(0,Math.min(index,total));
   const state={formId:form.id,index:safeIndex};
