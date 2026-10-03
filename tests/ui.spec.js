@@ -656,3 +656,25 @@ test('psychology stage uses its verified 2026 pack', async ({ page }) => {
   await expect(page.locator('#docStageContext')).not.toContainText('Lamaran online Manufaktur 2026 — tunggu pengumuman resmi');
   expect(errors).toEqual([]);
 });
+
+
+test('post SLC stage exposes verified psychology and MCU II checklist', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'post_slc_requirements');
+
+  const selected = await page.evaluate(() => {
+    const pack=documentPackForStage('post_slc_requirements');
+    return pack ? {id:pack.id,status:pack.status,items:(pack.items||[]).length} : null;
+  });
+
+  expect(selected).toEqual({
+    id:'post_slc_mcu2_2026',
+    status:'verified_across_multiple_2026_notices',
+    items:9
+  });
+  await expect(page.locator('#docStageContext')).toContainText('Setelah SLC');
+  await expect(page.locator('#docStageContext')).toContainText('Terverifikasi silang');
+  await expect(page.locator('#docList')).toContainText('Rp906.000');
+  await expect(page.locator('#docList')).toContainText('KTP asli');
+  expect(errors).toEqual([]);
+});
