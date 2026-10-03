@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071a36">
+  <title>Beta terbatas — Korea Employment Passport</title>
+  <link rel="stylesheet" href="beta.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" aria-label="Korea Employment Passport">Korea Employment Passport</a>
+    <span id="betaStatusPill" class="status-pill">MEMERIKSA STATUS…</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">INDONESIA → KOREA · E-9</span>
+      <h1>Beta terbatas untuk 30 peserta pertama</h1>
+      <p>Kami sedang menyiapkan beta Korea Employment Passport untuk calon pekerja yang menjalani jalur resmi G-to-G Korea / EPS.</p>
+      <div class="benefit-card">
+        <strong>6 bulan gratis</strong>
+        <span>untuk peserta beta yang diterima, dihitung sejak akun beta diaktifkan.</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Siapa yang dicari?</h2>
+        <ul id="eligibilityList"></ul>
+      </article>
+      <article class="card">
+        <h2>Syarat feedback</h2>
+        <ul id="feedbackList"></ul>
+      </article>
+    </section>
+
+    <section class="card no-guarantee">
+      <h2>Apa yang beta ini tidak janjikan</h2>
+      <div id="noGuaranteeList" class="chips"></div>
+      <p>Ini bukan penjualan lowongan dan bukan layanan penempatan berbayar.</p>
+    </section>
+
+    <section id="closedPanel" class="card closed-panel">
+      <span class="status-pill hold">BELUM DIBUKA</span>
+      <h2>Pendaftaran beta masih ditutup</h2>
+      <p>Kami sedang menyelesaikan pemeriksaan kualitas sebelum membuka kuota 30 peserta. Tidak ada antrean yang dihitung sebelum status berubah menjadi OPEN.</p>
+      <button type="button" disabled>Pendaftaran belum dibuka</button>
+    </section>
+
+    <section id="applicationPanel" class="card" hidden>
+      <span class="status-pill open">OPEN · 30 PESERTA</span>
+      <h2>Ajukan beta</h2>
+      <p>Urutan ditentukan berdasarkan waktu email aplikasi yang diterima setelah beta dibuka, hanya untuk aplikasi yang memenuhi syarat.</p>
+
+      <form id="betaApplicationForm">
+        <label>Tahap Anda sekarang
+          <select id="applicantStage" required>
+            <option value="">Pilih tahap</option>
+            <option value="preparing_registration">Persiapan / pendaftaran</option>
+            <option value="exam_selection">Ujian / skill test / seleksi</option>
+            <option value="job_application_roster">Lamaran kerja / roster</option>
+            <option value="slc_visa_departure">SLC / visa / persiapan berangkat</option>
+            <option value="other_active">Tahap aktif lainnya dalam proses resmi</option>
+          </select>
+        </label>
+
+        <label class="check">
+          <input id="activeProcess" type="checkbox" required>
+          <span>Saya benar-benar sedang menjalani / melanjutkan proses resmi G-to-G Korea / EPS E-9.</span>
+        </label>
+
+        <label class="check">
+          <input id="feedbackAgreement" type="checkbox" required>
+          <span>Saya bersedia menggunakan layanan dan memberi feedback sesuai pengalaman nyata.</span>
+        </label>
+
+        <div class="actions">
+          <button class="primary" type="submit">Kirim aplikasi lewat email</button>
+          <button id="copyApplicationBtn" class="secondary" type="button">Salin teks aplikasi</button>
+        </div>
+        <div id="applicationResult" class="result" hidden></div>
+      </form>
+    </section>
+
+    <section class="card privacy">
+      <h2>Privasi saat mendaftar</h2>
+      <p>Untuk mengajukan beta, kami tidak meminta nama, nomor paspor, nomor KTP, nomor ARC, nomor telepon, alamat rumah, atau foto dokumen identitas.</p>
+      <p>Jangan kirim gambar paspor/KTP/ARC untuk mendapatkan akses beta.</p>
+    </section>
+
+    <section class="card validator">
+      <h2>Sudah bekerja di Korea dengan E-9?</h2>
+      <p>20 pekerja Indonesia di Korea akan direkrut terpisah sebagai panel validasi pengalaman nyata. Kuota ini tidak mengurangi 30 tempat beta untuk pelamar aktif.</p>
+    </section>
+  </main>
+
+  <script src="beta.js"></script>
+</body>
+</html>
