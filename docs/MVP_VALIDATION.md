@@ -21,3 +21,7 @@ Any required private-broker task = route FAIL.
 - 20 Indonesian E-9 workers in Korea reviewing the route retrospectively.
 - At least one tester from each late-stage bucket: roster, SLC, visa/OPP, departure.
 - Every reported Broker Gap resolved or documented as official/licensed-only.
+
+## Timing of this evidence
+
+This 30+20 evidence is collected **after the beta is opened**. It is required before declaring the supported route a 100% broker-replacement PASS, not before starting recruitment itself.
