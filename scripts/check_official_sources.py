@@ -228,10 +228,14 @@ def main():
 
     initialized = False
     accepted = False
+    partial_acceptance = False
     acceptance_blocked = False
+    accepted_source_ids = []
+    preserved_failure_source_ids = []
     complete_fetch = len(current) == len(sources) and not failures
 
     if args.init_if_empty and not baseline and current:
+        # Initial baseline must be complete so that no source begins life silently untracked.
         if complete_fetch:
             baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             initialized = True
@@ -239,16 +243,27 @@ def main():
             acceptance_blocked = True
 
     if args.accept_current:
-        if complete_fetch:
-            baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        # Manual review may approve the sources that were fetched successfully while
+        # preserving the last reviewed fingerprint for unrelated temporary failures.
+        # Failed sources are never overwritten or treated as reviewed.
+        if current:
+            merged = dict(baseline)
+            merged.update(current)
+            baseline_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             accepted = True
+            partial_acceptance = not complete_fetch
+            accepted_source_ids = sorted(current.keys())
+            preserved_failure_source_ids = sorted(x["id"] for x in failures if x.get("id"))
         else:
             acceptance_blocked = True
 
     result = {
         "initialized": initialized,
         "acceptedCurrent": accepted,
+        "partialAcceptance": partial_acceptance,
         "acceptanceBlocked": acceptance_blocked,
+        "acceptedSourceIds": accepted_source_ids,
+        "preservedFailureSourceIds": preserved_failure_source_ids,
         "changed": changed,
         "failures": failures,
         "checked": len(current),
