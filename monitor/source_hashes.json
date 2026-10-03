@@ -134,15 +134,6 @@
     "contentType": "text/html",
     "tlsMode": "ca_verified"
   },
-  "eps_entry_to_departure": {
-    "sha256": "63fe9cd1bd0c149523115cc4b9ea3450e3ec85faddc216fe5fc6ca09adbb04d2",
-    "agency": "HRD Korea EPS",
-    "url": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
-    "contentLength": 1594,
-    "mode": "normalized_text",
-    "contentType": "text/html",
-    "tlsMode": "ca_verified"
-  },
   "eps_employment_management": {
     "sha256": "30a7e5e409b8455a0e7cec8c7b517bf3e3840eedc630a3e9efe3079c9ec0e10c",
     "agency": "HRD Korea EPS",
@@ -322,15 +313,6 @@
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
-  },
-  "kp2mi_psychology_rules_2026": {
-    "sha256": "45783f90ef6728b128a870c7d4cb00f815ce3f3384c1d1354c865b7194b505a9",
-    "agency": "KP2MI",
-    "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026",
-    "contentLength": 7028,
-    "mode": "normalized_text",
-    "contentType": "text/html",
-    "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave9": {
     "sha256": "f19c425d03777d23143d414cdf56e9c7dc5e2642f2708f87083536cd368164d7",
@@ -609,6 +591,24 @@
     "contentLength": 5711774,
     "mode": "binary",
     "contentType": "application/pdf",
+    "tlsMode": "ca_verified"
+  },
+  "immigration_form34_pdf": {
+    "sha256": "7e4c20be5f6a7fddf7a91c3a5f65db5e5962df7221c273725e786254e63640bb",
+    "agency": "Korea Immigration Service",
+    "url": "https://immigration.go.kr/bbs/immigration_eng/229/480237/download.do",
+    "contentLength": 85557,
+    "mode": "binary",
+    "contentType": "application/pdf",
+    "tlsMode": "ca_verified"
+  },
+  "immigration_integrated_application_guide": {
+    "sha256": "fbe2bea9cf1aecdc56298689ff313d38bd9503ac0e1b56c223e4a728594573f9",
+    "agency": "Korea Immigration Service",
+    "url": "https://www.immigration.go.kr/bbs/immigration/213/561864/artclView.do",
+    "contentLength": 1350,
+    "mode": "normalized_text",
+    "contentType": "text/html",
     "tlsMode": "ca_verified"
   }
 }

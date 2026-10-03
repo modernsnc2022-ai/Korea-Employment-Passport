@@ -1993,6 +1993,7 @@ function renderDocuments(){
     awaiting_sector_notice:'Menunggu pengumuman manufaktur yang sesuai',
     source_guided:'Sumber resmi saja — rincian belum dikunci',
     verified_practice:'Checklist bukti kerja',
+    verified_current_immigration:'Terverifikasi dari Kementerian Kehakiman Korea',
     review_required:'Sumber resmi berubah — review diperlukan',
     scope_required:'Pilih pengumuman yang memuat nama Anda terlebih dahulu',
     verified_notice_2026_05_26:'Terverifikasi untuk panggilan 26 Mei 2026',
