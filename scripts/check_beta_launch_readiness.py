@@ -167,6 +167,8 @@ require("function buildScoutRequestBody" in runtime, "workplace scout request mu
 require("'Info asrama: '+(data.dorm" not in runtime, "workplace scout request must not transmit dorm address")
 
 require("first **30** eligible people" in beta_target, "beta target must preserve first-30 public cohort")
+require("activation timing must never reorder" in beta_target.lower(),
+        "beta queue order must remain independent of activation timing")
 require("free for 6 months from beta account activation" in beta_target,
         "beta benefit must be 6 months from activation")
 require("gratis selama 6 bulan sejak akun beta diaktifkan" in outreach,
