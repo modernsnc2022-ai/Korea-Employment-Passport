@@ -40,12 +40,14 @@ REQUIRED_COLUMNS = {
     "current_stage",
     "in_korea",
     "e9_experience",
+    "experience_year",
     "broker_used",
     "broker_tasks",
     "amount_paid_idr",
     "documents_confusing",
     "official_process_gap",
     "workplace_info_needed",
+    "workplace_evidence_status",
     "interview_status",
     "broker_gap_status",
     "retest_status",
@@ -102,6 +104,7 @@ FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
 INTERVIEW_STATUSES = {"", "new", "scheduled", "completed", "withdrawn"}
 BROKER_GAP_STATUSES = {"", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
+WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "not_publishable"}
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
@@ -152,12 +155,27 @@ for index, row in enumerate(rows, start=1):
     free_until = row.get("free_until", "").strip()
     feedback_status = row.get("feedback_status", "").strip()
     interview_status = row.get("interview_status", "").strip()
+    experience_year = row.get("experience_year", "").strip()
+    workplace_evidence_status = row.get("workplace_evidence_status", "").strip()
     broker_gap_status = row.get("broker_gap_status", "").strip()
     retest_status = row.get("retest_status", "").strip()
     current_stage = row.get("current_stage", "").strip()
 
     if interview_status not in INTERVIEW_STATUSES:
         fail(f"{tester_id} invalid interview_status {interview_status!r}")
+    if workplace_evidence_status not in WORKPLACE_EVIDENCE_STATUSES:
+        fail(f"{tester_id} invalid workplace_evidence_status {workplace_evidence_status!r}")
+    if experience_year and experience_year != "unknown" and not re.fullmatch(r"20(?:0[4-9]|1\d|2[0-6])", experience_year):
+        fail(f"{tester_id} experience_year must be 2004..2026 or unknown")
+    if expected_group == "active_applicant" and (experience_year or workplace_evidence_status):
+        fail(f"{tester_id} active applicant must not use retrospective worker evidence fields")
+    if workplace_evidence_status == "published_single_verified_worker":
+        if expected_group != "e9_worker_korea":
+            fail(f"{tester_id} published worker evidence requires E-9 worker panel")
+        if interview_status != "completed":
+            fail(f"{tester_id} published worker evidence requires interview_status=completed")
+        if not experience_year:
+            fail(f"{tester_id} published worker evidence requires experience_year")
     if broker_gap_status not in BROKER_GAP_STATUSES:
         fail(f"{tester_id} invalid broker_gap_status {broker_gap_status!r}")
     if retest_status not in RETEST_STATUSES:
