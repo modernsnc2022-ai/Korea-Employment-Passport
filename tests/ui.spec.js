@@ -1,8 +1,32 @@
 const { test, expect } = require('@playwright/test');
 
-async function freshPage(page) {
+async function freshPage(page, options = {}) {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
+
+  const sourceState = options.sourceState || 'clean';
+  await page.route('**/data/source_review_status.json', async route => {
+    const response = await route.fetch();
+    const status = await response.json();
+    if (sourceState === 'clean') {
+      status.state = 'clean';
+      status.reviewRequiredUrls = [];
+      status.reviewRequiredSourceIds = [];
+      status.fetchFailureUrls = [];
+      status.fetchFailureSourceIds = [];
+      status.message = 'Test fixture: no unreviewed official-source changes.';
+    } else if (sourceState === 'review_required') {
+      status.state = 'review_required';
+      status.reviewRequiredUrls = [
+        'https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026'
+      ];
+      status.reviewRequiredSourceIds = ['kp2mi_psychology_2026'];
+      status.fetchFailureUrls = [];
+      status.fetchFailureSourceIds = [];
+      status.message = 'Test fixture: official source review required.';
+    }
+    await route.fulfill({ response, json: status });
+  });
 
   await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => {
@@ -906,5 +930,25 @@ test('E-9 worker validator panel can open independently without identity fields'
   expect(body).toContain('Currently working in Korea with E-9: YES');
   expect(body.toLowerCase()).not.toContain('passport number:');
   expect(body.toLowerCase()).not.toContain('phone number:');
+  expect(errors).toEqual([]);
+});
+
+
+test('review-required official source suppresses affected exact document guidance', async ({ page }) => {
+  const errors = await freshPage(page, { sourceState: 'review_required' });
+  await setStage(page, 'psychology_pre_job');
+
+  const selected = await page.evaluate(() => {
+    const pack = documentPackForStage('psychology_pre_job');
+    return pack ? { id: pack.id, status: pack.status, items: (pack.items || []).length } : null;
+  });
+
+  expect(selected).toEqual({
+    id: 'psychology_pre_job_2026',
+    status: 'review_required',
+    items: 0
+  });
+  await expect(page.locator('#freshnessStatus')).toContainText('PERUBAHAN SUMBER RESMI TERDETEKSI');
+  await expect(page.locator('#docStageContext')).toContainText('ditahan sementara');
   expect(errors).toEqual([]);
 });
