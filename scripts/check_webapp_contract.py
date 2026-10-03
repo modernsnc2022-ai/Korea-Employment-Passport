@@ -218,14 +218,16 @@ wizard_ref_set = {
     for form in form_wizards.get("forms", [])
     for field in form.get("fields", [])
 }
-wizard_ref_scope = {}
+wizard_ref_scopes = {}
 wizard_ref_stages = {}
 for form in form_wizards.get("forms", []):
+    scopes = form.get("scopeKeys")
+    if not isinstance(scopes, list):
+        scopes = [form.get("scopeKey")] if form.get("scopeKey") else []
     for field in form.get("fields", []):
         ref = f"{form.get('id')}:{field.get('id')}"
-        wizard_ref_scope[ref] = form.get("scopeKey")
+        wizard_ref_scopes[ref] = set(scopes)
         wizard_ref_stages[ref] = set(form.get("stages", []))
-
 question_ids = []
 bad_question_stage_refs = []
 bad_question_answer_refs = []
@@ -249,20 +251,31 @@ for question in broker_questions.get("questions", []):
     if wizard_ref and wizard_ref not in wizard_ref_set:
         bad_question_wizard_refs.append(f"{question_id}->{wizard_ref}")
     if wizard_ref and wizard_ref in wizard_ref_set:
-        expected_scope = wizard_ref_scope.get(wizard_ref)
-        question_scope = question.get("scopeKey")
-        if expected_scope != question_scope:
+        expected_scopes = wizard_ref_scopes.get(wizard_ref, set())
+        raw_question_scopes = question.get("scopeKeys")
+        if isinstance(raw_question_scopes, list):
+            question_scopes = set(raw_question_scopes)
+        else:
+            question_scopes = {question.get("scopeKey")} if question.get("scopeKey") else set()
+        if expected_scopes != question_scopes:
             bad_question_scope.append(
-                f"{question_id}:wizard_scope={expected_scope!r}:question_scope={question_scope!r}"
+                f"{question_id}:wizard_scopes={sorted(expected_scopes)!r}:question_scopes={sorted(question_scopes)!r}"
             )
         if stage_id not in wizard_ref_stages.get(wizard_ref, set()):
             bad_question_wizard_refs.append(f"{question_id}->{wizard_ref}:stage_mismatch")
     question_scope = question.get("scopeKey")
+    question_scope_keys = question.get("scopeKeys", [])
     if question_scope and question_scope not in known_scope_keys:
         bad_question_scope.append(f"{question_id}:unknown_scope={question_scope}")
+    if isinstance(question_scope_keys, list):
+        for scope_key in question_scope_keys:
+            if scope_key not in known_scope_keys:
+                bad_question_scope.append(f"{question_id}:unknown_scope={scope_key}")
+    else:
+        bad_question_scope.append(f"{question_id}:scopeKeys_not_list")
     if question_scope and not question.get("scopeLabel"):
         bad_question_scope.append(f"{question_id}:missing_scope_label")
-    if question.get("scopeLabel") and not question_scope:
+    if question.get("scopeLabel") and not question_scope and not question_scope_keys:
         bad_question_scope.append(f"{question_id}:label_without_scope")
     for required in ("question", "severity", "category"):
         if not str(question.get(required, "")).strip():
@@ -309,13 +322,20 @@ for form in form_wizards.get("forms", []):
     form_scope_type = form.get("scopeType")
     form_scope_key = form.get("scopeKey")
     form_scope_label = form.get("scopeLabel")
-    if form_scope_key or form_scope_label or form_scope_type:
+    form_scope_keys = form.get("scopeKeys", [])
+    if form_scope_key or form_scope_label or form_scope_type or form_scope_keys:
         if form_scope_type != "cohort":
             bad_form_scope.append(f"{form_id}:scopeType")
         if not form_scope_key or not form_scope_label:
             bad_form_scope.append(f"{form_id}:cohort_metadata")
         if form_scope_key and form_scope_key not in pack_scope_keys:
             bad_form_scope.append(f"{form_id}:scope_without_document_pack={form_scope_key}")
+        if not isinstance(form_scope_keys, list):
+            bad_form_scope.append(f"{form_id}:scopeKeys_not_list")
+        else:
+            for scope_key in form_scope_keys:
+                if scope_key not in pack_scope_keys:
+                    bad_form_scope.append(f"{form_id}:scopeKeys_without_document_pack={scope_key}")
     if not str(form.get("sourceUrl", "")).startswith("http"):
         bad_form_sources.append(f"{form_id}:sourceUrl")
     if not str(form.get("guidanceUrl", "")).startswith("http"):

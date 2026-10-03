@@ -321,10 +321,11 @@ function exactAnswerIdSet(stageId){
 function wizardFormApplies(form,stageId){
   if(!form?.stages?.includes(stageId))return false;
   if(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl))return false;
+  const selected=selectedScope(stageId);
+  if(Array.isArray(form.scopeKeys)&&form.scopeKeys.length)return form.scopeKeys.includes(selected);
   if(form.scopeType!=='cohort')return true;
-  return selectedScope(stageId)===form.scopeKey;
+  return selected===form.scopeKey;
 }
-
 function wizardFieldRefSet(stageId){
   const refs=new Set();
   (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId)).forEach(form=>{
@@ -335,10 +336,11 @@ function wizardFieldRefSet(stageId){
 
 function brokerQuestionApplies(item,stageId){
   if(item?.stageId!==stageId)return false;
+  const selected=selectedScope(stageId);
+  if(Array.isArray(item.scopeKeys)&&item.scopeKeys.length)return item.scopeKeys.includes(selected);
   if(!item.scopeKey)return true;
-  return selectedScope(stageId)===item.scopeKey;
+  return selected===item.scopeKey;
 }
-
 function bqcQuestionsForStage(stageId){
   const answerIds=exactAnswerIdSet(stageId);
   const wizardRefs=wizardFieldRefSet(stageId);
