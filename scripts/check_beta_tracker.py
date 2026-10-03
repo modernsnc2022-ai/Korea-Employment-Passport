@@ -215,5 +215,6 @@ for row in public_rows:
 activated = sum(1 for row in rows if row.get("activated_at", "").strip())
 print(
     f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} "
-    f"e9_workers={workers} assigned_public_beta={assigned_public} "        f"activated_public_beta={activated} free_months=6"
+    f"e9_workers={workers} assigned_public_beta={assigned_public} "
+    f"activated_public_beta={activated} free_months=6"
 )
