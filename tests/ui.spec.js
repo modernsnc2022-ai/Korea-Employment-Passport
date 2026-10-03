@@ -821,7 +821,9 @@ test('progress backup preserves reviewed form fields without beta evidence', asy
 test('workplace worker evidence empty state is neutral and privacy safe', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const errors = await freshPage(page);
+  await page.locator('[data-quick-stage="eligibility"]').click();
   await page.evaluate(() => switchView('workplace', false));
+  await expect(page.locator('#workplace')).toBeVisible();
 
   await page.locator('#wpCompany').fill('Contoh Manufacturing Co');
   await expect(page.locator('#workplaceWorkerEvidence')).toContainText('BELUM ADA KECOCOKAN');
@@ -838,7 +840,9 @@ test('workplace worker evidence empty state is neutral and privacy safe', async 
 
 test('workplace worker evidence renders only summarized verified facts', async ({ page }) => {
   const errors = await freshPage(page);
+  await page.locator('[data-quick-stage="eligibility"]').click();
   await page.evaluate(() => switchView('workplace', false));
+  await expect(page.locator('#workplace')).toBeVisible();
   await page.locator('#wpCompany').fill('Demo Factory');
 
   await page.evaluate(() => {
