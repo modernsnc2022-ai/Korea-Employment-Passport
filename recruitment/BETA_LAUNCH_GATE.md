@@ -44,6 +44,16 @@ Public beta recruitment must remain **HOLD** until every required item below is 
 - [ ] Mobile-width smoke review PASS.
 - [ ] No known critical or high-severity product defect remains open.
 
+## Automated gate behavior
+
+The `beta-launch-gate` workflow is an aggregator, not just a data-only check. For the same `main` HEAD it requires:
+- strict beta prelaunch readiness;
+- `static-check` SUCCESS;
+- `ui-smoke` SUCCESS, including mobile-width tests;
+- GitHub Pages `pages build and deployment` SUCCESS.
+
+A green beta-launch-gate must not be interpreted as valid when one of those sibling checks failed on the same commit.
+
 ## Beta OPEN vs route PASS
 
 The **30 active applicants + 20 E-9 workers are not prerequisites for opening the beta**. They are the evidence cohort collected after opening and are required before declaring the supported route a Broker Replacement Rate 100% PASS.
