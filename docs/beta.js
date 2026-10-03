@@ -4,6 +4,24 @@ let betaProgram=null;
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
+function workerValidatorText(){
+  return [
+    'KOREA EMPLOYMENT PASSPORT — E-9 WORKER VALIDATOR',
+    '',
+    'Currently working in Korea with E-9: YES',
+    'Completed Indonesia G-to-G Korea / EPS process: YES',
+    'Experience-validation participation agreement: YES',
+    '',
+    'I am interested in joining the separate 20-person retrospective validation panel.',
+    'I will compare app guidance with my real process experience and report mismatches.',
+    'I will not send passport/KTP/ARC images, identity numbers, exact home/dorm addresses, or other sensitive identity documents.'
+  ].join('\n');
+}
+
+function workerPanelOpen(){
+  return betaProgram?.retrospectivePanel?.status==='open';
+}
+
 function applicationText(){
   const stage=$('applicantStage').value;
   return [
@@ -42,6 +60,9 @@ function renderProgram(program){
   const open=program.status==='open';
   $('closedPanel').hidden=open;
   $('applicationPanel').hidden=!open;
+  const workerOpen=program.retrospectivePanel?.status==='open';
+  $('workerPanelClosed').hidden=workerOpen;
+  $('workerValidatorForm').hidden=!workerOpen;
   const pill=$('betaStatusPill');
   pill.textContent=open?'OPEN · '+beta.slots+' PESERTA':'BELUM DIBUKA';
   pill.className='status-pill '+(open?'open':'hold');
@@ -60,6 +81,36 @@ $('betaApplicationForm').addEventListener('submit',(event)=>{
   const subject=encodeURIComponent('[KEP Beta Application] Active EPS applicant');
   const body=encodeURIComponent(applicationText());
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('workerValidatorForm').addEventListener('submit',(event)=>{
+  event.preventDefault();
+  const out=$('workerValidatorResult');
+  if(!workerPanelOpen()){
+    out.hidden=false;out.className='result warn';out.textContent='Panel validator E-9 belum dibuka.';return;
+  }
+  if(!$('workerInKorea').checked||!$('workerUsedG2G').checked||!$('workerFeedbackAgreement').checked){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi ketiga konfirmasi terlebih dahulu.';return;
+  }
+  const email=betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com';
+  const subject=encodeURIComponent('[KEP E-9 Worker Validator] Retrospective panel');
+  const body=encodeURIComponent(workerValidatorText());
+  location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('copyWorkerValidatorBtn').addEventListener('click',async()=>{
+  const out=$('workerValidatorResult');
+  if(!workerPanelOpen()){
+    out.hidden=false;out.className='result warn';out.textContent='Panel validator E-9 belum dibuka.';return;
+  }
+  if(!$('workerInKorea').checked||!$('workerUsedG2G').checked||!$('workerFeedbackAgreement').checked){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi ketiga konfirmasi terlebih dahulu.';return;
+  }
+  const ok=await copyText(workerValidatorText());
+  out.hidden=false;out.className='result'+(ok?'':' warn');
+  out.textContent=ok
+    ?'Teks minat validator sudah disalin. Kirim ke '+(betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com')+'.'
+    :'Browser tidak mengizinkan salin otomatis. Gunakan tombol email.';
 });
 
 $('copyApplicationBtn').addEventListener('click',async()=>{
