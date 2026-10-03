@@ -51,3 +51,12 @@ Worker interviews and contact details stay outside this public repository. Do no
 8. Commit only the sanitized registry/tracker changes. Never commit the completed private intake file.
 
 The static CI separately checks the registry for forbidden identity/private fields and rejects worker media unless metadata removal is explicitly confirmed.
+
+## Retrospective worker evidence and cycle scope
+
+KEP-0031..KEP-0050 validators must record the year of the EPS process/departure they actually experienced before saving stage validation.
+
+- A validator whose experience year matches the current route cycle (2026) can contribute a current-cycle device checkpoint.
+- A validator whose experience is from an earlier year, or whose year is unknown, is **retrospective evidence only**. Their feedback is valuable for finding broker gaps, confusing steps, and real-world differences, but it must not be counted as PASS evidence for the 2026 route.
+- Never copy a past-cycle rule into 2026 merely because a retrospective worker remembers that rule.
+- Final product/route PASS still requires cohort-level evidence and official-current-source verification; a single device checkpoint is never the final product PASS.
