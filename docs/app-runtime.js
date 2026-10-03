@@ -3020,6 +3020,15 @@ function betaTesterIdState(){
   return canonicalBetaTesterId(read(KEYS.betaTesterId,''));
 }
 
+function betaTesterRole(testerId=betaTesterIdState()){
+  const match=/^KEP-(\d{4})$/.exec(String(testerId||''));
+  if(!match)return '';
+  const number=Number(match[1]);
+  if(number>=1&&number<=30)return 'active_applicant';
+  if(number>=31&&number<=50)return 'e9_worker_validator';
+  return '';
+}
+
 function hydrateBetaTesterIdFromUrl(){
   const fromUrl=canonicalBetaTesterId(new URLSearchParams(location.search).get('beta'));
   if(fromUrl)write(KEYS.betaTesterId,fromUrl);
@@ -3035,11 +3044,20 @@ function renderBetaModeBanner(){
     return;
   }
   banner.hidden=false;
-  banner.innerHTML=
-    `<strong>Mode beta ${escapeHtml(testerId)}</strong>`+
-    '<span><b>1</b> Gunakan aplikasi seperti biasa pada tahap Anda</span>'+
-    '<span><b>2</b> Nilai hanya tahap yang benar-benar Anda alami</span>'+
-    '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, atau email</span>';
+  const role=betaTesterRole(testerId);
+  if(role==='e9_worker_validator'){
+    banner.innerHTML=
+      `<strong>Panel validator E-9 ${escapeHtml(testerId)}</strong>`+
+      '<span><b>1</b> Pilih tahap yang benar-benar pernah Anda jalani</span>'+
+      '<span><b>2</b> Bandingkan panduan dengan pengalaman nyata; jika tidak ingat, pilih “belum dijalani/tidak dapat dinilai”</span>'+
+      '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, email, atau alamat asrama pribadi</span>';
+  }else{
+    banner.innerHTML=
+      `<strong>Mode beta ${escapeHtml(testerId)}</strong>`+
+      '<span><b>1</b> Gunakan aplikasi seperti biasa pada tahap Anda</span>'+
+      '<span><b>2</b> Nilai hanya tahap yang benar-benar Anda alami</span>'+
+      '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, atau email</span>';
+  }
 }
 
 function betaChecksState(){
@@ -3078,9 +3096,14 @@ function renderBetaValidation(){
   if(!select||!summary||!list||!route)return;
   const testerId=betaTesterIdState();
   if(testerInput)testerInput.value=testerId;
-  if(testerStatus)testerStatus.textContent=testerId
-    ?`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
-    :'Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.';
+  if(testerStatus){
+    const role=betaTesterRole(testerId);
+    testerStatus.textContent=testerId
+      ?role==='e9_worker_validator'
+        ?`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`
+        :`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
+      :'Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.';
+  }
   const previous=select.value;
   select.innerHTML='';
   route.stages.forEach(stage=>{
@@ -3212,6 +3235,7 @@ function buildBetaFeedbackBundle(){
   const sessionSummary=[
     'RINGKASAN SESI TANPA IDENTITAS',
     ...(testerId?['ID beta anonim: '+testerId]:[]),
+    ...(testerId?['Peran beta: '+(betaTesterRole(testerId)==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
     'Rute: '+routeLabel,
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
     'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
