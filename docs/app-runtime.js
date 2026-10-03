@@ -537,6 +537,43 @@ function renderJourney(){
   });
 }
 
+function scopePrefixForStage(stageId){
+  return {
+    visa_docs:'visa_',
+    predeparture_training:'opp_',
+    mcu3_departure:'departure_',
+    departure:'departure_'
+  }[stageId]||'';
+}
+
+function scopePromptForStage(stageId){
+  return {
+    visa_docs:'Tanggal panggilan MCU II / visa saya',
+    predeparture_training:'Jadwal OPP saya',
+    mcu3_departure:'Tanggal keberangkatan saya',
+    departure:'Tanggal keberangkatan saya'
+  }[stageId]||'Pengumuman yang memuat nama saya';
+}
+
+function scopeOptionAllowed(stageId,key){
+  const prefix=scopePrefixForStage(stageId);
+  return !prefix||String(key||'').startsWith(prefix);
+}
+
+function saveScopeSelection(stageId,value){
+  const state=read(KEYS.scopeSelections,{});
+  const apply=(id)=>{
+    if(value)state[id]=value;
+    else delete state[id];
+  };
+  apply(stageId);
+  if(String(value||'').startsWith('departure_')){
+    apply('mcu3_departure');
+    apply('departure');
+  }
+  write(KEYS.scopeSelections,state);
+}
+
 function scopeOptionsForStage(stageId){
   const rows=[];
   (exactAnswers?.answers||[])
@@ -562,7 +599,7 @@ function scopeOptionsForStage(stageId){
       sourceUrl:item.sourceUrl||prev.sourceUrl||''
     });
   });
-  return [...map.values()];
+  return [...map.values()].filter(item=>scopeOptionAllowed(stageId,item.key));
 }
 
 function renderScopePicker(stage){
@@ -578,7 +615,8 @@ function renderScopePicker(stage){
     return;
   }
   section.hidden=false;
-  select.innerHTML='<option value="">Belum tahu / pengumuman lain</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  $('scopePickerLabel').textContent=scopePromptForStage(stage.id);
+  select.innerHTML='<option value="">Belum tahu</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
   const chosen=scoped.find(item=>item.key===select.value);
   sourceLink.hidden=!chosen?.sourceUrl;
@@ -587,11 +625,8 @@ function renderScopePicker(stage){
 
 $('scopePicker').addEventListener('change',()=>{
   if(!activeStage)return;
-  const state=read(KEYS.scopeSelections,{});
   const value=$('scopePicker').value;
-  if(value)state[activeStage.id]=value;
-  else delete state[activeStage.id];
-  write(KEYS.scopeSelections,state);
+  saveScopeSelection(activeStage.id,value);
   renderStageBqc(activeStage);
   renderExactAnswers(activeStage);
   renderPreSubmitGate(activeStage);
@@ -803,18 +838,31 @@ function renderNextAction(){
     box.innerHTML='<small>LANGKAH BERIKUTNYA</small><h2>Persiapkan siklus rekrutmen resmi berikutnya</h2><p>Pendaftaran umum manufaktur 2026 sudah ditutup. Mulai dari cek kelayakan, lalu siapkan dokumen sesuai pengumuman siklus berikutnya.</p><button class="primary" data-go="eligibility">Mulai dari Cek Kelayakan</button>';
     renderContextTools(route.stages[0]);
   }else if(next){
+    const scoped=scopeOptionsForStage(next.id);
+    const needsScope=scoped.length>0&&!selectedScope(next.id);
     const toolKeys=STAGE_TOOLS[next.id]||[];
     const firstTool=toolKeys.length?TOOL_META[toolKeys[0]]:null;
-    const actionButton=firstTool
+    const normalAction=firstTool
       ? `<button class="primary" data-go="${firstTool.view}">${escapeHtml(firstTool.label)}</button><button class="secondary" data-stage="${escapeHtml(next.id)}">Lihat instruksi tahap</button>`
       : `<button class="primary" data-stage="${escapeHtml(next.id)}">Buka langkah ini</button>`;
-    box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p>${actionButton}`;
+    const scopeAction=needsScope
+      ? `<div class="next-scope"><label>${escapeHtml(scopePromptForStage(next.id))}<select data-next-scope><option value="">Pilih tanggal</option>${scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('')}</select></label><small>Pilih hanya jadwal yang memang memuat nama Anda.</small></div><button class="secondary" data-stage="${escapeHtml(next.id)}">Saya belum tahu → lihat petunjuk</button>`
+      : normalAction;
+    box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p>${scopeAction}`;
     renderContextTools(next);
   }else{
     box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
     renderContextTools(null);
   }
 
+  box.querySelector('[data-next-scope]')?.addEventListener('change',e=>{
+    const value=e.currentTarget.value;
+    if(!value)return;
+    saveScopeSelection(next.id,value);
+    renderNextAction();
+    renderDocuments();
+    renderBqcStatus();
+  });
   box.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',e=>switchView(e.currentTarget.dataset.go)));
   box.querySelectorAll('[data-stage]').forEach(btn=>btn.addEventListener('click',e=>{
     const stage=route.stages.find(s=>s.id===e.currentTarget.dataset.stage);
@@ -1541,11 +1589,8 @@ function renderDocumentScopePicker(stage){
 $('docScopeSelect').addEventListener('change',()=>{
   const stage=currentStage()||route?.stages?.at(-1);
   if(!stage)return;
-  const state=read(KEYS.scopeSelections,{});
   const value=$('docScopeSelect').value;
-  if(value)state[stage.id]=value;
-  else delete state[stage.id];
-  write(KEYS.scopeSelections,state);
+  saveScopeSelection(stage.id,value);
   renderDocuments();
   renderBqcStatus();
   if(activeStage?.id===stage.id){
