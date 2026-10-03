@@ -56,6 +56,11 @@ missing_refs = sorted(literal_refs - id_set)
 if missing_refs:
     errors.append("JS references missing HTML ids: " + ", ".join(missing_refs))
 
+consistency_refs = set(re.findall(r"['\"](cons[A-Za-z0-9]+)['\"]", js))
+missing_consistency_refs = sorted(consistency_refs - id_set)
+if missing_consistency_refs:
+    errors.append("consistency checker references missing HTML ids: " + ", ".join(missing_consistency_refs))
+
 required_runtime_functions = (
     "formLineageStatus",
     "wizardSourceUrl",

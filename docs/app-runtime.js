@@ -271,8 +271,9 @@ function renderFreshnessStatus(){
     return;
   }
 
+  const cadenceLabel=freshnessPolicy.monitorCadence==='every 6 hours'?'SETIAP 6 JAM':String(freshnessPolicy.monitorCadence||'').toUpperCase();
   box.innerHTML=`
-    <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(String(freshnessPolicy.monitorCadence||'').toUpperCase())}</span>
+    <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(cadenceLabel)}</span>
     <span><strong>Tidak ada perubahan resmi yang belum direview.</strong> Aturan hanya berubah setelah verifikasi.</span>
     <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
 }
@@ -1237,7 +1238,11 @@ const CONSISTENCY_GROUPS=[
   {label:'Nama',ids:['consNamePassport','consNameSlc','consNameKtp','consNameBank'],normalizer:'name'},
   {label:'Tanggal lahir',ids:['consDobPassport','consDobKtp','consDobSlc'],normalizer:'date'},
   {label:'Nomor paspor',ids:['consPassportMain','consPassportSkck','consPassportVisa'],normalizer:'id'},
-  {label:'NIK',ids:['consNikKtp','consNikVisa','consNikOther'],normalizer:'id'}
+  {label:'NIK',ids:['consNikKtp','consNikVisa','consNikOther'],normalizer:'id'},
+  {label:'ID CPMI',ids:['consCpmiCall','consCpmiChecklist','consCpmiPower'],normalizer:'id'},
+  {label:'Nomor rekening BNI',ids:['consBankBook','consBankChecklist','consBankPower'],normalizer:'digits'},
+  {label:'Nomor HP',ids:['consPhoneSisko','consPhoneVisa','consPhonePlacement'],normalizer:'phone'},
+  {label:'Email',ids:['consEmailSisko','consEmailVisa','consEmailPlacement'],normalizer:'email'}
 ];
 
 function normalizeConsistencyValue(value,type){
@@ -1248,6 +1253,18 @@ function normalizeConsistencyValue(value,type){
   }
   if(type==='id'){
     return text.normalize('NFKC').replace(/[\s-]+/g,'').toUpperCase();
+  }
+  if(type==='digits'){
+    return text.normalize('NFKC').replace(/[^0-9]/g,'');
+  }
+  if(type==='phone'){
+    let digits=text.normalize('NFKC').replace(/[^0-9]/g,'');
+    if(digits.startsWith('0062'))digits='0'+digits.slice(4);
+    else if(digits.startsWith('62'))digits='0'+digits.slice(2);
+    return digits;
+  }
+  if(type==='email'){
+    return text.normalize('NFKC').replace(/\s+/g,'').toLowerCase();
   }
   if(type==='date'){
     const raw=text.replace(/[.\-]/g,'/').replace(/\s+/g,'');
@@ -1277,10 +1294,55 @@ function evaluateConsistency(){
       mismatches.push(group.label);
     }
 
+    if(group.label==='Tanggal lahir'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'date');
+        const m=v.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if(!m){
+          formatWarnings.push('Tanggal lahir harus menggunakan tanggal yang jelas dan valid.');
+          return;
+        }
+        const y=Number(m[1]),mo=Number(m[2]),d=Number(m[3]);
+        const dt=new Date(Date.UTC(y,mo-1,d));
+        if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d){
+          formatWarnings.push('Tanggal lahir tidak valid. Periksa tahun, bulan, dan hari.');
+        }
+      });
+    }
     if(group.label==='NIK'){
       values.forEach(row=>{
         const v=normalizeConsistencyValue(row.value,'id');
         if(!/^\d{16}$/.test(v))formatWarnings.push('NIK harus 16 digit.');
+      });
+    }
+    if(group.label==='Nomor paspor'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'id');
+        if(!/^[A-Z0-9]{5,12}$/.test(v))formatWarnings.push('Periksa format nomor paspor; gunakan nomor terbaru tanpa spasi/simbol.');
+      });
+    }
+    if(group.label==='ID CPMI'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'id');
+        if(!/^ID\d+$/.test(v))formatWarnings.push('ID CPMI harus mengikuti format ID + angka dari pengumuman resmi.');
+      });
+    }
+    if(group.label==='Nomor rekening BNI'){
+      values.forEach(row=>{
+        const raw=String(row.value||'').trim().replace(/[\s-]/g,'');
+        if(!/^\d+$/.test(raw))formatWarnings.push('Nomor rekening BNI harus berupa angka.');
+      });
+    }
+    if(group.label==='Nomor HP'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'phone');
+        if(v.length<8||v.length>16)formatWarnings.push('Periksa nomor HP; setelah normalisasi harus 8–16 digit.');
+      });
+    }
+    if(group.label==='Email'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'email');
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))formatWarnings.push('Format email belum valid.');
       });
     }
   });
