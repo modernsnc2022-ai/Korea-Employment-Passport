@@ -33,6 +33,9 @@ The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains sep
 - Worker validators do **not** receive the public-beta application queue or six-month entitlement fields.
 - Contact details remain outside this public repository.
 
+- In the app, retrospective validators must record the year of the EPS process/departure they actually experienced (or “do not remember exactly”) before saving stage-validation evidence. This year is context for evidence quality, not identity data.
+- Never treat a pre-2026 worker recollection as proof that a 2026 notice-specific rule is correct. Official 2026 facts still come from official sources.
+
 
 ## Publishing verified workplace evidence
 
