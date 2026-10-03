@@ -113,7 +113,14 @@ require(len(public_checks) == 5, f"expected 5 public/contract workplace checks, 
 require(len(worker_checks) == 3, f"expected 3 worker-evidence workplace checks, found {len(worker_checks)}")
 require(len(workplace.get("workerEvidencePolicy", {}).get("points", [])) >= 4,
         "worker evidence privacy/verification policy is incomplete")
+official_lookups = workplace.get("officialLookups", [])
+require(len(official_lookups) >= 2, "workplace reality check must expose official verification routes")
+lookup_urls = {row.get("url", "") for row in official_lookups}
+require("https://www.factoryon.go.kr/" in lookup_urls, "FactoryOn official lookup is missing")
+require("https://eps.go.kr/eo/kr/frnr/index.eo" in lookup_urls, "EPS worker-record lookup is missing")
 require("Belum diverifikasi" in runtime, "workplace UI must visibly label unverified evidence")
+require("function buildScoutRequestBody" in runtime, "workplace scout request must use privacy-safe body builder")
+require("'Info asrama: '+(data.dorm" not in runtime, "workplace scout request must not transmit dorm address")
 
 require("first **30** eligible people" in beta_target, "beta target must preserve first-30 public cohort")
 require("free for 6 months from beta account activation" in beta_target,
