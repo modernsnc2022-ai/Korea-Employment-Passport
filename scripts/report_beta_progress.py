@@ -48,6 +48,10 @@ def render(rows: list[dict[str, str]]) -> str:
     evidence_rows = assigned_active + enrolled_workers
 
     interviews_completed = count_value(enrolled_workers, "interview_status", "completed")
+    worker_year_context = sum(nonempty(row, "experience_year") for row in enrolled_workers)
+    workplace_evidence_published = count_value(
+        enrolled_workers, "workplace_evidence_status", "published_single_verified_worker"
+    )
     broker_gaps_resolved = count_value(evidence_rows, "broker_gap_status", "resolved")
     broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
     retest_passed = count_value(evidence_rows, "retest_status", "passed")
@@ -68,6 +72,8 @@ def render(rows: list[dict[str, str]]) -> str:
         and activated >= 30
         and len(enrolled_workers) >= 20
         and interviews_completed >= 20
+        and worker_year_context >= 20
+        and workplace_evidence_published >= 1
         and late_ready
         and broker_gaps_open == 0
     )
@@ -92,6 +98,8 @@ def render(rows: list[dict[str, str]]) -> str:
         "## Retrospective validation",
         f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
         f"- E-9 worker interviews completed: {interviews_completed}/20",
+        f"- Experience-year context captured: {worker_year_context}/20",
+        f"- Privacy-reviewed workplace evidence published: {workplace_evidence_published}",
         "",
         "## Broker replacement evidence",
         f"- Broker gaps open: {broker_gaps_open}",
