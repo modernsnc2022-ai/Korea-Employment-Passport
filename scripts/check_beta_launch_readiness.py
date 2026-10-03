@@ -47,6 +47,8 @@ beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
 beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
+beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
+worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
 
 stage_ids = [row.get("id") for row in route.get("stages", [])]
 require(stage_ids == EXPECTED_STAGES, "supported route must contain the locked 27 stages in exact order")
@@ -201,6 +203,16 @@ require("experience_year" in beta_tracker and "workplace_evidence_status" in bet
         "beta tracker must keep worker experience year and workplace evidence status separate")
 require("testerId" in publisher and "tester_id" in publisher,
         "worker evidence publisher must validate a worker-panel KEP slot before publishing")
+require("interview_status" in publisher and "!= \"completed\"" in publisher,
+        "worker evidence publisher must require interview completion before publication")
+require('worker["interview_status"] = "completed"' not in publisher,
+        "worker evidence publisher must not complete interviews as a side effect")
+require("WORKER_INTERVIEW_RECORD_SELF_TEST_PASS" in worker_recorder,
+        "privacy-safe worker interview recorder must exist and expose a self-test")
+require('"interview_status"] = "completed"' in worker_recorder,
+        "worker interview recorder must own interview completion state")
+require('"workplace_evidence_status"] = workplace_evidence_status' in worker_recorder,
+        "worker interview recorder must explicitly record workplace publication consent state")
 official_lookups = workplace.get("officialLookups", [])
 require(len(official_lookups) >= 2, "workplace reality check must expose official verification routes")
 lookup_urls = {row.get("url", "") for row in official_lookups}
