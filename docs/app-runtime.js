@@ -17,8 +17,17 @@ let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=n
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
-const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
-const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
+const BETA_SCOPED_KEYS=new Set([KEYS.gaps,KEYS.fieldQuestions,KEYS.rejections,KEYS.betaChecks]);
+function activeBetaTesterIdForStorage(){
+  try{return canonicalBetaTesterId(JSON.parse(localStorage.getItem(KEYS.betaTesterId)||'""'))}catch{return ''}
+}
+function storageKeyFor(key){
+  if(!BETA_SCOPED_KEYS.has(key))return key;
+  const testerId=activeBetaTesterIdForStorage();
+  return testerId?key+'.'+testerId:key;
+}
+const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(storageKeyFor(key)))??fallback}catch{return fallback}};
+const write=(key,value)=>localStorage.setItem(storageKeyFor(key),JSON.stringify(value));
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
