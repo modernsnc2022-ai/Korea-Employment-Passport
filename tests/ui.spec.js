@@ -1018,3 +1018,29 @@ test('quick milestones do not infer post-entry compliance from first payroll rec
   expect(milestones.some(item => item.nextStage === 'labor_support_ready')).toBe(false);
   expect(errors).toEqual([]);
 });
+
+
+test('post-entry official help uses Korea foreign worker counseling', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => window.officialHelp?.channels?.length > 0, null, { timeout: 15000 });
+
+  const state = await page.evaluate(() => {
+    const channel = officialHelp.channels.find(item => item.id === 'foreign_worker_counseling');
+    return {
+      channel,
+      entry: officialHelp.stageMap.korea_entry_training,
+      insurance: officialHelp.stageMap.eps_insurance_check,
+      payroll: officialHelp.stageMap.first_payroll_check
+    };
+  });
+
+  expect(state.channel?.phones?.some(item => item.display === '1577-0071')).toBe(true);
+  expect(state.channel?.languages || '').toContain('Bahasa Indonesia');
+  expect(state.entry).toContain('foreign_worker_counseling');
+  expect(state.insurance).toContain('foreign_worker_counseling');
+  expect(state.payroll).toContain('foreign_worker_counseling');
+  expect(errors).toEqual([]);
+});
