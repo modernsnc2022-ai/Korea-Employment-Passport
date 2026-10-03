@@ -2179,7 +2179,13 @@ $('formFieldValue').addEventListener('keydown',(event)=>{
 function safeDocumentPack(pack){
   if(!pack)return null;
   if(sourceNeedsReview(pack.sourceUrl)){
-    return {...pack,status:'review_required',items:[]};
+    return {
+      ...pack,
+      status:'review_required',
+      title:'Panduan tahap ini sedang ditinjau',
+      message:'Sumber resmi untuk tahap ini berubah. Jangan gunakan rincian lama, angka lama, atau checklist lama sampai review selesai. Buka sumber resmi terbaru atau gunakan kanal bantuan resmi.',
+      items:[]
+    };
   }
   return pack;
 }
