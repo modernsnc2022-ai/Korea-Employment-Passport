@@ -152,7 +152,11 @@ for index, row in enumerate(rows, start=1):
     if application_received:
         if expected_group != "active_applicant":
             fail(f"{tester_id} retrospective worker panel must not use public-beta application queue fields")
+        if eligibility_status != "accepted":
+            fail(f"{tester_id} assigned public-beta slot requires eligibility_status=accepted")
         parse_utc_timestamp(application_received, tester_id)
+    elif eligibility_status == "accepted":
+        fail(f"{tester_id} eligibility_status=accepted requires application_received_at")
 
     if bool(activated_at) != bool(free_until):
         fail(f"{tester_id} activated_at and free_until must be set together")
@@ -185,8 +189,31 @@ for index, row in enumerate(rows, start=1):
 if len(rows) != 50 or active != 30 or workers != 20:
     fail(f"unexpected cohort counts rows={len(rows)} active={active} workers={workers}")
 
+public_rows = rows[:30]
+seen_empty_slot = False
+previous_received = None
+previous_id = None
+assigned_public = 0
+for row in public_rows:
+    tester_id = row["tester_id"].strip()
+    value = row.get("application_received_at", "").strip()
+    if not value:
+        seen_empty_slot = True
+        continue
+    if seen_empty_slot:
+        fail(f"{tester_id} is assigned after an empty earlier public-beta slot; assign KEP IDs contiguously from KEP-0001")
+    received = parse_utc_timestamp(value, tester_id)
+    if previous_received is not None and received < previous_received:
+        fail(
+            f"{tester_id} application_received_at is earlier than {previous_id}; "
+            "KEP-0001..KEP-0030 must follow eligible application receipt order"
+        )
+    previous_received = received
+    previous_id = tester_id
+    assigned_public += 1
+
 activated = sum(1 for row in rows if row.get("activated_at", "").strip())
 print(
     f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} "
-    f"e9_workers={workers} activated_public_beta={activated} free_months=6"
+    f"e9_workers={workers} assigned_public_beta={assigned_public} "        f"activated_public_beta={activated} free_months=6"
 )
