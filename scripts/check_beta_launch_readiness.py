@@ -195,6 +195,10 @@ require("PUBLISHABLE_STATUS = {\"single_verified_worker\"}" in publisher,
         "worker evidence publisher must not let one interview claim multi-worker verification")
 require("metadataRemoved" in publisher and "reviewConfirmed" in publisher,
         "worker evidence publisher must require privacy review and metadata removal")
+require("experienceYear" in publisher and "workplace_evidence_status" in publisher,
+        "worker evidence publishing must preserve experience cycle and separate publish status")
+require("experience_year" in beta_tracker and "workplace_evidence_status" in beta_tracker,
+        "beta tracker must keep worker experience year and workplace evidence status separate")
 require("testerId" in publisher and "tester_id" in publisher,
         "worker evidence publisher must validate a worker-panel KEP slot before publishing")
 official_lookups = workplace.get("officialLookups", [])
