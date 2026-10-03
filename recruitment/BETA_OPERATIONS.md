@@ -60,3 +60,14 @@ KEP-0031..KEP-0050 validators must record the year of the EPS process/departure 
 - A validator whose experience is from an earlier year, or whose year is unknown, is **retrospective evidence only**. Their feedback is valuable for finding broker gaps, confusing steps, and real-world differences, but it must not be counted as PASS evidence for the 2026 route.
 - Never copy a past-cycle rule into 2026 merely because a retrospective worker remembers that rule.
 - Final product/route PASS still requires cohort-level evidence and official-current-source verification; a single device checkpoint is never the final product PASS.
+
+
+### Tracker fields for worker evidence
+
+For KEP-0031..KEP-0050, keep these states separate:
+
+- `experience_year`: the EPS process/departure year actually experienced, or `unknown`.
+- `interview_status`: interview workflow only.
+- `workplace_evidence_status`: whether a privacy-reviewed workplace record has actually been published.
+
+Publishing a WPE record sets `workplace_evidence_status=published_single_verified_worker`; it must not be inferred merely from `interview_status=completed`. The public WPE record also carries `experienceYear` so older experience is visibly retrospective.
