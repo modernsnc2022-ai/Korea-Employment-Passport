@@ -111,6 +111,15 @@ require(
     mcu1_candidates[0].get("id") == "mcu1_2026" and mcu1_candidates[0].get("status") == "verified_2026",
     "MCU I most-specific document pack must remain the verified mcu1_2026 pack",
 )
+opp_common = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "opp_common_2026_pack"), {})
+require(
+    opp_common.get("status") == "verified_across_multiple_2026_calls",
+    "predeparture_training must have a cross-verified 2026 OPP preparation pack",
+)
+require(
+    opp_common.get("appliesTo") == ["predeparture_training"] and len(opp_common.get("items", [])) >= 7,
+    "OPP common pack must be stage-specific and contain the verified preparation checklist",
+)
 
 form_rows = forms.get("forms", [])
 field_count = sum(len(form.get("fields", [])) for form in form_rows)
