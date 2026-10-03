@@ -289,6 +289,7 @@ test('beta feedback bundle combines all gap types and redacts them in one draft'
   await expect(page.locator('#emailAllBetaFeedbackBtn')).toBeVisible();
   const shareText = await page.evaluate(() => sanitizedBetaFeedbackText(buildBetaFeedbackBundle().rawBody));
   expect(shareText).toContain('Catatan privasi');
+  expect(shareText).toContain('nama, alamat');
   expect(shareText).not.toContain('tester@example.com');
   expect(shareText).not.toContain('A1234567');
   expect(shareText).not.toContain('+62 812-3456-7890');
@@ -309,7 +310,7 @@ test('beta feedback bundle includes anonymous progress context', async ({ page }
     return buildBetaFeedbackBundle().rawBody;
   });
 
-  expect(body).toContain('RINGKASAN SESI TANPA IDENTITAS');
+  expect(body).toContain('RINGKASAN SESI — PERIKSA & HAPUS IDENTITAS SEBELUM KIRIM');
   expect(body).toContain('Tahap sekarang:');
   expect(body).toContain('Tahap selesai: 1/27');
   expect(body).toContain('1 Celah Calo');
@@ -1142,5 +1143,23 @@ test('retrospective worker year keeps prior-cycle evidence out of 2026 route PAS
     retrospectiveOnly: false,
     routePass: true
   });
+  expect(errors).toEqual([]);
+});
+
+
+test('beta feedback sanitizer redacts Korean phone numbers and always warns about residual privacy risk', async ({ page }) => {
+  const errors = await freshPage(page);
+  const result = await page.evaluate(() => {
+    const raw='Hubungi +82 10-1234-5678. Nama/alamat mungkin tetap ada.';
+    return {
+      sanitized:sanitizeBetaFeedback(raw),
+      shared:sanitizedBetaFeedbackText(raw),
+      cleanShared:sanitizedBetaFeedbackText('Tidak ada nomor di sini.')
+    };
+  });
+  expect(result.sanitized.redacted).toBe(true);
+  expect(result.sanitized.text).not.toContain('+82 10-1234-5678');
+  expect(result.shared).toContain('tidak dapat menjamin nama, alamat');
+  expect(result.cleanShared).toContain('tidak ada pola nomor/email yang terdeteksi otomatis');
   expect(errors).toEqual([]);
 });
