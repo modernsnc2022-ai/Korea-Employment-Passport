@@ -22,7 +22,20 @@ Priority 4: IKMI Korea / Masjid Al-Falah
 - 2026 activity corroboration: https://news.ums.ac.id/id/berita/ums-gelar-edukasi-kesehatan-di-korea-ajarkan-pencegahan-cedera-dan-sarcopenia/
 - Approach: ask admin permission for non-commercial E-9 worker beta recruitment; do not post as a job advertisement.
 
-Priority 5: Korean-language LPK communities
+Priority 5: Rumaisa Korsel
+- Official public site: https://rumaisakorsel.org/
+- 2026 site activity is current and the community explicitly includes Indonesian migrant workers in Korea.
+- Public contact: rumaisa.akhwatkorea@gmail.com / +82 10-4997-1060.
+- Best use: recruit female Indonesian E-9 workers for retrospective route validation.
+- Approach: request admin permission first; no job advertising and no collection of identity documents.
+
+Priority 6: wonGrow — Koperasi Digital PMI Korea
+- Public site: https://www.wongrow.id/
+- Site explicitly describes a community of Indonesian workers in Korea and publishes a WhatsApp contact route.
+- Best use: ask whether they can circulate a non-commercial beta-research invitation to E-9 workers.
+- Treat as a community/business contact, not as an official EPS authority.
+
+Priority 7: Korean-language LPK communities
 - Use only for interviews and comparison of tasks they currently perform
 - Do not frame them as illegal brokers
 - Distinguish training/administrative help from private job-placement claims
