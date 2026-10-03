@@ -125,6 +125,15 @@ if missing_action_labels:
     errors.append("official action URL missing label: " + ", ".join(missing_action_labels))
 
 known_stage_ids = set(stage_ids)
+post_entry_stage_ids = {
+    "korea_entry_training",
+    "employer_handover",
+    "residence_registration",
+    "eps_insurance_check",
+    "first_payroll_check",
+    "labor_support_ready",
+    "employment_maintenance",
+}
 
 help_channel_ids = []
 bad_help_content = []
@@ -223,6 +232,7 @@ bad_exact_stage_refs = []
 bad_exact_sources = []
 bad_exact_content = []
 bad_exact_scope = []
+unmonitored_post_entry_exact_sources = []
 allowed_scope_types = {"route_2026", "current_rule", "cohort"}
 for item in exact_answers.get("answers", []):
     item_id = item.get("id", "")
@@ -235,8 +245,11 @@ for item in exact_answers.get("answers", []):
     for stage_id in item.get("stages", []):
         if stage_id not in known_stage_ids:
             bad_exact_stage_refs.append(f"{item_id}->{stage_id}")
-    if not str(item.get("sourceUrl", "")).startswith("http"):
+    source_url = str(item.get("sourceUrl", "")).strip()
+    if not source_url.startswith("http"):
         bad_exact_sources.append(item_id or "<missing>")
+    elif post_entry_stage_ids.intersection(item.get("stages", [])) and source_url not in monitored_source_urls:
+        unmonitored_post_entry_exact_sources.append(f"{item_id}:{source_url}")
     for required in ("question", "answer", "writeExactly", "why", "verifiedAt", "verificationStatus"):
         if not str(item.get(required, "")).strip():
             bad_exact_content.append(f"{item_id}:{required}")
@@ -250,6 +263,12 @@ if bad_exact_stage_refs:
 
 if bad_exact_sources:
     errors.append("exact answers missing source URL: " + ", ".join(sorted(bad_exact_sources)))
+
+if unmonitored_post_entry_exact_sources:
+    errors.append(
+        "post-entry exact answers must use monitored official sources: "
+        + ", ".join(sorted(unmonitored_post_entry_exact_sources))
+    )
 
 if bad_exact_content:
     errors.append("exact answers missing required content: " + ", ".join(sorted(bad_exact_content)))
