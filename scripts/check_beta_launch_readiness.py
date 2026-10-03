@@ -151,6 +151,18 @@ require(
     "Manufacturing job-application HOLD pack must apply only to job_application",
 )
 
+residence_pack = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "korea_residence"), {})
+require(
+    residence_pack.get("status") == "verified_current_immigration"
+    and residence_pack.get("appliesTo") == ["residence_registration"]
+    and len(residence_pack.get("items", [])) >= 5,
+    "Residence Card document pack must stay scoped only to residence_registration",
+)
+require(
+    "korea_entry_training:[]" in runtime.replace(" ", ""),
+    "korea_entry_training must not expose the generic document tool unless a stage-specific pack exists",
+)
+
 opp_common = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "opp_common_2026_pack"), {})
 require(
     opp_common.get("status") == "verified_across_multiple_2026_calls",
@@ -174,6 +186,17 @@ require(len(public_checks) == 5, f"expected 5 public/contract workplace checks, 
 require(len(worker_checks) == 3, f"expected 3 worker-evidence workplace checks, found {len(worker_checks)}")
 require(len(workplace.get("workerEvidencePolicy", {}).get("points", [])) >= 4,
         "worker evidence privacy/verification policy is incomplete")
+
+worker_registry = load_json("docs/data/workplace_worker_evidence_v1.json")
+require(worker_registry.get("status") == "beta_collection",
+        "worker evidence registry must remain in beta_collection mode")
+publisher = (ROOT / "scripts/publish_worker_evidence.py").read_text(encoding="utf-8")
+require("PUBLISHABLE_STATUS = {\"single_verified_worker\"}" in publisher,
+        "worker evidence publisher must not let one interview claim multi-worker verification")
+require("metadataRemoved" in publisher and "reviewConfirmed" in publisher,
+        "worker evidence publisher must require privacy review and metadata removal")
+require("testerId" in publisher and "tester_id" in publisher,
+        "worker evidence publisher must validate a worker-panel KEP slot before publishing")
 official_lookups = workplace.get("officialLookups", [])
 require(len(official_lookups) >= 2, "workplace reality check must expose official verification routes")
 lookup_urls = {row.get("url", "") for row in official_lookups}
