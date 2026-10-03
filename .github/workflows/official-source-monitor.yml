@@ -6,8 +6,13 @@ on:
   push:
     branches: [main]
     paths:
+      - 'monitor/sources.json'
       - 'monitor/source_hashes.json'
+      - 'monitor/tls_pins.json'
       - 'scripts/check_official_sources.py'
+      - 'scripts/write_source_review_status.py'
+      - 'scripts/diagnose_source_volatility.py'
+      - '.github/workflows/official-source-monitor.yml'
   workflow_dispatch:
     inputs:
       accept_current:
