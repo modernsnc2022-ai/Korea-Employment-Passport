@@ -661,13 +661,13 @@
       "stages": [
         "residence_registration"
       ],
-      "question": "외국인등록은 언제까지 해야 하나요?",
-      "answer": "90일 초과 체류 예정이면 입국일부터 90일 이내에 해야 합니다.",
-      "writeExactly": "입국일을 기준으로 90일이 지나기 전에 외국인등록을 완료하도록 예약·준비하세요.",
-      "why": "출입국관리법 제31조는 90일 초과 체류 외국인에게 입국일부터 90일 이내 외국인등록을 요구합니다.",
+      "question": "Kapan saya harus melakukan pendaftaran orang asing / Residence Card?",
+      "answer": "Jika Anda akan tinggal di Korea lebih dari 90 hari, pendaftaran orang asing harus dilakukan dalam 90 hari sejak tanggal masuk.",
+      "writeExactly": "Hitung dari tanggal masuk dan siapkan reservasi serta dokumen agar pendaftaran selesai sebelum lewat 90 hari.",
+      "why": "Pasal 31 Undang-Undang Imigrasi Korea mewajibkan orang asing yang akan tinggal lebih dari 90 hari untuk mendaftar dalam 90 hari sejak masuk.",
       "doNotDo": [
-        "90일째에 임박해서 처음 준비하지 마세요",
-        "회사에서 알아서 해줄 것이라고만 생각하고 본인 진행상태를 확인하지 않는 것은 피하세요"
+        "Jangan baru mulai menyiapkan semuanya saat sudah mendekati hari ke-90.",
+        "Jangan hanya menganggap perusahaan akan mengurus semuanya; periksa sendiri status proses Anda."
       ],
       "sourceUrl": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
       "verifiedAt": "2026-10-04",
@@ -679,13 +679,13 @@
       "stages": [
         "residence_registration"
       ],
-      "question": "외국인등록은 회사 주소 기준인가요, 실제 사는 곳 기준인가요?",
-      "answer": "실제 국내 체류지를 기준으로 관할 출입국·외국인관서에 등록합니다.",
-      "writeExactly": "기숙사 등 실제로 거주하는 국내 체류지를 기준으로 관할 출입국·외국인관서를 확인하세요. 회사 주소가 실제 체류지와 다르면 회사 주소를 체류지처럼 쓰지 마세요.",
-      "why": "출입국관리법은 외국인등록을 '체류지를 관할하는' 기관에 하도록 하고, 등록사항에 국내 체류지를 포함합니다.",
+      "question": "Untuk pendaftaran Residence Card, saya mengikuti alamat perusahaan atau alamat tempat tinggal sebenarnya?",
+      "answer": "Gunakan tempat tinggal Anda yang sebenarnya di Korea untuk menentukan kantor imigrasi yang berwenang.",
+      "writeExactly": "Periksa kantor imigrasi yang membawahi alamat tempat Anda benar-benar tinggal, termasuk asrama. Jika alamat perusahaan berbeda dari tempat tinggal Anda, jangan menulis alamat perusahaan seolah-olah itu alamat tempat tinggal.",
+      "why": "Undang-Undang Imigrasi mengatur bahwa pendaftaran dilakukan pada kantor yang membawahi tempat tinggal dan memasukkan alamat tempat tinggal di Korea sebagai data pendaftaran.",
       "doNotDo": [
-        "근무처 주소와 국내 체류지를 혼동하지 마세요",
-        "실제 살지 않는 주소를 체류지로 임의 기재하지 마세요"
+        "Jangan mencampuradukkan alamat tempat kerja dengan alamat tempat tinggal di Korea.",
+        "Jangan menulis alamat yang sebenarnya tidak Anda tinggali."
       ],
       "sourceUrl": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
       "verifiedAt": "2026-10-04",
@@ -697,12 +697,12 @@
       "stages": [
         "residence_registration"
       ],
-      "question": "외국인등록하러 출입국에 갈 때 예약해야 하나요?",
-      "answer": "HiKorea에서 방문예약을 미리 신청하는 방식으로 준비하세요.",
-      "writeExactly": "HiKorea에서 체류지 관할 출입국·외국인관서의 방문예약을 먼저 잡고 방문하세요.",
-      "why": "법무부 서식 안내는 외국인등록을 위한 출입국·외국인관서 방문 시 HiKorea에서 미리 방문예약을 신청하도록 안내합니다.",
+      "question": "Apakah saya perlu reservasi sebelum datang ke kantor imigrasi untuk Residence Card?",
+      "answer": "Siapkan kunjungan dengan membuat reservasi terlebih dahulu melalui HiKorea.",
+      "writeExactly": "Buat reservasi kunjungan di HiKorea untuk kantor imigrasi yang membawahi tempat tinggal Anda, lalu datang sesuai jadwal.",
+      "why": "Panduan formulir Kementerian Kehakiman meminta pemohon pendaftaran orang asing membuat reservasi kunjungan terlebih dahulu melalui HiKorea.",
       "doNotDo": [
-        "예약 가능 여부를 확인하지 않고 바로 방문부터 하지 마세요"
+        "Jangan langsung datang tanpa lebih dulu memeriksa apakah reservasi diperlukan dan tersedia."
       ],
       "sourceUrl": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
       "verifiedAt": "2026-10-04",
@@ -714,12 +714,12 @@
       "stages": [
         "eps_insurance_check"
       ],
-      "question": "EPS 4대보험 중 회사가 가입해야 하는 것은 무엇인가요?",
-      "answer": "출국만기보험과 보증보험은 사용자(회사) 가입 대상입니다.",
-      "writeExactly": "회사 측에 출국만기보험과 임금체불 대비 보증보험 가입 여부를 확인하세요.",
-      "why": "HRD Korea EPS 4대보험 안내에서 출국만기보험과 보증보험의 가입대상을 사용자로 구분합니다.",
+      "question": "Dari 4 asuransi EPS, mana yang wajib didaftarkan oleh perusahaan?",
+      "answer": "Asuransi jaminan keberangkatan (출국만기보험) dan asuransi penjaminan upah (보증보험) merupakan kewajiban pihak pemberi kerja.",
+      "writeExactly": "Konfirmasikan kepada perusahaan apakah 출국만기보험 dan 보증보험 sudah didaftarkan untuk Anda.",
+      "why": "Panduan resmi 4 asuransi EPS membedakan dua asuransi tersebut sebagai kewajiban pihak pemberi kerja.",
       "doNotDo": [
-        "근로자 본인이 회사 의무 보험료를 브로커에게 대신 납부하지 마세요"
+        "Jangan membayar kewajiban asuransi perusahaan kepada broker atas nama perusahaan."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
       "verifiedAt": "2026-10-02",
@@ -731,12 +731,12 @@
       "stages": [
         "eps_insurance_check"
       ],
-      "question": "EPS 4대보험 중 근로자가 가입해야 하는 것은 무엇인가요?",
-      "answer": "귀국비용보험과 상해보험은 외국인근로자 가입 대상입니다.",
-      "writeExactly": "본인 귀국비용보험과 상해보험 가입 여부를 확인하고, 본인 부담 보험과 회사 부담 보험을 구분하세요.",
-      "why": "HRD Korea EPS 4대보험 안내에서 두 보험의 가입대상을 외국인근로자로 구분합니다.",
+      "question": "Dari 4 asuransi EPS, mana yang menjadi kewajiban pekerja asing?",
+      "answer": "Asuransi biaya kepulangan (귀국비용보험) dan asuransi kecelakaan (상해보험) merupakan asuransi yang menjadi kewajiban pekerja asing.",
+      "writeExactly": "Periksa status 귀국비용보험 dan 상해보험 Anda, dan bedakan dengan asuransi yang menjadi kewajiban perusahaan.",
+      "why": "Panduan resmi 4 asuransi EPS membedakan kedua asuransi tersebut sebagai kewajiban pekerja asing.",
       "doNotDo": [
-        "네 보험을 전부 회사 부담 또는 전부 근로자 부담이라고 생각하지 마세요"
+        "Jangan menganggap keempat asuransi semuanya dibayar perusahaan atau semuanya dibayar pekerja."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
       "verifiedAt": "2026-10-02",
@@ -748,12 +748,12 @@
       "stages": [
         "eps_insurance_check"
       ],
-      "question": "신규 E-9의 EPS 4대보험 가입기한은 언제인가요?",
-      "answer": "신규 E-9는 입국일을 근로계약 효력발생일로 보며, 출국만기·보증·상해보험은 15일 이내, 귀국비용보험은 3개월 이내입니다.",
-      "writeExactly": "입국일을 기준일로 잡고 회사 보험(출국만기·보증)과 본인 보험(상해)은 15일 이내, 귀국비용보험은 3개월 이내 가입 여부를 확인하세요.",
-      "why": "HRD Korea EPS 보험안내가 보험별 가입시기와 E-9 신규 근로계약 효력발생일을 규정합니다.",
+      "question": "Untuk pekerja E-9 baru, kapan batas waktu pendaftaran 4 asuransi EPS?",
+      "answer": "Untuk E-9 baru, tanggal masuk diperlakukan sebagai tanggal mulai berlakunya kontrak. 출국만기보험, 보증보험, dan 상해보험 diperiksa dalam 15 hari; 귀국비용보험 dalam 3 bulan.",
+      "writeExactly": "Gunakan tanggal masuk sebagai tanggal acuan. Periksa asuransi perusahaan (출국만기보험·보증보험) dan 상해보험 dalam 15 hari, lalu 귀국비용보험 dalam 3 bulan.",
+      "why": "Panduan asuransi EPS menetapkan waktu pendaftaran tiap asuransi dan menjelaskan tanggal efektif kontrak bagi pekerja E-9 baru.",
       "doNotDo": [
-        "보험 가입기한을 Residence Card 발급일 기준으로 임의 계산하지 마세요"
+        "Jangan menghitung batas waktu asuransi berdasarkan tanggal penerbitan Residence Card."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
       "verifiedAt": "2026-10-02",
@@ -765,12 +765,12 @@
       "stages": [
         "eps_insurance_check"
       ],
-      "question": "보험이 실제로 가입됐는지 어디에 확인하나요?",
-      "answer": "출국만기·귀국비용보험은 삼성화재 1600-0266, 임금체불 보증보험은 서울보증보험 02-777-6689 및 EPS 연계 조회로 확인할 수 있습니다.",
-      "writeExactly": "보험 종류를 먼저 구분한 뒤 해당 보험사/공식 조회경로에서 본인 가입 여부를 직접 확인하세요.",
-      "why": "HRD Korea EPS 4대보험 안내가 보험별 확인 연락처와 조회 경로를 제공합니다.",
+      "question": "Di mana saya dapat memastikan asuransi EPS saya benar-benar sudah terdaftar?",
+      "answer": "Untuk 출국만기보험 dan 귀국비용보험, konfirmasi dapat dilakukan melalui Samsung Fire 1600-0266; untuk 보증보험 melalui Seoul Guarantee Insurance 02-777-6689 dan jalur pengecekan yang terhubung dengan EPS.",
+      "writeExactly": "Tentukan dulu jenis asuransinya, lalu cek langsung status pendaftaran Anda melalui perusahaan asuransi atau kanal resmi yang sesuai.",
+      "why": "Panduan resmi 4 asuransi EPS menyediakan kanal konfirmasi untuk masing-masing jenis asuransi.",
       "doNotDo": [
-        "회사나 브로커의 말만 듣고 가입 완료로 간주하지 마세요"
+        "Jangan menganggap asuransi sudah aktif hanya berdasarkan ucapan perusahaan atau broker."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
       "verifiedAt": "2026-10-02",
@@ -782,13 +782,13 @@
       "stages": [
         "first_payroll_check"
       ],
-      "question": "임금명세서에서 무엇을 확인해야 하나요?",
-      "answer": "임금 구성항목, 각 항목의 계산방법, 그리고 공제했다면 공제내역이 적혀 있어야 합니다.",
-      "writeExactly": "급여를 받을 때 임금명세서를 받아 기본급·수당 등 구성항목, 계산방법, 세금·보험 등 공제내역을 각각 확인하세요.",
-      "why": "근로기준법 제48조는 임금 지급 시 구성항목·계산방법·공제내역 등을 적은 임금명세서를 교부하도록 합니다.",
+      "question": "Apa yang harus saya periksa pada slip/rincian gaji?",
+      "answer": "Slip gaji harus menunjukkan komponen upah, cara perhitungan tiap komponen, dan rincian potongan bila ada.",
+      "writeExactly": "Saat menerima gaji, periksa secara terpisah gaji pokok, tunjangan, cara perhitungan, serta potongan seperti pajak dan asuransi.",
+      "why": "Pasal 48 Labor Standards Act mewajibkan pemberian rincian upah yang memuat komponen, cara perhitungan, dan potongan.",
       "doNotDo": [
-        "통장 입금액만 보고 급여가 맞다고 판단하지 마세요",
-        "설명되지 않은 공제를 그냥 넘기지 마세요"
+        "Jangan menilai gaji hanya dari jumlah yang masuk ke rekening.",
+        "Jangan mengabaikan potongan yang tidak dijelaskan."
       ],
       "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
       "verifiedAt": "2026-10-02",
@@ -800,13 +800,13 @@
       "stages": [
         "first_payroll_check"
       ],
-      "question": "SLC 급여와 첫 월급은 어떤 숫자를 비교해야 하나요?",
-      "answer": "SLC의 기본급·통상임금 등 계약 항목은 임금명세서의 대응되는 급여 구성항목과 먼저 비교하고, 실제 입금액은 총지급액에서 명세된 공제를 뺀 금액과 따로 대조하세요.",
-      "writeExactly": "1) SLC의 기본급/통상임금 ↔ 급여명세서 대응 항목, 2) 명세서 총지급액 - 공제합계 ↔ 실제 계좌 입금액 순서로 확인하세요.",
-      "why": "법은 임금명세서에 임금 구성항목·계산방법·공제내역을 표시하도록 하므로, 계약금액과 실입금액을 한 숫자로 직접 비교하면 공제 때문에 판단이 왜곡될 수 있습니다.",
+      "question": "Angka mana pada SLC yang harus dibandingkan dengan gaji pertama?",
+      "answer": "Bandingkan dulu komponen kontrak seperti gaji pokok dan upah biasa dengan komponen yang sesuai pada slip gaji. Setelah itu, bandingkan jumlah transfer aktual dengan total bruto dikurangi potongan yang tercantum.",
+      "writeExactly": "Periksa berurutan: 1) gaji pokok/upah biasa pada SLC ↔ komponen yang sesuai pada slip gaji, 2) total bruto pada slip - total potongan ↔ jumlah yang benar-benar masuk rekening.",
+      "why": "Karena hukum mewajibkan rincian komponen, cara perhitungan, dan potongan pada slip gaji, membandingkan satu angka kontrak langsung dengan jumlah bersih di rekening dapat menyesatkan.",
       "doNotDo": [
-        "SLC 월 통상임금과 세후 입금액을 바로 비교해 부족하다고 단정하지 마세요",
-        "반대로 공제내역이 불명확한데도 정상이라고 넘기지 마세요"
+        "Jangan langsung menyimpulkan kekurangan hanya dengan membandingkan upah biasa bulanan di SLC dengan jumlah bersih setelah potongan.",
+        "Sebaliknya, jangan menganggap semuanya benar jika potongan tidak jelas."
       ],
       "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
       "verifiedAt": "2026-10-02",
@@ -818,12 +818,12 @@
       "stages": [
         "first_payroll_check"
       ],
-      "question": "2026년 한국 최저임금은 얼마인가요?",
-      "answer": "시간급 10,320원입니다. 주 40시간·월 209시간 환산액은 2,156,880원입니다.",
-      "writeExactly": "시간당 임금이 최저임금에 미달하는지 확인할 때 2026년 기준 10,320원을 사용하세요. 월 2,156,880원은 209시간 환산 기준이므로 모든 근로자의 고정 월 기준으로 단순 적용하지 마세요.",
-      "why": "고용노동부가 2026년 적용 최저임금을 시간급 10,320원으로 확정 고시했습니다.",
+      "question": "Berapa upah minimum Korea untuk tahun 2026?",
+      "answer": "Upah minimum 2026 adalah KRW 10.320 per jam. Nilai konversi bulanan untuk 209 jam adalah KRW 2.156.880.",
+      "writeExactly": "Gunakan KRW 10.320 per jam saat memeriksa apakah upah per jam berada di bawah minimum. Angka KRW 2.156.880 adalah konversi berbasis 209 jam dan tidak boleh diterapkan sebagai angka bulanan tetap untuk semua pekerja.",
+      "why": "Kementerian Ketenagakerjaan Korea menetapkan upah minimum 2026 sebesar KRW 10.320 per jam.",
       "doNotDo": [
-        "209시간을 일하지 않는 경우에도 월 2,156,880원을 무조건 동일하게 적용하지 마세요"
+        "Jangan menerapkan KRW 2.156.880 secara otomatis bila pola jam kerja Anda tidak menggunakan dasar 209 jam."
       ],
       "sourceUrl": "https://moel.go.kr/news/enews/report/enewsView.do?bbs_id=12&news_seq=18144&pageIndex=1&pageUnit=10&searchField=3",
       "verifiedAt": "2026-10-02",
@@ -1241,13 +1241,13 @@
         "slc",
         "first_payroll_check"
       ],
-      "question": "SLC에서 월 통상임금과 기본급은 어떻게 읽나요?",
-      "answer": "둘은 같은 칸이 아닙니다. 표준 SLC는 ‘월 통상임금’을 먼저 표시하고, 그 아래에 기본급·고정적 수당·상여금·수습기간 임금을 구분해 적도록 되어 있습니다.",
-      "writeExactly": "월 통상임금 총액과 기본급을 각각 따로 확인하고, 고정수당·상여금·수습임금이 있으면 그 금액도 별도로 기록하세요.",
-      "why": "외국인근로자 표준근로계약서 제7항 임금란이 월 통상임금과 기본급·고정수당·상여금 등을 별도 항목으로 구분합니다.",
+      "question": "Bagaimana membaca ‘upah biasa bulanan’ dan ‘gaji pokok’ pada SLC?",
+      "answer": "Keduanya bukan kolom yang sama. SLC standar menampilkan 월 통상임금 (upah biasa bulanan), lalu memisahkan gaji pokok, tunjangan tetap, bonus, dan upah masa percobaan.",
+      "writeExactly": "Catat total 월 통상임금 dan gaji pokok secara terpisah. Jika ada tunjangan tetap, bonus, atau upah masa percobaan, catat masing-masing juga.",
+      "why": "Bagian upah pada SLC standar memisahkan upah biasa bulanan dari gaji pokok, tunjangan tetap, bonus, dan komponen lainnya.",
       "doNotDo": [
-        "월 통상임금과 기본급을 같은 숫자라고 단정하지 마세요.",
-        "실수령액을 월 통상임금과 바로 비교하지 마세요."
+        "Jangan menganggap upah biasa bulanan dan gaji pokok selalu angka yang sama.",
+        "Jangan membandingkan jumlah bersih yang diterima langsung dengan upah biasa bulanan."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1259,13 +1259,13 @@
       "stages": [
         "slc"
       ],
-      "question": "SLC에서 근로시간과 휴게시간은 어디를 보나요?",
-      "answer": "제4항에서 시작·종료시간, 1일 평균 시간외근로, 교대제를 보고, 제5항에서 1일 휴게시간(분)을 따로 확인합니다.",
-      "writeExactly": "‘근로시간’의 시작/종료시각과 교대제 여부를 확인한 뒤, ‘휴게시간’의 1일 총 분(minute)을 별도로 확인하세요.",
-      "why": "표준 SLC는 근로시간과 휴게시간을 서로 다른 항목으로 명시합니다.",
+      "question": "Di bagian mana SLC saya harus memeriksa jam kerja dan waktu istirahat?",
+      "answer": "Periksa bagian 4 untuk waktu mulai/selesai, rata-rata lembur per hari, dan sistem shift; lalu bagian 5 untuk total waktu istirahat per hari dalam menit.",
+      "writeExactly": "Periksa jam mulai/selesai dan apakah ada shift pada bagian waktu kerja, lalu periksa total menit istirahat harian pada bagian waktu istirahat secara terpisah.",
+      "why": "SLC standar menempatkan waktu kerja dan waktu istirahat dalam bagian yang berbeda.",
       "doNotDo": [
-        "근무지 체류시간 전체를 근로시간이라고 자동 계산하지 마세요.",
-        "휴게시간을 근로시간 칸과 혼동하지 마세요."
+        "Jangan otomatis menghitung seluruh waktu berada di tempat kerja sebagai jam kerja.",
+        "Jangan mencampur waktu istirahat dengan kolom waktu kerja."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1278,13 +1278,13 @@
         "slc",
         "first_payroll_check"
       ],
-      "question": "SLC에서 기숙사와 식비는 어디까지 확인해야 하나요?",
-      "answer": "제10항에서 숙박 제공 여부·숙박유형·근로자 월 부담액과, 식사 제공 여부·제공 끼니·근로자 월 부담액을 각각 확인합니다.",
-      "writeExactly": "기숙사 제공 여부와 월 부담액, 식사 제공 여부와 월 부담액을 각각 적어 두세요. 신규·재입국자의 부담 수준은 입국 후 사용자와 근로자가 협의해 별도로 정하도록 표준 SLC에 안내돼 있습니다.",
-      "why": "표준 SLC 제10항이 숙박과 식사 제공 및 근로자 부담액을 별도로 명시합니다.",
+      "question": "Apa yang harus saya periksa tentang asrama dan biaya makan pada SLC?",
+      "answer": "Pada bagian 10, periksa apakah akomodasi diberikan, jenis akomodasi dan biaya bulanan pekerja; lalu periksa apakah makan diberikan, berapa kali, dan biaya bulanan pekerja.",
+      "writeExactly": "Catat secara terpisah apakah asrama disediakan dan berapa biaya bulanannya, serta apakah makan disediakan dan berapa biaya bulanannya. Untuk pekerja baru/re-entry, tingkat biaya dapat ditetapkan melalui kesepakatan setelah masuk Korea sesuai SLC standar.",
+      "why": "Bagian 10 SLC standar memisahkan penyediaan akomodasi, makan, dan jumlah biaya yang ditanggung pekerja.",
       "doNotDo": [
-        "‘기숙사 제공’만 보고 무료라고 생각하지 마세요.",
-        "계약서/별도 합의에 없는 금액을 당연한 공제라고 넘기지 마세요."
+        "Jangan menganggap ‘asrama disediakan’ berarti gratis.",
+        "Jangan menganggap potongan yang tidak tercantum dalam kontrak/kesepakatan sebagai hal yang otomatis benar."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1296,12 +1296,12 @@
       "stages": [
         "slc"
       ],
-      "question": "SLC에서 근로자는 어디에 서명하나요?",
-      "answer": "계약서 마지막의 ‘근로자 Employee: (서명 또는 인) / Employee: (signature)’ 부분에 서명 또는 날인합니다.",
-      "writeExactly": "계약서 마지막 근로자(Employee) 서명란에 본인이 서명 또는 날인하고, 사용자(Employer) 서명란에는 서명하지 마세요.",
-      "why": "표준 SLC 마지막 부분에 사용자와 근로자의 서명란이 각각 분리되어 있습니다.",
+      "question": "Di bagian mana pekerja menandatangani SLC?",
+      "answer": "Tanda tangan atau cap pekerja ditempatkan pada bagian akhir kontrak bertuliskan ‘근로자 Employee: (서명 또는 인) / Employee: (signature)’.",
+      "writeExactly": "Tandatangani atau beri cap hanya pada kolom Employee milik Anda sendiri di bagian akhir kontrak.",
+      "why": "Bagian akhir SLC standar menyediakan kolom tanda tangan terpisah untuk Employer dan Employee.",
       "doNotDo": [
-        "Employer 서명란에 대신 서명하지 마세요."
+        "Jangan menandatangani kolom Employer."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1313,12 +1313,12 @@
       "stages": [
         "slc"
       ],
-      "question": "회사 주소와 실제 근무장소가 다르면 SLC에서 무엇을 봐야 하나요?",
-      "answer": "계약서 상단의 ‘소재지(Location of the enterprise)’는 회사 소재지이고, 제2항 ‘근로장소(Place of employment)’는 실제 계약상 근무장소입니다.",
-      "writeExactly": "회사 소재지와 제2항 근로장소를 각각 따로 확인하세요. 실제 출근 장소를 확인할 때는 ‘근로장소’ 항목을 기준으로 보세요.",
-      "why": "표준 SLC는 회사 소재지와 근로장소를 별도 항목으로 구분하고, 계약에서 정한 장소 외 근로를 제한한다고 표시합니다.",
+      "question": "Jika alamat perusahaan berbeda dari lokasi kerja nyata, bagian mana pada SLC yang harus saya lihat?",
+      "answer": "‘Location of the enterprise’ di bagian atas adalah lokasi perusahaan, sedangkan ‘Place of employment / 근로장소’ pada bagian 2 adalah lokasi kerja menurut kontrak.",
+      "writeExactly": "Periksa alamat perusahaan dan 근로장소 secara terpisah. Untuk lokasi tempat Anda seharusnya bekerja, gunakan kolom Place of employment sebagai acuan.",
+      "why": "SLC standar memisahkan lokasi perusahaan dari tempat kerja dan memperlakukan tempat kerja sebagai unsur kontrak yang berbeda.",
       "doNotDo": [
-        "회사 소재지를 실제 출근 장소라고 자동으로 가정하지 마세요."
+        "Jangan otomatis menganggap alamat perusahaan adalah lokasi Anda akan bekerja setiap hari."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1331,12 +1331,12 @@
         "slc",
         "first_payroll_check"
       ],
-      "question": "SLC에 연장·야간·휴일근로 수당은 어떻게 적혀 있나요?",
-      "answer": "표준 SLC는 연장·야간·휴일근로에 통상임금의 50%를 가산한다고 표시하며, 상시근로자 4인 이하 사업장에는 해당 문구가 적용되지 않는다고 적고 있습니다.",
-      "writeExactly": "SLC의 사업장 규모와 연장·야간·휴일근로 시간을 확인한 뒤, 해당되는 경우 통상임금 50% 가산 규정을 기준으로 급여명세서를 대조하세요.",
-      "why": "표준 SLC 제7항 임금란에 해당 가산수당과 4인 이하 사업장 예외가 명시돼 있습니다.",
+      "question": "Bagaimana SLC menjelaskan tambahan upah untuk lembur, kerja malam, dan hari libur?",
+      "answer": "SLC standar menyatakan tambahan 50% dari upah biasa untuk lembur, kerja malam, dan kerja hari libur, serta mencantumkan bahwa ketentuan tersebut tidak berlaku dengan cara yang sama pada tempat kerja dengan 4 pekerja tetap atau kurang.",
+      "writeExactly": "Periksa ukuran tempat kerja dan jam lembur/malam/libur Anda, lalu bandingkan slip gaji dengan ketentuan tambahan 50% bila ketentuan tersebut berlaku.",
+      "why": "Bagian upah pada SLC standar mencantumkan tambahan tersebut sekaligus catatan mengenai tempat kerja dengan 4 pekerja tetap atau kurang.",
       "doNotDo": [
-        "사업장 규모를 확인하지 않고 모든 경우에 동일한 가산율을 기계적으로 적용하지 마세요."
+        "Jangan menerapkan persentase tambahan yang sama secara mekanis tanpa memeriksa ukuran tempat kerja dan aturan yang berlaku."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-02",
@@ -1983,13 +1983,13 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "E-9은 원하면 언제든 사업장을 바꿀 수 있나요?",
-      "answer": "아니요. 법에서 인정하는 사업장 변경 사유가 있을 때 공식 절차로 신청해야 합니다.",
-      "writeExactly": "근로계약 해지·만료, 휴업·폐업, 고용허가 취소·제한, 사용자 책임의 근로조건 위반·부당한 처우, 상해 등 계속 근무가 어려운 경우처럼 법정 사유에 해당하는지 먼저 확인한 뒤 신청하세요.",
-      "why": "고용노동부의 2026 사업장 변경제도 안내는 E-9 외국인근로자가 법정 사유에 해당하는 경우에만 사업장 변경을 허용한다고 설명합니다.",
+      "question": "Apakah pekerja E-9 dapat pindah tempat kerja kapan saja hanya karena ingin pindah?",
+      "answer": "Tidak. Permohonan perubahan tempat kerja harus didasarkan pada alasan yang diakui hukum dan dilakukan melalui prosedur resmi.",
+      "writeExactly": "Periksa lebih dulu apakah situasi Anda termasuk alasan resmi seperti kontrak berakhir/diputus, penghentian atau penutupan usaha, pembatalan/pembatasan izin kerja, pelanggaran kondisi kerja atau perlakuan tidak patut yang menjadi tanggung jawab pemberi kerja, atau cedera yang membuat pekerjaan sulit dilanjutkan.",
+      "why": "Panduan Kementerian Ketenagakerjaan mengenai perubahan tempat kerja menjelaskan bahwa pekerja E-9 dapat pindah bila memenuhi alasan yang diakui hukum.",
       "doNotDo": [
-        "단순히 더 좋은 회사로 가고 싶다는 이유만으로 변경이 자동 승인된다고 생각하지 마세요.",
-        "브로커가 사유를 만들어 줄 수 있다는 말을 믿지 마세요."
+        "Jangan menganggap keinginan pindah ke perusahaan yang lebih baik otomatis cukup sebagai alasan.",
+        "Jangan percaya pihak yang mengatakan broker dapat ‘membuatkan’ alasan resmi."
       ],
       "sourceUrl": "https://www.moel.go.kr/policyitrd/policyItrdView.do?policy_itrd_sn=42",
       "verifiedAt": "2026-10-03",
@@ -2001,13 +2001,13 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "사업장 변경 사유가 생기면 언제까지 신청해야 하나요?",
-      "answer": "고용센터에 1개월 이내 사업장 변경 신청을 해야 합니다.",
-      "writeExactly": "사업장 변경 사유가 발생한 날을 기준으로 1개월이 지나기 전에 고용센터 사업장 변경 신청을 하세요.",
-      "why": "HRD Korea EPS 출입국 관련 신고안내가 사유 발생 후 1개월 이내 고용센터 신청을 명시합니다.",
+      "question": "Jika alasan perubahan tempat kerja sudah terjadi, kapan saya harus mengajukan permohonan?",
+      "answer": "Permohonan perubahan tempat kerja harus diajukan ke employment center dalam waktu 1 bulan.",
+      "writeExactly": "Hitung sejak tanggal alasan perubahan tempat kerja terjadi dan ajukan ke employment center sebelum lewat 1 bulan.",
+      "why": "Panduan resmi EPS menyebut permohonan ke employment center harus dilakukan dalam 1 bulan sejak alasan perubahan terjadi.",
       "doNotDo": [
-        "새 회사를 먼저 구한 뒤 나중에 신고하면 된다고 생각하지 마세요.",
-        "마감 직전까지 미루지 마세요."
+        "Jangan menunggu sampai mendapatkan perusahaan baru terlebih dahulu lalu baru melapor.",
+        "Jangan menunda sampai mendekati batas waktu."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationCompany",
       "verifiedAt": "2026-10-03",
@@ -2019,13 +2019,13 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "사업장 변경 신청은 어디서 하나요?",
-      "answer": "기존 사업장 소재지 관할 지방고용노동관서 지역협력과 또는 EPS 웹/외국인고용관리 모바일 앱에서 신청할 수 있습니다.",
-      "writeExactly": "방문 시 기존 사업장 소재지 관할 지방고용노동관서 지역협력과를 이용하세요. 온라인은 EPS 홈페이지의 일반외국인서비스 → 로그인 → 사업장변경신청, 모바일은 외국인고용관리앱 → 로그인 → 사업장변경 신청 경로를 사용하세요.",
-      "why": "고용노동부 1350 공식 상담안내가 방문·웹·모바일 신청 경로를 구체적으로 안내합니다.",
+      "question": "Di mana saya mengajukan perubahan tempat kerja E-9?",
+      "answer": "Anda dapat mengajukan melalui unit yang berwenang di kantor ketenagakerjaan berdasarkan lokasi tempat kerja sebelumnya, atau melalui layanan EPS web/aplikasi pengelolaan pekerja asing.",
+      "writeExactly": "Untuk kunjungan langsung, periksa kantor ketenagakerjaan yang membawahi lokasi tempat kerja sebelumnya. Untuk online, gunakan menu permohonan perubahan tempat kerja pada EPS setelah login; untuk ponsel gunakan aplikasi resmi pengelolaan pekerja asing.",
+      "why": "Panduan resmi 1350 menjelaskan jalur kunjungan, web EPS, dan aplikasi seluler untuk permohonan perubahan tempat kerja.",
       "doNotDo": [
-        "브로커 사무실을 공식 접수처로 착각하지 마세요.",
-        "사업장 소재지와 무관한 기관에 먼저 가기 전에 관할을 확인하세요."
+        "Jangan menganggap kantor broker sebagai tempat pengajuan resmi.",
+        "Periksa yurisdiksi sebelum pergi ke kantor yang tidak berkaitan dengan lokasi tempat kerja Anda."
       ],
       "sourceUrl": "https://1350.moel.go.kr/rtmview.do?id=1000302820&page=2&type=ALL",
       "verifiedAt": "2026-10-04",
@@ -2037,13 +2037,13 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "E-9 사업장 변경은 몇 번까지 가능한가요?",
-      "answer": "원칙적으로 법정 사유에 해당할 때 최초 3년간 3회, 재고용 1년 10개월간 2회의 사업장 변경이 허용됩니다.",
-      "writeExactly": "사업장 변경을 준비하기 전에 본인이 법정 변경 사유에 해당하는지와 현재까지 사용한 변경 횟수를 관할 고용센터에서 확인하세요.",
-      "why": "고용노동부 사업장 변경제도 안내가 E-9의 법정 사유와 기본 변경 횟수 한도를 명시합니다.",
+      "question": "Berapa kali pekerja E-9 dapat mengganti tempat kerja?",
+      "answer": "Pada prinsipnya, bila ada alasan yang diakui hukum, perubahan tempat kerja dibatasi sampai 3 kali selama masa awal 3 tahun dan 2 kali selama masa re-employment 1 tahun 10 bulan.",
+      "writeExactly": "Sebelum mengajukan, konfirmasikan kepada employment center apakah alasan Anda memenuhi syarat dan berapa jumlah perubahan yang sudah tercatat untuk kasus Anda.",
+      "why": "Panduan Kementerian Ketenagakerjaan menjelaskan alasan resmi dan batas dasar jumlah perubahan tempat kerja untuk E-9.",
       "doNotDo": [
-        "횟수가 남았다는 이유만으로 아무 사유 없이 자유롭게 변경할 수 있다고 생각하지 마세요.",
-        "예외·횟수 산정은 개인 상황에 따라 달라질 수 있으므로 추측하지 마세요."
+        "Jangan menganggap sisa kuota berarti Anda bebas pindah tanpa alasan hukum.",
+        "Pengecualian dan cara menghitung jumlah perubahan dapat berbeda menurut keadaan pribadi; jangan menebak."
       ],
       "sourceUrl": "https://www.moel.go.kr/policyitrd/policyItrdView.do?policy_itrd_sn=42",
       "verifiedAt": "2026-10-03",
@@ -2055,13 +2055,13 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "브로커가 원하는 회사로 사업장 변경을 보장할 수 있나요?",
-      "answer": "공식 사업장 변경 절차는 고용노동관서/EPS 신청, 고용허가, 필요한 출입국 허가로 진행되며 민간 브로커가 특정 회사 배정을 보장하는 공식 단계는 없습니다.",
-      "writeExactly": "특정 회사로 확실히 옮겨 주겠다며 개인에게 돈을 요구하면 공식 절차로 보지 말고, 고용노동부 1350 또는 관할 고용센터/EPS에서 직접 확인하세요.",
-      "why": "정부가 안내하는 사업장 변경 경로는 고용센터·EPS·출입국 절차로 구성되며 민간 브로커의 회사 지정·보장 절차를 두고 있지 않습니다.",
+      "question": "Bisakah broker menjamin saya pindah ke perusahaan tertentu?",
+      "answer": "Prosedur resmi perubahan tempat kerja dilakukan melalui kantor ketenagakerjaan/EPS, izin kerja, dan bila diperlukan prosedur imigrasi. Tidak ada tahap resmi yang memberi broker swasta hak menjamin perusahaan tertentu.",
+      "writeExactly": "Jika seseorang meminta uang sambil menjanjikan kepastian pindah ke perusahaan tertentu, jangan anggap itu jaminan resmi. Konfirmasikan langsung ke 1350, employment center, atau EPS.",
+      "why": "Jalur pemerintah untuk perubahan tempat kerja menggunakan employment center, EPS, dan imigrasi; tidak ada prosedur resmi yang memberikan jaminan penempatan perusahaan oleh broker swasta.",
       "doNotDo": [
-        "'돈을 내면 원하는 회사로 확정 이동'이라는 말을 공식 보장으로 받아들이지 마세요.",
-        "공식 EPS 계정이나 OTP를 브로커에게 넘기지 마세요."
+        "Jangan menganggap janji ‘bayar dan pasti pindah ke perusahaan yang diinginkan’ sebagai jaminan resmi.",
+        "Jangan menyerahkan akun EPS atau OTP kepada broker."
       ],
       "sourceUrl": "https://1350.moel.go.kr/rtmview.do?id=1000302820&page=2&type=ALL",
       "verifiedAt": "2026-10-04",
@@ -2110,14 +2110,14 @@
       "stages": [
         "employment_maintenance"
       ],
-      "question": "사업장 변경 신청할 때 기본적으로 무슨 서류가 필요한가요?",
-      "answer": "사업장 변경신청서(별지 제13호 또는 제13호의2)가 기본입니다. 외국인등록 사실을 행정정보로 확인할 수 없는 경우에만 여권 사본을 첨부하며, 변경 사유 확인에 필요한 증빙은 사유에 따라 추가 요구될 수 있습니다.",
-      "writeExactly": "먼저 공식 사업장 변경신청서를 작성하세요. 여권 사본은 외국인등록 사실을 기관이 확인할 수 없는 경우에 준비하고, 해고·폐업·근로조건 위반·상해 등 본인 변경 사유를 입증할 자료는 관할 노동관서 안내에 따라 추가 제출하세요.",
-      "why": "외국인근로자의 고용 등에 관한 법률 시행규칙 제16조가 신청서, 조건부 여권사본, 그리고 사유 확인을 위한 추가자료 요구 가능성을 규정합니다.",
+      "question": "Dokumen dasar apa yang diperlukan saat mengajukan perubahan tempat kerja?",
+      "answer": "Dokumen dasarnya adalah formulir permohonan perubahan tempat kerja (lampiran No. 13 atau 13-2). Salinan paspor dilampirkan hanya bila fakta pendaftaran orang asing tidak dapat diperiksa melalui data administrasi, dan bukti tambahan dapat diminta sesuai alasan perubahan.",
+      "writeExactly": "Siapkan dulu formulir resmi perubahan tempat kerja. Siapkan salinan paspor hanya bila instansi tidak dapat memeriksa data pendaftaran Anda, lalu siapkan bukti sesuai alasan Anda—misalnya PHK, penutupan usaha, pelanggaran kondisi kerja, atau cedera—sesuai petunjuk kantor ketenagakerjaan.",
+      "why": "Peraturan pelaksanaan undang-undang ketenagakerjaan pekerja asing mengatur formulir, salinan paspor secara bersyarat, dan kemungkinan permintaan bukti tambahan untuk memastikan alasan perubahan.",
       "doNotDo": [
-        "모든 사유에 동일한 증빙서류가 필요하다고 생각하지 마세요.",
-        "브로커가 만든 임의 확인서를 공식서류라고 제출하지 마세요.",
-        "변경 사유를 입증할 자료를 임의로 꾸미지 마세요."
+        "Jangan menganggap semua alasan membutuhkan bukti yang sama.",
+        "Jangan menyerahkan surat buatan broker sebagai dokumen resmi.",
+        "Jangan merekayasa bukti untuk membuat alasan perubahan."
       ],
       "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?MST=271599&OC=unicpla&efYd=20250602&mobileYn=Y&target=law&type=HTML",
       "verifiedAt": "2026-10-03",
@@ -2311,12 +2311,12 @@
       "stages": [
         "labor_support_ready"
       ],
-      "question": "1350에는 어떤 문제를 물어볼 수 있나요?",
-      "answer": "1350은 근로기준·산업안전 등 노동상담과 모성보호·외국인고용허가 등 고용상담을 제공합니다.",
-      "writeExactly": "임금·근로조건·모성보호·외국인고용허가처럼 고용노동 분야에서 공식 상담이 필요하면 1350에 문의하세요.",
-      "why": "고용노동부 1350 전화상담 안내가 노동상담(근로기준·산업안전)과 고용상담(모성보호·외국인고용허가 등)을 공식 상담 분야로 안내합니다.",
+      "question": "Masalah apa saja yang dapat saya konsultasikan ke 1350?",
+      "answer": "1350 memberikan konsultasi resmi mengenai standar ketenagakerjaan, keselamatan kerja, perlindungan maternitas, employment permit system, dan bidang ketenagakerjaan terkait.",
+      "writeExactly": "Untuk masalah upah, kondisi kerja, perlindungan maternitas, atau izin kerja pekerja asing, hubungi 1350 sebagai kanal konsultasi resmi.",
+      "why": "Panduan telepon 1350 Kementerian Ketenagakerjaan mencantumkan konsultasi ketenagakerjaan dan employment permit system sebagai cakupan layanan.",
       "doNotDo": [
-        "1350 상담 자체가 사건 접수·처리 완료라고 생각하지 마세요."
+        "Jangan menganggap konsultasi 1350 sendiri berarti pengaduan atau kasus Anda sudah resmi diajukan dan selesai."
       ],
       "sourceUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
       "verifiedAt": "2026-10-04",
@@ -2328,13 +2328,13 @@
       "stages": [
         "labor_support_ready"
       ],
-      "question": "월급이 덜 들어오거나 지급일이 지났는데 못 받으면 첫 행동은 무엇인가요?",
-      "answer": "임금 지급일을 지난 미지급·부족 지급을 확인하고 증거를 모은 뒤, 사업장 소재지 관할 지방고용노동관서 또는 노동포털에서 임금체불 진정을 제기할 수 있습니다.",
-      "writeExactly": "1) SLC/근로계약서와 급여명세서 확인, 2) 실제 계좌 입금액 확인, 3) 부족액·지급일 기록, 4) 해결되지 않으면 관할 노동관서 방문 또는 노동포털의 임금체불 진정 경로로 신고하세요.",
-      "why": "고용노동부 1350은 재직근로자가 정기 임금지급일 이후 임금을 받지 못한 경우 사업장 관할 노동관서에 진정을 제기할 수 있다고 안내합니다.",
+      "question": "Jika gaji kurang atau tanggal pembayaran sudah lewat tetapi saya belum dibayar, apa langkah pertama?",
+      "answer": "Pastikan ada kekurangan atau keterlambatan setelah tanggal pembayaran, kumpulkan bukti, lalu bila belum terselesaikan Anda dapat mengajukan pengaduan tunggakan upah ke kantor ketenagakerjaan yang membawahi tempat kerja atau melalui Labor Portal.",
+      "writeExactly": "1) Periksa SLC/kontrak dan slip gaji, 2) cek jumlah yang benar-benar masuk rekening, 3) catat jumlah kekurangan dan tanggal pembayaran, 4) jika tidak selesai, ajukan konsultasi/pengaduan melalui kantor ketenagakerjaan atau Labor Portal.",
+      "why": "Panduan resmi 1350 menjelaskan bahwa pekerja yang belum menerima upah setelah tanggal pembayaran dapat mengajukan pengaduan ke kantor ketenagakerjaan yang berwenang.",
       "doNotDo": [
-        "회사와 분쟁이 있다는 이유로 증거를 삭제하지 마세요.",
-        "브로커에게 돈을 내야 노동청 신고가 가능하다고 믿지 마세요."
+        "Jangan menghapus bukti hanya karena sedang berselisih dengan perusahaan.",
+        "Jangan percaya bahwa Anda harus membayar broker agar bisa mengadu ke kantor ketenagakerjaan."
       ],
       "sourceUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
       "verifiedAt": "2026-10-03",
@@ -2347,13 +2347,13 @@
         "labor_support_ready",
         "first_payroll_check"
       ],
-      "question": "임금 문제에 대비해 어떤 증거를 보관해야 하나요?",
-      "answer": "급여자료·급여명세서, 근로계약서/SLC, 근로시간 증빙, 급여통장 입금내역을 우선 보관하세요.",
-      "writeExactly": "매월 SLC/계약서, 임금명세서, 은행 입금내역, 출퇴근·근로시간·연장근로 기록을 같은 기간별로 묶어 보관하세요.",
-      "why": "2026 고용노동부 1350 상담은 임금체불 진정 시 급여자료, 근로계약서, 근로시간 증빙자료 등을 준비하면 원활한 상담이 가능하다고 안내합니다.",
+      "question": "Bukti apa yang sebaiknya saya simpan untuk masalah upah?",
+      "answer": "Simpan data/slip gaji, SLC atau kontrak kerja, bukti jam kerja, dan riwayat transfer pada rekening gaji.",
+      "writeExactly": "Setiap bulan, simpan SLC/kontrak, slip gaji, riwayat transfer bank, serta catatan masuk-pulang, jam kerja, dan lembur untuk periode yang sama.",
+      "why": "Panduan konsultasi resmi 1350 menyebut data gaji, kontrak kerja, bukti waktu kerja, dan bukti rekening sebagai bahan yang membantu pemeriksaan masalah upah.",
       "doNotDo": [
-        "카카오톡/메신저 화면만 남기고 급여명세서나 은행자료를 버리지 마세요.",
-        "원본 증거를 임의 편집하지 마세요."
+        "Jangan hanya menyimpan tangkapan layar chat lalu membuang slip gaji atau bukti bank.",
+        "Jangan mengedit bukti asli."
       ],
       "sourceUrl": "https://1350.moel.go.kr/rtmview.do?id=1000323154",
       "verifiedAt": "2026-10-03",
@@ -2366,12 +2366,12 @@
         "labor_support_ready",
         "employment_maintenance"
       ],
-      "question": "한국어가 어려우면 어디에서 인도네시아어 상담을 받을 수 있나요?",
-      "answer": "외국인력상담센터 1577-0071에서 인도네시아어 상담을 받을 수 있습니다. 안내상 인도네시아어는 7번이며 상담시간은 09:00~18:00입니다.",
-      "writeExactly": "1577-0071로 전화해 인도네시아어(7번) 상담을 요청하세요. 취업·체류·사업주와의 고충 등 EPS 관련 상담에 활용할 수 있습니다.",
-      "why": "HRD Korea EPS 외국인근로자 상담센터 공식 안내가 인도네시아어를 포함한 다국어 상담과 번호·시간을 제공합니다.",
+      "question": "Jika bahasa Korea saya terbatas, di mana saya bisa mendapat konsultasi dalam Bahasa Indonesia?",
+      "answer": "Foreign Workforce Counseling Center 1577-0071 menyediakan konsultasi Bahasa Indonesia. Dalam panduan resmi, Bahasa Indonesia tersedia pada pilihan 7 dan jam layanan 09:00–18:00.",
+      "writeExactly": "Hubungi 1577-0071 dan pilih layanan Bahasa Indonesia (7). Gunakan untuk konsultasi terkait pekerjaan, tinggal di Korea, atau masalah dengan pemberi kerja dalam sistem EPS.",
+      "why": "Panduan resmi HRD Korea EPS untuk pusat konsultasi pekerja asing mencantumkan layanan multibahasa termasuk Bahasa Indonesia, nomor telepon, dan jam layanan.",
       "doNotDo": [
-        "통역이 필요하다는 이유만으로 민간 브로커에게 먼저 개인정보나 계정정보를 넘기지 마세요."
+        "Jangan menyerahkan data pribadi atau informasi akun kepada broker hanya karena Anda membutuhkan bantuan bahasa."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=workerCounseling",
       "verifiedAt": "2026-10-03",
@@ -2383,13 +2383,13 @@
       "stages": [
         "korea_entry_training"
       ],
-      "question": "한국 도착 후 취업교육은 어디에서 받나요?",
-      "answer": "인천공항 입국 후 국가·업종별로 지정된 취업교육기관으로 이동합니다. 모든 사람에게 적용되는 한 개의 고정 주소가 아닙니다.",
-      "writeExactly": "입국계획/현장 안내에 따라 지정 취업교육기관으로 이동하세요. 공항에서 임의로 회사나 브로커 차량을 따라가지 말고 공식 인솔·안내를 확인하세요.",
-      "why": "HRD Korea EPS는 입국 후 취업교육기관으로 이동해 교육을 받는 공식 절차를 안내합니다.",
+      "question": "Setelah tiba di Korea, di mana saya mengikuti pendidikan kerja?",
+      "answer": "Setelah tiba melalui Incheon, pekerja dipindahkan ke lembaga pendidikan kerja yang ditetapkan menurut negara dan sektor. Tidak ada satu alamat tetap yang berlaku untuk semua orang.",
+      "writeExactly": "Ikuti rencana masuk dan arahan petugas resmi menuju lembaga pendidikan yang ditetapkan. Jangan mengikuti kendaraan perusahaan atau broker secara mandiri tanpa memastikan arahan resmi.",
+      "why": "Prosedur resmi HRD Korea EPS menjelaskan pemindahan pekerja ke lembaga pendidikan setelah masuk Korea.",
       "doNotDo": [
-        "교육기관 주소를 오래된 후기에서 고정값으로 사용하지 마세요.",
-        "공식 인솔 절차를 벗어나 임의로 사업장으로 바로 이동하지 마세요."
+        "Jangan memakai alamat lembaga dari pengalaman lama sebagai alamat tetap untuk semua gelombang.",
+        "Jangan meninggalkan alur resmi dan langsung pergi sendiri ke tempat kerja sebelum pendidikan selesai."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
       "verifiedAt": "2026-10-03",
@@ -2401,12 +2401,12 @@
       "stages": [
         "korea_entry_training"
       ],
-      "question": "입국 후 취업교육은 얼마나 받나요?",
-      "answer": "16시간입니다.",
-      "writeExactly": "입국 후 지정 취업교육기관에서 16시간 취업교육을 이수하고, 교육기관에서 진행되는 건강검진 절차도 따르세요.",
-      "why": "HRD Korea EPS 입국절차는 취업교육 16시간과 교육기관 건강검진을 명시합니다.",
+      "question": "Berapa lama pendidikan kerja setelah masuk Korea?",
+      "answer": "Pendidikan kerja berlangsung 16 jam.",
+      "writeExactly": "Selesaikan 16 jam pendidikan kerja di lembaga yang ditetapkan dan ikuti juga pemeriksaan kesehatan yang dilakukan dalam proses tersebut.",
+      "why": "Prosedur masuk HRD Korea EPS menyebut pendidikan kerja 16 jam dan pemeriksaan kesehatan di lembaga pendidikan.",
       "doNotDo": [
-        "교육이 끝나기 전에 개인적으로 사업장으로 이동하지 마세요."
+        "Jangan pergi sendiri ke tempat kerja sebelum proses pendidikan selesai."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
       "verifiedAt": "2026-10-03",
@@ -2419,12 +2419,12 @@
         "korea_entry_training",
         "employer_handover"
       ],
-      "question": "언제 회사로 배치되나요?",
-      "answer": "취업교육을 이수하고 입국 후 건강검진 절차를 거친 뒤, 근로계약을 체결한 사업장으로 배치됩니다.",
-      "writeExactly": "취업교육기관 절차가 끝날 때까지 공식 안내를 따르고, 이후 SLC에 적힌 사업장 인계·배치 절차를 따르세요.",
-      "why": "HRD Korea EPS는 취업교육을 이수한 근로자를 계약 사업장으로 배치한다고 안내합니다.",
+      "question": "Kapan saya diserahkan atau ditempatkan ke perusahaan?",
+      "answer": "Setelah menyelesaikan pendidikan kerja dan pemeriksaan kesehatan setelah masuk, pekerja ditempatkan pada tempat kerja yang tercantum dalam kontrak.",
+      "writeExactly": "Ikuti seluruh prosedur di lembaga pendidikan sampai selesai, lalu ikuti proses penyerahan ke tempat kerja yang tercantum pada SLC.",
+      "why": "HRD Korea EPS menjelaskan bahwa pekerja yang menyelesaikan pendidikan kemudian ditempatkan ke tempat kerja kontraknya.",
       "doNotDo": [
-        "교육 전 임의 사업장 변경이나 브로커 알선을 따르지 마세요."
+        "Jangan mengikuti perubahan tempat kerja informal atau penempatan broker sebelum pendidikan selesai."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
       "verifiedAt": "2026-10-03",
@@ -2436,13 +2436,13 @@
       "stages": [
         "employer_handover"
       ],
-      "question": "기숙사/식사 비용은 언제 어떻게 확인해야 하나요?",
-      "answer": "표준근로계약서의 숙식 제공 여부·유형·근로자 부담금액을 확인하고, 신규 입국자의 실제 비용부담 수준은 입국 후 사용자와 협의해 확정합니다.",
-      "writeExactly": "회사 인계 직후 실제 숙소와 식사 조건을 SLC와 대조하고, 매월 본인이 부담할 숙박비·식비 금액을 공제 시작 전에 명확히 확인해 기록하세요.",
-      "why": "표준근로계약서 서식은 숙박·식사 제공과 근로자 부담금액을 표시하며 신규/재입국자의 비용부담 수준은 입국 후 상호 협의하도록 명시합니다.",
+      "question": "Kapan dan bagaimana saya harus memastikan biaya asrama dan makan setelah tiba?",
+      "answer": "Periksa di SLC apakah akomodasi/makan disediakan, jenisnya, dan jumlah biaya yang ditanggung pekerja. Untuk pekerja baru, tingkat biaya aktual dapat ditetapkan melalui kesepakatan dengan pemberi kerja setelah masuk.",
+      "writeExactly": "Segera setelah diserahkan ke perusahaan, bandingkan kondisi asrama dan makan aktual dengan SLC dan pastikan jumlah biaya bulanan yang akan dipotong sebelum potongan mulai dilakukan.",
+      "why": "SLC standar mencantumkan penyediaan akomodasi/makan dan biaya pekerja, serta menjelaskan bahwa untuk pekerja baru/re-entry tingkat biaya dapat disepakati setelah masuk.",
       "doNotDo": [
-        "금액을 확인하지 않은 채 급여에서 임의 공제되는 것을 그냥 넘기지 마세요.",
-        "SLC와 실제 숙소 조건이 다른데 기록 없이 구두로만 동의하지 마세요."
+        "Jangan membiarkan potongan dilakukan tanpa mengetahui jumlahnya.",
+        "Jika kondisi tempat tinggal berbeda dari SLC, jangan hanya menerima kesepakatan lisan tanpa mencatat perbedaannya."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-03",
@@ -2454,13 +2454,13 @@
       "stages": [
         "employer_handover"
       ],
-      "question": "실제 근로조건이 SLC와 다르면 어떻게 해야 하나요?",
-      "answer": "차이를 기록하고 그대로 묵인하지 마세요. 입국 전 계약한 임금 등 근로조건 위반은 고용허가 취소 사유가 될 수 있으므로 EPS 외국인력상담센터 1577-0071 또는 1350/관할 노동관서에 공식 상담하세요.",
-      "writeExactly": "SLC 원본, 실제 근무시간·임금·숙소 조건, 회사 설명을 기록한 뒤 공식 상담센터에 확인하세요. 임의로 새 조건에 서명하기 전 무엇이 바뀌는지 확인하세요.",
-      "why": "HRD Korea EPS는 입국 전 계약한 임금 또는 근로조건을 사용자가 위반하면 고용허가 취소 사유가 될 수 있다고 안내합니다.",
+      "question": "Apa yang harus saya lakukan jika kondisi kerja nyata berbeda dari SLC?",
+      "answer": "Catat perbedaannya dan jangan langsung mengabaikannya. Pelanggaran pemberi kerja terhadap upah atau kondisi kerja yang disepakati sebelum masuk dapat menjadi masalah resmi; konsultasikan melalui 1577-0071, 1350, atau kantor ketenagakerjaan yang berwenang.",
+      "writeExactly": "Simpan SLC, catat jam kerja/upah/asrama aktual dan penjelasan perusahaan, lalu minta konfirmasi melalui kanal resmi sebelum menandatangani perubahan kondisi baru.",
+      "why": "Panduan HRD Korea EPS menjelaskan bahwa pelanggaran pemberi kerja terhadap upah atau kondisi kerja kontrak sebelum masuk dapat menjadi dasar tindakan terhadap izin kerja.",
       "doNotDo": [
-        "브로커에게 돈을 내고 계약 차이를 '해결'하려 하지 마세요.",
-        "SLC와 다른 조건을 증거 없이 구두로만 받아들이지 마세요."
+        "Jangan membayar broker untuk ‘menyelesaikan’ perbedaan kontrak.",
+        "Jangan menerima kondisi yang berbeda dari SLC hanya secara lisan tanpa bukti."
       ],
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employManageCompnay",
       "verifiedAt": "2026-10-03",
@@ -2472,13 +2472,13 @@
       "stages": [
         "employer_handover"
       ],
-      "question": "회사가 제 통장과 도장을 보관해도 되나요?",
-      "answer": "안 됩니다. 표준근로계약서에는 사용자가 근로자 명의의 예금통장과 도장을 관리해서는 안 된다고 명시돼 있습니다.",
-      "writeExactly": "본인 명의 통장과 도장은 본인이 관리하세요. 회사가 보관하려 하면 표준근로계약서 조항을 확인하고 1577-0071 또는 1350에 상담하세요.",
-      "why": "외국인근로자 표준근로계약서 지급방법 항목에 사용자가 근로자 명의 통장과 도장을 관리해서는 안 된다는 문구가 있습니다.",
+      "question": "Apakah perusahaan boleh menyimpan buku rekening dan stempel pribadi saya?",
+      "answer": "Tidak. SLC standar menyatakan pemberi kerja tidak boleh mengelola atau menahan buku rekening dan stempel atas nama pekerja.",
+      "writeExactly": "Simpan sendiri buku rekening dan stempel Anda. Jika perusahaan meminta menyimpannya, periksa ketentuan SLC dan konsultasikan ke 1577-0071 atau 1350.",
+      "why": "Bagian metode pembayaran pada SLC standar menyatakan pemberi kerja tidak boleh mengelola buku rekening dan stempel milik pekerja.",
       "doNotDo": [
-        "급여 편의를 이유로 통장과 도장을 장기간 회사에 맡기지 마세요.",
-        "인터넷뱅킹 비밀번호·OTP도 타인에게 넘기지 마세요."
+        "Jangan menyerahkan buku rekening dan stempel untuk disimpan lama hanya demi kemudahan pembayaran gaji.",
+        "Jangan menyerahkan kata sandi internet banking atau OTP kepada orang lain."
       ],
       "sourceUrl": "https://www.law.go.kr/flDownload.do?bylClsCd=110202&flSeq=152583453&gubun=",
       "verifiedAt": "2026-10-03",
@@ -2490,14 +2490,14 @@
       "stages": [
         "residence_registration"
       ],
-      "question": "E-9 외국인등록할 때 기본적으로 무엇을 준비해야 하나요?",
-      "answer": "외국인등록 신청서, 여권, 체류지 입증서류, 3.5×4.5cm 여권용 사진 1장을 준비하고, E-9 체류자격별 서류로 사업자등록증을 준비합니다. 법인 사업장이면 법인등기사항전부증명서가 추가될 수 있습니다.",
-      "writeExactly": "HiKorea 방문예약 후, 여권·체류지 입증서류·최근 6개월 이내 3.5×4.5cm 사진 1장·E-9 사업장 사업자등록증을 준비하세요. 법인 사업장이면 법인등기사항전부증명서도 확인하세요. 예약확인서와 관할 출입국 안내에서 추가 요구서류가 있으면 그 안내를 우선 따르세요.",
-      "why": "법무부 외국인등록 안내는 여권·체류지 입증서류·사진을 공통 제출서류로 안내하고, 출입국관리법 시행규칙 별표 5의2는 E-9 외국인등록 체류자격별 첨부서류로 사업자등록증(법인인 경우 법인등기사항전부증명서)을 규정합니다.",
+      "question": "Apa dokumen dasar yang perlu saya siapkan untuk pendaftaran Residence Card sebagai E-9?",
+      "answer": "Siapkan formulir pendaftaran, paspor, bukti tempat tinggal, 1 foto paspor 3,5×4,5 cm, serta 사업자등록증 (business registration certificate) tempat kerja. Untuk badan hukum, 법인등기사항전부증명서 dapat diminta sebagai tambahan.",
+      "writeExactly": "Setelah membuat reservasi HiKorea, siapkan paspor, bukti tempat tinggal, 1 foto 3,5×4,5 cm yang diambil dalam 6 bulan terakhir, dan 사업자등록증 tempat kerja E-9. Jika perusahaan berbadan hukum, cek juga apakah 법인등기사항전부증명서 diperlukan. Ikuti permintaan tambahan pada konfirmasi reservasi atau kantor imigrasi Anda.",
+      "why": "Panduan Kementerian Kehakiman menyebut paspor, bukti tempat tinggal, dan foto sebagai dokumen umum; peraturan pelaksanaan juga mencantumkan dokumen usaha untuk E-9.",
       "doNotDo": [
-        "회사 주소만 적고 실제 체류지 입증서류를 빼먹지 마세요.",
-        "오래된 사진이나 규격이 다른 사진을 쓰지 마세요.",
-        "사업자등록증을 개인 신분증으로 착각하지 마세요."
+        "Jangan hanya menulis alamat perusahaan lalu mengabaikan bukti tempat tinggal yang sebenarnya.",
+        "Jangan memakai foto lama atau ukuran yang salah.",
+        "Jangan mengira business registration certificate adalah kartu identitas pribadi."
       ],
       "sourceUrl": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
       "verifiedAt": "2026-10-03",
@@ -2510,13 +2510,13 @@
       "stages": [
         "residence_registration"
       ],
-      "question": "외국인등록 후 이사하면 주소 변경을 언제까지 신고해야 하나요?",
-      "answer": "전입한 날부터 15일 이내입니다.",
-      "writeExactly": "새 체류지로 실제 전입한 날을 기준으로 15일 이내에 새 체류지의 시·군·구 또는 읍·면·동, 또는 새 체류지를 관할하는 출입국·외국인관서에 체류지 변경신고를 하세요. 신고할 때 외국인등록증을 제출합니다.",
-      "why": "출입국관리법 제36조는 등록외국인이 체류지를 변경한 경우 전입일부터 15일 이내 신고하도록 규정합니다.",
+      "question": "Setelah punya Residence Card, jika saya pindah tempat tinggal kapan harus melaporkan perubahan alamat?",
+      "answer": "Laporkan dalam 15 hari sejak benar-benar pindah ke tempat tinggal baru.",
+      "writeExactly": "Dalam 15 hari sejak tanggal pindah, laporkan perubahan tempat tinggal ke kantor pemerintah setempat yang berwenang atau kantor imigrasi yang membawahi alamat baru, dan siapkan Residence Card saat melapor.",
+      "why": "Pasal 36 Undang-Undang Imigrasi mewajibkan orang asing terdaftar melaporkan perubahan tempat tinggal dalam 15 hari sejak pindah.",
       "doNotDo": [
-        "회사에 주소를 알려준 것만으로 출입국 체류지 변경신고가 끝났다고 생각하지 마세요.",
-        "15일을 넘기지 마세요."
+        "Jangan menganggap memberi tahu perusahaan saja sudah menyelesaikan kewajiban pelaporan alamat ke imigrasi.",
+        "Jangan melewati batas 15 hari."
       ],
       "sourceUrl": "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031822293",
       "verifiedAt": "2026-10-03",
