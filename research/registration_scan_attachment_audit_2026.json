@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-03",
+  "downloadedFilename": "registration_scan_examples_2026.pdf",
+  "sha256": "49326cc84648b0c09aef3bab893e3587d237f62bce8a3e62e9579cd960da3aa3",
+  "bytes": 4587269,
+  "pages": 8,
+  "observedTitle": "CONTOH SCAN PERSYARATAN DOKUMEN PENDAFTARAN",
+  "observedScope": "PENDAFTARAN PROGRAM G TO G KE KOREA TAHUN 2025 — UBT UMUM SEKTOR PERIKANAN DENGAN SISTEM POIN",
+  "decision": "exclude_from_2026_manufacturing_rules",
+  "reason": "The downloaded attachment is explicitly a 2025 fisheries-sector example. It must not be used as a 2026 manufacturing requirement or Exact Answer source.",
+  "safetyRule": "Never promote an attachment into route rules based only on a filename or parent page. Verify year and sector inside the document."
+}
