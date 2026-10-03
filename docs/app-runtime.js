@@ -312,7 +312,9 @@ function exactAnswerApplies(item,stageId){
   if(!item?.stages?.includes(stageId))return false;
   if(sourceNeedsReview(item.sourceUrl))return false;
   if(item.scopeType!=='cohort')return true;
-  return selectedScope(stageId)===item.scopeKey;
+  const selected=selectedScope(stageId);
+  if(Array.isArray(item.scopeKeys)&&item.scopeKeys.length)return item.scopeKeys.includes(selected);
+  return selected===item.scopeKey;
 }
 
 function exactAnswerIdSet(stageId){
@@ -761,6 +763,11 @@ function evaluatePreSubmit(stage){
     issues.push('Data antar dokumen yang Anda bandingkan masih tidak konsisten.');
   }
 
+  const availableScopes=scopeOptionsForStage(stage.id);
+  if(availableScopes.length&&!selectedScope(stage.id)){
+    issues.push('Pilih dulu pengumuman yang benar-benar memuat nama Anda. Aturan tanggal/gelombang tidak boleh ditebak.');
+  }
+
   const pack=documentPackForStage(stage.id);
   if(!pack){
     issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
@@ -835,7 +842,11 @@ function openStage(stage){
 
   const doneBtn=$('stageDoneBtn');
   doneBtn.disabled=!canComplete;
-  doneBtn.textContent=isDone?'Batalkan tahap ini & setelahnya':canComplete?'Tandai selesai & lanjut':'Selesaikan tahap sebelumnya dulu';
+  doneBtn.textContent=isDone
+    ?'Batalkan tahap ini & setelahnya'
+    :canComplete
+      ?(PRE_SUBMIT_STAGES.has(stage.id)?'Periksa & lanjut':'Tandai selesai & lanjut')
+      :'Selesaikan tahap sebelumnya dulu';
   $('stageDialog').showModal();
 }
 
@@ -850,6 +861,18 @@ $('stageDoneBtn').addEventListener('click',(event)=>{
     route.stages.slice(index).forEach(stage=>done.delete(stage.id));
   }else{
     if(firstIncompleteIndex!==-1&&index!==firstIncompleteIndex)return;
+    if(PRE_SUBMIT_STAGES.has(activeStage.id)){
+      const check=evaluatePreSubmit(activeStage);
+      if(!check.ready){
+        const result=$('preSubmitResult');
+        $('preSubmitSection').hidden=false;
+        result.hidden=false;
+        result.className='result risk';
+        result.innerHTML='<strong>JANGAN LANJUT DULU.</strong><p>Selesaikan ini terlebih dahulu:</p><ul class="pre-submit-list">'+check.issues.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+        $('preSubmitSection').scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+    }
     done.add(activeStage.id);
   }
 
@@ -1061,24 +1084,38 @@ function findScopedAnswerChoices(query,stageId){
   const q=normalizeSearch(query);
   if(!q)return [];
   const tokens=q.split(' ').filter(token=>token.length>1);
-  const rows=exactAnswers.answers
-    .filter(item=>item.stages?.includes(stageId)&&item.scopeType==='cohort'&&item.scopeKey)
-    .map(item=>{
+  const scopeMeta=new Map(scopeOptionsForStage(stageId).map(item=>[item.key,item]));
+  const scopes=new Map();
+
+  exactAnswers.answers
+    .filter(item=>item.stages?.includes(stageId)&&item.scopeType==='cohort')
+    .forEach(item=>{
       const hay=normalizeSearch([item.question,item.answer,item.writeExactly,item.why,...(item.doNotDo||[])].join(' '));
       let score=0;
       if(hay.includes(q))score+=20;
       tokens.forEach(token=>{if(hay.includes(token))score+=2});
-      return {item,score};
-    })
-    .filter(row=>row.score>=8)
-    .sort((a,b)=>b.score-a.score);
-  const scopes=new Map();
-  rows.forEach(row=>{
-    const key=row.item.scopeKey;
-    const current=scopes.get(key);
-    if(!current||row.score>current.score)scopes.set(key,row);
-  });
-  return [...scopes.values()].slice(0,5).map(row=>row.item);
+      if(score<8)return;
+
+      const keys=Array.isArray(item.scopeKeys)&&item.scopeKeys.length
+        ?item.scopeKeys
+        :(item.scopeKey?[item.scopeKey]:[]);
+      keys.forEach(key=>{
+        const meta=scopeMeta.get(key);
+        const candidate={
+          ...item,
+          scopeKey:key,
+          scopeLabel:meta?.label||item.scopeLabel||key,
+          sourceUrl:meta?.sourceUrl||item.sourceUrl
+        };
+        const current=scopes.get(key);
+        if(!current||score>current.score)scopes.set(key,{item:candidate,score});
+      });
+    });
+
+  return [...scopes.values()]
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,5)
+    .map(row=>row.item);
 }
 
 function renderScopeChoiceForQuestion(query,out,onChosen){
@@ -1615,7 +1652,10 @@ function renderFormWizardCard(form,index){
     $('formWizardExample').textContent='Jangan submit hanya karena semua langkah sudah dibaca.';
     $('formWizardDont').innerHTML='<strong>Terakhir:</strong> Periksa nama, tanggal, nomor paspor, NIK, alamat, tanda tangan, materai, dan kolom yang memang harus kosong.';
     $('formWizardPrev').disabled=false;
-    $('formWizardNext').hidden=true;
+    const nextForm=stageForms[formIndex+1]||null;
+    $('formWizardNext').hidden=!nextForm;
+    $('formWizardNext').dataset.nextForm=nextForm?.id||'';
+    if(nextForm)$('formWizardNext').textContent='Lanjut ke formulir berikutnya →';
     resetWizardValueCheck(null);
     return;
   }
@@ -1627,9 +1667,12 @@ function renderFormWizardCard(form,index){
   $('formWizardInstruction').textContent=field.instruction;
   $('formWizardExample').textContent=field.example||'';
   $('formWizardDont').innerHTML=field.dont?'<strong>Jangan:</strong> '+escapeHtml(field.dont):'';
-  $('formWizardPrev').disabled=safeIndex===0;
+  const prevForm=stageForms[formIndex-1]||null;
+  $('formWizardPrev').disabled=safeIndex===0&&!prevForm;
+  $('formWizardPrev').dataset.prevForm=safeIndex===0&&prevForm?prevForm.id:'';
   $('formWizardNext').hidden=false;
-  $('formWizardNext').textContent=safeIndex===total-1?'Selesai panduan →':'Berikutnya →';
+  $('formWizardNext').dataset.nextForm='';
+  $('formWizardNext').textContent=safeIndex===total-1?'Selesai formulir →':'Berikutnya →';
 }
 
 function renderFormWizard(stage){
@@ -1661,6 +1704,17 @@ $('formWizardSelect').addEventListener('change',()=>{
 });
 
 $('formWizardPrev').addEventListener('click',()=>{
+  const prevFormId=$('formWizardPrev').dataset.prevForm||'';
+  const stage=currentStage()||route?.stages?.at(-1);
+  if(prevFormId&&stage){
+    const prevForm=formsForStage(stage.id).find(item=>item.id===prevFormId);
+    if(prevForm){
+      $('formWizardSelect').value=prevForm.id;
+      renderFormWizardCard(prevForm,Math.max(0,prevForm.fields.length-1));
+      $('formWizardCard').scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+  }
   const state=read(KEYS.formWizard,{});
   const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
   if(!form)return;
@@ -1668,6 +1722,17 @@ $('formWizardPrev').addEventListener('click',()=>{
 });
 
 $('formWizardNext').addEventListener('click',()=>{
+  const nextFormId=$('formWizardNext').dataset.nextForm||'';
+  const stage=currentStage()||route?.stages?.at(-1);
+  if(nextFormId&&stage){
+    const nextForm=formsForStage(stage.id).find(item=>item.id===nextFormId);
+    if(nextForm){
+      $('formWizardSelect').value=nextForm.id;
+      renderFormWizardCard(nextForm,0);
+      $('formWizardCard').scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+  }
   const state=read(KEYS.formWizard,{});
   const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
   if(!form)return;

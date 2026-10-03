@@ -261,6 +261,7 @@ bad_question_answer_refs = []
 bad_question_wizard_refs = []
 bad_question_scope = []
 bad_question_content = []
+unanswered_catalog_questions = []
 exact_id_set = set(exact_ids)
 for question in broker_questions.get("questions", []):
     question_id = question.get("id", "")
@@ -311,6 +312,14 @@ for question in broker_questions.get("questions", []):
         bad_question_content.append(f"{question_id}:severity_invalid")
     if question.get("severity") == "high" and not question.get("blocksZeroBrokerReady", False):
         bad_question_content.append(f"{question_id}:high_not_blocking")
+    has_verified_route = bool(
+        question.get("answerId")
+        or question.get("answerIds")
+        or question.get("wizardRef")
+        or question.get("wizardRefs")
+    )
+    if not has_verified_route:
+        unanswered_catalog_questions.append(question_id)
 
 question_dupes = [key for key, count in Counter(question_ids).items() if key and count > 1]
 if question_dupes:
@@ -330,6 +339,9 @@ if bad_question_scope:
 
 if bad_question_content:
     errors.append("broker questions missing/invalid required content: " + ", ".join(sorted(bad_question_content)))
+
+if unanswered_catalog_questions:
+    errors.append("broker-question catalog contains unanswered items: " + ", ".join(sorted(unanswered_catalog_questions)))
 
 form_ids = []
 wizard_field_ids = []
