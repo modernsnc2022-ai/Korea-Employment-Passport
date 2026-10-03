@@ -715,9 +715,19 @@ function renderExactAnswers(stage){
         <div class="exact-line"><strong>Berlaku untuk:</strong>${escapeHtml(exactScopeLabel(item))}</div>
         <div class="exact-line"><strong>Status:</strong>${escapeHtml(exactVerificationLabel(item))} · diperiksa ${escapeHtml(item.verifiedAt||'')}</div>
         <a class="source" href="${item.sourceUrl}" target="_blank" rel="noopener">Lihat dasar resmi ↗</a>
+        <button type="button" class="exact-more" data-exact-more="${escapeHtml(item.id)}">Masih bingung? Tanya lebih spesifik</button>
       </div>
     </details>`;
   }).join('');
+  list.querySelectorAll('[data-exact-more]').forEach(button=>button.addEventListener('click',()=>{
+    const item=answers.find(row=>row.id===button.dataset.exactMore);
+    if(!item)return;
+    if($('stageDialog')?.open)$('stageDialog').close();
+    const input=$('brokerLikeQuestion');
+    input.value=item.question+' — ';
+    document.querySelector('.micro-help')?.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>input.focus(),250);
+  }));
 }
 
 const PRE_SUBMIT_STAGES=new Set([
