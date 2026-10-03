@@ -105,6 +105,13 @@ test('visa document helper shows one field at a time on mobile', async ({ page }
   const after = await page.locator('#formWizardProgress').textContent();
   expect(after).not.toBe(before);
 
+  const reviewState = await page.evaluate(() => ({
+    reviewed: JSON.parse(localStorage.getItem('kep.formWizardReviewed') || '[]'),
+    leakedValue: localStorage.getItem('formFieldValue')
+  }));
+  expect(reviewState.reviewed.length).toBeGreaterThan(0);
+  expect(reviewState.leakedValue).toBeNull();
+
   const overflow = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth
@@ -129,6 +136,56 @@ test('notice-specific answers stay hidden until the user selects the matching no
   await expect(page.locator('#exactAnswerList')).not.toContainText(wave10Location);
   await page.locator('#scopePicker').selectOption('opp_sawangan_wave10_2026');
   await expect(page.locator('#exactAnswerList')).toContainText(wave10Location);
+
+  expect(errors).toEqual([]);
+});
+
+test('simple UX lock: first-time user can identify now, ask, and continue without opening extra panels', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await freshPage(page);
+
+  await expect(page.locator('.how-to-use')).toContainText('Ikuti “Langkah sekarang”');
+  await expect(page.locator('.how-to-use')).toContainText('Kalau ragu sekecil apa pun, tanya');
+  await expect(page.locator('.how-to-use')).toContainText('Selesai');
+
+  await page.locator('[data-quick-stage="eligibility"]').click();
+
+  await expect(page.locator('#nextAction')).toBeVisible();
+  await expect(page.locator('#nextAction')).toContainText('LANGKAH BERIKUTNYA');
+  await expect(page.locator('#brokerLikeQuestion')).toBeVisible();
+  await expect(page.locator('#brokerLikeQuestionBtn')).toBeVisible();
+
+  const primaryActions = await page.locator('#nextAction .primary:visible').count();
+  expect(primaryActions).toBe(1);
+
+  await expect(page.locator('.context-tools')).not.toHaveAttribute('open', '');
+  await expect(page.locator('.trust-panel')).not.toHaveAttribute('open', '');
+
+  expect(errors).toEqual([]);
+});
+
+test('form wizard exposes only one actionable field instruction at a time', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await freshPage(page);
+  await setStage(page, 'visa_docs');
+
+  await page.locator('.utility-tab[data-view="documents"]').click();
+  await page.locator('#docScopeSelect').selectOption('visa_sep08_2026');
+
+  await expect(page.locator('#formWizardSection')).toBeVisible();
+  await expect(page.locator('#formWizardCard')).toBeVisible();
+
+  const visibleLabels = await page.locator('#formWizardCard #formWizardLabel:visible').count();
+  const visibleInstructions = await page.locator('#formWizardCard #formWizardInstruction:visible').count();
+  const visibleExamples = await page.locator('#formWizardCard #formWizardExample:visible').count();
+  expect(visibleLabels).toBe(1);
+  expect(visibleInstructions).toBe(1);
+  expect(visibleExamples).toBe(1);
+
+  const initialLabel = await page.locator('#formWizardLabel').textContent();
+  await page.locator('#formWizardNext').click();
+  const nextLabel = await page.locator('#formWizardLabel').textContent();
+  expect(nextLabel).not.toBe(initialLabel);
 
   expect(errors).toEqual([]);
 });
