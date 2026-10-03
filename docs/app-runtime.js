@@ -12,8 +12,9 @@ const FORM_WIZARDS_URL='data/form_wizards_2026.json';
 const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
+const DEPARTURE_CALLS_URL='data/departure_calls_2026.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -332,7 +333,8 @@ async function boot(){
       formWizards,
       formLineage,
       sourceReviewStatus,
-      officialHelp
+      officialHelp,
+      departureCalls
     ]=await Promise.all([
       fetchJsonRequired(ROUTE_URL),
       fetchJsonRequired(RULES_URL),
@@ -364,6 +366,11 @@ async function boot(){
         OFFICIAL_HELP_URL,
         {version:'unavailable',verifiedAt:null,channels:[],stageMap:{}},
         'official help channels'
+      ),
+      fetchJsonOptional(
+        DEPARTURE_CALLS_URL,
+        {version:'unavailable',coverageStatus:'unavailable',complete:false,calls:[]},
+        'departure call registry'
       )
     ]);
     $('routeTitle').textContent='Indonesia → Korea';
@@ -784,6 +791,13 @@ function scopeOptionsForStage(stageId){
       key:pack.scopeKey,
       label:pack.scopeLabel||pack.scopeKey,
       sourceUrl:pack.sourceUrl||''
+    }));
+  (departureCalls?.calls||[])
+    .filter(call=>call.stages?.includes(stageId)&&call.key)
+    .forEach(call=>rows.push({
+      key:call.key,
+      label:call.label||call.key,
+      sourceUrl:call.sourceUrl||''
     }));
   const map=new Map();
   rows.forEach(item=>{
