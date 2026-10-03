@@ -111,6 +111,14 @@ require(
     mcu1_candidates[0].get("id") == "mcu1_2026" and mcu1_candidates[0].get("status") == "verified_2026",
     "MCU I most-specific document pack must remain the verified mcu1_2026 pack",
 )
+post_slc_pack = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "post_slc_mcu2_2026"), {})
+require(
+    post_slc_pack.get("status") == "verified_across_multiple_2026_notices"
+    and post_slc_pack.get("appliesTo") == ["post_slc_requirements"]
+    and len(post_slc_pack.get("items", [])) >= 9,
+    "post_slc_requirements must expose a verified psychology/MCU II preparation pack",
+)
+
 psych_pack = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "psychology_pre_job_2026"), {})
 require(
     psych_pack.get("status") == "verified_2026"
