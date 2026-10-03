@@ -48,8 +48,8 @@ Public beta recruitment must remain **HOLD** until every required item below is 
 When sections 1–7 all PASS:
 1. change recruitment status from HOLD to OPEN;
 2. open the first-30 active-applicant beta;
-3. assign KEP-0001 through KEP-0030 in eligibility/activation order;
-4. grant each accepted beta account 6 months free from activation;
+3. assign KEP-0001 through KEP-0030 to eligible applicants in application-received timestamp order after recruitment becomes OPEN;
+4. activation timing must not change queue order; grant each accepted beta account 6 months free from its actual activation date;
 5. continue recruiting KEP-0031 through KEP-0050 separately as the E-9 worker retrospective validation panel.
 
 ## Launch principle
