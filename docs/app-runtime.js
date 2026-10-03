@@ -244,7 +244,7 @@ const STAGE_TOOLS={
   korea_entry_training:[],
   employer_handover:['workplace'],
   residence_registration:['documents'],
-  eps_insurance_check:['fees'],
+  eps_insurance_check:[],
   first_payroll_check:['payroll'],
   labor_support_ready:['gaps'],
   employment_maintenance:['gaps']
