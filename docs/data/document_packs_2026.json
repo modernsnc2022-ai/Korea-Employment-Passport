@@ -187,10 +187,7 @@
     {
       "id": "korea_residence",
       "appliesTo": [
-        "korea_entry_training",
-        "employer_handover",
-        "residence_registration",
-        "eps_insurance_check"
+        "residence_registration"
       ],
       "status": "verified_current_immigration",
       "title": "Foreign Resident Registration / Residence Card",
