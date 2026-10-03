@@ -29,7 +29,9 @@ def assign(rows, joined_date, current_stage, source_channel):
     target["current_stage"]=current_stage
     target["in_korea"]="yes"
     target["e9_experience"]="confirmed"
+    target["experience_year"]=""
     target["interview_status"]="new"
+    target["workplace_evidence_status"]="pending"
     target["broker_gap_status"]="open"
     target["retest_status"]="pending"
     return target
@@ -47,6 +49,8 @@ def self_test():
     assert second["tester_id"]=="KEP-0032"
     assert first["in_korea"]=="yes"
     assert first["e9_experience"]=="confirmed"
+    assert first["experience_year"]==""
+    assert first["workplace_evidence_status"]=="pending"
     try:
         assign(rows,"2026-10-06","not_a_stage","community_admin")
     except ValueError as exc:
