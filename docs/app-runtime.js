@@ -2043,10 +2043,18 @@ function renderDocuments(){
         const status=article.querySelector('.file-status');
         if(!file){status.textContent='Belum ada file yang diperiksa';status.className='file-status';return}
         const errors=[];
+        if(file.size===0)errors.push('file kosong');
         if(maxSize&&file.size>maxSize*1024*1024)errors.push('ukuran lebih dari '+maxSize+' MB');
         const lower=file.name.toLowerCase();
-        if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('format harus PDF');
-        if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('format harus JPG/JPEG');
+        if(doc.format==='PDF'&&!lower.endsWith('.pdf'))errors.push('nama file harus berakhiran .pdf');
+        if(doc.format==='JPG'&&!/\.jpe?g$/.test(lower))errors.push('nama file harus berakhiran .jpg/.jpeg');
+        try{
+          const signature=await detectFileSignature(file);
+          if(doc.format==='PDF'&&signature!=='PDF')errors.push('isi file bukan PDF asli');
+          if(doc.format==='JPG'&&signature!=='JPG')errors.push('isi file bukan JPEG asli');
+        }catch{
+          errors.push('format internal file tidak dapat dibaca');
+        }
         if(/photo/i.test(doc.id)&&!errors.length){
           try{
             const ratio=await readImageRatio(file);
@@ -2057,7 +2065,7 @@ function renderDocuments(){
           }
         }
         status.className='file-status '+(errors.length?'bad':'ok');
-        status.textContent=errors.length?'Periksa ulang: '+errors.join('; '):'Format/ukuran lolos pemeriksaan · '+(file.size/1024/1024).toFixed(2)+' MB';
+        status.textContent=errors.length?'Periksa ulang: '+errors.join('; '):'Format asli/ukuran lolos pemeriksaan · '+(file.size/1024/1024).toFixed(2)+' MB';
       });
     }
     list.appendChild(article);
