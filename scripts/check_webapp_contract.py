@@ -288,6 +288,12 @@ bad_form_stage_refs = []
 bad_form_sources = []
 bad_form_content = []
 bad_form_scope = []
+bad_form_validator = []
+allowed_validator_types = {
+    "blank", "exact_ci", "contains_ci", "date_yyyy_mm_dd", "email",
+    "nik16", "phone", "passport", "uppercase_nonempty", "relationship_en",
+    "cpmi_id", "digits", "nonempty"
+}
 for form in form_wizards.get("forms", []):
     form_id = form.get("id", "")
     form_ids.append(form_id)
@@ -318,6 +324,15 @@ for form in form_wizards.get("forms", []):
         for required in ("id", "label", "instruction", "example"):
             if not str(field.get(required, "")).strip():
                 bad_form_content.append(f"{form_id}:{field_id}:{required}")
+        validator = field.get("validator")
+        if validator is not None:
+            vtype = validator.get("type")
+            if vtype not in allowed_validator_types:
+                bad_form_validator.append(f"{form_id}:{field_id}:type={vtype}")
+            if vtype in {"exact_ci", "contains_ci"} and not str(validator.get("expected", "")).strip():
+                bad_form_validator.append(f"{form_id}:{field_id}:missing_expected")
+            if not str(validator.get("label", "")).strip():
+                bad_form_validator.append(f"{form_id}:{field_id}:missing_label")
 
 form_dupes = [key for key, count in Counter(form_ids).items() if key and count > 1]
 if form_dupes:
@@ -339,6 +354,9 @@ if bad_form_content:
 if bad_form_scope:
     errors.append("form wizards have invalid/mismatched scope metadata: " + ", ".join(sorted(bad_form_scope)))
 
+if bad_form_validator:
+    errors.append("form wizards have invalid validator metadata: " + ", ".join(sorted(bad_form_validator)))
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -356,5 +374,6 @@ print(
     f"broker_questions={len(broker_questions.get('questions', []))}",
     f"form_wizards={len(form_wizards.get('forms', []))}",
     f"form_fields={sum(len(form.get('fields', [])) for form in form_wizards.get('forms', []))}",
+    f"form_validators={sum(1 for form in form_wizards.get('forms', []) for field in form.get('fields', []) if field.get('validator'))}",
     f"js_literal_refs={len(literal_refs)}",
 )

@@ -1134,12 +1134,108 @@ function formsForStage(stageId){
   return (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId));
 }
 
+function validateWizardValue(value,validator){
+  const raw=String(value??'');
+  const text=raw.trim();
+  const type=validator?.type;
+  if(!type)return {ok:null,message:'Tidak ada pemeriksaan otomatis untuk kolom ini.'};
+
+  if(type==='blank'){
+    return text===''?{ok:true,message:'Benar — kolom ini dibiarkan kosong.'}:{ok:false,message:'Kolom ini harus dikosongkan.'};
+  }
+  if(type==='exact_ci'){
+    const expected=String(validator.expected||'').trim();
+    return text.toUpperCase()===expected.toUpperCase()
+      ?{ok:true,message:'Benar — nilainya sesuai petunjuk.'}
+      :{ok:false,message:'Tulis persis: '+expected};
+  }
+  if(type==='contains_ci'){
+    const expected=String(validator.expected||'').trim();
+    return text.toUpperCase().includes(expected.toUpperCase())
+      ?{ok:true,message:'Benar — nilai memuat '+expected+'.'}
+      :{ok:false,message:'Nilai harus memuat '+expected+'.'};
+  }
+  if(type==='date_yyyy_mm_dd'){
+    const m=text.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+    if(!m)return {ok:false,message:'Gunakan format YYYY/MM/DD, contoh 1995/04/17.'};
+    const y=Number(m[1]),mo=Number(m[2]),d=Number(m[3]);
+    const dt=new Date(Date.UTC(y,mo-1,d));
+    const valid=dt.getUTCFullYear()===y&&dt.getUTCMonth()===mo-1&&dt.getUTCDate()===d;
+    return valid?{ok:true,message:'Format tanggal valid.'}:{ok:false,message:'Tanggal tidak valid. Periksa tahun, bulan, dan hari.'};
+  }
+  if(type==='email'){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)
+      ?{ok:true,message:'Format email valid.'}
+      :{ok:false,message:'Format email belum valid.'};
+  }
+  if(type==='nik16'){
+    return /^\d{16}$/.test(text)
+      ?{ok:true,message:'Format NIK 16 digit valid.'}
+      :{ok:false,message:'NIK harus 16 digit angka.'};
+  }
+  if(type==='phone'){
+    const digits=text.replace(/[^0-9]/g,'');
+    return digits.length>=8&&digits.length<=16
+      ?{ok:true,message:'Format dasar nomor telepon terlihat valid.'}
+      :{ok:false,message:'Periksa nomor telepon; gunakan nomor aktif dengan 8–16 digit.'};
+  }
+  if(type==='passport'){
+    return /^[A-Za-z0-9]{5,12}$/.test(text)
+      ?{ok:true,message:'Format dasar nomor paspor terlihat valid.'}
+      :{ok:false,message:'Gunakan nomor paspor terbaru tanpa spasi/simbol tambahan.'};
+  }
+  if(type==='uppercase_nonempty'){
+    if(!text)return {ok:false,message:'Kolom ini tidak boleh kosong.'};
+    return text===text.toUpperCase()
+      ?{ok:true,message:'Terisi dan huruf kapital.'}
+      :{ok:false,message:'Gunakan huruf kapital sesuai petunjuk formulir.'};
+  }
+  if(type==='relationship_en'){
+    const allowed=['FATHER','MOTHER','HUSBAND','WIFE','SISTER','BROTHER'];
+    return allowed.includes(text.toUpperCase())
+      ?{ok:true,message:'Hubungan ditulis dalam bahasa Inggris.'}
+      :{ok:false,message:'Gunakan salah satu: '+allowed.join(', ')+'.'};
+  }
+  if(type==='cpmi_id'){
+    return /^ID\d+$/i.test(text)
+      ?{ok:true,message:'Format ID CPMI terlihat valid.'}
+      :{ok:false,message:'ID CPMI harus mengikuti format ID + angka dari pengumuman/name tag.'};
+  }
+  if(type==='digits'){
+    return /^\d+$/.test(text)
+      ?{ok:true,message:'Format angka valid.'}
+      :{ok:false,message:'Gunakan angka saja, tanpa spasi atau tanda baca.'};
+  }
+  if(type==='nonempty'){
+    return text?{ok:true,message:'Kolom sudah terisi.'}:{ok:false,message:'Kolom ini tidak boleh kosong.'};
+  }
+  return {ok:null,message:'Jenis pemeriksaan belum didukung.'};
+}
+
+function resetWizardValueCheck(field){
+  const wrap=$('formFieldCheck');
+  const input=$('formFieldValue');
+  const result=$('formFieldCheckResult');
+  input.value='';
+  result.hidden=true;
+  result.className='result';
+  result.textContent='';
+  wrap.open=false;
+  wrap.hidden=!field?.validator;
+  if(field?.validator){
+    input.placeholder=field.validator.type==='blank'
+      ?'Biarkan kosong lalu tekan “Periksa nilai”'
+      :'Tempel nilai yang Anda tulis — tidak disimpan';
+  }
+}
+
 function renderFormWizardCard(form,index){
   const card=$('formWizardCard');
   const intro=$('formWizardIntro');
   if(!form){
     card.hidden=true;
     intro.innerHTML='';
+    resetWizardValueCheck(null);
     return;
   }
 
@@ -1163,10 +1259,12 @@ function renderFormWizardCard(form,index){
     $('formWizardDont').innerHTML='<strong>Terakhir:</strong> Periksa nama, tanggal, nomor paspor, NIK, alamat, tanda tangan, materai, dan kolom yang memang harus kosong.';
     $('formWizardPrev').disabled=false;
     $('formWizardNext').hidden=true;
+    resetWizardValueCheck(null);
     return;
   }
 
   const field=form.fields[safeIndex];
+  resetWizardValueCheck(field);
   $('formWizardProgress').textContent='Kolom '+(safeIndex+1)+' dari '+total;
   $('formWizardLabel').textContent=field.label;
   $('formWizardInstruction').textContent=field.instruction;
@@ -1217,6 +1315,30 @@ $('formWizardNext').addEventListener('click',()=>{
   const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
   if(!form)return;
   renderFormWizardCard(form,Math.min(form.fields.length,Number(state.index||0)+1));
+});
+
+
+function checkCurrentWizardValue(){
+  const state=read(KEYS.formWizard,{});
+  const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
+  if(!form)return;
+  const field=form.fields?.[Number(state.index||0)];
+  if(!field?.validator)return;
+
+  const input=$('formFieldValue');
+  const out=$('formFieldCheckResult');
+  const checked=validateWizardValue(input.value,field.validator);
+  out.hidden=false;
+  out.className='result '+(checked.ok===true?'safe':checked.ok===false?'risk':'warn');
+  out.textContent=checked.message;
+}
+
+$('formFieldCheckBtn').addEventListener('click',checkCurrentWizardValue);
+$('formFieldValue').addEventListener('keydown',(event)=>{
+  if(event.key==='Enter'){
+    event.preventDefault();
+    checkCurrentWizardValue();
+  }
 });
 
 function documentPackForStage(stageId){
