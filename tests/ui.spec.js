@@ -485,3 +485,32 @@ test('unexperienced beta stage never counts as zero-broker evidence', async ({ p
   await expect(page.locator('#betaValidationSummary')).toContainText('Belum dijalani/tidak dapat dinilai: 1');
   expect(errors).toEqual([]);
 });
+
+
+test('workplace reality check separates public evidence from worker testimony', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await freshPage(page);
+  await page.locator('[data-quick-stage="eligibility"]').click();
+
+  await page.evaluate(() => switchView('workplace', false));
+  await expect(page.locator('#workplace')).toBeVisible();
+  await expect(page.locator('#workplaceEvidencePolicy')).toContainText('Mulai dari bukti publik dan SLC');
+  await expect(page.locator('#realityChecks .evidence-badge')).toHaveCount(8);
+  await expect(page.locator('#realityChecks .evidence-badge.public')).toHaveCount(5);
+  await expect(page.locator('#realityChecks .evidence-badge.worker')).toHaveCount(3);
+  await expect(page.locator('#workplaceCoverageDetail')).toContainText('Bukti publik/kontrak: 0/5');
+  await expect(page.locator('#workplaceCoverageDetail')).toContainText('Bukti pengalaman pekerja: 0/3');
+
+  const first = page.locator('#realityChecks article').first();
+  await expect(first.locator('.verify-state')).toHaveText('Belum diverifikasi');
+  await first.locator('input[type="checkbox"]').check();
+  await expect(first.locator('.verify-state')).toHaveText('Sudah diperiksa');
+  await expect(page.locator('#workplaceCoverageDetail')).toContainText('Bukti publik/kontrak: 1/5');
+
+  const overflow = await page.evaluate(() => ({
+    scrollWidth: document.documentElement.scrollWidth,
+    innerWidth: window.innerWidth
+  }));
+  expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
+  expect(errors).toEqual([]);
+});
