@@ -29,6 +29,13 @@ if '<details class="trust-panel"' not in html:
     errors.append("simple UX lock requires technical trust details collapsed")
 if 'id="formWizardCard"' not in html:
     errors.append("simple UX lock requires one-field-at-a-time form wizard")
+if '<details id="allJourneyDetails"' not in html:
+    errors.append("simple UX lock requires full journey collapsed by default")
+if 'id="quickStart"' not in html:
+    errors.append("simple UX lock requires first-use quick start")
+utility_tabs = re.findall(r'class="utility-tab[^"]*"\s+data-view="([^"]+)"', html)
+if len(utility_tabs) != 4:
+    errors.append(f"simple UX lock requires exactly 4 primary bottom-nav items, got {len(utility_tabs)}")
 if "cohort" in html.lower():
     errors.append("user-facing HTML contains internal jargon: cohort")
 
