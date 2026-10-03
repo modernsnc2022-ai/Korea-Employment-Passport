@@ -11,6 +11,7 @@ const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const FORM_WIZARDS_URL='data/form_wizards_2026.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',quickSetup:'kep.quickSetupDone'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,i18n={},activeStage=null,deferredInstall=null;
+let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
@@ -631,6 +632,10 @@ function evaluatePreSubmit(stage){
     if(unresolvedHigh.length>8)issues.push('+'+(unresolvedHigh.length-8)+' pertanyaan blocker lain belum terverifikasi.');
   }
 
+  if(consistencyRisk.hasMismatch&&consistencyRisk.stageId===stage.id){
+    issues.push('Data antar dokumen yang Anda bandingkan masih tidak konsisten.');
+  }
+
   const pack=documentPackForStage(stage.id);
   if(!pack){
     issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
@@ -1087,6 +1092,106 @@ $('brokerLikeQuestion').addEventListener('keydown',(event)=>{
     answerBrokerLikeQuestion();
   }
 });
+
+
+const CONSISTENCY_GROUPS=[
+  {label:'Nama',ids:['consNamePassport','consNameSlc','consNameKtp','consNameBank'],normalizer:'name'},
+  {label:'Tanggal lahir',ids:['consDobPassport','consDobKtp','consDobSlc'],normalizer:'date'},
+  {label:'Nomor paspor',ids:['consPassportMain','consPassportSkck','consPassportVisa'],normalizer:'id'},
+  {label:'NIK',ids:['consNikKtp','consNikVisa','consNikOther'],normalizer:'id'}
+];
+
+function normalizeConsistencyValue(value,type){
+  const text=String(value||'').trim();
+  if(!text)return '';
+  if(type==='name'){
+    return text.normalize('NFKC').replace(/\s+/g,' ').toUpperCase();
+  }
+  if(type==='id'){
+    return text.normalize('NFKC').replace(/[\s-]+/g,'').toUpperCase();
+  }
+  if(type==='date'){
+    const raw=text.replace(/[.\-]/g,'/').replace(/\s+/g,'');
+    let m=raw.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+    if(m)return [m[1],String(Number(m[2])).padStart(2,'0'),String(Number(m[3])).padStart(2,'0')].join('-');
+    m=raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if(m)return [m[3],String(Number(m[2])).padStart(2,'0'),String(Number(m[1])).padStart(2,'0')].join('-');
+    return raw.toUpperCase();
+  }
+  return text;
+}
+
+function evaluateConsistency(){
+  const checked=[];
+  const mismatches=[];
+  const formatWarnings=[];
+
+  CONSISTENCY_GROUPS.forEach(group=>{
+    const values=group.ids
+      .map(id=>({id,value:$(id)?.value?.trim()||''}))
+      .filter(row=>row.value!=='');
+    if(values.length<2)return;
+
+    checked.push(group.label);
+    const normalized=values.map(row=>normalizeConsistencyValue(row.value,group.normalizer));
+    if(new Set(normalized).size>1){
+      mismatches.push(group.label);
+    }
+
+    if(group.label==='NIK'){
+      values.forEach(row=>{
+        const v=normalizeConsistencyValue(row.value,'id');
+        if(!/^\d{16}$/.test(v))formatWarnings.push('NIK harus 16 digit.');
+      });
+    }
+  });
+
+  return {checked,mismatches,formatWarnings:[...new Set(formatWarnings)]};
+}
+
+$('checkConsistencyBtn').addEventListener('click',()=>{
+  const out=$('consistencyResult');
+  const result=evaluateConsistency();
+  const stage=currentStage();
+
+  out.hidden=false;
+  if(!result.checked.length){
+    out.className='result warn';
+    out.innerHTML='<strong>Belum cukup data untuk dibandingkan.</strong><p>Isi minimal dua sumber untuk satu kelompok, misalnya nama di Paspor dan nama di SLC.</p>';
+    consistencyRisk={stageId:stage?.id||null,hasMismatch:false};
+    return;
+  }
+
+  const issues=[...result.mismatches.map(x=>'Tidak sama: '+x),...result.formatWarnings];
+  if(issues.length){
+    out.className='result risk';
+    out.innerHTML='<strong>JANGAN SUBMIT DULU.</strong><p>Ada perbedaan yang perlu dijelaskan atau diperbaiki:</p><ul class="pre-submit-list">'+issues.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul><p>Periksa dokumen sumber dan aturan resmi sebelum mengubah data.</p>';
+    consistencyRisk={stageId:stage?.id||null,hasMismatch:true};
+  }else{
+    out.className='result safe';
+    out.innerHTML='<strong>Data yang dibandingkan konsisten.</strong><p>'+escapeHtml(result.checked.join(', '))+' tidak menunjukkan perbedaan setelah normalisasi dasar.</p>';
+    consistencyRisk={stageId:stage?.id||null,hasMismatch:false};
+  }
+});
+
+$('clearConsistencyBtn').addEventListener('click',()=>{
+  document.querySelectorAll('.consistency-check input').forEach(input=>{input.value=''});
+  const out=$('consistencyResult');
+  out.hidden=true;
+  out.className='result';
+  out.innerHTML='';
+  consistencyRisk={stageId:null,hasMismatch:false};
+});
+
+document.querySelectorAll('.consistency-check input').forEach(input=>input.addEventListener('input',()=>{
+  const out=$('consistencyResult');
+  if(!out.hidden){
+    out.hidden=true;
+    out.className='result';
+    out.innerHTML='';
+  }
+  consistencyRisk={stageId:null,hasMismatch:false};
+}));
 
 function renderDocumentExamples(stageId){
   const section=$('documentExampleSection');

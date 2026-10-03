@@ -156,6 +156,49 @@
         <div id="fieldHelpResult" class="result" hidden></div>
       </div>
 
+      <details class="consistency-check">
+        <summary>Cek apakah data sama di semua dokumen (opsional)</summary>
+        <div class="consistency-body">
+          <p class="muted">Masukkan hanya nilai yang ingin dibandingkan. Nilai tidak disimpan dan tidak dikirim ke server.</p>
+
+          <div class="consistency-group" data-consistency-group="name">
+            <h3>Nama</h3>
+            <label>Paspor <input id="consNamePassport" autocomplete="off"></label>
+            <label>SLC <input id="consNameSlc" autocomplete="off"></label>
+            <label>KTP <input id="consNameKtp" autocomplete="off"></label>
+            <label>Rekening BNI <input id="consNameBank" autocomplete="off"></label>
+          </div>
+
+          <div class="consistency-group" data-consistency-group="dob">
+            <h3>Tanggal lahir</h3>
+            <label>Paspor <input id="consDobPassport" autocomplete="off" placeholder="YYYY/MM/DD"></label>
+            <label>KTP <input id="consDobKtp" autocomplete="off" placeholder="YYYY/MM/DD"></label>
+            <label>SLC <input id="consDobSlc" autocomplete="off" placeholder="YYYY/MM/DD"></label>
+          </div>
+
+          <div class="consistency-group" data-consistency-group="passport">
+            <h3>Nomor paspor</h3>
+            <label>Paspor terbaru <input id="consPassportMain" autocomplete="off"></label>
+            <label>SKCK <input id="consPassportSkck" autocomplete="off"></label>
+            <label>Form visa <input id="consPassportVisa" autocomplete="off"></label>
+          </div>
+
+          <div class="consistency-group" data-consistency-group="nik">
+            <h3>NIK</h3>
+            <label>KTP <input id="consNikKtp" autocomplete="off" inputmode="numeric"></label>
+            <label>Form visa <input id="consNikVisa" autocomplete="off" inputmode="numeric"></label>
+            <label>Perjanjian/Surat Kuasa <input id="consNikOther" autocomplete="off" inputmode="numeric"></label>
+          </div>
+
+          <div class="consistency-actions">
+            <button id="checkConsistencyBtn" type="button" class="primary">Bandingkan</button>
+            <button id="clearConsistencyBtn" type="button" class="secondary">Hapus nilai</button>
+          </div>
+          <div id="consistencyResult" class="result" hidden></div>
+          <p class="muted">Perbedaan tidak selalu berarti otomatis ditolak, tetapi jangan submit sebelum alasan perbedaannya jelas dan sesuai petunjuk resmi.</p>
+        </div>
+      </details>
+
       <div id="docScopeWrap" class="panel doc-scope-wrap" hidden>
         <label>Pengumuman yang memuat nama saya
           <select id="docScopeSelect"></select>
