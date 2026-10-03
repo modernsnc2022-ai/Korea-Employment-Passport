@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import calendar
 import csv
+import json
 import re
 import sys
 from datetime import date, datetime
@@ -8,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
+ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 
 FORBIDDEN_COLUMNS = {
@@ -97,6 +99,9 @@ if missing:
 
 ELIGIBILITY_STATUSES = {"", "pending", "eligible", "ineligible", "waitlist", "accepted"}
 FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
+SUPPORTED_STAGES = {
+    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
+}
 
 
 def add_calendar_months(value: date, months: int) -> date:
@@ -143,7 +148,10 @@ for index, row in enumerate(rows, start=1):
     activated_at = row.get("activated_at", "").strip()
     free_until = row.get("free_until", "").strip()
     feedback_status = row.get("feedback_status", "").strip()
+    current_stage = row.get("current_stage", "").strip()
 
+    if current_stage and current_stage not in SUPPORTED_STAGES:
+        fail(f"{tester_id} current_stage is not a supported route stage: {current_stage}")
     if eligibility_status not in ELIGIBILITY_STATUSES:
         fail(f"{tester_id} invalid eligibility_status {eligibility_status!r}")
     if feedback_status not in FEEDBACK_STATUSES:
