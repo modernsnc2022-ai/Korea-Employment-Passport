@@ -92,6 +92,28 @@
     <section class="card validator">
       <h2>Sudah bekerja di Korea dengan E-9?</h2>
       <p>20 pekerja Indonesia di Korea akan direkrut terpisah sebagai panel validasi pengalaman nyata. Kuota ini tidak mengurangi 30 tempat beta untuk pelamar aktif.</p>
+      <div id="workerPanelClosed" class="result warn">
+        Panel 20 pekerja E-9 belum dibuka. Status panel ini terpisah dari beta 30 pelamar aktif.
+      </div>
+      <form id="workerValidatorForm" hidden>
+        <label class="check">
+          <input id="workerInKorea" type="checkbox" required>
+          <span>Saya sekarang bekerja di Korea dengan status E-9.</span>
+        </label>
+        <label class="check">
+          <input id="workerUsedG2G" type="checkbox" required>
+          <span>Saya pernah melalui proses Indonesia G-to-G Korea / EPS.</span>
+        </label>
+        <label class="check">
+          <input id="workerFeedbackAgreement" type="checkbox" required>
+          <span>Saya bersedia membandingkan panduan aplikasi dengan pengalaman nyata dan melaporkan perbedaannya.</span>
+        </label>
+        <div class="actions">
+          <button class="primary" type="submit">Kirim minat sebagai validator</button>
+          <button id="copyWorkerValidatorBtn" class="secondary" type="button">Salin teks validator</button>
+        </div>
+        <div id="workerValidatorResult" class="result" hidden></div>
+      </form>
     </section>
   </main>
 
