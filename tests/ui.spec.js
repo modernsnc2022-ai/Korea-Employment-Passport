@@ -1044,3 +1044,13 @@ test('post-entry official help uses Korea foreign worker counseling', async ({ p
   expect(state.payroll).toContain('foreign_worker_counseling');
   expect(errors).toEqual([]);
 });
+
+
+test('mid-process selector explains that prior stages are marked complete', async ({ page }) => {
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  await page.locator('#allJourneyDetails').evaluate(el => el.open = true);
+  await expect(page.locator('.jump-stage')).toContainText('Tahap paling awal yang belum selesai');
+  await expect(page.locator('.jump-stage')).toContainText('Residence Card');
+  await expect(page.locator('#currentStageSelect option').first()).toHaveText('Pilih tahap paling awal yang belum selesai');
+});
