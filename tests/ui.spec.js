@@ -728,3 +728,49 @@ test('partial departure registry never suggests another call when date is missin
   expect(href).toContain('kp2mi.go.id/gtog-korea/info');
   expect(errors).toEqual([]);
 });
+
+
+test('beta OPEN path remains functional and identity-minimal', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.route('**/data/beta_program_v1.json', async route => {
+    const response = await route.fetch();
+    const program = await response.json();
+    program.status = 'open';
+    await route.fulfill({
+      response,
+      json: program
+    });
+  });
+
+  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#betaStatusPill')).toHaveText('OPEN · 30 PESERTA', { timeout: 10000 });
+  await expect(page.locator('#closedPanel')).toBeHidden();
+  await expect(page.locator('#applicationPanel')).toBeVisible();
+
+  const identityInputs = await page.locator(
+    '#betaApplicationForm input[type="text"], ' +
+    '#betaApplicationForm input[type="email"], ' +
+    '#betaApplicationForm input[type="tel"], ' +
+    '#betaApplicationForm input[type="file"], ' +
+    '#betaApplicationForm textarea'
+  ).count();
+  expect(identityInputs).toBe(0);
+
+  await page.locator('#applicantStage').selectOption('job_application_roster');
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+
+  const application = await page.evaluate(() => applicationText());
+  expect(application).toContain('Current stage: job_application_roster');
+  expect(application).toContain('Official G-to-G / EPS E-9 process: YES');
+  expect(application).toContain('Feedback participation agreement: YES');
+  expect(application).toContain('Queue order should use the received timestamp');
+  expect(application.toLowerCase()).not.toContain('passport number:');
+  expect(application.toLowerCase()).not.toContain('ktp number:');
+  expect(application.toLowerCase()).not.toContain('phone number:');
+  expect(application.toLowerCase()).not.toContain('home address:');
+
+  expect(errors).toEqual([]);
+});
