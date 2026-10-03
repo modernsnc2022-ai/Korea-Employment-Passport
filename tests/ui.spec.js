@@ -536,3 +536,31 @@ test('beta enrollment stays closed until launch status opens', async ({ page }) 
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
   expect(errors).toEqual([]);
 });
+
+
+test('manufacturing job application cannot complete before sector notice', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'job_application');
+
+  await page.evaluate(() => {
+    const stage=route.stages.find(row=>row.id==='job_application');
+    if(!stage)throw new Error('job_application stage missing');
+    openStage(stage);
+  });
+
+  await expect(page.locator('#stageDialog')).toBeVisible();
+  await expect(page.locator('#stageDoneBtn')).toBeEnabled();
+  await page.locator('#stageDoneBtn').click();
+
+  await expect(page.locator('#preSubmitResult')).toBeVisible();
+  await expect(page.locator('#preSubmitResult')).toContainText('JANGAN LANJUT DULU');
+  await expect(page.locator('#preSubmitResult')).toContainText('Checklist dokumen tahap ini belum cukup spesifik');
+
+  const state=await page.evaluate(() => ({
+    done: JSON.parse(localStorage.getItem('kep.doneStages')||'[]'),
+    current: currentStage()?.id
+  }));
+  expect(state.done).not.toContain('job_application');
+  expect(state.current).toBe('job_application');
+  expect(errors).toEqual([]);
+});
