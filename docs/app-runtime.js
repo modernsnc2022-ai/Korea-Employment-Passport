@@ -2757,12 +2757,36 @@ function sanitizeBetaFeedback(text){
   return {text:value,redacted};
 }
 
-function encodeSanitizedBetaBody(rawBody){
+function sanitizedBetaFeedbackText(rawBody){
   const safe=sanitizeBetaFeedback(rawBody);
   const notice=safe.redacted
-    ?'Catatan privasi: pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang telah dihapus otomatis sebelum draft email dibuat.\n\n'
+    ?'Catatan privasi: pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang telah dihapus otomatis sebelum laporan dibagikan.\n\n'
     :'';
-  return encodeURIComponent(notice+safe.text);
+  return notice+safe.text;
+}
+
+function encodeSanitizedBetaBody(rawBody){
+  return encodeURIComponent(sanitizedBetaFeedbackText(rawBody));
+}
+
+async function copyTextSafely(text){
+  if(navigator.clipboard?.writeText){
+    try{
+      await navigator.clipboard.writeText(text);
+      return true;
+    }catch{}
+  }
+  const area=document.createElement('textarea');
+  area.value=text;
+  area.setAttribute('readonly','');
+  area.style.position='fixed';
+  area.style.opacity='0';
+  document.body.appendChild(area);
+  area.select();
+  let copied=false;
+  try{copied=document.execCommand('copy')}catch{}
+  area.remove();
+  return copied;
 }
 
 function canonicalBetaTesterId(value){
@@ -2989,17 +3013,34 @@ function betaFeedbackBundleMailto(bundle=buildBetaFeedbackBundle()){
   return 'mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 }
 
-$('emailAllBetaFeedbackBtn').addEventListener('click',()=>{
+function betaFeedbackBundleOrWarn(){
   const out=$('betaFeedbackBundleResult');
   const bundle=buildBetaFeedbackBundle();
   if(!bundle.count){
     out.hidden=false;
     out.className='result warn';
     out.textContent='Belum ada checkpoint beta, pertanyaan, kasus penolakan, atau Celah Calo yang tersimpan di perangkat ini.';
-    return;
+    return null;
   }
-  out.hidden=true;
-  location.href=betaFeedbackBundleMailto(bundle);
+  return {out,bundle};
+}
+
+$('copyAllBetaFeedbackBtn').addEventListener('click',async()=>{
+  const state=betaFeedbackBundleOrWarn();
+  if(!state)return;
+  const copied=await copyTextSafely(sanitizedBetaFeedbackText(state.bundle.rawBody));
+  state.out.hidden=false;
+  state.out.className='result '+(copied?'safe':'warn');
+  state.out.textContent=copied
+    ?'Laporan beta anonim sudah disalin. Tempelkan ke WhatsApp, Telegram, atau kanal beta yang disepakati.'
+    :'Browser tidak mengizinkan salin otomatis. Gunakan tombol email atau izinkan akses clipboard lalu coba lagi.';
+});
+
+$('emailAllBetaFeedbackBtn').addEventListener('click',()=>{
+  const state=betaFeedbackBundleOrWarn();
+  if(!state)return;
+  state.out.hidden=true;
+  location.href=betaFeedbackBundleMailto(state.bundle);
 });
 
 $('emailFieldQuestionsBtn').addEventListener('click',()=>{
