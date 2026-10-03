@@ -32,6 +32,7 @@ source = load_json("docs/data/source_review_status.json")
 forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
+departure_calls = load_json("docs/data/departure_calls_2026.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
@@ -185,6 +186,22 @@ for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks
     require(key in runtime.split("const BETA_SCOPED_KEYS", 1)[1].split(";", 1)[0],
             f"{key} must stay beta-tester scoped")
 require("sanitizedBetaFeedbackText" in runtime, "sanitized beta feedback sharing must remain enabled")
+
+require(departure_calls.get("coverageStatus") == "partial_verified",
+        "departure call registry must remain explicitly partial until the full 2026 cycle is verified")
+require(departure_calls.get("complete") is False,
+        "departure call registry must not claim complete 2026 coverage yet")
+call_rows = departure_calls.get("calls", [])
+require(len(call_rows) >= 15, f"expected at least 15 verified departure calls, found {len(call_rows)}")
+call_keys = [row.get("key") for row in call_rows]
+require(len(call_keys) == len(set(call_keys)), "departure call registry keys must be unique")
+for row in call_rows:
+    require(str(row.get("key", "")).startswith("departure_2026_"), "departure call key must be 2026-scoped")
+    require(str(row.get("sourceUrl", "")).startswith("https://kp2mi.go.id/"),
+            f"{row.get('key')}: departure source must be official KP2MI HTTPS")
+    require("departure" in row.get("stages", []), f"{row.get('key')}: departure stage mapping missing")
+mcu_verified = [row for row in call_rows if row.get("mcuRuleVerified")]
+require(len(mcu_verified) >= 5, "expected at least five departure calls with verified final-MCU rules")
 
 if failures:
     print("BETA_PRELAUNCH_STATIC_FAIL")
