@@ -52,6 +52,7 @@ function makeProgressBackup(){
       docs:read(KEYS.docs,[]),
       scopeSelections:read(KEYS.scopeSelections,{}),
       formWizard:read(KEYS.formWizard,{}),
+      wizardReviewed:read(KEYS.wizardReviewed,[]),
       quickSetup:read(KEYS.quickSetup,false)
     }
   };
@@ -87,10 +88,28 @@ function safeRestoreProgress(payload){
     }
   }
 
+  const validReviewedKeys=new Set();
+  (formWizards?.forms||[]).forEach(form=>{
+    const scopesForForm=Array.isArray(form.scopeKeys)&&form.scopeKeys.length
+      ?form.scopeKeys
+      :form.scopeKey?[form.scopeKey]:['default'];
+    (form.stages||[]).forEach(stageId=>{
+      if(!stageIds.has(stageId))return;
+      (form.fields||[]).forEach(field=>{
+        if(!field?.id||!field.validator)return;
+        scopesForForm.forEach(scope=>validReviewedKeys.add([stageId,scope,form.id,field.id].join('|')));
+      });
+    });
+  });
+  const wizardReviewed=Array.isArray(progress.wizardReviewed)
+    ?[...new Set(progress.wizardReviewed.filter(key=>typeof key==='string'&&validReviewedKeys.has(key)))]
+    :[];
+
   write(KEYS.done,done);
   write(KEYS.docs,docs);
   write(KEYS.scopeSelections,scopes);
   write(KEYS.formWizard,wizard);
+  write(KEYS.wizardReviewed,wizardReviewed);
   write(KEYS.quickSetup,Boolean(progress.quickSetup));
 }
 
