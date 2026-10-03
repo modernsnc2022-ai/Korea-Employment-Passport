@@ -774,3 +774,45 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
 
   expect(errors).toEqual([]);
 });
+
+
+test('progress backup preserves reviewed form fields without beta evidence', async ({ page }) => {
+  const errors = await freshPage(page);
+
+  const result = await page.evaluate(() => {
+    const form=(formWizards?.forms||[]).find(item=>
+      item.stages?.includes('visa_docs') &&
+      Array.isArray(item.scopeKeys) &&
+      item.scopeKeys.includes('visa_sep08_2026') &&
+      (item.fields||[]).some(field=>field.validator)
+    );
+    if(!form)throw new Error('verified visa form missing');
+    const field=(form.fields||[]).find(item=>item.validator);
+    if(!field)throw new Error('validated field missing');
+
+    saveScopeSelection('visa_docs','visa_sep08_2026');
+    markWizardFieldReviewed(form,field,'visa_docs');
+    write(KEYS.gaps,[{id:99,stage:'visa_docs',task:'PRIVATE BETA GAP'}]);
+    write(KEYS.betaChecks,{visa_docs:{stageId:'visa_docs',status:'no_private_help'}});
+
+    const key=wizardReviewKey(form,field,'visa_docs');
+    const backup=makeProgressBackup();
+
+    write(KEYS.wizardReviewed,[]);
+    safeRestoreProgress(backup);
+
+    return {
+      key,
+      reviewed:read(KEYS.wizardReviewed,[]),
+      progressKeys:Object.keys(backup.progress).sort(),
+      serialized:JSON.stringify(backup)
+    };
+  });
+
+  expect(result.reviewed).toContain(result.key);
+  expect(result.progressKeys).toContain('wizardReviewed');
+  expect(result.serialized).not.toContain('PRIVATE BETA GAP');
+  expect(result.progressKeys).not.toContain('gaps');
+  expect(result.progressKeys).not.toContain('betaChecks');
+  expect(errors).toEqual([]);
+});
