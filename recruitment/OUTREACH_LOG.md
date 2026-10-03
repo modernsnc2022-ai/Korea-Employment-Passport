@@ -5,7 +5,7 @@
 | 2026-10-02 | Indonesia EPS Center / HRD Korea | Official EPS center | Email requesting beta recruitment channels and process feedback | Sent |
 | 2026-10-02 | Inkomunitas | Indonesian community | Email requesting beta volunteer publication | Sent |
 | 2026-10-02 | KMI Korea | Indonesian worker/community network | Email requesting E-9 worker recruitment help | Sent |
-| 2026-10-02 | IKMI Korea | Indonesian community in Korea | Email requesting beta volunteer recruitment | Sent |
+| 2026-10-02 | IKMI Korea | Indonesian community in Korea | Email requesting beta volunteer recruitment | Bounced — legacy email route invalid; retire and use current public contact channel |
 | 2026-10-02 | SBMI | Migrant-worker rights organization | Email requesting current/past Korea worker volunteers | Sent |
 | 2026-10-02 | APPIK | Returnee migrant-worker network | Email requesting Korea returnee volunteers | Sent |
 | 2026-10-02 | KBRI Seoul | Embassy / diaspora network | Email requesting channel guidance for PMI/E-9 volunteers | Sent |
