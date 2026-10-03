@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.5.0",
   "route": "ID-E9-MFG-GENERAL-2026",
   "packs": [
     {
@@ -281,6 +281,87 @@
           "validation": "check",
           "required": false,
           "note": "Simpan hanya bukti yang sah dan relevan."
+        }
+      ]
+    },
+    {
+      "id": "post_slc_mcu2_2026",
+      "appliesTo": [
+        "post_slc_requirements"
+      ],
+      "status": "verified_across_multiple_2026_notices",
+      "title": "Setelah SLC — psikologi + persiapan MCU II 2026",
+      "message": "Urutan umum: selesaikan pemeriksaan psikologi lebih dulu, lalu ikuti MCU II jika hasilnya Layak Disarankan/Layak Dipertimbangkan. Tanggal dan sarana kesehatan tetap harus mengikuti panggilan resmi yang memuat nama Anda.",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-pemeriksaan-medical-check-up-mcu-ii-tanggal-08-september-2026-dan-persiapan-pemberkasan-dokumen-visa-bagi-calon-pekerja-migran-indonesia-reguler-program-g-to-g-ke-korea-selatan",
+      "verifiedAgainst": [
+        "mcu2_2026_01_12",
+        "mcu2_2026_05_26",
+        "mcu2_2026_09_08"
+      ],
+      "lastChecked": "2026-10-04",
+      "items": [
+        {
+          "id": "post_slc_psych_sisko",
+          "title": "Hasil pemeriksaan psikologi resmi tersedia di Sisko P2MI",
+          "validation": "check",
+          "required": true,
+          "note": "Hanya hasil Layak Disarankan/Layak Dipertimbangkan yang dapat lanjut ke MCU II pada alur yang diumumkan."
+        },
+        {
+          "id": "post_slc_call_match",
+          "title": "Tanggal dan sarana kesehatan cocok dengan panggilan MCU II yang memuat nama Anda",
+          "validation": "check",
+          "required": true,
+          "note": "Jangan memakai tanggal atau rumah sakit dari panggilan peserta lain."
+        },
+        {
+          "id": "post_slc_arrive_0800",
+          "title": "Rencana hadir paling lambat pukul 08.00",
+          "validation": "check",
+          "required": true,
+          "note": "Batas hadir ini berulang pada beberapa panggilan MCU II reguler 2026."
+        },
+        {
+          "id": "post_slc_fast_10h",
+          "title": "Puasa minimal 10 jam sebelum MCU II · hanya air putih",
+          "validation": "check",
+          "required": true,
+          "note": "Pengumuman menyarankan puasa minimal 10 jam; air putih diperbolehkan."
+        },
+        {
+          "id": "post_slc_ktp",
+          "title": "KTP asli",
+          "validation": "check",
+          "required": true,
+          "note": "Bawa KTP asli."
+        },
+        {
+          "id": "post_slc_passport_copy",
+          "title": "Salinan paspor",
+          "validation": "check",
+          "required": true,
+          "note": "Siapkan salinan paspor sesuai panggilan."
+        },
+        {
+          "id": "post_slc_photo5",
+          "title": "Pasfoto studio terbaru 3,5 × 4,5 cm · 5 lembar",
+          "validation": "check",
+          "required": true,
+          "note": "Latar putih, full face, telinga terlihat; ikuti rincian foto pada panggilan Anda."
+        },
+        {
+          "id": "post_slc_glasses",
+          "title": "Kacamata yang biasa digunakan (jika berkacamata)",
+          "validation": "check",
+          "required": false,
+          "note": "Wajib dibawa/dipakai bagi peserta yang berkacamata."
+        },
+        {
+          "id": "post_slc_mcu2_fee",
+          "title": "Biaya MCU II Rp906.000 · non-tunai",
+          "validation": "check",
+          "required": true,
+          "note": "Jangan membayar pungutan lain di luar biaya MCU sesuai ketentuan resmi."
         }
       ]
     },
