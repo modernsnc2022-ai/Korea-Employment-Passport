@@ -30,7 +30,10 @@ bqc = load_json("docs/data/broker_question_catalog_v1.json")
 source = load_json("docs/data/source_review_status.json")
 forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
+beta_program = load_json("docs/data/beta_program_v1.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
+beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
+beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
 beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 
@@ -91,6 +94,13 @@ require("gratis selama 6 bulan sejak akun beta diaktifkan" in outreach,
         "Indonesian outreach must state 6 months free from activation")
 require("Recruitment status: **HOLD" in outreach,
         "public recruitment must remain HOLD before the launch gate passes")
+require(beta_program.get("status") == "hold", "beta enrollment program must remain hold before launch")
+require(beta_program.get("publicBeta", {}).get("slots") == 30, "public beta enrollment must preserve 30 slots")
+require(beta_program.get("publicBeta", {}).get("freeMonths") == 6, "public beta benefit must remain 6 months")
+require(beta_program.get("publicBeta", {}).get("benefitStarts") == "beta_activation_date",
+        "six-month benefit must start from beta activation")
+require("Beta terbatas untuk 30 peserta pertama" in beta_page, "beta enrollment page must state the 30-person limit")
+require("program.status==='open'" in beta_js, "beta application UI must be gated by OPEN status")
 
 require("number>=1&&number<=50" in runtime, "beta ID range must remain KEP-0001..KEP-0050")
 for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks"]:
