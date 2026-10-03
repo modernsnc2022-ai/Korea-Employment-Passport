@@ -3187,7 +3187,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
 
 $('betaWorkerExperienceYear').addEventListener('change',()=>{
   const value=String($('betaWorkerExperienceYear').value||'');
-  const allowed=value==='unknown'||/^(?:200[4-9]|20[12]\d)$/.test(value);
+  const allowed=value==='unknown'||/^(?:200[4-9]|201\d|202[0-6])$/.test(value);
   if(!allowed&&value!=='')return;
   write(KEYS.betaWorkerExperienceYear,value);
   const status=$('betaWorkerExperienceStatus');
