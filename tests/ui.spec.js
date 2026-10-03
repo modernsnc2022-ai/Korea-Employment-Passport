@@ -1054,3 +1054,35 @@ test('mid-process selector explains that prior stages are marked complete', asyn
   await expect(page.locator('.jump-stage')).toContainText('Residence Card');
   await expect(page.locator('#currentStageSelect option').first()).toHaveText('Pilih tahap paling awal yang belum selesai');
 });
+
+
+test('retrospective worker evidence records experience year before stage validation', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html?beta=KEP-0031', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel').evaluate(el => { el.open = true; });
+
+  await expect(page.locator('#betaWorkerExperienceWrap')).toBeVisible();
+  await page.locator('#betaCheckStage').selectOption('korea_entry_training');
+  await page.locator('#betaCheckOutcome').selectOption('no_private_help');
+  await page.locator('#saveBetaCheckBtn').click();
+  expect(await page.evaluate(() => betaValidationStats().tested)).toBe(0);
+  await expect(page.locator('#betaWorkerExperienceStatus')).toContainText('Pilih tahun pengalaman');
+
+  await page.locator('#betaWorkerExperienceYear').selectOption('2024');
+  await page.locator('#saveBetaCheckBtn').click();
+  expect(await page.evaluate(() => betaValidationStats().tested)).toBe(1);
+  const bundle = await page.evaluate(() => buildBetaFeedbackBundle().rawBody);
+  expect(bundle).toContain('Tahun pengalaman/proses EPS: 2024');
+
+  await page.goto('/app.html?beta=KEP-0032', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel').evaluate(el => { el.open = true; });
+  await expect(page.locator('#betaWorkerExperienceYear')).toHaveValue('');
+
+  expect(errors).toEqual([]);
+});
