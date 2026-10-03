@@ -398,6 +398,13 @@ $('setMilestoneBtn').addEventListener('click',()=>{
   document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
+document.querySelectorAll('[data-quick-stage]').forEach(button=>button.addEventListener('click',()=>{
+  const stageId=button.dataset.quickStage;
+  if(!stageId)return;
+  applyCurrentStage(stageId,true);
+  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
+}));
+
 $('startFromBeginningBtn').addEventListener('click',()=>{
   write(KEYS.done,[]);
   write(KEYS.quickSetup,true);
@@ -478,28 +485,51 @@ function renderJourney(){
 }
 
 function scopeOptionsForStage(stageId){
-  const answerScopes=(exactAnswers?.answers||[])
+  const rows=[];
+  (exactAnswers?.answers||[])
     .filter(item=>item.stages?.includes(stageId)&&item.scopeType==='cohort'&&item.scopeKey)
-    .map(item=>[item.scopeKey,{key:item.scopeKey,label:item.scopeLabel||item.scopeKey}]);
-  const packScopes=(documentPacks?.packs||[])
+    .forEach(item=>rows.push({
+      key:item.scopeKey,
+      label:item.scopeLabel||item.scopeKey,
+      sourceUrl:item.sourceUrl||''
+    }));
+  (documentPacks?.packs||[])
     .filter(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeType==='cohort'&&pack.scopeKey)
-    .map(pack=>[pack.scopeKey,{key:pack.scopeKey,label:pack.scopeLabel||pack.scopeKey}]);
-  return [...new Map([...answerScopes,...packScopes]).values()];
+    .forEach(pack=>rows.push({
+      key:pack.scopeKey,
+      label:pack.scopeLabel||pack.scopeKey,
+      sourceUrl:pack.sourceUrl||''
+    }));
+  const map=new Map();
+  rows.forEach(item=>{
+    const prev=map.get(item.key)||{};
+    map.set(item.key,{
+      key:item.key,
+      label:item.label||prev.label||item.key,
+      sourceUrl:item.sourceUrl||prev.sourceUrl||''
+    });
+  });
+  return [...map.values()];
 }
 
 function renderScopePicker(stage){
   const section=$('scopePickerSection');
   const select=$('scopePicker');
-  if(!exactAnswers?.answers?.length){section.hidden=true;select.innerHTML='';return}
+  const sourceLink=$('scopePickerSource');
+  if(!exactAnswers?.answers?.length){section.hidden=true;select.innerHTML='';sourceLink.hidden=true;return}
   const scoped=scopeOptionsForStage(stage.id);
   if(!scoped.length){
     section.hidden=true;
     select.innerHTML='';
+    sourceLink.hidden=true;
     return;
   }
   section.hidden=false;
   select.innerHTML='<option value="">Belum tahu / pengumuman lain</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
+  const chosen=scoped.find(item=>item.key===select.value);
+  sourceLink.hidden=!chosen?.sourceUrl;
+  if(chosen?.sourceUrl)sourceLink.href=chosen.sourceUrl;
 }
 
 $('scopePicker').addEventListener('change',()=>{
@@ -903,7 +933,9 @@ function renderScopeChoiceForQuestion(query,out,onChosen){
   out.className='result warn';
   out.hidden=false;
   out.innerHTML='<strong>Satu hal dulu: nama Anda ada di pengumuman yang mana?</strong><p>Pilih pengumuman yang benar. Setelah itu jawaban akan menyesuaikan otomatis.</p><div class="scope-choice-list">'+choices.map(item=>
-    '<button type="button" class="scope-choice" data-scope="'+escapeHtml(item.scopeKey)+'">'+escapeHtml(item.scopeLabel||'Pengumuman ini')+'</button>'
+    '<div class="scope-choice-row"><button type="button" class="scope-choice" data-scope="'+escapeHtml(item.scopeKey)+'">'+escapeHtml(item.scopeLabel||'Pengumuman ini')+'</button>'+
+    (item.sourceUrl?'<a class="scope-check-link" href="'+item.sourceUrl+'" target="_blank" rel="noopener">Cek nama saya ↗</a>':'')+
+    '</div>'
   ).join('')+'</div><small class="muted">Kalau tidak yakin, jangan pilih sembarang. Buka pengumuman resmi dan pastikan nama Anda ada di sana.</small>';
   out.querySelectorAll('[data-scope]').forEach(btn=>btn.addEventListener('click',()=>{
     const state=read(KEYS.scopeSelections,{});
@@ -1200,15 +1232,20 @@ function documentPackForStage(stageId){
 function renderDocumentScopePicker(stage){
   const wrap=$('docScopeWrap');
   const select=$('docScopeSelect');
+  const sourceLink=$('docScopeSource');
   const options=scopeOptionsForStage(stage.id);
   if(!options.length){
     wrap.hidden=true;
     select.innerHTML='';
+    sourceLink.hidden=true;
     return;
   }
   wrap.hidden=false;
   select.innerHTML='<option value="">Belum pilih / pengumuman lain</option>'+options.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
+  const chosen=options.find(item=>item.key===select.value);
+  sourceLink.hidden=!chosen?.sourceUrl;
+  if(chosen?.sourceUrl)sourceLink.href=chosen.sourceUrl;
 }
 
 $('docScopeSelect').addEventListener('change',()=>{

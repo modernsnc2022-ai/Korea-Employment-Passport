@@ -35,13 +35,25 @@
 
     <section id="quickStart" class="quick-start" hidden>
       <span class="eyebrow dark">PERTAMA KALI PAKAI?</span>
-      <h2>Tentukan posisi Anda dalam 10 detik</h2>
-      <p>Pilih hal terakhir yang sudah benar-benar selesai. Kami akan membuka langkah berikutnya.</p>
-      <div class="quick-start-row">
-        <select id="lastMilestoneSelect" aria-label="Hal terakhir yang sudah selesai"></select>
-        <button id="setMilestoneBtn" class="primary" type="button">Tentukan posisi saya</button>
+      <h2>Pilih yang paling mirip dengan kondisi Anda</h2>
+      <p>Biasanya cukup satu klik. Kalau posisi Anda ada di tengah-tengah, buka “pilih lebih tepat”.</p>
+      <div class="quick-choice-grid">
+        <button type="button" class="quick-choice" data-quick-stage="eligibility"><strong>Belum mendaftar resmi</strong><small>Baru mulai / cek syarat</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="exam_fee"><strong>Baru selesai daftar online</strong><small>Belum ujian EPS-TOPIK</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="skill_competency"><strong>Sudah ikut EPS-TOPIK</strong><small>Menunggu / menuju Skill Test</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="psychology_pre_job"><strong>Sudah lulus seleksi akhir</strong><small>Menuju psikologi / MCU I</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="roster"><strong>Sudah kirim lamaran</strong><small>Menunggu dipilih perusahaan</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="post_slc_requirements"><strong>Sudah dapat SLC</strong><small>Psikologi / MCU II / visa</small></button>
+        <button type="button" class="quick-choice" data-quick-stage="korea_entry_training"><strong>Sudah tiba di Korea</strong><small>Pendidikan kerja / penempatan</small></button>
       </div>
-      <button id="startFromBeginningBtn" class="quick-start-link" type="button">Saya belum mulai proses resmi → mulai dari awal</button>
+      <details class="quick-precise">
+        <summary>Posisi saya berbeda → pilih lebih tepat</summary>
+        <div class="quick-start-row">
+          <select id="lastMilestoneSelect" aria-label="Hal terakhir yang sudah selesai"></select>
+          <button id="setMilestoneBtn" class="primary" type="button">Gunakan posisi ini</button>
+        </div>
+      </details>
+      <button id="startFromBeginningBtn" class="quick-start-link" type="button">Mulai benar-benar dari awal</button>
     </section>
 
     <section class="how-to-use" aria-label="Cara pakai">
@@ -148,6 +160,7 @@
         <label>Pengumuman yang memuat nama saya
           <select id="docScopeSelect"></select>
         </label>
+        <a id="docScopeSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
         <small>Pilih hanya jika nama Anda memang ada di pengumuman tersebut. Checklist dan contoh akan menyesuaikan otomatis.</small>
       </div>
       <div id="docStageContext" class="panel doc-context"></div>
@@ -436,7 +449,8 @@
         <label>Pengumuman yang memuat nama saya
           <select id="scopePicker"></select>
         </label>
-        <small>Pilih hanya jika Anda yakin pengumuman ini memang milik Anda. Jika belum tahu, biarkan “Belum tahu”.</small>
+        <a id="scopePickerSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
+        <small>Pilih hanya jika nama Anda benar-benar ada di pengumuman tersebut. Jika belum tahu, biarkan “Belum tahu”.</small>
       </section>
       <details id="stageBqcSection" class="stage-bqc-section" hidden>
         <summary>Apakah tahap ini sudah cukup aman tanpa bertanya ke calo?</summary>
