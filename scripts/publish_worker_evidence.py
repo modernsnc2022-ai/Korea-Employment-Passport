@@ -18,9 +18,7 @@ ALLOWED_ROOT_KEYS = {
 }
 ALLOWED_FACT_KEYS = {"topic", "summary", "basis"}
 ALLOWED_MEDIA_KEYS = {"type", "url", "consent", "privacyReviewed", "metadataRemoved"}
-ALLOWED_STATUS = {
-    "single_verified_worker", "multi_verified_workers", "worker_plus_public_record"
-}
+PUBLISHABLE_STATUS = {"single_verified_worker"}
 ALLOWED_BASIS = {"worker_experience", "worker_experience_plus_public_record"}
 FORBIDDEN_KEYS = {
     "name", "workerName", "worker_name", "email", "phone", "passport",
@@ -92,8 +90,8 @@ def validate_intake(intake: dict) -> None:
         fail("companyAliases must be a list of strings")
 
     status = intake.get("verificationStatus")
-    if status not in ALLOWED_STATUS:
-        fail("verificationStatus is invalid")
+    if status not in PUBLISHABLE_STATUS:
+        fail("single-interview publisher only allows verificationStatus=single_verified_worker")
 
     verified_at = str(intake.get("verifiedAt", ""))
     date.fromisoformat(verified_at)
@@ -223,6 +221,15 @@ def self_test() -> None:
         assert "possible email" in str(exc)
     else:
         raise AssertionError("PII-like email was not rejected")
+
+    exaggerated = json.loads(json.dumps(intake))
+    exaggerated["verificationStatus"] = "multi_verified_workers"
+    try:
+        build_public_record(exaggerated, registry)
+    except ValueError as exc:
+        assert "single-interview publisher" in str(exc)
+    else:
+        raise AssertionError("single interview was allowed to claim multi-worker verification")
 
     bad_media = json.loads(json.dumps(intake))
     bad_media["media"] = [{
