@@ -8,5 +8,5 @@
   "reviewRequiredSourceIds": [],
   "fetchFailureUrls": [],
   "fetchFailureSourceIds": [],
-  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
+  "message": "No unreviewed official-source changes are currently recorded."
 }
