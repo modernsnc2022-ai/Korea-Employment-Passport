@@ -123,6 +123,7 @@ def self_test() -> None:
             workplace_info_needed="yes",
             broker_gap_status="open",
             retest_status="pending",
+            workplace_evidence_status="pending",
         )
     except ValueError as exc:
         assert "already completed" in str(exc)
