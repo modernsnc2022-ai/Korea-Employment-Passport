@@ -29,9 +29,12 @@ The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains sep
 - Do not assign worker-validator KEP IDs while `retrospectivePanel.status` is HOLD.
 - After the worker panel becomes OPEN, assign KEP-0031 through KEP-0050 contiguously in validator enrollment order.
 - Use `scripts/assign_worker_validator.py` for dry-run first, then `--write` after checking the proposed KEP ID.
-- The helper records only a non-identifying source channel, supported route stage, in-Korea confirmation, E-9 experience confirmation, and panel status fields.
+- Assignment initializes `interview_status=new`, a blank `experience_year`, and `workplace_evidence_status=pending`.
+- After the interview, use `scripts/record_worker_interview.py` without `--write` first. It accepts only categorical/non-identifying values: experience year, route stage, broker-used yes/no/unknown, workplace-info-needed yes/no/unknown, gap status, retest status, and workplace-evidence decision.
+- Add `--write` only after checking the dry-run line. This helper—not the WPE publisher—sets `interview_status=completed`.
+- Choose `workplace_evidence_status=declined` when the worker does not consent to public workplace evidence, or `not_publishable` when the interview cannot safely produce a public WPE record. Only `pending` can later be published.
 - Worker validators do **not** receive the public-beta application queue or six-month entitlement fields.
-- Contact details remain outside this public repository.
+- Contact details and narrative/raw interview notes remain outside this public repository.
 
 - In the app, retrospective validators must record the year of the EPS process/departure they actually experienced (or “do not remember exactly”) before saving stage-validation evidence. This year is context for evidence quality, not identity data.
 - Never treat a pre-2026 worker recollection as proof that a 2026 notice-specific rule is correct. Official 2026 facts still come from official sources.
@@ -47,8 +50,9 @@ Worker interviews and contact details stay outside this public repository. Do no
 4. For photos/videos, require `consent=true`, `privacyReviewed=true`, and `metadataRemoved=true`.
 5. Run `python scripts/publish_worker_evidence.py --intake <private-file.json>` first. This is dry-run only.
 6. Check the proposed WPE-#### record. The helper verifies that the KEP ID is an assigned KEP-0031..0050 worker-validator slot, removes the tester ID from the public record, and only permits `single_verified_worker` for this single-interview publishing path. Do not label one interview as multi-worker or worker-plus-public verification.
-7. Re-run with `--write` only after the dry-run output is approved. The helper appends the sanitized record to `docs/data/workplace_worker_evidence_v1.json` and marks the tracker interview status `completed`. A completed validator interview cannot be published a second time through this helper.
-8. Commit only the sanitized registry/tracker changes. Never commit the completed private intake file.
+7. The tracker interview must already be `completed`, its `experience_year` must match the intake, and `workplace_evidence_status` must still be `pending`. A `declined` or `not_publishable` interview cannot be published.
+8. Re-run with `--write` only after the dry-run output is approved. The helper appends the sanitized record to `docs/data/workplace_worker_evidence_v1.json` and changes only `workplace_evidence_status` to `published_single_verified_worker`; it does **not** complete the interview.
+9. Commit only the sanitized registry/tracker changes. Never commit the completed private intake file.
 
 The static CI separately checks the registry for forbidden identity/private fields and rejects worker media unless metadata removal is explicitly confirmed.
 
@@ -71,3 +75,5 @@ For KEP-0031..KEP-0050, keep these states separate:
 - `workplace_evidence_status`: whether a privacy-reviewed workplace record has actually been published.
 
 Publishing a WPE record sets `workplace_evidence_status=published_single_verified_worker`; it must not be inferred merely from `interview_status=completed`. The public WPE record also carries `experienceYear` so older experience is visibly retrospective.
+
+The public CSV is deliberately categorical. Keep `notes` empty. If `broker_tasks`, `documents_confusing`, or `official_process_gap` are used, store only semicolon-separated 27-stage IDs; never store a broker/person name or narrative interview text in those cells.
