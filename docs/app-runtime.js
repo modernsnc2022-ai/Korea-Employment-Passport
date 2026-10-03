@@ -2743,7 +2743,7 @@ function renderWorkplaceWorkerEvidence(){
 
   const matches=workerEvidenceForCompany(company);
   if(!matches.length){
-    box.innerHTML='<div class="workplace-worker-head"><strong>Bukti pengalaman pekerja terverifikasi</strong><span>BELUM ADA KECocokan</span></div>'+
+    box.innerHTML='<div class="workplace-worker-head"><strong>Bukti pengalaman pekerja terverifikasi</strong><span>BELUM ADA KECOCOKAN</span></div>'+
       '<p><strong>Belum ada bukti pekerja terverifikasi yang dipublikasikan untuk perusahaan ini.</strong></p>'+
       '<p>'+escapeHtml(policy.noEvidenceMeaning||'Tidak adanya data di sini bukan penilaian negatif terhadap perusahaan.')+'</p>';
     return;
