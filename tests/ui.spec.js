@@ -637,3 +637,24 @@ test('predeparture OPP scope resolves to verified common pack', async ({ page })
   await expect(page.locator('#docStageContext')).toContainText('Terverifikasi silang');
   expect(errors).toEqual([]);
 });
+
+
+test('psychology stage uses its verified 2026 pack', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'psychology_pre_job');
+
+  const selected = await page.evaluate(() => {
+    const pack=documentPackForStage('psychology_pre_job');
+    return pack ? {id:pack.id,status:pack.status,title:pack.title,items:(pack.items||[]).length} : null;
+  });
+
+  expect(selected).toEqual({
+    id:'psychology_pre_job_2026',
+    status:'verified_2026',
+    title:'Pemeriksaan psikologi sebelum lamaran online · lulusan 2026',
+    items:4
+  });
+  await expect(page.locator('#docStageContext')).toContainText('Pemeriksaan psikologi sebelum lamaran online');
+  await expect(page.locator('#docStageContext')).not.toContainText('Lamaran online Manufaktur 2026 — tunggu pengumuman resmi');
+  expect(errors).toEqual([]);
+});
