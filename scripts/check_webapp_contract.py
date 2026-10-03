@@ -412,6 +412,56 @@ if bad_question_content:
 if unanswered_catalog_questions:
     errors.append("broker-question catalog contains unanswered items: " + ", ".join(sorted(unanswered_catalog_questions)))
 
+# Manufacturing 2026 online job-application details are intentionally held until a
+# sector-specific official notice is reviewed. Keep this lock explicit so a 2025
+# Manufacturing or 2026 Fisheries rule cannot silently leak into the supported route.
+manufacturing_job_hold_ids = {"job_docs", "job_scan", "job_name", "job_edit", "job_submit"}
+question_by_id = {item.get("id"): item for item in broker_questions.get("questions", [])}
+exact_by_id = {item.get("id"): item for item in exact_answers.get("answers", [])}
+hold_answer_id = "job_application_manufacturing_2026_wait_notice"
+hold_errors = []
+for question_id in sorted(manufacturing_job_hold_ids):
+    item = question_by_id.get(question_id)
+    if not item:
+        hold_errors.append(f"{question_id}:missing")
+        continue
+    if item.get("stageId") != "job_application":
+        hold_errors.append(f"{question_id}:wrong_stage")
+    if item.get("status") != "answered_hold":
+        hold_errors.append(f"{question_id}:status={item.get('status')}")
+    if item.get("answerId") != hold_answer_id:
+        hold_errors.append(f"{question_id}:answerId={item.get('answerId')}")
+    if not item.get("blocksZeroBrokerReady", False):
+        hold_errors.append(f"{question_id}:not_blocking_zero_broker")
+
+current_hold_ids = {
+    item.get("id") for item in broker_questions.get("questions", [])
+    if item.get("stageId") == "job_application" and item.get("status") == "answered_hold"
+}
+if current_hold_ids != manufacturing_job_hold_ids:
+    hold_errors.append(
+        "hold_set=" + repr(sorted(current_hold_ids)) + ":expected=" + repr(sorted(manufacturing_job_hold_ids))
+    )
+
+hold_answer = exact_by_id.get(hold_answer_id)
+if not hold_answer:
+    hold_errors.append(f"{hold_answer_id}:missing_exact_answer")
+else:
+    if hold_answer.get("verificationStatus") != "hold_for_official_manufacturing_notice":
+        hold_errors.append(f"{hold_answer_id}:verificationStatus={hold_answer.get('verificationStatus')}")
+    if not hold_answer.get("blocksSubmission", False):
+        hold_errors.append(f"{hold_answer_id}:submission_not_blocked")
+    if "job_application" not in hold_answer.get("stages", []):
+        hold_errors.append(f"{hold_answer_id}:job_application_stage_missing")
+    if hold_answer.get("scopeType") != "route_2026":
+        hold_errors.append(f"{hold_answer_id}:scopeType={hold_answer.get('scopeType')}")
+
+if hold_errors:
+    errors.append(
+        "Manufacturing 2026 job-application hold lock violated; review the sector-specific official notice before unlocking: "
+        + ", ".join(hold_errors)
+    )
+
 form_ids = []
 wizard_field_ids = []
 bad_form_stage_refs = []
