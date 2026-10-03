@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "state": "clean",
+  "autoPublishRules": false,
+  "configured": 57,
+  "checked": 57,
+  "reviewRequiredUrls": [],
+  "reviewRequiredSourceIds": [],
+  "fetchFailureUrls": [],
+  "fetchFailureSourceIds": [],
+  "message": "No unreviewed official-source changes are currently recorded."
+}

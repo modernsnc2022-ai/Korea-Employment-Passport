@@ -9,8 +9,9 @@ const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const FORM_WIZARDS_URL='data/form_wizards_2026.json';
+const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,sourceReviewStatus=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -173,7 +174,7 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes,sourceReviewRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
@@ -184,9 +185,10 @@ async function boot(){
       fetch(DOCUMENT_EXAMPLES_URL,{cache:'no-store'}),
       fetch(FRESHNESS_URL,{cache:'no-store'}),
       fetch(BROKER_QUESTION_URL,{cache:'no-store'}),
-      fetch(FORM_WIZARDS_URL,{cache:'no-store'})
+      fetch(FORM_WIZARDS_URL,{cache:'no-store'}),
+      fetch(SOURCE_REVIEW_STATUS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok||!sourceReviewRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -198,6 +200,7 @@ async function boot(){
     freshnessPolicy=await freshnessRes.json();
     brokerQuestions=await brokerQuestionRes.json();
     formWizards=await formWizardRes.json();
+    sourceReviewStatus=await sourceReviewRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
     renderCycleStatus();
@@ -240,10 +243,57 @@ function renderFreshnessStatus(){
   const box=$('freshnessStatus');
   if(!freshnessPolicy||!route){box.hidden=true;return}
   box.hidden=false;
+  box.className='freshness-status';
+  const state=sourceReviewStatus?.state||'clean';
+  const trustPanel=document.querySelector('.trust-panel');
+
+  if(state==='review_required'){
+    box.classList.add('review-required');
+    if(trustPanel)trustPanel.open=true;
+    const count=(sourceReviewStatus.reviewRequiredUrls||[]).length;
+    box.innerHTML=`
+      <span class="freshness-pill">PERUBAHAN SUMBER RESMI TERDETEKSI</span>
+      <span><strong>${count} sumber perlu ditinjau.</strong> Jawaban/formulir yang bergantung pada sumber tersebut sementara tidak dianggap “jawaban pasti”.</span>
+      <span>Aturan tidak diubah otomatis sampai review selesai.</span>`;
+    return;
+  }
+
+  if(state==='fetch_warning'){
+    box.classList.add('fetch-warning');
+    const count=(sourceReviewStatus.fetchFailureUrls||[]).length;
+    box.innerHTML=`
+      <span class="freshness-pill">PEMERIKSAAN SUMBER BELUM LENGKAP</span>
+      <span><strong>${count} sumber resmi sementara tidak dapat diperiksa.</strong> Aturan tidak diubah otomatis.</span>
+      <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
+    return;
+  }
+
   box.innerHTML=`
     <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(String(freshnessPolicy.monitorCadence||'').toUpperCase())}</span>
-    <span><strong>Aturan tidak diperbarui otomatis.</strong> Perubahan sumber harus ditinjau sebelum dipublikasikan.</span>
+    <span><strong>Tidak ada perubahan resmi yang belum direview.</strong> Aturan hanya berubah setelah verifikasi.</span>
     <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
+}
+
+function normalizeSourceUrl(url){
+  return String(url||'')
+    .trim()
+    .replace(/^http:/i,'https:')
+    .replace('://www.','://')
+    .replace(/\/$/,'');
+}
+
+function sourceNeedsReview(url){
+  if(!url||!sourceReviewStatus)return false;
+  const target=normalizeSourceUrl(url);
+  return (sourceReviewStatus.reviewRequiredUrls||[])
+    .some(item=>normalizeSourceUrl(item)===target);
+}
+
+function sourceHasFetchWarning(url){
+  if(!url||!sourceReviewStatus)return false;
+  const target=normalizeSourceUrl(url);
+  return (sourceReviewStatus.fetchFailureUrls||[])
+    .some(item=>normalizeSourceUrl(item)===target);
 }
 
 function selectedScope(stageId){
@@ -256,6 +306,7 @@ function exactAnswerById(answerId){
 
 function exactAnswerApplies(item,stageId){
   if(!item?.stages?.includes(stageId))return false;
+  if(sourceNeedsReview(item.sourceUrl))return false;
   if(item.scopeType!=='cohort')return true;
   return selectedScope(stageId)===item.scopeKey;
 }
@@ -266,6 +317,7 @@ function exactAnswerIdSet(stageId){
 
 function wizardFormApplies(form,stageId){
   if(!form?.stages?.includes(stageId))return false;
+  if(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl))return false;
   if(form.scopeType!=='cohort')return true;
   return selectedScope(stageId)===form.scopeKey;
 }
@@ -639,7 +691,7 @@ function evaluatePreSubmit(stage){
   const pack=documentPackForStage(stage.id);
   if(!pack){
     issues.push('Belum ada checklist dokumen resmi yang dikunci untuk tahap ini.');
-  }else if(['awaiting_sector_notice','source_guided','scope_required'].includes(pack.status)){
+  }else if(['awaiting_sector_notice','source_guided','scope_required','review_required'].includes(pack.status)){
     issues.push('Checklist dokumen tahap ini belum cukup spesifik untuk pengumuman yang berlaku bagi Anda.');
   }else{
     const checked=new Set(read(KEYS.docs,[]));
@@ -878,7 +930,8 @@ function wizardFieldSearchRows(query,stageId){
   const tokens=q.split(' ').filter(token=>token.length>1);
   const rows=[];
   for(const form of formWizards.forms){
-    if(stageId&&!form.stages?.includes(stageId))continue;
+    if(stageId&&!wizardFormApplies(form,stageId))continue;
+    if(!stageId&&(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl)))continue;
     for(const field of form.fields||[]){
       const hay=normalizeSearch([form.title,field.label,field.instruction,field.example,field.dont||''].join(' '));
       let score=0;
@@ -1204,6 +1257,8 @@ function renderDocumentExamples(stageId){
 
   const samples=documentExamples.samples.filter(sample=>{
     if(!sample.stages?.includes(stageId))return false;
+    if(sourceNeedsReview(sample.sourceUrl))return false;
+    if((sample.officialFiles||[]).some(file=>sourceNeedsReview(file.url)))return false;
     if(sample.scopeType!=='cohort')return true;
     return selectedScope(stageId)===sample.scopeKey;
   });
@@ -1446,14 +1501,22 @@ $('formFieldValue').addEventListener('keydown',(event)=>{
   }
 });
 
+function safeDocumentPack(pack){
+  if(!pack)return null;
+  if(sourceNeedsReview(pack.sourceUrl)){
+    return {...pack,status:'review_required',items:[]};
+  }
+  return pack;
+}
+
 function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
   const selected=selectedScope(stageId);
   if(selected){
     const scoped=documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeKey===selected);
-    if(scoped)return scoped;
+    if(scoped)return safeDocumentPack(scoped);
   }
-  return documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&!pack.scopeKey)||null;
+  return safeDocumentPack(documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&!pack.scopeKey)||null);
 }
 
 function renderDocumentScopePicker(stage){
@@ -1517,6 +1580,7 @@ function renderDocuments(){
     awaiting_sector_notice:'Menunggu pengumuman manufaktur yang sesuai',
     source_guided:'Sumber resmi saja — rincian belum dikunci',
     verified_practice:'Checklist bukti kerja',
+    review_required:'Sumber resmi berubah — review diperlukan',
     scope_required:'Pilih pengumuman yang memuat nama Anda terlebih dahulu',
     verified_notice_2026_05_26:'Terverifikasi untuk panggilan 26 Mei 2026',
     verified_notice_2026_06_19:'Terverifikasi untuk panggilan 19 Juni 2026',
@@ -1533,7 +1597,11 @@ function renderDocuments(){
     <a class="source" href="${pack.sourceUrl}" target="_blank" rel="noopener">Buka sumber resmi paket ini ↗</a>`;
 
   if(!pack.items?.length){
-    list.innerHTML='<article><div><h3>Jangan gunakan daftar dari tahap/sector lain</h3><p>Checklist sengaja dikosongkan sampai sumber yang sesuai dengan rute ini terverifikasi. Ini mencegah dokumen lama atau sektor lain dianggap sebagai persyaratan resmi.</p></div></article>';
+    if(pack.status==='review_required'){
+      list.innerHTML='<article><div><h3>Jangan submit berdasarkan checklist lama</h3><p>Sumber resmi untuk tahap ini berubah dan sedang ditinjau. Checklist lama sengaja disembunyikan sampai review selesai.</p></div></article>';
+    }else{
+      list.innerHTML='<article><div><h3>Jangan gunakan daftar dari tahap/sector lain</h3><p>Checklist sengaja dikosongkan sampai sumber yang sesuai dengan rute ini terverifikasi. Ini mencegah dokumen lama atau sektor lain dianggap sebagai persyaratan resmi.</p></div></article>';
+    }
     return;
   }
 

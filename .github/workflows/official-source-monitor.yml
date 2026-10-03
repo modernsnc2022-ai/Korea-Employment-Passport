@@ -42,15 +42,21 @@ jobs:
           echo "failures=$(jq '.failures | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "initialized=$(jq -r '.initialized' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "accepted=$(jq -r '.acceptedCurrent' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "acceptance_blocked=$(jq -r '.acceptanceBlocked // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
 
-      - name: Commit reviewed/initial baseline
-        if: steps.result.outputs.initialized == 'true' || steps.result.outputs.accepted == 'true'
+      - name: Publish app review status
+        run: python scripts/write_source_review_status.py
+
+      - name: Commit monitor state when changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add monitor/source_hashes.json
-          git diff --cached --quiet || git commit -m "chore: update official source baseline"
-          git push
+          git add monitor/source_hashes.json docs/data/source_review_status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update official source review state"
+            git pull --rebase origin main
+            git push
+          fi
 
       - name: Open review issue when an official page changes
         if: steps.result.outputs.changed != '0' && steps.result.outputs.accepted != 'true'
@@ -78,4 +84,12 @@ jobs:
           echo "## Official source monitor" >> "$GITHUB_STEP_SUMMARY"
           echo "- Changed: ${{ steps.result.outputs.changed }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Fetch failures: ${{ steps.result.outputs.failures }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Accepted reviewed baseline: ${{ steps.result.outputs.accepted }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Acceptance blocked: ${{ steps.result.outputs.acceptance_blocked }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Auto-publish: **disabled**" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail blocked baseline acceptance
+        if: github.event_name == 'workflow_dispatch' && inputs.accept_current == true && steps.result.outputs.acceptance_blocked == 'true'
+        run: |
+          echo "Reviewed baseline was NOT accepted because one or more configured official sources could not be fetched."
+          exit 1

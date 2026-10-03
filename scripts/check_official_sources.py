@@ -4,9 +4,13 @@ import hashlib
 import json
 import re
 import sys
+import time
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from html.parser import HTMLParser
 from pathlib import Path
+from threading import Semaphore
+from urllib.parse import urlparse
 
 class TextExtractor(HTMLParser):
     def __init__(self):
@@ -53,6 +57,9 @@ def fetch_fingerprint(url):
     extractor = TextExtractor()
     extractor.feed(html)
     normalized = re.sub(r"\s+", " ", " ".join(extractor.parts)).strip()
+    # Ignore volatile page counters that change on every fetch but do not alter the official rule.
+    normalized = re.sub(r"(조회(?:수)?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized)
+    normalized = re.sub(r"(Views?|Hits?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized, flags=re.I)
     return {
         "sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
         "contentLength": len(normalized),
@@ -67,27 +74,64 @@ def main():
     p.add_argument("--output", default="monitor/check_result.json")
     p.add_argument("--accept-current", action="store_true")
     p.add_argument("--init-if-empty", action="store_true")
+    p.add_argument("--workers", type=int, default=4, help="Concurrent source fetches across different hosts (1-8)")
+    p.add_argument("--retries", type=int, default=2, help="Attempts for transient network failures (1-3)")
     args = p.parse_args()
+    workers = max(1, min(args.workers, 8))
+    attempts = max(1, min(args.retries, 3))
 
-    sources = json.loads(Path(args.sources).read_text(encoding="utf-8"))["sources"]
+    sources = json.loads(Path(args.sources).read_text(encoding="utf-8-sig"))["sources"]
     baseline_path = Path(args.baseline)
-    baseline = json.loads(baseline_path.read_text(encoding="utf-8")) if baseline_path.exists() else {}
+    baseline = json.loads(baseline_path.read_text(encoding="utf-8-sig")) if baseline_path.exists() else {}
+
+    fingerprints = {}
+    failure_by_id = {}
+    host_gates = {
+        urlparse(source["url"]).netloc.lower(): Semaphore(1)
+        for source in sources
+    }
+
+    def fetch_source(source):
+        url = source["url"]
+        host = urlparse(url).netloc.lower()
+        last_error = None
+        with host_gates[host]:
+            for attempt in range(1, attempts + 1):
+                try:
+                    return source["id"], fetch_fingerprint(url)
+                except Exception as exc:
+                    last_error = exc
+                    if "CERTIFICATE_VERIFY_FAILED" in str(exc) or attempt >= attempts:
+                        break
+                    time.sleep(0.75 * attempt)
+        raise last_error
+
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        future_to_source = {executor.submit(fetch_source, source): source for source in sources}
+        for future in as_completed(future_to_source):
+            source = future_to_source[future]
+            try:
+                source_id, fingerprint = future.result()
+                fingerprints[source_id] = fingerprint
+            except Exception as exc:
+                failure_by_id[source["id"]] = str(exc)
 
     current = {}
     failures = []
     for source in sources:
-        try:
-            fingerprint = fetch_fingerprint(source["url"])
-            current[source["id"]] = {
-                "sha256": fingerprint["sha256"],
-                "agency": source["agency"],
-                "url": source["url"],
-                "contentLength": fingerprint["contentLength"],
-                "mode": fingerprint["mode"],
-                "contentType": fingerprint["contentType"],
-            }
-        except Exception as exc:
-            failures.append({"id": source["id"], "url": source["url"], "error": str(exc)})
+        source_id = source["id"]
+        fingerprint = fingerprints.get(source_id)
+        if fingerprint is None:
+            failures.append({"id": source_id, "url": source["url"], "error": failure_by_id.get(source_id, "unknown fetch failure")})
+            continue
+        current[source_id] = {
+            "sha256": fingerprint["sha256"],
+            "agency": source["agency"],
+            "url": source["url"],
+            "contentLength": fingerprint["contentLength"],
+            "mode": fingerprint["mode"],
+            "contentType": fingerprint["contentType"],
+        }
 
     changed = []
     for source_id, now in current.items():
@@ -104,18 +148,33 @@ def main():
 
     initialized = False
     accepted = False
-    if (args.init_if_empty and not baseline and current) or args.accept_current:
-        baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        initialized = not baseline
-        accepted = args.accept_current
+    acceptance_blocked = False
+    complete_fetch = len(current) == len(sources) and not failures
+
+    if args.init_if_empty and not baseline and current:
+        if complete_fetch:
+            baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            initialized = True
+        else:
+            acceptance_blocked = True
+
+    if args.accept_current:
+        if complete_fetch:
+            baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            accepted = True
+        else:
+            acceptance_blocked = True
 
     result = {
         "initialized": initialized,
         "acceptedCurrent": accepted,
+        "acceptanceBlocked": acceptance_blocked,
         "changed": changed,
         "failures": failures,
         "checked": len(current),
         "configured": len(sources),
+        "workers": workers,
+        "attempts": attempts,
     }
     Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))

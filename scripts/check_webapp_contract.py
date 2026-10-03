@@ -15,6 +15,7 @@ exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json
 document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
 broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
 form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").read_text(encoding="utf-8"))
+source_review = json.loads((ROOT / "docs" / "data" / "source_review_status.json").read_text(encoding="utf-8-sig"))
 
 errors = []
 
@@ -357,6 +358,29 @@ if bad_form_scope:
 if bad_form_validator:
     errors.append("form wizards have invalid validator metadata: " + ", ".join(sorted(bad_form_validator)))
 
+allowed_review_states = {"clean", "review_required", "fetch_warning"}
+review_state = source_review.get("state")
+if review_state not in allowed_review_states:
+    errors.append(f"invalid source review state: {review_state}")
+if source_review.get("autoPublishRules") is not False:
+    errors.append("source review status must keep autoPublishRules=false")
+configured = source_review.get("configured")
+checked = source_review.get("checked")
+if not isinstance(configured, int) or not isinstance(checked, int) or configured < 0 or checked < 0 or checked > configured:
+    errors.append("source review configured/checked counts are invalid")
+for key in ("reviewRequiredUrls", "reviewRequiredSourceIds", "fetchFailureUrls", "fetchFailureSourceIds"):
+    if not isinstance(source_review.get(key), list):
+        errors.append(f"source review {key} must be a list")
+if review_state == "clean":
+    if source_review.get("reviewRequiredUrls") or source_review.get("fetchFailureUrls"):
+        errors.append("clean source review state cannot contain pending review/fetch URLs")
+    if isinstance(configured, int) and isinstance(checked, int) and configured != checked:
+        errors.append("clean source review state requires checked == configured")
+elif review_state == "review_required" and not source_review.get("reviewRequiredUrls"):
+    errors.append("review_required source state must list reviewRequiredUrls")
+elif review_state == "fetch_warning" and not source_review.get("fetchFailureUrls"):
+    errors.append("fetch_warning source state must list fetchFailureUrls")
+
 if errors:
     print("WEBAPP_CONTRACT_FAIL")
     for error in errors:
@@ -375,5 +399,7 @@ print(
     f"form_wizards={len(form_wizards.get('forms', []))}",
     f"form_fields={sum(len(form.get('fields', [])) for form in form_wizards.get('forms', []))}",
     f"form_validators={sum(1 for form in form_wizards.get('forms', []) for field in form.get('fields', []) if field.get('validator'))}",
+    f"source_review_state={source_review.get('state')}",
+    f"source_review_checked={source_review.get('checked')}/{source_review.get('configured')}",
     f"js_literal_refs={len(literal_refs)}",
 )
