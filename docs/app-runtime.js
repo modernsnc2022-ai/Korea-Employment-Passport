@@ -3073,6 +3073,14 @@ function betaValidationStats(){
   const passed=evaluatedRows.filter(row=>row.status==='no_private_help').length;
   const failed=evaluatedRows.filter(row=>row.status==='private_help_needed').length;
   const notExperienced=rows.filter(row=>row.status==='not_experienced').length;
+  const testerId=betaTesterIdState();
+  const testerRole=betaTesterRole(testerId);
+  const workerExperienceYear=testerRole==='e9_worker_validator'
+    ?String(read(KEYS.betaWorkerExperienceYear,'')||'')
+    :'';
+  const currentCycle=String(route?.cycle||'');
+  const currentRouteEligible=testerRole!=='e9_worker_validator'||workerExperienceYear===currentCycle;
+  const checkpointComplete=Boolean(route?.stages?.length)&&evaluatedRows.length===route.stages.length&&failed===0;
   return {
     rows,
     evaluatedRows,
@@ -3082,7 +3090,13 @@ function betaValidationStats(){
     failed,
     notExperienced,
     total:(route?.stages||[]).length,
-    routePass:Boolean(route?.stages?.length)&&evaluatedRows.length===route.stages.length&&failed===0
+    testerRole,
+    workerExperienceYear,
+    currentCycle,
+    currentRouteEligible,
+    retrospectiveOnly:testerRole==='e9_worker_validator'&&!currentRouteEligible,
+    checkpointComplete,
+    routePass:checkpointComplete&&currentRouteEligible
   };
 }
 
@@ -3137,13 +3151,19 @@ function renderBetaValidation(){
   const stats=betaValidationStats();
   summary.hidden=false;
   summary.className='result '+(stats.failed?'warn':stats.routePass?'safe':'');
+  const retrospectiveNote=stats.retrospectiveOnly
+    ?`<br><strong>Validasi retrospektif ${escapeHtml(stats.workerExperienceYear==='unknown'?'tahun tidak pasti':stats.workerExperienceYear)}:</strong> hasil ini dipakai untuk menemukan perbedaan/celah pengalaman, bukan sebagai bukti PASS rute ${escapeHtml(stats.currentCycle)}.`
+    :'';
   summary.innerHTML=`<strong>Checkpoint beta: ${stats.tested}/${stats.total} tahap benar-benar dinilai.</strong><br>`+
     `Tanpa bantuan swasta: ${stats.passed} · Masih butuh bantuan swasta: ${stats.failed} · Belum dijalani/tidak dapat dinilai: ${stats.notExperienced}. `+
     (stats.routePass
       ?'<strong>Checkpoint perangkat ini lengkap: 27/27 tanpa bantuan swasta.</strong> Ini bukti beta perangkat ini, bukan PASS final produk.'
-      :stats.failed
-        ?'Rute belum PASS. Catat tugas yang masih membutuhkan bantuan pada Celah Calo di bawah.'
-        :'Belum cukup untuk menyatakan rute PASS; hanya tahap yang benar-benar dijalani boleh dihitung sebagai bukti.');
+      :stats.retrospectiveOnly&&stats.checkpointComplete
+        ?`Checkpoint pengalaman ini lengkap tanpa bantuan swasta, tetapi tidak dihitung sebagai PASS rute ${escapeHtml(stats.currentCycle)} karena tahun pengalaman berbeda/tidak pasti.`
+        :stats.failed
+          ?'Rute belum PASS. Catat tugas yang masih membutuhkan bantuan pada Celah Calo di bawah.'
+          :'Belum cukup untuk menyatakan rute PASS; hanya tahap yang benar-benar dijalani boleh dihitung sebagai bukti.')+
+    retrospectiveNote;
 
   list.innerHTML='';
   stats.rows.forEach(row=>{
@@ -3248,7 +3268,7 @@ function buildBetaFeedbackBundle(){
   if(betaStats.recorded){
     sections.unshift(
       'CHECKPOINT ZERO-BROKER\n'+
-      `Tahap benar-benar dinilai: ${betaStats.tested}/${betaStats.total}; tanpa bantuan swasta: ${betaStats.passed}; masih butuh bantuan swasta: ${betaStats.failed}; belum dijalani/tidak dapat dinilai: ${betaStats.notExperienced}; checkpoint lengkap tanpa bantuan swasta: ${betaStats.routePass?'YA':'BELUM'}\n`+
+      `Tahap benar-benar dinilai: ${betaStats.tested}/${betaStats.total}; tanpa bantuan swasta: ${betaStats.passed}; masih butuh bantuan swasta: ${betaStats.failed}; belum dijalani/tidak dapat dinilai: ${betaStats.notExperienced}; checkpoint lengkap tanpa bantuan swasta: ${betaStats.routePass?'YA':'BELUM'}; eligible bukti rute ${betaStats.currentCycle}: ${betaStats.currentRouteEligible?'YA':'TIDAK (retrospektif)'}\n`+
       betaStats.rows.map((row,index)=>{
         const statusText=row.status==='no_private_help'
           ?'PASS tanpa bantuan swasta'
