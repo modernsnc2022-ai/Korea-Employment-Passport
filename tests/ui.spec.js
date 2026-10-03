@@ -992,7 +992,8 @@ test('post-entry document pack stays scoped to residence registration', async ({
     entryPack: documentPackForStage('korea_entry_training')?.id || null,
     handoverPack: documentPackForStage('employer_handover')?.id || null,
     residencePack: documentPackForStage('residence_registration')?.id || null,
-    insurancePack: documentPackForStage('eps_insurance_check')?.id || null
+    insurancePack: documentPackForStage('eps_insurance_check')?.id || null,
+    insuranceTools: STAGE_TOOLS.eps_insurance_check
   }));
 
   expect(state.entryTools).not.toContain('documents');
@@ -1000,5 +1001,6 @@ test('post-entry document pack stays scoped to residence registration', async ({
   expect(state.handoverPack).toBeNull();
   expect(state.residencePack).toBe('korea_residence');
   expect(state.insurancePack).toBeNull();
+  expect(state.insuranceTools).not.toContain('fees');
   expect(errors).toEqual([]);
 });
