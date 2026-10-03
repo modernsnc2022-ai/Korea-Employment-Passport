@@ -103,8 +103,19 @@ def validate_worker_row(row: dict[str, str], tester_id: str) -> None:
         fail(f"{tester_id}: in_korea must be yes")
     if row.get("e9_experience", "").strip().lower() != "confirmed":
         fail(f"{tester_id}: E-9 experience must be confirmed")
-    if row.get("interview_status", "").strip().lower() == "completed":
-        fail(f"{tester_id}: interview is already completed; do not publish the same validator interview twice")
+    if row.get("interview_status", "").strip().lower() != "completed":
+        fail(f"{tester_id}: worker interview must be completed before workplace evidence is published")
+    experience_year = row.get("experience_year", "").strip()
+    if not valid_experience_year(experience_year):
+        fail(f"{tester_id}: experience_year must be 2004..2026 or unknown")
+    evidence_status = row.get("workplace_evidence_status", "").strip().lower()
+    if evidence_status == WORKPLACE_EVIDENCE_PUBLISHED:
+        fail(f"{tester_id}: workplace evidence is already published")
+    if evidence_status not in {"pending", "declined", "not_publishable"}:
+        fail(
+            f"{tester_id}: workplace_evidence_status must be pending, declined, or not_publishable "
+            "before publication"
+        )
 
 
 def validate_intake(intake: dict) -> None:
@@ -233,7 +244,9 @@ def self_test() -> None:
         "role": "e9_worker_validator",
         "in_korea": "yes",
         "e9_experience": "confirmed",
-        "interview_status": "new",
+        "experience_year": "2024",
+        "interview_status": "completed",
+        "workplace_evidence_status": "pending",
     }]
     registry = {"records": [{"evidenceId": "WPE-0001"}]}
     intake = {
@@ -252,14 +265,23 @@ def self_test() -> None:
         "media": [],
     }
     validate_worker_row(rows[0], intake["testerId"])
-    completed_row = dict(rows[0])
-    completed_row["interview_status"] = "completed"
+    published_row = dict(rows[0])
+    published_row["workplace_evidence_status"] = WORKPLACE_EVIDENCE_PUBLISHED
     try:
-        validate_worker_row(completed_row, intake["testerId"])
+        validate_worker_row(published_row, intake["testerId"])
     except ValueError as exc:
-        assert "already completed" in str(exc)
+        assert "already published" in str(exc)
     else:
-        raise AssertionError("completed worker interview was allowed to publish twice")
+        raise AssertionError("published worker evidence was allowed to publish twice")
+
+    incomplete_row = dict(rows[0])
+    incomplete_row["interview_status"] = "new"
+    try:
+        validate_worker_row(incomplete_row, intake["testerId"])
+    except ValueError as exc:
+        assert "interview must be completed" in str(exc)
+    else:
+        raise AssertionError("workplace evidence was allowed before interview completion")
 
     record = build_public_record(intake, registry)
     assert record["evidenceId"] == "WPE-0002"
@@ -320,7 +342,7 @@ def main() -> int:
         description="Prepare or publish a privacy-safe E-9 worker evidence record. Dry-run is the default."
     )
     parser.add_argument("--intake", help="Path to a private/local JSON intake file; do not commit completed intake files.")
-    parser.add_argument("--write", action="store_true", help="Write sanitized record to public registry and mark interview complete.")
+    parser.add_argument("--write", action="store_true", help="Write sanitized record to public registry after the interview has already been completed.")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
 
@@ -345,7 +367,9 @@ def main() -> int:
         raise SystemExit("WORKER_EVIDENCE_BLOCKED " + str(exc)) from exc
     intake_year = str(intake.get("experienceYear", "")).strip()
     tracker_year = str(worker.get("experience_year", "") or "").strip()
-    if tracker_year and tracker_year != intake_year:
+    if not tracker_year:
+        raise SystemExit("WORKER_EVIDENCE_BLOCKED tracker experience_year is missing; record the interview first")
+    if tracker_year != intake_year:
         raise SystemExit(
             f"WORKER_EVIDENCE_BLOCKED experience year mismatch tracker={tracker_year} intake={intake_year}"
         )
@@ -365,15 +389,13 @@ def main() -> int:
         return 0
 
     registry.setdefault("records", []).append(record)
-    worker["experience_year"] = intake_year
     worker["workplace_evidence_status"] = WORKPLACE_EVIDENCE_PUBLISHED
-    worker["interview_status"] = "completed"
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_tracker(fields, rows)
     print(
         f"WORKER_EVIDENCE_WRITTEN evidence_id={record['evidenceId']} "
         f"experience_year={intake_year} workplace_evidence_status={WORKPLACE_EVIDENCE_PUBLISHED} "
-        "interview_status=completed"
+        "interview_status=already_completed"
     )
     return 0
 
