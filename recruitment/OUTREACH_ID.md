@@ -12,6 +12,15 @@ pendaftaran, dokumen, ujian, skill test, lamaran, SLC, visa, sampai keberangkata
 Kami mencari peserta proses G-to-G dan pekerja E-9 yang sudah berada di Korea.
 Bolehkah kami mengundang relawan beta di komunitas ini?
 Kami akan mengikuti aturan grup dan tidak melakukan promosi berbayar.
+
+## Short WhatsApp message to community admin
+
+Halo Admin IKMI. Kami sedang menguji beta gratis Korea Employment Passport untuk membantu calon PMI mengikuti jalur resmi G-to-G Korea/EPS tanpa calo.
+
+Kami mencari relawan pekerja Indonesia yang sedang/pernah melalui E-9 Korea untuk mengecek apakah panduan kami benar-benar sesuai pengalaman nyata. Ini bukan iklan lowongan dan kami tidak menjanjikan penempatan.
+
+Apakah kami boleh mengirim undangan beta singkat ke komunitas/grup yang Admin anggap sesuai? Kami akan mengikuti aturan grup dan tidak meminta paspor/KTP atau data identitas sensitif.
+
 ## Public beta post
 
 🇮🇩🇰🇷 DICARI RELAWAN BETA — G-to-G Korea / EPS
