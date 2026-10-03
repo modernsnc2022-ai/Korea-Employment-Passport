@@ -100,6 +100,18 @@ require(source.get("configured") == source.get("checked") and int(source.get("co
 require(not source.get("reviewRequiredUrls"), "official-source reviewRequiredUrls is not empty")
 require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
 
+document_packs = load_json("docs/data/document_packs_2026.json")
+mcu1_candidates = [
+    pack for pack in document_packs.get("packs", [])
+    if "mcu1" in pack.get("appliesTo", []) and not pack.get("scopeKey")
+]
+require(bool(mcu1_candidates), "MCU I must have at least one document pack")
+mcu1_candidates.sort(key=lambda pack: len(pack.get("appliesTo", [])) or 999)
+require(
+    mcu1_candidates[0].get("id") == "mcu1_2026" and mcu1_candidates[0].get("status") == "verified_2026",
+    "MCU I most-specific document pack must remain the verified mcu1_2026 pack",
+)
+
 form_rows = forms.get("forms", [])
 field_count = sum(len(form.get("fields", [])) for form in form_rows)
 require(len(form_rows) == 8, f"expected 8 form wizards, found {len(form_rows)}")
