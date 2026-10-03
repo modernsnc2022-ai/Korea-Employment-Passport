@@ -47,6 +47,7 @@ jobs:
           echo "preserved_failures=$(jq '.preservedFailureSourceIds | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "pinned_fallbacks=$(jq '.pinnedFallbacks | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "curl_ca_fallbacks=$(jq '.curlCaVerifiedFallbacks | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "job_application_watch=$(jq '[.changed[] | select(.id == "kp2mi_gtog_korea_info_index")] | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
 
       - name: Publish app review status
         run: python scripts/write_source_review_status.py
@@ -77,10 +78,31 @@ jobs:
 
           This is intentionally human-gated.
           EOF
+          if [ "${{ steps.result.outputs.job_application_watch }}" != "0" ]; then
+            cat >> /tmp/body.txt <<'EOF'
+
+          ## Priority: Manufacturing 2026 job-application watch
+
+          The KP2MI G-to-G Korea information index changed. Check first whether KP2MI has published a **2026 Manufacturing e-certificate / online job-application notice**.
+
+          If such a notice exists, verify it before changing rules and resolve these currently held questions only where the notice explicitly answers them:
+          - required job-application documents (`job_docs`)
+          - scan vs photo (`job_scan`)
+          - identity/name/address source (`job_name`)
+          - whether submitted data can be edited (`job_edit`)
+          - what status/button proves final submission (`job_submit`)
+
+          Do not copy the 2025 Manufacturing or 2026 Fisheries rules into Manufacturing 2026 unless the new official notice says so.
+          EOF
+          fi
           if [ -z "$EXISTING" ]; then
             gh issue create --title "Official source change detected — review required" --body-file /tmp/body.txt
           else
-            gh issue comment "$EXISTING" --body "Another scheduled check detected official-source changes. Review the latest official-source-monitor run."
+            COMMENT="Another scheduled check detected official-source changes. Review the latest official-source-monitor run."
+            if [ "${{ steps.result.outputs.job_application_watch }}" != "0" ]; then
+              COMMENT="$COMMENT Priority: the KP2MI Korea info index changed; check for a 2026 Manufacturing online job-application notice and the five held job_application questions."
+            fi
+            gh issue comment "$EXISTING" --body "$COMMENT"
           fi
 
       - name: Close resolved source-review issue
@@ -104,6 +126,7 @@ jobs:
           echo "- Acceptance blocked: ${{ steps.result.outputs.acceptance_blocked }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Pinned TLS fallbacks: ${{ steps.result.outputs.pinned_fallbacks }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- CA-verified curl TLS compatibility fallbacks: ${{ steps.result.outputs.curl_ca_fallbacks }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Manufacturing 2026 job-application priority watch: ${{ steps.result.outputs.job_application_watch }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Auto-publish: **disabled**" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Fail blocked baseline acceptance
