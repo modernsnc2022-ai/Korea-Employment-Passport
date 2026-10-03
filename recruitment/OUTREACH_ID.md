@@ -41,6 +41,6 @@ Penting:
 • tidak ada biaya untuk ikut beta;
 • jangan mengirim paspor/KTP/ARC atau nomor identitas sensitif.
 
-Kuota beta publik: **30 orang, berdasarkan urutan peserta yang memenuhi syarat dan aktivasi beta.**
+Kuota beta publik: **30 orang pertama yang memenuhi syarat, berdasarkan waktu aplikasi diterima setelah pendaftaran resmi dibuka.**
 
 Selain itu, kami juga mengundang pekerja Indonesia yang sudah bekerja di Korea dengan E-9 sebagai panel validasi pengalaman nyata.
