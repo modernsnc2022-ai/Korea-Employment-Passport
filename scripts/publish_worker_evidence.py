@@ -70,6 +70,8 @@ def validate_worker_row(row: dict[str, str], tester_id: str) -> None:
         fail(f"{tester_id}: in_korea must be yes")
     if row.get("e9_experience", "").strip().lower() != "confirmed":
         fail(f"{tester_id}: E-9 experience must be confirmed")
+    if row.get("interview_status", "").strip().lower() == "completed":
+        fail(f"{tester_id}: interview is already completed; do not publish the same validator interview twice")
 
 
 def validate_intake(intake: dict) -> None:
@@ -209,6 +211,15 @@ def self_test() -> None:
         "media": [],
     }
     validate_worker_row(rows[0], intake["testerId"])
+    completed_row = dict(rows[0])
+    completed_row["interview_status"] = "completed"
+    try:
+        validate_worker_row(completed_row, intake["testerId"])
+    except ValueError as exc:
+        assert "already completed" in str(exc)
+    else:
+        raise AssertionError("completed worker interview was allowed to publish twice")
+
     record = build_public_record(intake, registry)
     assert record["evidenceId"] == "WPE-0002"
     assert "testerId" not in record and "tester_id" not in record
