@@ -14,13 +14,18 @@ TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 REGISTRY = ROOT / "docs" / "data" / "workplace_worker_evidence_v1.json"
 
 ALLOWED_ROOT_KEYS = {
-    "testerId", "companyName", "companyAliases", "verificationStatus",
+    "testerId", "experienceYear", "companyName", "companyAliases", "verificationStatus",
     "verifiedAt", "facts", "media", "reviewConfirmed"
 }
 ALLOWED_FACT_KEYS = {"topic", "summary", "basis"}
 ALLOWED_MEDIA_KEYS = {"type", "url", "consent", "privacyReviewed", "metadataRemoved"}
 PUBLISHABLE_STATUS = {"single_verified_worker"}
 ALLOWED_BASIS = {"worker_experience", "worker_experience_plus_public_record"}
+WORKPLACE_EVIDENCE_PUBLISHED = "published_single_verified_worker"
+
+def valid_experience_year(value: str) -> bool:
+    value = str(value or "").strip()
+    return value == "unknown" or bool(re.fullmatch(r"20(?:0[4-9]|1\d|2[0-6])", value))
 FORBIDDEN_KEYS = {
     "name", "workerName", "worker_name", "email", "phone", "passport",
     "passportNumber", "ktp", "nik", "arc", "homeAddress", "exactDormAddress",
@@ -111,6 +116,10 @@ def validate_intake(intake: dict) -> None:
     if not re.fullmatch(r"KEP-00(?:3[1-9]|4\d|50)", tester_id):
         fail("testerId must be KEP-0031 through KEP-0050")
 
+    experience_year = str(intake.get("experienceYear", "")).strip()
+    if not valid_experience_year(experience_year):
+        fail("experienceYear must be 2004..2026 or unknown")
+
     company = str(intake.get("companyName", "")).strip()
     if not company:
         fail("companyName is required")
@@ -160,6 +169,7 @@ def validate_intake(intake: dict) -> None:
             fail(f"$.media[{index}]: HTTPS URL is required")
 
     public_projection = {
+        "experienceYear": experience_year,
         "companyName": company,
         "companyAliases": aliases,
         "verificationStatus": status,
@@ -188,6 +198,7 @@ def build_public_record(intake: dict, registry: dict) -> dict:
     validate_intake(intake)
     record = {
         "evidenceId": next_evidence_id(registry),
+        "experienceYear": str(intake["experienceYear"]).strip(),
         "companyName": str(intake["companyName"]).strip(),
         "companyAliases": [x.strip() for x in intake.get("companyAliases", []) if x.strip()],
         "verificationStatus": intake["verificationStatus"],
@@ -227,6 +238,7 @@ def self_test() -> None:
     registry = {"records": [{"evidenceId": "WPE-0001"}]}
     intake = {
         "testerId": "KEP-0031",
+        "experienceYear": "2024",
         "companyName": "Sample Manufacturing Co.",
         "companyAliases": ["Sample Mfg"],
         "verificationStatus": "single_verified_worker",
@@ -331,6 +343,12 @@ def main() -> int:
         validate_worker_row(worker, tester_id)
     except ValueError as exc:
         raise SystemExit("WORKER_EVIDENCE_BLOCKED " + str(exc)) from exc
+    intake_year = str(intake.get("experienceYear", "")).strip()
+    tracker_year = str(worker.get("experience_year", "") or "").strip()
+    if tracker_year and tracker_year != intake_year:
+        raise SystemExit(
+            f"WORKER_EVIDENCE_BLOCKED experience year mismatch tracker={tracker_year} intake={intake_year}"
+        )
 
     registry = json.loads(REGISTRY.read_text(encoding="utf-8-sig"))
     try:
@@ -347,10 +365,16 @@ def main() -> int:
         return 0
 
     registry.setdefault("records", []).append(record)
+    worker["experience_year"] = intake_year
+    worker["workplace_evidence_status"] = WORKPLACE_EVIDENCE_PUBLISHED
     worker["interview_status"] = "completed"
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_tracker(fields, rows)
-    print(f"WORKER_EVIDENCE_WRITTEN evidence_id={record['evidenceId']} interview_status=completed")
+    print(
+        f"WORKER_EVIDENCE_WRITTEN evidence_id={record['evidenceId']} "
+        f"experience_year={intake_year} workplace_evidence_status={WORKPLACE_EVIDENCE_PUBLISHED} "
+        "interview_status=completed"
+    )
     return 0
 
 
