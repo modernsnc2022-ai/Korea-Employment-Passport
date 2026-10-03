@@ -865,3 +865,42 @@ test('workplace worker evidence renders only summarized verified facts', async (
   await expect(page.locator('#workplaceWorkerEvidence')).toContainText('bukan jaminan kondisi semua pekerja');
   expect(errors).toEqual([]);
 });
+
+
+test('E-9 worker validator panel can open independently without identity fields', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.route('**/data/beta_program_v1.json', async route => {
+    const response = await route.fetch();
+    const program = await response.json();
+    program.status = 'hold';
+    program.retrospectivePanel.status = 'open';
+    await route.fulfill({ response, json: program });
+  });
+
+  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#closedPanel')).toBeVisible();
+  await expect(page.locator('#applicationPanel')).toBeHidden();
+  await expect(page.locator('#workerPanelClosed')).toBeHidden();
+  await expect(page.locator('#workerValidatorForm')).toBeVisible();
+
+  const identityInputs = await page.locator(
+    '#workerValidatorForm input[type="text"], ' +
+    '#workerValidatorForm input[type="email"], ' +
+    '#workerValidatorForm input[type="tel"], ' +
+    '#workerValidatorForm input[type="file"], ' +
+    '#workerValidatorForm textarea'
+  ).count();
+  expect(identityInputs).toBe(0);
+
+  await page.locator('#workerInKorea').check();
+  await page.locator('#workerUsedG2G').check();
+  await page.locator('#workerFeedbackAgreement').check();
+  const body=await page.evaluate(() => workerValidatorText());
+  expect(body).toContain('20-person retrospective validation panel');
+  expect(body).toContain('Currently working in Korea with E-9: YES');
+  expect(body.toLowerCase()).not.toContain('passport number:');
+  expect(body.toLowerCase()).not.toContain('phone number:');
+  expect(errors).toEqual([]);
+});
