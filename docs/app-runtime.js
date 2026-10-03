@@ -241,7 +241,7 @@ const STAGE_TOOLS={
   predeparture_training:['documents','fees'],
   mcu3_departure:['documents','fees'],
   departure:['documents','fees'],
-  korea_entry_training:['documents'],
+  korea_entry_training:[],
   employer_handover:['workplace'],
   residence_registration:['documents'],
   eps_insurance_check:['fees'],
