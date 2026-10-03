@@ -1,1 +1,93 @@
-{"version":"1.0.0","checks":[{"id":"company_match","title":"Nama perusahaan cocok dengan SLC","detail":"Nama perusahaan pada peta/sumber publik konsisten dengan SLC."},{"id":"address_match","title":"Alamat tempat kerja cocok","detail":"Alamat pada SLC dapat ditemukan dan lokasi terlihat masuk akal untuk jenis usaha."},{"id":"industry_match","title":"Kegiatan usaha terlihat sesuai","detail":"Informasi publik tidak bertentangan dengan industri/pekerjaan pada SLC."},{"id":"transport","title":"Transportasi dan akses diperiksa","detail":"Periksa halte, stasiun, jalan akses, dan waktu tempuh yang realistis."},{"id":"essentials","title":"Fasilitas dasar sekitar diperiksa","detail":"Periksa minimarket, rumah sakit/klinik, bank/ATM, dan layanan penting di sekitar."},{"id":"dorm","title":"Akomodasi diverifikasi","detail":"Ketahui lokasi, tipe, biaya, jumlah penghuni, dan jarak ke tempat kerja jika informasi tersedia."},{"id":"worker_evidence","title":"Ada bukti dari pekerja nyata","detail":"Gunakan pengalaman pekerja terverifikasi dan pisahkan fakta dari opini."},{"id":"contract_reality","title":"Kontrak dibandingkan dengan kondisi nyata","detail":"Bandingkan jam kerja, lembur, tanggal gajian, potongan, shift, makan, dan akomodasi."}]}
+{
+  "version": "1.1.0",
+  "evidenceTypes": {
+    "contract_public": {
+      "label": "Kontrak + sumber publik",
+      "group": "public"
+    },
+    "public": {
+      "label": "Sumber publik",
+      "group": "public"
+    },
+    "contract_worker": {
+      "label": "Kontrak + pengalaman pekerja",
+      "group": "worker"
+    },
+    "worker": {
+      "label": "Pengalaman pekerja",
+      "group": "worker"
+    },
+    "worker_contract": {
+      "label": "Pengalaman pekerja + kontrak",
+      "group": "worker"
+    }
+  },
+  "workerEvidencePolicy": {
+    "title": "Aturan bukti pekerja",
+    "points": [
+      "Pisahkan fakta yang dapat diverifikasi dari opini atau kesan pribadi.",
+      "Jangan tampilkan nama, nomor telepon, nomor ARC/paspor/KTP, alamat rumah, atau identitas sensitif pekerja.",
+      "Foto/video harus memiliki izin pengirim dan tidak boleh menampilkan dokumen identitas, area privat tanpa izin, atau rahasia dagang.",
+      "Satu pengalaman pekerja tidak boleh ditulis sebagai kondisi pasti untuk semua pekerja di perusahaan tersebut.",
+      "Jika bukti belum cukup, tampilkan sebagai belum diverifikasi."
+    ]
+  },
+  "checks": [
+    {
+      "id": "company_match",
+      "title": "Nama perusahaan cocok dengan SLC",
+      "detail": "Nama perusahaan pada peta/sumber publik konsisten dengan SLC.",
+      "evidenceType": "contract_public",
+      "coverageGroup": "public"
+    },
+    {
+      "id": "address_match",
+      "title": "Alamat tempat kerja cocok",
+      "detail": "Alamat pada SLC dapat ditemukan dan lokasi terlihat masuk akal untuk jenis usaha.",
+      "evidenceType": "contract_public",
+      "coverageGroup": "public"
+    },
+    {
+      "id": "industry_match",
+      "title": "Kegiatan usaha terlihat sesuai",
+      "detail": "Informasi publik tidak bertentangan dengan industri/pekerjaan pada SLC.",
+      "evidenceType": "public",
+      "coverageGroup": "public"
+    },
+    {
+      "id": "transport",
+      "title": "Transportasi dan akses diperiksa",
+      "detail": "Periksa halte, stasiun, jalan akses, dan waktu tempuh yang realistis.",
+      "evidenceType": "public",
+      "coverageGroup": "public"
+    },
+    {
+      "id": "essentials",
+      "title": "Fasilitas dasar sekitar diperiksa",
+      "detail": "Periksa minimarket, rumah sakit/klinik, bank/ATM, dan layanan penting di sekitar.",
+      "evidenceType": "public",
+      "coverageGroup": "public"
+    },
+    {
+      "id": "dorm",
+      "title": "Akomodasi diverifikasi",
+      "detail": "Ketahui lokasi, tipe, biaya, jumlah penghuni, dan jarak ke tempat kerja jika informasi tersedia.",
+      "evidenceType": "contract_worker",
+      "coverageGroup": "worker"
+    },
+    {
+      "id": "worker_evidence",
+      "title": "Ada bukti dari pekerja nyata",
+      "detail": "Gunakan pengalaman pekerja terverifikasi dan pisahkan fakta dari opini.",
+      "evidenceType": "worker",
+      "coverageGroup": "worker"
+    },
+    {
+      "id": "contract_reality",
+      "title": "Kontrak dibandingkan dengan kondisi nyata",
+      "detail": "Bandingkan jam kerja, lembur, tanggal gajian, potongan, shift, makan, dan akomodasi.",
+      "evidenceType": "worker_contract",
+      "coverageGroup": "worker"
+    }
+  ]
+}
