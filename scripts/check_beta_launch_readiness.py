@@ -26,6 +26,7 @@ def load_json(path: str):
     return json.loads((ROOT / path).read_text(encoding="utf-8-sig"))
 
 route = load_json("docs/data/id_e9_manufacturing_2026.json")
+i18n = load_json("docs/data/id_e9_manufacturing_2026_id.json")
 bqc = load_json("docs/data/broker_question_catalog_v1.json")
 source = load_json("docs/data/source_review_status.json")
 forms = load_json("docs/data/form_wizards_2026.json")
@@ -39,6 +40,33 @@ outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 
 stage_ids = [row.get("id") for row in route.get("stages", [])]
 require(stage_ids == EXPECTED_STAGES, "supported route must contain the locked 27 stages in exact order")
+
+allowed_broker_states = {"complete", "guided_official", "prep_complete", "held_official_notice"}
+for stage in route.get("stages", []):
+    stage_id = stage.get("id", "<missing>")
+    for field in ("title", "authority", "kind", "action", "brokerReplacement", "sourceUrl"):
+        require(bool(str(stage.get(field, "")).strip()), f"{stage_id}: missing required route field {field}")
+    require(
+        str(stage.get("sourceUrl", "")).startswith("https://"),
+        f"{stage_id}: sourceUrl must use HTTPS",
+    )
+    require(
+        stage.get("brokerReplacement") in allowed_broker_states,
+        f"{stage_id}: unsupported brokerReplacement state {stage.get('brokerReplacement')!r}",
+    )
+    if stage.get("officialActionUrl"):
+        require(
+            str(stage.get("officialActionUrl")).startswith("https://"),
+            f"{stage_id}: officialActionUrl must use HTTPS",
+        )
+        require(bool(str(stage.get("officialActionLabel", "")).strip()),
+                f"{stage_id}: officialActionUrl requires officialActionLabel")
+    localized = i18n.get(stage_id, {})
+    require(bool(str(localized.get("title", "")).strip()), f"{stage_id}: missing Indonesian title")
+    require(bool(str(localized.get("action", "")).strip()), f"{stage_id}: missing Indonesian action")
+    if stage.get("warning"):
+        require(bool(str(localized.get("warning", "")).strip()), f"{stage_id}: route warning is not localized")
+require(set(i18n.keys()) == set(EXPECTED_STAGES), "Indonesian route localization must match exactly the 27 supported stages")
 
 questions = bqc.get("questions", [])
 unresolved_high = [
