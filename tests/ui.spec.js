@@ -514,3 +514,25 @@ test('workplace reality check separates public evidence from worker testimony', 
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
   expect(errors).toEqual([]);
 });
+
+
+test('beta enrollment stays closed until launch status opens', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#betaStatusPill')).toHaveText('BELUM DIBUKA', { timeout: 10000 });
+  await expect(page.locator('#closedPanel')).toBeVisible();
+  await expect(page.locator('#applicationPanel')).toBeHidden();
+  await expect(page.locator('body')).toContainText('Beta terbatas untuk 30 peserta pertama');
+  await expect(page.locator('body')).toContainText('6 bulan gratis');
+  await expect(page.locator('body')).toContainText('Jangan kirim gambar paspor/KTP/ARC');
+
+  const overflow = await page.evaluate(() => ({
+    scrollWidth: document.documentElement.scrollWidth,
+    innerWidth: window.innerWidth
+  }));
+  expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
+  expect(errors).toEqual([]);
+});
