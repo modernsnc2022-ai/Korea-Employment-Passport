@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import csv
+from collections import Counter
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
+
+LATE_STAGE_BUCKETS = {
+    "roster": {"roster", "employer_selection"},
+    "slc": {"slc", "post_slc_requirements"},
+    "visa_opp": {"visa_docs", "predeparture_training", "mcu3_departure"},
+    "departure": {"departure"},
+}
+
+def nonempty(row: dict[str, str], key: str) -> bool:
+    return bool((row.get(key) or "").strip())
+
+def count_value(rows: list[dict[str, str]], key: str, value: str) -> int:
+    return sum(1 for row in rows if (row.get(key) or "").strip() == value)
+
+def safe_counter(rows: list[dict[str, str]], key: str) -> Counter[str]:
+    counter: Counter[str] = Counter()
+    for row in rows:
+        value = (row.get(key) or "").strip()
+        if value:
+            counter[value] += 1
+    return counter
+
+def render(rows: list[dict[str, str]]) -> str:
+    active = [row for row in rows if row.get("target_group", "").strip() == "active_applicant"]
+    workers = [row for row in rows if row.get("target_group", "").strip() == "e9_worker_korea"]
+
+    applications = sum(nonempty(row, "application_received_at") for row in active)
+    accepted = count_value(active, "eligibility_status", "accepted")
+    activated = sum(nonempty(row, "activated_at") for row in active)
+    feedback_started = sum(
+        (row.get("feedback_status") or "").strip() in {"active", "complete"}
+        for row in active
+    )
+    feedback_complete = count_value(active, "feedback_status", "complete")
+
+    interviews_completed = count_value(workers, "interview_status", "completed")
+    broker_gaps_resolved = count_value(rows, "broker_gap_status", "resolved")
+    broker_gaps_open = count_value(rows, "broker_gap_status", "open")
+    retest_passed = count_value(rows, "retest_status", "passed")
+
+    late_stage = {}
+    for bucket, stages in LATE_STAGE_BUCKETS.items():
+        late_stage[bucket] = sum(
+            1 for row in active if (row.get("current_stage") or "").strip() in stages
+        )
+
+    active_stage_counts = safe_counter(active, "current_stage")
+    worker_stage_counts = safe_counter(workers, "current_stage")
+
+    late_ready = all(late_stage[bucket] >= 1 for bucket in LATE_STAGE_BUCKETS)
+    cohort_ready = len(active) == 30 and len(workers) == 20
+    evidence_ready = (
+        applications >= 30
+        and activated >= 30
+        and interviews_completed >= 20
+        and late_ready
+        and broker_gaps_open == 0
+    )
+
+    lines = [
+        "# Beta progress — privacy-safe aggregate",
+        "",
+        "This report contains counts only. It must not include participant names, contact details, identity numbers, addresses, or free-text notes.",
+        "",
+        "## Cohort",
+        f"- Public beta slots: {len(active)}/30",
+        f"- E-9 worker validation slots: {len(workers)}/20",
+        f"- Cohort structure ready: {'YES' if cohort_ready else 'NO'}",
+        "",
+        "## Public beta funnel",
+        f"- Applications received after OPEN: {applications}/30",
+        f"- Eligibility accepted: {accepted}/30",
+        f"- Beta accounts activated: {activated}/30",
+        f"- Feedback started: {feedback_started}/30",
+        f"- Feedback completed: {feedback_complete}/30",
+        "",
+        "## Retrospective validation",
+        f"- E-9 worker interviews completed: {interviews_completed}/20",
+        "",
+        "## Broker replacement evidence",
+        f"- Broker gaps open: {broker_gaps_open}",
+        f"- Broker gaps resolved: {broker_gaps_resolved}",
+        f"- Retests passed: {retest_passed}",
+        "",
+        "## Required late-stage coverage among active applicants",
+        f"- Roster / employer selection: {late_stage['roster']}",
+        f"- SLC / post-SLC: {late_stage['slc']}",
+        f"- Visa / OPP / final medical: {late_stage['visa_opp']}",
+        f"- Departure: {late_stage['departure']}",
+        f"- Late-stage coverage ready: {'YES' if late_ready else 'NO'}",
+        "",
+        "## Stage distribution",
+        "- Active applicants: " + (
+            ", ".join(f"{key}={value}" for key, value in sorted(active_stage_counts.items()))
+            if active_stage_counts else "no stages recorded"
+        ),
+        "- E-9 workers: " + (
+            ", ".join(f"{key}={value}" for key, value in sorted(worker_stage_counts.items()))
+            if worker_stage_counts else "no stages recorded"
+        ),
+        "",
+        "## Evidence gate",
+        f"- Real-user evidence ready for route PASS review: {'YES' if evidence_ready else 'NO'}",
+        "- This aggregate does not itself declare Broker Replacement Rate PASS; route PASS still requires reviewing the actual sanitized beta evidence and confirming every necessary private-broker task is replaced.",
+        "",
+    ]
+    return "\n".join(lines)
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", help="Optional markdown output path")
+    args = parser.parse_args()
+
+    with TRACKER.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    if len(rows) != 50:
+        raise SystemExit(f"BETA_PROGRESS_FAIL expected 50 tracker rows, found {len(rows)}")
+
+    report = render(rows)
+    if args.output:
+        path = Path(args.output)
+        if not path.is_absolute():
+            path = ROOT / path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(report + "\n", encoding="utf-8")
+    print(report)
+    print("BETA_PROGRESS_PASS privacy_safe_counts_only=true")
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
