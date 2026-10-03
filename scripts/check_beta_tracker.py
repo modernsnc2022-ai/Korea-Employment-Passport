@@ -99,6 +99,9 @@ if missing:
 
 ELIGIBILITY_STATUSES = {"", "pending", "eligible", "ineligible", "waitlist", "accepted"}
 FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
+INTERVIEW_STATUSES = {"", "new", "scheduled", "completed", "withdrawn"}
+BROKER_GAP_STATUSES = {"", "open", "resolved", "official_or_licensed_only"}
+RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
@@ -148,8 +151,17 @@ for index, row in enumerate(rows, start=1):
     activated_at = row.get("activated_at", "").strip()
     free_until = row.get("free_until", "").strip()
     feedback_status = row.get("feedback_status", "").strip()
+    interview_status = row.get("interview_status", "").strip()
+    broker_gap_status = row.get("broker_gap_status", "").strip()
+    retest_status = row.get("retest_status", "").strip()
     current_stage = row.get("current_stage", "").strip()
 
+    if interview_status not in INTERVIEW_STATUSES:
+        fail(f"{tester_id} invalid interview_status {interview_status!r}")
+    if broker_gap_status not in BROKER_GAP_STATUSES:
+        fail(f"{tester_id} invalid broker_gap_status {broker_gap_status!r}")
+    if retest_status not in RETEST_STATUSES:
+        fail(f"{tester_id} invalid retest_status {retest_status!r}")
     if current_stage and current_stage not in SUPPORTED_STAGES:
         fail(f"{tester_id} current_stage is not a supported route stage: {current_stage}")
     if eligibility_status not in ELIGIBILITY_STATUSES:
@@ -220,9 +232,33 @@ for row in public_rows:
     previous_id = tester_id
     assigned_public += 1
 
+worker_rows = rows[30:]
+seen_empty_worker = False
+assigned_workers = 0
+for row in worker_rows:
+    tester_id = row["tester_id"].strip()
+    joined = row.get("created_at", "").strip()
+    if not joined:
+        seen_empty_worker = True
+        continue
+    if seen_empty_worker:
+        fail(f"{tester_id} is assigned after an empty earlier worker-validator slot; assign KEP-0031..KEP-0050 contiguously")
+    try:
+        date.fromisoformat(joined)
+    except ValueError:
+        fail(f"{tester_id} created_at must use YYYY-MM-DD for worker validators")
+    if row.get("role", "").strip() != "e9_worker_validator":
+        fail(f"{tester_id} assigned worker validator requires role=e9_worker_validator")
+    if row.get("in_korea", "").strip() != "yes":
+        fail(f"{tester_id} assigned worker validator requires in_korea=yes")
+    if row.get("e9_experience", "").strip() != "confirmed":
+        fail(f"{tester_id} assigned worker validator requires e9_experience=confirmed")
+    assigned_workers += 1
+
 activated = sum(1 for row in rows if row.get("activated_at", "").strip())
 print(
     f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} "
     f"e9_workers={workers} assigned_public_beta={assigned_public} "
+    f"assigned_worker_validators={assigned_workers} "
     f"activated_public_beta={activated} free_months=6"
 )
