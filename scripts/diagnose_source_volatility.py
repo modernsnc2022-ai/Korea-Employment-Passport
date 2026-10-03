@@ -19,7 +19,19 @@ status = json.loads(STATUS.read_text(encoding="utf-8-sig"))
 tls_pins = json.loads(TLS_PINS.read_text(encoding="utf-8-sig")) if TLS_PINS.exists() else {"hosts": {}}
 
 changed_ids = set(status.get("reviewRequiredSourceIds", []))
-targets = [row for row in sources if row.get("id") in changed_ids and "kp2mi.go.id" in row.get("url", "")]
+diagnostic_ids = {
+    "kp2mi_gtog_korea_info_index",
+    "kp2mi_contact",
+    "kp2mi_registration_2026",
+    "kp2mi_visa_mcu_2026",
+    "kp2mi_departure_2026_09_15",
+}
+targets = [
+    row for row in sources
+    if row.get("id") in changed_ids
+    and row.get("id") in diagnostic_ids
+    and "kp2mi.go.id" in row.get("url", "")
+]
 
 print(f"SOURCE_VOLATILITY_DIAGNOSTIC targets={len(targets)}")
 if not targets:
