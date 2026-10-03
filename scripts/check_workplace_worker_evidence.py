@@ -76,6 +76,8 @@ for row in data.get("records", []):
             fail(f"{evidence_id}: unsupported media type")
         if media.get("consent") is not True or media.get("privacyReviewed") is not True:
             fail(f"{evidence_id}: media requires consent=true and privacyReviewed=true")
+        if media.get("metadataRemoved") is not True:
+            fail(f"{evidence_id}: media requires metadataRemoved=true")
         if not str(media.get("url", "")).startswith("https://"):
             fail(f"{evidence_id}: media URL must be HTTPS")
 
