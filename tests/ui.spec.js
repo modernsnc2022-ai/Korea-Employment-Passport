@@ -608,3 +608,32 @@ test('mcu1 uses its verified stage-specific document pack', async ({ page }) => 
   await expect(page.locator('#docStageContext')).not.toContainText('tunggu pengumuman resmi');
   expect(errors).toEqual([]);
 });
+
+
+test('predeparture OPP scope resolves to verified common pack', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'predeparture_training');
+
+  const scopeKey = await page.evaluate(() => {
+    const options=scopeOptionsForStage('predeparture_training');
+    const preferred=options.find(row=>row.key==='opp_sawangan_wave9_2026')||options[0];
+    if(!preferred)throw new Error('no OPP scope available');
+    saveScopeSelection('predeparture_training',preferred.key);
+    renderDocuments();
+    return preferred.key;
+  });
+  expect(scopeKey).toMatch(/^opp_/);
+
+  const pack = await page.evaluate(() => {
+    const value=documentPackForStage('predeparture_training');
+    return value ? {id:value.id,status:value.status,items:(value.items||[]).length} : null;
+  });
+  expect(pack).toEqual({
+    id:'opp_common_2026_pack',
+    status:'verified_across_multiple_2026_calls',
+    items:7
+  });
+  await expect(page.locator('#docStageContext')).toContainText('OPP 2026');
+  await expect(page.locator('#docStageContext')).toContainText('Terverifikasi silang');
+  expect(errors).toEqual([]);
+});
