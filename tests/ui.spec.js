@@ -978,3 +978,27 @@ test('worker validator beta IDs show retrospective instructions and role', async
   expect(result.body).not.toContain('nama pekerja');
   expect(errors).toEqual([]);
 });
+
+
+test('post-entry document pack stays scoped to residence registration', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const state = await page.evaluate(() => ({
+    entryTools: STAGE_TOOLS.korea_entry_training,
+    entryPack: documentPackForStage('korea_entry_training')?.id || null,
+    handoverPack: documentPackForStage('employer_handover')?.id || null,
+    residencePack: documentPackForStage('residence_registration')?.id || null,
+    insurancePack: documentPackForStage('eps_insurance_check')?.id || null
+  }));
+
+  expect(state.entryTools).not.toContain('documents');
+  expect(state.entryPack).toBeNull();
+  expect(state.handoverPack).toBeNull();
+  expect(state.residencePack).toBe('korea_residence');
+  expect(state.insurancePack).toBeNull();
+  expect(errors).toEqual([]);
+});
