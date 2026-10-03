@@ -3,6 +3,7 @@ const RULES_URL='data/id_e9_manufacturing_2026_rules.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 const CONTRACT_URL='data/slc_guardian_2026.json';
 const WORKPLACE_URL='data/workplace_reality_v1.json';
+const WORKPLACE_WORKER_EVIDENCE_URL='data/workplace_worker_evidence_v1.json';
 const DOCUMENT_PACKS_URL='data/document_packs_2026.json';
 const EXACT_ANSWERS_URL='data/exact_answer_rules_v1.json';
 const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
@@ -14,7 +15,7 @@ const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
 const DEPARTURE_CALLS_URL='data/departure_calls_2026.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -344,6 +345,7 @@ async function boot(){
       i18n,
       contractRules,
       workplaceRules,
+      workplaceWorkerEvidence,
       documentPacks,
       exactAnswers,
       documentExamples,
@@ -360,6 +362,11 @@ async function boot(){
       fetchJsonRequired(I18N_URL),
       fetchJsonRequired(CONTRACT_URL),
       fetchJsonRequired(WORKPLACE_URL),
+      fetchJsonOptional(
+        WORKPLACE_WORKER_EVIDENCE_URL,
+        {version:'unavailable',status:'unavailable',records:[],displayPolicy:{}},
+        'verified worker evidence registry'
+      ),
       fetchJsonRequired(DOCUMENT_PACKS_URL),
       fetchJsonRequired(EXACT_ANSWERS_URL),
       fetchJsonRequired(DOCUMENT_EXAMPLES_URL),
@@ -2706,6 +2713,60 @@ function renderWorkplaceOfficialLookups(){
     ).join('')+'</div>';
 }
 
+function normalizeWorkerEvidenceCompany(value){
+  return String(value||'')
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣\s]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function workerEvidenceForCompany(company){
+  const target=normalizeWorkerEvidenceCompany(company);
+  if(!target||!workplaceWorkerEvidence?.records?.length)return [];
+  return workplaceWorkerEvidence.records.filter(row=>{
+    const names=[row.companyName,...(row.companyAliases||[])];
+    return names.some(name=>normalizeWorkerEvidenceCompany(name)===target);
+  });
+}
+
+function renderWorkplaceWorkerEvidence(){
+  const box=$('workplaceWorkerEvidence');
+  if(!box)return;
+  const company=$('wpCompany')?.value?.trim()||'';
+  const policy=workplaceWorkerEvidence?.displayPolicy||{};
+  if(!company){
+    box.innerHTML='<div class="workplace-worker-head"><strong>Bukti pengalaman pekerja terverifikasi</strong><span>BETA</span></div><p>Masukkan nama perusahaan dari SLC untuk mencari bukti pengalaman pekerja yang sudah melalui verifikasi privasi.</p>';
+    return;
+  }
+
+  const matches=workerEvidenceForCompany(company);
+  if(!matches.length){
+    box.innerHTML='<div class="workplace-worker-head"><strong>Bukti pengalaman pekerja terverifikasi</strong><span>BELUM ADA KECocokan</span></div>'+
+      '<p><strong>Belum ada bukti pekerja terverifikasi yang dipublikasikan untuk perusahaan ini.</strong></p>'+
+      '<p>'+escapeHtml(policy.noEvidenceMeaning||'Tidak adanya data di sini bukan penilaian negatif terhadap perusahaan.')+'</p>';
+    return;
+  }
+
+  box.innerHTML='<div class="workplace-worker-head"><strong>Bukti pengalaman pekerja terverifikasi</strong><span>'+matches.length+' CATATAN</span></div>'+
+    matches.map(row=>{
+      const facts=(row.facts||[]).map(fact=>
+        '<li><strong>'+escapeHtml(fact.topic)+'</strong><span>'+escapeHtml(fact.summary)+'</span></li>'
+      ).join('');
+      const media=(row.media||[]).map(item=>
+        '<a href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener">Lihat '+escapeHtml(item.type)+' terverifikasi ↗</a>'
+      ).join('');
+      return '<article class="worker-evidence-card">'+
+        '<div class="workplace-check-meta"><span class="evidence-badge worker">'+escapeHtml(row.verificationStatus||'verified')+'</span><span class="verify-state verified">Diverifikasi '+escapeHtml(row.verifiedAt||'')+'</span></div>'+
+        '<strong>'+escapeHtml(row.companyName||company)+'</strong>'+
+        '<ul>'+facts+'</ul>'+
+        (media?'<div class="worker-evidence-media">'+media+'</div>':'')+
+        '<small>Ringkasan ini hanya berlaku pada pengalaman yang diverifikasi dan bukan jaminan kondisi semua pekerja.</small>'+
+      '</article>';
+    }).join('');
+}
+
 function renderWorkplace(){
   if(!workplaceRules)return;
   const saved=read(KEYS.workplace,{checks:[]});
@@ -2716,6 +2777,7 @@ function renderWorkplace(){
   updateMapLinks();
   renderWorkplaceEvidencePolicy();
   renderWorkplaceOfficialLookups();
+  renderWorkplaceWorkerEvidence();
 
   const selected=new Set(saved.checks||[]);
   const wrap=$('realityChecks');
@@ -2738,7 +2800,7 @@ function renderWorkplace(){
 
   ['wpCompany','wpAddress','wpDorm'].forEach(id=>{
     const el=$(id);
-    el.oninput=()=>{saveWorkplace();updateMapLinks()};
+    el.oninput=()=>{saveWorkplace();updateMapLinks();if(id==='wpCompany')renderWorkplaceWorkerEvidence()};
   });
   updateCoverage();
 }
