@@ -45,6 +45,10 @@ if len(utility_tabs) != 4:
     errors.append(f"simple UX lock requires exactly 4 primary bottom-nav items, got {len(utility_tabs)}")
 if "cohort" in html.lower():
     errors.append("user-facing HTML contains internal jargon: cohort")
+if js.count("encodeSanitizedBetaBody(") < 4:
+    errors.append("beta feedback email paths must use automatic privacy redaction")
+if "dihapus otomatis" not in html.lower():
+    errors.append("beta feedback privacy redaction is not disclosed in the app UI")
 
 ids = re.findall(r'\bid="([^"]+)"', html)
 dupes = [key for key, count in Counter(ids).items() if count > 1]
@@ -68,6 +72,8 @@ required_runtime_functions = (
     "wizardGuidanceUrl",
     "renderFormWizardCard",
     "renderFormWizard",
+    "sanitizeBetaFeedback",
+    "encodeSanitizedBetaBody",
 )
 for function_name in required_runtime_functions:
     called = re.search(rf"\b{re.escape(function_name)}\s*\(", js)

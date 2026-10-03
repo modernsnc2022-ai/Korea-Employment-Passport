@@ -2726,12 +2726,39 @@ function renderUnresolvedFieldQuestions(){
   });
 }
 
+const BETA_FEEDBACK_REDACTION_RULES=[
+  {label:'email',pattern:/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi},
+  {label:'document_id',pattern:/\b[A-Z]{1,3}[-\s]?\d{6,12}\b/gi},
+  {label:'phone',pattern:/(?<!\w)(?:\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)/g},
+  {label:'long_number',pattern:/\b\d[\d\s.-]{8,}\d\b/g}
+];
+
+function sanitizeBetaFeedback(text){
+  let value=String(text||'');
+  let redacted=false;
+  BETA_FEEDBACK_REDACTION_RULES.forEach(rule=>{
+    value=value.replace(rule.pattern,()=>{
+      redacted=true;
+      return '[DIHAPUS:'+rule.label+']';
+    });
+  });
+  return {text:value,redacted};
+}
+
+function encodeSanitizedBetaBody(rawBody){
+  const safe=sanitizeBetaFeedback(rawBody);
+  const notice=safe.redacted
+    ?'Catatan privasi: pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang telah dihapus otomatis sebelum draft email dibuat.\n\n'
+    :'';
+  return encodeURIComponent(notice+safe.text);
+}
+
 $('emailFieldQuestionsBtn').addEventListener('click',()=>{
   const list=read(KEYS.fieldQuestions,[]);
   if(!list.length)return;
   const lines=list.map((item,index)=>`${index+1}. [${item.stageTitle||item.stageId}] ${item.question}`).join('\n');
   const subject=encodeURIComponent('[KEP Beta] Exact field questions needing verification');
-  const body=encodeURIComponent(
+  const body=encodeSanitizedBetaBody(
     'Pertanyaan field yang belum punya jawaban terverifikasi:\n\n'+
     lines+
     '\n\nMohon verifikasi berdasarkan form/pengumuman resmi yang sesuai. Jangan jawab berdasarkan tebakan atau sektor/siklus lain.'
@@ -2846,7 +2873,7 @@ $('emailRejectsBtn').addEventListener('click',()=>{
     'Fix: '+(item.fix||'belum diketahui')
   ).join('\n\n');
   const subject=encodeURIComponent('[KEP Beta] Rejection cases for rule update');
-  const body=encodeURIComponent(
+  const body=encodeSanitizedBetaBody(
     'Kasus penolakan untuk diverifikasi dan dijadikan aturan pencegahan:\n\n'+
     bodyLines+
     '\n\nData sensitif (nomor paspor/KTP/ARC) tidak boleh disertakan.'
@@ -2882,7 +2909,7 @@ $('emailGapsBtn').addEventListener('click',()=>{
   const gaps=read(KEYS.gaps,[]);if(!gaps.length)return;
   const lines=gaps.map((g,i)=>`${i+1}. [${g.stage}] ${g.task} — ${g.helper}`).join('\n');
   const subject=encodeURIComponent('[KEP Beta] Broker Gap report');
-  const body=encodeURIComponent('Broker Gaps from my device:\n\n'+lines+'\n\nNo sensitive document is attached.');
+  const body=encodeSanitizedBetaBody('Broker Gaps from my device:\n\n'+lines+'\n\nNo sensitive document is attached.');
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 

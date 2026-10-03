@@ -208,3 +208,23 @@ test('unknown broker-like question routes to official human help instead of gues
 
   expect(errors).toEqual([]);
 });
+
+
+test('beta feedback removes sensitive-looking identifiers before email draft', async ({ page }) => {
+  const errors = await freshPage(page);
+  const result = await page.evaluate(() => {
+    const raw='Paspor A1234567; NIK 3174123456789012; email tester@example.com; HP +62 812-3456-7890';
+    const sanitized=sanitizeBetaFeedback(raw);
+    const mailBody=decodeURIComponent(encodeSanitizedBetaBody(raw));
+    return {sanitized,mailBody};
+  });
+
+  expect(result.sanitized.redacted).toBe(true);
+  expect(result.sanitized.text).not.toContain('A1234567');
+  expect(result.sanitized.text).not.toContain('3174123456789012');
+  expect(result.sanitized.text).not.toContain('tester@example.com');
+  expect(result.sanitized.text).not.toContain('+62 812-3456-7890');
+  expect(result.mailBody).toContain('Catatan privasi');
+  expect(result.mailBody).toContain('[DIHAPUS:');
+  expect(errors).toEqual([]);
+});
