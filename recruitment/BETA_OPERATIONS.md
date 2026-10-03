@@ -44,7 +44,7 @@ Worker interviews and contact details stay outside this public repository. Do no
 4. For photos/videos, require `consent=true`, `privacyReviewed=true`, and `metadataRemoved=true`.
 5. Run `python scripts/publish_worker_evidence.py --intake <private-file.json>` first. This is dry-run only.
 6. Check the proposed WPE-#### record. The helper verifies that the KEP ID is an assigned KEP-0031..0050 worker-validator slot, removes the tester ID from the public record, and only permits `single_verified_worker` for this single-interview publishing path. Do not label one interview as multi-worker or worker-plus-public verification.
-7. Re-run with `--write` only after the dry-run output is approved. The helper appends the sanitized record to `docs/data/workplace_worker_evidence_v1.json` and marks the tracker interview status `completed`.
+7. Re-run with `--write` only after the dry-run output is approved. The helper appends the sanitized record to `docs/data/workplace_worker_evidence_v1.json` and marks the tracker interview status `completed`. A completed validator interview cannot be published a second time through this helper.
 8. Commit only the sanitized registry/tracker changes. Never commit the completed private intake file.
 
 The static CI separately checks the registry for forbidden identity/private fields and rejects worker media unless metadata removal is explicitly confirmed.
