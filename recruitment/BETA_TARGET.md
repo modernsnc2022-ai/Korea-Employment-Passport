@@ -5,6 +5,7 @@
 Public beta recruitment stays **closed** until `BETA_LAUNCH_GATE.md` passes.
 
 When the gate passes:
+- queue order is fixed by the received timestamp of eligible applications submitted after recruitment becomes OPEN; activation timing must never reorder accepted applicants;
 - recruit the first **30** eligible people who are actively going through Indonesia -> Korea G-to-G / EPS E-9 process, ordered by the received timestamp of applications submitted after recruitment becomes OPEN;
 - each accepted tester receives Korea Employment Passport service **free for 6 months from beta account activation**;
 - the benefit is conditional on good-faith participation in product feedback;
