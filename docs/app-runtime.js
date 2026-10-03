@@ -2709,21 +2709,25 @@ function updateCoverage(){
   }
 }
 
+function buildScoutRequestBody(data,missing){
+  return (
+    'Halo Korea Employment Passport Beta,\n\n'+
+    'Saya ingin meminta pemeriksaan lapangan / reality check untuk:\n'+
+    'Perusahaan: '+(data.company||'-')+'\n'+
+    'Alamat kerja: '+(data.address||'-')+'\n\n'+
+    'Yang belum terverifikasi:\n'+(missing||'Semua checklist sudah ditandai.')+'\n\n'+
+    'Catatan privasi: informasi/alamat asrama tidak disertakan dalam permintaan ini.\n'+
+    'Saya memahami pemeriksaan harus dilakukan secara legal: tanpa masuk area privat tanpa izin, tanpa merekam rahasia dagang, dan tanpa mengirim dokumen pribadi sensitif.'
+  );
+}
+
 $('requestScoutBtn').addEventListener('click',()=>{
   const data=saveWorkplace();
   if(!data.company&&!data.address)return;
   const checked=new Set(data.checks||[]);
   const missing=workplaceRules.checks.filter(c=>!checked.has(c.id)).map(c=>'• '+c.title).join('\n');
   const subject=encodeURIComponent('[KEP Beta] Workplace Reality Check request');
-  const body=encodeURIComponent(
-    'Halo Korea Employment Passport Beta,\n\n'+
-    'Saya ingin meminta pemeriksaan lapangan / reality check untuk:\n'+
-    'Perusahaan: '+(data.company||'-')+'\n'+
-    'Alamat kerja: '+(data.address||'-')+'\n'+
-    'Info asrama: '+(data.dorm||'-')+'\n\n'+
-    'Yang belum terverifikasi:\n'+(missing||'Semua checklist sudah ditandai.')+'\n\n'+
-    'Saya memahami pemeriksaan harus dilakukan secara legal: tanpa masuk area privat tanpa izin, tanpa merekam rahasia dagang, dan tanpa mengirim dokumen pribadi sensitif.'
-  );
+  const body=encodeURIComponent(buildScoutRequestBody(data,missing));
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
