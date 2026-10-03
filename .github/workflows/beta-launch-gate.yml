@@ -5,9 +5,14 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   readiness:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -15,3 +20,42 @@ jobs:
           python-version: '3.12'
       - name: Check strict beta launch readiness
         run: python scripts/check_beta_launch_readiness.py
+      - name: Require same-HEAD static, UI, and Pages success
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          required=("static-check" "ui-smoke" "pages build and deployment")
+          for attempt in {1..60}; do
+            data="$(gh api -H 'Accept: application/vnd.github+json'               "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$GITHUB_SHA&per_page=100")"
+            pending=0
+            for name in "${required[@]}"; do
+              row="$(jq -c --arg name "$name" --argjson current "$GITHUB_RUN_ID"                 '.workflow_runs
+                 | map(select(.name == $name and .id != $current))
+                 | sort_by(.created_at)
+                 | last // empty' <<<"$data")"
+              if [ -z "$row" ]; then
+                echo "WAIT $name: no run yet for $GITHUB_SHA"
+                pending=1
+                continue
+              fi
+              status="$(jq -r '.status' <<<"$row")"
+              conclusion="$(jq -r '.conclusion // ""' <<<"$row")"
+              url="$(jq -r '.html_url' <<<"$row")"
+              echo "$name status=$status conclusion=$conclusion $url"
+              if [ "$status" = "completed" ] && [ "$conclusion" != "success" ]; then
+                echo "BLOCKED: $name did not succeed on $GITHUB_SHA"
+                exit 1
+              fi
+              if [ "$status" != "completed" ]; then
+                pending=1
+              fi
+            done
+            if [ "$pending" -eq 0 ]; then
+              echo "BETA_LAUNCH_SIBLING_CHECKS_PASS sha=$GITHUB_SHA"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "BLOCKED: required same-HEAD checks did not all complete within 10 minutes"
+          exit 1
