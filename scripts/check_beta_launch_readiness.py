@@ -111,6 +111,20 @@ require(
     mcu1_candidates[0].get("id") == "mcu1_2026" and mcu1_candidates[0].get("status") == "verified_2026",
     "MCU I most-specific document pack must remain the verified mcu1_2026 pack",
 )
+psych_pack = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "psychology_pre_job_2026"), {})
+require(
+    psych_pack.get("status") == "verified_2026"
+    and psych_pack.get("appliesTo") == ["psychology_pre_job"]
+    and len(psych_pack.get("items", [])) >= 4,
+    "psychology_pre_job must use its verified 2026 stage-specific pack",
+)
+job_pack = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "job_application_manufacturing"), {})
+require(
+    job_pack.get("appliesTo") == ["job_application"]
+    and job_pack.get("status") == "awaiting_sector_notice",
+    "Manufacturing job-application HOLD pack must apply only to job_application",
+)
+
 opp_common = next((pack for pack in document_packs.get("packs", []) if pack.get("id") == "opp_common_2026_pack"), {})
 require(
     opp_common.get("status") == "verified_across_multiple_2026_calls",
