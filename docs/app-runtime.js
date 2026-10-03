@@ -2592,6 +2592,25 @@ $('checkPayrollBtn').addEventListener('click',()=>{
   $(id)?.addEventListener('change',savePayroll);
 });
 
+function workplaceEvidenceMeta(check){
+  const meta=workplaceRules?.evidenceTypes?.[check?.evidenceType]||{};
+  return {
+    label:meta.label||'Bukti belum diklasifikasikan',
+    group:check?.coverageGroup||meta.group||'worker'
+  };
+}
+
+function renderWorkplaceEvidencePolicy(){
+  const box=$('workplaceEvidencePolicy');
+  if(!box||!workplaceRules)return;
+  const policy=workplaceRules.workerEvidencePolicy||{};
+  const points=Array.isArray(policy.points)?policy.points:[];
+  box.innerHTML=
+    '<div class="workplace-policy-head"><span class="evidence-badge public">BISA DIMULAI TANPA TESTIMONI</span><strong>Mulai dari bukti publik dan SLC</strong></div>'+
+    '<p>Nama perusahaan, alamat, kegiatan usaha, akses transportasi, dan fasilitas sekitar dapat diperiksa lebih dulu. Bukti pengalaman pekerja dipisahkan dan tidak boleh diasumsikan benar sebelum diverifikasi.</p>'+
+    (points.length?'<details><summary>'+escapeHtml(policy.title||'Aturan bukti pekerja')+'</summary><ul>'+points.map(point=>'<li>'+escapeHtml(point)+'</li>').join('')+'</ul></details>':'');
+}
+
 function renderWorkplace(){
   if(!workplaceRules)return;
   const saved=read(KEYS.workplace,{checks:[]});
@@ -2600,14 +2619,24 @@ function renderWorkplace(){
   $('wpAddress').value=saved.address||contract.workplace||contract.enterpriseLocation||'';
   $('wpDorm').value=saved.dorm||'';
   updateMapLinks();
+  renderWorkplaceEvidencePolicy();
 
   const selected=new Set(saved.checks||[]);
   const wrap=$('realityChecks');
   wrap.innerHTML='';
   workplaceRules.checks.forEach(check=>{
+    const checked=selected.has(check.id);
+    const meta=workplaceEvidenceMeta(check);
     const article=document.createElement('article');
-    article.innerHTML=`<input type="checkbox" ${selected.has(check.id)?'checked':''}><div><h3>${escapeHtml(check.title)}</h3><p>${escapeHtml(check.detail)}</p></div>`;
-    article.querySelector('input').addEventListener('change',saveWorkplace);
+    article.dataset.evidenceGroup=meta.group;
+    article.innerHTML=`<input type="checkbox" ${checked?'checked':''} aria-label="${escapeHtml(check.title)}"><div><div class="workplace-check-meta"><span class="evidence-badge ${meta.group==='public'?'public':'worker'}">${escapeHtml(meta.label)}</span><span class="verify-state ${checked?'verified':'unverified'}">${checked?'Sudah diperiksa':'Belum diverifikasi'}</span></div><h3>${escapeHtml(check.title)}</h3><p>${escapeHtml(check.detail)}</p></div>`;
+    const input=article.querySelector('input');
+    const status=article.querySelector('.verify-state');
+    input.addEventListener('change',()=>{
+      saveWorkplace();
+      status.textContent=input.checked?'Sudah diperiksa':'Belum diverifikasi';
+      status.className='verify-state '+(input.checked?'verified':'unverified');
+    });
     wrap.appendChild(article);
   });
 
@@ -2640,11 +2669,24 @@ function updateMapLinks(){
 function updateCoverage(){
   if(!workplaceRules)return;
   const state=read(KEYS.workplace,{checks:[]});
-  const count=(state.checks||[]).length;
+  const selected=new Set(state.checks||[]);
+  const count=selected.size;
   const total=workplaceRules.checks.length;
   const pct=total?Math.round(count/total*100):0;
   $('coverageText').textContent=pct+'%';
   $('coverageBar').style.width=pct+'%';
+
+  const publicChecks=workplaceRules.checks.filter(check=>workplaceEvidenceMeta(check).group==='public');
+  const workerChecks=workplaceRules.checks.filter(check=>workplaceEvidenceMeta(check).group==='worker');
+  const publicCount=publicChecks.filter(check=>selected.has(check.id)).length;
+  const workerCount=workerChecks.filter(check=>selected.has(check.id)).length;
+  const detail=$('workplaceCoverageDetail');
+  if(detail){
+    detail.innerHTML=
+      '<span><strong>Bukti publik/kontrak:</strong> '+publicCount+'/'+publicChecks.length+'</span>'+
+      '<span><strong>Bukti pengalaman pekerja:</strong> '+workerCount+'/'+workerChecks.length+'</span>'+
+      (workerCount<workerChecks.length?'<small>Bagian pekerja yang belum ada bukti tetap ditandai belum diverifikasi; itu tidak menghapus hasil pemeriksaan publik.</small>':'');
+  }
 }
 
 $('requestScoutBtn').addEventListener('click',()=>{
