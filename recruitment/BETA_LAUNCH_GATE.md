@@ -44,6 +44,12 @@ Public beta recruitment must remain **HOLD** until every required item below is 
 - [ ] Mobile-width smoke review PASS.
 - [ ] No known critical or high-severity product defect remains open.
 
+## Beta OPEN vs route PASS
+
+The **30 active applicants + 20 E-9 workers are not prerequisites for opening the beta**. They are the evidence cohort collected after opening and are required before declaring the supported route a Broker Replacement Rate 100% PASS.
+
+Beta OPEN requires sections 1–7 to pass plus a final same-day check for any new Manufacturing 2026 official notice. Route PASS remains governed by `docs/MVP_VALIDATION.md`.
+
 ## 8. Recruitment switch
 When sections 1–7 all PASS:
 1. change recruitment status from HOLD to OPEN;
