@@ -17,6 +17,6 @@ module.exports = defineConfig({
     command: 'python -m http.server 4173 --directory docs',
     url: 'http://127.0.0.1:4173/app.html',
     reuseExistingServer: true,
-    timeout: 15000
+    timeout: 30000
   }
 });

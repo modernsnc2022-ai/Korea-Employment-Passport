@@ -363,3 +363,42 @@ test('anonymous beta ID links feedback to tracker without identity data', async 
   expect(result.body).not.toContain('email');
   expect(errors).toEqual([]);
 });
+
+
+test('unexperienced beta stage never counts as zero-broker evidence', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel').evaluate((el) => { el.open = true; });
+
+  await page.locator('#betaCheckStage').selectOption('eligibility');
+  await page.locator('#betaCheckOutcome').selectOption('not_experienced');
+  await page.locator('#saveBetaCheckBtn').click();
+
+  const result = await page.evaluate(() => {
+    const stats=betaValidationStats();
+    const bundle=buildBetaFeedbackBundle();
+    return {
+      recorded:stats.recorded,
+      tested:stats.tested,
+      passed:stats.passed,
+      failed:stats.failed,
+      notExperienced:stats.notExperienced,
+      routePass:stats.routePass,
+      checkpointCount:bundle.checkpointCount,
+      body:bundle.rawBody
+    };
+  });
+
+  expect(result.recorded).toBe(1);
+  expect(result.tested).toBe(0);
+  expect(result.passed).toBe(0);
+  expect(result.failed).toBe(0);
+  expect(result.notExperienced).toBe(1);
+  expect(result.routePass).toBe(false);
+  expect(result.checkpointCount).toBe(1);
+  expect(result.body).toContain('BELUM DIJALANI / TIDAK DINILAI');
+  await expect(page.locator('#betaValidationSummary')).toContainText('0/27');
+  await expect(page.locator('#betaValidationSummary')).toContainText('Belum dijalani/tidak dapat dinilai: 1');
+  expect(errors).toEqual([]);
+});

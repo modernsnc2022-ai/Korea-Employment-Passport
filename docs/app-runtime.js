@@ -2788,15 +2788,20 @@ function betaValidationStats(){
   const rows=(route?.stages||[])
     .map(stage=>checks[stage.id]?{stage,...checks[stage.id]}:null)
     .filter(Boolean);
-  const passed=rows.filter(row=>row.status==='no_private_help').length;
-  const failed=rows.filter(row=>row.status==='private_help_needed').length;
+  const evaluatedRows=rows.filter(row=>['no_private_help','private_help_needed'].includes(row.status));
+  const passed=evaluatedRows.filter(row=>row.status==='no_private_help').length;
+  const failed=evaluatedRows.filter(row=>row.status==='private_help_needed').length;
+  const notExperienced=rows.filter(row=>row.status==='not_experienced').length;
   return {
     rows,
-    tested:rows.length,
+    evaluatedRows,
+    recorded:rows.length,
+    tested:evaluatedRows.length,
     passed,
     failed,
+    notExperienced,
     total:(route?.stages||[]).length,
-    routePass:Boolean(route?.stages?.length)&&rows.length===route.stages.length&&failed===0
+    routePass:Boolean(route?.stages?.length)&&evaluatedRows.length===route.stages.length&&failed===0
   };
 }
 
@@ -2826,19 +2831,24 @@ function renderBetaValidation(){
   const stats=betaValidationStats();
   summary.hidden=false;
   summary.className='result '+(stats.failed?'warn':stats.routePass?'safe':'');
-  summary.innerHTML=`<strong>Checkpoint beta: ${stats.tested}/${stats.total} tahap dinilai.</strong><br>`+
-    `Tanpa bantuan swasta: ${stats.passed} · Masih butuh bantuan swasta: ${stats.failed}. `+
+  summary.innerHTML=`<strong>Checkpoint beta: ${stats.tested}/${stats.total} tahap benar-benar dinilai.</strong><br>`+
+    `Tanpa bantuan swasta: ${stats.passed} · Masih butuh bantuan swasta: ${stats.failed} · Belum dijalani/tidak dapat dinilai: ${stats.notExperienced}. `+
     (stats.routePass
       ?'<strong>Checkpoint perangkat ini lengkap: 27/27 tanpa bantuan swasta.</strong> Ini bukti beta perangkat ini, bukan PASS final produk.'
       :stats.failed
         ?'Rute belum PASS. Catat tugas yang masih membutuhkan bantuan pada Celah Calo di bawah.'
-        :'Belum cukup untuk menyatakan rute PASS; lanjutkan penilaian tahap yang benar-benar sudah dijalani.');
+        :'Belum cukup untuk menyatakan rute PASS; hanya tahap yang benar-benar dijalani boleh dihitung sebagai bukti.');
 
   list.innerHTML='';
   stats.rows.forEach(row=>{
     const article=document.createElement('article');
     article.className='gap-item';
-    article.innerHTML=`<h3>${escapeHtml(stageTitle(row.stage))}</h3><p>${row.status==='no_private_help'?'✓ Selesai tanpa bantuan swasta':'⚠ Masih membutuhkan bantuan swasta'}</p>`;
+    const outcome=row.status==='no_private_help'
+      ?'✓ Selesai tanpa bantuan swasta'
+      :row.status==='private_help_needed'
+        ?'⚠ Masih membutuhkan bantuan swasta'
+        :'— Belum menjalani / tidak bisa menilai';
+    article.innerHTML=`<h3>${escapeHtml(stageTitle(row.stage))}</h3><p>${outcome}</p>`;
     list.appendChild(article);
   });
 }
@@ -2864,7 +2874,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
 $('saveBetaCheckBtn').addEventListener('click',()=>{
   const stageId=$('betaCheckStage').value;
   const status=$('betaCheckOutcome').value;
-  if(!stageId||!['no_private_help','private_help_needed'].includes(status))return;
+  if(!stageId||!['no_private_help','private_help_needed','not_experienced'].includes(status))return;
   const checks=betaChecksState();
   checks[stageId]={stageId,status,updatedAt:new Date().toISOString()};
   write(KEYS.betaChecks,checks);
@@ -2905,16 +2915,23 @@ function buildBetaFeedbackBundle(){
   }
 
   const betaStats=betaValidationStats();
-  if(betaStats.tested){
+  if(betaStats.recorded){
     sections.unshift(
       'CHECKPOINT ZERO-BROKER\n'+
-      `Tahap dinilai: ${betaStats.tested}/${betaStats.total}; tanpa bantuan swasta: ${betaStats.passed}; masih butuh bantuan swasta: ${betaStats.failed}; checkpoint lengkap tanpa bantuan swasta: ${betaStats.routePass?'YA':'BELUM'}\n`+
-      betaStats.rows.map((row,index)=>`${index+1}. [${stageTitle(row.stage)}] ${row.status==='no_private_help'?'PASS tanpa bantuan swasta':'FAIL masih membutuhkan bantuan swasta'}`).join('\n')
+      `Tahap benar-benar dinilai: ${betaStats.tested}/${betaStats.total}; tanpa bantuan swasta: ${betaStats.passed}; masih butuh bantuan swasta: ${betaStats.failed}; belum dijalani/tidak dapat dinilai: ${betaStats.notExperienced}; checkpoint lengkap tanpa bantuan swasta: ${betaStats.routePass?'YA':'BELUM'}\n`+
+      betaStats.rows.map((row,index)=>{
+        const statusText=row.status==='no_private_help'
+          ?'PASS tanpa bantuan swasta'
+          :row.status==='private_help_needed'
+            ?'FAIL masih membutuhkan bantuan swasta'
+            :'BELUM DIJALANI / TIDAK DINILAI';
+        return `${index+1}. [${stageTitle(row.stage)}] ${statusText}`;
+      }).join('\n')
     );
   }
 
   const findingCount=fieldQuestions.length+rejections.length+gaps.length;
-  const checkpointCount=betaStats.tested;
+  const checkpointCount=betaStats.recorded;
   const count=findingCount+checkpointCount;
   const done=read(KEYS.done,[]);
   const current=currentStage();
@@ -2927,7 +2944,7 @@ function buildBetaFeedbackBundle(){
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
     'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
     'Temuan: '+fieldQuestions.length+' pertanyaan, '+rejections.length+' penolakan, '+gaps.length+' Celah Calo',
-    'Checkpoint zero-broker: '+betaStats.tested+'/'+betaStats.total+' dinilai; '+betaStats.passed+' PASS; '+betaStats.failed+' FAIL'
+    'Checkpoint zero-broker: '+betaStats.tested+'/'+betaStats.total+' benar-benar dinilai; '+betaStats.passed+' PASS; '+betaStats.failed+' FAIL; '+betaStats.notExperienced+' belum dijalani/tidak dinilai'
   ].join('\n');
   return {
     count,
