@@ -194,6 +194,21 @@
       "id": "moel_wage_evidence_guidance",
       "agency": "Ministry of Employment and Labor",
       "url": "https://www.moel.go.kr/minwon/fastcounsel/fastcounselView.do?inetDcssMngId=202505090333334120312"
+    },
+    {
+      "id": "korea_earrival_official",
+      "agency": "Korea Immigration Service",
+      "url": "https://www.e-arrivalcard.go.kr/"
+    },
+    {
+      "id": "korea_earrival_immigration_guide",
+      "agency": "Korea Immigration Service",
+      "url": "https://www.immigration.go.kr/immigration/3509/subview.do"
+    },
+    {
+      "id": "kdca_qcode_input",
+      "agency": "Korea Disease Control and Prevention Agency",
+      "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do"
     }
   ]
 }
