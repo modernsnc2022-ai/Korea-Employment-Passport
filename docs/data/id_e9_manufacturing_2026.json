@@ -109,9 +109,9 @@
       "kind": "official_requirement",
       "action": "For 2026 graduates, complete the required psychology examination before MCU I and job application.",
       "brokerReplacement": "guided_official",
-      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026",
-      "officialActionUrl": "https://himpsi.or.id/cpmi/daily-cpmi-korea-2026",
-      "officialActionLabel": "Buka jalur psikologi HIMPSI"
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026",
+      "officialActionUrl": "http://himpsi.or.id/cpmi/daily-cpmi-korea-2026",
+      "officialActionLabel": "Buka daftar psikolog HIMPSI"
     },
     {
       "id": "mcu1",
