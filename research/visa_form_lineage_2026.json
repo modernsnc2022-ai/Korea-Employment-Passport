@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "verifiedAt": "2026-10-03",
+  "route": "ID-E9-2026",
+  "summary": {
+    "comparedOfficialIssueDates": [
+      "2026-05-25",
+      "2026-06-18",
+      "2026-08-27"
+    ],
+    "stableAcrossAll": 4,
+    "changedInAug": 1,
+    "materialFinding": "Among the five compared official documents, only the debit-blocking/debit-authorization form changed between the June and August 2026 issues."
+  },
+  "forms": [
+    {
+      "filename": "visa_form_yellow_2026.pdf",
+      "maySha256": "bbd783419430f4d5c635c33e981e5775aa3c71984fce4934a831087666e61b89",
+      "juneSha256": "bbd783419430f4d5c635c33e981e5775aa3c71984fce4934a831087666e61b89",
+      "augSha256": "bbd783419430f4d5c635c33e981e5775aa3c71984fce4934a831087666e61b89",
+      "sameMayJune": true,
+      "sameJuneAug": true,
+      "latestChangedInAug": false,
+      "latestUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_2._Formulir_Pengajuan_Visa_(Print_Warna_Kuning).pdf"
+    },
+    {
+      "filename": "form_e9_2026.pdf",
+      "maySha256": "33dd0a8466f96db55e56bd4bb0b9718c23eb873a24548fe4d7ab80de15ec477a",
+      "juneSha256": "33dd0a8466f96db55e56bd4bb0b9718c23eb873a24548fe4d7ab80de15ec477a",
+      "augSha256": "33dd0a8466f96db55e56bd4bb0b9718c23eb873a24548fe4d7ab80de15ec477a",
+      "sameMayJune": true,
+      "sameJuneAug": true,
+      "latestChangedInAug": false,
+      "latestUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_3._Formulir_Pernyataan_E9.pdf"
+    },
+    {
+      "filename": "placement_agreement_2026.pdf",
+      "maySha256": "52c6a4d6e34db810123cb85f66dcd1888647bd820027f0ec00d5d8c88afa0db0",
+      "juneSha256": "52c6a4d6e34db810123cb85f66dcd1888647bd820027f0ec00d5d8c88afa0db0",
+      "augSha256": "52c6a4d6e34db810123cb85f66dcd1888647bd820027f0ec00d5d8c88afa0db0",
+      "sameMayJune": true,
+      "sameJuneAug": true,
+      "latestChangedInAug": false,
+      "latestUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_4._Perjanjian_Penempatan_G_to_G_Korea_Selatan.pdf"
+    },
+    {
+      "filename": "visa_debit_power_2026.pdf",
+      "maySha256": "70fefb822e16a03dedb91df595f35b4bddf77344c8955d727bc72305dfe0bdb4",
+      "juneSha256": "70fefb822e16a03dedb91df595f35b4bddf77344c8955d727bc72305dfe0bdb4",
+      "augSha256": "c3b746295abb8d6b99b83e99203e2c3a39babefd6f5b24f3415853857bfbf04e",
+      "sameMayJune": true,
+      "sameJuneAug": false,
+      "latestChangedInAug": true,
+      "latestUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_5._Surat_Kuasa_Pemblokiran_dan_Pendebetan_Rekening.pdf"
+    },
+    {
+      "filename": "official_visa_guidance_2026.pdf",
+      "maySha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
+      "juneSha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
+      "augSha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
+      "sameMayJune": true,
+      "sameJuneAug": true,
+      "latestChangedInAug": false,
+      "latestUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_8._Petunjuk_Pemberkasan_Dokumen_Visa.pdf"
+    }
+  ]
+}

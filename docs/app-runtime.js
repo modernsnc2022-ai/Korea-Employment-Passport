@@ -9,9 +9,10 @@ const DOCUMENT_EXAMPLES_URL='data/document_examples_v1.json';
 const FRESHNESS_URL='data/freshness_policy_v1.json';
 const BROKER_QUESTION_URL='data/broker_question_catalog_v1.json';
 const FORM_WIZARDS_URL='data/form_wizards_2026.json';
+const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,sourceReviewStatus=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -174,7 +175,7 @@ function renderContextTools(stage){
 
 async function boot(){
   try{
-    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes,sourceReviewRes]=await Promise.all([
+    const [routeRes,rulesRes,i18nRes,contractRes,workplaceRes,documentPacksRes,exactAnswersRes,documentExamplesRes,freshnessRes,brokerQuestionRes,formWizardRes,formLineageRes,sourceReviewRes]=await Promise.all([
       fetch(ROUTE_URL,{cache:'no-store'}),
       fetch(RULES_URL,{cache:'no-store'}),
       fetch(I18N_URL,{cache:'no-store'}),
@@ -186,9 +187,10 @@ async function boot(){
       fetch(FRESHNESS_URL,{cache:'no-store'}),
       fetch(BROKER_QUESTION_URL,{cache:'no-store'}),
       fetch(FORM_WIZARDS_URL,{cache:'no-store'}),
+      fetch(FORM_LINEAGE_URL,{cache:'no-store'}),
       fetch(SOURCE_REVIEW_STATUS_URL,{cache:'no-store'})
     ]);
-    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok||!sourceReviewRes.ok) throw new Error('verified data unavailable');
+    if(!routeRes.ok||!rulesRes.ok||!i18nRes.ok||!contractRes.ok||!workplaceRes.ok||!documentPacksRes.ok||!exactAnswersRes.ok||!documentExamplesRes.ok||!freshnessRes.ok||!brokerQuestionRes.ok||!formWizardRes.ok||!formLineageRes.ok||!sourceReviewRes.ok) throw new Error('verified data unavailable');
     route=await routeRes.json();
     rules=await rulesRes.json();
     i18n=await i18nRes.json();
@@ -200,6 +202,7 @@ async function boot(){
     freshnessPolicy=await freshnessRes.json();
     brokerQuestions=await brokerQuestionRes.json();
     formWizards=await formWizardRes.json();
+    formLineage=await formLineageRes.json();
     sourceReviewStatus=await sourceReviewRes.json();
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
@@ -1447,7 +1450,9 @@ function renderFormWizardCard(form,index){
     return;
   }
 
-  intro.innerHTML='<strong>'+escapeHtml(form.title)+'</strong>'+
+  const lineage=formLineageStatus(form);
+  const lineageHtml=lineage?'<div class="wizard-version '+lineage.kind+'">'+escapeHtml(lineage.text)+'</div>':'';
+  intro.innerHTML='<strong>'+escapeHtml(form.title)+'</strong>'+lineageHtml+
     '<ul>'+((form.intro||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join(''))+'</ul>'+
     (form.attention?'<div class="wizard-attention"><strong>Perhatian:</strong> '+escapeHtml(form.attention)+'</div>':'')+
     '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>'+
