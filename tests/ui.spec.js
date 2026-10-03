@@ -955,3 +955,26 @@ test('review-required official source suppresses affected exact document guidanc
   await expect(page.locator('#docList')).toContainText('Jangan submit berdasarkan checklist lama');
   expect(errors).toEqual([]);
 });
+
+
+test('worker validator beta IDs show retrospective instructions and role', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html?beta=KEP-0031', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  await expect(page.locator('#betaModeBanner')).toBeVisible();
+  await expect(page.locator('#betaModeBanner')).toContainText('Panel validator E-9 KEP-0031');
+  await expect(page.locator('#betaModeBanner')).toContainText('pengalaman nyata');
+  await expect(page.locator('#betaModeBanner')).toContainText('alamat asrama pribadi');
+
+  const result = await page.evaluate(() => ({
+    role: betaTesterRole(),
+    body: buildBetaFeedbackBundle().rawBody
+  }));
+  expect(result.role).toBe('e9_worker_validator');
+  expect(result.body).toContain('Peran beta: validator E-9 retrospektif');
+  expect(result.body).not.toContain('nama pekerja');
+  expect(errors).toEqual([]);
+});
