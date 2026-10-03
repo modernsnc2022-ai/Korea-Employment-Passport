@@ -36,6 +36,7 @@ Public beta recruitment must remain **HOLD** until every required item below is 
 - [ ] Public workplace-information view is usable without worker testimonials.
 - [ ] Missing or unverified workplace claims are labeled as such.
 - [ ] Worker reviews/photos/videos, when added, have a verification and privacy rule.
+- [ ] E-9 worker interviews can be converted to WPE-#### records through the dry-run-first privacy-safe publisher; completed private intake files are never committed.
 
 ## 7. Release quality
 - [ ] Static checks PASS on release HEAD.
