@@ -57,6 +57,10 @@ jobs:
       - name: Publish app review status
         run: python scripts/write_source_review_status.py
 
+      - name: Diagnose changed KP2MI sources without auto-accepting
+        if: steps.result.outputs.changed != '0' && steps.result.outputs.accepted != 'true'
+        run: python scripts/diagnose_source_volatility.py --all
+
       - name: Commit monitor state when changed
         run: |
           git config user.name "github-actions[bot]"
