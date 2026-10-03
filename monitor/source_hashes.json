@@ -72,7 +72,7 @@
     "contentType": "text/html"
   },
   "moel_minimum_wage_2026": {
-    "sha256": "3c5de22b14a7a574c4703835f7269d58833fb70a5d924368ab35a0a8d76b7602",
+    "sha256": "9db20c9b6c7a97e337b7b1e3df7b66f3f2d57a1ab90bc595d85264193fb75e7b",
     "agency": "Ministry of Employment and Labor",
     "url": "https://moel.go.kr/news/enews/report/enewsView.do?bbs_id=12&news_seq=18144&pageIndex=1&pageUnit=10&searchField=3",
     "contentLength": 4472,
@@ -92,6 +92,14 @@
     "agency": "Ministry of Employment and Labor",
     "url": "https://www.moel.go.kr/policyitrd/policyItrdView.do?policy_itrd_sn=42",
     "contentLength": 4164,
+    "mode": "normalized_text",
+    "contentType": "text/html"
+  },
+  "foreign_worker_employment_rule_change_docs": {
+    "sha256": "384fdf3e7b973203782fc7808cec83bc0afea05d7e8beb0421e9981c1904c9ba",
+    "agency": "Korea Law Information Center",
+    "url": "https://www.law.go.kr/DRF/lawService.do?MST=271599&OC=unicpla&efYd=20250602&mobileYn=Y&target=law&type=HTML",
+    "contentLength": 24,
     "mode": "normalized_text",
     "contentType": "text/html"
   },
@@ -136,7 +144,7 @@
     "contentType": "application/pdf"
   },
   "immigration_foreigner_registration_info": {
-    "sha256": "66631ecf3b312ecc3ec4feee36307c654d247e2960cb5ff87ac32d672f5734c9",
+    "sha256": "33c44d0a7e29932483e443777db230dab402d612be55241718808a70366c2779",
     "agency": "Korea Immigration Service",
     "url": "https://www.immigration.go.kr/bbs/moj/189/559234/artclView.do",
     "contentLength": 1550,
