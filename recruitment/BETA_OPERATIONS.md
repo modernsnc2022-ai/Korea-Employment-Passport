@@ -20,3 +20,15 @@ Run without --write for a dry run. Add --write only after checking the proposed 
 The script selects the next contiguous public KEP slot, computes the six-calendar-month end date, and refuses an application timestamp earlier than the last assigned eligible application.
 
 Direct contact information stays in the access-controlled communication system and is matched to the pseudonymous KEP ID outside this public repository.
+
+
+## E-9 worker validator panel
+
+The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains separate from the 30-person public beta.
+
+- Do not assign worker-validator KEP IDs while `retrospectivePanel.status` is HOLD.
+- After the worker panel becomes OPEN, assign KEP-0031 through KEP-0050 contiguously in validator enrollment order.
+- Use `scripts/assign_worker_validator.py` for dry-run first, then `--write` after checking the proposed KEP ID.
+- The helper records only a non-identifying source channel, supported route stage, in-Korea confirmation, E-9 experience confirmation, and panel status fields.
+- Worker validators do **not** receive the public-beta application queue or six-month entitlement fields.
+- Contact details remain outside this public repository.
