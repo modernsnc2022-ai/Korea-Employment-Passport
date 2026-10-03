@@ -2611,6 +2611,25 @@ function renderWorkplaceEvidencePolicy(){
     (points.length?'<details><summary>'+escapeHtml(policy.title||'Aturan bukti pekerja')+'</summary><ul>'+points.map(point=>'<li>'+escapeHtml(point)+'</li>').join('')+'</ul></details>':'');
 }
 
+function renderWorkplaceOfficialLookups(){
+  const box=$('workplaceOfficialLookups');
+  if(!box||!workplaceRules)return;
+  const rows=Array.isArray(workplaceRules.officialLookups)?workplaceRules.officialLookups:[];
+  if(!rows.length){box.hidden=true;box.innerHTML='';return}
+  box.hidden=false;
+  box.innerHTML='<div class="workplace-official-head"><strong>Pemeriksaan lewat sumber resmi Korea</strong><span>BUKTI TAMBAHAN</span></div>'+
+    '<div class="workplace-official-grid">'+rows.map(item=>
+      '<article>'+
+        '<div class="workplace-check-meta"><span class="evidence-badge public">'+escapeHtml(item.access==='public'?'PUBLIK':'LOGIN RESMI')+'</span></div>'+
+        '<strong>'+escapeHtml(item.title)+'</strong>'+
+        '<small>'+escapeHtml(item.authority||'')+'</small>'+
+        '<p>'+escapeHtml(item.use||'')+'</p>'+
+        '<p class="lookup-caution">'+escapeHtml(item.caution||'')+'</p>'+
+        '<a class="secondary link-button" href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener">Buka sumber resmi ↗</a>'+
+      '</article>'
+    ).join('')+'</div>';
+}
+
 function renderWorkplace(){
   if(!workplaceRules)return;
   const saved=read(KEYS.workplace,{checks:[]});
@@ -2620,6 +2639,7 @@ function renderWorkplace(){
   $('wpDorm').value=saved.dorm||'';
   updateMapLinks();
   renderWorkplaceEvidencePolicy();
+  renderWorkplaceOfficialLookups();
 
   const selected=new Set(saved.checks||[]);
   const wrap=$('realityChecks');
