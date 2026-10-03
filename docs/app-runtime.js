@@ -2197,7 +2197,8 @@ function renderDocuments(){
     scope_required:'Pilih pengumuman yang memuat nama Anda terlebih dahulu',
     verified_notice_2026_05_26:'Terverifikasi untuk panggilan 26 Mei 2026',
     verified_notice_2026_06_19:'Terverifikasi untuk panggilan 19 Juni 2026',
-    verified_notice_2026_09_08:'Terverifikasi untuk panggilan 8 September 2026'
+    verified_notice_2026_09_08:'Terverifikasi untuk panggilan 8 September 2026',
+    verified_across_multiple_2026_calls:'Terverifikasi silang dari beberapa panggilan OPP 2026'
   }[pack.status]||pack.status;
 
   context.innerHTML=`
