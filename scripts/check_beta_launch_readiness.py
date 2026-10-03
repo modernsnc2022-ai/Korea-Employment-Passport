@@ -43,6 +43,7 @@ workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
 departure_calls = load_json("docs/data/departure_calls_2026.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
+app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
 beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
@@ -249,7 +250,7 @@ for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks
     require(key in runtime.split("const BETA_SCOPED_KEYS", 1)[1].split(";", 1)[0],
             f"{key} must stay beta-tester scoped")
 require("sanitizedBetaFeedbackText" in runtime, "sanitized beta feedback sharing must remain enabled")
-require("betaWorkerExperienceWrap" in beta_page,
+require("betaWorkerExperienceWrap" in app_page,
         "worker validator UI must capture experience-year context")
 require("Tahun pengalaman/proses EPS:" in runtime,
         "worker validator feedback must preserve experience-year context")
