@@ -707,3 +707,24 @@ test('departure scope picker includes partial verified 2026 registry', async ({ 
   expect(result.aug24?.sourceUrl).toContain('kp2mi.go.id');
   expect(errors).toEqual([]);
 });
+
+
+test('partial departure registry never suggests another call when date is missing', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'departure');
+
+  await page.evaluate(() => {
+    const stage=route.stages.find(row=>row.id==='departure');
+    openStage(stage);
+  });
+
+  await expect(page.locator('#scopePickerSection')).toBeVisible();
+  await expect(page.locator('#scopePicker')).toHaveValue('');
+  await expect(page.locator('#scopePickerSource')).toBeVisible();
+  await expect(page.locator('#scopePickerSource')).toContainText('indeks resmi KP2MI');
+  await expect(page.locator('#scopePickerSection small')).toContainText('belum lengkap');
+  await expect(page.locator('#scopePickerSection small')).toContainText('jangan memakai aturan tanggal lain');
+  const href=await page.locator('#scopePickerSource').getAttribute('href');
+  expect(href).toContain('kp2mi.go.id/gtog-korea/info');
+  expect(errors).toEqual([]);
+});
