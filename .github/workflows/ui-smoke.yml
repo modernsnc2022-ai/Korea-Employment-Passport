@@ -3,13 +3,6 @@ name: ui-smoke
 on:
   push:
     branches: [main]
-    paths:
-      - 'docs/**'
-      - 'tests/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'playwright.config.js'
-      - '.github/workflows/ui-smoke.yml'
   workflow_dispatch:
 
 permissions:
