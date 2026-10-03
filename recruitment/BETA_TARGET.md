@@ -6,7 +6,7 @@ Public beta recruitment stays **closed** until `BETA_LAUNCH_GATE.md` passes.
 
 When the gate passes:
 - recruit the first **30** eligible people who are actively going through Indonesia -> Korea G-to-G / EPS E-9 process;
-- each accepted tester receives Korea Employment Passport service **free for 12 months from beta account activation**;
+- each accepted tester receives Korea Employment Passport service **free for 6 months from beta account activation**;
 - the benefit is conditional on good-faith participation in product feedback;
 - this is a product beta, not a job sale, placement service, visa guarantee, or departure guarantee;
 - no payment is required to join the beta.
