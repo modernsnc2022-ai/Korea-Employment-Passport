@@ -365,6 +365,28 @@ test('anonymous beta ID links feedback to tracker without identity data', async 
 });
 
 
+test('beta invite URL immediately confirms the assigned anonymous tester', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html?beta=KEP-0017', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  await expect(page.locator('#betaModeBanner')).toBeVisible();
+  await expect(page.locator('#betaModeBanner')).toContainText('Mode beta KEP-0017');
+  await expect(page.locator('#betaModeBanner')).toContainText('Nilai hanya tahap yang benar-benar Anda alami');
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('kep.betaTesterId')||'null'))).toBe('KEP-0017');
+
+  await page.evaluate(() => localStorage.clear());
+  await page.goto('/app.html?beta=KEP-9999', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  await expect(page.locator('#betaModeBanner')).toBeHidden();
+  expect(await page.evaluate(() => localStorage.getItem('kep.betaTesterId'))).toBeNull();
+
+  expect(errors).toEqual([]);
+});
+
+
 test('unexperienced beta stage never counts as zero-broker evidence', async ({ page }) => {
   const errors = await freshPage(page);
   await setStage(page, 'eligibility');
