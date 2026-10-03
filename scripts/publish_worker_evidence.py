@@ -15,7 +15,7 @@ REGISTRY = ROOT / "docs" / "data" / "workplace_worker_evidence_v1.json"
 
 ALLOWED_ROOT_KEYS = {
     "testerId", "experienceYear", "companyName", "companyAliases", "verificationStatus",
-    "verifiedAt", "facts", "media", "reviewConfirmed"
+    "verifiedAt", "facts", "media", "contributorConsent", "reviewConfirmed"
 }
 ALLOWED_FACT_KEYS = {"topic", "summary", "basis"}
 ALLOWED_MEDIA_KEYS = {"type", "url", "consent", "privacyReviewed", "metadataRemoved"}
@@ -146,6 +146,8 @@ def validate_intake(intake: dict) -> None:
     verified_at = str(intake.get("verifiedAt", ""))
     date.fromisoformat(verified_at)
 
+    if intake.get("contributorConsent") is not True:
+        fail("contributorConsent=true is required before a worker experience summary can be published")
     if intake.get("reviewConfirmed") is not True:
         fail("reviewConfirmed must be true before evidence can be prepared")
 
@@ -256,6 +258,7 @@ def self_test() -> None:
         "companyAliases": ["Sample Mfg"],
         "verificationStatus": "single_verified_worker",
         "verifiedAt": "2026-10-04",
+        "contributorConsent": True,
         "reviewConfirmed": True,
         "facts": [{
             "topic": "accommodation",
