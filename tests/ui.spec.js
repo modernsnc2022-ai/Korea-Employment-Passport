@@ -261,7 +261,13 @@ test('beta feedback bundle combines all gap types and redacts them in one draft'
   expect(result.body).not.toContain('+62 812-3456-7890');
   expect(result.body).not.toContain('3174123456789012');
   expect(result.body).not.toContain('081234567890');
+  await expect(page.locator('#copyAllBetaFeedbackBtn')).toBeVisible();
   await expect(page.locator('#emailAllBetaFeedbackBtn')).toBeVisible();
+  const shareText = await page.evaluate(() => sanitizedBetaFeedbackText(buildBetaFeedbackBundle().rawBody));
+  expect(shareText).toContain('Catatan privasi');
+  expect(shareText).not.toContain('tester@example.com');
+  expect(shareText).not.toContain('A1234567');
+  expect(shareText).not.toContain('+62 812-3456-7890');
   expect(errors).toEqual([]);
 });
 
