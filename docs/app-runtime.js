@@ -2123,10 +2123,15 @@ function documentPackForStage(stageId){
   if(!documentPacks?.packs?.length)return null;
   const selected=selectedScope(stageId);
   if(selected){
-    const scoped=documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeKey===selected);
+    const scoped=documentPacks.packs
+      .filter(pack=>pack.appliesTo?.includes(stageId)&&pack.scopeKey===selected)
+      .sort((a,b)=>(a.appliesTo?.length||999)-(b.appliesTo?.length||999))[0];
     if(scoped)return safeDocumentPack(scoped);
   }
-  return safeDocumentPack(documentPacks.packs.find(pack=>pack.appliesTo?.includes(stageId)&&!pack.scopeKey)||null);
+  const unscoped=documentPacks.packs
+    .filter(pack=>pack.appliesTo?.includes(stageId)&&!pack.scopeKey)
+    .sort((a,b)=>(a.appliesTo?.length||999)-(b.appliesTo?.length||999));
+  return safeDocumentPack(unscoped[0]||null);
 }
 
 function renderDocumentScopePicker(stage){
