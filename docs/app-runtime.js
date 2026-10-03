@@ -174,7 +174,6 @@ const QUICK_MILESTONES=[
   {label:'Berkas visa sudah selesai',nextStage:'predeparture_training'},
   {label:'Saya sudah berangkat dan tiba di Korea',nextStage:'korea_entry_training'},
   {label:'Saya sudah diserahkan ke perusahaan',nextStage:'residence_registration'},
-  {label:'Saya sudah menerima gaji pertama',nextStage:'labor_support_ready'}
 ];
 
 const PHASES=[
