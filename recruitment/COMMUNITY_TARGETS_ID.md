@@ -18,8 +18,9 @@ Priority 3: Komunitas EPS Topik Indonesia Facebook
 Priority 4: IKMI Korea / Masjid Al-Falah
 - Official public site: https://ikmikorea.org/
 - Audience includes Indonesian Muslims in Korea, including migrant workers (PMI), professionals, and students.
-- Contact rule: use the current contact route exposed by the official site; do not reuse the legacy Yahoo address that bounced on 2026-10-02.
-- Approach: ask admin permission for non-commercial E-9 worker beta recruitment.
+- Current site exposes a WhatsApp admin contact button; use that route instead of the legacy Yahoo address that bounced on 2026-10-02.
+- 2026 activity corroboration: https://news.ums.ac.id/id/berita/ums-gelar-edukasi-kesehatan-di-korea-ajarkan-pencegahan-cedera-dan-sarcopenia/
+- Approach: ask admin permission for non-commercial E-9 worker beta recruitment; do not post as a job advertisement.
 
 Priority 5: Korean-language LPK communities
 - Use only for interviews and comparison of tasks they currently perform
