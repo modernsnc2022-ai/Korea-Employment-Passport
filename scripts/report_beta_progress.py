@@ -43,10 +43,14 @@ def render(rows: list[dict[str, str]]) -> str:
     )
     feedback_complete = count_value(active, "feedback_status", "complete")
 
-    interviews_completed = count_value(workers, "interview_status", "completed")
-    broker_gaps_resolved = count_value(rows, "broker_gap_status", "resolved")
-    broker_gaps_open = count_value(rows, "broker_gap_status", "open")
-    retest_passed = count_value(rows, "retest_status", "passed")
+    enrolled_workers = [row for row in workers if nonempty(row, "created_at")]
+    assigned_active = [row for row in active if nonempty(row, "application_received_at")]
+    evidence_rows = assigned_active + enrolled_workers
+
+    interviews_completed = count_value(enrolled_workers, "interview_status", "completed")
+    broker_gaps_resolved = count_value(evidence_rows, "broker_gap_status", "resolved")
+    broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
+    retest_passed = count_value(evidence_rows, "retest_status", "passed")
 
     late_stage = {}
     for bucket, stages in LATE_STAGE_BUCKETS.items():
@@ -62,6 +66,7 @@ def render(rows: list[dict[str, str]]) -> str:
     evidence_ready = (
         applications >= 30
         and activated >= 30
+        and len(enrolled_workers) >= 20
         and interviews_completed >= 20
         and late_ready
         and broker_gaps_open == 0
@@ -85,6 +90,7 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Feedback completed: {feedback_complete}/30",
         "",
         "## Retrospective validation",
+        f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
         f"- E-9 worker interviews completed: {interviews_completed}/20",
         "",
         "## Broker replacement evidence",
