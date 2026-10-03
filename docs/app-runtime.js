@@ -2762,9 +2762,22 @@ function renderWorkplaceWorkerEvidence(){
       const media=(row.media||[]).map(item=>
         '<a href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener">Lihat '+escapeHtml(item.type)+' terverifikasi ↗</a>'
       ).join('');
+      const verificationLabel={
+        single_verified_worker:'1 pekerja terverifikasi',
+        multi_verified_workers:'Beberapa pekerja terverifikasi',
+        worker_plus_public_record:'Pekerja + sumber publik'
+      }[row.verificationStatus]||'Terverifikasi';
+      const experienceYear=String(row.experienceYear||'');
+      const cycle=String(route?.cycle||'');
+      const experienceLabel=experienceYear==='unknown'
+        ?'Tahun pengalaman tidak pasti · retrospektif'
+        :experienceYear===cycle
+          ?'Pengalaman EPS '+experienceYear+' · siklus saat ini'
+          :'Pengalaman EPS '+experienceYear+' · retrospektif';
       return '<article class="worker-evidence-card">'+
-        '<div class="workplace-check-meta"><span class="evidence-badge worker">'+escapeHtml(row.verificationStatus||'verified')+'</span><span class="verify-state verified">Diverifikasi '+escapeHtml(row.verifiedAt||'')+'</span></div>'+
+        '<div class="workplace-check-meta"><span class="evidence-badge worker">'+escapeHtml(verificationLabel)+'</span><span class="verify-state verified">Diverifikasi '+escapeHtml(row.verifiedAt||'')+'</span></div>'+
         '<strong>'+escapeHtml(row.companyName||company)+'</strong>'+
+        '<small>'+escapeHtml(experienceLabel)+'</small>'+
         '<ul>'+facts+'</ul>'+
         (media?'<div class="worker-evidence-media">'+media+'</div>':'')+
         '<small>Ringkasan ini hanya berlaku pada pengalaman yang diverifikasi dan bukan jaminan kondisi semua pekerja.</small>'+
