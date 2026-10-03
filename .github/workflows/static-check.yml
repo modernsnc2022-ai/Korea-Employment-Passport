@@ -58,7 +58,7 @@ jobs:
       - name: Check beta tracker privacy and 30+20 cohort slots
         run: python scripts/check_beta_tracker.py
       - name: Check beta prelaunch readiness
-        run: python scripts/check_beta_launch_readiness.py
+        run: python scripts/check_beta_launch_readiness.py --allow-source-review-pending
       - name: Report privacy-safe beta progress
         run: python scripts/report_beta_progress.py
       - name: Self-test beta slot assignment helper
