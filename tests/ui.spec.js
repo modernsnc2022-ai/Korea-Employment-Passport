@@ -587,3 +587,24 @@ test('scout request excludes dorm residence details', async ({ page }) => {
   expect(body).toContain('informasi/alamat asrama tidak disertakan');
   expect(errors).toEqual([]);
 });
+
+
+test('mcu1 uses its verified stage-specific document pack', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'mcu1');
+
+  const selected = await page.evaluate(() => {
+    const pack=documentPackForStage('mcu1');
+    return pack ? {id:pack.id,status:pack.status,title:pack.title,items:(pack.items||[]).length} : null;
+  });
+
+  expect(selected).toEqual({
+    id:'mcu1_2026',
+    status:'verified_2026',
+    title:'Persiapan MCU I 2026',
+    items:4
+  });
+  await expect(page.locator('#docStageContext')).toContainText('Persiapan MCU I 2026');
+  await expect(page.locator('#docStageContext')).not.toContainText('tunggu pengumuman resmi');
+  expect(errors).toEqual([]);
+});
