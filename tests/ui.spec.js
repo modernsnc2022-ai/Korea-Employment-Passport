@@ -875,6 +875,7 @@ test('workplace worker evidence renders only summarized verified facts', async (
       displayPolicy:{noEvidenceMeaning:'No evidence is not a negative finding.'},
       records:[{
         evidenceId:'WPE-0001',
+        experienceYear:'2024',
         companyName:'Demo Factory',
         companyAliases:['DEMO FACTORY'],
         verificationStatus:'single_verified_worker',
@@ -890,6 +891,8 @@ test('workplace worker evidence renders only summarized verified facts', async (
 
   await expect(page.locator('#workplaceWorkerEvidence')).toContainText('1 CATATAN');
   await expect(page.locator('#workplaceWorkerEvidence')).toContainText('Pembayaran gaji');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('1 pekerja terverifikasi');
+  await expect(page.locator('#workplaceWorkerEvidence')).toContainText('Pengalaman EPS 2024 · retrospektif');
   await expect(page.locator('#workplaceWorkerEvidence')).toContainText('bukan jaminan kondisi semua pekerja');
   expect(errors).toEqual([]);
 });
