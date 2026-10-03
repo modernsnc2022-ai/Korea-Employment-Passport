@@ -5,7 +5,7 @@
   "records": [],
   "displayPolicy": {
     "purpose": "Show privacy-safe workplace facts from verified E-9 worker experience without exposing worker identity.",
-    "noEvidenceMeaning": "No matching record means only that Korea Employment Passport has not yet published verified worker evidence for this company. It is not a negative finding.",
+    "noEvidenceMeaning": "Tidak adanya catatan yang cocok hanya berarti Korea Employment Passport belum memublikasikan bukti pekerja terverifikasi untuk perusahaan ini. Ini bukan temuan negatif tentang perusahaan tersebut.",
     "workerEvidenceRule": "Worker-experience facts must be summarized, scoped to the experience actually reported, and never generalized as guaranteed conditions for every worker.",
     "mediaRule": "Photos/videos may be published only with contributor permission, metadata stripped, and privacy review completed. Do not publish identity documents, exact dorm-room addresses, faces without permission, vehicle plates, private areas without permission, or trade secrets."
   },
