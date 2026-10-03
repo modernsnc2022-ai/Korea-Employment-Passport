@@ -1004,3 +1004,17 @@ test('post-entry document pack stays scoped to residence registration', async ({
   expect(state.insuranceTools).not.toContain('fees');
   expect(errors).toEqual([]);
 });
+
+
+test('quick milestones do not infer post-entry compliance from first payroll receipt', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const milestones = await page.evaluate(() => QUICK_MILESTONES.map(item => ({ ...item })));
+  expect(milestones.some(item => item.label.includes('gaji pertama'))).toBe(false);
+  expect(milestones.some(item => item.nextStage === 'labor_support_ready')).toBe(false);
+  expect(errors).toEqual([]);
+});
