@@ -104,7 +104,9 @@ FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
 INTERVIEW_STATUSES = {"", "new", "scheduled", "completed", "withdrawn"}
 BROKER_GAP_STATUSES = {"", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
-WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "not_publishable"}
+WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
+YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
+CONTROLLED_STAGE_LIST_FIELDS = {"broker_tasks", "documents_confusing", "official_process_gap"}
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
@@ -187,6 +189,27 @@ for index, row in enumerate(rows, start=1):
     if feedback_status not in FEEDBACK_STATUSES:
         fail(f"{tester_id} invalid feedback_status {feedback_status!r}")
 
+    broker_used = row.get("broker_used", "").strip()
+    workplace_info_needed = row.get("workplace_info_needed", "").strip()
+    amount_paid_idr = row.get("amount_paid_idr", "").strip()
+    if broker_used not in YES_NO_UNKNOWN:
+        fail(f"{tester_id} broker_used must be yes/no/unknown or blank")
+    if workplace_info_needed not in YES_NO_UNKNOWN:
+        fail(f"{tester_id} workplace_info_needed must be yes/no/unknown or blank")
+    if amount_paid_idr and not amount_paid_idr.isdigit():
+        fail(f"{tester_id} amount_paid_idr must contain digits only")
+    if row.get("notes", "").strip():
+        fail(f"{tester_id} public tracker notes must remain empty; keep narrative interview notes private")
+    for field in CONTROLLED_STAGE_LIST_FIELDS:
+        value = row.get(field, "").strip()
+        if not value:
+            continue
+        values = [part.strip() for part in value.split(";") if part.strip()]
+        if not values or any(stage_id not in SUPPORTED_STAGES for stage_id in values):
+            fail(f"{tester_id} {field} must contain only semicolon-separated route stage IDs")
+    if expected_group == "e9_worker_korea" and interview_status == "completed" and not experience_year:
+        fail(f"{tester_id} completed worker interview requires experience_year")
+
     if application_received:
         if expected_group != "active_applicant":
             fail(f"{tester_id} retrospective worker panel must not use public-beta application queue fields")
@@ -257,6 +280,8 @@ for row in worker_rows:
     tester_id = row["tester_id"].strip()
     joined = row.get("created_at", "").strip()
     if not joined:
+        if row.get("experience_year", "").strip() or row.get("workplace_evidence_status", "").strip():
+            fail(f"{tester_id} unassigned worker slot must not contain interview/evidence state")
         seen_empty_worker = True
         continue
     if seen_empty_worker:
@@ -271,6 +296,9 @@ for row in worker_rows:
         fail(f"{tester_id} assigned worker validator requires in_korea=yes")
     if row.get("e9_experience", "").strip() != "confirmed":
         fail(f"{tester_id} assigned worker validator requires e9_experience=confirmed")
+    evidence_status = row.get("workplace_evidence_status", "").strip()
+    if evidence_status not in {"pending", "published_single_verified_worker", "declined", "not_publishable"}:
+        fail(f"{tester_id} assigned worker validator requires explicit workplace_evidence_status")
     assigned_workers += 1
 
 activated = sum(1 for row in rows if row.get("activated_at", "").strip())
