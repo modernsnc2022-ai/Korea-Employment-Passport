@@ -1,5 +1,5 @@
 {
-  "version": "2.3.0",
+  "version": "2.4.0",
   "route": "ID-E9-MFG-GENERAL-2026",
   "packs": [
     {
@@ -69,10 +69,49 @@
       ]
     },
     {
+      "id": "psychology_pre_job_2026",
+      "appliesTo": [
+        "psychology_pre_job"
+      ],
+      "status": "verified_2026",
+      "title": "Pemeriksaan Psikologi 2026 — sebelum MCU I",
+      "message": "Untuk lulusan 2026, daftar melalui psikolog HIMPSI yang tercantum pada jalur resmi dengan menunjukkan ID Sisko P2MI. Biaya Rp350.000 dibayar langsung kepada psikolog yang dipilih. Hasil dikirim dari SIAP HIMPSI ke Sisko P2MI. Hanya hasil Layak Disarankan/Layak Dipertimbangkan yang dapat lanjut ke MCU I.",
+      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026",
+      "lastChecked": "2026-10-04",
+      "items": [
+        {
+          "id": "psych_sisko_id",
+          "title": "ID Sisko P2MI siap ditunjukkan saat pendaftaran",
+          "validation": "check",
+          "required": true,
+          "note": "Pengumuman 15 Juli 2026 meminta pendaftaran pemeriksaan psikologi dengan menunjukkan ID Sisko P2MI."
+        },
+        {
+          "id": "psych_himpsi_route",
+          "title": "Psikolog dipilih melalui daftar resmi HIMPSI Korea 2026",
+          "validation": "check",
+          "required": true,
+          "note": "Gunakan daftar psikolog yang ditautkan dari pengumuman resmi KP2MI; jangan memilih melalui calo."
+        },
+        {
+          "id": "psych_fee_direct",
+          "title": "Biaya Rp350.000 dibayar langsung kepada psikolog yang dipilih",
+          "validation": "check",
+          "required": true,
+          "note": "Jangan mengalihkan pembayaran ini ke perantara atau rekening yang tidak sesuai petunjuk psikolog resmi."
+        },
+        {
+          "id": "psych_result_sisko",
+          "title": "Hasil pemeriksaan sudah muncul/terkirim ke Sisko P2MI",
+          "validation": "check",
+          "required": true,
+          "note": "Hasil resmi dikirim dari SIAP HIMPSI ke Sisko P2MI dan dipakai KP2MI untuk menentukan apakah Anda dapat lanjut ke MCU I."
+        }
+      ]
+    },
+    {
       "id": "job_application_manufacturing",
       "appliesTo": [
-        "psychology_pre_job",
-        "mcu1",
         "job_application"
       ],
       "status": "awaiting_sector_notice",
@@ -80,7 +119,7 @@
       "message": "Belum ada pengumuman lamaran online Manufaktur 2026 yang berhasil diverifikasi. Jangan memakai daftar dokumen Perikanan 2026 atau Manufaktur 2025 sebagai aturan saat ini.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "items": [],
-      "lastChecked": "2026-10-03"
+      "lastChecked": "2026-10-04"
     },
     {
       "id": "departure",
