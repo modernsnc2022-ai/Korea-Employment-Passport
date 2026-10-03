@@ -48,7 +48,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('research/exam_card_source_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/manifest.webmanifest','utf8'))"
       - name: Check Python monitor scripts
-        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py scripts/check_bqc_scopes.py scripts/check_beta_tracker.py scripts/check_beta_launch_readiness.py
+        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py scripts/check_bqc_scopes.py scripts/check_beta_tracker.py scripts/check_beta_launch_readiness.py scripts/report_beta_progress.py
       - name: Check webapp DOM and route contract
         run: python scripts/check_webapp_contract.py
       - name: Check zero-broker scope coverage
@@ -57,6 +57,8 @@ jobs:
         run: python scripts/check_beta_tracker.py
       - name: Check beta prelaunch readiness
         run: python scripts/check_beta_launch_readiness.py
+      - name: Report privacy-safe beta progress
+        run: python scripts/report_beta_progress.py
       - name: Check required public files
         run: |
           test -f docs/index.html
