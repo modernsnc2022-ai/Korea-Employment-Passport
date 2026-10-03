@@ -2972,7 +2972,7 @@ function renderUnresolvedFieldQuestions(){
 const BETA_FEEDBACK_REDACTION_RULES=[
   {label:'email',pattern:/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi},
   {label:'document_id',pattern:/\b[A-Z]{1,3}[-\s]?\d{6,12}\b/gi},
-  {label:'phone',pattern:/(?<!\w)(?:\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)/g},
+  {label:'phone',pattern:/(?<!\w)(?:\+?82|\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)/g},
   {label:'long_number',pattern:/\b\d[\d\s.-]{8,}\d\b/g}
 ];
 
@@ -2991,8 +2991,8 @@ function sanitizeBetaFeedback(text){
 function sanitizedBetaFeedbackText(rawBody){
   const safe=sanitizeBetaFeedback(rawBody);
   const notice=safe.redacted
-    ?'Catatan privasi: pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang telah dihapus otomatis sebelum laporan dibagikan.\n\n'
-    :'';
+    ?'Catatan privasi: pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang telah dihapus otomatis. Pemeriksaan otomatis tidak dapat menjamin nama, alamat, atau semua data pribadi terdeteksi; baca sekali lagi sebelum membagikan.\n\n'
+    :'Catatan privasi: tidak ada pola nomor/email yang terdeteksi otomatis. Pemeriksaan otomatis tidak dapat menjamin nama, alamat, atau semua data pribadi terdeteksi; baca sekali lagi sebelum membagikan.\n\n';
   return notice+safe.text;
 }
 
@@ -3305,7 +3305,7 @@ function buildBetaFeedbackBundle(){
     :'';
   const routeLabel=route?[route.country,route.visa,route.sector,route.cycle].filter(Boolean).join(' → '):'route belum dimuat';
   const sessionSummary=[
-    'RINGKASAN SESI TANPA IDENTITAS',
+    'RINGKASAN SESI — PERIKSA & HAPUS IDENTITAS SEBELUM KIRIM',
     ...(testerId?['ID beta anonim: '+testerId]:[]),
     ...(testerId?['Peran beta: '+(testerRole==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
     ...(testerRole==='e9_worker_validator'?['Tahun pengalaman/proses EPS: '+(workerExperienceYear||'belum dicatat')]:[]),
