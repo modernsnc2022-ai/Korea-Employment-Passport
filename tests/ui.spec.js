@@ -567,3 +567,23 @@ test('manufacturing job application cannot complete before sector notice', async
   expect(state.current).toBe('job_application');
   expect(errors).toEqual([]);
 });
+
+
+test('scout request excludes dorm residence details', async ({ page }) => {
+  const errors = await freshPage(page);
+  const body = await page.evaluate(() => buildScoutRequestBody(
+    {
+      company:'PT Test Company',
+      address:'Seoul workplace address',
+      dorm:'PRIVATE DORM ADDRESS 123'
+    },
+    '• Akomodasi diverifikasi'
+  ));
+
+  expect(body).toContain('PT Test Company');
+  expect(body).toContain('Seoul workplace address');
+  expect(body).toContain('Akomodasi diverifikasi');
+  expect(body).not.toContain('PRIVATE DORM ADDRESS 123');
+  expect(body).toContain('informasi/alamat asrama tidak disertakan');
+  expect(errors).toEqual([]);
+});
