@@ -23,6 +23,28 @@ tls_pins = json.loads((ROOT / "monitor" / "tls_pins.json").read_text(encoding="u
 
 errors = []
 
+# Indonesian-first UX guard: Korean may remain only as short official labels/terms,
+# never as the primary language of an Exact Answer.
+def _script_counts(value):
+    text = str(value or "")
+    hangul = sum(1 for ch in text if "\uac00" <= ch <= "\ud7a3")
+    latin = sum(1 for ch in text if ("A" <= ch <= "Z") or ("a" <= ch <= "z"))
+    return hangul, latin
+
+for answer in exact_answers.get("answers", []):
+    hangul = 0
+    latin = 0
+    for field in ("question", "answer", "writeExactly", "why"):
+        h, l = _script_counts(answer.get(field, ""))
+        hangul += h
+        latin += l
+    if hangul > 20 and hangul > latin * 0.65:
+        errors.append(
+            "Indonesian-first Exact Answer contains Korean as primary language: "
+            + str(answer.get("id", "<missing>"))
+        )
+
+
 # Keep the default user journey simple even as the internal rules grow.
 if 'class="how-to-use"' not in html:
     errors.append("simple UX lock missing 3-step usage strip")
