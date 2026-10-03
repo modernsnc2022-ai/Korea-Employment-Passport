@@ -1570,6 +1570,10 @@ function validateWizardValue(value,validator){
 function resetWizardValueCheck(field){
   const wrap=$('formFieldCheck');
   const input=$('formFieldValue');
+  const checkBtn=$('formFieldCheckBtn');
+  const confirmBtn=$('formFieldConfirmBtn');
+  const summary=wrap.querySelector('summary');
+  const note=wrap.querySelector('.wizard-check-body small');
   const result=$('formFieldCheckResult');
   input.value='';
   result.hidden=true;
@@ -1577,7 +1581,17 @@ function resetWizardValueCheck(field){
   result.textContent='';
   wrap.open=false;
   wrap.hidden=!field?.validator;
-  if(field?.validator){
+
+  const manual=field?.validator?.type==='manual_confirm';
+  input.hidden=manual;
+  checkBtn.hidden=manual;
+  confirmBtn.hidden=!manual;
+  if(summary)summary.textContent=manual?'Konfirmasi saya sudah melakukan ini':'Cek apakah isian saya sudah benar';
+  if(note)note.textContent=manual
+    ?'Konfirmasi ini hanya disimpan selama layar ini terbuka dan tidak mengirim data ke server.'
+    :'Nilai ini tidak disimpan ke localStorage dan tidak dikirim ke server.';
+
+  if(field?.validator&&!manual){
     input.placeholder=field.validator.type==='blank'
       ?'Biarkan kosong lalu tekan “Periksa nilai”'
       :'Tempel nilai yang Anda tulis — tidak disimpan';
@@ -1757,6 +1771,16 @@ function checkCurrentWizardValue(){
 
 let formFieldCheckTimer=null;
 $('formFieldCheckBtn').addEventListener('click',checkCurrentWizardValue);
+$('formFieldConfirmBtn').addEventListener('click',()=>{
+  const state=read(KEYS.formWizard,{});
+  const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
+  const field=form?.fields?.[Number(state.index||0)];
+  const out=$('formFieldCheckResult');
+  if(field?.validator?.type!=='manual_confirm')return;
+  out.hidden=false;
+  out.className='result safe';
+  out.textContent='Dikonfirmasi — Anda sudah memeriksa langkah ini langsung pada formulir asli sesuai petunjuk.';
+});
 $('formFieldValue').addEventListener('input',()=>{
   clearTimeout(formFieldCheckTimer);
   const state=read(KEYS.formWizard,{});

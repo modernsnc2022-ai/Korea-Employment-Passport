@@ -353,7 +353,7 @@ bad_form_validator = []
 allowed_validator_types = {
     "blank", "exact_ci", "contains_ci", "date_yyyy_mm_dd", "email",
     "nik16", "phone", "passport", "uppercase_nonempty", "relationship_en",
-    "cpmi_id", "digits", "nonempty"
+    "cpmi_id", "digits", "nonempty", "manual_confirm"
 }
 for form in form_wizards.get("forms", []):
     form_id = form.get("id", "")
@@ -408,7 +408,9 @@ for form in form_wizards.get("forms", []):
             if not str(field.get(required, "")).strip():
                 bad_form_content.append(f"{form_id}:{field_id}:{required}")
         validator = field.get("validator")
-        if validator is not None:
+        if validator is None:
+            bad_form_validator.append(f"{form_id}:{field_id}:missing_validator")
+        else:
             vtype = validator.get("type")
             if vtype not in allowed_validator_types:
                 bad_form_validator.append(f"{form_id}:{field_id}:type={vtype}")
