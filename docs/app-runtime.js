@@ -762,6 +762,15 @@ function scopeOptionAllowed(stageId,key){
   return !prefix||String(key||'').startsWith(prefix);
 }
 
+function departureRegistryFallback(stageId){
+  if(!['mcu3_departure','departure'].includes(stageId))return null;
+  if(departureCalls?.coverageStatus!=='partial_verified')return null;
+  return {
+    url:departureCalls.indexUrl||'https://kp2mi.go.id/gtog-korea/info',
+    message:'Daftar panggilan keberangkatan 2026 di aplikasi belum lengkap. Jika tanggal Anda tidak ada, jangan memakai aturan tanggal lain — cari panggilan nama Anda di indeks resmi KP2MI.'
+  };
+}
+
 function saveScopeSelection(stageId,value){
   const state=read(KEYS.scopeSelections,{});
   const apply=(id)=>{
@@ -825,11 +834,27 @@ function renderScopePicker(stage){
   }
   section.hidden=false;
   $('scopePickerLabel').textContent=scopePromptForStage(stage.id);
-  select.innerHTML='<option value="">Belum tahu</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
+  const fallback=departureRegistryFallback(stage.id);
+  select.innerHTML='<option value="">'+(fallback?'Tanggal saya belum ada / belum tahu':'Belum tahu')+'</option>'+scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
   const chosen=scoped.find(item=>item.key===select.value);
-  sourceLink.hidden=!chosen?.sourceUrl;
-  if(chosen?.sourceUrl)sourceLink.href=chosen.sourceUrl;
+  const note=section.querySelector('small');
+  if(chosen?.sourceUrl){
+    sourceLink.hidden=false;
+    sourceLink.href=chosen.sourceUrl;
+    sourceLink.textContent='Periksa nama saya di pengumuman resmi ↗';
+    if(note)note.textContent='Pilih hanya jika nama Anda benar-benar ada di pengumuman tersebut. Jika belum tahu, biarkan pilihan kosong.';
+  }else if(fallback?.url){
+    sourceLink.hidden=false;
+    sourceLink.href=fallback.url;
+    sourceLink.textContent='Cari panggilan lain di indeks resmi KP2MI ↗';
+    if(note)note.textContent=fallback.message;
+  }else{
+    sourceLink.hidden=true;
+    sourceLink.href='#';
+    sourceLink.textContent='Periksa nama saya di pengumuman resmi ↗';
+    if(note)note.textContent='Pilih hanya jika nama Anda benar-benar ada di pengumuman tersebut. Jika belum tahu, biarkan “Belum tahu”.';
+  }
 }
 
 $('scopePicker').addEventListener('change',()=>{
@@ -2163,8 +2188,19 @@ function renderDocumentScopePicker(stage){
   select.innerHTML='<option value="">Belum pilih / pengumuman lain</option>'+options.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('');
   select.value=selectedScope(stage.id);
   const chosen=options.find(item=>item.key===select.value);
-  sourceLink.hidden=!chosen?.sourceUrl;
-  if(chosen?.sourceUrl)sourceLink.href=chosen.sourceUrl;
+  const fallback=departureRegistryFallback(stage.id);
+  if(chosen?.sourceUrl){
+    sourceLink.hidden=false;
+    sourceLink.href=chosen.sourceUrl;
+    sourceLink.textContent='Buka pengumuman yang dipilih ↗';
+  }else if(fallback?.url){
+    sourceLink.hidden=false;
+    sourceLink.href=fallback.url;
+    sourceLink.textContent='Tanggal tidak ada? Cari di indeks resmi KP2MI ↗';
+  }else{
+    sourceLink.hidden=true;
+    sourceLink.href='#';
+  }
 }
 
 $('docScopeSelect').addEventListener('change',()=>{
