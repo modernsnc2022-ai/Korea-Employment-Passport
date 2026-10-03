@@ -247,4 +247,5 @@ print(
 )
 if args.allow_source_review_pending and source.get("state") != "clean":
     print(f"PRODUCT_CI_SOURCE_HOLD state={source.get('state')} launch gate remains blocked")
-print("MANUAL_LAUNCH_GATES_REMAIN: fresh Manufacturing notice re-check, mobile release review, open-defect review, real-user evidence")
+print("BETA_OPEN_MANUAL_GATES_REMAIN: final Manufacturing notice re-check at OPEN decision, explicit release decision")
+print("ROUTE_PASS_EVIDENCE_REMAINS: 30 active applicants, 20 E-9 worker validators, late-stage coverage, every Broker Gap resolved or official/licensed-only")
