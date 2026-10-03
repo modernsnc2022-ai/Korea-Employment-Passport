@@ -16,6 +16,7 @@ document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.j
 broker_questions = json.loads((ROOT / "docs" / "data" / "broker_question_catalog_v1.json").read_text(encoding="utf-8"))
 form_wizards = json.loads((ROOT / "docs" / "data" / "form_wizards_2026.json").read_text(encoding="utf-8"))
 source_review = json.loads((ROOT / "docs" / "data" / "source_review_status.json").read_text(encoding="utf-8-sig"))
+monitor_sources = json.loads((ROOT / "monitor" / "sources.json").read_text(encoding="utf-8-sig"))
 tls_pins = json.loads((ROOT / "monitor" / "tls_pins.json").read_text(encoding="utf-8-sig"))
 
 errors = []
@@ -49,6 +50,22 @@ literal_refs = set(re.findall(r"\$\(['\"]([A-Za-z0-9_-]+)['\"]\)", js))
 missing_refs = sorted(literal_refs - id_set)
 if missing_refs:
     errors.append("JS references missing HTML ids: " + ", ".join(missing_refs))
+
+required_runtime_functions = (
+    "formLineageStatus",
+    "wizardSourceUrl",
+    "wizardGuidanceUrl",
+    "renderFormWizardCard",
+    "renderFormWizard",
+)
+for function_name in required_runtime_functions:
+    called = re.search(rf"\b{re.escape(function_name)}\s*\(", js)
+    defined = re.search(
+        rf"(?:function\s+{re.escape(function_name)}\s*\(|(?:const|let|var)\s+{re.escape(function_name)}\s*=)",
+        js,
+    )
+    if called and not defined:
+        errors.append(f"runtime function called but not defined: {function_name}")
 
 view_ids = set(re.findall(r'<section\s+id="([^"]+)"\s+class="view(?:\s+active)?"', html))
 nav_targets = set(re.findall(r'data-view="([^"]+)"', html))
@@ -340,6 +357,17 @@ for form in form_wizards.get("forms", []):
         bad_form_sources.append(f"{form_id}:sourceUrl")
     if not str(form.get("guidanceUrl", "")).startswith("http"):
         bad_form_sources.append(f"{form_id}:guidanceUrl")
+    for mapping_name in ("sourceUrlsByScope", "guidanceUrlsByScope"):
+        mapping = form.get(mapping_name, {})
+        if mapping and not isinstance(mapping, dict):
+            bad_form_sources.append(f"{form_id}:{mapping_name}_not_object")
+        elif isinstance(mapping, dict):
+            allowed_scopes = set(form_scope_keys or ([form_scope_key] if form_scope_key else []))
+            for scope_key, mapped_url in mapping.items():
+                if scope_key not in allowed_scopes:
+                    bad_form_scope.append(f"{form_id}:{mapping_name}:unexpected_scope={scope_key}")
+                if not str(mapped_url).startswith("http"):
+                    bad_form_sources.append(f"{form_id}:{mapping_name}:{scope_key}")
     for stage_id in form.get("stages", []):
         if stage_id not in known_stage_ids:
             bad_form_stage_refs.append(f"{form_id}->{stage_id}")
@@ -347,6 +375,10 @@ for form in form_wizards.get("forms", []):
         bad_form_content.append(f"{form_id}:title")
     if not form.get("fields"):
         bad_form_content.append(f"{form_id}:fields")
+    if not str(form.get("verificationStatus", "")).startswith("verified_"):
+        bad_form_content.append(f"{form_id}:verificationStatus")
+    if not str(form.get("verifiedAt", "")).strip():
+        bad_form_content.append(f"{form_id}:verifiedAt")
     for field in form.get("fields", []):
         field_id = field.get("id", "")
         wizard_field_ids.append(f"{form_id}:{field_id}")
@@ -396,6 +428,11 @@ configured = source_review.get("configured")
 checked = source_review.get("checked")
 if not isinstance(configured, int) or not isinstance(checked, int) or configured < 0 or checked < 0 or checked > configured:
     errors.append("source review configured/checked counts are invalid")
+actual_source_count = len(monitor_sources.get("sources", []))
+if configured != actual_source_count:
+    errors.append(
+        f"source review configured count {configured} does not match monitor/sources.json {actual_source_count}"
+    )
 for key in ("reviewRequiredUrls", "reviewRequiredSourceIds", "fetchFailureUrls", "fetchFailureSourceIds"):
     if not isinstance(source_review.get(key), list):
         errors.append(f"source review {key} must be a list")

@@ -318,19 +318,38 @@ function exactAnswerIdSet(stageId){
   return new Set((exactAnswers?.answers||[]).filter(item=>exactAnswerApplies(item,stageId)).map(item=>item.id));
 }
 
+function wizardSourceUrl(form,stageId){
+  if(!form)return '';
+  const targetStage=stageId||(form.stages||[])[0]||'visa_docs';
+  const scope=selectedScope(targetStage);
+  return (scope&&form.sourceUrlsByScope?.[scope])||form.sourceUrl||'';
+}
+
+function wizardGuidanceUrl(form,stageId){
+  if(!form)return '';
+  const targetStage=stageId||(form.stages||[])[0]||'visa_docs';
+  const scope=selectedScope(targetStage);
+  return (scope&&form.guidanceUrlsByScope?.[scope])||form.guidanceUrl||'';
+}
+
 function wizardFormApplies(form,stageId){
   if(!form?.stages?.includes(stageId))return false;
-  if(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl))return false;
+  if(sourceNeedsReview(wizardSourceUrl(form,stageId))||sourceNeedsReview(wizardGuidanceUrl(form,stageId)))return false;
   const selected=selectedScope(stageId);
   if(Array.isArray(form.scopeKeys)&&form.scopeKeys.length)return form.scopeKeys.includes(selected);
   if(form.scopeType!=='cohort')return true;
   return selected===form.scopeKey;
 }
+function wizardFormVerified(form){
+  return String(form?.verificationStatus||'').startsWith('verified_');
+}
 function wizardFieldRefSet(stageId){
   const refs=new Set();
-  (formWizards?.forms||[]).filter(form=>wizardFormApplies(form,stageId)).forEach(form=>{
-    (form.fields||[]).forEach(field=>refs.add(form.id+':'+field.id));
-  });
+  (formWizards?.forms||[])
+    .filter(form=>wizardFormApplies(form,stageId)&&wizardFormVerified(form))
+    .forEach(form=>{
+      (form.fields||[]).forEach(field=>refs.add(form.id+':'+field.id));
+    });
   return refs;
 }
 
@@ -349,7 +368,8 @@ function bqcQuestionsForStage(stageId){
     .map(item=>{
       const candidates=[...new Set([item.answerId,...(item.answerIds||[])].filter(Boolean))];
       const resolvedByExact=candidates.some(id=>answerIds.has(id));
-      const resolvedByWizard=Boolean(item.wizardRef&&wizardRefs.has(item.wizardRef));
+      const requiredWizardRefs=[...new Set([item.wizardRef,...(item.wizardRefs||[])].filter(Boolean))];
+      const resolvedByWizard=requiredWizardRefs.length>0&&requiredWizardRefs.every(ref=>wizardRefs.has(ref));
       return {...item,resolved:resolvedByExact||resolvedByWizard};
     });
   const local=read(KEYS.fieldQuestions,[])
@@ -1442,6 +1462,43 @@ function resetWizardValueCheck(field){
   }
 }
 
+
+function formLineageStatus(form){
+  if(!formLineage?.forms?.length||!form)return null;
+  const lineageId=form.lineageFormId||form.id;
+  const row=formLineage.forms.find(item=>item.formId===lineageId);
+  if(!row)return null;
+
+  if(row.stableAcrossComparedIssues){
+    return {
+      kind:'stable',
+      text:'Versi formulir ini sama pada panggilan resmi yang sudah dibandingkan.'
+    };
+  }
+
+  const stageId=(form.stages||[])[0]||'visa_docs';
+  const scope=selectedScope(stageId);
+  const legacyScopes=new Set(['visa_may26_2026','visa_jun19_2026']);
+
+  if(lineageId==='debit_power'){
+    if(form.id==='debit_power_legacy'||legacyScopes.has(scope)){
+      return {
+        kind:'legacy',
+        text:'Gunakan versi lama yang dilampirkan pada panggilan Mei/Juni 2026; jangan campur dengan versi Agustus.'
+      };
+    }
+    return {
+      kind:'updated',
+      text:'Formulir ini berubah pada Agustus 2026. Gunakan lampiran dari pengumuman yang memuat nama Anda.'
+    };
+  }
+
+  return {
+    kind:'updated',
+    text:'Versi formulir pernah berubah. Gunakan lampiran dari pengumuman yang memuat nama Anda.'
+  };
+}
+
 function renderFormWizardCard(form,index){
   const card=$('formWizardCard');
   const intro=$('formWizardIntro');
@@ -1458,7 +1515,7 @@ function renderFormWizardCard(form,index){
     '<ul>'+((form.intro||[]).map(item=>'<li>'+escapeHtml(item)+'</li>').join(''))+'</ul>'+
     (form.attention?'<div class="wizard-attention"><strong>Perhatian:</strong> '+escapeHtml(form.attention)+'</div>':'')+
     '<p class="muted">'+escapeHtml(formWizards?.policy?.scopeNote||'')+'</p>'+
-    '<div class="wizard-source-links"><a href="'+escapeHtml(form.sourceUrl)+'" target="_blank" rel="noopener">Buka formulir resmi ↗</a><a href="'+escapeHtml(form.guidanceUrl)+'" target="_blank" rel="noopener">Buka petunjuk resmi ↗</a></div>';
+    '<div class="wizard-source-links"><a href="'+escapeHtml(wizardSourceUrl(form))+'" target="_blank" rel="noopener">Buka formulir resmi ↗</a><a href="'+escapeHtml(wizardGuidanceUrl(form))+'" target="_blank" rel="noopener">Buka petunjuk resmi ↗</a></div>';
 
   const total=form.fields.length;
   const safeIndex=Math.max(0,Math.min(index,total));
@@ -1548,7 +1605,20 @@ function checkCurrentWizardValue(){
   out.textContent=checked.message;
 }
 
+let formFieldCheckTimer=null;
 $('formFieldCheckBtn').addEventListener('click',checkCurrentWizardValue);
+$('formFieldValue').addEventListener('input',()=>{
+  clearTimeout(formFieldCheckTimer);
+  const state=read(KEYS.formWizard,{});
+  const form=(formWizards?.forms||[]).find(item=>item.id===state.formId);
+  const field=form?.fields?.[Number(state.index||0)];
+  const out=$('formFieldCheckResult');
+  if(!field?.validator||field.validator.type==='blank'||!$('formFieldValue').value.trim()){
+    out.hidden=true;
+    return;
+  }
+  formFieldCheckTimer=setTimeout(checkCurrentWizardValue,250);
+});
 $('formFieldValue').addEventListener('keydown',(event)=>{
   if(event.key==='Enter'){
     event.preventDefault();

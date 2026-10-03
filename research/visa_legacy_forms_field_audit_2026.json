@@ -1,0 +1,91 @@
+{
+  "version": "1.0.0",
+  "verifiedAt": "2026-10-03",
+  "purpose": "Evidence for legacy May/June 2026 visa form field mapping without storing official PDF binaries.",
+  "conclusions": {
+    "checklistByteIdenticalAcrossComparedMayJuneAug": true,
+    "legacyDebitMayEqualsJune": true,
+    "legacyDebitChangedByAug": true,
+    "legacyGuidanceMayEqualsJune": true
+  },
+  "legacyDebitFields": [
+    {
+      "order": 1,
+      "label": "Nama",
+      "instruction": "Isi nama sesuai KTP."
+    },
+    {
+      "order": 2,
+      "label": "NIK",
+      "instruction": "Isi nomor KTP."
+    },
+    {
+      "order": 3,
+      "label": "ID CPMI",
+      "instruction": "Isi ID CPMI dari Pengumuman Panggilan OPP."
+    },
+    {
+      "order": 4,
+      "label": "Nomor rekening BNI",
+      "instruction": "Isi rekening BNI atas nama pribadi CPMI."
+    },
+    {
+      "order": "4a",
+      "label": "Nama pemilik rekening",
+      "instruction": "Form menyediakan kolom nama pemilik rekening; rekening pada butir 4 wajib atas nama pribadi CPMI."
+    },
+    {
+      "order": 5,
+      "label": "Kantor Cabang Pembuka",
+      "instruction": "Isi nama kantor cabang BNI tempat membuka rekening."
+    },
+    {
+      "order": 6,
+      "label": "Kota & tanggal",
+      "instruction": "Isi kota lokasi OPP dan tanggal hari pertama OPP."
+    },
+    {
+      "order": 7,
+      "label": "Materai, tanda tangan & nama",
+      "instruction": "Tempel 1 materai; tanda tangan mengenai materai; tulis nama sesuai KTP di bawah tanda tangan."
+    }
+  ],
+  "legacyDebitPrintedAmount": "Rp1.236.000,00",
+  "sources": [
+    {
+      "id": "may26_debit",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_5._Surat_Kuasa_Pemblokiran_dan_Pendebetan_Rekening.pdf",
+      "pages": 2,
+      "bytes": 267525,
+      "sha256": "70fefb822e16a03dedb91df595f35b4bddf77344c8955d727bc72305dfe0bdb4"
+    },
+    {
+      "id": "may26_guidance",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_8._Petunjuk_Pemberkasan_Dokumen_Visa.pdf",
+      "pages": 12,
+      "bytes": 5711774,
+      "sha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259"
+    },
+    {
+      "id": "may26_checklist",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_6._Checklist_Pemberkasan.pdf",
+      "pages": 1,
+      "bytes": 41827,
+      "sha256": "e87f3cfcced9b25bfc235cdcdfe054975b2f48bf43df45740c2a88eb45930966"
+    },
+    {
+      "id": "jun19_checklist",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_18-06-2026_6._Checklist_Pemberkasan.pdf",
+      "pages": 1,
+      "bytes": 41827,
+      "sha256": "e87f3cfcced9b25bfc235cdcdfe054975b2f48bf43df45740c2a88eb45930966"
+    },
+    {
+      "id": "aug_checklist",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-08-2026_6._Checklist_Pemberkasan.pdf",
+      "pages": 1,
+      "bytes": 41827,
+      "sha256": "e87f3cfcced9b25bfc235cdcdfe054975b2f48bf43df45740c2a88eb45930966"
+    }
+  ]
+}

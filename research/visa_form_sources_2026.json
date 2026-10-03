@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "verifiedAt": "2026-10-03",
   "policy": "PDF binaries are not stored in the repository. Keep source URL, hash, page count, and reviewed change notes only.",
   "juneBaseline": [
@@ -121,6 +121,32 @@
       "oldSha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
       "newSha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
       "note": "No binary change from June baseline."
+    }
+  ],
+  "may26LegacyVerified": [
+    {
+      "logicalName": "visa_debit_power_legacy",
+      "sourceDate": "2026-05-25",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_5._Surat_Kuasa_Pemblokiran_dan_Pendebetan_Rekening.pdf",
+      "pages": 2,
+      "sha256": "70fefb822e16a03dedb91df595f35b4bddf77344c8955d727bc72305dfe0bdb4",
+      "sameAsJun19": true
+    },
+    {
+      "logicalName": "visa_checklist_legacy",
+      "sourceDate": "2026-05-25",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_6._Checklist_Pemberkasan.pdf",
+      "pages": 1,
+      "sha256": "e87f3cfcced9b25bfc235cdcdfe054975b2f48bf43df45740c2a88eb45930966",
+      "sameAsJun19": true
+    },
+    {
+      "logicalName": "visa_guidance",
+      "sourceDate": "2026-05-25",
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_25-05-2026_8._Petunjuk_Pemberkasan_Dokumen_Visa.pdf",
+      "pages": 12,
+      "sha256": "ab08ecdc2ad31303bdf9c1550058d012cb3ccb52d290072d1b5e2af69959a259",
+      "sameAsJun19AndAug27": true
     }
   ]
 }

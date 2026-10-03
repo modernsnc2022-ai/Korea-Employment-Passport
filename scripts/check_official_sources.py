@@ -36,13 +36,14 @@ class TextExtractor(HTMLParser):
                 self.parts.append(text)
 
 REQUEST_HEADERS = {
-    "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.2 (+GitHub Actions)",
+    "User-Agent": "Korea-Employment-Passport-SourceMonitor/1.3 (+GitHub Actions)",
     "Accept-Language": "ko,en;q=0.8,id;q=0.7",
 }
+REQUEST_TIMEOUT_SECONDS = 12
 
 def _verified_fetch(url):
     req = urllib.request.Request(url, headers=REQUEST_HEADERS)
-    with urllib.request.urlopen(req, timeout=30) as resp:
+    with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT_SECONDS) as resp:
         raw = resp.read()
         content_type = (resp.headers.get_content_type() or "").lower()
         charset = resp.headers.get_content_charset() or "utf-8"
@@ -76,7 +77,7 @@ def _pinned_fetch(url, tls_pins, redirects=3):
     allowed_hashes = _validate_pin_record(host, pin)
 
     context = ssl._create_unverified_context()
-    conn = http.client.HTTPSConnection(host, port=parsed.port or 443, timeout=30, context=context)
+    conn = http.client.HTTPSConnection(host, port=parsed.port or 443, timeout=REQUEST_TIMEOUT_SECONDS, context=context)
     try:
         conn.connect()
         der = conn.sock.getpeercert(binary_form=True)
@@ -132,9 +133,22 @@ def fetch_fingerprint(url, tls_pins=None):
     extractor = TextExtractor()
     extractor.feed(html)
     normalized = re.sub(r"\s+", " ", " ".join(extractor.parts)).strip()
-    # Ignore volatile page counters that change on every fetch but do not alter the official rule.
+    # Ignore volatile counters that change on every fetch but do not alter the official rule.
     normalized = re.sub(r"(조회(?:수)?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized)
     normalized = re.sub(r"(Views?|Hits?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized, flags=re.I)
+    # KP2MI detail pages render: HH.MM DD Month YYYY <view-count> TITLE...
+    normalized = re.sub(
+        r"(\b\d{2}\.\d{2}\s+\d{1,2}\s+[A-Za-z]+\s+\d{4})\s+[0-9][0-9,]*\b",
+        r"\1 <dynamic-count>",
+        normalized,
+    )
+    # KP2MI footer prints Total Visitors as space-separated digits.
+    normalized = re.sub(
+        r"(Total\s+Visitors)\s+(?:\d\s*){3,}",
+        r"\1 <dynamic-total>",
+        normalized,
+        flags=re.I,
+    )
     return {
         "sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
         "contentLength": len(normalized),
@@ -151,10 +165,12 @@ def main():
     p.add_argument("--tls-pins", default="monitor/tls_pins.json")
     p.add_argument("--accept-current", action="store_true")
     p.add_argument("--init-if-empty", action="store_true")
-    p.add_argument("--workers", type=int, default=4, help="Concurrent source fetches across different hosts (1-8)")
-    p.add_argument("--retries", type=int, default=2, help="Attempts for transient network failures (1-3)")
+    p.add_argument("--workers", type=int, default=4, help="Concurrent source fetches across independent hosts (1-8)")
+    p.add_argument("--per-host", type=int, default=1, help="Maximum concurrent fetches to the same canonical host (1-3)")
+    p.add_argument("--retries", type=int, default=3, help="Attempts for transient network failures (1-3)")
     args = p.parse_args()
     workers = max(1, min(args.workers, 8))
+    per_host = max(1, min(args.per_host, 3))
     attempts = max(1, min(args.retries, 3))
 
     sources = json.loads(Path(args.sources).read_text(encoding="utf-8-sig"))["sources"]
@@ -165,24 +181,43 @@ def main():
 
     fingerprints = {}
     failure_by_id = {}
+
+    def canonical_host(url):
+        host = (urlparse(url).hostname or "").lower()
+        if host.startswith("www."):
+            host = host[4:]
+        return host
+
+    fragile_hosts = {"kp2mi.go.id"}
     host_gates = {
-        urlparse(source["url"]).netloc.lower(): Semaphore(1)
+        canonical_host(source["url"]): Semaphore(
+            1 if canonical_host(source["url"]) in fragile_hosts else per_host
+        )
         for source in sources
     }
+    host_last_request = {}
 
     def fetch_source(source):
         url = source["url"]
-        host = urlparse(url).netloc.lower()
+        host = canonical_host(url)
         last_error = None
         with host_gates[host]:
             for attempt in range(1, attempts + 1):
+                if host in fragile_hosts:
+                    elapsed = time.monotonic() - host_last_request.get(host, 0.0)
+                    min_gap = 1.25 if attempt == 1 else 2.0 * attempt
+                    if elapsed < min_gap:
+                        time.sleep(min_gap - elapsed)
                 try:
-                    return source["id"], fetch_fingerprint(url, tls_pins)
+                    result = fetch_fingerprint(url, tls_pins)
+                    host_last_request[host] = time.monotonic()
+                    return source["id"], result
                 except Exception as exc:
+                    host_last_request[host] = time.monotonic()
                     last_error = exc
                     if "CERTIFICATE_VERIFY_FAILED" in str(exc) or attempt >= attempts:
                         break
-                    time.sleep(0.75 * attempt)
+                    time.sleep(1.5 * attempt)
         raise last_error
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -215,15 +250,26 @@ def main():
 
     changed = []
     for source_id, now in current.items():
-        before = baseline.get(source_id, {})
+        before = baseline.get(source_id)
+        if not before:
+            changed.append({
+                "id": source_id,
+                "agency": now["agency"],
+                "url": now["url"],
+                "before": None,
+                "after": now["sha256"],
+                "reason": "new_unbaselined_source",
+            })
+            continue
         old_hash = before.get("sha256")
-        if old_hash and old_hash != now["sha256"]:
+        if old_hash != now["sha256"]:
             changed.append({
                 "id": source_id,
                 "agency": now["agency"],
                 "url": now["url"],
                 "before": old_hash,
                 "after": now["sha256"],
+                "reason": "content_changed",
             })
 
     initialized = False
@@ -239,6 +285,7 @@ def main():
         if complete_fetch:
             baseline_path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             initialized = True
+            changed = []
         else:
             acceptance_blocked = True
 
@@ -269,6 +316,7 @@ def main():
         "checked": len(current),
         "configured": len(sources),
         "workers": workers,
+        "perHost": per_host,
         "attempts": attempts,
         "pinnedFallbacks": [source_id for source_id, row in current.items() if row.get("tlsMode") == "pinned_leaf"],
     }

@@ -38,15 +38,18 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/source_review_status.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/tls_pins.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_form_sources_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('research/visa_legacy_forms_field_audit_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_form_may26_comparison_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/visa_form_lineage_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/registration_sources_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('research/exam_card_source_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/manifest.webmanifest','utf8'))"
       - name: Check Python monitor scripts
-        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py
+        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py scripts/check_bqc_scopes.py
       - name: Check webapp DOM and route contract
         run: python scripts/check_webapp_contract.py
+      - name: Check zero-broker scope coverage
+        run: python scripts/check_bqc_scopes.py
       - name: Check required public files
         run: |
           test -f docs/index.html
