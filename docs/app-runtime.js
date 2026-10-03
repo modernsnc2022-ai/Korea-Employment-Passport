@@ -462,8 +462,10 @@ function renderQuickStart(){
   const finished=read(KEYS.quickSetup,false);
   if(hasProgress||finished){
     box.hidden=true;
+    document.body.classList.remove('setup-mode');
     return;
   }
+  document.body.classList.add('setup-mode');
   box.hidden=false;
   select.innerHTML='<option value="">Pilih hal terakhir yang sudah selesai</option>'+
     QUICK_MILESTONES.map(item=>'<option value="'+escapeHtml(item.nextStage)+'">'+escapeHtml(item.label)+'</option>').join('');
@@ -1003,8 +1005,17 @@ function wizardFieldSearchRows(query,stageId){
   const tokens=q.split(' ').filter(token=>token.length>1);
   const rows=[];
   for(const form of formWizards.forms){
-    if(stageId&&!wizardFormApplies(form,stageId))continue;
-    if(!stageId&&(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl)))continue;
+    if(stageId){
+      if(!wizardFormApplies(form,stageId))continue;
+    }else{
+      if(form.scopeType==='cohort'||(form.scopeKeys||[]).length)continue;
+      if(sourceNeedsReview(form.sourceUrl)||sourceNeedsReview(form.guidanceUrl))continue;
+    }
+    const scope=stageId?selectedScope(stageId):'';
+    const scopeInfo=stageId?scopeOptionsForStage(stageId).find(item=>item.key===scope):null;
+    const sourceUrl=stageId
+      ?(wizardGuidanceUrl(form,stageId)||wizardSourceUrl(form,stageId))
+      :(form.guidanceUrl||form.sourceUrl);
     for(const field of form.fields||[]){
       const hay=normalizeSearch([form.title,field.label,field.instruction,field.example,field.dont||''].join(' '));
       let score=0;
@@ -1017,12 +1028,14 @@ function wizardFieldSearchRows(query,stageId){
             question:form.title+' — '+field.label,
             answer:field.instruction,
             writeExactly:field.instruction,
-            why:'Berdasarkan Petunjuk Pemberkasan Dokumen Visa resmi 2026 untuk formulir ini.',
+            why:'Berdasarkan petunjuk resmi untuk formulir dan pengumuman yang dipilih.',
             doNotDo:field.dont?[field.dont]:[],
-            sourceUrl:form.guidanceUrl||form.sourceUrl,
-            verifiedAt:formWizards.verifiedAt||'2026-10-02',
-            verificationStatus:'verified_form_guidance',
-            scopeType:'route_2026'
+            sourceUrl,
+            verifiedAt:form.verifiedAt||formWizards.verifiedAt||'2026-10-02',
+            verificationStatus:form.verificationStatus||'verified_form_guidance',
+            scopeType:scope?'cohort':'route_2026',
+            scopeKey:scope||undefined,
+            scopeLabel:scopeInfo?.label||undefined
           },
           score
         });

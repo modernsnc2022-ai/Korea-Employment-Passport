@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 html = (ROOT / "docs" / "app.html").read_text(encoding="utf-8")
 js = (ROOT / "docs" / "app-runtime.js").read_text(encoding="utf-8")
+css = (ROOT / "docs" / "app-shell.css").read_text(encoding="utf-8")
 route = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json").read_text(encoding="utf-8"))
 i18n = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026_id.json").read_text(encoding="utf-8"))
 document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json").read_text(encoding="utf-8"))
@@ -34,6 +35,10 @@ if '<details id="allJourneyDetails"' not in html:
     errors.append("simple UX lock requires full journey collapsed by default")
 if 'id="quickStart"' not in html:
     errors.append("simple UX lock requires first-use quick start")
+if "document.body.classList.add('setup-mode')" not in js or "document.body.classList.remove('setup-mode')" not in js:
+    errors.append("simple UX lock requires first-use setup mode toggle")
+if "body.setup-mode .flow-dashboard" not in css or "body.setup-mode .utility-nav" not in css or "body.setup-mode .view" not in css:
+    errors.append("simple UX lock requires first-use setup mode to hide advanced navigation")
 utility_tabs = re.findall(r'class="utility-tab[^"]*"\s+data-view="([^"]+)"', html)
 if len(utility_tabs) != 4:
     errors.append(f"simple UX lock requires exactly 4 primary bottom-nav items, got {len(utility_tabs)}")

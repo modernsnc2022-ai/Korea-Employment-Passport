@@ -22,6 +22,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .topbar{position:sticky;top:0;z-index:40;background:rgba(7,26,54,.96);color:#fff;padding:13px max(20px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px;backdrop-filter:blur(12px)}
 .topbar>div{display:grid;min-width:0}.topbar strong{font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.topbar small{color:#a9c4f8}
 .shell{max-width:1180px;margin:auto;padding:28px 20px 110px}
+body.setup-mode .cycle-status,
+body.setup-mode .how-to-use,
+body.setup-mode .trust-panel,
+body.setup-mode .flow-dashboard,
+body.setup-mode .utility-nav,
+body.setup-mode .view{display:none!important}
+body.setup-mode .shell{padding-bottom:36px}
 
 .summary{background:linear-gradient(135deg,#071a36,#164b91);color:#fff;border-radius:26px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,260px);gap:30px;align-items:end;box-shadow:var(--shadow)}
 .eyebrow{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#8fb7ff}.eyebrow.dark{color:var(--blue)}
