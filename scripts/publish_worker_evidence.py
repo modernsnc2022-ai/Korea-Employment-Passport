@@ -111,10 +111,10 @@ def validate_worker_row(row: dict[str, str], tester_id: str) -> None:
     evidence_status = row.get("workplace_evidence_status", "").strip().lower()
     if evidence_status == WORKPLACE_EVIDENCE_PUBLISHED:
         fail(f"{tester_id}: workplace evidence is already published")
-    if evidence_status not in {"pending", "declined", "not_publishable"}:
+    if evidence_status != "pending":
         fail(
-            f"{tester_id}: workplace_evidence_status must be pending, declined, or not_publishable "
-            "before publication"
+            f"{tester_id}: workplace evidence publication requires workplace_evidence_status=pending; "
+            f"current status is {evidence_status or 'blank'}"
         )
 
 
