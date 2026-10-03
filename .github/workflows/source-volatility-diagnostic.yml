@@ -1,0 +1,22 @@
+name: source-volatility-diagnostic
+
+on:
+  push:
+    paths:
+      - 'scripts/diagnose_source_volatility.py'
+      - '.github/workflows/source-volatility-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare immediate KP2MI fingerprints
+        run: python scripts/diagnose_source_volatility.py
