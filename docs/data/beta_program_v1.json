@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "status": "hold",
+  "route": "Indonesia -> Korea E-9 Manufacturing 2026",
+  "publicBeta": {
+    "slots": 30,
+    "freeMonths": 6,
+    "benefitStarts": "beta_activation_date",
+    "queueRule": "first eligible applications by received timestamp after status becomes open",
+    "eligibility": [
+      "Currently participating in or preparing to continue the official Indonesia G-to-G Korea / EPS E-9 process",
+      "Willing to use Korea Employment Passport during the real process",
+      "Willing to provide good-faith feedback about unclear, missing, rejected, or broker-dependent steps"
+    ],
+    "feedback": [
+      "Complete first-use feedback",
+      "Report any point where an official answer is missing or unclear",
+      "Report any step that still requires a calo/private intermediary",
+      "Provide short follow-up feedback when the real EPS stage changes, when reasonably possible"
+    ],
+    "noGuarantee": [
+      "No job guarantee",
+      "No employer-selection guarantee",
+      "No SLC guarantee",
+      "No visa guarantee",
+      "No departure guarantee"
+    ]
+  },
+  "retrospectivePanel": {
+    "slots": 20,
+    "role": "Indonesian E-9 workers already in Korea who validate instructions against real experience",
+    "separateFromPublicBeta": true
+  },
+  "privacy": {
+    "publicApplicationDoesNotRequire": [
+      "name",
+      "passport number",
+      "KTP number",
+      "ARC number",
+      "phone number",
+      "home address"
+    ],
+    "note": "Application email is handled outside the public repository. Never send identity-document images for beta enrollment."
+  },
+  "application": {
+    "email": "modernsnc2022@gmail.com",
+    "opensOnlyWhenStatus": "open"
+  }
+}
