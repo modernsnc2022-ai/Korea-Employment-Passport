@@ -62,7 +62,7 @@ REQUIRED_COLUMNS = {
 
 PII_PATTERNS = {
     "email": re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I),
-    "phone": re.compile(r"(?<!\w)(?:\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)"),
+    "phone": re.compile(r"(?<!\w)(?:\+?82|\+?62|0)[\s.-]?(?:\d[\s.-]?){8,13}(?!\w)"),
     "document_id": re.compile(r"\b[A-Z]{1,3}[-\s]?\d{6,12}\b", re.I),
 }
 SCAN_FIELDS = {
