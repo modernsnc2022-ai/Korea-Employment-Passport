@@ -495,6 +495,9 @@ test('workplace reality check separates public evidence from worker testimony', 
   await page.evaluate(() => switchView('workplace', false));
   await expect(page.locator('#workplace')).toBeVisible();
   await expect(page.locator('#workplaceEvidencePolicy')).toContainText('Mulai dari bukti publik dan SLC');
+  await expect(page.locator('#workplaceOfficialLookups')).toContainText('FactoryOn');
+  await expect(page.locator('#workplaceOfficialLookups')).toContainText('EPS');
+  await expect(page.locator('#workplaceOfficialLookups a')).toHaveCount(2);
   await expect(page.locator('#realityChecks .evidence-badge')).toHaveCount(8);
   await expect(page.locator('#realityChecks .evidence-badge.public')).toHaveCount(5);
   await expect(page.locator('#realityChecks .evidence-badge.worker')).toHaveCount(3);
