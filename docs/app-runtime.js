@@ -525,11 +525,19 @@ function exactScopeLabel(item){
 
 function exactVerificationLabel(item){
   const v=String(item.verificationStatus||'');
+  if(v==='waiting_official_notice')return 'Menunggu pengumuman resmi · jangan menebak';
+  if(v==='call_specific_follow_notice'||v==='flight_call_specific')return 'Ikuti pengumuman yang memuat nama Anda';
+  if(v==='institution_specific_follow_notice')return 'Ikuti petunjuk lembaga resmi Anda';
+  if(v==='official_process_no_universal_deadline')return 'Tidak ada batas waktu universal pada prosedur resmi';
+  if(v==='official_channel_confirmed')return 'Kanal resmi sudah dikonfirmasi';
+  if(v==='official_rights_guidance')return 'Panduan hak resmi';
+  if(v==='verified_with_current_process_check')return 'Terverifikasi · proses terbaru juga dicek';
+  if(v==='verified_official_pdf')return 'Terverifikasi dari PDF resmi';
   if(v.startsWith('verified_current'))return 'Terverifikasi · aturan aktif';
   if(v.startsWith('verified_across'))return 'Terverifikasi · konsisten di beberapa pengumuman 2026';
   if(v.startsWith('verified'))return 'Terverifikasi';
   if(v.startsWith('cohort_specific'))return 'Terverifikasi · khusus pengumuman tertentu';
-  return 'Perlu cek cakupan';
+  return 'Sumber resmi sudah ditautkan · cek cakupan';
 }
 
 function renderExactAnswers(stage){
