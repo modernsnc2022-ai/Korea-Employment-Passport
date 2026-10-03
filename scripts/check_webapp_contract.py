@@ -74,6 +74,7 @@ required_runtime_functions = (
     "renderFormWizard",
     "sanitizeBetaFeedback",
     "encodeSanitizedBetaBody",
+    "canonicalBetaTesterId",
     "betaValidationStats",
     "renderBetaValidation",
     "buildBetaFeedbackBundle",

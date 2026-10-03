@@ -329,3 +329,37 @@ test('beta zero-broker checkpoint tracks stage pass and fail without identity da
   await expect(page.locator('#gapStage')).toHaveValue('registration');
   expect(errors).toEqual([]);
 });
+
+
+test('anonymous beta ID links feedback to tracker without identity data', async ({ page }) => {
+  const errors = await freshPage(page);
+  await setStage(page, 'eligibility');
+  await page.evaluate(() => switchView('gaps', false));
+  await page.locator('#betaValidationPanel').evaluate((el) => { el.open = true; });
+
+  await page.locator('#betaTesterId').fill('kep-0042');
+  await page.locator('#saveBetaTesterIdBtn').click();
+  await expect(page.locator('#betaTesterId')).toHaveValue('KEP-0042');
+  await expect(page.locator('#betaTesterIdStatus')).toContainText('KEP-0042');
+
+  const result = await page.evaluate(() => {
+    localStorage.setItem('kep.brokerGaps', JSON.stringify([
+      {id:4, stage:'eligibility', task:'Masih membutuhkan bantuan', helper:'Teman / pekerja senior'}
+    ]));
+    const bundle=buildBetaFeedbackBundle();
+    const href=betaFeedbackBundleMailto(bundle);
+    return {
+      testerId:bundle.testerId,
+      body:bundle.rawBody,
+      subject:decodeURIComponent(href.split('?subject=')[1].split('&body=')[0]),
+      stored:JSON.parse(localStorage.getItem('kep.betaTesterId')||'null')
+    };
+  });
+
+  expect(result.testerId).toBe('KEP-0042');
+  expect(result.stored).toBe('KEP-0042');
+  expect(result.body).toContain('ID beta anonim: KEP-0042');
+  expect(result.subject).toContain('[KEP-0042]');
+  expect(result.body).not.toContain('email');
+  expect(errors).toEqual([]);
+});

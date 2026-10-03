@@ -474,6 +474,11 @@
         <summary>Uji beta: apakah tahap selesai tanpa bantuan swasta?</summary>
         <div class="consistency-body beta-validation-body">
           <p>Catat hanya hasil tahapnya. Jangan masukkan nama, nomor identitas, atau dokumen pribadi. Satu tahap yang masih membutuhkan calo/agen/LPK/teman berarti rute belum PASS.</p>
+          <label>ID beta anonim (opsional)
+            <input id="betaTesterId" autocomplete="off" placeholder="Contoh: KEP-0001" maxlength="10">
+          </label>
+          <button id="saveBetaTesterIdBtn" class="secondary" type="button">Simpan ID beta</button>
+          <small id="betaTesterIdStatus" class="muted">Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.</small>
           <label>Tahap yang dinilai
             <select id="betaCheckStage"></select>
           </label>

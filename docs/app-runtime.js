@@ -12,7 +12,7 @@ const FORM_WIZARDS_URL='data/form_wizards_2026.json';
 const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
-const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
+const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
 let route=null,rules=null,contractRules=null,workplaceRules=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
@@ -374,6 +374,7 @@ async function boot(){
     renderPayroll();
     renderWorkplace();
     renderGapStage();
+    hydrateBetaTesterIdFromUrl();
     renderBetaValidation();
     renderRejectionStage();
     renderRejections();
@@ -2763,6 +2764,20 @@ function encodeSanitizedBetaBody(rawBody){
   return encodeURIComponent(notice+safe.text);
 }
 
+function canonicalBetaTesterId(value){
+  const normalized=String(value||'').trim().toUpperCase();
+  return /^KEP-\d{4,6}$/.test(normalized)?normalized:'';
+}
+
+function betaTesterIdState(){
+  return canonicalBetaTesterId(read(KEYS.betaTesterId,''));
+}
+
+function hydrateBetaTesterIdFromUrl(){
+  const fromUrl=canonicalBetaTesterId(new URLSearchParams(location.search).get('beta'));
+  if(fromUrl)write(KEYS.betaTesterId,fromUrl);
+}
+
 function betaChecksState(){
   const value=read(KEYS.betaChecks,{});
   return value&&typeof value==='object'&&!Array.isArray(value)?value:{};
@@ -2789,7 +2804,14 @@ function renderBetaValidation(){
   const select=$('betaCheckStage');
   const summary=$('betaValidationSummary');
   const list=$('betaValidationList');
+  const testerInput=$('betaTesterId');
+  const testerStatus=$('betaTesterIdStatus');
   if(!select||!summary||!list||!route)return;
+  const testerId=betaTesterIdState();
+  if(testerInput)testerInput.value=testerId;
+  if(testerStatus)testerStatus.textContent=testerId
+    ?`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
+    :'Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.';
   const previous=select.value;
   select.innerHTML='';
   route.stages.forEach(stage=>{
@@ -2820,6 +2842,24 @@ function renderBetaValidation(){
     list.appendChild(article);
   });
 }
+
+$('saveBetaTesterIdBtn').addEventListener('click',()=>{
+  const input=$('betaTesterId');
+  const status=$('betaTesterIdStatus');
+  const raw=String(input?.value||'').trim();
+  if(!raw){
+    localStorage.removeItem(KEYS.betaTesterId);
+    renderBetaValidation();
+    return;
+  }
+  const testerId=canonicalBetaTesterId(raw);
+  if(!testerId){
+    if(status)status.textContent='Format ID beta tidak valid. Gunakan format seperti KEP-0001.';
+    return;
+  }
+  write(KEYS.betaTesterId,testerId);
+  renderBetaValidation();
+});
 
 $('saveBetaCheckBtn').addEventListener('click',()=>{
   const stageId=$('betaCheckStage').value;
@@ -2878,9 +2918,11 @@ function buildBetaFeedbackBundle(){
   const count=findingCount+checkpointCount;
   const done=read(KEYS.done,[]);
   const current=currentStage();
+  const testerId=betaTesterIdState();
   const routeLabel=route?[route.country,route.visa,route.sector,route.cycle].filter(Boolean).join(' → '):'route belum dimuat';
   const sessionSummary=[
     'RINGKASAN SESI TANPA IDENTITAS',
+    ...(testerId?['ID beta anonim: '+testerId]:[]),
     'Rute: '+routeLabel,
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
     'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
@@ -2891,6 +2933,7 @@ function buildBetaFeedbackBundle(){
     count,
     findingCount,
     checkpointCount,
+    testerId,
     rawBody:
       'Temuan beta Korea Employment Passport dari perangkat ini:\n\n'+
       sessionSummary+'\n\n'+
@@ -2900,7 +2943,8 @@ function buildBetaFeedbackBundle(){
 }
 
 function betaFeedbackBundleMailto(bundle=buildBetaFeedbackBundle()){
-  const subject=encodeURIComponent(`[KEP Beta] Combined feedback — ${bundle.findingCount} temuan, ${bundle.checkpointCount} checkpoint`);
+  const testerPrefix=bundle.testerId?`[${bundle.testerId}] `:'';
+  const subject=encodeURIComponent(`${testerPrefix}[KEP Beta] Combined feedback — ${bundle.findingCount} temuan, ${bundle.checkpointCount} checkpoint`);
   const body=encodeSanitizedBetaBody(bundle.rawBody);
   return 'mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 }
