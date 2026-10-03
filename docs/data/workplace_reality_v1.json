@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "evidenceTypes": {
     "contract_public": {
       "label": "Kontrak + sumber publik",
@@ -88,6 +88,26 @@
       "detail": "Bandingkan jam kerja, lembur, tanggal gajian, potongan, shift, makan, dan akomodasi.",
       "evidenceType": "worker_contract",
       "coverageGroup": "worker"
+    }
+  ],
+  "officialLookups": [
+    {
+      "id": "factoryon",
+      "title": "FactoryOn — pencarian pabrik/perusahaan",
+      "authority": "Korea Industrial Complex Corporation",
+      "url": "https://www.factoryon.go.kr/",
+      "access": "public",
+      "use": "Cari nama perusahaan dan cocokkan lokasi pabrik/jenis manufaktur dengan SLC jika data tersedia.",
+      "caution": "Tidak muncul di FactoryOn saja tidak membuktikan perusahaan palsu. Gunakan sebagai satu bukti tambahan, bukan keputusan tunggal."
+    },
+    {
+      "id": "eps_worker_records",
+      "title": "EPS — catatan kerja resmi pekerja asing",
+      "authority": "Ministry of Employment and Labor / Korea Employment Information Service",
+      "url": "https://eps.go.kr/eo/kr/frnr/index.eo",
+      "access": "login",
+      "use": "Saat akun/akses EPS sudah tersedia, periksa status kontrak kerja, riwayat perubahan tempat kerja, dan riwayat asuransi yang tersedia untuk akun Anda.",
+      "caution": "Layanan ini dapat memerlukan login atau verifikasi identitas dan tidak menggantikan pemeriksaan SLC sebelum berangkat."
     }
   ]
 }
