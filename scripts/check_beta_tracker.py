@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import calendar
 import csv
 import re
 import sys
+from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +47,11 @@ REQUIRED_COLUMNS = {
     "interview_status",
     "broker_gap_status",
     "retest_status",
+    "application_received_at",
+    "eligibility_status",
+    "activated_at",
+    "free_until",
+    "feedback_status",
     "notes",
     "beta_link",
 }
@@ -88,6 +95,28 @@ missing = sorted(REQUIRED_COLUMNS - headers)
 if missing:
     fail("missing required columns: " + ", ".join(missing))
 
+ELIGIBILITY_STATUSES = {"", "pending", "eligible", "ineligible", "waitlist", "accepted"}
+FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
+
+
+def add_calendar_months(value: date, months: int) -> date:
+    month_index = value.month - 1 + months
+    year = value.year + month_index // 12
+    month = month_index % 12 + 1
+    day = min(value.day, calendar.monthrange(year, month)[1])
+    return date(year, month, day)
+
+
+def parse_utc_timestamp(value: str, tester_id: str) -> datetime:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        fail(f"{tester_id} application_received_at must be ISO-8601")
+    if parsed.tzinfo is None:
+        fail(f"{tester_id} application_received_at must include timezone")
+    return parsed
+
+
 expected_ids = [f"KEP-{index:04d}" for index in range(1, 51)]
 actual_ids = [row.get("tester_id", "").strip() for row in rows]
 if actual_ids != expected_ids:
@@ -109,6 +138,44 @@ for index, row in enumerate(rows, start=1):
     if row.get("beta_link", "").strip() != expected_link:
         fail(f"{tester_id} beta_link mismatch")
 
+    application_received = row.get("application_received_at", "").strip()
+    eligibility_status = row.get("eligibility_status", "").strip()
+    activated_at = row.get("activated_at", "").strip()
+    free_until = row.get("free_until", "").strip()
+    feedback_status = row.get("feedback_status", "").strip()
+
+    if eligibility_status not in ELIGIBILITY_STATUSES:
+        fail(f"{tester_id} invalid eligibility_status {eligibility_status!r}")
+    if feedback_status not in FEEDBACK_STATUSES:
+        fail(f"{tester_id} invalid feedback_status {feedback_status!r}")
+
+    if application_received:
+        if expected_group != "active_applicant":
+            fail(f"{tester_id} retrospective worker panel must not use public-beta application queue fields")
+        parse_utc_timestamp(application_received, tester_id)
+
+    if bool(activated_at) != bool(free_until):
+        fail(f"{tester_id} activated_at and free_until must be set together")
+
+    if activated_at:
+        if expected_group != "active_applicant":
+            fail(f"{tester_id} E-9 worker validator must not receive public-beta entitlement fields")
+        if eligibility_status != "accepted":
+            fail(f"{tester_id} activated beta access requires eligibility_status=accepted")
+        if not application_received:
+            fail(f"{tester_id} activated beta access requires application_received_at")
+        try:
+            activation_date = date.fromisoformat(activated_at)
+            expiry_date = date.fromisoformat(free_until)
+        except ValueError:
+            fail(f"{tester_id} activated_at/free_until must use YYYY-MM-DD")
+        expected_expiry = add_calendar_months(activation_date, 6)
+        if expiry_date != expected_expiry:
+            fail(
+                f"{tester_id} free_until must be exactly six calendar months after activation "
+                f"({expected_expiry.isoformat()})"
+            )
+
     for field in SCAN_FIELDS:
         value = row.get(field, "") or ""
         for label, pattern in PII_PATTERNS.items():
@@ -118,4 +185,8 @@ for index, row in enumerate(rows, start=1):
 if len(rows) != 50 or active != 30 or workers != 20:
     fail(f"unexpected cohort counts rows={len(rows)} active={active} workers={workers}")
 
-print(f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} e9_workers={workers}")
+activated = sum(1 for row in rows if row.get("activated_at", "").strip())
+print(
+    f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} "
+    f"e9_workers={workers} activated_public_beta={activated} free_months=6"
+)
