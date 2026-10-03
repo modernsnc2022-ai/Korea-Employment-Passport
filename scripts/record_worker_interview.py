@@ -17,6 +17,7 @@ ALLOWED_YEARS = {str(year) for year in range(2004, 2027)} | {"unknown"}
 YES_NO_UNKNOWN = {"yes", "no", "unknown"}
 BROKER_GAP_STATUSES = {"open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"pending", "passed", "failed", "not_applicable"}
+WORKPLACE_EVIDENCE_DECISIONS = {"pending", "declined", "not_publishable"}
 
 
 def fail(message: str) -> None:
@@ -48,6 +49,7 @@ def record(
     workplace_info_needed: str,
     broker_gap_status: str,
     retest_status: str,
+    workplace_evidence_status: str,
 ) -> dict[str, str]:
     validate_assigned_worker(row, tester_id)
     if row.get("interview_status", "").strip().lower() == "completed":
@@ -64,6 +66,8 @@ def record(
         fail("unsupported broker-gap-status")
     if retest_status not in RETEST_STATUSES:
         fail("unsupported retest-status")
+    if workplace_evidence_status not in WORKPLACE_EVIDENCE_DECISIONS:
+        fail("workplace-evidence-status must be pending, declined, or not_publishable")
 
     row["experience_year"] = experience_year
     row["current_stage"] = current_stage
@@ -72,8 +76,7 @@ def record(
     row["broker_gap_status"] = broker_gap_status
     row["retest_status"] = retest_status
     row["interview_status"] = "completed"
-    if not row.get("workplace_evidence_status", "").strip():
-        row["workplace_evidence_status"] = "pending"
+    row["workplace_evidence_status"] = workplace_evidence_status
     return row
 
 
@@ -103,6 +106,7 @@ def self_test() -> None:
         workplace_info_needed="yes",
         broker_gap_status="open",
         retest_status="pending",
+        workplace_evidence_status="pending",
     )
     assert row["interview_status"] == "completed"
     assert row["experience_year"] == "2024"
@@ -155,6 +159,12 @@ def main() -> int:
     parser.add_argument("--workplace-info-needed", choices=sorted(YES_NO_UNKNOWN))
     parser.add_argument("--broker-gap-status", choices=sorted(BROKER_GAP_STATUSES), default="open")
     parser.add_argument("--retest-status", choices=sorted(RETEST_STATUSES), default="pending")
+    parser.add_argument(
+        "--workplace-evidence-status",
+        choices=sorted(WORKPLACE_EVIDENCE_DECISIONS),
+        default="pending",
+        help="pending if privacy-reviewed workplace evidence may later be published; otherwise declined/not_publishable.",
+    )
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -193,6 +203,7 @@ def main() -> int:
             workplace_info_needed=str(args.workplace_info_needed),
             broker_gap_status=str(args.broker_gap_status),
             retest_status=str(args.retest_status),
+            workplace_evidence_status=str(args.workplace_evidence_status),
         )
     except ValueError as exc:
         raise SystemExit("WORKER_INTERVIEW_BLOCKED " + str(exc)) from exc
