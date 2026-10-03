@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import time
 from pathlib import Path
@@ -18,6 +19,10 @@ baseline = json.loads(BASELINE.read_text(encoding="utf-8-sig"))
 status = json.loads(STATUS.read_text(encoding="utf-8-sig"))
 tls_pins = json.loads(TLS_PINS.read_text(encoding="utf-8-sig")) if TLS_PINS.exists() else {"hosts": {}}
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--all", action="store_true", help="Diagnose every changed KP2MI source instead of the representative sample.")
+args = parser.parse_args()
+
 changed_ids = set(status.get("reviewRequiredSourceIds", []))
 diagnostic_ids = {
     "kp2mi_gtog_korea_info_index",
@@ -29,7 +34,7 @@ diagnostic_ids = {
 targets = [
     row for row in sources
     if row.get("id") in changed_ids
-    and row.get("id") in diagnostic_ids
+    and (args.all or row.get("id") in diagnostic_ids)
     and "kp2mi.go.id" in row.get("url", "")
 ]
 
@@ -74,6 +79,17 @@ print(
     f"stable_immediate={len(stable)} volatile_immediate={len(volatile)} "
     f"min_delta={min(deltas) if deltas else 'n/a'} "
     f"max_delta={max(deltas) if deltas else 'n/a'}"
+)
+uniform_delta = bool(deltas) and len(set(deltas)) == 1
+common_shift_suspected = (
+    len(rows) >= 3
+    and not volatile
+    and uniform_delta
+)
+print(
+    "SOURCE_PATTERN "
+    f"uniform_delta={str(uniform_delta).lower()} "
+    f"common_shift_suspected={str(common_shift_suspected).lower()}"
 )
 if volatile:
     print("VOLATILE_IDS " + ",".join(volatile))
