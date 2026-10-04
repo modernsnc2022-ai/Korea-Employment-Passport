@@ -104,7 +104,7 @@ if missing:
 ELIGIBILITY_STATUSES = {"", "pending", "eligible", "ineligible", "waitlist", "accepted"}
 FEEDBACK_STATUSES = {"", "not_started", "active", "complete", "withdrawn"}
 INTERVIEW_STATUSES = {"", "new", "scheduled", "completed", "withdrawn"}
-BROKER_GAP_STATUSES = {"", "open", "resolved", "official_or_licensed_only"}
+BROKER_GAP_STATUSES = {"", "pending", "none_reported", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
 YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
@@ -228,6 +228,8 @@ for index, row in enumerate(rows, start=1):
         fail(f"{tester_id} completed worker interview requires experience_year")
 
     if application_received:
+        if broker_gap_status == "":
+            fail(f"{tester_id} assigned public beta slot requires explicit broker_gap_status")
         if expected_group != "active_applicant":
             fail(f"{tester_id} retrospective worker panel must not use public-beta application queue fields")
         if eligibility_status != "accepted":
@@ -313,6 +315,8 @@ for row in worker_rows:
         fail(f"{tester_id} assigned worker validator requires in_korea=yes")
     if row.get("e9_experience", "").strip() != "confirmed":
         fail(f"{tester_id} assigned worker validator requires e9_experience=confirmed")
+    if row.get("broker_gap_status", "").strip() == "":
+        fail(f"{tester_id} assigned worker validator requires explicit broker_gap_status")
     evidence_status = row.get("workplace_evidence_status", "").strip()
     if evidence_status not in {"pending", "published_single_verified_worker", "declined", "not_publishable"}:
         fail(f"{tester_id} assigned worker validator requires explicit workplace_evidence_status")
