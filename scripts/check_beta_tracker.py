@@ -108,6 +108,7 @@ BROKER_GAP_STATUSES = {"", "pending", "none_reported", "open", "resolved", "offi
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
 YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
+ALLOWED_SOURCE_CHANNELS = {"", "website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other"}
 CONTROLLED_STAGE_LIST_FIELDS = {
     "broker_tasks", "documents_confusing", "official_process_gap",
     "zero_broker_pass_stages", "zero_broker_fail_stages"
@@ -168,6 +169,7 @@ for index, row in enumerate(rows, start=1):
     broker_gap_status = row.get("broker_gap_status", "").strip()
     retest_status = row.get("retest_status", "").strip()
     current_stage = row.get("current_stage", "").strip()
+    source_channel = row.get("source_channel", "").strip()
 
     if interview_status not in INTERVIEW_STATUSES:
         fail(f"{tester_id} invalid interview_status {interview_status!r}")
@@ -190,6 +192,8 @@ for index, row in enumerate(rows, start=1):
         fail(f"{tester_id} invalid retest_status {retest_status!r}")
     if current_stage and current_stage not in SUPPORTED_CURRENT_STAGES:
         fail(f"{tester_id} current_stage is not a supported route stage or complete: {current_stage}")
+    if source_channel not in ALLOWED_SOURCE_CHANNELS:
+        fail(f"{tester_id} source_channel must use a non-identifying controlled code")
     if eligibility_status not in ELIGIBILITY_STATUSES:
         fail(f"{tester_id} invalid eligibility_status {eligibility_status!r}")
     if feedback_status not in FEEDBACK_STATUSES:
