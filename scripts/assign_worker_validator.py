@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+RECRUITMENT_SOURCES = ROOT / "docs" / "data" / "beta_recruitment_sources_v1.json"
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
