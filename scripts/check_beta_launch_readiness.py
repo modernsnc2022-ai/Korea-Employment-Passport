@@ -125,6 +125,26 @@ else:
     require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
 
 document_packs = load_json("docs/data/document_packs_2026.json")
+document_items = [
+    item
+    for pack in document_packs.get("packs", [])
+    for item in pack.get("items", [])
+]
+require(bool(document_items), "document guidance must contain checklist items")
+require(
+    all(isinstance(item.get("required"), bool) for item in document_items),
+    "every document item must explicitly distinguish required vs conditional",
+)
+require(
+    "Wajib / perlu disiapkan" in runtime and "Jika tersedia / bersyarat" in runtime,
+    "document UI must visibly distinguish required and conditional items",
+)
+require(
+    "JANGAN SUBMIT DULU." in runtime
+    and "Checklist dokumen tahap ini belum cukup spesifik" in runtime,
+    "pre-submit UI must block unresolved/unconfirmed requirements",
+)
+
 mcu1_candidates = [
     pack for pack in document_packs.get("packs", [])
     if "mcu1" in pack.get("appliesTo", []) and not pack.get("scopeKey")
@@ -261,6 +281,17 @@ require(worker_panel.get("status") in {"hold", "open"}, "E-9 worker panel must u
 require(beta_program.get("publicBeta", {}).get("freeMonths") == 6, "public beta benefit must remain 6 months")
 require(beta_program.get("publicBeta", {}).get("benefitStarts") == "beta_activation_date",
         "six-month benefit must start from beta activation")
+require(len(beta_program.get("publicBeta", {}).get("feedback", [])) >= 3,
+        "public beta must keep explicit feedback participation requirements")
+no_guarantee = set(beta_program.get("publicBeta", {}).get("noGuarantee", []))
+require(
+    {"No job guarantee", "No SLC guarantee", "No visa guarantee", "No departure guarantee"}.issubset(no_guarantee),
+    "public beta must clearly preserve job/SLC/visa/departure no-guarantee copy",
+)
+require(
+    all(token in beta_page for token in ["nomor paspor", "nomor KTP", "nomor ARC", "nomor telepon"]),
+    "beta enrollment page must state that sensitive identity/contact fields are not required",
+)
 require("Beta terbatas untuk 30 peserta pertama" in beta_page, "beta enrollment page must state the 30-person limit")
 require("program.status==='open'" in beta_js, "beta application UI must be gated by OPEN status")
 
