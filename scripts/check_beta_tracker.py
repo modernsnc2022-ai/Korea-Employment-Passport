@@ -137,16 +137,18 @@ def parse_utc_timestamp(value: str, tester_id: str) -> datetime:
     return parsed
 
 
-expected_ids = [f"KEP-{index:04d}" for index in range(1, 51)]
+if len(rows) < 50:
+    fail(f"tracker must keep at least the 50 reserved base IDs, found {len(rows)}")
+expected_ids = [f"KEP-{index:04d}" for index in range(1, len(rows) + 1)]
 actual_ids = [row.get("tester_id", "").strip() for row in rows]
 if actual_ids != expected_ids:
-    fail("tester IDs must be exactly KEP-0001..KEP-0050 in order")
+    fail("tester IDs must be contiguous from KEP-0001; KEP-0031..KEP-0050 stay reserved for workers")
 
 active = 0
 workers = 0
 for index, row in enumerate(rows, start=1):
     tester_id = row["tester_id"].strip()
-    expected_group = "active_applicant" if index <= 30 else "e9_worker_korea"
+    expected_group = "e9_worker_korea" if 31 <= index <= 50 else "active_applicant"
     if row.get("target_group", "").strip() != expected_group:
         fail(f"{tester_id} target_group must be {expected_group}")
     if expected_group == "active_applicant":
@@ -270,10 +272,10 @@ for index, row in enumerate(rows, start=1):
             if pattern.search(value):
                 fail(f"{tester_id} {field} contains possible {label}; keep public tracker pseudonymous")
 
-if len(rows) != 50 or active != 30 or workers != 20:
+if active < 30 or workers != 20:
     fail(f"unexpected cohort counts rows={len(rows)} active={active} workers={workers}")
 
-public_rows = rows[:30]
+public_rows = rows[:30] + rows[50:]
 seen_empty_slot = False
 previous_received = None
 previous_id = None
@@ -281,7 +283,10 @@ assigned_public = 0
 for row in public_rows:
     tester_id = row["tester_id"].strip()
     value = row.get("application_received_at", "").strip()
+    tester_number = int(tester_id.split("-")[1])
     if not value:
+        if tester_number >= 51:
+            fail(f"{tester_id} overflow public-beta row must be assigned when created")
         seen_empty_slot = True
         continue
     if seen_empty_slot:
@@ -296,7 +301,7 @@ for row in public_rows:
     previous_id = tester_id
     assigned_public += 1
 
-worker_rows = rows[30:]
+worker_rows = rows[30:50]
 seen_empty_worker = False
 assigned_workers = 0
 for row in worker_rows:
@@ -328,7 +333,7 @@ for row in worker_rows:
 
 activated = sum(1 for row in rows if row.get("activated_at", "").strip())
 print(
-    f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} "
+    f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} target_active=30 "
     f"e9_workers={workers} assigned_public_beta={assigned_public} "
     f"assigned_worker_validators={assigned_workers} "
     f"activated_public_beta={activated} free_months=6"
