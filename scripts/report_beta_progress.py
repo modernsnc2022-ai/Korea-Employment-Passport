@@ -10,9 +10,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+BQC = ROOT / "docs" / "data" / "broker_question_catalog_v1.json"
 ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
+BQC_DATA = json.loads(BQC.read_text(encoding="utf-8-sig"))
 ROUTE_STAGE_IDS = [row["id"] for row in ROUTE_DATA.get("stages", [])]
 ROUTE_CYCLE = str(ROUTE_DATA.get("cycle", ""))
+STRUCTURED_ROUTE_HOLDS = [
+    row.get("id")
+    for row in BQC_DATA.get("questions", [])
+    if row.get("blocksZeroBrokerReady")
+    and row.get("status") == "answered_hold"
+]
 
 LATE_STAGE_BUCKETS = {
     "roster": {"roster", "employer_selection"},
@@ -174,6 +182,7 @@ def render(rows: list[dict[str, str]]) -> str:
         and broker_gaps_pending == 0
         and broker_gaps_open == 0
         and zero_broker_stage_ready
+        and not STRUCTURED_ROUTE_HOLDS
     )
 
     lines = [
@@ -220,6 +229,9 @@ def render(rows: list[dict[str, str]]) -> str:
             ", ".join(zero_uncovered_stage_ids) if zero_uncovered_stage_ids else "none"
         ),
         f"- Stage-level zero-broker evidence ready: {'YES' if zero_broker_stage_ready else 'NO'}",
+        "- Structured official-evidence HOLDs blocking final route PASS: " + (
+            ", ".join(STRUCTURED_ROUTE_HOLDS) if STRUCTURED_ROUTE_HOLDS else "none"
+        ),
         "",
         "## Required late-stage coverage among active applicants",
         f"- Roster / employer selection: {late_stage['roster']}",
@@ -240,6 +252,7 @@ def render(rows: list[dict[str, str]]) -> str:
         "",
         "## Evidence gate",
         f"- Real-user evidence ready for route PASS review: {'YES' if evidence_ready else 'NO'}",
+        "- Beta OPEN may proceed with explicit official-evidence HOLDs, but final Broker Replacement Rate 100% PASS cannot.",
         "- This aggregate does not itself declare Broker Replacement Rate PASS; route PASS still requires reviewing the actual sanitized beta evidence and confirming every necessary private-broker task is replaced.",
         "",
     ]
