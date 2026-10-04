@@ -403,6 +403,7 @@ async function boot(){
     renderCycleStatus();
     renderFreshnessStatus();
     renderBqcStatus();
+    hydrateBetaTesterIdFromUrl();
     renderQuickStart();
     renderJourney();
     renderCurrentStageSelector();
@@ -415,7 +416,6 @@ async function boot(){
     renderPayroll();
     renderWorkplace();
     renderGapStage();
-    hydrateBetaTesterIdFromUrl();
     renderBetaModeBanner();
     renderBetaValidation();
     renderRejectionStage();
@@ -658,6 +658,11 @@ function renderQuickStart(){
   const box=$('quickStart');
   const select=$('lastMilestoneSelect');
   if(!box||!route)return;
+  if(betaTesterRole()==='e9_worker_validator'){
+    box.hidden=true;
+    document.body.classList.remove('setup-mode');
+    return;
+  }
   const hasProgress=read(KEYS.done,[]).length>0;
   const finished=read(KEYS.quickSetup,false);
   if(hasProgress||finished){
