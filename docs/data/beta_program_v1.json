@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -56,5 +56,14 @@
   "application": {
     "email": "modernsnc2022@gmail.com",
     "opensOnlyWhenStatus": "open"
+  },
+  "releaseDecision": {
+    "publicBeta": "pending_manual_approval",
+    "approvedAt": null,
+    "requirements": [
+      "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate green",
+      "same-day Manufacturing 2026 official-notice re-check",
+      "explicit manual OPEN decision"
+    ]
   }
 }
