@@ -783,6 +783,26 @@ test('partial departure registry never suggests another call when date is missin
 });
 
 
+test('bare OPEN status cannot bypass explicit release approval', async ({ page }) => {
+  await page.route('**/data/beta_program_v1.json', async route => {
+    const response = await route.fetch();
+    const program = await response.json();
+    program.status = 'open';
+    program.retrospectivePanel.status = 'open';
+    program.releaseDecision.publicBeta = 'pending_manual_approval';
+    program.releaseDecision.approvedAt = null;
+    program.releaseDecision.retrospectivePanel = 'pending_manual_approval';
+    program.releaseDecision.retrospectiveApprovedAt = null;
+    await route.fulfill({ response, json: program });
+  });
+
+  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#applicationPanel')).toBeHidden();
+  await expect(page.locator('#closedPanel')).toBeVisible();
+  await expect(page.locator('#workerValidatorForm')).toBeHidden();
+  await expect(page.locator('#workerPanelClosed')).toBeVisible();
+});
+
 test('beta OPEN path remains functional and identity-minimal', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -791,6 +811,8 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
     const response = await route.fetch();
     const program = await response.json();
     program.status = 'open';
+    program.releaseDecision.publicBeta = 'approved_manual';
+    program.releaseDecision.approvedAt = '2026-10-04T18:30:00+09:00';
     await route.fulfill({
       response,
       json: program
@@ -946,6 +968,8 @@ test('E-9 worker validator panel can open independently without identity fields'
     const program = await response.json();
     program.status = 'hold';
     program.retrospectivePanel.status = 'open';
+    program.releaseDecision.retrospectivePanel = 'approved_manual';
+    program.releaseDecision.retrospectiveApprovedAt = '2026-10-04T18:45:00+09:00';
     await route.fulfill({ response, json: program });
   });
 
