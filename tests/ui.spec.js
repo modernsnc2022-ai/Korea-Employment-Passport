@@ -354,6 +354,8 @@ test('beta zero-broker checkpoint tracks stage pass and fail without identity da
   expect(result.count).toBe(2);
   expect(Object.keys(result.saved)).toEqual(['eligibility','registration']);
   expect(result.rawBody).toContain('CHECKPOINT ZERO-BROKER');
+  expect(result.rawBody).toContain('[eligibility |');
+  expect(result.rawBody).toContain('[registration |');
   expect(result.rawBody).toContain('1 PASS');
   expect(result.rawBody).toContain('1 FAIL');
   await expect(page.locator('#betaValidationSummary')).toContainText('2/27');
