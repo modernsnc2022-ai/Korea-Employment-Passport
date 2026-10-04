@@ -45,6 +45,7 @@ beta_program = load_json("docs/data/beta_program_v1.json")
 departure_calls = load_json("docs/data/departure_calls_2026.json")
 manufacturing_launch_check = load_json("recruitment/MANUFACTURING_LAUNCH_CHECK.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
+landing_page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
 app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
@@ -356,6 +357,10 @@ require(
     all(token in beta_page for token in ["nomor paspor", "nomor KTP", "nomor ARC", "nomor telepon"]),
     "beta enrollment page must state that sensitive identity/contact fields are not required",
 )
+require('href="beta.html"' in landing_page,
+        "public landing must route tester enrollment to beta.html")
+require('id="betaForm"' not in landing_page and 'id="name"' not in landing_page and 'id="contact"' not in landing_page,
+        "public landing must not collect identity/contact data in a legacy beta form")
 require("Pendaftaran minat beta sudah dibuka" in beta_page, "beta enrollment page must state that tester-interest intake is open")
 require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state that 30 is not an automatic rejection cap")
 require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
