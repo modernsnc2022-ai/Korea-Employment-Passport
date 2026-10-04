@@ -54,6 +54,7 @@ mvp_validation = (ROOT / "docs/MVP_VALIDATION.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
 worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
+beta_interest_parser = (ROOT / "scripts/parse_beta_interest.py").read_text(encoding="utf-8")
 beta_feedback_recorder = (ROOT / "scripts/record_beta_feedback.py").read_text(encoding="utf-8")
 beta_progress_reporter = (ROOT / "scripts/report_beta_progress.py").read_text(encoding="utf-8")
 zero_broker_recorder = (ROOT / "scripts/record_zero_broker_evidence.py").read_text(encoding="utf-8")
@@ -379,6 +380,10 @@ require("program.application?.intakeStatus==='open'" in beta_js,
         "tester-interest application UI must be gated by intakeStatus, independently of beta access")
 require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCE_CODES" in beta_js,
         "tester-interest email must carry a controlled non-identifying recruitment source code")
+require("BETA_INTEREST_PARSE_SELF_TEST_PASS" in beta_interest_parser,
+        "privacy-safe tester-interest parser must exist and expose a self-test")
+require("RAW_BODY_NOT_STORED=true" in beta_interest_parser,
+        "tester-interest parser must explicitly avoid raw-body storage")
 require("return RECRUITMENT_SOURCE_CODES.has(raw)?raw:'website'" in beta_js,
         "unknown recruitment source values must fall back to website")
 require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
