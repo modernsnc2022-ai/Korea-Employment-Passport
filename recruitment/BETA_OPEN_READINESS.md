@@ -40,7 +40,7 @@ These five questions remain intentionally held rather than guessed:
 
 This is tracked in GitHub issue #2 and is an external official-evidence dependency, not a known product-code defect.
 
-## Before changing recruitment from HOLD to OPEN
+## Before changing beta access from HOLD to OPEN
 
 1. Re-check the KP2MI Korea information index and official search **on the day of the OPEN decision** for a new 2026 Manufacturing-specific online job-application notice.
 2. If a new notice exists, review it before changing any held rules.
@@ -62,6 +62,7 @@ See `docs/MVP_VALIDATION.md`.
 
 ## Current switch state
 
-- Public beta: **HOLD**
+- Tester-interest application intake: **OPEN**
+- Public beta access: **HOLD**
 - E-9 worker validator panel: **HOLD**
 - No participant slot has been activated or enrolled yet.
