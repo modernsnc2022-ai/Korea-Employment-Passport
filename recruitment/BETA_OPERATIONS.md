@@ -153,6 +153,6 @@ New beta/worker assignments start at `pending`. Route PASS review remains blocke
 
 ## Same-day Manufacturing notice check
 
-Before any public-beta OPEN transition, review the official KP2MI G-to-G Korea index again for a 2026 Manufacturing-specific online job-application detailed notice and update `recruitment/MANUFACTURING_LAUNCH_CHECK.json`.
+Before any public-beta OPEN transition, review the official KP2MI G-to-G Korea index again for a 2026 Manufacturing-specific online job-application detailed notice. Record the result with `python scripts/record_manufacturing_launch_check.py --checked-at YYYY-MM-DD --result ...` in dry-run mode first, then use `--write` after review; do not hand-edit the audit JSON.
 
 The release helper requires the audit record's `checkedAt` to equal the OPEN approval date. If a new Manufacturing job-application notice is found, set the record to review-required and do not OPEN until the five held job-application questions, structured rules, static checks, UI tests, and source baseline have been reviewed and updated. A Fisheries-only online job-application notice must never be reused for Manufacturing.
