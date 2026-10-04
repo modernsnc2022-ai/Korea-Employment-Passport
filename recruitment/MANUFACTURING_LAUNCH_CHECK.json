@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "route": "Indonesia -> Korea E-9 Manufacturing 2026",
+  "scope": "2026 Manufacturing online job-application detailed notice",
+  "checkedAt": "2026-10-04",
+  "result": "no_current_manufacturing_job_application_notice",
+  "primaryIndex": "https://kp2mi.go.id/gtog-korea/info",
+  "officialEvidence": [
+    {
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "interpretation": "2026 Manufacturing/Fisheries EPS-TOPIK registration notice; not a Manufacturing online job-application detail notice."
+    },
+    {
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+      "interpretation": "2026 online job-application detail notice is explicitly Fisheries-sector scoped and must not be reused for Manufacturing."
+    }
+  ],
+  "heldQuestions": [
+    "job_docs",
+    "job_scan",
+    "job_name",
+    "job_edit",
+    "job_submit"
+  ],
+  "releaseRule": "If a Manufacturing-specific 2026 online job-application notice is found, change result to notice_found_review_required and do not OPEN until structured rules and launch checks are updated."
+}
