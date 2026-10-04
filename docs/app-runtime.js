@@ -3254,14 +3254,14 @@ function buildBetaFeedbackBundle(){
   if(fieldQuestions.length){
     sections.push(
       'PERTANYAAN YANG BELUM TERVERIFIKASI\n'+
-      fieldQuestions.map((item,index)=>`${index+1}. [${item.stageTitle||item.stageId}] ${item.question}`).join('\n')
+      fieldQuestions.map((item,index)=>`${index+1}. [${item.stageId} | ${item.stageTitle||item.stageId}] ${item.question}`).join('\n')
     );
   }
   if(rejections.length){
     sections.push(
       'KASUS PENOLAKAN\n'+
       rejections.map((item,index)=>
-        `${index+1}. [${item.stageTitle||item.stageId}] ${item.field||'kolom/dokumen'}\n`+
+        `${index+1}. [${item.stageId} | ${item.stageTitle||item.stageId}] ${item.field||'kolom/dokumen'}\n`+
         `   Penolakan: ${item.reason}\n`+
         `   Perbaikan: ${item.fix||'belum diketahui'}`
       ).join('\n')
@@ -3272,7 +3272,7 @@ function buildBetaFeedbackBundle(){
       'CELAH CALO / PERANTARA\n'+
       gaps.map((item,index)=>{
         const stage=route?.stages.find(row=>row.id===item.stage);
-        return `${index+1}. [${stage?stageTitle(stage):item.stage}] ${item.task} — ${item.helper}`;
+        return `${index+1}. [${item.stage} | ${stage?stageTitle(stage):item.stage}] ${item.task} — ${item.helper}`;
       }).join('\n')
     );
   }
@@ -3288,7 +3288,7 @@ function buildBetaFeedbackBundle(){
           :row.status==='private_help_needed'
             ?'FAIL masih membutuhkan bantuan swasta'
             :'BELUM DIJALANI / TIDAK DINILAI';
-        return `${index+1}. [${stageTitle(row.stage)}] ${statusText}`;
+        return `${index+1}. [${row.stage.id} | ${stageTitle(row.stage)}] ${statusText}`;
       }).join('\n')
     );
   }
