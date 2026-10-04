@@ -11,8 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 BQC = ROOT / "docs" / "data" / "broker_question_catalog_v1.json"
+SOURCE_REVIEW = ROOT / "docs" / "data" / "source_review_status.json"
 ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
 BQC_DATA = json.loads(BQC.read_text(encoding="utf-8-sig"))
+SOURCE_REVIEW_DATA = json.loads(SOURCE_REVIEW.read_text(encoding="utf-8-sig"))
 ROUTE_STAGE_IDS = [row["id"] for row in ROUTE_DATA.get("stages", [])]
 ROUTE_CYCLE = str(ROUTE_DATA.get("cycle", ""))
 STRUCTURED_ROUTE_HOLDS = [
@@ -21,6 +23,12 @@ STRUCTURED_ROUTE_HOLDS = [
     if row.get("blocksZeroBrokerReady")
     and row.get("status") == "answered_hold"
 ]
+SOURCE_REVIEW_READY = (
+    SOURCE_REVIEW_DATA.get("state") == "clean"
+    and SOURCE_REVIEW_DATA.get("configured") == SOURCE_REVIEW_DATA.get("checked")
+    and not SOURCE_REVIEW_DATA.get("reviewRequiredUrls")
+    and not SOURCE_REVIEW_DATA.get("fetchFailureUrls")
+)
 
 LATE_STAGE_BUCKETS = {
     "roster": {"roster", "employer_selection"},
@@ -183,6 +191,7 @@ def render(rows: list[dict[str, str]]) -> str:
         and broker_gaps_open == 0
         and zero_broker_stage_ready
         and not STRUCTURED_ROUTE_HOLDS
+        and SOURCE_REVIEW_READY
     )
 
     lines = [
@@ -249,6 +258,11 @@ def render(rows: list[dict[str, str]]) -> str:
             ", ".join(f"{key}={value}" for key, value in sorted(worker_stage_counts.items()))
             if worker_stage_counts else "no stages recorded"
         ),
+        "",
+        "## Official-source readiness",
+        f"- Source review state: {SOURCE_REVIEW_DATA.get('state', 'unknown')}",
+        f"- Sources checked: {SOURCE_REVIEW_DATA.get('checked', 0)}/{SOURCE_REVIEW_DATA.get('configured', 0)}",
+        f"- Official-source readiness for final route PASS: {'YES' if SOURCE_REVIEW_READY else 'NO'}",
         "",
         "## Evidence gate",
         f"- Real-user evidence ready for route PASS review: {'YES' if evidence_ready else 'NO'}",
