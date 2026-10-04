@@ -67,6 +67,8 @@ def record(
     broker_tasks: list[str] | None = None,
     documents_confusing: list[str] | None = None,
     official_process_gap: list[str] | None = None,
+    zero_broker_pass_stages: list[str] | None = None,
+    zero_broker_fail_stages: list[str] | None = None,
 ) -> dict[str, str]:
     validate_public_tester(row, tester_id)
 
@@ -103,10 +105,22 @@ def record(
         ("broker_tasks", broker_tasks),
         ("documents_confusing", documents_confusing),
         ("official_process_gap", official_process_gap),
+        ("zero_broker_pass_stages", zero_broker_pass_stages),
+        ("zero_broker_fail_stages", zero_broker_fail_stages),
     ):
         normalized = normalize_stage_list(values)
         if normalized is not None:
             row[field] = normalized
+
+    zero_pass = {
+        part for part in row.get("zero_broker_pass_stages", "").split(";") if part
+    }
+    zero_fail = {
+        part for part in row.get("zero_broker_fail_stages", "").split(";") if part
+    }
+    overlap = sorted(zero_pass & zero_fail)
+    if overlap:
+        fail("zero-broker PASS and FAIL cannot contain the same stage: " + ", ".join(overlap))
 
     row["notes"] = ""
     return row
@@ -131,6 +145,8 @@ def self_test() -> None:
         "broker_tasks": "",
         "documents_confusing": "",
         "official_process_gap": "",
+        "zero_broker_pass_stages": "",
+        "zero_broker_fail_stages": "",
         "notes": "",
     }
     row = record(
@@ -146,11 +162,30 @@ def self_test() -> None:
         broker_tasks=["roster", "employer_selection", "roster"],
         documents_confusing=["slc"],
         official_process_gap=["employer_selection"],
+        zero_broker_pass_stages=["eligibility", "registration", "roster"],
+        zero_broker_fail_stages=["employer_selection"],
     )
     assert row["feedback_status"] == "active"
     assert row["current_stage"] == "slc"
     assert row["broker_tasks"] == "roster;employer_selection"
+    assert row["zero_broker_pass_stages"] == "eligibility;registration;roster"
+    assert row["zero_broker_fail_stages"] == "employer_selection"
     assert row["notes"] == ""
+
+    contradictory = dict(base)
+    try:
+        record(
+            contradictory,
+            tester_id="KEP-0001",
+            current_stage="slc",
+            feedback_status="active",
+            zero_broker_pass_stages=["roster"],
+            zero_broker_fail_stages=["roster"],
+        )
+    except ValueError as exc:
+        assert "PASS and FAIL" in str(exc)
+    else:
+        raise AssertionError("contradictory zero-broker stage evidence was accepted")
 
     finished = record(
         dict(base),
@@ -211,6 +246,8 @@ def main() -> int:
     parser.add_argument("--broker-task-stage", action="append")
     parser.add_argument("--document-confusing-stage", action="append")
     parser.add_argument("--official-process-gap-stage", action="append")
+    parser.add_argument("--zero-broker-pass-stage", action="append")
+    parser.add_argument("--zero-broker-fail-stage", action="append")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -246,6 +283,8 @@ def main() -> int:
             broker_tasks=args.broker_task_stage,
             documents_confusing=args.document_confusing_stage,
             official_process_gap=args.official_process_gap_stage,
+            zero_broker_pass_stages=args.zero_broker_pass_stage,
+            zero_broker_fail_stages=args.zero_broker_fail_stage,
         )
     except ValueError as exc:
         raise SystemExit("BETA_FEEDBACK_BLOCKED " + str(exc)) from exc
@@ -260,7 +299,9 @@ def main() -> int:
         "BETA_FEEDBACK_STAGE_LISTS "
         f"broker_tasks={target.get('broker_tasks','')} "
         f"documents_confusing={target.get('documents_confusing','')} "
-        f"official_process_gap={target.get('official_process_gap','')}"
+        f"official_process_gap={target.get('official_process_gap','')} "
+        f"zero_broker_pass={target.get('zero_broker_pass_stages','')} "
+        f"zero_broker_fail={target.get('zero_broker_fail_stages','')}"
     )
 
     if not args.write:
