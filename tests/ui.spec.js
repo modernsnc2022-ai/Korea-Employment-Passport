@@ -783,12 +783,14 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   ).count();
   expect(identityInputs).toBe(0);
 
-  await page.locator('#applicantStage').selectOption('job_application_roster');
+  await expect(page.locator('#applicantStage option')).toHaveCount(28);
+  await page.locator('#applicantStage').selectOption('roster');
   await page.locator('#activeProcess').check();
   await page.locator('#feedbackAgreement').check();
 
   const application = await page.evaluate(() => applicationText());
-  expect(application).toContain('Current stage: job_application_roster');
+  expect(application).toContain('Current route stage ID: roster');
+  expect(application).toContain('Current stage title:');
   expect(application).toContain('Official G-to-G / EPS E-9 process: YES');
   expect(application).toContain('Feedback participation agreement: YES');
   expect(application).toContain('Queue order should use the received timestamp');
@@ -796,6 +798,14 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   expect(application.toLowerCase()).not.toContain('ktp number:');
   expect(application.toLowerCase()).not.toContain('phone number:');
   expect(application.toLowerCase()).not.toContain('home address:');
+
+  const stageIds = await page.locator('#applicantStage option').evaluateAll(options =>
+    options.map(option => option.value).filter(Boolean)
+  );
+  expect(stageIds).toHaveLength(27);
+  expect(new Set(stageIds).size).toBe(27);
+  expect(stageIds).toContain('eligibility');
+  expect(stageIds).toContain('employment_maintenance');
 
   expect(errors).toEqual([]);
 });
