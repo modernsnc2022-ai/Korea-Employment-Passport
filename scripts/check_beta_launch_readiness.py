@@ -352,7 +352,12 @@ require("release.retrospectivePanel==='approved_manual'" in beta_js and "release
         "worker-panel UI must require explicit approved release state, not status alone")
 
 require("number>=1&&number<=50" in runtime, "beta ID range must remain KEP-0001..KEP-0050")
-for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks","KEYS.betaWorkerExperienceYear"]:
+for key in [
+    "KEYS.done","KEYS.docs","KEYS.gaps","KEYS.contract","KEYS.workplace","KEYS.ledger",
+    "KEYS.payroll","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks",
+    "KEYS.betaWorkerExperienceYear","KEYS.scopeSelections","KEYS.formWizard",
+    "KEYS.wizardReviewed","KEYS.quickSetup"
+]:
     require(key in runtime.split("const BETA_SCOPED_KEYS", 1)[1].split(";", 1)[0],
             f"{key} must stay beta-tester scoped")
 require("sanitizedBetaFeedbackText" in runtime, "sanitized beta feedback sharing must remain enabled")
