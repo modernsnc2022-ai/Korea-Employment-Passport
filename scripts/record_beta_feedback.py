@@ -246,7 +246,7 @@ def self_test() -> None:
             feedback_status="active",
         )
     except ValueError as exc:
-        assert "KEP-0001 through KEP-0030" in str(exc)
+        assert "active-applicant KEP ID" in str(exc)
     else:
         raise AssertionError("worker validator was accepted by public-beta feedback recorder")
 
