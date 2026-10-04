@@ -582,16 +582,17 @@ test('workplace reality check separates public evidence from worker testimony', 
 });
 
 
-test('beta enrollment stays closed until launch status opens', async ({ page }) => {
+test('tester-interest intake is open while beta access remains on hold', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('#betaStatusPill')).toHaveText('BELUM DIBUKA', { timeout: 10000 });
+  await expect(page.locator('#betaStatusPill')).toHaveText('PENDAFTARAN OPEN · AKSES MENUNGGU', { timeout: 10000 });
   await expect(page.locator('#closedPanel')).toBeVisible();
-  await expect(page.locator('#applicationPanel')).toBeHidden();
-  await expect(page.locator('body')).toContainText('Beta terbatas untuk 30 peserta pertama');
+  await expect(page.locator('#applicationPanel')).toBeVisible();
+  await expect(page.locator('body')).toContainText('Pendaftaran minat beta sudah dibuka');
+  await expect(page.locator('body')).toContainText('30 bukan batas otomatis');
   await expect(page.locator('body')).toContainText('6 bulan gratis');
   await expect(page.locator('body')).toContainText('Jangan kirim gambar paspor/KTP/ARC');
 
@@ -807,7 +808,7 @@ test('bare OPEN status cannot bypass explicit release approval', async ({ page }
   });
 
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('#applicationPanel')).toBeHidden();
+  await expect(page.locator('#applicationPanel')).toBeVisible();
   await expect(page.locator('#closedPanel')).toBeVisible();
   await expect(page.locator('#workerValidatorForm')).toBeHidden();
   await expect(page.locator('#workerPanelClosed')).toBeVisible();
@@ -830,7 +831,7 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   });
 
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('#betaStatusPill')).toHaveText('OPEN · 30 PESERTA', { timeout: 10000 });
+  await expect(page.locator('#betaStatusPill')).toHaveText('AKSES BETA OPEN', { timeout: 10000 });
   await expect(page.locator('#closedPanel')).toBeHidden();
   await expect(page.locator('#applicationPanel')).toBeVisible();
 
@@ -853,7 +854,9 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   expect(application).toContain('Current stage title:');
   expect(application).toContain('Official G-to-G / EPS E-9 process: YES');
   expect(application).toContain('Feedback participation agreement: YES');
-  expect(application).toContain('Queue order should use the received timestamp');
+  expect(application).toContain('I am registering my interest as a beta tester.');
+  expect(application).toContain('does not activate beta access yet');
+  expect(application).toContain('initial validation target is around 30 testers, not an automatic rejection cap');
   expect(application.toLowerCase()).not.toContain('passport number:');
   expect(application.toLowerCase()).not.toContain('ktp number:');
   expect(application.toLowerCase()).not.toContain('phone number:');
@@ -1058,6 +1061,26 @@ test('review-required official source suppresses affected exact document guidanc
   expect(errors).toEqual([]);
 });
 
+
+test('overflow beta IDs above KEP-0050 remain active-applicant IDs', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/app.html?beta=KEP-0051&stage=roster', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const state = await page.evaluate(() => ({
+    id: betaTesterIdState(),
+    role: betaTesterRole(),
+    current: currentStage()?.id,
+    done: read(KEYS.done,[])
+  }));
+  expect(state.id).toBe('KEP-0051');
+  expect(state.role).toBe('active_applicant');
+  expect(state.current).toBe('roster');
+  expect(state.done.length).toBeGreaterThan(0);
+  expect(errors).toEqual([]);
+});
 
 test('worker validator beta IDs show retrospective instructions and role', async ({ page }) => {
   const errors = [];
