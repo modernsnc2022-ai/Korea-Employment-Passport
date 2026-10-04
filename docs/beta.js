@@ -54,7 +54,10 @@ function workerValidatorText(){
 }
 
 function workerPanelOpen(){
-  return betaProgram?.retrospectivePanel?.status==='open';
+  const release=betaProgram?.releaseDecision||{};
+  return betaProgram?.retrospectivePanel?.status==='open'
+    && release.retrospectivePanel==='approved_manual'
+    && Boolean(String(release.retrospectiveApprovedAt||'').trim());
 }
 
 function applicationText(){
@@ -94,10 +97,15 @@ function renderProgram(program){
   $('feedbackList').innerHTML=(beta.feedback||[]).map(x=>'<li>'+escapeHtml(x)+'</li>').join('');
   $('noGuaranteeList').innerHTML=(beta.noGuarantee||[]).map(x=>'<span>'+escapeHtml(x)+'</span>').join('');
 
-  const open=program.status==='open';
+  const release=program.releaseDecision||{};
+  const open=program.status==='open'
+    && release.publicBeta==='approved_manual'
+    && Boolean(String(release.approvedAt||'').trim());
   $('closedPanel').hidden=open;
   $('applicationPanel').hidden=!open;
-  const workerOpen=program.retrospectivePanel?.status==='open';
+  const workerOpen=program.retrospectivePanel?.status==='open'
+    && release.retrospectivePanel==='approved_manual'
+    && Boolean(String(release.retrospectiveApprovedAt||'').trim());
   $('workerPanelClosed').hidden=workerOpen;
   $('workerValidatorForm').hidden=!workerOpen;
   const pill=$('betaStatusPill');
@@ -108,7 +116,13 @@ function renderProgram(program){
 $('betaApplicationForm').addEventListener('submit',(event)=>{
   event.preventDefault();
   const out=$('applicationResult');
-  if(!betaProgram||betaProgram.status!=='open'){
+  const release=betaProgram?.releaseDecision||{};
+  if(
+    !betaProgram
+    || betaProgram.status!=='open'
+    || release.publicBeta!=='approved_manual'
+    || !String(release.approvedAt||'').trim()
+  ){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran beta belum dibuka.';return;
   }
   if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
@@ -152,7 +166,13 @@ $('copyWorkerValidatorBtn').addEventListener('click',async()=>{
 
 $('copyApplicationBtn').addEventListener('click',async()=>{
   const out=$('applicationResult');
-  if(!betaProgram||betaProgram.status!=='open'){
+  const release=betaProgram?.releaseDecision||{};
+  if(
+    !betaProgram
+    || betaProgram.status!=='open'
+    || release.publicBeta!=='approved_manual'
+    || !String(release.approvedAt||'').trim()
+  ){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran beta belum dibuka.';return;
   }
   if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
