@@ -277,6 +277,10 @@ require("BETA_FEEDBACK_RECORD_SELF_TEST_PASS" in beta_feedback_recorder,
         "privacy-safe public beta feedback recorder must exist and expose a self-test")
 require('row["notes"] = ""' in beta_feedback_recorder,
         "public beta feedback recorder must keep narrative notes out of the public tracker")
+require("Kode KEP saja bukan bukti identitas" in app_page,
+        "beta UI must state that a KEP ID alone is not authentication")
+require("same private enrollment email/thread" in (ROOT / "recruitment/BETA_OPERATIONS.md").read_text(encoding="utf-8"),
+        "beta operations must verify private-channel provenance before counting evidence")
 
 require(departure_calls.get("coverageStatus") == "partial_verified",
         "departure call registry must remain explicitly partial until the full 2026 cycle is verified")
