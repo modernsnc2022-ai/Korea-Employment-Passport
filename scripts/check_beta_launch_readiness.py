@@ -233,9 +233,23 @@ require("free for 6 months from beta account activation" in beta_target,
         "beta benefit must be 6 months from activation")
 require("gratis selama 6 bulan sejak akun beta diaktifkan" in outreach,
         "Indonesian outreach must state 6 months free from activation")
-require("Recruitment status: **HOLD" in outreach,
-        "public recruitment must remain HOLD before the launch gate passes")
-require(beta_program.get("status") == "hold", "beta enrollment program must remain hold before launch")
+program_status = beta_program.get("status")
+release_decision = beta_program.get("releaseDecision", {})
+require(program_status in {"hold", "open"}, f"unsupported public beta status: {program_status!r}")
+if program_status == "hold":
+    require(release_decision.get("publicBeta") == "pending_manual_approval",
+            "HOLD state must remain pending manual OPEN approval")
+    require(release_decision.get("approvedAt") in {None, ""},
+            "HOLD state must not carry an OPEN approval timestamp")
+    require("Recruitment status: **HOLD" in outreach,
+            "HOLD program must keep outreach recruitment status HOLD")
+else:
+    require(release_decision.get("publicBeta") == "approved_manual",
+            "OPEN state requires explicit releaseDecision.publicBeta=approved_manual")
+    require(bool(str(release_decision.get("approvedAt") or "").strip()),
+            "OPEN state requires releaseDecision.approvedAt")
+    require("Recruitment status: **OPEN" in outreach,
+            "OPEN program must keep outreach recruitment status OPEN")
 require(beta_program.get("publicBeta", {}).get("slots") == 30, "public beta enrollment must preserve 30 slots")
 worker_panel = beta_program.get("retrospectivePanel", {})
 require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
