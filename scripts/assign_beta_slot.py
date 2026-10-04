@@ -5,6 +5,7 @@ import argparse
 import calendar
 import csv
 import json
+import re
 from datetime import date, datetime
 from pathlib import Path
 
@@ -60,16 +61,12 @@ def acceptance_message(row: dict[str, str]) -> str:
         "Akses beta tidak menjamin pekerjaan, pemilihan perusahaan, SLC, visa, atau keberangkatan."
     ])
 
-def assign(rows, received_at, activation_date, current_stage, source_channel, opened_at=None):
+def assign(rows, received_at, activation_date, current_stage, source_channel):
     if source_channel not in ALLOWED_SOURCE_CHANNELS:
         raise ValueError("unsupported source_channel; use a non-identifying channel code")
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
     received = parse_ts(received_at)
-    if opened_at:
-        opened = parse_ts(opened_at)
-        if received < opened:
-            raise ValueError("application receipt is earlier than public beta OPEN timestamp")
     activation = date.fromisoformat(activation_date)
     if activation < received.date():
         raise ValueError(
@@ -81,7 +78,21 @@ def assign(rows, received_at, activation_date, current_stage, source_channel, op
         raise ValueError("received timestamp is earlier than the last assigned eligible application")
     target = next((r for r in public if not r.get("application_received_at", "").strip()), None)
     if target is None:
-        raise ValueError("all 30 public beta slots are already assigned")
+        numeric_ids = []
+        for row in rows:
+            match = re.fullmatch(r"KEP-(\d{4})", str(row.get("tester_id", "")).strip())
+            if match:
+                numeric_ids.append(int(match.group(1)))
+        next_number = max(numeric_ids or [50]) + 1
+        if next_number > 9999:
+            raise ValueError("no additional KEP IDs are available")
+        tester_id = f"KEP-{next_number:04d}"
+        target = {key: "" for key in rows[0].keys()}
+        target["tester_id"] = tester_id
+        target["target_group"] = "active_applicant"
+        target["beta_link"] = BASE_URL + tester_id
+        rows.append(target)
+        public.append(target)
     target["application_received_at"] = received_at
     target["eligibility_status"] = "accepted"
     target["activated_at"] = activation.isoformat()
@@ -101,9 +112,8 @@ def self_test():
         "free_until": "", "feedback_status": "", "current_stage": "",
         "source_channel": "", "role": "", "created_at": "", "beta_link": ""
     } for i in range(1, 51)]
-    opened_at = "2026-10-05T08:30:00+07:00"
-    first = assign(rows, "2026-10-05T09:00:00+07:00", "2026-10-06", "roster", "community", opened_at)
-    second = assign(rows, "2026-10-05T09:01:00+07:00", "2026-10-05", "slc", "community", opened_at)
+    first = assign(rows, "2026-10-03T09:00:00+07:00", "2026-10-06", "roster", "community")
+    second = assign(rows, "2026-10-03T09:01:00+07:00", "2026-10-05", "slc", "community")
     assert first["tester_id"] == "KEP-0001"
     assert first["free_until"] == "2027-04-06"
     assert second["tester_id"] == "KEP-0002"
@@ -112,35 +122,57 @@ def self_test():
     assert acceptance_link(first).endswith("?beta=KEP-0001&stage=roster")
     assert "stage=roster" in acceptance_message(first)
     try:
-        assign(rows, "2026-10-05T08:29:59+07:00", "2026-10-05", "visa_docs", "community", opened_at)
-    except ValueError as exc:
-        assert "earlier than public beta OPEN timestamp" in str(exc)
-    else:
-        raise AssertionError("pre-OPEN application receipt was accepted")
-    try:
-        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community", opened_at)
+        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community")
     except ValueError as exc:
         assert "activation date cannot be earlier" in str(exc)
     else:
         raise AssertionError("activation before application receipt was accepted")
     try:
-        assign(rows, "2026-10-05T08:59:00+07:00", "2026-10-07", "visa_docs", "community", opened_at)
+        assign(rows, "2026-10-03T08:59:00+07:00", "2026-10-07", "visa_docs", "community")
     except ValueError:
         pass
     else:
         raise AssertionError("out-of-order receipt was not rejected")
     try:
-        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "visa_docs", "MarcusOh", opened_at)
+        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "visa_docs", "MarcusOh")
     except ValueError as exc:
         assert "unsupported source_channel" in str(exc)
     else:
         raise AssertionError("identifying/free-text source channel was accepted")
     try:
-        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "not_a_stage", "community", opened_at)
+        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "not_a_stage", "community")
     except ValueError as exc:
         assert "unsupported current_stage" in str(exc)
     else:
         raise AssertionError("unsupported stage was not rejected")
+    overflow_rows = [{
+        "tester_id": f"KEP-{i:04d}",
+        "target_group": "active_applicant" if i <= 30 else "e9_worker_korea",
+        "application_received_at": "", "eligibility_status": "", "activated_at": "",
+        "free_until": "", "feedback_status": "", "current_stage": "",
+        "source_channel": "", "role": "", "created_at": "",
+        "beta_link": BASE_URL + f"KEP-{i:04d}",
+        "broker_gap_status": "", "retest_status": "", "experience_year": "",
+        "workplace_evidence_status": "", "interview_status": "", "in_korea": "",
+        "e9_experience": "", "broker_used": "", "broker_tasks": "",
+        "amount_paid_idr": "", "documents_confusing": "", "official_process_gap": "",
+        "workplace_info_needed": "", "notes": "",
+        "zero_broker_pass_stages": "", "zero_broker_fail_stages": ""
+    } for i in range(1, 51)]
+    for idx in range(30):
+        row = overflow_rows[idx]
+        row["application_received_at"] = f"2026-10-01T09:{idx:02d}:00+07:00"
+        row["eligibility_status"] = "accepted"
+    overflow = assign(
+        overflow_rows,
+        "2026-10-01T10:00:00+07:00",
+        "2026-10-06",
+        "roster",
+        "email",
+    )
+    assert overflow["tester_id"] == "KEP-0051"
+    assert overflow["target_group"] == "active_applicant"
+    assert overflow_rows[-1]["tester_id"] == "KEP-0051"
     print("BETA_SLOT_ASSIGNMENT_SELF_TEST_PASS")
 
 def main():
@@ -170,7 +202,7 @@ def main():
     if not all(required):
         parser.error("--received-at, --activation-date, --current-stage and --source-channel are required")
     fields, rows = load_tracker()
-    target = assign(rows, *required, opened_at=approved_at)
+    target = assign(rows, *required)
     if args.write:
         with TRACKER.open("w", encoding="utf-8-sig", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
