@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.4.1",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -54,7 +54,8 @@
       "phone number",
       "home address"
     ],
-    "note": "Application email is handled outside the public repository. Never send identity-document images for beta enrollment."
+    "note": "Application email is handled outside the public repository. Never send identity-document images for beta enrollment.",
+    "emailHandling": "Application sender email is visible in the private email system and used only for application review, approval/KEP-ID reply, and necessary beta communication; never store it in the public repository."
   },
   "application": {
     "email": "modernsnc2022@gmail.com",
