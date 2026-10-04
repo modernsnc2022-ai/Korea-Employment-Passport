@@ -409,10 +409,16 @@ require("Tahun pengalaman/proses EPS:" in runtime,
         "worker validator feedback must preserve experience-year context")
 require("Current route stage ID:" in beta_js,
         "beta application must send an exact supported route stage ID")
+require('id="applicantCycle"' in beta_page and "EPS process cycle:" in beta_js,
+        "beta interest intake must capture non-identifying EPS route-cycle context")
+require("--route-cycle" in beta_feedback_recorder,
+        "public beta feedback recorder must support verified route-cycle correction")
 require("BETA_FEEDBACK_RECORD_SELF_TEST_PASS" in beta_feedback_recorder,
         "privacy-safe public beta feedback recorder must exist and expose a self-test")
 require('row["notes"] = ""' in beta_feedback_recorder,
         "public beta feedback recorder must keep narrative notes out of the public tracker")
+require("route_cycle" in beta_tracker,
+        "beta tracker must preserve active-applicant EPS route-cycle context")
 require("zero_broker_pass_stages" in beta_tracker and "zero_broker_fail_stages" in beta_tracker,
         "beta tracker must preserve stage-level zero-broker PASS/FAIL evidence")
 require("--zero-broker-pass-stage" in beta_feedback_recorder and "--zero-broker-fail-stage" in beta_feedback_recorder,
@@ -421,6 +427,10 @@ require("--zero-broker-pass-stage" in worker_recorder and "--zero-broker-fail-st
         "worker interview recorder must accept stage-level zero-broker evidence")
 require("zero_broker_stage_ready" in beta_progress_reporter and "ROUTE_CYCLE" in beta_progress_reporter,
         "beta progress report must gate route evidence on all current-cycle zero-broker stages")
+require("active_is_current_cycle" in beta_progress_reporter
+        and "current_cycle_active_rows" in beta_progress_reporter
+        and "current_cycle_evidence_rows = current_cycle_active_rows + current_cycle_worker_rows" in beta_progress_reporter,
+        "route PASS evidence must exclude prior-cycle/unknown active-applicant evidence")
 require("STRUCTURED_ROUTE_HOLDS" in beta_progress_reporter,
         "beta progress report must block final route PASS on structured official-evidence HOLDs")
 require("SOURCE_REVIEW_READY" in beta_progress_reporter,
