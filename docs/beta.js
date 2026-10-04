@@ -4,7 +4,7 @@ const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 let betaProgram=null,betaRoute=null,betaI18n={};
 const RECRUITMENT_SOURCE_CODES=new Set([
   'website','email','community','community_admin','social','referral','direct_outreach','partner','other',
-  'epstopik_indonesia','topikly','apsan_hakwon','owie_epstopik'
+  'epstopik_indonesia','topikly','apsan_hakwon','owie_epstopik','lpk_samwon'
 ]);
 
 const $=(id)=>document.getElementById(id);
