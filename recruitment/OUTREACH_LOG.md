@@ -12,6 +12,16 @@
 | 2026-10-02 | APPIK | Returnee migrant-worker network | Email requesting Korea returnee volunteers | Sent |
 | 2026-10-02 | KBRI Seoul | Embassy / diaspora network | Email requesting channel guidance for PMI/E-9 volunteers | Sent |
 
+| 2026-10-04 | TOPIKly | EPS-TOPIK learning platform | Recruitment cooperation request reviewed | Declined — external services are not introduced to learners under internal policy; not a negative judgment of KEP |
+
+| 2026-10-04 | Komihwa Cianjur / HANGGUK.COM | EPS-TOPIK training/community | Email requesting permission or admin repost to students/alumni | Sent |
+
+| 2026-10-04 | Hanguk Hakwon | EPS-TOPIK training/alumni community | Email requesting permission or admin repost | Sent |
+
+| 2026-10-04 | LPK JAYABAYA | EPS-TOPIK training/community | Email requesting permission or admin repost to Korea-program participants/alumni | Sent |
+
+| 2026-10-04 | EPS-TOPIK & G to G Korea Update (@eps_indo) | Telegram public discussion group | Rules checked; no blanket promotion ban visible, but Telegram Web session is not authenticated | Candidate — direct post pending authenticated session |
+
 Target groups for admin-approved posting:
 - EPS-TOPIK INDONESIA Telegram (~6.8k observed)
 - EPS-TOPIK & G to G Korea Update Telegram
