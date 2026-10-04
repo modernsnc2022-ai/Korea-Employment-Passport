@@ -13,12 +13,15 @@ ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+RECRUITMENT_SOURCES = ROOT / "docs" / "data" / "beta_recruitment_sources_v1.json"
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
 ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
 SUPPORTED_ROUTE_CYCLES = {str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)} | {"unknown"}
 SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
-ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon", "jendela_asa", "lpk_ggum"}
+ALLOWED_SOURCE_CHANNELS = set(
+    json.loads(RECRUITMENT_SOURCES.read_text(encoding="utf-8-sig")).get("codes", [])
+)
 
 def add_months(value: date, months: int) -> date:
     idx = value.month - 1 + months
