@@ -1,5 +1,5 @@
 {
-  "version": "1.4.1",
+  "version": "1.5.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -27,7 +27,13 @@
     "targetParticipants": 30,
     "capacityPolicy": "soft_target_no_automatic_rejection",
     "overflowIdRule": "KEP-0051 and above after KEP-0001..KEP-0030; KEP-0031..KEP-0050 reserved for E-9 worker validators",
-    "benefitEligibility": "every approved beta tester"
+    "benefitEligibility": "every approved beta tester",
+    "activeApplicantCyclePolicy": {
+      "capturedAtInterest": true,
+      "allowed": "current route cycle, previous two cycles, or unknown",
+      "currentCycleEvidenceRule": "Only active applicants whose route_cycle matches the supported route cycle may contribute current-cycle route-rule PASS evidence.",
+      "priorCycleUse": "Prior-cycle/unknown applicants remain valid product, usability, and broker-gap evidence."
+    }
   },
   "retrospectivePanel": {
     "slots": 20,
