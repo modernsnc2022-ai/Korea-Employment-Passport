@@ -14,9 +14,10 @@ TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
-SUPPORTED_STAGES = {
-    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
-}
+ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
+ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
+SUPPORTED_ROUTE_CYCLES = {str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)} | {"unknown"}
+SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
 ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other"}
 
 def add_months(value: date, months: int) -> date:
@@ -53,6 +54,7 @@ def acceptance_message(row: dict[str, str]) -> str:
         f"ID beta anonim: {row.get('tester_id', '')}",
         f"Link beta: {acceptance_link(row)}",
         f"Tahap awal yang tercatat: {row.get('current_stage', '')}",
+        f"Tahun proses EPS yang tercatat: {row.get('route_cycle', '')}",
         f"Akses gratis sampai: {row.get('free_until', '')} (6 bulan sejak aktivasi)",
         "",
         "Buka link beta di atas. ID KEP pada link memisahkan feedback beta Anda dari peserta lain.",
@@ -62,9 +64,14 @@ def acceptance_message(row: dict[str, str]) -> str:
         "Akses beta tidak menjamin pekerjaan, pemilihan perusahaan, SLC, visa, atau keberangkatan."
     ])
 
-def assign(rows, received_at, activation_date, current_stage, source_channel):
+def assign(rows, received_at, activation_date, current_stage, route_cycle, source_channel):
     if source_channel not in ALLOWED_SOURCE_CHANNELS:
         raise ValueError("unsupported source_channel; use a non-identifying channel code")
+    if route_cycle not in SUPPORTED_ROUTE_CYCLES:
+        raise ValueError(
+            "unsupported route_cycle; use one of "
+            + ", ".join(sorted(SUPPORTED_ROUTE_CYCLES))
+        )
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
     received = parse_ts(received_at)
@@ -97,6 +104,7 @@ def assign(rows, received_at, activation_date, current_stage, source_channel):
     target["free_until"] = add_months(activation, 6).isoformat()
     target["feedback_status"] = "not_started"
     target["current_stage"] = current_stage
+    target["route_cycle"] = route_cycle
     target["source_channel"] = source_channel
     target["role"] = "public_beta_tester"
     target["created_at"] = activation.isoformat()
@@ -107,34 +115,42 @@ def self_test():
         "tester_id": f"KEP-{i:04d}",
         "target_group": "active_applicant" if i <= 30 else "e9_worker_korea",
         "application_received_at": "", "eligibility_status": "", "activated_at": "",
-        "free_until": "", "feedback_status": "", "current_stage": "",
+        "free_until": "", "feedback_status": "", "current_stage": "", "route_cycle": "",
         "source_channel": "", "role": "", "created_at": "", "beta_link": ""
     } for i in range(1, 51)]
-    first = assign(rows, "2026-10-03T09:00:00+07:00", "2026-10-06", "roster", "community")
-    second = assign(rows, "2026-10-03T09:01:00+07:00", "2026-10-05", "slc", "community")
+    first = assign(rows, "2026-10-03T09:00:00+07:00", "2026-10-06", "roster", "2026", "community")
+    second = assign(rows, "2026-10-03T09:01:00+07:00", "2026-10-05", "slc", "2025", "community")
     assert first["tester_id"] == "KEP-0001"
     assert first["free_until"] == "2027-04-06"
     assert second["tester_id"] == "KEP-0002"
     assert second["activated_at"] < first["activated_at"]
+    assert first["route_cycle"] == "2026"
+    assert second["route_cycle"] == "2025"
     first["beta_link"] = "https://example.invalid/app.html?beta=KEP-0001"
     assert acceptance_link(first).endswith("?beta=KEP-0001&stage=roster")
     assert "stage=roster" in acceptance_message(first)
     try:
-        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community")
+        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "2026", "community")
     except ValueError as exc:
         assert "activation date cannot be earlier" in str(exc)
     else:
         raise AssertionError("activation before application receipt was accepted")
-    earlier = assign(rows, "2026-10-03T08:59:00+07:00", "2026-10-07", "visa_docs", "community")
+    earlier = assign(rows, "2026-10-03T08:59:00+07:00", "2026-10-07", "visa_docs", "unknown", "community")
     assert earlier["tester_id"] == "KEP-0003"
     try:
-        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "visa_docs", "MarcusOh")
+        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "visa_docs", "2026", "MarcusOh")
     except ValueError as exc:
         assert "unsupported source_channel" in str(exc)
     else:
         raise AssertionError("identifying/free-text source channel was accepted")
     try:
-        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "not_a_stage", "community")
+        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "visa_docs", "2023", "community")
+    except ValueError as exc:
+        assert "unsupported route_cycle" in str(exc)
+    else:
+        raise AssertionError("unsupported route cycle was accepted")
+    try:
+        assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "not_a_stage", "2026", "community")
     except ValueError as exc:
         assert "unsupported current_stage" in str(exc)
     else:
@@ -162,6 +178,7 @@ def self_test():
         "2026-10-01T10:00:00+07:00",
         "2026-10-06",
         "roster",
+        "2026",
         "email",
     )
     assert overflow["tester_id"] == "KEP-0051"
@@ -174,6 +191,7 @@ def main():
     parser.add_argument("--received-at")
     parser.add_argument("--activation-date")
     parser.add_argument("--current-stage")
+    parser.add_argument("--route-cycle")
     parser.add_argument("--source-channel")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--self-test", action="store_true")
@@ -183,7 +201,7 @@ def main():
         return 0
     program = json.loads(PROGRAM.read_text(encoding="utf-8-sig"))
     if program.get("status") != "open":
-        raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED recruitment status is not OPEN")
+        raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED beta access status is not OPEN")
     release = program.get("releaseDecision", {})
     approved_at = str(release.get("approvedAt") or "").strip()
     if release.get("publicBeta") != "approved_manual" or not approved_at:
@@ -192,9 +210,9 @@ def main():
         parse_ts(approved_at)
     except ValueError as exc:
         raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED OPEN approval timestamp must include timezone") from exc
-    required = [args.received_at, args.activation_date, args.current_stage, args.source_channel]
+    required = [args.received_at, args.activation_date, args.current_stage, args.route_cycle, args.source_channel]
     if not all(required):
-        parser.error("--received-at, --activation-date, --current-stage and --source-channel are required")
+        parser.error("--received-at, --activation-date, --current-stage, --route-cycle and --source-channel are required")
     fields, rows = load_tracker()
     target = assign(rows, *required)
     if args.write:
