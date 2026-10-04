@@ -82,3 +82,17 @@ The public CSV is deliberately categorical. Keep `notes` empty. If `broker_tasks
 ### Public-summary consent
 
 Completing a retrospective interview does not by itself authorize public company-level publication. Before `publish_worker_evidence.py` can prepare a WPE record, the private intake must record `contributorConsent=true` for the de-identified public summary. Keep the consent record outside the public registry. Media still requires its own explicit consent, privacy review, and metadata removal.
+
+
+## Public beta feedback ingestion
+
+Do not edit narrative beta feedback directly into `BETA_TESTER_TRACKER.csv`.
+
+1. Read the participant's combined feedback privately.
+2. Confirm the `KEP-####` ID and the exact `ID tahap sekarang` from the bundle.
+3. Map only actionable findings to the locked 27 route stage IDs.
+4. Dry-run `python scripts/record_beta_feedback.py ...`.
+5. Review the categorical/stage-only output.
+6. Re-run with `--write` only after the mapping is correct.
+
+The recorder never accepts free-text notes. Narrative email content remains outside the public repository. Use `feedback_status=active` while feedback is ongoing and `complete` only when the participant's planned beta feedback cycle is complete.
