@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "defaultCode": "website",
+  "codes": [
+    "website",
+    "email",
+    "community",
+    "community_admin",
+    "social",
+    "referral",
+    "direct_outreach",
+    "partner",
+    "other",
+    "epstopik_indonesia",
+    "topikly",
+    "apsan_hakwon",
+    "owie_epstopik",
+    "lpk_samwon",
+    "jendela_asa",
+    "lpk_ggum"
+  ]
+}
