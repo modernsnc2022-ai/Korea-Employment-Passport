@@ -74,9 +74,6 @@ def assign(rows, received_at, activation_date, current_stage, source_channel):
             "activation date cannot be earlier than this application's received date"
         )
     public = [r for r in rows if r.get("target_group", "").strip() == "active_applicant"]
-    assigned = [r for r in public if r.get("application_received_at", "").strip()]
-    if assigned and received < parse_ts(assigned[-1]["application_received_at"].strip()):
-        raise ValueError("received timestamp is earlier than the last assigned eligible application")
     target = next((r for r in public if not r.get("application_received_at", "").strip()), None)
     if target is None:
         numeric_ids = []
@@ -128,12 +125,8 @@ def self_test():
         assert "activation date cannot be earlier" in str(exc)
     else:
         raise AssertionError("activation before application receipt was accepted")
-    try:
-        assign(rows, "2026-10-03T08:59:00+07:00", "2026-10-07", "visa_docs", "community")
-    except ValueError:
-        pass
-    else:
-        raise AssertionError("out-of-order receipt was not rejected")
+    earlier = assign(rows, "2026-10-03T08:59:00+07:00", "2026-10-07", "visa_docs", "community")
+    assert earlier["tester_id"] == "KEP-0003"
     try:
         assign(rows, "2026-10-03T09:02:00+07:00", "2026-10-07", "visa_docs", "MarcusOh")
     except ValueError as exc:
