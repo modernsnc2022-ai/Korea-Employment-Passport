@@ -3062,7 +3062,7 @@ function canonicalBetaTesterId(value){
   const match=/^KEP-(\d{4})$/.exec(normalized);
   if(!match)return '';
   const number=Number(match[1]);
-  return number>=1&&number<=50?normalized:'';
+  return number>=1&&number<=9999?normalized:'';
 }
 
 function betaTesterIdState(){
@@ -3073,8 +3073,8 @@ function betaTesterRole(testerId=betaTesterIdState()){
   const match=/^KEP-(\d{4})$/.exec(String(testerId||''));
   if(!match)return '';
   const number=Number(match[1]);
-  if(number>=1&&number<=30)return 'active_applicant';
   if(number>=31&&number<=50)return 'e9_worker_validator';
+  if((number>=1&&number<=30)||number>=51)return 'active_applicant';
   return '';
 }
 
@@ -3267,7 +3267,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   }
   const testerId=canonicalBetaTesterId(raw);
   if(!testerId){
-    if(status)status.textContent='ID beta tidak valid. Gunakan kode KEP-0001 sampai KEP-0050.';
+    if(status)status.textContent='ID beta tidak valid. Gunakan kode KEP yang diberikan tim beta.';
     return;
   }
   write(KEYS.betaTesterId,testerId);
