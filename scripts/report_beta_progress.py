@@ -178,7 +178,7 @@ def render(rows: list[dict[str, str]]) -> str:
     worker_stage_counts = safe_counter(workers, "current_stage")
 
     late_ready = all(late_stage[bucket] >= 1 for bucket in LATE_STAGE_BUCKETS)
-    cohort_ready = len(active) == 30 and len(workers) == 20
+    cohort_ready = len(active) >= 30 and len(workers) == 20
     evidence_ready = (
         applications >= 30
         and activated >= 30
@@ -200,16 +200,16 @@ def render(rows: list[dict[str, str]]) -> str:
         "This report contains counts only. It must not include participant names, contact details, identity numbers, addresses, or free-text notes.",
         "",
         "## Cohort",
-        f"- Public beta slots: {len(active)}/30",
+        f"- Active-applicant tracker rows: {len(active)} (validation target: at least 30)",
         f"- E-9 worker validation slots: {len(workers)}/20",
         f"- Cohort structure ready: {'YES' if cohort_ready else 'NO'}",
         "",
         "## Public beta funnel",
-        f"- Applications received after OPEN: {applications}/30",
-        f"- Eligibility accepted: {accepted}/30",
-        f"- Beta accounts activated: {activated}/30",
-        f"- Feedback started: {feedback_started}/30",
-        f"- Feedback completed: {feedback_complete}/30",
+        f"- Approved tester applications recorded: {applications} (validation target: at least 30)",
+        f"- Eligibility accepted: {accepted} (target: at least 30)",
+        f"- Beta accounts activated: {activated} (target: at least 30)",
+        f"- Feedback started: {feedback_started}",
+        f"- Feedback completed: {feedback_complete} (target: at least 30)",
         "",
         "## Retrospective validation",
         f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
