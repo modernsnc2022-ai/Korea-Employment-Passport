@@ -15,7 +15,7 @@ SUPPORTED_STAGES = {
 }
 ALLOWED_YEARS = {str(year) for year in range(2004, 2027)} | {"unknown"}
 YES_NO_UNKNOWN = {"yes", "no", "unknown"}
-BROKER_GAP_STATUSES = {"open", "resolved", "official_or_licensed_only"}
+BROKER_GAP_STATUSES = {"pending", "none_reported", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_DECISIONS = {"pending", "declined", "not_publishable"}
 
@@ -113,7 +113,7 @@ def self_test() -> None:
         "broker_used": "",
         "workplace_info_needed": "",
         "interview_status": "new",
-        "broker_gap_status": "open",
+        "broker_gap_status": "pending",
         "retest_status": "pending",
         "workplace_evidence_status": "pending",
         "zero_broker_pass_stages": "",
@@ -185,7 +185,7 @@ def main() -> int:
     parser.add_argument("--current-stage", default="employment_maintenance")
     parser.add_argument("--broker-used", choices=sorted(YES_NO_UNKNOWN))
     parser.add_argument("--workplace-info-needed", choices=sorted(YES_NO_UNKNOWN))
-    parser.add_argument("--broker-gap-status", choices=sorted(BROKER_GAP_STATUSES), default="open")
+    parser.add_argument("--broker-gap-status", choices=sorted(BROKER_GAP_STATUSES), default="pending")
     parser.add_argument("--retest-status", choices=sorted(RETEST_STATUSES), default="pending")
     parser.add_argument(
         "--workplace-evidence-status",
