@@ -3,11 +3,16 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
+ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+ROUTE_STAGE_IDS = [
+    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
+]
 
 LATE_STAGE_BUCKETS = {
     "roster": {"roster", "employer_selection"},
@@ -28,6 +33,14 @@ def safe_counter(rows: list[dict[str, str]], key: str) -> Counter[str]:
         value = (row.get(key) or "").strip()
         if value:
             counter[value] += 1
+    return counter
+
+def stage_evidence_counter(rows: list[dict[str, str]], key: str) -> Counter[str]:
+    counter: Counter[str] = Counter()
+    for row in rows:
+        values = [part.strip() for part in (row.get(key) or "").split(";") if part.strip()]
+        for stage_id in values:
+            counter[stage_id] += 1
     return counter
 
 def render(rows: list[dict[str, str]]) -> str:
@@ -53,10 +66,11 @@ def render(rows: list[dict[str, str]]) -> str:
         row for row in enrolled_workers
         if (row.get("interview_status") or "").strip() == "completed"
     ]
-    current_cycle_workers = sum(
-        (row.get("experience_year") or "").strip() == "2026"
-        for row in completed_workers
-    )
+    current_cycle_worker_rows = [
+        row for row in completed_workers
+        if (row.get("experience_year") or "").strip() == "2026"
+    ]
+    current_cycle_workers = len(current_cycle_worker_rows)
     prior_cycle_workers = sum(
         (row.get("experience_year") or "").strip().isdigit()
         and (row.get("experience_year") or "").strip() != "2026"
@@ -69,6 +83,24 @@ def render(rows: list[dict[str, str]]) -> str:
     workplace_evidence_published = count_value(
         enrolled_workers, "workplace_evidence_status", "published_single_verified_worker"
     )
+
+    current_cycle_evidence_rows = assigned_active + current_cycle_worker_rows
+    zero_pass_counts = stage_evidence_counter(current_cycle_evidence_rows, "zero_broker_pass_stages")
+    zero_fail_counts = stage_evidence_counter(current_cycle_evidence_rows, "zero_broker_fail_stages")
+    zero_fail_stage_ids = [stage_id for stage_id in ROUTE_STAGE_IDS if zero_fail_counts[stage_id] > 0]
+    zero_pass_ready_stage_ids = [
+        stage_id for stage_id in ROUTE_STAGE_IDS
+        if zero_pass_counts[stage_id] > 0 and zero_fail_counts[stage_id] == 0
+    ]
+    zero_uncovered_stage_ids = [
+        stage_id for stage_id in ROUTE_STAGE_IDS
+        if zero_pass_counts[stage_id] == 0 and zero_fail_counts[stage_id] == 0
+    ]
+    zero_broker_stage_ready = (
+        len(zero_pass_ready_stage_ids) == len(ROUTE_STAGE_IDS)
+        and not zero_fail_stage_ids
+    )
+
     broker_gaps_resolved = count_value(evidence_rows, "broker_gap_status", "resolved")
     broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
     retest_passed = count_value(evidence_rows, "retest_status", "passed")
@@ -93,6 +125,7 @@ def render(rows: list[dict[str, str]]) -> str:
         and workplace_evidence_published >= 1
         and late_ready
         and broker_gaps_open == 0
+        and zero_broker_stage_ready
     )
 
     lines = [
@@ -126,6 +159,15 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Broker gaps open: {broker_gaps_open}",
         f"- Broker gaps resolved: {broker_gaps_resolved}",
         f"- Retests passed: {retest_passed}",
+        f"- Current-cycle evidence rows: {len(current_cycle_evidence_rows)}",
+        f"- Zero-broker stage PASS coverage: {len(zero_pass_ready_stage_ids)}/{len(ROUTE_STAGE_IDS)}",
+        "- Current-cycle FAIL stages: " + (
+            ", ".join(zero_fail_stage_ids) if zero_fail_stage_ids else "none"
+        ),
+        "- Stages with no current-cycle PASS/FAIL evidence yet: " + (
+            ", ".join(zero_uncovered_stage_ids) if zero_uncovered_stage_ids else "none"
+        ),
+        f"- Stage-level zero-broker evidence ready: {'YES' if zero_broker_stage_ready else 'NO'}",
         "",
         "## Required late-stage coverage among active applicants",
         f"- Roster / employer selection: {late_stage['roster']}",
