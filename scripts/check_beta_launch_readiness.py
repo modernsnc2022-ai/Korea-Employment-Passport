@@ -51,6 +51,7 @@ outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
 worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
 beta_feedback_recorder = (ROOT / "scripts/record_beta_feedback.py").read_text(encoding="utf-8")
+beta_progress_reporter = (ROOT / "scripts/report_beta_progress.py").read_text(encoding="utf-8")
 
 stage_ids = [row.get("id") for row in route.get("stages", [])]
 require(stage_ids == EXPECTED_STAGES, "supported route must contain the locked 27 stages in exact order")
@@ -277,6 +278,14 @@ require("BETA_FEEDBACK_RECORD_SELF_TEST_PASS" in beta_feedback_recorder,
         "privacy-safe public beta feedback recorder must exist and expose a self-test")
 require('row["notes"] = ""' in beta_feedback_recorder,
         "public beta feedback recorder must keep narrative notes out of the public tracker")
+require("zero_broker_pass_stages" in beta_tracker and "zero_broker_fail_stages" in beta_tracker,
+        "beta tracker must preserve stage-level zero-broker PASS/FAIL evidence")
+require("--zero-broker-pass-stage" in beta_feedback_recorder and "--zero-broker-fail-stage" in beta_feedback_recorder,
+        "public beta feedback recorder must accept stage-level zero-broker evidence")
+require("--zero-broker-pass-stage" in worker_recorder and "--zero-broker-fail-stage" in worker_recorder,
+        "worker interview recorder must accept stage-level zero-broker evidence")
+require("zero_broker_stage_ready" in beta_progress_reporter and "ROUTE_CYCLE" in beta_progress_reporter,
+        "beta progress report must gate route evidence on all current-cycle zero-broker stages")
 require("Kode KEP saja bukan bukti identitas" in app_page,
         "beta UI must state that a KEP ID alone is not authentication")
 require("same private enrollment email/thread" in (ROOT / "recruitment/BETA_OPERATIONS.md").read_text(encoding="utf-8"),
