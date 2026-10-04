@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+RECRUITMENT_SOURCES = ROOT / "docs" / "data" / "beta_recruitment_sources_v1.json"
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 
 FORBIDDEN_COLUMNS = {
@@ -109,7 +110,9 @@ BROKER_GAP_STATUSES = {"", "pending", "none_reported", "open", "resolved", "offi
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
 YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
-ALLOWED_SOURCE_CHANNELS = {"", "website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon", "jendela_asa", "lpk_ggum"}
+ALLOWED_SOURCE_CHANNELS = {""} | set(
+    json.loads(RECRUITMENT_SOURCES.read_text(encoding="utf-8-sig")).get("codes", [])
+)
 CONTROLLED_STAGE_LIST_FIELDS = {
     "broker_tasks", "documents_confusing", "official_process_gap",
     "zero_broker_pass_stages", "zero_broker_fail_stages"
