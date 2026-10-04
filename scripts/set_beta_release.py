@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 SOURCE = ROOT / "docs" / "data" / "source_review_status.json"
+MANUFACTURING_CHECK = ROOT / "recruitment" / "MANUFACTURING_LAUNCH_CHECK.json"
 OUTREACH = ROOT / "recruitment" / "OUTREACH_ID.md"
 
 
@@ -16,7 +17,7 @@ def fail(message: str) -> None:
     raise ValueError(message)
 
 
-def prepare_open(program: dict, source: dict, approved_at: str) -> dict:
+def prepare_open(program: dict, source: dict, manufacturing_check: dict, approved_at: str) -> dict:
     if program.get("status") != "hold":
         fail("public beta can be opened only from HOLD")
     release = program.get("releaseDecision", {})
@@ -35,6 +36,18 @@ def prepare_open(program: dict, source: dict, approved_at: str) -> dict:
         fail("official source reviewRequiredUrls must be empty before OPEN")
     if source.get("fetchFailureUrls"):
         fail("official source fetchFailureUrls must be empty before OPEN")
+
+    if manufacturing_check.get("checkedAt") != approved_at:
+        fail("Manufacturing launch check must be recorded on the same date as OPEN approval")
+    if manufacturing_check.get("result") != "no_current_manufacturing_job_application_notice":
+        fail(
+            "Manufacturing launch check found/requires review of a notice; "
+            "do not OPEN until route rules and launch checks are updated"
+        )
+    if manufacturing_check.get("heldQuestions") != [
+        "job_docs", "job_scan", "job_name", "job_edit", "job_submit"
+    ]:
+        fail("Manufacturing launch check must preserve the locked five HOLD questions")
 
     updated = json.loads(json.dumps(program))
     updated["status"] = "open"
@@ -68,7 +81,12 @@ def self_test() -> None:
         "reviewRequiredUrls": [],
         "fetchFailureUrls": [],
     }
-    opened = prepare_open(program, source, "2026-10-04")
+    manufacturing_check = {
+        "checkedAt": "2026-10-04",
+        "result": "no_current_manufacturing_job_application_notice",
+        "heldQuestions": ["job_docs", "job_scan", "job_name", "job_edit", "job_submit"],
+    }
+    opened = prepare_open(program, source, manufacturing_check, "2026-10-04")
     assert opened["status"] == "open"
     assert opened["releaseDecision"]["publicBeta"] == "approved_manual"
     assert opened["releaseDecision"]["approvedAt"] == "2026-10-04"
@@ -76,11 +94,29 @@ def self_test() -> None:
     bad_source = dict(source)
     bad_source["state"] = "review_required"
     try:
-        prepare_open(program, bad_source, "2026-10-04")
+        prepare_open(program, bad_source, manufacturing_check, "2026-10-04")
     except ValueError as exc:
         assert "must be clean" in str(exc)
     else:
         raise AssertionError("OPEN was allowed with non-clean official-source state")
+
+    stale_check = dict(manufacturing_check)
+    stale_check["checkedAt"] = "2026-10-03"
+    try:
+        prepare_open(program, source, stale_check, "2026-10-04")
+    except ValueError as exc:
+        assert "same date" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed with a stale Manufacturing launch check")
+
+    found_check = dict(manufacturing_check)
+    found_check["result"] = "notice_found_review_required"
+    try:
+        prepare_open(program, source, found_check, "2026-10-04")
+    except ValueError as exc:
+        assert "requires review" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed after a Manufacturing notice was found")
 
     changed = outreach_open_text("Recruitment status: **HOLD — do not publish**")
     assert "Recruitment status: **OPEN" in changed
@@ -115,10 +151,13 @@ def main() -> int:
 
     program = json.loads(PROGRAM.read_text(encoding="utf-8-sig"))
     source = json.loads(SOURCE.read_text(encoding="utf-8-sig"))
+    manufacturing_check = json.loads(MANUFACTURING_CHECK.read_text(encoding="utf-8-sig"))
     outreach = OUTREACH.read_text(encoding="utf-8")
 
     try:
-        updated_program = prepare_open(program, source, str(args.approved_at))
+        updated_program = prepare_open(
+            program, source, manufacturing_check, str(args.approved_at)
+        )
         updated_outreach = outreach_open_text(outreach)
     except ValueError as exc:
         raise SystemExit("BETA_RELEASE_BLOCKED " + str(exc)) from exc
