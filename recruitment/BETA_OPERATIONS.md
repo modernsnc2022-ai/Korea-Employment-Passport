@@ -125,3 +125,14 @@ The same stage must never appear in both columns for one participant. Use the ex
 For KEP-0001..KEP-0030, verified feedback from the active 2026 route can contribute current-cycle evidence. For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
 
 Route evidence review is not ready until all 27 stages have current-cycle PASS coverage, no current-cycle FAIL stage remains, all Broker Gaps are resolved or official/licensed-only, and the other cohort/late-stage gates are satisfied.
+
+
+### Follow-up stage evidence after initial intake
+
+A participant may continue using the app after the initial public-beta feedback or worker interview. Do not reopen or overwrite the interview workflow just to capture later stage results.
+
+After verifying the same private participant channel, use:
+
+`python scripts/record_zero_broker_evidence.py --tester-id KEP-#### --pass-stage <stage> ... --fail-stage <stage> ...`
+
+Run without `--write` first. The supplied PASS/FAIL lists are treated as the latest complete stage-evidence snapshot for that participant. For E-9 worker validators, the worker interview must already be completed and `experience_year` must already be recorded. The helper changes only the two zero-broker stage-list fields and keeps narrative notes empty.
