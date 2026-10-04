@@ -61,8 +61,9 @@ function routeBackupKey(){
 function makeProgressBackup(){
   return {
     kind:'kep-progress-backup',
-    schemaVersion:1,
+    schemaVersion:2,
     routeKey:routeBackupKey(),
+    betaTesterId:betaTesterIdState()||null,
     exportedAt:new Date().toISOString(),
     progress:{
       done:read(KEYS.done,[]),
@@ -76,11 +77,25 @@ function makeProgressBackup(){
 }
 
 function safeRestoreProgress(payload){
-  if(!payload||payload.kind!=='kep-progress-backup'||payload.schemaVersion!==1){
+  if(
+    !payload
+    || payload.kind!=='kep-progress-backup'
+    || ![1,2].includes(payload.schemaVersion)
+  ){
     throw new Error('File ini bukan backup progres Korea Employment Passport yang didukung.');
   }
   if(payload.routeKey!==routeBackupKey()){
     throw new Error('Backup ini berasal dari rute yang berbeda: '+String(payload.routeKey||'unknown'));
+  }
+  const activeBetaId=betaTesterIdState();
+  if(payload.schemaVersion===1&&activeBetaId){
+    throw new Error('Backup lama tanpa konteks ID beta tidak boleh dipulihkan saat mode beta aktif.');
+  }
+  if(payload.schemaVersion===2){
+    const backupBetaId=canonicalBetaTesterId(payload.betaTesterId||'');
+    if((backupBetaId||'')!==(activeBetaId||'')){
+      throw new Error('Backup ini berasal dari ID beta yang berbeda.');
+    }
   }
   const progress=payload.progress||{};
   const stageIds=new Set((route?.stages||[]).map(stage=>stage.id));
