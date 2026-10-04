@@ -18,6 +18,14 @@ This file covers operational handling only.
 - The sender email address is visible in the private email system and may be used only for application review, the approval/KEP-ID reply, and necessary beta communication. Never put it in this public repository.
 - Do not put names, phone numbers, passport/KTP/ARC numbers, exact home/dorm addresses, identity-document images, or other private contact details in this repository.
 
+## Private application review helper
+
+Keep the original tester-interest email in Gmail/private communication only. If an operator needs to transfer its structured values into the approval workflow, copy only the email body to a temporary private text file outside the repository and run:
+
+`python scripts/parse_beta_interest.py --input <private-body.txt>`
+
+The parser returns only `current_stage`, `route_cycle`, and `source_channel`. It rejects unsupported/tampered source codes and does not write or echo the raw body. Delete the temporary file after review.
+
 ## Assignment helper
 
 Use `scripts/assign_beta_slot.py` only after **beta access** status is OPEN. It accepts the eligible application received timestamp with timezone, activation date, current route stage, the applicant's EPS `route_cycle` from the tester-interest email, and a non-identifying source-channel label.
