@@ -58,6 +58,8 @@ REQUIRED_COLUMNS = {
     "feedback_status",
     "notes",
     "beta_link",
+    "zero_broker_pass_stages",
+    "zero_broker_fail_stages",
 }
 
 PII_PATTERNS = {
@@ -106,7 +108,10 @@ BROKER_GAP_STATUSES = {"", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
 YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
-CONTROLLED_STAGE_LIST_FIELDS = {"broker_tasks", "documents_confusing", "official_process_gap"}
+CONTROLLED_STAGE_LIST_FIELDS = {
+    "broker_tasks", "documents_confusing", "official_process_gap",
+    "zero_broker_pass_stages", "zero_broker_fail_stages"
+}
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
@@ -208,6 +213,17 @@ for index, row in enumerate(rows, start=1):
         values = [part.strip() for part in value.split(";") if part.strip()]
         if not values or any(stage_id not in SUPPORTED_STAGES for stage_id in values):
             fail(f"{tester_id} {field} must contain only semicolon-separated route stage IDs")
+        if len(values) != len(set(values)):
+            fail(f"{tester_id} {field} must not contain duplicate stage IDs")
+    zero_pass = {
+        part.strip() for part in row.get("zero_broker_pass_stages", "").split(";") if part.strip()
+    }
+    zero_fail = {
+        part.strip() for part in row.get("zero_broker_fail_stages", "").split(";") if part.strip()
+    }
+    overlap = sorted(zero_pass & zero_fail)
+    if overlap:
+        fail(f"{tester_id} zero-broker PASS/FAIL overlap: {', '.join(overlap)}")
     if expected_group == "e9_worker_korea" and interview_status == "completed" and not experience_year:
         fail(f"{tester_id} completed worker interview requires experience_year")
 
