@@ -50,6 +50,7 @@ landing_page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
 app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
+sw_js = (ROOT / "docs/sw.js").read_text(encoding="utf-8")
 beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
 mvp_validation = (ROOT / "docs/MVP_VALIDATION.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
@@ -389,6 +390,10 @@ require("return betaRecruitmentSourceCodes.has(raw)?raw:betaRecruitmentDefaultCo
         "unknown recruitment source values must fall back to the shared default code")
 require(recruitment_sources.get("defaultCode") == "website",
         "shared recruitment-source default must remain website")
+require(
+    "./data/beta_recruitment_sources_v1.json" in sw_js,
+    "service worker must cache the shared beta recruitment-source catalog",
+)
 require(
     set(recruitment_sources.get("codes", [])) >= {
         "website","epstopik_indonesia","topikly","apsan_hakwon","owie_epstopik",
