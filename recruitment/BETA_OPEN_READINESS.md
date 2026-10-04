@@ -1,8 +1,14 @@
 # Beta OPEN readiness — Indonesia → Korea E-9 Manufacturing 2026
 
-Status: **READY FOR RELEASE DECISION — recruitment remains HOLD**
+Status: **SUPPORTED-ROUTE DEVELOPMENT COMPLETE — tester-interest intake OPEN; beta access HOLD pending explicit release decision**
 
 Reviewed: 2026-10-04 KST
+
+## Development-completion boundary
+
+For the supported first route (Indonesia → E-9 → Manufacturing → 2026), product development is considered complete when there is no known product-code defect, the full supported workflow is implemented, and the same-HEAD static/UI/Pages/launch-gate suite is green. This is intentionally separate from **route validation**: field evidence from real applicants/workers and the external Manufacturing 2026 official-evidence HOLD can still remain after development completion.
+
+The five Manufacturing job-application HOLD questions are an external evidence dependency, not unfinished guessed UI. The app must continue to block unsupported submission detail and route the user to official help instead of inventing an answer.
 
 ## Automated readiness
 
@@ -12,6 +18,7 @@ Reviewed: 2026-10-04 KST
 - Official-source monitor: 72/72 checked, clean, no review-required source, no fetch failure
 - Static product integrity: PASS
 - Strict beta-launch gate: PASS
+- Known product-code defects: 0 open issues; GitHub issue #2 is classified as an external official-evidence dependency
 - Mobile/desktop UI smoke: PASS on the current product code line
 - GitHub Pages deployment: PASS on the current product code line
 - Public beta slots: 30 pseudonymous KEP IDs prepared
