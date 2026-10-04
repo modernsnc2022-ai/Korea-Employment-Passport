@@ -20,7 +20,9 @@ This file covers operational handling only.
 
 ## Assignment helper
 
-Use `scripts/assign_beta_slot.py` only after **beta access** status is OPEN. It accepts the eligible application received timestamp with timezone, activation date, current route stage, and a non-identifying source-channel label.
+Use `scripts/assign_beta_slot.py` only after **beta access** status is OPEN. It accepts the eligible application received timestamp with timezone, activation date, current route stage, the applicant's EPS `route_cycle` from the tester-interest email, and a non-identifying source-channel label.
+
+For active applicants, `route_cycle` means the main EPS application/round year that brought the participant to the current stage, not birth year or current calendar year. The intake offers the current supported cycle, the previous two cycles, and `unknown`.
 
 Allowed public-repo source-channel codes are: `website`, `email`, `community`, `community_admin`, `social`, `referral`, `direct_outreach`, `partner`, `other`. Never put a person name, handle, email address, phone number, or organization-specific contact detail in `source_channel`.
 
@@ -104,7 +106,7 @@ A KEP ID is pseudonymous routing metadata, not authentication. Before writing fe
 1. Read the participant's combined feedback privately.
 2. Confirm the `KEP-####` ID and the exact `ID tahap sekarang` from the bundle.
 3. Map only actionable findings to the locked 27 route stage IDs.
-4. Dry-run `python scripts/record_beta_feedback.py ...`.
+4. Dry-run `python scripts/record_beta_feedback.py ...`. If the participant later clarifies that the recorded EPS cycle was wrong, pass `--route-cycle YYYY` (or `unknown`) only after verifying that correction in the same private participant channel.
 5. Review the categorical/stage-only output.
 6. Re-run with `--write` only after the mapping is correct.
 
@@ -133,7 +135,9 @@ The public tracker preserves route evidence only as stage IDs:
 
 The same stage must never appear in both columns for one participant. Use the exact stage IDs included in the app's combined feedback bundle; do not infer IDs from translated titles.
 
-For active-applicant IDs (KEP-0001..KEP-0030 and KEP-0051+), verified feedback from the active 2026 route can contribute current-cycle evidence. For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
+For active-applicant IDs (KEP-0001..KEP-0030 and KEP-0051+), stage evidence is preserved regardless of process year, but only rows whose `route_cycle` equals the supported route cycle (currently 2026) contribute current-cycle route PASS coverage. Prior-cycle/unknown active applicants remain valuable product/usability/broker-gap evidence and do not become invalid testers.
+
+For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
 
 Route evidence review is not ready until all 27 stages have current-cycle PASS coverage, no current-cycle FAIL stage remains, all Broker Gaps are resolved or official/licensed-only, and the other cohort/late-stage gates are satisfied.
 
