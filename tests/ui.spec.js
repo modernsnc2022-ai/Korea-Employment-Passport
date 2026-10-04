@@ -398,23 +398,49 @@ test('anonymous beta ID links feedback to tracker without identity data', async 
 });
 
 
-test('beta invite URL immediately confirms the assigned anonymous tester', async ({ page }) => {
+test('beta invite URL immediately confirms the assigned anonymous tester and first stage', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
-  await page.goto('/app.html?beta=KEP-0017', { waitUntil: 'domcontentloaded' });
+  await page.goto('/app.html?beta=KEP-0017&stage=roster', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
 
   await expect(page.locator('#betaModeBanner')).toBeVisible();
   await expect(page.locator('#betaModeBanner')).toContainText('Mode beta KEP-0017');
+  await expect(page.locator('#betaModeBanner')).toContainText('Tahap dari aplikasi beta');
+  await expect(page.locator('#betaModeBanner')).toContainText('Roster');
   await expect(page.locator('#betaModeBanner')).toContainText('Nilai hanya tahap yang benar-benar Anda alami');
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('kep.betaTesterId')||'null'))).toBe('KEP-0017');
+  await expect(page.locator('#quickStart')).toBeHidden();
+
+  const hydrated = await page.evaluate(() => ({
+    testerId: JSON.parse(localStorage.getItem('kep.betaTesterId')||'null'),
+    done: JSON.parse(localStorage.getItem('kep.doneStages')||'[]'),
+    quickSetup: JSON.parse(localStorage.getItem('kep.quickSetupDone')||'false'),
+    current: currentStage()?.id || null
+  }));
+  expect(hydrated.testerId).toBe('KEP-0017');
+  expect(hydrated.done).toHaveLength(12);
+  expect(hydrated.done).toContain('job_application');
+  expect(hydrated.current).toBe('roster');
+  expect(hydrated.quickSetup).toBe(true);
+
+  // A later invite URL must not overwrite progress already created on this device.
+  await page.goto('/app.html?beta=KEP-0017&stage=visa_docs', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  expect(await page.evaluate(() => currentStage()?.id || null)).toBe('roster');
 
   await page.evaluate(() => localStorage.clear());
-  await page.goto('/app.html?beta=KEP-9999', { waitUntil: 'domcontentloaded' });
+  await page.goto('/app.html?beta=KEP-9999&stage=visa_docs', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
   await expect(page.locator('#betaModeBanner')).toBeHidden();
   expect(await page.evaluate(() => localStorage.getItem('kep.betaTesterId'))).toBeNull();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('kep.doneStages')||'[]'))).toEqual([]);
+
+  await page.evaluate(() => localStorage.clear());
+  await page.goto('/app.html?beta=KEP-0031&stage=visa_docs', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+  expect(await page.evaluate(() => currentStage()?.id || null)).toBe('eligibility');
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('kep.doneStages')||'[]'))).toEqual([]);
 
   expect(errors).toEqual([]);
 });
