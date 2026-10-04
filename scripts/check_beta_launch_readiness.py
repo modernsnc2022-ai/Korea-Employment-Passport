@@ -48,6 +48,7 @@ app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
 beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
+mvp_validation = (ROOT / "docs/MVP_VALIDATION.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
 worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
@@ -338,6 +339,12 @@ require("--zero-broker-pass-stage" in worker_recorder and "--zero-broker-fail-st
         "worker interview recorder must accept stage-level zero-broker evidence")
 require("zero_broker_stage_ready" in beta_progress_reporter and "ROUTE_CYCLE" in beta_progress_reporter,
         "beta progress report must gate route evidence on all current-cycle zero-broker stages")
+require("STRUCTURED_ROUTE_HOLDS" in beta_progress_reporter,
+        "beta progress report must block final route PASS on structured official-evidence HOLDs")
+require("No structured `blocksZeroBrokerReady=true` question remains on `answered_hold`." in mvp_validation,
+        "MVP validation must keep structured HOLDs out of final Broker Replacement Rate PASS")
+require("They do **not** require the beta itself to stay closed" in mvp_validation,
+        "MVP validation must distinguish beta OPEN from final route PASS")
 require("ZERO_BROKER_EVIDENCE_RECORD_SELF_TEST_PASS" in zero_broker_recorder,
         "follow-up stage evidence recorder must exist and expose a self-test")
 require('row["notes"] = ""' in zero_broker_recorder,
