@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
