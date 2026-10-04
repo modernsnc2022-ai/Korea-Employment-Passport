@@ -38,6 +38,7 @@ REQUIRED_COLUMNS = {
     "source_channel",
     "role",
     "current_stage",
+    "route_cycle",
     "in_korea",
     "e9_experience",
     "experience_year",
@@ -113,9 +114,10 @@ CONTROLLED_STAGE_LIST_FIELDS = {
     "broker_tasks", "documents_confusing", "official_process_gap",
     "zero_broker_pass_stages", "zero_broker_fail_stages"
 }
-SUPPORTED_STAGES = {
-    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
-}
+ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
+ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
+SUPPORTED_ROUTE_CYCLES = {str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)} | {"unknown"}
+SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
 SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
 
 
@@ -171,6 +173,7 @@ for index, row in enumerate(rows, start=1):
     broker_gap_status = row.get("broker_gap_status", "").strip()
     retest_status = row.get("retest_status", "").strip()
     current_stage = row.get("current_stage", "").strip()
+    route_cycle = row.get("route_cycle", "").strip()
     source_channel = row.get("source_channel", "").strip()
 
     if interview_status not in INTERVIEW_STATUSES:
@@ -181,6 +184,13 @@ for index, row in enumerate(rows, start=1):
         fail(f"{tester_id} experience_year must be 2004..2026 or unknown")
     if expected_group == "active_applicant" and (experience_year or workplace_evidence_status):
         fail(f"{tester_id} active applicant must not use retrospective worker evidence fields")
+    if expected_group == "e9_worker_korea" and route_cycle:
+        fail(f"{tester_id} worker validator must not use active-applicant route_cycle")
+    if route_cycle and route_cycle not in SUPPORTED_ROUTE_CYCLES:
+        fail(
+            f"{tester_id} route_cycle must be one of "
+            + ", ".join(sorted(SUPPORTED_ROUTE_CYCLES))
+        )
     if workplace_evidence_status == "published_single_verified_worker":
         if expected_group != "e9_worker_korea":
             fail(f"{tester_id} published worker evidence requires E-9 worker panel")
@@ -237,9 +247,11 @@ for index, row in enumerate(rows, start=1):
         if broker_gap_status == "":
             fail(f"{tester_id} assigned public beta slot requires explicit broker_gap_status")
         if expected_group != "active_applicant":
-            fail(f"{tester_id} retrospective worker panel must not use public-beta application queue fields")
+            fail(f"{tester_id} retrospective worker panel must not use public-beta application fields")
         if eligibility_status != "accepted":
             fail(f"{tester_id} assigned public-beta slot requires eligibility_status=accepted")
+        if route_cycle not in SUPPORTED_ROUTE_CYCLES:
+            fail(f"{tester_id} assigned active applicant requires route_cycle")
         parse_utc_timestamp(application_received, tester_id)
     elif eligibility_status == "accepted":
         fail(f"{tester_id} eligibility_status=accepted requires application_received_at")
@@ -277,9 +289,8 @@ if active < 30 or workers != 20:
 
 public_rows = rows[:30] + rows[50:]
 seen_empty_slot = False
-previous_received = None
-previous_id = None
 assigned_public = 0
+current_cycle_public = 0
 for row in public_rows:
     tester_id = row["tester_id"].strip()
     value = row.get("application_received_at", "").strip()
@@ -291,15 +302,10 @@ for row in public_rows:
         continue
     if seen_empty_slot:
         fail(f"{tester_id} is assigned after an empty earlier public-beta slot; assign KEP IDs contiguously from KEP-0001")
-    received = parse_utc_timestamp(value, tester_id)
-    if previous_received is not None and received < previous_received:
-        fail(
-            f"{tester_id} application_received_at is earlier than {previous_id}; "
-            "KEP-0001..KEP-0030 must follow eligible application receipt order"
-        )
-    previous_received = received
-    previous_id = tester_id
+    parse_utc_timestamp(value, tester_id)
     assigned_public += 1
+    if row.get("route_cycle", "").strip() == str(ROUTE_CYCLE):
+        current_cycle_public += 1
 
 worker_rows = rows[30:50]
 seen_empty_worker = False
@@ -335,6 +341,7 @@ activated = sum(1 for row in rows if row.get("activated_at", "").strip())
 print(
     f"BETA_TRACKER_PASS rows={len(rows)} active_applicants={active} target_active=30 "
     f"e9_workers={workers} assigned_public_beta={assigned_public} "
+    f"current_cycle_public={current_cycle_public} "
     f"assigned_worker_validators={assigned_workers} "
     f"activated_public_beta={activated} free_months=6"
 )
