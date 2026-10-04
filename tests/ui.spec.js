@@ -628,6 +628,21 @@ test('unknown recruitment source code falls back to website', async ({ page }) =
 });
 
 
+test('public community recruitment sources are loaded from the shared source catalog', async ({ page }) => {
+  for (const source of ['telegram_eps_indo', 'inkomunitas']) {
+    await page.goto('/beta.html?src='+source, { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => document.querySelectorAll('#applicantStage option').length === 28);
+    await page.locator('#applicantStage').selectOption('eligibility');
+    await page.locator('#applicantCycle').selectOption('2026');
+    await page.locator('#activeProcess').check();
+    await page.locator('#feedbackAgreement').check();
+
+    const application = await page.evaluate(() => applicationText());
+    expect(application).toContain('Recruitment source code: '+source);
+  }
+});
+
+
 test('manufacturing job application cannot complete before sector notice', async ({ page }) => {
   const errors = await freshPage(page);
   await setStage(page, 'job_application');
