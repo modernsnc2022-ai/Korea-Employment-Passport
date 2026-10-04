@@ -266,9 +266,12 @@ require("Belum diverifikasi" in runtime, "workplace UI must visibly label unveri
 require("function buildScoutRequestBody" in runtime, "workplace scout request must use privacy-safe body builder")
 require("'Info asrama: '+(data.dorm" not in runtime, "workplace scout request must not transmit dorm address")
 
-require("first **30** eligible people" in beta_target, "beta target must preserve first-30 public cohort")
-require("activation timing must never reorder" in beta_target.lower(),
-        "beta queue order must remain independent of activation timing")
+require("target at least **30** active Indonesian applicants" in beta_target,
+        "beta target must preserve an initial validation target of at least 30 active applicants")
+require("30 is a validation target, not an automatic rejection cap" in beta_target,
+        "beta target must not use 30 as an automatic rejection cap")
+require("KEP-0051 and upward" in beta_target,
+        "beta target must reserve overflow active-applicant IDs above KEP-0050")
 require("free for 6 months from beta account activation" in beta_target,
         "beta benefit must be 6 months from activation")
 require("gratis selama 6 bulan sejak akun beta diaktifkan" in outreach,
@@ -281,8 +284,10 @@ if program_status == "hold":
             "HOLD state must remain pending manual OPEN approval")
     require(release_decision.get("approvedAt") in {None, ""},
             "HOLD state must not carry an OPEN approval timestamp")
-    require("Recruitment status: **HOLD" in outreach,
-            "HOLD program must keep outreach recruitment status HOLD")
+    require("Application intake status: **OPEN**" in outreach,
+            "tester-interest intake must remain OPEN while beta access is HOLD")
+    require("Beta access status: **HOLD" in outreach,
+            "HOLD program must keep beta access status HOLD")
 else:
     require(release_decision.get("publicBeta") == "approved_manual",
             "OPEN state requires explicit releaseDecision.publicBeta=approved_manual")
@@ -302,13 +307,20 @@ else:
         and manufacturing_launch_check.get("checkedAt") == approved_dt.date().isoformat(),
         "OPEN state requires a same-day Manufacturing launch-check record",
     )
-    require("Recruitment status: **OPEN" in outreach,
-            "OPEN program must keep outreach recruitment status OPEN")
-require(beta_program.get("publicBeta", {}).get("slots") == 30, "public beta enrollment must preserve 30 slots")
+    require("Application intake status: **OPEN**" in outreach,
+            "application intake must remain OPEN after beta access opens")
+    require("Beta access status: **OPEN" in outreach,
+            "OPEN program must keep beta access status OPEN")
+require(beta_program.get("publicBeta", {}).get("targetParticipants") == 30,
+        "public beta must preserve 30 as the initial validation target")
+require(beta_program.get("publicBeta", {}).get("capacityPolicy") == "soft_target_no_automatic_rejection",
+        "public beta must keep 30 as a soft target, not a hard cap")
+require(beta_program.get("application", {}).get("intakeStatus") == "open",
+        "tester-interest application intake must be OPEN")
 worker_panel = beta_program.get("retrospectivePanel", {})
 require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
 require(worker_panel.get("separateFromPublicBeta") is True,
-        "E-9 worker panel must remain separate from the 30-person public beta")
+        "E-9 worker panel must remain separate from the active-applicant validation cohort")
 require(worker_panel.get("status") in {"hold", "open"}, "E-9 worker panel must use explicit hold/open status")
 worker_release_state = release_decision.get("retrospectivePanel")
 worker_release_at = str(release_decision.get("retrospectiveApprovedAt") or "").strip()
@@ -344,10 +356,14 @@ require(
     all(token in beta_page for token in ["nomor paspor", "nomor KTP", "nomor ARC", "nomor telepon"]),
     "beta enrollment page must state that sensitive identity/contact fields are not required",
 )
-require("Beta terbatas untuk 30 peserta pertama" in beta_page, "beta enrollment page must state the 30-person limit")
-require("program.status==='open'" in beta_js, "beta application UI must be gated by OPEN status")
+require("Pendaftaran minat beta sudah dibuka" in beta_page, "beta enrollment page must state that tester-interest intake is open")
+require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state that 30 is not an automatic rejection cap")
+require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
+# legacy anchor removed:  limit")
+require("program.application?.intakeStatus==='open'" in beta_js,
+        "tester-interest application UI must be gated by intakeStatus, independently of beta access")
 require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
-        "public beta UI must require explicit approved release state, not status alone")
+        "beta access state must require explicit approved release state, not status alone")
 require("release.retrospectivePanel==='approved_manual'" in beta_js and "release.retrospectiveApprovedAt" in beta_js,
         "worker-panel UI must require explicit approved release state, not status alone")
 
@@ -436,9 +452,9 @@ print(
     f"fields={field_count} "
     f"workplace_public={len(public_checks)} "
     f"workplace_worker={len(worker_checks)} "
-    "public_beta=30 free_months=6"
+    "public_beta_target=30 overflow_allowed=true free_months=6"
 )
 if args.allow_source_review_pending and source.get("state") != "clean":
     print(f"PRODUCT_CI_SOURCE_HOLD state={source.get('state')} launch gate remains blocked")
-print("BETA_OPEN_MANUAL_GATES_REMAIN: final Manufacturing notice re-check at OPEN decision, explicit release decision")
-print("ROUTE_PASS_EVIDENCE_REMAINS: 30 active applicants, 20 E-9 worker validators, late-stage coverage, every Broker Gap resolved or official/licensed-only")
+print("BETA_ACCESS_OPEN_MANUAL_GATES_REMAIN: intake is open; final Manufacturing notice re-check and explicit access release decision remain")
+print("ROUTE_PASS_EVIDENCE_REMAINS: at least 30 active applicants, 20 E-9 worker validators, late-stage coverage, every Broker Gap resolved or official/licensed-only")
