@@ -3540,6 +3540,13 @@ function switchView(viewId,scroll=true){
   document.querySelectorAll('.view').forEach(view=>{
     view.classList.toggle('active',view.id===viewId);
   });
+  if(viewId==='gaps'){
+    renderBetaModeBanner();
+    renderBetaValidation();
+    renderRejections();
+    renderGaps();
+    renderUnresolvedFieldQuestions();
+  }
   if(scroll)document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
