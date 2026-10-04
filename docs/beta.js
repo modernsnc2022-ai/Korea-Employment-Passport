@@ -39,6 +39,24 @@ function selectedApplicantStageTitle(){
   return select?.selectedOptions?.[0]?.textContent?.trim()||'';
 }
 
+function renderApplicantCycleOptions(){
+  const select=$('applicantCycle');
+  if(!select||!betaRoute)return;
+  const cycle=Number(betaRoute.cycle)||2026;
+  const years=[cycle,cycle-1,cycle-2];
+  select.innerHTML='<option value="">Pilih tahun proses EPS</option>';
+  years.forEach(year=>{
+    const option=document.createElement('option');
+    option.value=String(year);
+    option.textContent=String(year);
+    select.appendChild(option);
+  });
+  const unknown=document.createElement('option');
+  unknown.value='unknown';
+  unknown.textContent='Tidak yakin';
+  select.appendChild(unknown);
+}
+
 function workerValidatorText(){
   return [
     'KOREA EMPLOYMENT PASSPORT — E-9 WORKER VALIDATOR',
@@ -63,11 +81,13 @@ function workerPanelOpen(){
 function applicationText(){
   const stage=$('applicantStage').value;
   const stageTitle=selectedApplicantStageTitle();
+  const cycle=$('applicantCycle').value;
   return [
     'KOREA EMPLOYMENT PASSPORT — TESTER INTEREST',
     '',
     'Current route stage ID: '+stage,
     'Current stage title: '+stageTitle,
+    'EPS process cycle: '+cycle,
     'Official G-to-G / EPS E-9 process: YES',
     'Feedback participation agreement: YES',
     '',
@@ -126,8 +146,8 @@ $('betaApplicationForm').addEventListener('submit',(event)=>{
   if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
-  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
-    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap dan kedua persetujuan terlebih dahulu.';return;
+  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
   }
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
@@ -170,8 +190,8 @@ $('copyApplicationBtn').addEventListener('click',async()=>{
   if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
-  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
-    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap dan kedua persetujuan terlebih dahulu.';return;
+  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
   }
   const ok=await copyText(applicationText());
   out.hidden=false;out.className='result'+(ok?'':' warn');
@@ -189,6 +209,7 @@ Promise.all([
     betaRoute=route;
     betaI18n=i18n||{};
     renderApplicantStageOptions();
+    renderApplicantCycleOptions();
     renderProgram(program);
   })
   .catch(()=>{
