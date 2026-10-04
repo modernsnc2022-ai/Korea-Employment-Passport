@@ -1,6 +1,6 @@
 # Beta launch gate — Indonesia E-9 Manufacturing
 
-Public beta recruitment must remain **HOLD** until every required item below is PASS.
+Public tester-interest intake may be **OPEN before launch**. Actual beta access, KEP ID activation, and the 6-month benefit must remain **HOLD** until every required item below is PASS.
 
 ## 1. Core product flow
 - [ ] All 27 supported-route stages are navigable in order.
@@ -25,10 +25,10 @@ Public beta recruitment must remain **HOLD** until every required item below is 
 - [ ] Manufacturing 2026 notices are checked again immediately before launch.
 
 ## 5. Beta UX and privacy
-- [ ] Beta ID accepts only KEP-0001 through KEP-0050.
+- [ ] Beta ID accepts the reserved base IDs plus contiguous overflow active-applicant IDs KEP-0051 and upward.
 - [ ] Beta evidence is isolated by tester ID.
 - [ ] Sanitized feedback can be copied/shared without identity fields.
-- [ ] Public beta copy clearly states: first 30 eligible active applicants, free for 6 months from beta activation, feedback participation required.
+- [ ] Public beta copy clearly states: initial target at least 30 eligible active applicants, 30 is not an automatic rejection cap, approved testers receive 6 months free from activation, and feedback participation is required.
 - [ ] Public beta copy clearly states there is no job, visa, SLC, or departure guarantee.
 - [ ] No passport/KTP/ARC number or other sensitive identifier is required to receive the beta benefit.
 
@@ -57,17 +57,20 @@ A green beta-launch-gate must not be interpreted as valid when one of those sibl
 
 ## Beta OPEN vs route PASS
 
-The **30 active applicants + 20 E-9 workers are not prerequisites for opening the beta**. They are the evidence cohort collected after opening and are required before declaring the supported route a Broker Replacement Rate 100% PASS.
+The **at least 30 active applicants + 20 E-9 workers are not prerequisites for opening beta access**. They are the evidence cohort collected after opening and are required before declaring the supported route a Broker Replacement Rate 100% PASS.
 
-Beta OPEN requires sections 1–7 to pass plus a final same-day check for any new Manufacturing 2026 official notice. Route PASS remains governed by `docs/MVP_VALIDATION.md`.
+Beta access OPEN requires sections 1–7 to pass plus a final same-day check for any new Manufacturing 2026 official notice. Application intake may already be OPEN. Route PASS remains governed by `docs/MVP_VALIDATION.md`.
 
-## 8. Recruitment switch
+## 8. Access approval switch
+Application intake can remain OPEN while access is HOLD.
+
 When sections 1–7 all PASS:
-1. after an explicit manual release decision, use the release-state helper to change recruitment status from HOLD to OPEN and record the approval date;
-2. open the first-30 active-applicant beta;
-3. assign KEP-0001 through KEP-0030 to eligible applicants in application-received timestamp order after recruitment becomes OPEN;
-4. activation timing must not change queue order; grant each accepted beta account 6 months free from its actual activation date;
-5. continue recruiting KEP-0031 through KEP-0050 separately as the E-9 worker retrospective validation panel.
+1. after an explicit manual release decision, use the release-state helper to change **beta access** from HOLD to OPEN and record the approval timestamp;
+2. review the applications already collected while access was HOLD;
+3. approve eligible active applicants and assign KEP-0001 through KEP-0030 as the base cohort;
+4. if more eligible applicants are approved, continue with KEP-0051 upward; do not reject someone solely because the count exceeded 30;
+5. keep KEP-0031 through KEP-0050 reserved for the separate E-9 worker retrospective panel;
+6. grant every approved beta tester 6 months free from their actual beta activation date.
 
 ## Launch principle
 The beta should start only when the product is complete enough that testers are primarily finding **real-world process gaps**, not obvious unfinished-product defects.
