@@ -13,6 +13,7 @@ ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
+SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
 
 FEEDBACK_STATUSES = {"active", "complete", "withdrawn"}
 BROKER_GAP_STATUSES = {"open", "resolved", "official_or_licensed_only"}
@@ -69,7 +70,7 @@ def record(
 ) -> dict[str, str]:
     validate_public_tester(row, tester_id)
 
-    if current_stage not in SUPPORTED_STAGES:
+    if current_stage not in SUPPORTED_CURRENT_STAGES:
         fail(f"unsupported current-stage: {current_stage}")
     if feedback_status not in FEEDBACK_STATUSES:
         fail("feedback-status must be active, complete, or withdrawn")
@@ -150,6 +151,17 @@ def self_test() -> None:
     assert row["current_stage"] == "slc"
     assert row["broker_tasks"] == "roster;employer_selection"
     assert row["notes"] == ""
+
+    finished = record(
+        dict(base),
+        tester_id="KEP-0001",
+        current_stage="complete",
+        feedback_status="complete",
+        broker_gap_status="resolved",
+        retest_status="passed",
+    )
+    assert finished["current_stage"] == "complete"
+    assert finished["feedback_status"] == "complete"
 
     try:
         record(
