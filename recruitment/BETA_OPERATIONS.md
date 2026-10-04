@@ -136,3 +136,16 @@ After verifying the same private participant channel, use:
 `python scripts/record_zero_broker_evidence.py --tester-id KEP-#### --pass-stage <stage> ... --fail-stage <stage> ...`
 
 Run without `--write` first. The supplied PASS/FAIL lists are treated as the latest complete stage-evidence snapshot for that participant. For E-9 worker validators, the worker interview must already be completed and `experience_year` must already be recorded. The helper changes only the two zero-broker stage-list fields and keeps narrative notes empty.
+
+
+## Broker-gap assessment state
+
+`broker_gap_status` describes assessment state, not a default accusation that a broker gap exists:
+
+- `pending` — participant has not yet been fully assessed.
+- `none_reported` — assessed; no private-broker dependency was reported.
+- `open` — a real private-broker dependency remains unresolved.
+- `resolved` — a previously reported broker gap has been replaced/resolved.
+- `official_or_licensed_only` — the remaining helper/service is an unavoidable official or legally licensed role, not a replaceable private broker.
+
+New beta/worker assignments start at `pending`. Route PASS review remains blocked while any evidence participant is still `pending` or any real gap remains `open`. Public applicants must also complete their planned beta feedback cycle before route evidence can become ready.
