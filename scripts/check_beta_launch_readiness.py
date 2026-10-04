@@ -357,6 +357,17 @@ require(
     all(token in beta_page for token in ["nomor paspor", "nomor KTP", "nomor ARC", "nomor telepon"]),
     "beta enrollment page must state that sensitive identity/contact fields are not required",
 )
+require(
+    "alamat email pengirim akan terlihat oleh tim" in beta_page
+    and "tidak dimasukkan ke repositori publik" in beta_page,
+    "beta enrollment page must disclose sender-email handling without public-repo storage",
+)
+privacy_page = (ROOT / "docs/privacy.html").read_text(encoding="utf-8")
+require(
+    "alamat email pengirim akan terlihat oleh tim" in privacy_page
+    and "tidak disimpan di repositori publik" in privacy_page,
+    "privacy notice must disclose sender-email handling and public-repo exclusion",
+)
 require('href="beta.html"' in landing_page,
         "public landing must route tester enrollment to beta.html")
 require('id="betaForm"' not in landing_page and 'id="name"' not in landing_page and 'id="contact"' not in landing_page,
