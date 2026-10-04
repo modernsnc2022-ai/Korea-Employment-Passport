@@ -3077,8 +3077,11 @@ function renderBetaModeBanner(){
   banner.hidden=false;
   const role=betaTesterRole(testerId);
   if(role==='e9_worker_validator'){
+    const assignedStage=String(new URLSearchParams(location.search).get('stage')||'').trim();
+    const assigned=route?.stages?.find(stage=>stage.id===assignedStage);
     banner.innerHTML=
       `<strong>Panel validator E-9 ${escapeHtml(testerId)}</strong>`+
+      (assigned?`<span><b>Fokus awal</b> ${escapeHtml(stageTitle(assigned))}</span>`:'')+
       '<span><b>1</b> Pilih tahap yang benar-benar pernah Anda jalani</span>'+
       '<span><b>2</b> Bandingkan panduan dengan pengalaman nyata; jika tidak ingat, pilih “belum dijalani/tidak dapat dinilai”</span>'+
       '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, email, atau alamat asrama pribadi</span>';
@@ -3180,7 +3183,11 @@ function renderBetaValidation(){
     option.textContent=stageTitle(stage);
     select.appendChild(option);
   });
-  const preferred=previous||currentStage()?.id||route.stages[0]?.id;
+  const urlStage=String(new URLSearchParams(location.search).get('stage')||'').trim();
+  const workerUrlStage=role==='e9_worker_validator'&&route.stages.some(stage=>stage.id===urlStage)
+    ?urlStage
+    :'';
+  const preferred=previous||workerUrlStage||currentStage()?.id||route.stages[0]?.id;
   if(preferred&&route.stages.some(stage=>stage.id===preferred))select.value=preferred;
 
   const stats=betaValidationStats();
