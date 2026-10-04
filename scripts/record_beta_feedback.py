@@ -10,9 +10,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
-SUPPORTED_STAGES = {
-    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
-}
+ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
+ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
+SUPPORTED_ROUTE_CYCLES = {str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)} | {"unknown"}
+SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
 SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 
@@ -72,6 +73,7 @@ def record(
     tester_id: str,
     current_stage: str,
     feedback_status: str,
+    route_cycle: str | None = None,
     broker_gap_status: str | None = None,
     retest_status: str | None = None,
     broker_used: str | None = None,
@@ -89,6 +91,8 @@ def record(
         fail(f"unsupported current-stage: {current_stage}")
     if feedback_status not in FEEDBACK_STATUSES:
         fail("feedback-status must be active, complete, or withdrawn")
+    if route_cycle is not None and route_cycle not in SUPPORTED_ROUTE_CYCLES:
+        fail("unsupported route-cycle")
     if broker_gap_status is not None and broker_gap_status not in BROKER_GAP_STATUSES:
         fail("unsupported broker-gap-status")
     if retest_status is not None and retest_status not in RETEST_STATUSES:
@@ -102,6 +106,8 @@ def record(
 
     row["current_stage"] = current_stage
     row["feedback_status"] = feedback_status
+    if route_cycle is not None:
+        row["route_cycle"] = route_cycle
 
     if broker_gap_status is not None:
         row["broker_gap_status"] = broker_gap_status
@@ -149,6 +155,7 @@ def self_test() -> None:
         "activated_at": "2026-10-06",
         "free_until": "2027-04-06",
         "current_stage": "roster",
+        "route_cycle": "2026",
         "feedback_status": "not_started",
         "broker_gap_status": "pending",
         "retest_status": "pending",
@@ -167,6 +174,7 @@ def self_test() -> None:
         tester_id="KEP-0001",
         current_stage="slc",
         feedback_status="active",
+        route_cycle="2025",
         broker_gap_status="open",
         retest_status="pending",
         broker_used="yes",
@@ -180,6 +188,7 @@ def self_test() -> None:
     )
     assert row["feedback_status"] == "active"
     assert row["current_stage"] == "slc"
+    assert row["route_cycle"] == "2025"
     assert row["broker_tasks"] == "roster;employer_selection"
     assert row["zero_broker_pass_stages"] == "eligibility;registration;roster"
     assert row["zero_broker_fail_stages"] == "employer_selection"
@@ -201,6 +210,19 @@ def self_test() -> None:
         assert "PASS and FAIL" in str(exc)
     else:
         raise AssertionError("contradictory zero-broker stage evidence was accepted")
+
+    try:
+        record(
+            dict(base),
+            tester_id="KEP-0001",
+            current_stage="slc",
+            feedback_status="active",
+            route_cycle="2023",
+        )
+    except ValueError as exc:
+        assert "unsupported route-cycle" in str(exc)
+    else:
+        raise AssertionError("unsupported route cycle was accepted")
 
     finished = record(
         dict(base),
@@ -263,6 +285,7 @@ def main() -> int:
     parser.add_argument("--tester-id")
     parser.add_argument("--current-stage")
     parser.add_argument("--feedback-status", choices=sorted(FEEDBACK_STATUSES))
+    parser.add_argument("--route-cycle", choices=sorted(SUPPORTED_ROUTE_CYCLES))
     parser.add_argument("--broker-gap-status", choices=sorted(BROKER_GAP_STATUSES))
     parser.add_argument("--retest-status", choices=sorted(RETEST_STATUSES))
     parser.add_argument("--broker-used", choices=sorted(YES_NO_UNKNOWN))
@@ -300,6 +323,7 @@ def main() -> int:
             tester_id=tester_id,
             current_stage=str(args.current_stage),
             feedback_status=str(args.feedback_status),
+            route_cycle=args.route_cycle,
             broker_gap_status=args.broker_gap_status,
             retest_status=args.retest_status,
             broker_used=args.broker_used,
@@ -317,7 +341,8 @@ def main() -> int:
     mode = "WRITE" if args.write else "DRY_RUN"
     print(
         f"BETA_FEEDBACK_{mode} tester_id={tester_id} "
-        f"current_stage={target['current_stage']} feedback_status={target['feedback_status']} "
+        f"current_stage={target['current_stage']} route_cycle={target.get('route_cycle','')} "
+        f"feedback_status={target['feedback_status']} "
         f"broker_gap_status={target.get('broker_gap_status','')} retest_status={target.get('retest_status','')}"
     )
     print(
