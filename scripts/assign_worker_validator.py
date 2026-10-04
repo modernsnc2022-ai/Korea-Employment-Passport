@@ -14,7 +14,33 @@ ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
+BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other"}
+
+def invitation_link(row: dict[str, str]) -> str:
+    base = str(row.get("beta_link", "")).strip()
+    stage = str(row.get("current_stage", "")).strip()
+    if not base:
+        base = BASE_URL + str(row.get("tester_id", "")).strip()
+    if stage not in SUPPORTED_STAGES:
+        return base
+    separator = "&" if "?" in base else "?"
+    return f"{base}{separator}stage={stage}"
+
+
+def invitation_message(row: dict[str, str]) -> str:
+    return "\n".join([
+        "Korea Employment Passport — undangan validator E-9",
+        "",
+        f"ID validator anonim: {row.get('tester_id','')}",
+        f"Link validator: {invitation_link(row)}",
+        "",
+        "Gunakan panel ini hanya untuk tahap yang benar-benar pernah Anda alami.",
+        "Catat tahun pengalaman EPS sebelum menyimpan penilaian tahap.",
+        "Jangan masukkan nama, nomor identitas, telepon, email, atau alamat asrama pribadi.",
+        "Balas melalui kanal pribadi yang sudah dikonfirmasi tim agar feedback dapat dipetakan ke ID validator dengan benar."
+    ])
+
 
 def assign(rows, joined_date, current_stage, source_channel):
     date.fromisoformat(joined_date)
@@ -37,6 +63,8 @@ def assign(rows, joined_date, current_stage, source_channel):
     target["workplace_evidence_status"]="pending"
     target["broker_gap_status"]="pending"
     target["retest_status"]="pending"
+    if not str(target.get("beta_link","")).strip():
+        target["beta_link"]=BASE_URL+target["tester_id"]
     return target
 
 def self_test():
@@ -54,6 +82,8 @@ def self_test():
     assert first["e9_experience"]=="confirmed"
     assert first["experience_year"]==""
     assert first["workplace_evidence_status"]=="pending"
+    assert "stage=employment_maintenance" in invitation_link(first)
+    assert "ID validator anonim: KEP-0031" in invitation_message(first)
     try:
         assign(rows,"2026-10-06","employment_maintenance","worker-name-here")
     except ValueError as exc:
@@ -104,8 +134,11 @@ def main():
     print(
         "WORKER_VALIDATOR_SLOT_"+("WRITTEN" if args.write else "DRY_RUN")+
         " tester_id="+target["tester_id"]+
-        " beta_link="+target.get("beta_link","")
+        " beta_link="+invitation_link(target)
     )
+    print("WORKER_VALIDATOR_INVITATION_BEGIN")
+    print(invitation_message(target))
+    print("WORKER_VALIDATOR_INVITATION_END")
     return 0
 
 if __name__=="__main__":
