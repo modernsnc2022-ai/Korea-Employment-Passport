@@ -2,6 +2,10 @@ const PROGRAM_URL='data/beta_program_v1.json';
 const ROUTE_URL='data/id_e9_manufacturing_2026.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
 let betaProgram=null,betaRoute=null,betaI18n={};
+const RECRUITMENT_SOURCE_CODES=new Set([
+  'website','email','community','community_admin','social','referral','direct_outreach','partner','other',
+  'epstopik_indonesia','topikly','apsan_hakwon','owie_epstopik'
+]);
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -32,6 +36,11 @@ function renderApplicantStageOptions(){
     });
     select.appendChild(optgroup);
   });
+}
+
+function recruitmentSourceCode(){
+  const raw=String(new URLSearchParams(location.search).get('src')||'website').trim().toLowerCase();
+  return RECRUITMENT_SOURCE_CODES.has(raw)?raw:'website';
 }
 
 function selectedApplicantStageTitle(){
@@ -88,6 +97,7 @@ function applicationText(){
     'Current route stage ID: '+stage,
     'Current stage title: '+stageTitle,
     'EPS process cycle: '+cycle,
+    'Recruitment source code: '+recruitmentSourceCode(),
     'Official G-to-G / EPS E-9 process: YES',
     'Feedback participation agreement: YES',
     '',
