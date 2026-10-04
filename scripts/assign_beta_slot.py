@@ -34,12 +34,21 @@ def load_tracker():
         reader = csv.DictReader(handle)
         return list(reader.fieldnames or []), list(reader)
 
+def acceptance_link(row: dict[str, str]) -> str:
+    base = str(row.get("beta_link", "")).strip()
+    stage = str(row.get("current_stage", "")).strip()
+    if not base or stage not in SUPPORTED_STAGES:
+        return base
+    separator = "&" if "?" in base else "?"
+    return f"{base}{separator}stage={stage}"
+
+
 def acceptance_message(row: dict[str, str]) -> str:
     return "\n".join([
         "Korea Employment Passport — akses beta diterima",
         "",
         f"ID beta anonim: {row.get('tester_id', '')}",
-        f"Link beta: {row.get('beta_link', '')}",
+        f"Link beta: {acceptance_link(row)}",
         f"Tahap awal yang tercatat: {row.get('current_stage', '')}",
         f"Akses gratis sampai: {row.get('free_until', '')} (6 bulan sejak aktivasi)",
         "",
@@ -91,6 +100,9 @@ def self_test():
     assert first["free_until"] == "2027-04-06"
     assert second["tester_id"] == "KEP-0002"
     assert second["activated_at"] < first["activated_at"]
+    first["beta_link"] = "https://example.invalid/app.html?beta=KEP-0001"
+    assert acceptance_link(first).endswith("?beta=KEP-0001&stage=roster")
+    assert "stage=roster" in acceptance_message(first)
     try:
         assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community")
     except ValueError as exc:
