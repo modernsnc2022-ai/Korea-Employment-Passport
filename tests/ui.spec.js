@@ -456,19 +456,29 @@ test('beta evidence stays isolated when a browser switches tester IDs', async ({
     const checks={eligibility:{stageId:'eligibility',status:'no_private_help',updatedAt:new Date().toISOString()}};
     write(KEYS.betaChecks,checks);
     write(KEYS.gaps,[{id:1,stage:'eligibility',task:'Gap tester satu',helper:'Teman'}]);
+    write(KEYS.done,['eligibility','registration']);
+    write(KEYS.workplace,{company:'Tester satu factory'});
+    write(KEYS.payroll,{gross:'1234567'});
   });
   expect(await page.evaluate(() => betaValidationStats().tested)).toBe(1);
   expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).toContain('Gap tester satu');
+  expect(await page.evaluate(() => read(KEYS.done,[]))).toEqual(['eligibility','registration']);
 
   await page.goto('/app.html?beta=KEP-0002', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
   expect(await page.evaluate(() => betaValidationStats().tested)).toBe(0);
   expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).not.toContain('Gap tester satu');
+  expect(await page.evaluate(() => read(KEYS.done,[]))).toEqual([]);
+  expect(await page.evaluate(() => read(KEYS.workplace,null))).toBeNull();
+  expect(await page.evaluate(() => read(KEYS.payroll,null))).toBeNull();
 
   await page.goto('/app.html?beta=KEP-0001', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
   expect(await page.evaluate(() => betaValidationStats().tested)).toBe(1);
   expect(await page.evaluate(() => buildBetaFeedbackBundle().rawBody)).toContain('Gap tester satu');
+  expect(await page.evaluate(() => read(KEYS.done,[]))).toEqual(['eligibility','registration']);
+  expect(await page.evaluate(() => read(KEYS.workplace,{}).company)).toBe('Tester satu factory');
+  expect(await page.evaluate(() => read(KEYS.payroll,{}).gross)).toBe('1234567');
 
   expect(errors).toEqual([]);
 });
