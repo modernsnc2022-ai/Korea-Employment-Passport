@@ -32,7 +32,7 @@ Use `scripts/assign_beta_slot.py` only after **beta access** status is OPEN. It 
 
 For active applicants, `route_cycle` means the main EPS application/round year that brought the participant to the current stage, not birth year or current calendar year. The intake offers the current supported cycle, the previous two cycles, and `unknown`.
 
-Allowed public-repo source-channel codes are: `website`, `email`, `community`, `community_admin`, `social`, `referral`, `direct_outreach`, `partner`, `other`, plus the controlled campaign codes `epstopik_indonesia`, `topikly`, `apsan_hakwon`, and `owie_epstopik`. Never put a person name, handle, email address, phone number, or arbitrary free text in `source_channel`.
+Allowed public-repo source-channel codes are: `website`, `email`, `community`, `community_admin`, `social`, `referral`, `direct_outreach`, `partner`, `other`, plus the controlled campaign codes `epstopik_indonesia`, `topikly`, `apsan_hakwon`, and `owie_epstopik`, and `lpk_samwon`. Never put a person name, handle, email address, phone number, or arbitrary free text in `source_channel`.
 
 For future outreach, prefer a source-coded beta link such as `beta.html?src=epstopik_indonesia`. The browser copies only an allow-listed non-identifying source code into the tester-interest email. Unknown or tampered `src` values fall back to `website`.
 
