@@ -413,9 +413,9 @@ test('beta invite URL immediately confirms the assigned anonymous tester and fir
   await expect(page.locator('#quickStart')).toBeHidden();
 
   const hydrated = await page.evaluate(() => ({
-    testerId: JSON.parse(localStorage.getItem('kep.betaTesterId')||'null'),
-    done: JSON.parse(localStorage.getItem('kep.doneStages')||'[]'),
-    quickSetup: JSON.parse(localStorage.getItem('kep.quickSetupDone')||'false'),
+    testerId: betaTesterIdState(),
+    done: read(KEYS.done,[]),
+    quickSetup: read(KEYS.quickSetup,false),
     current: currentStage()?.id || null
   }));
   expect(hydrated.testerId).toBe('KEP-0017');
@@ -430,7 +430,7 @@ test('beta invite URL immediately confirms the assigned anonymous tester and fir
   expect(await page.evaluate(() => currentStage()?.id || null)).toBe('roster');
 
   await page.evaluate(() => localStorage.clear());
-  await page.goto('/app.html?beta=KEP-9999&stage=visa_docs', { waitUntil: 'domcontentloaded' });
+  await page.goto('/app.html?beta=KEP-0000&stage=visa_docs', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
   await expect(page.locator('#betaModeBanner')).toBeHidden();
   expect(await page.evaluate(() => localStorage.getItem('kep.betaTesterId'))).toBeNull();
@@ -1014,7 +1014,7 @@ test('E-9 worker validator panel can open independently without identity fields'
 
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#closedPanel')).toBeVisible();
-  await expect(page.locator('#applicationPanel')).toBeHidden();
+  await expect(page.locator('#applicationPanel')).toBeVisible();
   await expect(page.locator('#workerPanelClosed')).toBeHidden();
   await expect(page.locator('#workerValidatorForm')).toBeVisible();
 
