@@ -59,10 +59,14 @@ def acceptance_message(row: dict[str, str]) -> str:
         "Akses beta tidak menjamin pekerjaan, pemilihan perusahaan, SLC, visa, atau keberangkatan."
     ])
 
-def assign(rows, received_at, activation_date, current_stage, source_channel):
+def assign(rows, received_at, activation_date, current_stage, source_channel, opened_at=None):
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
     received = parse_ts(received_at)
+    if opened_at:
+        opened = parse_ts(opened_at)
+        if received < opened:
+            raise ValueError("application receipt is earlier than public beta OPEN timestamp")
     activation = date.fromisoformat(activation_date)
     if activation < received.date():
         raise ValueError(
@@ -94,8 +98,9 @@ def self_test():
         "free_until": "", "feedback_status": "", "current_stage": "",
         "source_channel": "", "role": "", "created_at": "", "beta_link": ""
     } for i in range(1, 51)]
-    first = assign(rows, "2026-10-05T09:00:00+07:00", "2026-10-06", "roster", "community")
-    second = assign(rows, "2026-10-05T09:01:00+07:00", "2026-10-05", "slc", "community")
+    opened_at = "2026-10-05T08:30:00+07:00"
+    first = assign(rows, "2026-10-05T09:00:00+07:00", "2026-10-06", "roster", "community", opened_at)
+    second = assign(rows, "2026-10-05T09:01:00+07:00", "2026-10-05", "slc", "community", opened_at)
     assert first["tester_id"] == "KEP-0001"
     assert first["free_until"] == "2027-04-06"
     assert second["tester_id"] == "KEP-0002"
@@ -104,19 +109,25 @@ def self_test():
     assert acceptance_link(first).endswith("?beta=KEP-0001&stage=roster")
     assert "stage=roster" in acceptance_message(first)
     try:
-        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community")
+        assign(rows, "2026-10-05T08:29:59+07:00", "2026-10-05", "visa_docs", "community", opened_at)
+    except ValueError as exc:
+        assert "earlier than public beta OPEN timestamp" in str(exc)
+    else:
+        raise AssertionError("pre-OPEN application receipt was accepted")
+    try:
+        assign(rows, "2026-10-08T09:02:00+07:00", "2026-10-07", "visa_docs", "community", opened_at)
     except ValueError as exc:
         assert "activation date cannot be earlier" in str(exc)
     else:
         raise AssertionError("activation before application receipt was accepted")
     try:
-        assign(rows, "2026-10-05T08:59:00+07:00", "2026-10-07", "visa_docs", "community")
+        assign(rows, "2026-10-05T08:59:00+07:00", "2026-10-07", "visa_docs", "community", opened_at)
     except ValueError:
         pass
     else:
         raise AssertionError("out-of-order receipt was not rejected")
     try:
-        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "not_a_stage", "community")
+        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "not_a_stage", "community", opened_at)
     except ValueError as exc:
         assert "unsupported current_stage" in str(exc)
     else:
@@ -139,13 +150,18 @@ def main():
     if program.get("status") != "open":
         raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED recruitment status is not OPEN")
     release = program.get("releaseDecision", {})
-    if release.get("publicBeta") != "approved_manual" or not release.get("approvedAt"):
+    approved_at = str(release.get("approvedAt") or "").strip()
+    if release.get("publicBeta") != "approved_manual" or not approved_at:
         raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED public beta OPEN has no explicit approved release decision")
+    try:
+        parse_ts(approved_at)
+    except ValueError as exc:
+        raise SystemExit("BETA_SLOT_ASSIGNMENT_BLOCKED OPEN approval timestamp must include timezone") from exc
     required = [args.received_at, args.activation_date, args.current_stage, args.source_channel]
     if not all(required):
         parser.error("--received-at, --activation-date, --current-stage and --source-channel are required")
     fields, rows = load_tracker()
-    target = assign(rows, *required)
+    target = assign(rows, *required, opened_at=approved_at)
     if args.write:
         with TRACKER.open("w", encoding="utf-8-sig", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
