@@ -18,7 +18,7 @@ ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
 ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
 SUPPORTED_ROUTE_CYCLES = {str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)} | {"unknown"}
 SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
-ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik"}
+ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon"}
 
 def add_months(value: date, months: int) -> date:
     idx = value.month - 1 + months
