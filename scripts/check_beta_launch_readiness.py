@@ -42,6 +42,7 @@ source = load_json("docs/data/source_review_status.json")
 forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
+recruitment_sources = load_json("docs/data/beta_recruitment_sources_v1.json")
 departure_calls = load_json("docs/data/departure_calls_2026.json")
 manufacturing_launch_check = load_json("recruitment/MANUFACTURING_LAUNCH_CHECK.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
@@ -378,14 +379,23 @@ require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state
 require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
 require("program.application?.intakeStatus==='open'" in beta_js,
         "tester-interest application UI must be gated by intakeStatus, independently of beta access")
-require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCE_CODES" in beta_js,
-        "tester-interest email must carry a controlled non-identifying recruitment source code")
+require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCES_URL" in beta_js,
+        "tester-interest email must carry a controlled non-identifying recruitment source code from shared data")
 require("BETA_INTEREST_PARSE_SELF_TEST_PASS" in beta_interest_parser,
         "privacy-safe tester-interest parser must exist and expose a self-test")
 require("RAW_BODY_NOT_STORED=true" in beta_interest_parser,
         "tester-interest parser must explicitly avoid raw-body storage")
-require("return RECRUITMENT_SOURCE_CODES.has(raw)?raw:'website'" in beta_js,
-        "unknown recruitment source values must fall back to website")
+require("return betaRecruitmentSourceCodes.has(raw)?raw:betaRecruitmentDefaultCode" in beta_js,
+        "unknown recruitment source values must fall back to the shared default code")
+require(recruitment_sources.get("defaultCode") == "website",
+        "shared recruitment-source default must remain website")
+require(
+    set(recruitment_sources.get("codes", [])) >= {
+        "website","epstopik_indonesia","topikly","apsan_hakwon","owie_epstopik",
+        "lpk_samwon","jendela_asa","lpk_ggum"
+    },
+    "shared recruitment-source catalog is missing a required controlled code",
+)
 require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
         "beta access state must require explicit approved release state, not status alone")
 require("release.retrospectivePanel==='approved_manual'" in beta_js and "release.retrospectiveApprovedAt" in beta_js,
