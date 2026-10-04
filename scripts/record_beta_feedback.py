@@ -14,6 +14,7 @@ SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
 SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
+BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
 
 FEEDBACK_STATUSES = {"active", "complete", "withdrawn"}
 BROKER_GAP_STATUSES = {"pending", "none_reported", "open", "resolved", "official_or_licensed_only"}
@@ -38,6 +39,16 @@ def validate_public_tester(row: dict[str, str], tester_id: str) -> None:
         fail(f"{tester_id}: application receipt is missing")
     if not row.get("activated_at", "").strip() or not row.get("free_until", "").strip():
         fail(f"{tester_id}: beta access has not been activated")
+
+
+def resume_link(row: dict[str, str]) -> str:
+    tester_id = str(row.get("tester_id", "")).strip()
+    base = str(row.get("beta_link", "")).strip() or (BASE_URL + tester_id)
+    stage = str(row.get("current_stage", "")).strip()
+    if stage not in SUPPORTED_STAGES:
+        return base
+    separator = "&" if "?" in base else "?"
+    return f"{base}{separator}stage={stage}"
 
 
 def normalize_stage_list(values: list[str] | None) -> str | None:
@@ -171,6 +182,8 @@ def self_test() -> None:
     assert row["zero_broker_pass_stages"] == "eligibility;registration;roster"
     assert row["zero_broker_fail_stages"] == "employer_selection"
     assert row["notes"] == ""
+    row["beta_link"] = BASE_URL + "KEP-0001"
+    assert resume_link(row).endswith("?beta=KEP-0001&stage=slc")
 
     contradictory = dict(base)
     try:
@@ -303,6 +316,7 @@ def main() -> int:
         f"zero_broker_pass={target.get('zero_broker_pass_stages','')} "
         f"zero_broker_fail={target.get('zero_broker_fail_stages','')}"
     )
+    print("BETA_RESUME_LINK " + resume_link(target))
 
     if not args.write:
         print("DRY_RUN_ONLY public tracker was not changed")
