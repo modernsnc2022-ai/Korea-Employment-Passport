@@ -1003,13 +1003,18 @@ test('worker validator beta IDs show retrospective instructions and role', async
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
-  await page.goto('/app.html?beta=KEP-0031', { waitUntil: 'domcontentloaded' });
+  await page.goto('/app.html?beta=KEP-0031&stage=first_payroll_check', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
 
   await expect(page.locator('#betaModeBanner')).toBeVisible();
   await expect(page.locator('#quickStart')).toBeHidden();
   expect(await page.evaluate(() => document.body.classList.contains('setup-mode'))).toBe(false);
   await expect(page.locator('#betaModeBanner')).toContainText('Panel validator E-9 KEP-0031');
+  await expect(page.locator('#betaModeBanner')).toContainText('Fokus awal');
+  await expect(page.locator('#betaModeBanner')).toContainText('gaji');
+  await page.evaluate(() => switchView('gaps', false));
+  await expect(page.locator('#betaCheckStage')).toHaveValue('first_payroll_check');
+  expect(await page.evaluate(() => read(KEYS.done,[]).length)).toBe(0);
   await expect(page.locator('#betaModeBanner')).toContainText('pengalaman nyata');
   await expect(page.locator('#betaModeBanner')).toContainText('alamat asrama pribadi');
 
