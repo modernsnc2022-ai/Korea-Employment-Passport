@@ -9,17 +9,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
+RECRUITMENT_SOURCES = ROOT / "docs" / "data" / "beta_recruitment_sources_v1.json"
 ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
 ROUTE_CYCLE = int(ROUTE_DATA.get("cycle", 0))
 SUPPORTED_STAGES = {row["id"] for row in ROUTE_DATA.get("stages", [])}
 SUPPORTED_ROUTE_CYCLES = {
     str(year) for year in range(max(2004, ROUTE_CYCLE - 2), ROUTE_CYCLE + 1)
 } | {"unknown"}
-ALLOWED_SOURCE_CHANNELS = {
-    "website", "email", "community", "community_admin", "social", "referral",
-    "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly",
-    "apsan_hakwon", "owie_epstopik",
-}
+ALLOWED_SOURCE_CHANNELS = set(
+    json.loads(RECRUITMENT_SOURCES.read_text(encoding="utf-8-sig")).get("codes", [])
+)
 
 FIELD_PATTERNS = {
     "current_stage": re.compile(r"^Current route stage ID:\s*(\S+)\s*$", re.M),
