@@ -65,6 +65,12 @@ def worker_is_current_cycle(row: dict[str, str]) -> bool:
         and (row.get("experience_year") or "").strip() == ROUTE_CYCLE
     )
 
+def active_is_current_cycle(row: dict[str, str]) -> bool:
+    return (
+        bool((row.get("application_received_at") or "").strip())
+        and (row.get("route_cycle") or "").strip() == ROUTE_CYCLE
+    )
+
 def zero_broker_stage_summary(rows: list[dict[str, str]]) -> dict:
     pass_counts = stage_evidence_counter(rows, "zero_broker_pass_stages")
     fail_counts = stage_evidence_counter(rows, "zero_broker_fail_stages")
@@ -114,6 +120,14 @@ def self_test() -> None:
         "interview_status": "new",
         "experience_year": ROUTE_CYCLE,
     }) is False
+    assert active_is_current_cycle({
+        "application_received_at": "2026-10-01T09:00:00+07:00",
+        "route_cycle": ROUTE_CYCLE,
+    }) is True
+    assert active_is_current_cycle({
+        "application_received_at": "2026-10-01T09:00:00+07:00",
+        "route_cycle": "2025",
+    }) is False
     print("BETA_PROGRESS_SELF_TEST_PASS")
 
 def render(rows: list[dict[str, str]]) -> str:
@@ -131,6 +145,16 @@ def render(rows: list[dict[str, str]]) -> str:
 
     enrolled_workers = [row for row in workers if nonempty(row, "created_at")]
     assigned_active = [row for row in active if nonempty(row, "application_received_at")]
+    current_cycle_active_rows = [row for row in assigned_active if active_is_current_cycle(row)]
+    prior_cycle_active_rows = [
+        row for row in assigned_active
+        if (row.get("route_cycle") or "").strip().isdigit()
+        and (row.get("route_cycle") or "").strip() != ROUTE_CYCLE
+    ]
+    unknown_cycle_active_rows = [
+        row for row in assigned_active
+        if (row.get("route_cycle") or "").strip() == "unknown"
+    ]
     evidence_rows = assigned_active + enrolled_workers
 
     interviews_completed = count_value(enrolled_workers, "interview_status", "completed")
@@ -154,7 +178,7 @@ def render(rows: list[dict[str, str]]) -> str:
         enrolled_workers, "workplace_evidence_status", "published_single_verified_worker"
     )
 
-    current_cycle_evidence_rows = assigned_active + current_cycle_worker_rows
+    current_cycle_evidence_rows = current_cycle_active_rows + current_cycle_worker_rows
     zero_summary = zero_broker_stage_summary(current_cycle_evidence_rows)
     zero_fail_stage_ids = zero_summary["fail_stage_ids"]
     zero_pass_ready_stage_ids = zero_summary["pass_ready_stage_ids"]
@@ -167,14 +191,18 @@ def render(rows: list[dict[str, str]]) -> str:
     broker_gaps_official = count_value(evidence_rows, "broker_gap_status", "official_or_licensed_only")
     broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
     retest_passed = count_value(evidence_rows, "retest_status", "passed")
+    current_broker_gaps_pending = count_value(current_cycle_evidence_rows, "broker_gap_status", "pending")
+    current_broker_gaps_open = count_value(current_cycle_evidence_rows, "broker_gap_status", "open")
 
     late_stage = {}
     for bucket, stages in LATE_STAGE_BUCKETS.items():
         late_stage[bucket] = sum(
-            1 for row in active if (row.get("current_stage") or "").strip() in stages
+            1 for row in current_cycle_active_rows
+            if (row.get("current_stage") or "").strip() in stages
         )
 
     active_stage_counts = safe_counter(active, "current_stage")
+    current_active_stage_counts = safe_counter(current_cycle_active_rows, "current_stage")
     worker_stage_counts = safe_counter(workers, "current_stage")
 
     late_ready = all(late_stage[bucket] >= 1 for bucket in LATE_STAGE_BUCKETS)
@@ -187,8 +215,8 @@ def render(rows: list[dict[str, str]]) -> str:
         and interviews_completed >= 20
         and worker_year_context >= 20
         and late_ready
-        and broker_gaps_pending == 0
-        and broker_gaps_open == 0
+        and current_broker_gaps_pending == 0
+        and current_broker_gaps_open == 0
         and zero_broker_stage_ready
         and not STRUCTURED_ROUTE_HOLDS
         and SOURCE_REVIEW_READY
@@ -210,6 +238,10 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Beta accounts activated: {activated} (target: at least 30)",
         f"- Feedback started: {feedback_started}",
         f"- Feedback completed: {feedback_complete} (target: at least 30)",
+        f"- Active applicants from {ROUTE_CYCLE} route cycle: {len(current_cycle_active_rows)}",
+        f"- Active applicants from prior route cycles: {len(prior_cycle_active_rows)}",
+        f"- Active applicants with unknown route cycle: {len(unknown_cycle_active_rows)}",
+        "- Prior-cycle/unknown active-applicant feedback is product evidence and gap discovery, but not current-cycle route-rule PASS evidence.",
         "",
         "## Retrospective validation",
         f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
@@ -226,6 +258,8 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Broker-gap assessments pending: {broker_gaps_pending}",
         f"- Participants reporting no broker gap: {broker_gaps_none}",
         f"- Broker gaps open: {broker_gaps_open}",
+        f"- Current-cycle broker-gap assessments pending: {current_broker_gaps_pending}",
+        f"- Current-cycle broker gaps open: {current_broker_gaps_open}",
         f"- Broker gaps resolved: {broker_gaps_resolved}",
         f"- Broker steps confirmed official/licensed-only: {broker_gaps_official}",
         f"- Retests passed: {retest_passed}",
@@ -250,9 +284,13 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Late-stage coverage ready: {'YES' if late_ready else 'NO'}",
         "",
         "## Stage distribution",
-        "- Active applicants: " + (
+        "- Active applicants (all cycles): " + (
             ", ".join(f"{key}={value}" for key, value in sorted(active_stage_counts.items()))
             if active_stage_counts else "no stages recorded"
+        ),
+        f"- Active applicants ({ROUTE_CYCLE} cycle only): " + (
+            ", ".join(f"{key}={value}" for key, value in sorted(current_active_stage_counts.items()))
+            if current_active_stage_counts else "no stages recorded"
         ),
         "- E-9 workers: " + (
             ", ".join(f"{key}={value}" for key, value in sorted(worker_stage_counts.items()))
@@ -266,7 +304,7 @@ def render(rows: list[dict[str, str]]) -> str:
         "",
         "## Evidence gate",
         f"- Real-user evidence ready for route PASS review: {'YES' if evidence_ready else 'NO'}",
-        "- Beta OPEN may proceed with explicit official-evidence HOLDs, but final Broker Replacement Rate 100% PASS cannot.",
+        "- Beta access OPEN may proceed with explicit official-evidence HOLDs, but final Broker Replacement Rate 100% PASS cannot.",
         "- This aggregate does not itself declare Broker Replacement Rate PASS; route PASS still requires reviewing the actual sanitized beta evidence and confirming every necessary private-broker task is replaced.",
         "",
     ]
