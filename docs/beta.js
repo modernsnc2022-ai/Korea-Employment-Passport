@@ -40,7 +40,7 @@ function renderApplicantStageOptions(){
 
 function recruitmentSourceCode(){
   const raw=String(new URLSearchParams(location.search).get('src')||'website').trim().toLowerCase();
-  return RECRUITMENT_SOURCE_CODES.has(raw)?raw:'website';
+  return betaRecruitmentSourceCodes.has(raw)?raw:betaRecruitmentDefaultCode;
 }
 
 function selectedApplicantStageTitle(){
@@ -213,11 +213,15 @@ $('copyApplicationBtn').addEventListener('click',async()=>{
 Promise.all([
   fetch(PROGRAM_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('program HTTP '+response.status);return response.json()}),
   fetch(ROUTE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('route HTTP '+response.status);return response.json()}),
-  fetch(I18N_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('i18n HTTP '+response.status);return response.json()})
+  fetch(I18N_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('i18n HTTP '+response.status);return response.json()}),
+  fetch(RECRUITMENT_SOURCES_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('sources HTTP '+response.status);return response.json()})
 ])
-  .then(([program,route,i18n])=>{
+  .then(([program,route,i18n,recruitmentSources])=>{
     betaRoute=route;
     betaI18n=i18n||{};
+    betaRecruitmentSourceCodes=new Set(recruitmentSources?.codes||[]);
+    betaRecruitmentDefaultCode=String(recruitmentSources?.defaultCode||'website');
+    if(!betaRecruitmentSourceCodes.has(betaRecruitmentDefaultCode))throw new Error('invalid recruitment source default');
     renderApplicantStageOptions();
     renderApplicantCycleOptions();
     renderProgram(program);
