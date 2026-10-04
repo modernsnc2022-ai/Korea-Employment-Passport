@@ -71,11 +71,13 @@ function applicationText(){
     'Official G-to-G / EPS E-9 process: YES',
     'Feedback participation agreement: YES',
     '',
-    'I am applying for the limited public beta.',
+    'I am registering my interest as a beta tester.',
+    'I understand that sending this application does not activate beta access yet.',
+    'I understand that the initial validation target is around 30 testers, not an automatic rejection cap.',
     'I understand that beta access does not guarantee a job, employer selection, SLC, visa, or departure.',
     'I will not attach passport/KTP/ARC images or sensitive identity numbers.',
     '',
-    'Queue order should use the received timestamp of this application email.'
+    'The team may review and approve eligible testers after seeing the application volume.'
   ].join('\n');
 }
 
@@ -98,38 +100,37 @@ function renderProgram(program){
   $('noGuaranteeList').innerHTML=(beta.noGuarantee||[]).map(x=>'<span>'+escapeHtml(x)+'</span>').join('');
 
   const release=program.releaseDecision||{};
-  const open=program.status==='open'
+  const accessOpen=program.status==='open'
     && release.publicBeta==='approved_manual'
     && Boolean(String(release.approvedAt||'').trim());
-  $('closedPanel').hidden=open;
-  $('applicationPanel').hidden=!open;
+  const intakeOpen=program.application?.intakeStatus==='open';
+  $('closedPanel').hidden=accessOpen;
+  $('applicationPanel').hidden=!intakeOpen;
   const workerOpen=program.retrospectivePanel?.status==='open'
     && release.retrospectivePanel==='approved_manual'
     && Boolean(String(release.retrospectiveApprovedAt||'').trim());
   $('workerPanelClosed').hidden=workerOpen;
   $('workerValidatorForm').hidden=!workerOpen;
   const pill=$('betaStatusPill');
-  pill.textContent=open?'OPEN · '+beta.slots+' PESERTA':'BELUM DIBUKA';
-  pill.className='status-pill '+(open?'open':'hold');
+  pill.textContent=accessOpen
+    ?'AKSES BETA OPEN'
+    :intakeOpen
+      ?'PENDAFTARAN OPEN · AKSES MENUNGGU'
+      :'BELUM DIBUKA';
+  pill.className='status-pill '+(intakeOpen||accessOpen?'open':'hold');
 }
 
 $('betaApplicationForm').addEventListener('submit',(event)=>{
   event.preventDefault();
   const out=$('applicationResult');
-  const release=betaProgram?.releaseDecision||{};
-  if(
-    !betaProgram
-    || betaProgram.status!=='open'
-    || release.publicBeta!=='approved_manual'
-    || !String(release.approvedAt||'').trim()
-  ){
-    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran beta belum dibuka.';return;
+  if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
+    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
   if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
     out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap dan kedua persetujuan terlebih dahulu.';return;
   }
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
-  const subject=encodeURIComponent('[KEP Beta Application] Active EPS applicant');
+  const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
   const body=encodeURIComponent(applicationText());
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
@@ -166,14 +167,8 @@ $('copyWorkerValidatorBtn').addEventListener('click',async()=>{
 
 $('copyApplicationBtn').addEventListener('click',async()=>{
   const out=$('applicationResult');
-  const release=betaProgram?.releaseDecision||{};
-  if(
-    !betaProgram
-    || betaProgram.status!=='open'
-    || release.publicBeta!=='approved_manual'
-    || !String(release.approvedAt||'').trim()
-  ){
-    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran beta belum dibuka.';return;
+  if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
+    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
   if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value){
     out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap dan kedua persetujuan terlebih dahulu.';return;
@@ -181,7 +176,7 @@ $('copyApplicationBtn').addEventListener('click',async()=>{
   const ok=await copyText(applicationText());
   out.hidden=false;out.className='result'+(ok?'':' warn');
   out.textContent=ok
-    ?'Teks aplikasi sudah disalin. Kirim ke '+(betaProgram.application?.email||'modernsnc2022@gmail.com')+'.'
+    ?'Teks pendaftaran minat sudah disalin. Kirim ke '+(betaProgram.application?.email||'modernsnc2022@gmail.com')+'. Akses beta akan disetujui kemudian.'
     :'Browser tidak mengizinkan salin otomatis. Gunakan tombol email.';
 });
 
