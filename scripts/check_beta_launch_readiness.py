@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -285,10 +286,20 @@ if program_status == "hold":
 else:
     require(release_decision.get("publicBeta") == "approved_manual",
             "OPEN state requires explicit releaseDecision.publicBeta=approved_manual")
-    require(bool(str(release_decision.get("approvedAt") or "").strip()),
-            "OPEN state requires releaseDecision.approvedAt")
+    approved_at = str(release_decision.get("approvedAt") or "").strip()
+    require(bool(approved_at), "OPEN state requires releaseDecision.approvedAt")
+    approved_dt = None
+    if approved_at:
+        try:
+            approved_dt = datetime.fromisoformat(approved_at.replace("Z", "+00:00"))
+        except ValueError:
+            failures.append("OPEN approval timestamp must be valid ISO-8601")
+        else:
+            require(approved_dt.tzinfo is not None,
+                    "OPEN approval timestamp must include timezone")
     require(
-        manufacturing_launch_check.get("checkedAt") == release_decision.get("approvedAt"),
+        approved_dt is not None
+        and manufacturing_launch_check.get("checkedAt") == approved_dt.date().isoformat(),
         "OPEN state requires a same-day Manufacturing launch-check record",
     )
     require("Recruitment status: **OPEN" in outreach,
