@@ -404,6 +404,7 @@ async function boot(){
     renderFreshnessStatus();
     renderBqcStatus();
     hydrateBetaTesterIdFromUrl();
+    const hydratedBetaStage=hydratePublicBetaStageFromUrl();
     renderQuickStart();
     renderJourney();
     renderCurrentStageSelector();
@@ -3051,6 +3052,19 @@ function hydrateBetaTesterIdFromUrl(){
   if(fromUrl)write(KEYS.betaTesterId,fromUrl);
 }
 
+function hydratePublicBetaStageFromUrl(){
+  if(!route||betaTesterRole()!=='active_applicant')return '';
+  const stageId=String(new URLSearchParams(location.search).get('stage')||'').trim();
+  const index=route.stages.findIndex(stage=>stage.id===stageId);
+  if(index<0)return '';
+  const hasProgress=read(KEYS.done,[]).length>0;
+  const setupFinished=read(KEYS.quickSetup,false);
+  if(hasProgress||setupFinished)return '';
+  write(KEYS.done,route.stages.slice(0,index).map(stage=>stage.id));
+  write(KEYS.quickSetup,true);
+  return stageId;
+}
+
 function renderBetaModeBanner(){
   const banner=$('betaModeBanner');
   if(!banner)return;
@@ -3069,8 +3083,11 @@ function renderBetaModeBanner(){
       '<span><b>2</b> Bandingkan panduan dengan pengalaman nyata; jika tidak ingat, pilih “belum dijalani/tidak dapat dinilai”</span>'+
       '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, email, atau alamat asrama pribadi</span>';
   }else{
+    const assignedStage=String(new URLSearchParams(location.search).get('stage')||'').trim();
+    const assigned=route?.stages?.find(stage=>stage.id===assignedStage);
     banner.innerHTML=
       `<strong>Mode beta ${escapeHtml(testerId)}</strong>`+
+      (assigned?`<span><b>Mulai</b> Tahap dari aplikasi beta: ${escapeHtml(stageTitle(assigned))}</span>`:'')+
       '<span><b>1</b> Gunakan aplikasi seperti biasa pada tahap Anda</span>'+
       '<span><b>2</b> Nilai hanya tahap yang benar-benar Anda alami</span>'+
       '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, atau email</span>';
