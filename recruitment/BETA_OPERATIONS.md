@@ -1,32 +1,39 @@
-# Beta operations — public 30-person cohort
+# Beta operations — active-applicant cohort
 
-This file covers operational handling only. The public beta remains **HOLD** until BETA_LAUNCH_GATE.md passes.
+This file covers operational handling only.
 
-## Slot order
+**Tester-interest intake may be OPEN while beta access remains HOLD.** Do not assign/activate KEP IDs until BETA_LAUNCH_GATE.md passes and the explicit beta-access release decision is recorded.
 
-- Do not assign KEP IDs while recruitment status is HOLD.
-- Review eligibility first outside the public repository.
-- After OPEN, assign KEP-0001 through KEP-0030 in the received-timestamp order of eligible applications.
-- Activation timing never changes queue order.
-- The 6-month free period starts from that participant's actual beta activation date.
-- Do not put email addresses, names, phone numbers, passport/KTP/ARC numbers, exact home addresses, or identity-document images in this repository.
+## Application intake and approval
+
+- Accept tester-interest emails while application intake is OPEN, even if beta access is still HOLD.
+- Review eligibility outside the public repository after seeing the actual application volume.
+- The initial validation target is at least 30 active applicants; 30 is not a hard cap and is not an automatic rejection threshold.
+- Do not reject an otherwise eligible applicant solely because the count becomes 31 or higher.
+- KEP-0001 through KEP-0030 are the base active-applicant IDs.
+- KEP-0031 through KEP-0050 remain reserved for the separate E-9 worker panel.
+- Additional approved active applicants use KEP-0051 upward, contiguously.
+- Approval does not have to follow email receipt order. Preserve the actual application-received timestamp, but assign the next available KEP ID when that eligible applicant is approved.
+- The 6-month free period starts from that participant's actual beta activation date, not from application date.
+- The sender email address is visible in the private email system and may be used only for application review, the approval/KEP-ID reply, and necessary beta communication. Never put it in this public repository.
+- Do not put names, phone numbers, passport/KTP/ARC numbers, exact home/dorm addresses, identity-document images, or other private contact details in this repository.
 
 ## Assignment helper
 
-Use scripts/assign_beta_slot.py only after the beta program status is OPEN. It accepts an eligible application received timestamp with timezone, activation date, current route stage, and a non-identifying source-channel label.
+Use `scripts/assign_beta_slot.py` only after **beta access** status is OPEN. It accepts the eligible application received timestamp with timezone, activation date, current route stage, and a non-identifying source-channel label.
 
 Allowed public-repo source-channel codes are: `website`, `email`, `community`, `community_admin`, `social`, `referral`, `direct_outreach`, `partner`, `other`. Never put a person name, handle, email address, phone number, or organization-specific contact detail in `source_channel`.
 
-Run without --write for a dry run. Add --write only after checking the proposed KEP ID and free-until date.
+Run without `--write` for a dry run. Add `--write` only after checking the proposed KEP ID and free-until date.
 
-The script selects the next contiguous public KEP slot, computes the six-calendar-month end date, and refuses an application timestamp earlier than the last assigned eligible application. It also refuses any application received before the recorded public-beta OPEN timestamp, including mail received earlier on the same calendar day.
+The helper fills the next unused base active-applicant slot first. Once KEP-0001..KEP-0030 are assigned, it creates KEP-0051, KEP-0052, and so on as needed. It computes the six-calendar-month end date from the actual activation date. Applications collected before beta-access OPEN remain eligible for later approval.
 
 Direct contact information stays in the access-controlled communication system and is matched to the pseudonymous KEP ID outside this public repository.
 
 
 ## E-9 worker validator panel
 
-The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains separate from the 30-person public beta.
+The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains separate from the active-applicant cohort, including any KEP-0051+ overflow approvals.
 
 Before changing the worker panel to OPEN, confirm same-HEAD static/UI/Pages/launch-gate checks are green and the official-source state is clean. Dry-run `python scripts/set_worker_panel_release.py --approved-at YYYY-MM-DDTHH:MM:SS+09:00 --confirm-open`; only after explicit approval re-run with `--write`. Do not hand-edit only `retrospectivePanel.status`.
 
@@ -37,7 +44,7 @@ Before changing the worker panel to OPEN, confirm same-HEAD static/UI/Pages/laun
 - After the interview, use `scripts/record_worker_interview.py` without `--write` first. It accepts only categorical/non-identifying values: experience year, route stage, broker-used yes/no/unknown, workplace-info-needed yes/no/unknown, gap status, retest status, and workplace-evidence decision.
 - Add `--write` only after checking the dry-run line. This helper—not the WPE publisher—sets `interview_status=completed`.
 - Choose `workplace_evidence_status=declined` when the worker does not consent to public workplace evidence, or `not_publishable` when the interview cannot safely produce a public WPE record. Only `pending` can later be published.
-- Worker validators do **not** receive the public-beta application queue or six-month entitlement fields.
+- Worker validators do **not** receive the active-applicant six-month entitlement fields.
 - Contact details and narrative/raw interview notes remain outside this public repository.
 
 - In the app, retrospective validators must record the year of the EPS process/departure they actually experienced (or “do not remember exactly”) before saving stage-validation evidence. This year is context for evidence quality, not identity data.
@@ -126,7 +133,7 @@ The public tracker preserves route evidence only as stage IDs:
 
 The same stage must never appear in both columns for one participant. Use the exact stage IDs included in the app's combined feedback bundle; do not infer IDs from translated titles.
 
-For KEP-0001..KEP-0030, verified feedback from the active 2026 route can contribute current-cycle evidence. For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
+For active-applicant IDs (KEP-0001..KEP-0030 and KEP-0051+), verified feedback from the active 2026 route can contribute current-cycle evidence. For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
 
 Route evidence review is not ready until all 27 stages have current-cycle PASS coverage, no current-cycle FAIL stage remains, all Broker Gaps are resolved or official/licensed-only, and the other cohort/late-stage gates are satisfied.
 
