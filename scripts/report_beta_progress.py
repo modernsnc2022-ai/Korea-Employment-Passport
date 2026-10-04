@@ -166,7 +166,6 @@ def render(rows: list[dict[str, str]]) -> str:
         and len(enrolled_workers) >= 20
         and interviews_completed >= 20
         and worker_year_context >= 20
-        and workplace_evidence_published >= 1
         and late_ready
         and broker_gaps_open == 0
         and zero_broker_stage_ready
@@ -198,6 +197,7 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- Completed interviews with unknown experience year: {unknown_cycle_workers}",
         f"- Prior-cycle/unknown worker interviews are retrospective gap evidence only; they are not {ROUTE_CYCLE} route-rule PASS evidence.",
         f"- Privacy-reviewed workplace evidence published: {workplace_evidence_published}",
+        "- Public WPE publication depends on separate contributor consent and is reported here, but it is not a route-PASS prerequisite.",
         "",
         "## Broker replacement evidence",
         f"- Broker gaps open: {broker_gaps_open}",
