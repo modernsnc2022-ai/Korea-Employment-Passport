@@ -16,7 +16,7 @@ SUPPORTED_STAGES = {
 SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
 
 FEEDBACK_STATUSES = {"active", "complete", "withdrawn"}
-BROKER_GAP_STATUSES = {"open", "resolved", "official_or_licensed_only"}
+BROKER_GAP_STATUSES = {"pending", "none_reported", "open", "resolved", "official_or_licensed_only"}
 RETEST_STATUSES = {"pending", "passed", "failed", "not_applicable"}
 YES_NO_UNKNOWN = {"yes", "no", "unknown"}
 
@@ -137,7 +137,7 @@ def self_test() -> None:
         "free_until": "2027-04-06",
         "current_stage": "roster",
         "feedback_status": "not_started",
-        "broker_gap_status": "open",
+        "broker_gap_status": "pending",
         "retest_status": "pending",
         "broker_used": "",
         "workplace_info_needed": "",
