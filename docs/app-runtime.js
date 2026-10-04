@@ -19,7 +19,23 @@ let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorker
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
-const BETA_SCOPED_KEYS=new Set([KEYS.gaps,KEYS.fieldQuestions,KEYS.rejections,KEYS.betaChecks,KEYS.betaWorkerExperienceYear]);
+const BETA_SCOPED_KEYS=new Set([
+  KEYS.done,
+  KEYS.docs,
+  KEYS.gaps,
+  KEYS.contract,
+  KEYS.workplace,
+  KEYS.ledger,
+  KEYS.payroll,
+  KEYS.fieldQuestions,
+  KEYS.rejections,
+  KEYS.betaChecks,
+  KEYS.betaWorkerExperienceYear,
+  KEYS.scopeSelections,
+  KEYS.formWizard,
+  KEYS.wizardReviewed,
+  KEYS.quickSetup
+]);
 function activeBetaTesterIdForStorage(){
   try{return canonicalBetaTesterId(JSON.parse(localStorage.getItem(KEYS.betaTesterId)||'""'))}catch{return ''}
 }
