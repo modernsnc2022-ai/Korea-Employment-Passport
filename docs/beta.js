@@ -1,8 +1,43 @@
 const PROGRAM_URL='data/beta_program_v1.json';
-let betaProgram=null;
+const ROUTE_URL='data/id_e9_manufacturing_2026.json';
+const I18N_URL='data/id_e9_manufacturing_2026_id.json';
+let betaProgram=null,betaRoute=null,betaI18n={};
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+
+const STAGE_GROUPS=[
+  {label:'Persiapan & pendaftaran',ids:['eligibility','registration','exam_fee','biometric','document_verify','exam_card']},
+  {label:'Ujian & seleksi',ids:['eps_topik','skill_competency','final_selection','psychology_pre_job','mcu1']},
+  {label:'Lamaran kerja & kontrak',ids:['job_application','roster','employer_selection','slc','post_slc_requirements']},
+  {label:'Visa & keberangkatan',ids:['visa_docs','predeparture_training','mcu3_departure','departure']},
+  {label:'Setelah tiba di Korea',ids:['korea_entry_training','employer_handover','residence_registration','eps_insurance_check','first_payroll_check','labor_support_ready','employment_maintenance']}
+];
+
+function renderApplicantStageOptions(){
+  const select=$('applicantStage');
+  if(!select||!betaRoute)return;
+  const byId=Object.fromEntries((betaRoute.stages||[]).map(stage=>[stage.id,stage]));
+  select.innerHTML='<option value="">Pilih tahap resmi saat ini</option>';
+  STAGE_GROUPS.forEach(group=>{
+    const optgroup=document.createElement('optgroup');
+    optgroup.label=group.label;
+    group.ids.forEach(id=>{
+      const stage=byId[id];
+      if(!stage)return;
+      const option=document.createElement('option');
+      option.value=id;
+      option.textContent=betaI18n[id]?.title||stage.title||id;
+      optgroup.appendChild(option);
+    });
+    select.appendChild(optgroup);
+  });
+}
+
+function selectedApplicantStageTitle(){
+  const select=$('applicantStage');
+  return select?.selectedOptions?.[0]?.textContent?.trim()||'';
+}
 
 function workerValidatorText(){
   return [
@@ -24,10 +59,12 @@ function workerPanelOpen(){
 
 function applicationText(){
   const stage=$('applicantStage').value;
+  const stageTitle=selectedApplicantStageTitle();
   return [
     'KOREA EMPLOYMENT PASSPORT — BETA APPLICATION',
     '',
-    'Current stage: '+stage,
+    'Current route stage ID: '+stage,
+    'Current stage title: '+stageTitle,
     'Official G-to-G / EPS E-9 process: YES',
     'Feedback participation agreement: YES',
     '',
@@ -128,9 +165,17 @@ $('copyApplicationBtn').addEventListener('click',async()=>{
     :'Browser tidak mengizinkan salin otomatis. Gunakan tombol email.';
 });
 
-fetch(PROGRAM_URL,{cache:'no-store'})
-  .then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()})
-  .then(renderProgram)
+Promise.all([
+  fetch(PROGRAM_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('program HTTP '+response.status);return response.json()}),
+  fetch(ROUTE_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('route HTTP '+response.status);return response.json()}),
+  fetch(I18N_URL,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('i18n HTTP '+response.status);return response.json()})
+])
+  .then(([program,route,i18n])=>{
+    betaRoute=route;
+    betaI18n=i18n||{};
+    renderApplicantStageOptions();
+    renderProgram(program);
+  })
   .catch(()=>{
     $('betaStatusPill').textContent='STATUS TIDAK TERSEDIA';
     $('betaStatusPill').className='status-pill hold';
