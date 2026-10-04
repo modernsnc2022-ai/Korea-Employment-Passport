@@ -149,3 +149,10 @@ Run without `--write` first. The supplied PASS/FAIL lists are treated as the lat
 - `official_or_licensed_only` — the remaining helper/service is an unavoidable official or legally licensed role, not a replaceable private broker.
 
 New beta/worker assignments start at `pending`. Route PASS review remains blocked while any evidence participant is still `pending` or any real gap remains `open`. Public applicants must also complete their planned beta feedback cycle before route evidence can become ready.
+
+
+## Same-day Manufacturing notice check
+
+Before any public-beta OPEN transition, review the official KP2MI G-to-G Korea index again for a 2026 Manufacturing-specific online job-application detailed notice and update `recruitment/MANUFACTURING_LAUNCH_CHECK.json`.
+
+The release helper requires the audit record's `checkedAt` to equal the OPEN approval date. If a new Manufacturing job-application notice is found, set the record to review-required and do not OPEN until the five held job-application questions, structured rules, static checks, UI tests, and source baseline have been reviewed and updated. A Fisheries-only online job-application notice must never be reused for Manufacturing.
