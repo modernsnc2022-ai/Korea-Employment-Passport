@@ -64,7 +64,7 @@ function applicationText(){
   const stage=$('applicantStage').value;
   const stageTitle=selectedApplicantStageTitle();
   return [
-    'KOREA EMPLOYMENT PASSPORT — BETA APPLICATION',
+    'KOREA EMPLOYMENT PASSPORT — TESTER INTEREST',
     '',
     'Current route stage ID: '+stage,
     'Current stage title: '+stageTitle,
