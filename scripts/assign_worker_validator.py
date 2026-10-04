@@ -32,7 +32,7 @@ def assign(rows, joined_date, current_stage, source_channel):
     target["experience_year"]=""
     target["interview_status"]="new"
     target["workplace_evidence_status"]="pending"
-    target["broker_gap_status"]="open"
+    target["broker_gap_status"]="pending"
     target["retest_status"]="pending"
     return target
 
@@ -41,7 +41,7 @@ def self_test():
       "tester_id":f"KEP-{i:04d}",
       "target_group":"active_applicant" if i<=30 else "e9_worker_korea",
       "created_at":"","source_channel":"","role":"","current_stage":"","in_korea":"",
-      "e9_experience":"","interview_status":"new","broker_gap_status":"open","retest_status":"pending"
+      "e9_experience":"","interview_status":"new","broker_gap_status":"pending","retest_status":"pending"
     } for i in range(1,51)]
     first=assign(rows,"2026-10-04","employment_maintenance","community_admin")
     second=assign(rows,"2026-10-05","first_payroll_check","community_admin")
