@@ -59,11 +59,13 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
 
 
 def outreach_open_text(text: str) -> str:
-    if "Recruitment status: **HOLD" not in text:
-        fail("OUTREACH_ID.md does not contain the expected HOLD status marker")
+    if "Application intake status: **OPEN**" not in text:
+        fail("OUTREACH_ID.md must keep application intake OPEN")
+    if "Beta access status: **HOLD" not in text:
+        fail("OUTREACH_ID.md does not contain the expected beta-access HOLD marker")
     return text.replace(
-        "Recruitment status: **HOLD",
-        "Recruitment status: **OPEN",
+        "Beta access status: **HOLD",
+        "Beta access status: **OPEN",
         1,
     )
 
@@ -128,8 +130,12 @@ def self_test() -> None:
     else:
         raise AssertionError("OPEN was allowed after a Manufacturing notice was found")
 
-    changed = outreach_open_text("Recruitment status: **HOLD — do not publish**")
-    assert "Recruitment status: **OPEN" in changed
+    changed = outreach_open_text(
+        "Application intake status: **OPEN**\n"
+        "Beta access status: **HOLD until gate passes.**"
+    )
+    assert "Application intake status: **OPEN**" in changed
+    assert "Beta access status: **OPEN" in changed
     print("BETA_RELEASE_STATE_SELF_TEST_PASS")
 
 
@@ -189,7 +195,7 @@ def main() -> int:
         encoding="utf-8",
     )
     OUTREACH.write_text(updated_outreach, encoding="utf-8")
-    print("BETA_RELEASE_WRITTEN public_beta_status=open outreach_status=OPEN")
+    print("BETA_RELEASE_WRITTEN public_beta_access=open application_intake=open")
     return 0
 
 
