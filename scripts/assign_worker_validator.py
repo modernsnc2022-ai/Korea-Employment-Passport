@@ -15,7 +15,7 @@ SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
 BASE_URL = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html?beta="
-ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon"}
+ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon", "jendela_asa", "lpk_ggum"}
 
 def invitation_link(row: dict[str, str]) -> str:
     base = str(row.get("beta_link", "")).strip()
