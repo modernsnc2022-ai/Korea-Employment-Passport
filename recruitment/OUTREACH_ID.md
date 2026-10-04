@@ -1,46 +1,54 @@
 # Indonesia beta outreach
 
-> Recruitment status: **HOLD until BETA_LAUNCH_GATE passes.**
-> Existing outreach replies may be received and logged, but do not open the public 30-person beta yet.
+> Application intake status: **OPEN**
+> Beta access status: **HOLD until BETA_LAUNCH_GATE passes and explicit approval is recorded.**
+> Sending an application now does not activate beta access or start the 6-month benefit.
 
-## Message to community admin — use after launch gate PASS
+## Message to community admin — application intake can be shared now
 
-Halo Admin. Kami sedang membuka beta terbatas Korea Employment Passport,
+Halo Admin. Kami sedang mencari calon tester untuk Korea Employment Passport,
 alat pendamping calon pekerja Indonesia yang mengikuti jalur resmi G-to-G Korea/EPS.
 
-Beta ini dibuka untuk **30 peserta pertama** yang sedang menjalani proses resmi G-to-G Korea/EPS.
-Peserta beta yang diterima akan mendapatkan layanan Korea Employment Passport **gratis selama 6 bulan sejak akun beta diaktifkan**, dengan syarat bersedia menggunakan layanan secara nyata dan memberikan masukan selama proses.
+Saat ini kami **menerima pendaftaran minat lebih dulu** untuk melihat kebutuhan dan jumlah calon tester.
+Target validasi awal sekitar **30 pelamar aktif**, tetapi 30 bukan batas otomatis. Jika jumlah pendaftar yang layak sedikit lebih banyak, mereka tidak akan ditolak hanya karena melewati angka 30.
+
+Setelah produk dinyatakan siap, peserta yang disetujui akan menerima KEP ID dan link beta.
+Sejak akses beta benar-benar diaktifkan, peserta yang disetujui mendapatkan Korea Employment Passport **gratis selama 6 bulan sejak akun beta diaktifkan**, dengan syarat bersedia menggunakan layanan secara nyata dan memberikan masukan selama proses.
 
 Tujuan beta ini bukan menjual lowongan dan bukan menjanjikan keberangkatan.
 Kami ingin menguji apakah calon pekerja dapat menjalani proses resmi tanpa calo:
-pendaftaran, dokumen, ujian, skill test, lamaran, SLC, visa, sampai keberangkatan.
+pendaftaran, dokumen, ujian, skill test, lamaran, SLC, visa, sampai keberangkatan dan tahap awal bekerja di Korea.
 
-Bolehkah kami mengundang peserta beta di komunitas ini?
+Bolehkah kami membagikan undangan pendaftaran calon tester di komunitas ini?
 Kami akan mengikuti aturan grup dan tidak melakukan promosi berbayar.
 
-## Public beta post — publish only after launch gate PASS
+## Public tester-interest post — may publish while beta access is still HOLD
 
-🇮🇩🇰🇷 BETA TERBATAS — KOREA EMPLOYMENT PASSPORT
+🇮🇩🇰🇷 PENDAFTARAN CALON TESTER — KOREA EMPLOYMENT PASSPORT
 
-Kami membuka beta untuk **30 peserta pertama** yang sedang menjalani proses resmi G-to-G Korea / EPS E-9.
+Kami sedang mengumpulkan calon tester yang benar-benar menjalani proses resmi G-to-G Korea / EPS E-9.
 
-🎁 Peserta beta yang diterima mendapatkan:
-**akses Korea Employment Passport gratis selama 6 bulan sejak akun beta diaktifkan.**
+📌 **Pendaftaran minat sudah dibuka.**
+Ini belum berarti akses beta langsung aktif. Kami akan melihat jumlah pendaftar terlebih dahulu, lalu meninjau dan menyetujui peserta ketika produk siap untuk digunakan dalam proses nyata.
 
-Syaratnya sederhana:
-• benar-benar sedang menjalani proses G-to-G Korea/EPS;
-• mencoba layanan dalam proses nyata;
-• memberikan masukan tentang bagian yang membingungkan, kurang lengkap, atau masih membuat Anda harus bertanya kepada calo/LPK/orang lain;
-• memberi kabar singkat saat tahap proses Anda berubah, jika memungkinkan.
+Target validasi awal kami sekitar **30 pelamar aktif**, tetapi angka 30 bukan hard cap. Pendaftar yang memenuhi syarat tidak akan otomatis ditolak hanya karena jumlahnya menjadi 31 atau sedikit lebih banyak.
 
-Kami ingin membantu pengguna mengikuti jalur resmi tanpa calo, dari persiapan, pendaftaran, dokumen, ujian, skill test, lamaran, SLC, visa, sampai keberangkatan.
+🎁 Peserta yang kemudian disetujui sebagai tester mendapatkan:
+**akses Korea Employment Passport gratis selama 6 bulan sejak akun beta benar-benar diaktifkan.**
+
+Syarat utama:
+• benar-benar sedang menjalani / melanjutkan proses resmi G-to-G Korea/EPS E-9;
+• menggunakan layanan dalam proses nyata setelah akses diberikan;
+• memberikan masukan tentang bagian yang membingungkan, kurang lengkap, ditolak, atau masih membuat Anda harus mencari bantuan calo/perantara;
+• memberi kabar singkat saat tahap proses berubah, jika memungkinkan.
 
 Penting:
 • ini bukan penjualan lowongan;
-• kami tidak menjamin diterima kerja, visa, SLC, atau keberangkatan;
-• tidak ada biaya untuk ikut beta;
-• jangan mengirim paspor/KTP/ARC atau nomor identitas sensitif.
+• kami tidak menjamin diterima kerja, pemilihan perusahaan, SLC, visa, atau keberangkatan;
+• tidak ada biaya untuk mendaftar atau ikut beta;
+• jangan mengirim paspor/KTP/ARC, nomor identitas sensitif, nomor telepon, atau alamat rumah/asrama dalam formulir beta;
+• masa gratis 6 bulan baru mulai saat akses beta benar-benar diaktifkan.
 
-Kuota beta publik: **30 orang pertama yang memenuhi syarat, berdasarkan waktu aplikasi diterima setelah pendaftaran resmi dibuka.**
+Daftar melalui halaman beta Korea Employment Passport dan kirim teks pendaftaran minat sesuai petunjuk di sana.
 
-Selain itu, kami juga mengundang pekerja Indonesia yang sudah bekerja di Korea dengan E-9 sebagai panel validasi pengalaman nyata.
+Selain itu, pekerja Indonesia yang sudah bekerja di Korea dengan E-9 akan direkrut melalui panel validasi pengalaman nyata yang terpisah.
