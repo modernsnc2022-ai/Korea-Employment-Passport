@@ -74,6 +74,8 @@ jobs:
         run: python scripts/record_manufacturing_launch_check.py --self-test
       - name: Self-test beta release-state helper
         run: python scripts/set_beta_release.py --self-test
+      - name: Self-test E-9 worker panel release helper
+        run: python scripts/set_worker_panel_release.py --self-test
       - name: Self-test E-9 worker validator assignment
         run: python scripts/assign_worker_validator.py --self-test
       - name: Self-test worker interview recorder
