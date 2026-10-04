@@ -63,7 +63,7 @@ Beta OPEN requires sections 1–7 to pass plus a final same-day check for any ne
 
 ## 8. Recruitment switch
 When sections 1–7 all PASS:
-1. change recruitment status from HOLD to OPEN;
+1. after an explicit manual release decision, use the release-state helper to change recruitment status from HOLD to OPEN and record the approval date;
 2. open the first-30 active-applicant beta;
 3. assign KEP-0001 through KEP-0030 to eligible applicants in application-received timestamp order after recruitment becomes OPEN;
 4. activation timing must not change queue order; grant each accepted beta account 6 months free from its actual activation date;
