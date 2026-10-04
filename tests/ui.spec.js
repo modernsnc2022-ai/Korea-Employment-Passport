@@ -595,6 +595,9 @@ test('tester-interest intake is open while beta access remains on hold', async (
   await expect(page.locator('body')).toContainText('30 bukan batas otomatis');
   await expect(page.locator('body')).toContainText('6 bulan gratis');
   await expect(page.locator('body')).toContainText('Jangan kirim gambar paspor/KTP/ARC');
+  await expect(page.locator('#applicantCycle option')).toHaveCount(5);
+  await expect(page.locator('#applicantCycle')).toContainText('2026');
+  await expect(page.locator('#applicantCycle')).toContainText('Tidak yakin');
 
   const overflow = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -845,13 +848,16 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   expect(identityInputs).toBe(0);
 
   await expect(page.locator('#applicantStage option')).toHaveCount(28);
+  await expect(page.locator('#applicantCycle option')).toHaveCount(5);
   await page.locator('#applicantStage').selectOption('roster');
+  await page.locator('#applicantCycle').selectOption('2026');
   await page.locator('#activeProcess').check();
   await page.locator('#feedbackAgreement').check();
 
   const application = await page.evaluate(() => applicationText());
   expect(application).toContain('Current route stage ID: roster');
   expect(application).toContain('Current stage title:');
+  expect(application).toContain('EPS process cycle: 2026');
   expect(application).toContain('Official G-to-G / EPS E-9 process: YES');
   expect(application).toContain('Feedback participation agreement: YES');
   expect(application).toContain('I am registering my interest as a beta tester.');
