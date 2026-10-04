@@ -341,6 +341,8 @@ require("zero_broker_stage_ready" in beta_progress_reporter and "ROUTE_CYCLE" in
         "beta progress report must gate route evidence on all current-cycle zero-broker stages")
 require("STRUCTURED_ROUTE_HOLDS" in beta_progress_reporter,
         "beta progress report must block final route PASS on structured official-evidence HOLDs")
+require("SOURCE_REVIEW_READY" in beta_progress_reporter,
+        "beta progress report must require a clean official-source state for final route PASS")
 require("No structured `blocksZeroBrokerReady=true` question remains on `answered_hold`." in mvp_validation,
         "MVP validation must keep structured HOLDs out of final Broker Replacement Rate PASS")
 require("They do **not** require the beta itself to stay closed" in mvp_validation,
