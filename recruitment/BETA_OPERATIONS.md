@@ -15,6 +15,8 @@ This file covers operational handling only. The public beta remains **HOLD** unt
 
 Use scripts/assign_beta_slot.py only after the beta program status is OPEN. It accepts an eligible application received timestamp with timezone, activation date, current route stage, and a non-identifying source-channel label.
 
+Allowed public-repo source-channel codes are: `website`, `email`, `community`, `community_admin`, `social`, `referral`, `direct_outreach`, `partner`, `other`. Never put a person name, handle, email address, phone number, or organization-specific contact detail in `source_channel`.
+
 Run without --write for a dry run. Add --write only after checking the proposed KEP ID and free-until date.
 
 The script selects the next contiguous public KEP slot, computes the six-calendar-month end date, and refuses an application timestamp earlier than the last assigned eligible application. It also refuses any application received before the recorded public-beta OPEN timestamp, including mail received earlier on the same calendar day.
@@ -25,6 +27,8 @@ Direct contact information stays in the access-controlled communication system a
 ## E-9 worker validator panel
 
 The 20-person retrospective panel uses KEP-0031 through KEP-0050 and remains separate from the 30-person public beta.
+
+Before changing the worker panel to OPEN, confirm same-HEAD static/UI/Pages/launch-gate checks are green and the official-source state is clean. Dry-run `python scripts/set_worker_panel_release.py --approved-at YYYY-MM-DDTHH:MM:SS+09:00 --confirm-open`; only after explicit approval re-run with `--write`. Do not hand-edit only `retrospectivePanel.status`.
 
 - Do not assign worker-validator KEP IDs while `retrospectivePanel.status` is HOLD.
 - After the worker panel becomes OPEN, assign KEP-0031 through KEP-0050 contiguously in validator enrollment order.
