@@ -981,6 +981,8 @@ test('worker validator beta IDs show retrospective instructions and role', async
   await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
 
   await expect(page.locator('#betaModeBanner')).toBeVisible();
+  await expect(page.locator('#quickStart')).toBeHidden();
+  expect(await page.evaluate(() => document.body.classList.contains('setup-mode'))).toBe(false);
   await expect(page.locator('#betaModeBanner')).toContainText('Panel validator E-9 KEP-0031');
   await expect(page.locator('#betaModeBanner')).toContainText('pengalaman nyata');
   await expect(page.locator('#betaModeBanner')).toContainText('alamat asrama pribadi');
