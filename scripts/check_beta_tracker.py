@@ -109,7 +109,7 @@ BROKER_GAP_STATUSES = {"", "pending", "none_reported", "open", "resolved", "offi
 RETEST_STATUSES = {"", "pending", "passed", "failed", "not_applicable"}
 WORKPLACE_EVIDENCE_STATUSES = {"", "pending", "published_single_verified_worker", "declined", "not_publishable"}
 YES_NO_UNKNOWN = {"", "yes", "no", "unknown"}
-ALLOWED_SOURCE_CHANNELS = {"", "website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik"}
+ALLOWED_SOURCE_CHANNELS = {"", "website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other", "epstopik_indonesia", "topikly", "apsan_hakwon", "owie_epstopik", "lpk_samwon"}
 CONTROLLED_STAGE_LIST_FIELDS = {
     "broker_tasks", "documents_confusing", "official_process_gap",
     "zero_broker_pass_stages", "zero_broker_fail_stages"
