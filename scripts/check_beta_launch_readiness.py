@@ -50,6 +50,7 @@ beta_target = (ROOT / "recruitment/BETA_TARGET.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
 worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
+beta_feedback_recorder = (ROOT / "scripts/record_beta_feedback.py").read_text(encoding="utf-8")
 
 stage_ids = [row.get("id") for row in route.get("stages", [])]
 require(stage_ids == EXPECTED_STAGES, "supported route must contain the locked 27 stages in exact order")
@@ -256,6 +257,12 @@ require("betaWorkerExperienceWrap" in app_page,
         "worker validator UI must capture experience-year context")
 require("Tahun pengalaman/proses EPS:" in runtime,
         "worker validator feedback must preserve experience-year context")
+require("Current route stage ID:" in beta_js,
+        "beta application must send an exact supported route stage ID")
+require("BETA_FEEDBACK_RECORD_SELF_TEST_PASS" in beta_feedback_recorder,
+        "privacy-safe public beta feedback recorder must exist and expose a self-test")
+require('row["notes"] = ""' in beta_feedback_recorder,
+        "public beta feedback recorder must keep narrative notes out of the public tracker")
 
 require(departure_calls.get("coverageStatus") == "partial_verified",
         "departure call registry must remain explicitly partial until the full 2026 cycle is verified")
