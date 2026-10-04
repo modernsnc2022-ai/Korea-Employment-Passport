@@ -1337,7 +1337,8 @@ test('beta feedback sanitizer redacts Korean phone numbers and always warns abou
 test('company community stays fail-closed until real member auth backend exists', async ({ page }) => {
   const errors = await freshPage(page);
   await page.locator('[data-quick-stage="eligibility"]').click();
-  await page.locator('.utility-tab[data-view="companyHub"]').click();
+  await page.evaluate(() => switchView('workplace', false));
+  await page.locator('#openCompanyHubBtn').click();
 
   await expect(page.locator('#companyHub')).toBeVisible();
   await expect(page.locator('#companyMembershipGate')).toContainText('ANGGOTA SAJA');
@@ -1372,7 +1373,8 @@ test('paid operator investigation request excludes private dorm and identity dat
 test('company question reports evidence scarcity instead of inventing employer facts', async ({ page }) => {
   const errors = await freshPage(page);
   await page.locator('[data-quick-stage="eligibility"]').click();
-  await page.locator('.utility-tab[data-view="companyHub"]').click();
+  await page.evaluate(() => switchView('workplace', false));
+  await page.locator('#openCompanyHubBtn').click();
   await page.locator('#companyQaCompany').fill('No Evidence Factory XYZ');
   await page.locator('#companyQaQuestion').fill('Bagaimana kondisi asrama?');
   await page.locator('#companyQaBtn').click();
