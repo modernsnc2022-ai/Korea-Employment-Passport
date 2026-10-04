@@ -900,10 +900,14 @@ test('progress backup preserves reviewed form fields without beta evidence', asy
       key,
       reviewed:read(KEYS.wizardReviewed,[]),
       progressKeys:Object.keys(backup.progress).sort(),
-      serialized:JSON.stringify(backup)
+      serialized:JSON.stringify(backup),
+      schemaVersion:backup.schemaVersion,
+      betaTesterId:backup.betaTesterId
     };
   });
 
+  expect(result.schemaVersion).toBe(2);
+  expect(result.betaTesterId).toBeNull();
   expect(result.reviewed).toContain(result.key);
   expect(result.progressKeys).toContain('wizardReviewed');
   expect(result.serialized).not.toContain('PRIVATE BETA GAP');
@@ -912,6 +916,28 @@ test('progress backup preserves reviewed form fields without beta evidence', asy
   expect(errors).toEqual([]);
 });
 
+
+test('beta progress backup cannot cross anonymous tester IDs', async ({ page }) => {
+  await page.goto('/app.html?beta=KEP-0001&stage=registration', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const backup=await page.evaluate(() => makeProgressBackup());
+  expect(backup.schemaVersion).toBe(2);
+  expect(backup.betaTesterId).toBe('KEP-0001');
+
+  await page.goto('/app.html?beta=KEP-0002&stage=eligibility', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => /\/\s*27/.test(document.querySelector('#progressText')?.textContent || ''), null, { timeout: 15000 });
+
+  const error=await page.evaluate(payload => {
+    try{
+      safeRestoreProgress(payload);
+      return '';
+    }catch(err){
+      return String(err.message||err);
+    }
+  }, backup);
+  expect(error).toContain('ID beta yang berbeda');
+});
 
 test('workplace worker evidence empty state is neutral and privacy safe', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
