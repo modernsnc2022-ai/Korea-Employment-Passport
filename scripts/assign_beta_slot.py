@@ -15,6 +15,7 @@ ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
+ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other"}
 
 def add_months(value: date, months: int) -> date:
     idx = value.month - 1 + months
@@ -60,6 +61,8 @@ def acceptance_message(row: dict[str, str]) -> str:
     ])
 
 def assign(rows, received_at, activation_date, current_stage, source_channel, opened_at=None):
+    if source_channel not in ALLOWED_SOURCE_CHANNELS:
+        raise ValueError("unsupported source_channel; use a non-identifying channel code")
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
     received = parse_ts(received_at)
@@ -126,6 +129,12 @@ def self_test():
         pass
     else:
         raise AssertionError("out-of-order receipt was not rejected")
+    try:
+        assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "visa_docs", "MarcusOh", opened_at)
+    except ValueError as exc:
+        assert "unsupported source_channel" in str(exc)
+    else:
+        raise AssertionError("identifying/free-text source channel was accepted")
     try:
         assign(rows, "2026-10-05T09:02:00+07:00", "2026-10-07", "not_a_stage", "community", opened_at)
     except ValueError as exc:
