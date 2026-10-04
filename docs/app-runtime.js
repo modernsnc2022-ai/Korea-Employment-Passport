@@ -3311,6 +3311,7 @@ function buildBetaFeedbackBundle(){
     ...(testerRole==='e9_worker_validator'?['Tahun pengalaman/proses EPS: '+(workerExperienceYear||'belum dicatat')]:[]),
     'Rute: '+routeLabel,
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),
+    'ID tahap sekarang: '+(current?.id||'complete'),
     'Tahap selesai: '+done.length+'/'+(route?.stages?.length||0),
     'Temuan: '+fieldQuestions.length+' pertanyaan, '+rejections.length+' penolakan, '+gaps.length+' Celah Calo',
     'Checkpoint zero-broker: '+betaStats.tested+'/'+betaStats.total+' benar-benar dinilai; '+betaStats.passed+' PASS; '+betaStats.failed+' FAIL; '+betaStats.notExperienced+' belum dijalani/tidak dinilai'
