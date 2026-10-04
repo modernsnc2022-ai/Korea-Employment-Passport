@@ -7,7 +7,7 @@ let betaRecruitmentSourceCodes=new Set(['website']);
 let betaRecruitmentDefaultCode='website';
 
 const $=(id)=>document.getElementById(id);
-const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
+const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
 const STAGE_GROUPS=[
   {label:'Persiapan & pendaftaran',ids:['eligibility','registration','exam_fee','biometric','document_verify','exam_card']},
