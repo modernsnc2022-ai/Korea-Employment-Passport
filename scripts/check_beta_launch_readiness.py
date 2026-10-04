@@ -377,6 +377,10 @@ require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state
 require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
 require("program.application?.intakeStatus==='open'" in beta_js,
         "tester-interest application UI must be gated by intakeStatus, independently of beta access")
+require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCE_CODES" in beta_js,
+        "tester-interest email must carry a controlled non-identifying recruitment source code")
+require("return RECRUITMENT_SOURCE_CODES.has(raw)?raw:'website'" in beta_js,
+        "unknown recruitment source values must fall back to website")
 require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
         "beta access state must require explicit approved release state, not status alone")
 require("release.retrospectivePanel==='approved_manual'" in beta_js and "release.retrospectiveApprovedAt" in beta_js,
