@@ -31,8 +31,10 @@ def normalize_stage_list(values: list[str] | None) -> str:
 
 
 def validate_assigned_tester(row: dict[str, str], tester_id: str) -> None:
-    if not re.fullmatch(r"KEP-00(?:0[1-9]|[1-4]\d|50)", tester_id):
-        fail("tester-id must be KEP-0001 through KEP-0050")
+    match = re.fullmatch(r"KEP-(\d{4})", tester_id)
+    number = int(match.group(1)) if match else 0
+    if number < 1:
+        fail("tester-id must be a valid KEP-0001..KEP-9999 code")
 
     group = row.get("target_group", "").strip()
     if group == "active_applicant":
@@ -102,6 +104,16 @@ def self_test() -> None:
     )
     assert updated["zero_broker_pass_stages"] == "eligibility;registration"
     assert updated["zero_broker_fail_stages"] == "exam_fee"
+
+    overflow = dict(public)
+    overflow["tester_id"] = "KEP-0051"
+    overflow_updated = record(
+        overflow,
+        tester_id="KEP-0051",
+        pass_stages=["roster"],
+        fail_stages=[],
+    )
+    assert overflow_updated["zero_broker_pass_stages"] == "roster"
 
     worker = {
         "tester_id": "KEP-0031",
