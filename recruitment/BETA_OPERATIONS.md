@@ -17,7 +17,7 @@ Use scripts/assign_beta_slot.py only after the beta program status is OPEN. It a
 
 Run without --write for a dry run. Add --write only after checking the proposed KEP ID and free-until date.
 
-The script selects the next contiguous public KEP slot, computes the six-calendar-month end date, and refuses an application timestamp earlier than the last assigned eligible application.
+The script selects the next contiguous public KEP slot, computes the six-calendar-month end date, and refuses an application timestamp earlier than the last assigned eligible application. It also refuses any application received before the recorded public-beta OPEN timestamp, including mail received earlier on the same calendar day.
 
 Direct contact information stays in the access-controlled communication system and is matched to the pseudonymous KEP ID outside this public repository.
 
@@ -106,11 +106,11 @@ The public beta must stay HOLD until there is an explicit manual OPEN decision. 
 
 1. Confirm same-HEAD `static-check`, `ui-smoke`, Pages deployment, and `beta-launch-gate` are green.
 2. Re-check the official Manufacturing 2026 notice on the same day.
-3. Dry-run `python scripts/set_beta_release.py --approved-at YYYY-MM-DD --confirm-open`.
+3. Dry-run `python scripts/set_beta_release.py --approved-at YYYY-MM-DDTHH:MM:SS+09:00 --confirm-open`.
 4. Review that the source state is still clean and the proposed transition is HOLD → OPEN.
 5. Only after explicit release approval, re-run with `--write` and commit both the program state and outreach status together.
 
-OPEN is valid only when `releaseDecision.publicBeta=approved_manual` and `approvedAt` is present. This prevents future CI from treating a legitimately opened beta as an invalid prelaunch state.
+OPEN is valid only when `releaseDecision.publicBeta=approved_manual` and `approvedAt` is a timezone-aware ISO-8601 timestamp. This prevents future CI from treating a legitimately opened beta as an invalid prelaunch state.
 
 
 ## Stage-level zero-broker evidence
