@@ -587,7 +587,7 @@ test('tester-interest intake is open while beta access remains on hold', async (
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
-  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await page.goto('/beta.html?src=epstopik_indonesia', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#betaStatusPill')).toHaveText('PENDAFTARAN OPEN · AKSES MENUNGGU', { timeout: 10000 });
   await expect(page.locator('#closedPanel')).toBeVisible();
   await expect(page.locator('#applicationPanel')).toBeVisible();
@@ -599,12 +599,32 @@ test('tester-interest intake is open while beta access remains on hold', async (
   await expect(page.locator('#applicantCycle')).toContainText('2026');
   await expect(page.locator('#applicantCycle')).toContainText('Tidak yakin');
 
+  await page.locator('#applicantStage').selectOption('eligibility');
+  await page.locator('#applicantCycle').selectOption('2026');
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+  const application = await page.evaluate(() => applicationText());
+  expect(application).toContain('Recruitment source code: epstopik_indonesia');
+
   const overflow = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth
   }));
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
   expect(errors).toEqual([]);
+});
+
+test('unknown recruitment source code falls back to website', async ({ page }) => {
+  await page.goto('/beta.html?src=%3Cscript%3Ebad%3C/script%3E', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => document.querySelectorAll('#applicantStage option').length === 28);
+  await page.locator('#applicantStage').selectOption('eligibility');
+  await page.locator('#applicantCycle').selectOption('2026');
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+
+  const application = await page.evaluate(() => applicationText());
+  expect(application).toContain('Recruitment source code: website');
+  expect(application).not.toContain('<script>');
 });
 
 
