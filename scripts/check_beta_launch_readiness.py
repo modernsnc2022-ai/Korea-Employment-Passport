@@ -42,6 +42,7 @@ forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
 departure_calls = load_json("docs/data/departure_calls_2026.json")
+manufacturing_launch_check = load_json("recruitment/MANUFACTURING_LAUNCH_CHECK.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
 app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
@@ -98,6 +99,20 @@ holds = {
     if q.get("stageId") == "job_application" and q.get("status") == "answered_hold"
 }
 require(holds == EXPECTED_JOB_HOLDS, f"Manufacturing job-application HOLD set changed: {sorted(holds)}")
+require(
+    manufacturing_launch_check.get("heldQuestions") == [
+        "job_docs", "job_scan", "job_name", "job_edit", "job_submit"
+    ],
+    "Manufacturing launch-check record must preserve the locked five HOLD questions",
+)
+require(
+    manufacturing_launch_check.get("result") == "no_current_manufacturing_job_application_notice",
+    "Manufacturing launch-check record indicates a notice was found or still needs review",
+)
+require(
+    manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/info",
+    "Manufacturing launch check must use the official KP2MI G-to-G Korea index",
+)
 job_stage = next((row for row in route.get("stages", []) if row.get("id") == "job_application"), {})
 require(
     job_stage.get("brokerReplacement") == "held_official_notice",
@@ -270,6 +285,10 @@ else:
             "OPEN state requires explicit releaseDecision.publicBeta=approved_manual")
     require(bool(str(release_decision.get("approvedAt") or "").strip()),
             "OPEN state requires releaseDecision.approvedAt")
+    require(
+        manufacturing_launch_check.get("checkedAt") == release_decision.get("approvedAt"),
+        "OPEN state requires a same-day Manufacturing launch-check record",
+    )
     require("Recruitment status: **OPEN" in outreach,
             "OPEN program must keep outreach recruitment status OPEN")
 require(beta_program.get("publicBeta", {}).get("slots") == 30, "public beta enrollment must preserve 30 slots")
