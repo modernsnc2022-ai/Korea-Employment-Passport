@@ -361,6 +361,12 @@ for key in [
     require(key in runtime.split("const BETA_SCOPED_KEYS", 1)[1].split(";", 1)[0],
             f"{key} must stay beta-tester scoped")
 require("sanitizedBetaFeedbackText" in runtime, "sanitized beta feedback sharing must remain enabled")
+require("schemaVersion:2" in runtime and "betaTesterId:betaTesterIdState()||null" in runtime,
+        "progress backup must carry anonymous beta-ID context")
+require("Backup ini berasal dari ID beta yang berbeda." in runtime,
+        "beta progress restore must reject cross-ID backups")
+require("Backup lama tanpa konteks ID beta" in runtime,
+        "legacy progress backups must not enter active beta namespaces")
 require("betaWorkerExperienceWrap" in app_page,
         "worker validator UI must capture experience-year context")
 require("Tahun pengalaman/proses EPS:" in runtime,
