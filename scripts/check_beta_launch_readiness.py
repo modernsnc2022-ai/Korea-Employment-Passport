@@ -359,7 +359,6 @@ require(
 require("Pendaftaran minat beta sudah dibuka" in beta_page, "beta enrollment page must state that tester-interest intake is open")
 require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state that 30 is not an automatic rejection cap")
 require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
-# legacy anchor removed:  limit")
 require("program.application?.intakeStatus==='open'" in beta_js,
         "tester-interest application UI must be gated by intakeStatus, independently of beta access")
 require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
@@ -367,7 +366,12 @@ require("release.publicBeta==='approved_manual'" in beta_js and "release.approve
 require("release.retrospectivePanel==='approved_manual'" in beta_js and "release.retrospectiveApprovedAt" in beta_js,
         "worker-panel UI must require explicit approved release state, not status alone")
 
-require("number>=1&&number<=50" in runtime, "beta ID range must remain KEP-0001..KEP-0050")
+require("number>=1&&number<=9999" in runtime,
+        "beta ID parser must support contiguous overflow active-applicant IDs")
+require("if(number>=31&&number<=50)return 'e9_worker_validator'" in runtime,
+        "KEP-0031..KEP-0050 must stay reserved for worker validators")
+require("number>=51" in runtime and "return 'active_applicant'" in runtime,
+        "KEP-0051+ must map to overflow active applicants")
 for key in [
     "KEYS.done","KEYS.docs","KEYS.gaps","KEYS.contract","KEYS.workplace","KEYS.ledger",
     "KEYS.payroll","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks",
