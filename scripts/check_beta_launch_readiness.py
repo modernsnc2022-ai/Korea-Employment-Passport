@@ -346,6 +346,10 @@ require(
 )
 require("Beta terbatas untuk 30 peserta pertama" in beta_page, "beta enrollment page must state the 30-person limit")
 require("program.status==='open'" in beta_js, "beta application UI must be gated by OPEN status")
+require("release.publicBeta==='approved_manual'" in beta_js and "release.approvedAt" in beta_js,
+        "public beta UI must require explicit approved release state, not status alone")
+require("release.retrospectivePanel==='approved_manual'" in beta_js and "release.retrospectiveApprovedAt" in beta_js,
+        "worker-panel UI must require explicit approved release state, not status alone")
 
 require("number>=1&&number<=50" in runtime, "beta ID range must remain KEP-0001..KEP-0050")
 for key in ["KEYS.gaps","KEYS.fieldQuestions","KEYS.rejections","KEYS.betaChecks","KEYS.betaWorkerExperienceYear"]:
