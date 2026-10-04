@@ -27,8 +27,10 @@ def fail(message: str) -> None:
 
 
 def validate_public_tester(row: dict[str, str], tester_id: str) -> None:
-    if not re.fullmatch(r"KEP-00(?:0[1-9]|[12]\d|30)", tester_id):
-        fail("tester-id must be KEP-0001 through KEP-0030")
+    match = re.fullmatch(r"KEP-(\d{4})", tester_id)
+    number = int(match.group(1)) if match else 0
+    if number < 1 or 31 <= number <= 50:
+        fail("tester-id must be an active-applicant KEP ID (0001-0030 or 0051+)")
     if row.get("target_group", "").strip() != "active_applicant":
         fail(f"{tester_id}: not a public beta slot")
     if row.get("role", "").strip() != "public_beta_tester":
@@ -222,6 +224,16 @@ def self_test() -> None:
         assert "unsupported current-stage" in str(exc)
     else:
         raise AssertionError("invalid stage was accepted")
+
+    overflow = dict(base)
+    overflow["tester_id"] = "KEP-0051"
+    overflow_row = record(
+        overflow,
+        tester_id="KEP-0051",
+        current_stage="roster",
+        feedback_status="active",
+    )
+    assert overflow_row["current_stage"] == "roster"
 
     worker = dict(base)
     worker["tester_id"] = "KEP-0031"
