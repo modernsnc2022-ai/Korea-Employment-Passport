@@ -111,3 +111,17 @@ The public beta must stay HOLD until there is an explicit manual OPEN decision. 
 5. Only after explicit release approval, re-run with `--write` and commit both the program state and outreach status together.
 
 OPEN is valid only when `releaseDecision.publicBeta=approved_manual` and `approvedAt` is present. This prevents future CI from treating a legitimately opened beta as an invalid prelaunch state.
+
+
+## Stage-level zero-broker evidence
+
+The public tracker preserves route evidence only as stage IDs:
+
+- `zero_broker_pass_stages`: stages the participant actually completed without private help.
+- `zero_broker_fail_stages`: stages where private help was still required.
+
+The same stage must never appear in both columns for one participant. Use the exact stage IDs included in the app's combined feedback bundle; do not infer IDs from translated titles.
+
+For KEP-0001..KEP-0030, verified feedback from the active 2026 route can contribute current-cycle evidence. For KEP-0031..KEP-0050, stage evidence is preserved for every validated experience year, but only completed worker interviews whose `experience_year` equals the route cycle can contribute current-cycle route PASS coverage. Prior-year/unknown worker evidence remains retrospective gap evidence.
+
+Route evidence review is not ready until all 27 stages have current-cycle PASS coverage, no current-cycle FAIL stage remains, all Broker Gaps are resolved or official/licensed-only, and the other cohort/late-stage gates are satisfied.
