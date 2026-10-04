@@ -34,6 +34,21 @@ def load_tracker():
         reader = csv.DictReader(handle)
         return list(reader.fieldnames or []), list(reader)
 
+def acceptance_message(row: dict[str, str]) -> str:
+    return "\n".join([
+        "Korea Employment Passport — akses beta diterima",
+        "",
+        f"ID beta anonim: {row.get('tester_id', '')}",
+        f"Link beta: {row.get('beta_link', '')}",
+        f"Tahap awal yang tercatat: {row.get('current_stage', '')}",
+        f"Akses gratis sampai: {row.get('free_until', '')} (6 bulan sejak aktivasi)",
+        "",
+        "Buka link beta di atas. ID KEP pada link memisahkan feedback beta Anda dari peserta lain.",
+        "Pada pengaturan awal, pilih tahap paling awal yang belum selesai jika posisi yang tercatat perlu dikoreksi.",
+        "Jangan kirim foto paspor/KTP/ARC, nomor identitas, atau alamat rumah/asrama dalam feedback.",
+        "Akses beta tidak menjamin pekerjaan, pemilihan perusahaan, SLC, visa, atau keberangkatan."
+    ])
+
 def assign(rows, received_at, activation_date, current_stage, source_channel):
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
@@ -115,6 +130,9 @@ def main():
         " free_until=" + target["free_until"] +
         " beta_link=" + target.get("beta_link", "")
     )
+    print("BETA_ACCEPTANCE_MESSAGE_BEGIN")
+    print(acceptance_message(target))
+    print("BETA_ACCEPTANCE_MESSAGE_END")
     return 0
 
 if __name__ == "__main__":
