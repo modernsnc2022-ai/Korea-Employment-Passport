@@ -145,7 +145,10 @@ def render(rows: list[dict[str, str]]) -> str:
     zero_uncovered_stage_ids = zero_summary["uncovered_stage_ids"]
     zero_broker_stage_ready = zero_summary["ready"]
 
+    broker_gaps_pending = count_value(evidence_rows, "broker_gap_status", "pending")
+    broker_gaps_none = count_value(evidence_rows, "broker_gap_status", "none_reported")
     broker_gaps_resolved = count_value(evidence_rows, "broker_gap_status", "resolved")
+    broker_gaps_official = count_value(evidence_rows, "broker_gap_status", "official_or_licensed_only")
     broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
     retest_passed = count_value(evidence_rows, "retest_status", "passed")
 
@@ -163,10 +166,12 @@ def render(rows: list[dict[str, str]]) -> str:
     evidence_ready = (
         applications >= 30
         and activated >= 30
+        and feedback_complete >= 30
         and len(enrolled_workers) >= 20
         and interviews_completed >= 20
         and worker_year_context >= 20
         and late_ready
+        and broker_gaps_pending == 0
         and broker_gaps_open == 0
         and zero_broker_stage_ready
     )
@@ -200,8 +205,11 @@ def render(rows: list[dict[str, str]]) -> str:
         "- Public WPE publication depends on separate contributor consent and is reported here, but it is not a route-PASS prerequisite.",
         "",
         "## Broker replacement evidence",
+        f"- Broker-gap assessments pending: {broker_gaps_pending}",
+        f"- Participants reporting no broker gap: {broker_gaps_none}",
         f"- Broker gaps open: {broker_gaps_open}",
         f"- Broker gaps resolved: {broker_gaps_resolved}",
+        f"- Broker steps confirmed official/licensed-only: {broker_gaps_official}",
         f"- Retests passed: {retest_passed}",
         f"- Current-cycle evidence rows: {len(current_cycle_evidence_rows)}",
         f"- Zero-broker stage PASS coverage: {len(zero_pass_ready_stage_ids)}/{len(ROUTE_STAGE_IDS)}",
