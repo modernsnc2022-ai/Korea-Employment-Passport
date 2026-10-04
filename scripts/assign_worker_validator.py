@@ -82,6 +82,14 @@ def main():
     program=json.loads(PROGRAM.read_text(encoding="utf-8-sig"))
     if program.get("retrospectivePanel",{}).get("status")!="open":
         raise SystemExit("WORKER_VALIDATOR_ASSIGNMENT_BLOCKED panel status is not OPEN")
+    release=program.get("releaseDecision",{})
+    if (
+        release.get("retrospectivePanel")!="approved_manual"
+        or not str(release.get("retrospectiveApprovedAt") or "").strip()
+    ):
+        raise SystemExit(
+            "WORKER_VALIDATOR_ASSIGNMENT_BLOCKED worker panel OPEN has no explicit approved release decision"
+        )
     if not args.joined_date or not args.source_channel:
         parser.error("--joined-date and --source-channel are required")
     with TRACKER.open("r",encoding="utf-8-sig",newline="") as handle:
