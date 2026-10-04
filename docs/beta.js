@@ -1,14 +1,13 @@
 const PROGRAM_URL='data/beta_program_v1.json';
 const ROUTE_URL='data/id_e9_manufacturing_2026.json';
 const I18N_URL='data/id_e9_manufacturing_2026_id.json';
+const RECRUITMENT_SOURCES_URL='data/beta_recruitment_sources_v1.json';
 let betaProgram=null,betaRoute=null,betaI18n={};
-const RECRUITMENT_SOURCE_CODES=new Set([
-  'website','email','community','community_admin','social','referral','direct_outreach','partner','other',
-  'epstopik_indonesia','topikly','apsan_hakwon','owie_epstopik','lpk_samwon','jendela_asa','lpk_ggum'
-]);
+let betaRecruitmentSourceCodes=new Set(['website']);
+let betaRecruitmentDefaultCode='website';
 
 const $=(id)=>document.getElementById(id);
-const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 const STAGE_GROUPS=[
   {label:'Persiapan & pendaftaran',ids:['eligibility','registration','exam_fee','biometric','document_verify','exam_card']},
