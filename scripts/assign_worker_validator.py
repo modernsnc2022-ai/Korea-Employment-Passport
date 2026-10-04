@@ -14,9 +14,12 @@ ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
+ALLOWED_SOURCE_CHANNELS = {"website", "email", "community", "community_admin", "social", "referral", "direct_outreach", "partner", "other"}
 
 def assign(rows, joined_date, current_stage, source_channel):
     date.fromisoformat(joined_date)
+    if source_channel not in ALLOWED_SOURCE_CHANNELS:
+        raise ValueError("unsupported source_channel; use a non-identifying channel code")
     if current_stage not in SUPPORTED_STAGES:
         raise ValueError(f"unsupported current_stage: {current_stage}")
     workers=[row for row in rows if row.get("target_group","").strip()=="e9_worker_korea"]
@@ -51,6 +54,12 @@ def self_test():
     assert first["e9_experience"]=="confirmed"
     assert first["experience_year"]==""
     assert first["workplace_evidence_status"]=="pending"
+    try:
+        assign(rows,"2026-10-06","employment_maintenance","worker-name-here")
+    except ValueError as exc:
+        assert "unsupported source_channel" in str(exc)
+    else:
+        raise AssertionError("identifying/free-text source channel was accepted")
     try:
         assign(rows,"2026-10-06","not_a_stage","community_admin")
     except ValueError as exc:
