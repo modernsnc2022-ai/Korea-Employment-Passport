@@ -310,6 +310,26 @@ require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel mus
 require(worker_panel.get("separateFromPublicBeta") is True,
         "E-9 worker panel must remain separate from the 30-person public beta")
 require(worker_panel.get("status") in {"hold", "open"}, "E-9 worker panel must use explicit hold/open status")
+worker_release_state = release_decision.get("retrospectivePanel")
+worker_release_at = str(release_decision.get("retrospectiveApprovedAt") or "").strip()
+if worker_panel.get("status") == "hold":
+    require(worker_release_state == "pending_manual_approval",
+            "worker-panel HOLD state must remain pending manual approval")
+    require(not worker_release_at,
+            "worker-panel HOLD state must not carry an approval timestamp")
+else:
+    require(worker_release_state == "approved_manual",
+            "worker-panel OPEN requires explicit approved release decision")
+    require(bool(worker_release_at),
+            "worker-panel OPEN requires retrospectiveApprovedAt")
+    if worker_release_at:
+        try:
+            worker_approved_dt = datetime.fromisoformat(worker_release_at.replace("Z", "+00:00"))
+        except ValueError:
+            failures.append("worker-panel approval timestamp must be valid ISO-8601")
+        else:
+            require(worker_approved_dt.tzinfo is not None,
+                    "worker-panel approval timestamp must include timezone")
 require(beta_program.get("publicBeta", {}).get("freeMonths") == 6, "public beta benefit must remain 6 months")
 require(beta_program.get("publicBeta", {}).get("benefitStarts") == "beta_activation_date",
         "six-month benefit must start from beta activation")
