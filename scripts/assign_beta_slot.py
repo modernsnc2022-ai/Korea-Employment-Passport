@@ -55,7 +55,7 @@ def acceptance_message(row: dict[str, str]) -> str:
         "",
         "Buka link beta di atas. ID KEP pada link memisahkan feedback beta Anda dari peserta lain.",
         "Untuk feedback yang akan dihitung sebagai bukti beta, balas melalui email/thread pribadi yang sama dengan pendaftaran atau kanal pribadi yang telah dikonfirmasi tim.",
-        "Pada pengaturan awal, pilih tahap paling awal yang belum selesai jika posisi yang tercatat perlu dikoreksi.",
+        "Link akan membuka tahap yang tercatat saat pendaftaran. Jika posisi Anda sudah berubah, koreksi ke tahap paling awal yang belum selesai di aplikasi.",
         "Jangan kirim foto paspor/KTP/ARC, nomor identitas, atau alamat rumah/asrama dalam feedback.",
         "Akses beta tidak menjamin pekerjaan, pemilihan perusahaan, SLC, visa, atau keberangkatan."
     ])
