@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import date
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,9 +24,11 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
     if release.get("publicBeta") != "pending_manual_approval":
         fail("release decision is not pending manual approval")
     try:
-        date.fromisoformat(approved_at)
+        approved_dt = datetime.fromisoformat(approved_at.replace("Z", "+00:00"))
     except ValueError as exc:
-        raise ValueError("approved-at must use YYYY-MM-DD") from exc
+        raise ValueError("approved-at must use timezone-aware ISO-8601 datetime") from exc
+    if approved_dt.tzinfo is None:
+        fail("approved-at must include timezone")
 
     if source.get("state") != "clean":
         fail(f"official source state must be clean, got {source.get('state')!r}")
@@ -37,7 +39,7 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
     if source.get("fetchFailureUrls"):
         fail("official source fetchFailureUrls must be empty before OPEN")
 
-    if manufacturing_check.get("checkedAt") != approved_at:
+    if manufacturing_check.get("checkedAt") != approved_dt.date().isoformat():
         fail("Manufacturing launch check must be recorded on the same date as OPEN approval")
     if manufacturing_check.get("result") != "no_current_manufacturing_job_application_notice":
         fail(
@@ -86,24 +88,32 @@ def self_test() -> None:
         "result": "no_current_manufacturing_job_application_notice",
         "heldQuestions": ["job_docs", "job_scan", "job_name", "job_edit", "job_submit"],
     }
-    opened = prepare_open(program, source, manufacturing_check, "2026-10-04")
+    approved_at = "2026-10-04T18:30:00+09:00"
+    opened = prepare_open(program, source, manufacturing_check, approved_at)
     assert opened["status"] == "open"
     assert opened["releaseDecision"]["publicBeta"] == "approved_manual"
-    assert opened["releaseDecision"]["approvedAt"] == "2026-10-04"
+    assert opened["releaseDecision"]["approvedAt"] == approved_at
 
     bad_source = dict(source)
     bad_source["state"] = "review_required"
     try:
-        prepare_open(program, bad_source, manufacturing_check, "2026-10-04")
+        prepare_open(program, bad_source, manufacturing_check, approved_at)
     except ValueError as exc:
         assert "must be clean" in str(exc)
     else:
         raise AssertionError("OPEN was allowed with non-clean official-source state")
 
+    try:
+        prepare_open(program, source, manufacturing_check, "2026-10-04T18:30:00")
+    except ValueError as exc:
+        assert "include timezone" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed without an approval timezone")
+
     stale_check = dict(manufacturing_check)
     stale_check["checkedAt"] = "2026-10-03"
     try:
-        prepare_open(program, source, stale_check, "2026-10-04")
+        prepare_open(program, source, stale_check, approved_at)
     except ValueError as exc:
         assert "same date" in str(exc)
     else:
@@ -112,7 +122,7 @@ def self_test() -> None:
     found_check = dict(manufacturing_check)
     found_check["result"] = "notice_found_review_required"
     try:
-        prepare_open(program, source, found_check, "2026-10-04")
+        prepare_open(program, source, found_check, approved_at)
     except ValueError as exc:
         assert "requires review" in str(exc)
     else:
