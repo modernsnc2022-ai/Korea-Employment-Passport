@@ -110,6 +110,7 @@ CONTROLLED_STAGE_LIST_FIELDS = {"broker_tasks", "documents_confusing", "official
 SUPPORTED_STAGES = {
     row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
 }
+SUPPORTED_CURRENT_STAGES = SUPPORTED_STAGES | {"complete"}
 
 
 def add_calendar_months(value: date, months: int) -> date:
@@ -182,8 +183,8 @@ for index, row in enumerate(rows, start=1):
         fail(f"{tester_id} invalid broker_gap_status {broker_gap_status!r}")
     if retest_status not in RETEST_STATUSES:
         fail(f"{tester_id} invalid retest_status {retest_status!r}")
-    if current_stage and current_stage not in SUPPORTED_STAGES:
-        fail(f"{tester_id} current_stage is not a supported route stage: {current_stage}")
+    if current_stage and current_stage not in SUPPORTED_CURRENT_STAGES:
+        fail(f"{tester_id} current_stage is not a supported route stage or complete: {current_stage}")
     if eligibility_status not in ELIGIBILITY_STATUSES:
         fail(f"{tester_id} invalid eligibility_status {eligibility_status!r}")
     if feedback_status not in FEEDBACK_STATUSES:
