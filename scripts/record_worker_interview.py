@@ -24,6 +24,17 @@ def fail(message: str) -> None:
     raise ValueError(message)
 
 
+def normalize_stage_list(values: list[str] | None) -> str:
+    clean: list[str] = []
+    for raw in values or []:
+        stage_id = str(raw or "").strip()
+        if stage_id not in SUPPORTED_STAGES:
+            fail(f"unsupported route stage in evidence list: {stage_id}")
+        if stage_id not in clean:
+            clean.append(stage_id)
+    return ";".join(clean)
+
+
 def validate_assigned_worker(row: dict[str, str], tester_id: str) -> None:
     if not re.fullmatch(r"KEP-00(?:3[1-9]|4\d|50)", tester_id):
         fail("tester-id must be KEP-0031 through KEP-0050")
@@ -50,6 +61,8 @@ def record(
     broker_gap_status: str,
     retest_status: str,
     workplace_evidence_status: str,
+    zero_broker_pass_stages: list[str] | None = None,
+    zero_broker_fail_stages: list[str] | None = None,
 ) -> dict[str, str]:
     validate_assigned_worker(row, tester_id)
     if row.get("interview_status", "").strip().lower() == "completed":
@@ -77,6 +90,13 @@ def record(
     row["retest_status"] = retest_status
     row["interview_status"] = "completed"
     row["workplace_evidence_status"] = workplace_evidence_status
+    row["zero_broker_pass_stages"] = normalize_stage_list(zero_broker_pass_stages)
+    row["zero_broker_fail_stages"] = normalize_stage_list(zero_broker_fail_stages)
+    zero_pass = {part for part in row["zero_broker_pass_stages"].split(";") if part}
+    zero_fail = {part for part in row["zero_broker_fail_stages"].split(";") if part}
+    overlap = sorted(zero_pass & zero_fail)
+    if overlap:
+        fail("zero-broker PASS and FAIL cannot contain the same stage: " + ", ".join(overlap))
     return row
 
 
@@ -96,6 +116,8 @@ def self_test() -> None:
         "broker_gap_status": "open",
         "retest_status": "pending",
         "workplace_evidence_status": "pending",
+        "zero_broker_pass_stages": "",
+        "zero_broker_fail_stages": "",
     }
     row = record(
         dict(base),
@@ -107,10 +129,14 @@ def self_test() -> None:
         broker_gap_status="open",
         retest_status="pending",
         workplace_evidence_status="pending",
+        zero_broker_pass_stages=["korea_entry_training", "employer_handover"],
+        zero_broker_fail_stages=["residence_registration"],
     )
     assert row["interview_status"] == "completed"
     assert row["experience_year"] == "2024"
     assert row["workplace_evidence_status"] == "pending"
+    assert row["zero_broker_pass_stages"] == "korea_entry_training;employer_handover"
+    assert row["zero_broker_fail_stages"] == "residence_registration"
 
     duplicate = dict(row)
     try:
@@ -167,6 +193,8 @@ def main() -> int:
         default="pending",
         help="pending if privacy-reviewed workplace evidence may later be published; otherwise declined/not_publishable.",
     )
+    parser.add_argument("--zero-broker-pass-stage", action="append")
+    parser.add_argument("--zero-broker-fail-stage", action="append")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -206,6 +234,8 @@ def main() -> int:
             broker_gap_status=str(args.broker_gap_status),
             retest_status=str(args.retest_status),
             workplace_evidence_status=str(args.workplace_evidence_status),
+            zero_broker_pass_stages=args.zero_broker_pass_stage,
+            zero_broker_fail_stages=args.zero_broker_fail_stage,
         )
     except ValueError as exc:
         raise SystemExit("WORKER_INTERVIEW_BLOCKED " + str(exc)) from exc
@@ -215,7 +245,9 @@ def main() -> int:
         f"WORKER_INTERVIEW_{mode} tester_id={tester_id} "
         f"experience_year={target['experience_year']} current_stage={target['current_stage']} "
         f"broker_used={target['broker_used']} workplace_info_needed={target['workplace_info_needed']} "
-        f"interview_status={target['interview_status']} workplace_evidence_status={target['workplace_evidence_status']}"
+        f"interview_status={target['interview_status']} workplace_evidence_status={target['workplace_evidence_status']} "
+        f"zero_broker_pass={target.get('zero_broker_pass_stages','')} "
+        f"zero_broker_fail={target.get('zero_broker_fail_stages','')}"
     )
 
     if args.write:
