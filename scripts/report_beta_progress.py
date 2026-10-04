@@ -10,9 +10,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER = ROOT / "recruitment" / "BETA_TESTER_TRACKER.csv"
 ROUTE = ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json"
-ROUTE_STAGE_IDS = [
-    row["id"] for row in json.loads(ROUTE.read_text(encoding="utf-8-sig")).get("stages", [])
-]
+ROUTE_DATA = json.loads(ROUTE.read_text(encoding="utf-8-sig"))
+ROUTE_STAGE_IDS = [row["id"] for row in ROUTE_DATA.get("stages", [])]
+ROUTE_CYCLE = str(ROUTE_DATA.get("cycle", ""))
 
 LATE_STAGE_BUCKETS = {
     "roster": {"roster", "employer_selection"},
@@ -68,12 +68,12 @@ def render(rows: list[dict[str, str]]) -> str:
     ]
     current_cycle_worker_rows = [
         row for row in completed_workers
-        if (row.get("experience_year") or "").strip() == "2026"
+        if (row.get("experience_year") or "").strip() == ROUTE_CYCLE
     ]
     current_cycle_workers = len(current_cycle_worker_rows)
     prior_cycle_workers = sum(
         (row.get("experience_year") or "").strip().isdigit()
-        and (row.get("experience_year") or "").strip() != "2026"
+        and (row.get("experience_year") or "").strip() != ROUTE_CYCLE
         for row in completed_workers
     )
     unknown_cycle_workers = sum(
@@ -149,10 +149,10 @@ def render(rows: list[dict[str, str]]) -> str:
         f"- E-9 worker validators enrolled: {len(enrolled_workers)}/20",
         f"- E-9 worker interviews completed: {interviews_completed}/20",
         f"- Experience-year context captured: {worker_year_context}/20",
-        f"- Completed interviews from 2026 experience: {current_cycle_workers}",
+        f"- Completed interviews from {ROUTE_CYCLE} experience: {current_cycle_workers}",
         f"- Completed interviews from prior-cycle experience: {prior_cycle_workers}",
         f"- Completed interviews with unknown experience year: {unknown_cycle_workers}",
-        "- Prior-cycle/unknown worker interviews are retrospective gap evidence only; they are not 2026 route-rule PASS evidence.",
+        f"- Prior-cycle/unknown worker interviews are retrospective gap evidence only; they are not {ROUTE_CYCLE} route-rule PASS evidence.",
         f"- Privacy-reviewed workplace evidence published: {workplace_evidence_published}",
         "",
         "## Broker replacement evidence",
