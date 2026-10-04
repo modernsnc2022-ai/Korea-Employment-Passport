@@ -1,0 +1,166 @@
+{
+  "version": "1.0.0",
+  "productScope": "Indonesia -> Korea E-9 Manufacturing",
+  "community": {
+    "status": "backend_required",
+    "visibility": "members_only",
+    "authEnforcement": "server_side",
+    "kepIdIsAuthentication": false,
+    "publicPagesMayContainPosts": false,
+    "pseudonymousDisplay": true,
+    "accountIdentityPublic": false,
+    "postTypes": [
+      "question",
+      "work_experience",
+      "dorm_context",
+      "pay_overtime",
+      "transport",
+      "photo_context",
+      "operator_report_summary"
+    ],
+    "closedMessage": "Backend autentikasi anggota belum aktif. Postingan anggota tidak dimuat pada GitHub Pages publik.",
+    "moderation": {
+      "reportAndBlockRequired": true,
+      "operatorAuditTrailRequired": true,
+      "seriousClaimsNeedEvidenceLabel": true,
+      "noDoxxing": true,
+      "noIdentityDocumentImages": true,
+      "noPrivateDormOrHomeAddress": true,
+      "noUnblurredFacesWithoutConsent": true,
+      "noVehiclePlateExposureWithoutNeedAndReview": true,
+      "reviewLabels": [
+        "pengalaman pribadi",
+        "bukti pekerja terverifikasi",
+        "informasi publik",
+        "operator terverifikasi",
+        "belum terverifikasi"
+      ]
+    }
+  },
+  "investigation": {
+    "enabled": true,
+    "fulfillment": "manual_operator",
+    "payment": "quote_before_payment",
+    "priceDisplay": "not_set",
+    "noJobPlacement": true,
+    "noEmployerQualityGuarantee": true,
+    "reportEvidenceLabels": [
+      "official_public",
+      "public_observation",
+      "company_response",
+      "worker_experience",
+      "operator_field_observation",
+      "not_verified"
+    ],
+    "tiers": [
+      {
+        "id": "desk",
+        "label": "1 · Riset online terperinci",
+        "fieldVisit": false,
+        "phoneVerification": false
+      },
+      {
+        "id": "phone",
+        "label": "2 · Riset + verifikasi telepon bila memungkinkan",
+        "fieldVisit": false,
+        "phoneVerification": true
+      },
+      {
+        "id": "field",
+        "label": "3 · Kunjungan lapangan bila memungkinkan",
+        "fieldVisit": true,
+        "phoneVerification": true
+      }
+    ],
+    "privacy": {
+      "requestFields": [
+        "company",
+        "workplace_address",
+        "tier",
+        "question"
+      ],
+      "prohibitedFields": [
+        "passport_number",
+        "ktp_number",
+        "arc_number",
+        "medical_record",
+        "bank_account",
+        "private_dorm_address",
+        "private_home_address"
+      ]
+    },
+    "fieldRules": [
+      "No trespass",
+      "No covert entry",
+      "No trade-secret recording",
+      "Photograph only from lawful/public locations or with permission",
+      "Clearly report what could not be verified"
+    ]
+  },
+  "ads": {
+    "enabled": false,
+    "label": "IKLAN / SPONSOR",
+    "defaultPersonalization": "context_only",
+    "neverInfluenceOfficialAnswers": true,
+    "neverInfluenceEvidenceRanking": true,
+    "noSensitiveTargeting": true,
+    "noConversationSaleToAdvertisers": true,
+    "placementRules": [
+      "Never place an ad inside an official-answer card",
+      "Never make a sponsor look like KP2MI/HRD Korea/government",
+      "Paid services are optional and must not be presented as required for the official route",
+      "Sponsored result must be visually separated and labeled"
+    ],
+    "eligibleCategories": [
+      {
+        "id": "licensed_admin_agent",
+        "label": "Layanan administrasi/행정사 berizin",
+        "verification": "license_or_registration_required"
+      },
+      {
+        "id": "insurance",
+        "label": "Asuransi / agen asuransi",
+        "verification": "licensed_provider_or_agency_required"
+      },
+      {
+        "id": "telecom",
+        "label": "SIM / telekomunikasi",
+        "verification": "business_identity_required"
+      },
+      {
+        "id": "remittance",
+        "label": "Remitansi / pengiriman uang",
+        "verification": "regulated_provider_required"
+      },
+      {
+        "id": "banking",
+        "label": "Perbankan",
+        "verification": "regulated_provider_required"
+      },
+      {
+        "id": "language",
+        "label": "Bahasa Korea / pendidikan",
+        "verification": "business_identity_required"
+      },
+      {
+        "id": "legal_labor",
+        "label": "Konsultasi hukum/ketenagakerjaan berizin",
+        "verification": "professional_license_required"
+      },
+      {
+        "id": "housing_life",
+        "label": "Kebutuhan hidup/perumahan",
+        "verification": "business_identity_required"
+      }
+    ],
+    "prohibitedCategories": [
+      "job_guarantee",
+      "paid_employer_selection",
+      "visa_guarantee",
+      "slc_guarantee",
+      "broker_fast_track",
+      "unlicensed_financial_service",
+      "unlicensed_legal_service"
+    ]
+  }
+}

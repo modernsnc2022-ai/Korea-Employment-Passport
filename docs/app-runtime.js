@@ -14,8 +14,9 @@ const FORM_LINEAGE_URL='data/form_lineage_2026.json';
 const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
 const DEPARTURE_CALLS_URL='data/departure_calls_2026.json';
+const COMPANY_SERVICES_URL='data/company_services_v1.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',betaWorkerExperienceYear:'kep.betaWorkerExperienceYear',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,companyServices=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -385,7 +386,8 @@ async function boot(){
       formLineage,
       sourceReviewStatus,
       officialHelp,
-      departureCalls
+      departureCalls,
+      companyServices
     ]=await Promise.all([
       fetchJsonRequired(ROUTE_URL),
       fetchJsonRequired(RULES_URL),
@@ -427,6 +429,16 @@ async function boot(){
         DEPARTURE_CALLS_URL,
         {version:'unavailable',coverageStatus:'unavailable',complete:false,calls:[]},
         'departure call registry'
+      ),
+      fetchJsonOptional(
+        COMPANY_SERVICES_URL,
+        {
+          version:'unavailable',
+          community:{status:'backend_required',visibility:'members_only',authEnforcement:'server_side',closedMessage:'Backend anggota belum aktif.'},
+          investigation:{enabled:true,tiers:[]},
+          ads:{enabled:false,label:'IKLAN / SPONSOR'}
+        },
+        'company community and paid-service policy'
       )
     ]);
     $('routeTitle').textContent='Indonesia → Korea';
@@ -447,6 +459,7 @@ async function boot(){
     renderContract();
     renderPayroll();
     renderWorkplace();
+    renderCompanyHub();
     renderGapStage();
     renderBetaModeBanner();
     renderBetaValidation();
@@ -3586,6 +3599,147 @@ $('emailGapsBtn').addEventListener('click',()=>{
   location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+body;
 });
 
+
+function companyServiceTier(tierId){
+  return (companyServices?.investigation?.tiers||[]).find(row=>row.id===tierId)||null;
+}
+
+function companyBoardIsLive(){
+  const community=companyServices?.community||{};
+  return community.status==='live'
+    && community.visibility==='members_only'
+    && community.authEnforcement==='server_side';
+}
+
+function syncCompanyHubFromWorkplace(){
+  const company=$('wpCompany')?.value?.trim()||'';
+  const address=$('wpAddress')?.value?.trim()||'';
+  if(company&&!$('companyQaCompany').value)$('companyQaCompany').value=company;
+  if(address&&!$('companyQaAddress').value)$('companyQaAddress').value=address;
+}
+
+function renderCompanyHub(){
+  if(!companyServices)return;
+  syncCompanyHubFromWorkplace();
+
+  const community=companyServices.community||{};
+  const memberStatus=$('companyMemberStatus');
+  const boardState=$('companyBoardState');
+  const badge=$('companyBoardBadge');
+  if(companyBoardIsLive()){
+    memberStatus.innerHTML='<strong>Backend anggota aktif.</strong> Postingan hanya boleh dimuat setelah sesi anggota tervalidasi oleh server.';
+    badge.textContent='ANGGOTA';
+    badge.className='company-board-badge live';
+    boardState.className='result';
+    boardState.innerHTML='<strong>Masuk diperlukan.</strong><p>Konten komunitas dimuat hanya melalui sesi anggota terautentikasi; tidak ada data posting di bundle publik.</p>';
+  }else{
+    memberStatus.innerHTML='<strong>Fail-closed.</strong> '+escapeHtml(community.closedMessage||'Backend autentikasi anggota belum aktif; konten anggota tidak dimuat pada halaman publik.');
+    badge.textContent='TERKUNCI';
+    badge.className='company-board-badge';
+    boardState.className='result warn';
+    boardState.innerHTML='<strong>Papan bersama belum dibuka di build publik.</strong><p>Ini disengaja: KEP ID atau localStorage tidak dianggap login. Data anggota tidak boleh dipublikasikan sebagai JSON statis.</p>';
+  }
+
+  const adSlot=$('companyAdSlot');
+  const ads=companyServices.ads||{};
+  if(!ads.enabled){
+    adSlot.hidden=true;
+    adSlot.innerHTML='';
+  }else{
+    adSlot.hidden=false;
+    adSlot.innerHTML='<span>'+escapeHtml(ads.label||'IKLAN / SPONSOR')+'</span><strong>Slot sponsor terverifikasi</strong><p>Iklan dipisahkan dari jawaban resmi dan tidak memengaruhi urutan atau isi panduan.</p>';
+  }
+}
+
+function companyQaEvidence(company){
+  const workerRows=workerEvidenceForCompany(company);
+  const facts=workerRows.flatMap(row=>(row.facts||[]).map(fact=>({
+    topic:fact.topic||'Pengalaman pekerja',
+    summary:fact.summary||'',
+    year:row.experienceYear||'unknown',
+    status:row.verificationStatus||'unverified'
+  })));
+  const publicLookups=(workplaceRules?.officialLookups||[]).map(row=>({
+    title:row.title,
+    authority:row.authority,
+    url:row.url
+  }));
+  return {workerRows,facts,publicLookups};
+}
+
+function answerCompanyQuestion(){
+  const company=$('companyQaCompany').value.trim();
+  const address=$('companyQaAddress').value.trim();
+  const question=$('companyQaQuestion').value.trim();
+  const out=$('companyQaResult');
+  out.hidden=false;
+  if(!company||!question){
+    out.className='result warn';
+    out.textContent='Masukkan nama perusahaan dan pertanyaan.';
+    return;
+  }
+  const evidence=companyQaEvidence(company);
+  const matchedFacts=evidence.facts.slice(0,5);
+  const workerText=matchedFacts.length
+    ?'<div class="company-evidence-list">'+matchedFacts.map(row=>
+      '<article><span class="evidence-badge worker">PEKERJA TERVERIFIKASI</span><strong>'+escapeHtml(row.topic)+'</strong><p>'+escapeHtml(row.summary)+'</p><small>Pengalaman EPS '+escapeHtml(row.year)+'</small></article>'
+    ).join('')+'</div>'
+    :'<p><strong>Belum ada pengalaman pekerja terverifikasi yang cocok persis dengan nama perusahaan ini.</strong></p>';
+  const lookupText=evidence.publicLookups.length
+    ?'<p>Sumber resmi yang tersedia untuk pemeriksaan tambahan: '+evidence.publicLookups.map(row=>escapeHtml(row.title)).join(', ')+'.</p>'
+    :'';
+  out.className='result '+(matchedFacts.length?'safe':'warn');
+  out.innerHTML=
+    '<strong>Pertanyaan:</strong> '+escapeHtml(question)+
+    '<p><strong>Perusahaan:</strong> '+escapeHtml(company)+(address?' · '+escapeHtml(address):'')+'</p>'+
+    workerText+lookupText+
+    '<p>Jika bukti ini belum menjawab pertanyaan Anda, gunakan komunitas anggota setelah aktif atau buat permintaan investigasi operator di bawah. KEP tidak akan menebak kondisi perusahaan yang belum diverifikasi.</p>';
+}
+
+function buildOperatorInvestigationBody(data){
+  const tier=companyServiceTier(data.tier);
+  const tierLabel=tier?.label||data.tier||'unknown';
+  return [
+    'KOREA EMPLOYMENT PASSPORT — PAID REALITY CHECK REQUEST',
+    '',
+    'Company: '+(data.company||'-'),
+    'Workplace address: '+(data.address||'-'),
+    'Investigation tier: '+tierLabel,
+    'Question / requested checks: '+(data.question||'-'),
+    '',
+    'I understand this is a paid information-verification service, not job placement and not a guarantee about the employer.',
+    'I understand price and any travel cost must be confirmed before payment.',
+    'I did not include passport/KTP/ARC numbers, medical records, bank details, or a private dorm/home address.'
+  ].join('\n');
+}
+
+function requestOperatorInvestigation(){
+  const company=($('companyQaCompany').value||$('wpCompany')?.value||'').trim();
+  const address=($('companyQaAddress').value||$('wpAddress')?.value||'').trim();
+  const tier=$('companyInvestigationTier').value;
+  const question=$('companyInvestigationQuestion').value.trim()||$('companyQaQuestion').value.trim();
+  const out=$('companyInvestigationResult');
+  out.hidden=false;
+  if(!company||!question){
+    out.className='result warn';
+    out.textContent='Masukkan nama perusahaan dan hal yang ingin diperiksa terlebih dahulu.';
+    return;
+  }
+  const body=buildOperatorInvestigationBody({company,address,tier,question});
+  const subject=encodeURIComponent('[KEP Paid Reality Check] '+tier+' — '+company);
+  location.href='mailto:modernsnc2022@gmail.com?subject='+subject+'&body='+encodeURIComponent(body);
+  out.className='result safe';
+  out.textContent='Draft permintaan dibuat. Tim akan mengonfirmasi ruang lingkup dan harga sebelum pembayaran atau kunjungan.';
+}
+
+$('companyQaBtn').addEventListener('click',answerCompanyQuestion);
+$('companyInvestigationRequestBtn').addEventListener('click',requestOperatorInvestigation);
+$('openCompanyHubBtn').addEventListener('click',()=>{
+  syncCompanyHubFromWorkplace();
+  renderCompanyHub();
+  switchView('companyHub');
+});
+
 function switchView(viewId,scroll=true){
   const utilityOwner={
     eligibility:'journey',
@@ -3606,6 +3760,9 @@ function switchView(viewId,scroll=true){
     renderRejections();
     renderGaps();
     renderUnresolvedFieldQuestions();
+  }
+  if(viewId==='companyHub'){
+    renderCompanyHub();
   }
   if(scroll)document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
 }

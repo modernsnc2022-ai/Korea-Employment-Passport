@@ -1332,3 +1332,53 @@ test('beta feedback sanitizer redacts Korean phone numbers and always warns abou
   expect(result.cleanShared).toContain('tidak ada pola nomor/email yang terdeteksi otomatis');
   expect(errors).toEqual([]);
 });
+
+
+test('company community stays fail-closed until real member auth backend exists', async ({ page }) => {
+  const errors = await freshPage(page);
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await page.locator('.utility-tab[data-view="companyHub"]').click();
+
+  await expect(page.locator('#companyHub')).toBeVisible();
+  await expect(page.locator('#companyMembershipGate')).toContainText('ANGGOTA SAJA');
+  await expect(page.locator('#companyMembershipGate')).toContainText('KEP ID');
+  await expect(page.locator('#companyBoardBadge')).toHaveText('TERKUNCI');
+  await expect(page.locator('#companyBoardState')).toContainText('tidak dianggap login');
+  await expect(page.locator('#companyAdSlot')).toBeHidden();
+  expect(errors).toEqual([]);
+});
+
+test('paid operator investigation request excludes private dorm and identity data by design', async ({ page }) => {
+  const errors = await freshPage(page);
+  const body = await page.evaluate(() => buildOperatorInvestigationBody({
+    company:'Demo Manufacturing Co',
+    address:'123 Public Workplace Road, Korea',
+    tier:'field',
+    question:'Please check transport and the visible surrounding environment.',
+    dorm:'PRIVATE DORM ADDRESS',
+    passport:'P123456789'
+  }));
+
+  expect(body).toContain('Demo Manufacturing Co');
+  expect(body).toContain('123 Public Workplace Road');
+  expect(body).toContain('Kunjungan lapangan');
+  expect(body).toContain('transport');
+  expect(body).toContain('price and any travel cost must be confirmed');
+  expect(body).not.toContain('PRIVATE DORM ADDRESS');
+  expect(body).not.toContain('P123456789');
+  expect(errors).toEqual([]);
+});
+
+test('company question reports evidence scarcity instead of inventing employer facts', async ({ page }) => {
+  const errors = await freshPage(page);
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await page.locator('.utility-tab[data-view="companyHub"]').click();
+  await page.locator('#companyQaCompany').fill('No Evidence Factory XYZ');
+  await page.locator('#companyQaQuestion').fill('Bagaimana kondisi asrama?');
+  await page.locator('#companyQaBtn').click();
+
+  await expect(page.locator('#companyQaResult')).toBeVisible();
+  await expect(page.locator('#companyQaResult')).toContainText('Belum ada pengalaman pekerja terverifikasi');
+  await expect(page.locator('#companyQaResult')).toContainText('tidak akan menebak');
+  expect(errors).toEqual([]);
+});

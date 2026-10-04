@@ -110,7 +110,8 @@
       <button class="utility-tab active" data-view="journey"><span>01</span>Sekarang</button>
       <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
       <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
-      <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
+      <button class="utility-tab" data-view="companyHub"><span>04</span>Perusahaan</button>
+      <button class="utility-tab" data-view="gaps"><span>05</span>Bantuan</button>
     </nav>
 
     <section id="journey" class="view active">
@@ -419,9 +420,83 @@
         <div class="coverage-head"><strong>Bukti yang sudah diperiksa</strong><span id="coverageText">0%</span></div>
         <div class="coverage-bar"><span id="coverageBar"></span></div>
         <div id="workplaceCoverageDetail" class="workplace-coverage-detail"></div>
-        <button id="requestScoutBtn" class="primary">Minta pemeriksaan lapangan</button>
-        <p class="muted">Permintaan hanya berisi nama perusahaan, alamat kerja, dan item yang belum terverifikasi. Jangan kirim paspor, ARC, atau dokumen kesehatan.</p>
+        <button id="openCompanyHubBtn" class="secondary" type="button">Buka komunitas & tanya tentang perusahaan</button>
+        <button id="requestScoutBtn" class="primary" type="button">Minta investigasi operator (berbayar)</button>
+        <p class="muted">Jika informasi publik dan pengalaman pekerja belum cukup, Anda dapat meminta investigasi tambahan. Harga dikonfirmasi sebelum pembayaran. Jangan kirim paspor, ARC, dokumen kesehatan, atau alamat asrama pribadi.</p>
       </div>
+    </section>
+
+
+    <section id="companyHub" class="view">
+      <div class="section-head">
+        <span class="eyebrow dark">KOMUNITAS PERUSAHAAN</span>
+        <h2>Tanya, baca pengalaman, lalu minta investigasi jika masih kurang</h2>
+        <p>Ruang perusahaan dirancang khusus anggota. Pertanyaan dan pengalaman ditampilkan dengan nama samaran; identitas akun tidak dipublikasikan.</p>
+      </div>
+
+      <div id="companyMembershipGate" class="panel company-member-gate">
+        <div class="company-gate-head">
+          <span class="company-member-badge">ANGGOTA SAJA</span>
+          <strong>Papan anonim tidak pernah dibuka hanya dengan KEP ID</strong>
+        </div>
+        <p>KEP ID adalah kode beta, bukan autentikasi. Postingan bersama hanya boleh dimuat setelah layanan akun menerapkan autentikasi server-side. Halaman publik GitHub Pages tidak menyimpan atau menampilkan posting anggota.</p>
+        <div id="companyMemberStatus" class="company-member-status"></div>
+      </div>
+
+      <div class="panel company-question-panel">
+        <h3>Apa yang ingin Anda ketahui tentang perusahaan ini?</h3>
+        <p class="muted">Versi saat ini mencari bukti yang sudah diverifikasi di KEP. Jika belum ada cukup bukti, pertanyaan dapat dibawa ke komunitas anggota setelah backend aktif atau diteruskan ke investigasi operator.</p>
+        <label>Nama perusahaan
+          <input id="companyQaCompany" autocomplete="off" placeholder="Nama pada SLC">
+        </label>
+        <label>Alamat tempat kerja (opsional)
+          <input id="companyQaAddress" autocomplete="off" placeholder="Alamat pada SLC">
+        </label>
+        <label>Pertanyaan
+          <textarea id="companyQaQuestion" rows="4" placeholder="Contoh: Ada informasi tentang asrama, lembur, transportasi, atau lingkungan sekitar?"></textarea>
+        </label>
+        <button id="companyQaBtn" class="primary" type="button">Cari informasi yang sudah ada</button>
+        <div id="companyQaResult" class="result" hidden></div>
+      </div>
+
+      <div class="panel company-board-panel">
+        <div class="company-board-head">
+          <div>
+            <span class="eyebrow dark">PAPAN ANONIM</span>
+            <h3>Pertanyaan & pengalaman anggota</h3>
+          </div>
+          <span id="companyBoardBadge" class="company-board-badge">TERKUNCI</span>
+        </div>
+        <div class="company-board-categories">
+          <span>Pertanyaan</span><span>Pengalaman kerja</span><span>Asrama</span><span>Gaji & lembur</span><span>Transportasi</span><span>Foto konteks</span>
+        </div>
+        <div id="companyBoardState" class="result warn"></div>
+        <p class="muted">Saat backend aktif, anggota dapat menulis dengan nama samaran. Tuduhan faktual yang serius, data pribadi, doxxing, foto wajah/plat nomor/문서 식별정보 등은 moderation 대상입니다.</p>
+      </div>
+
+      <div class="panel company-investigation">
+        <div>
+          <span class="eyebrow dark">HUMAN REALITY CHECK · BERBAYAR</span>
+          <h3>Informasi masih kurang? Minta operator memeriksa</h3>
+          <p class="muted">Pilih tingkat investigasi. Ini bukan jasa penempatan kerja dan tidak menjamin bahwa perusahaan “baik” atau “buruk”. Kami melaporkan apa yang dapat diverifikasi dan apa yang tidak dapat diverifikasi.</p>
+        </div>
+        <label>Tingkat investigasi
+          <select id="companyInvestigationTier">
+            <option value="desk">1 · Riset online terperinci</option>
+            <option value="phone">2 · Riset + verifikasi telepon bila memungkinkan</option>
+            <option value="field">3 · Kunjungan lapangan bila memungkinkan</option>
+          </select>
+        </label>
+        <label>Hal yang paling ingin diperiksa
+          <textarea id="companyInvestigationQuestion" rows="4" placeholder="Contoh: kondisi sekitar pabrik, akses bus, toko/rumah sakit dekat, informasi asrama yang dapat diverifikasi secara legal"></textarea>
+        </label>
+        <button id="companyInvestigationRequestBtn" class="primary" type="button">Buat permintaan investigasi</button>
+        <div id="companyInvestigationResult" class="result" hidden></div>
+        <p class="muted">Permintaan hanya memakai nama perusahaan, alamat kerja, tingkat investigasi, dan pertanyaan. Harga/biaya perjalanan dikonfirmasi sebelum pembayaran. Jangan kirim nomor paspor/KTP/ARC, hasil medis, rekening, atau alamat asrama pribadi.</p>
+      </div>
+
+      <aside id="companyAdSlot" class="company-ad-slot" hidden aria-label="Iklan sponsor"></aside>
+      <button class="secondary process-return" type="button">← Kembali ke perjalanan</button>
     </section>
 
     <section id="payroll" class="view">

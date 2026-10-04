@@ -41,6 +41,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/official_help_channels_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/beta_program_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/beta_recruitment_sources_v1.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/tls_pins.json','utf8'))"
@@ -95,4 +96,5 @@ jobs:
           test -f docs/beta.css
           test -f docs/beta.js
           test -f docs/privacy.html
+          test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
