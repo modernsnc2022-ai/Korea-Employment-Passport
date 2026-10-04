@@ -88,6 +88,8 @@ Completing a retrospective interview does not by itself authorize public company
 
 Do not edit narrative beta feedback directly into `BETA_TESTER_TRACKER.csv`.
 
+A KEP ID is pseudonymous routing metadata, not authentication. Before writing feedback to the public tracker, confirm that it came from the same private enrollment email/thread or another private contact channel explicitly linked to that participant outside this repository.
+
 1. Read the participant's combined feedback privately.
 2. Confirm the `KEP-####` ID and the exact `ID tahap sekarang` from the bundle.
 3. Map only actionable findings to the locked 27 route stage IDs.
