@@ -59,6 +59,8 @@ jobs:
         run: python scripts/check_beta_tracker.py
       - name: Check beta prelaunch readiness
         run: python scripts/check_beta_launch_readiness.py --allow-source-review-pending
+      - name: Self-test beta progress evidence aggregation
+        run: python scripts/report_beta_progress.py --self-test
       - name: Report privacy-safe beta progress
         run: python scripts/report_beta_progress.py
       - name: Self-test beta slot assignment helper
