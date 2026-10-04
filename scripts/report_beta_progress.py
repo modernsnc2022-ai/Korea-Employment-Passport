@@ -43,6 +43,63 @@ def stage_evidence_counter(rows: list[dict[str, str]], key: str) -> Counter[str]
             counter[stage_id] += 1
     return counter
 
+def worker_is_current_cycle(row: dict[str, str]) -> bool:
+    return (
+        (row.get("interview_status") or "").strip() == "completed"
+        and (row.get("experience_year") or "").strip() == ROUTE_CYCLE
+    )
+
+def zero_broker_stage_summary(rows: list[dict[str, str]]) -> dict:
+    pass_counts = stage_evidence_counter(rows, "zero_broker_pass_stages")
+    fail_counts = stage_evidence_counter(rows, "zero_broker_fail_stages")
+    fail_stage_ids = [stage_id for stage_id in ROUTE_STAGE_IDS if fail_counts[stage_id] > 0]
+    pass_ready_stage_ids = [
+        stage_id for stage_id in ROUTE_STAGE_IDS
+        if pass_counts[stage_id] > 0 and fail_counts[stage_id] == 0
+    ]
+    uncovered_stage_ids = [
+        stage_id for stage_id in ROUTE_STAGE_IDS
+        if pass_counts[stage_id] == 0 and fail_counts[stage_id] == 0
+    ]
+    return {
+        "pass_counts": pass_counts,
+        "fail_counts": fail_counts,
+        "fail_stage_ids": fail_stage_ids,
+        "pass_ready_stage_ids": pass_ready_stage_ids,
+        "uncovered_stage_ids": uncovered_stage_ids,
+        "ready": len(pass_ready_stage_ids) == len(ROUTE_STAGE_IDS) and not fail_stage_ids,
+    }
+
+def self_test() -> None:
+    all_stages = ";".join(ROUTE_STAGE_IDS)
+    clean = zero_broker_stage_summary([{
+        "zero_broker_pass_stages": all_stages,
+        "zero_broker_fail_stages": "",
+    }])
+    assert clean["ready"] is True
+    assert len(clean["pass_ready_stage_ids"]) == len(ROUTE_STAGE_IDS)
+
+    failed = zero_broker_stage_summary([{
+        "zero_broker_pass_stages": all_stages,
+        "zero_broker_fail_stages": ROUTE_STAGE_IDS[0],
+    }])
+    assert failed["ready"] is False
+    assert failed["fail_stage_ids"] == [ROUTE_STAGE_IDS[0]]
+
+    assert worker_is_current_cycle({
+        "interview_status": "completed",
+        "experience_year": ROUTE_CYCLE,
+    }) is True
+    assert worker_is_current_cycle({
+        "interview_status": "completed",
+        "experience_year": "2024",
+    }) is False
+    assert worker_is_current_cycle({
+        "interview_status": "new",
+        "experience_year": ROUTE_CYCLE,
+    }) is False
+    print("BETA_PROGRESS_SELF_TEST_PASS")
+
 def render(rows: list[dict[str, str]]) -> str:
     active = [row for row in rows if row.get("target_group", "").strip() == "active_applicant"]
     workers = [row for row in rows if row.get("target_group", "").strip() == "e9_worker_korea"]
@@ -66,10 +123,7 @@ def render(rows: list[dict[str, str]]) -> str:
         row for row in enrolled_workers
         if (row.get("interview_status") or "").strip() == "completed"
     ]
-    current_cycle_worker_rows = [
-        row for row in completed_workers
-        if (row.get("experience_year") or "").strip() == ROUTE_CYCLE
-    ]
+    current_cycle_worker_rows = [row for row in completed_workers if worker_is_current_cycle(row)]
     current_cycle_workers = len(current_cycle_worker_rows)
     prior_cycle_workers = sum(
         (row.get("experience_year") or "").strip().isdigit()
@@ -85,21 +139,11 @@ def render(rows: list[dict[str, str]]) -> str:
     )
 
     current_cycle_evidence_rows = assigned_active + current_cycle_worker_rows
-    zero_pass_counts = stage_evidence_counter(current_cycle_evidence_rows, "zero_broker_pass_stages")
-    zero_fail_counts = stage_evidence_counter(current_cycle_evidence_rows, "zero_broker_fail_stages")
-    zero_fail_stage_ids = [stage_id for stage_id in ROUTE_STAGE_IDS if zero_fail_counts[stage_id] > 0]
-    zero_pass_ready_stage_ids = [
-        stage_id for stage_id in ROUTE_STAGE_IDS
-        if zero_pass_counts[stage_id] > 0 and zero_fail_counts[stage_id] == 0
-    ]
-    zero_uncovered_stage_ids = [
-        stage_id for stage_id in ROUTE_STAGE_IDS
-        if zero_pass_counts[stage_id] == 0 and zero_fail_counts[stage_id] == 0
-    ]
-    zero_broker_stage_ready = (
-        len(zero_pass_ready_stage_ids) == len(ROUTE_STAGE_IDS)
-        and not zero_fail_stage_ids
-    )
+    zero_summary = zero_broker_stage_summary(current_cycle_evidence_rows)
+    zero_fail_stage_ids = zero_summary["fail_stage_ids"]
+    zero_pass_ready_stage_ids = zero_summary["pass_ready_stage_ids"]
+    zero_uncovered_stage_ids = zero_summary["uncovered_stage_ids"]
+    zero_broker_stage_ready = zero_summary["ready"]
 
     broker_gaps_resolved = count_value(evidence_rows, "broker_gap_status", "resolved")
     broker_gaps_open = count_value(evidence_rows, "broker_gap_status", "open")
@@ -196,7 +240,12 @@ def render(rows: list[dict[str, str]]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", help="Optional markdown output path")
+    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
+
+    if args.self_test:
+        self_test()
+        return 0
 
     with TRACKER.open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
