@@ -96,3 +96,16 @@ Do not edit narrative beta feedback directly into `BETA_TESTER_TRACKER.csv`.
 6. Re-run with `--write` only after the mapping is correct.
 
 The recorder never accepts free-text notes. Narrative email content remains outside the public repository. Use `feedback_status=active` while feedback is ongoing and `complete` only when the participant's planned beta feedback cycle is complete.
+
+
+## Public beta release transition
+
+The public beta must stay HOLD until there is an explicit manual OPEN decision. Do not hand-edit only `status`.
+
+1. Confirm same-HEAD `static-check`, `ui-smoke`, Pages deployment, and `beta-launch-gate` are green.
+2. Re-check the official Manufacturing 2026 notice on the same day.
+3. Dry-run `python scripts/set_beta_release.py --approved-at YYYY-MM-DD --confirm-open`.
+4. Review that the source state is still clean and the proposed transition is HOLD → OPEN.
+5. Only after explicit release approval, re-run with `--write` and commit both the program state and outreach status together.
+
+OPEN is valid only when `releaseDecision.publicBeta=approved_manual` and `approvedAt` is present. This prevents future CI from treating a legitimately opened beta as an invalid prelaunch state.
