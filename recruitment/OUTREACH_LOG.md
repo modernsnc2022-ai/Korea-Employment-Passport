@@ -81,3 +81,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | ANEKARASA — WhatsApp reply | Indonesian community/business hub in Ansan | Admin replied that they will first ask people in their network whether they are interested | **Positive referral step — waiting for interest feedback / introductions** |
 
 | 2026-10-05 | ANEKARASA — follow-up sent | Indonesian community/business hub in Ansan | Sent thank-you follow-up confirming that interested people may receive the beta link directly or be introduced to KEP/admin contacts | **Sent — awaiting introductions / interest feedback** |
+
+| 2026-10-05 | Warung Nusantara — WhatsApp reply | Indonesian community/business hub in Ansan/Wongok-dong | Admin replied "Boleh mas" to the request to connect/share KEP beta information to WNI/E-9 worker groups | **Permission / positive response — send forwardable recruitment copy** |
