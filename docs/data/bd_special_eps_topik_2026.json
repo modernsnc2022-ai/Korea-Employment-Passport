@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "country": "BD",
+  "cycle": 2026,
+  "routeType": "special_eps_topik",
+  "excludedFromRegularCountryPack": true,
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=005&examNot=20&examYear=2026&lang=ko&lcnsId=001",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "title": "2026 Special EPS-TOPIK in Bangladesh",
+    "testType": "Special CBT",
+    "pointSystem": false,
+    "registrationPeriod": "2026-03-10 through 2026-03-11",
+    "testAnnouncementDate": "2026-04-30",
+    "testDate": "2026-05-08",
+    "resultDate": "2026-06-08",
+    "receptionAddress": "Probashi Kallyan Bhaban (M Floor), 71-72 Eskaton Garden, Dhaka-1000",
+    "receptionPhones": [
+      "02-9336508",
+      "02-9330652"
+    ]
+  },
+  "warning": "These 2026 Special EPS-TOPIK dates belong only to the Special route and must never populate the Regular Manufacturing Country Pack."
+}
