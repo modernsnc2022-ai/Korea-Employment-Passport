@@ -103,3 +103,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 
 | 2026-10-05 | Masjid Hidayatullah Jangnim Busan — Instagram DM | Indonesian WNI/PMI Muslim community in Busan | Sent KEP E-9 worker-validator recruitment DM to `@dkm_hidayatullah`; sent the recruitment explanation first and the beta link separately using `src=hidayatullah_jangnim_busan` | **Sent — awaiting reply** |
 | 2026-10-05 | Antioch Indonesia Mission Ansan — WhatsApp | Indonesian migrant-worker Christian community in Ansan | Verified +82 10-2267-9531 is active on WhatsApp and sent the KEP E-9 worker-validator recruitment request; message used `src=antioch_indonesia_ansan` and included privacy / no-guarantee disclosures | **Sent — awaiting reply** |
+
+| 2026-10-05 | Masjid Nurul Hidayah Anseong — public mobile | Indonesian KMI mosque/community in Anseong | Current public mosque directories list +82 10-6464-4091; KMI community references identify Nurul Hidayah/Ansong as an Indonesian-run member community; source `nurul_hidayah_anseong` added | **Ready — WhatsApp availability not yet tested; do not mark sent until confirmed** |
