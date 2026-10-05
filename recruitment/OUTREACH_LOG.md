@@ -52,3 +52,5 @@ Excluded:
 Rule: no unsolicited commercial advertising; request admin permission where group rules restrict promotion or are unclear.
 
 | 2026-10-05 | KMI Korea — WhatsApp | Indonesian worker/community network in Korea | Sent direct WhatsApp message requesting connection to KMI central/regional WhatsApp admins for current E-9 worker beta validation recruitment; message included KEP beta link and no-guarantee/privacy disclosures | **Sent — awaiting reply** |
+
+| 2026-10-05 | Human Initiative Korea | Indonesian diaspora/community network in Korea | Email requesting KEP beta sharing to current E-9 workers or connection to regional community admins | **Sent — Gmail message `1a10b30e60ae56b8`; awaiting reply** |
