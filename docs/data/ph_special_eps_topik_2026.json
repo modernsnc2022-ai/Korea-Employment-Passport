@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "country": "PH",
+  "cycle": 2026,
+  "routeType": "special_eps_topik_returning_worker",
+  "excludedFromRegularCountryPack": true,
+  "sourceUrl": "https://wcms.dmw.gov.ph/uploads/EPS_TOPIK_Advisory_No_1_s_2026_For_DMW_website_6d6ae0b963.pdf",
+  "verifiedAt": "2026-10-05",
+  "purpose": "Separate evidence to prevent Special EPS-TOPIK facts from contaminating the Regular Manufacturing Country Pack.",
+  "facts": {
+    "eligibleRoute": "Former EPS workers who completed their previous contract and returned to the Philippines voluntarily; HRD Korea provides invited candidates.",
+    "industry": "Manufacturing",
+    "dmwRegistrationPeriod": "2026-03-09 14:00 through 2026-03-12 17:00",
+    "testFeeUsd": 24,
+    "dmwTestPeriod": "2026-03-26 through 2026-03-29",
+    "dmwResultDate": "2026-04-06",
+    "expectedSuccessfulCandidates": 100,
+    "minimumScore": 120,
+    "testVenue": "DMW Central Office, Mandaluyong City"
+  },
+  "warning": "These dates, fee, quota and eligibility are Special EPS-TOPIK facts and must never be promoted into the Regular Manufacturing route."
+}
