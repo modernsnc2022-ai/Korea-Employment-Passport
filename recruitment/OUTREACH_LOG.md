@@ -105,3 +105,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Antioch Indonesia Mission Ansan — WhatsApp | Indonesian migrant-worker Christian community in Ansan | Verified +82 10-2267-9531 is active on WhatsApp and sent the KEP E-9 worker-validator recruitment request; message used `src=antioch_indonesia_ansan` and included privacy / no-guarantee disclosures | **Sent — awaiting reply** |
 
 | 2026-10-05 | Masjid Nurul Hidayah Anseong — WhatsApp probe | Indonesian KMI mosque/community in Anseong | Tested published number +82 10-6464-4091 in WhatsApp | **Invalid — no WhatsApp search result; retire direct-number route and do not retry** |
+
+| 2026-10-05 | Hwaseong Hangnam Masjid — public mobile | Indonesian mosque/community in Hyangnam-eup, Hwaseong | Recently indexed public mosque directory identifies this as an Indonesian community mosque in a factory area and lists +82 10-8193-0990; source `hwaseong_hangnam_masjid` added | **Ready — WhatsApp availability not yet tested; do not mark sent until confirmed** |
