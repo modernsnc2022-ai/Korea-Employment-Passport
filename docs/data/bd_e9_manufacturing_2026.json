@@ -1,0 +1,286 @@
+{
+  "country": "BD",
+  "countryName": "Bangladesh",
+  "nativeCountryName": "বাংলাদেশ",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-regular-manufacturing-current-window-not-yet-verified",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "Bangladesh Overseas Employment and Services Limited (BOESL)",
+    "url": "https://boesl.gov.bd/",
+    "receptionOffice": "71, Probashi Kallyan Bhaban, 4th floor, 72 Eskaton Garden Rd, Dhaka 1200",
+    "phone": "+88-02-9336508"
+  },
+  "evidenceNotes": [
+    "HRD Korea identifies BOESL as Bangladesh's EPS sending agency and lists the Dhaka reception office.",
+    "A 2026 Special EPS-TOPIK schedule is officially confirmed for Bangladesh, but it is a Special route and is not used as a Regular Manufacturing schedule.",
+    "KEP has not yet verified a current 2026 Regular Manufacturing registration/test window in Bangladesh.",
+    "HRD Korea's generic visiting-registration guide provides a US$28 / application-sheet / two-photo / ID-copy baseline, but KEP treats it only as generic EPS guidance until a Bangladesh cycle-specific Regular notice is verified."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "specialRouteFactsExcludedFromRegular": true,
+    "genericHrdBaselineNotCurrentCycle": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "BOESL / HRD Korea",
+      "kind": "rules",
+      "action": "KEP has not verified a current 2026 Regular Manufacturing eligibility notice for Bangladesh. Wait for the current BOESL/HRD Korea Regular notice before treating age, health or legal conditions as exact cycle rules.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "awaiting_regular_notice"
+    },
+    {
+      "id": "registration",
+      "title": "Regular EPS-TOPIK registration",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_action",
+      "action": "KEP has not verified an open 2026 Regular Manufacturing registration window for Bangladesh. Do not use the 2026 Special EPS-TOPIK dates as a Regular registration window.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "regular_window_not_verified"
+    },
+    {
+      "id": "exam_fee",
+      "title": "Regular EPS-TOPIK fee",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_payment",
+      "action": "HRD Korea's generic visiting-registration guide shows a US$28 registration baseline, but KEP does not promote that as the current Bangladesh Regular Manufacturing fee until a cycle-specific notice is verified.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "supportState": "generic_hrd_baseline_only"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity verification",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_action",
+      "action": "Follow only the identity/biometric instructions in the current Bangladesh Regular notice. No Special-route identity rule is imported into Regular Manufacturing.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_action",
+      "action": "HRD Korea's generic visiting-registration baseline uses an application sheet with two recent passport photos and an ID copy. Treat this only as generic EPS guidance until BOESL publishes the current Regular Manufacturing checklist.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "supportState": "generic_hrd_baseline_only"
+    },
+    {
+      "id": "exam_card",
+      "title": "Exam admission / schedule",
+      "authority": "BOESL / HRD Korea",
+      "kind": "self_service",
+      "action": "Wait for the current Regular Manufacturing exam notice and admission instructions. The 2026 Special EPS-TOPIK exam date does not apply to new Regular Manufacturing applicants.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "awaiting_regular_notice"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — Regular Manufacturing",
+      "authority": "HRD Korea / BOESL",
+      "kind": "official_exam",
+      "action": "KEP has not verified a 2026 Regular Manufacturing EPS-TOPIK schedule for Bangladesh. Do not substitute the confirmed 2026 Special EPS-TOPIK schedule.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "regular_schedule_not_verified"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test / Job Capacity Assessment",
+      "authority": "HRD Korea / BOESL",
+      "kind": "official_exam",
+      "action": "If the Bangladesh Regular route uses point-system skills/job-capacity assessment, the current-cycle notice must define the exact stage. KEP does not infer it from another country or from Special EPS-TOPIK.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "research_pending_regular_notice"
+    },
+    {
+      "id": "final_selection",
+      "title": "Final selection",
+      "authority": "HRD Korea / BOESL",
+      "kind": "official_result",
+      "action": "Use only the current Bangladesh Regular selection/result notice. Passing EPS-TOPIK does not guarantee employer selection or departure.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "research_pending_regular_notice"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "BOESL",
+      "kind": "official_requirement",
+      "action": "No separate Bangladesh psychology stage is asserted. Do not copy Indonesia-specific psychology rules.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "BOESL / designated provider",
+      "kind": "official_requirement",
+      "action": "Use only the current Bangladesh Regular medical notice and designated-provider instructions. Exact 2026 Regular medical requirements are not yet mapped.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "BOESL",
+      "kind": "official_action",
+      "action": "Wait for the current BOESL Regular candidate-file/employment-application instructions. Exact documents, fees and timing are not yet mapped.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS candidate roster",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_wait",
+      "action": "After official candidate-file acceptance, roster handling follows the EPS process. No private broker can guarantee priority or Korean employer selection.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for employer selection through the official EPS system. BOESL is the Bangladesh sending agency; a private broker cannot guarantee selection.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "verified_sending_authority_principle"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / BOESL",
+      "kind": "official_contract",
+      "action": "If selected by a Korean employer, follow current BOESL/EPS SLC instructions. Do not pay a private intermediary to obtain or alter an SLC.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Bangladesh requirements",
+      "authority": "BOESL",
+      "kind": "conditional_official",
+      "action": "Follow current BOESL notices for training, medical follow-up, visa documents, payments and departure. Exact 2026 Regular downstream rules remain under review.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "BOESL / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use current BOESL/Korean-mission visa instructions. Exact 2026 Regular Manufacturing checklist and fees are not yet mapped.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "BOESL",
+      "kind": "official_training",
+      "action": "Complete only the official training/orientation assigned by BOESL. Exact 2026 Regular cohort timing and fees remain notice-specific.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "BOESL",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage. Follow a current BOESL departure notice if a final medical recheck is required.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "BOESL / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after official contract, visa, training and departure requirements are complete and BOESL issues the applicable departure instructions.",
+      "sourceUrl": "https://boesl.gov.bd/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/bd_exact_answer_rules_2026.json",
+  "documentPacksFile": "data/bd_document_packs_2026.json",
+  "stageReadinessFile": "data/bd_stage_readiness_2026.json",
+  "specialRouteEvidenceFile": "data/bd_special_eps_topik_2026.json"
+}
