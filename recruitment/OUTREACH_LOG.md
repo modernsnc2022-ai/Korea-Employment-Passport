@@ -87,3 +87,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Kedai Rinjani — WhatsApp reply | Indonesian community/business hub in Ansan | Admin said many PMI now belong to their own paguyuban, making direct contact numbers hard to obtain, and suggested trying other Indonesian restaurants | **Useful network insight — no direct referral; route closed politely** |
 
 | 2026-10-05 | wonGrow — WhatsApp | Self-organized Indonesian worker cooperative/community in Korea | Sent direct WhatsApp request asking for beta sharing to PMI Korea members / internal community admins; message used `src=wongrow_pmi_korea` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Sirothol Mustaqim Ansan WhatsApp probe | Indonesian Muslim / worker community in Ansan | Tested public number +82 10-2130-4155 via WhatsApp | **Invalid — number is not on WhatsApp; retire direct-number route** |
