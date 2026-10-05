@@ -211,6 +211,8 @@ require(ph_readiness.get("specialRoute",{}).get("mustNotPopulateRegular") is Tru
 require(ph_readiness.get("betaReadiness",{}).get("status")=="blocked","Philippines beta must remain blocked")
 require(ph_special.get("excludedFromRegularCountryPack") is True,"Philippines Special evidence must be explicitly excluded from Regular pack")
 require(ph_special.get("facts",{}).get("testFeeUsd")==24 and ph_special.get("facts",{}).get("expectedSuccessfulCandidates")==100,"Philippines Special facts must preserve their own fee/quota only inside special evidence")
+require(ph_special.get("crossSourceScheduleNote",{}).get("status")=="special_route_schedule_sources_differ","Philippines Special DMW/HRD schedule discrepancy must remain isolated from Regular")
+require("Regular Manufacturing" in ph_special.get("crossSourceScheduleNote",{}).get("rule",""),"Philippines Special discrepancy rule must explicitly block promotion into Regular Manufacturing")
 regular_exact_ids={row.get("id") for row in ph_exact.get("answers",[])}
 for exact_id in ["ph_2026_sending_authority","ph_2026_regular_schedule_status","ph_2026_portal_registration_status","ph_2026_special_route_separation","ph_regular_no_job_guarantee"]:
     require(exact_id in regular_exact_ids,f"Philippines exact-answer catalog missing {exact_id}")
