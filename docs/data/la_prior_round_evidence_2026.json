@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "country": "LA",
+  "cycle": 2026,
+  "currentRouteId": "la-e9-manufacturing-2026",
+  "excludedFromCurrent34th": true,
+  "verifiedAt": "2026-10-06",
+  "rounds": [
+    {
+      "round": "33rd Point System Laos Manufacturing",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=37&examYear=2026&lang=ko&lcnsId=001",
+      "registrationPeriod": "2026-03-10 through 2026-03-13",
+      "testAnnouncementDate": "2026-04-01",
+      "testPeriod": "2026-04-20 through 2026-04-27",
+      "use": "prior_round_workflow_evidence_only"
+    }
+  ],
+  "rule": "No 33rd-round date, fee, quota or document requirement may be promoted into the current 34th-round exact rules without a current official source."
+}
