@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Eligibility check",
+    "action": "Use the current DMW EPS portal qualification snapshot only as a pre-check. The next Regular Manufacturing notice must control the final age window and any cycle-specific eligibility conditions."
+  },
+  "registration": {
+    "title": "Regular EPS-TOPIK registration",
+    "action": "No Regular EPS-TOPIK registration is currently open on the official DMW portal. HRD Korea lists the 11th point-system recruitment in Philippines_Manufacturing, but registration/test/result dates are still undecided."
+  },
+  "exam_fee": {
+    "title": "Regular EPS-TOPIK fee",
+    "action": "Do not pay any test fee until DMW publishes the Regular Manufacturing registration notice. The US$24 fee in the March 2026 Special EPS-TOPIK advisory belongs to the special returning-worker route and must not be reused here."
+  },
+  "biometric": {
+    "title": "Identity verification",
+    "action": "Prepare to follow the identity-verification requirements in the next Regular Manufacturing notice. KEP does not infer a biometric step from the Special EPS route or the 2025 cycle."
+  },
+  "document_verify": {
+    "title": "Registration file preparation",
+    "action": "The current DMW portal asks applicants to prepare a recent passport-sized JPG photo and a scanned passport JPG. Treat these as the current portal snapshot and recheck when Regular registration opens."
+  },
+  "exam_card": {
+    "title": "Exam schedule / admission preparation",
+    "action": "Wait for the official Regular Manufacturing test-date notice and admission instructions. Current HRD Korea schedule fields for the 11th recruitment are undecided."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Regular Manufacturing",
+    "action": "The 11th point-system Regular Manufacturing route is registered in HRD Korea, but its current registration, test and result dates remain undecided. Do not substitute the 2026 Special EPS-TOPIK schedule."
+  },
+  "skill_competency": {
+    "title": "Skills Test / Job Capacity Assessment",
+    "action": "Regular Philippines Manufacturing uses a point-based selection flow with a second-round skills/job-capacity stage, but KEP has not verified the current 2026 Regular schedule or scoring notice. 2025 material is workflow-shape evidence only."
+  },
+  "final_selection": {
+    "title": "Point-based final selection",
+    "action": "For the Regular route, final selection requires the current point-system notice and current-cycle results. Do not reuse 2025 quotas, cutoffs or dates as 2026 Regular facts."
+  },
+  "psychology_pre_job": {
+    "title": "Country-specific pre-job checks",
+    "action": "No separate Philippines psychology stage is asserted for the current Regular route. Do not copy Indonesia-specific psychology rules."
+  },
+  "mcu1": {
+    "title": "Medical examination",
+    "action": "The 2025 Regular Manufacturing process required medical examination after the official final-pass announcement at a DOH-accredited clinic. That is prior-cycle workflow evidence only; wait for the current Regular notice before using exact medical instructions."
+  },
+  "job_application": {
+    "title": "Job-roster candidate file",
+    "action": "The 2025 Regular Manufacturing final-pass advisory shows a post-selection candidate-file/medical submission stage, but its documents, links and timing are not current 2026 Regular rules. Wait for the current DMW advisory."
+  },
+  "roster": {
+    "title": "EPS Job Roster",
+    "action": "Passing selection does not guarantee employment. A worker becomes eligible for the EPS Job Roster only through the official process after the required current-cycle steps."
+  },
+  "employer_selection": {
+    "title": "Korean employer selection",
+    "action": "Wait for employer selection through the official EPS process. DMW is the Philippine sending agency; a private broker cannot guarantee a Korean employer selection."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "If selected by a Korean employer, follow the current DMW EPS advisory for the SLC and subsequent requirements. No private intermediary can legitimately guarantee or alter an SLC."
+  },
+  "post_slc_requirements": {
+    "title": "Post-SLC Philippines requirements",
+    "action": "Follow only current DMW advisories for training, medical follow-up, visa documents, fees and departure preparation. KEP has not yet promoted exact 2026 Regular downstream rules."
+  },
+  "visa_docs": {
+    "title": "Visa document package",
+    "action": "Use the current DMW/Korean-mission instructions for visa processing. Exact 2026 Regular Manufacturing checklist and fees are not yet mapped."
+  },
+  "predeparture_training": {
+    "title": "Pre-departure preparation / training",
+    "action": "Use the current DMW advisory for any mandatory pre-departure training/orientation. Exact 2026 Regular cohort instructions are not yet mapped."
+  },
+  "mcu3_departure": {
+    "title": "Final medical/departure readiness",
+    "action": "Do not invent an Indonesia-style MCU-III stage. Follow the current DMW departure advisory if a final medical or health recheck is required."
+  },
+  "departure": {
+    "title": "Official departure to Korea",
+    "action": "Travel only after official DMW/EPS contract, visa, training and departure requirements are complete and an official departure plan is issued."
+  },
+  "korea_entry_training": {
+    "title": "Korea entry + employment education",
+    "action": "After entry, complete the official Korea-side employment education and handover process."
+  },
+  "employer_handover": {
+    "title": "Employer handover",
+    "action": "Confirm workplace, accommodation and emergency contacts during official handover."
+  },
+  "residence_registration": {
+    "title": "Residence Card / foreigner registration",
+    "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card."
+  },
+  "eps_insurance_check": {
+    "title": "EPS insurance check",
+    "action": "Confirm required EPS insurance obligations through official EPS information."
+  },
+  "first_payroll_check": {
+    "title": "First payroll check",
+    "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules."
+  },
+  "labor_support_ready": {
+    "title": "Labor support readiness",
+    "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue."
+  },
+  "employment_maintenance": {
+    "title": "Employment / workplace-change readiness",
+    "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines."
+  }
+}
