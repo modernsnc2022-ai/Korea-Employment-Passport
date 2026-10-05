@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "country": "TL",
+  "cycle": 2026,
+  "routeType": "manufacturing_baucau_discovery",
+  "exactPromotionAllowed": false,
+  "discoveryStatus": "direct_official_detail_not_captured",
+  "knownFromScheduleDiscovery": {
+    "title": "The 9th recruitment of the point system in East Timor(Manufacturing)_Baucau"
+  },
+  "warning": "Do not populate exact Baucau dates until a direct official HRD Korea detail page is captured."
+}
