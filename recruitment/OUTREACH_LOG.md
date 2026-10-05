@@ -69,3 +69,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Warung Nusantara — WhatsApp | Indonesian community/business hub in Ansan/Wongok-dong | Sent direct WhatsApp request asking for connection to WNI/E-9 worker WhatsApp groups, paguyuban, or community admins; message used `src=warung_nusantara_ansan` | **Sent — awaiting reply** |
 
 | 2026-10-05 | WARCOP Indonesia — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker WhatsApp groups, paguyuban, or community admins; message used `src=warcop_ansan` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Human Initiative Korea — WhatsApp reply | Indonesian diaspora/community network in Korea | Replied that KEP information had been forwarded to the relevant internal team | **Positive first response — awaiting follow-up from relevant team** |
