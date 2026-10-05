@@ -55,3 +55,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 
 | 2026-10-05 | Human Initiative Korea | Indonesian diaspora/community network in Korea | Email requesting KEP beta sharing to current E-9 workers or connection to regional community admins | **Sent — Gmail message `1a10b30e60ae56b8`; awaiting reply** | **Bounced — 550 relay not permitted; switch to official WhatsApp route** |
 | 2026-10-05 | Human Initiative Korea — WhatsApp | Indonesian diaspora/community network in Korea | Sent direct WhatsApp request asking for connection to WNI/E-9 community admins or internal group sharing; message used `src=human_initiative_korea` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Alba Mart / Al-Barokah WhatsApp probe | Indonesian community / mosque network in Gimhae | Tested public Alba Mart-linked number +82 10-5854-6097 via WhatsApp | **Invalid — WhatsApp reports this number is not on WhatsApp; retire this route** |
