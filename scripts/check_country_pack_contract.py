@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos and Uzbekistan")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan and Mongolia")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -392,6 +392,44 @@ for exact_id in [
 ]:
     require(exact_id in uz_exact_ids,f"Uzbekistan exact-answer catalog missing {exact_id}")
 
+
+mn_entry=routes["mn-e9-manufacturing-2026"]
+mn_pack=load("docs/data/mn_e9_manufacturing_2026.json")
+mn_exact=load("docs/data/mn_exact_answer_rules_2026.json")
+mn_docs=load("docs/data/mn_document_packs_2026.json")
+mn_special=load("docs/data/mn_special_eps_topik_2026.json")
+mn_readiness=load("docs/data/mn_stage_readiness_2026.json")
+require(mn_entry.get("lifecycle")=="research_hold" and mn_entry.get("publicAvailability")=="preview_only","Mongolia registry route must remain preview-only HOLD")
+require(mn_pack.get("lifecycle")=="research_hold" and mn_pack.get("publicAvailability")=="preview_only","Mongolia pack must remain preview-only HOLD")
+require(mn_pack.get("safety",{}).get("betaIntakeOpen") is False,"Mongolia beta intake must remain closed")
+require(mn_pack.get("safety",{}).get("specialRouteFactsExcludedFromRegular") is True,"Mongolia Special facts must stay outside Regular 11th Manufacturing")
+require(mn_pack.get("safety",{}).get("genericResultListingNotAutoLinkedToCurrentManufacturing") is True,"Mongolia generic result listing must not auto-link to current Manufacturing")
+require(mn_pack.get("safety",{}).get("officialContactContextsPreserved") is True,"Mongolia official contact contexts must remain source-scoped")
+require(mn_pack.get("officialSendingAgency",{}).get("name")=="General Office for Labour and Welfare Service (GOLWS)","Mongolia sending agency must remain GOLWS")
+require(mn_pack.get("specialRouteEvidenceFile")=="data/mn_special_eps_topik_2026.json","Mongolia pack must link separate Special evidence")
+mn_current=mn_readiness.get("currentCycle",{})
+require(mn_current.get("registration",{}).get("status")=="closed_verified","Mongolia 11th registration must remain closed_verified")
+require(mn_current.get("epsTopikSchedule",{}).get("status")=="completed_period_verified","Mongolia 11th test period must remain verified")
+require(mn_current.get("skillsAndFinalResult",{}).get("status")=="result_index_exists_cycle_linkage_pending","Mongolia final-result linkage must remain gated until exact cycle/sector proof")
+require(mn_current.get("fee",{}).get("status")=="cycle_specific_unverified","Mongolia cycle-specific fee must remain unresolved")
+require(mn_current.get("documents",{}).get("status")=="cycle_specific_checklist_not_reconstructed","Mongolia registration checklist must remain HOLD")
+require(mn_readiness.get("specialRoute",{}).get("mustNotPopulateRegular") is True,"Mongolia Special route must never populate Regular rules")
+require(mn_readiness.get("betaReadiness",{}).get("status")=="blocked","Mongolia beta must remain blocked")
+require(mn_special.get("excludedFromRegularCountryPack") is True,"Mongolia Special evidence must be explicitly excluded from Regular")
+require(mn_special.get("facts",{}).get("registrationPeriod")=="2026-04-20 through 2026-04-22","Mongolia Special registration dates must remain isolated")
+require(mn_special.get("facts",{}).get("testDate")=="2026-05-26" and mn_special.get("facts",{}).get("finalResultDate")=="2026-06-16","Mongolia Special test/result dates must remain isolated")
+mn_doc_ids={p.get("id") for p in mn_docs.get("packs",[])}
+require({"mn_11th_registration_documents_hold","mn_official_contact_context"}.issubset(mn_doc_ids),"Mongolia document packs must preserve HOLD plus official contact context")
+mn_hold=next((p for p in mn_docs.get("packs",[]) if p.get("id")=="mn_11th_registration_documents_hold"),{})
+require(mn_hold.get("items")==[],"Mongolia current registration HOLD pack must contain no invented checklist items")
+mn_exact_ids={row.get("id") for row in mn_exact.get("answers",[])}
+for exact_id in [
+    "mn_2026_sending_authority","mn_2026_registration_window","mn_2026_test_notice_date",
+    "mn_2026_test_period","mn_2026_point_system","mn_2026_result_index_state",
+    "mn_2026_special_firewall","mn_2026_skill_structure","mn_no_job_guarantee"
+]:
+    require(exact_id in mn_exact_ids,f"Mongolia exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -401,6 +439,7 @@ bangladesh=(ROOT/"docs/bd.html").read_text(encoding="utf-8")
 srilanka=(ROOT/"docs/lk.html").read_text(encoding="utf-8")
 laos=(ROOT/"docs/la.html").read_text(encoding="utf-8")
 uzbekistan=(ROOT/"docs/uz.html").read_text(encoding="utf-8")
+mongolia=(ROOT/"docs/mn.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -433,10 +472,13 @@ require("RESEARCH / HOLD" in uzbekistan and "2026-03-09" in uzbekistan and "2026
 require("OFFICIAL CONTACT CONTEXT" in uzbekistan and "INTENTIONALLY UNRESOLVED" in uzbekistan,"Uzbekistan preview must preserve official contact contexts and unresolved current rules")
 require("US$28" in uzbekistan and "current Uzbekistan exact fee" in uzbekistan,"Uzbekistan preview must label generic US$28 baseline as non-current exact fee")
 require('href="beta.html"' not in uzbekistan and 'id="betaForm"' not in uzbekistan,"Uzbekistan preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in mongolia and "2026-03-25" in mongolia and "2026-06-26" in mongolia,"Mongolia preview must visibly remain HOLD with verified registration/test timeline")
+require("Special EPS-TOPIK remains a separate route" in mongolia and "Final-result linkage" in mongolia,"Mongolia preview shell must visibly preserve Special and result-linkage gates")
+require('href="beta.html"' not in mongolia and 'id="betaForm"' not in mongolia,"Mongolia preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold" % (len(routes),len(EXPECTED)))

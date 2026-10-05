@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "routeId": "mn-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "officialSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+  "officialSendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+  "interpretationRule": "Current 11th Manufacturing facts require current-cycle proof. Special-route evidence and generic pass-index entries may not auto-populate the Regular Manufacturing route.",
+  "currentCycle": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "registration": {
+      "status": "closed_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "note": "2026-03-25 through 2026-03-27."
+    },
+    "epsTopikSchedule": {
+      "status": "completed_period_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "note": "Announcement 2026-04-30; test 2026-05-27 through 2026-06-26."
+    },
+    "skillsAndFinalResult": {
+      "status": "result_index_exists_cycle_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+    },
+    "fee": {
+      "status": "cycle_specific_unverified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "documents": {
+      "status": "cycle_specific_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "medicalAndJobApplication": {
+      "status": "research_pending_current_cycle",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_cycle",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "specialRoute": {
+    "status": "separate_verified_route",
+    "evidenceFile": "data/mn_special_eps_topik_2026.json",
+    "mustNotPopulateRegular": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "generic 2026-08-28 pass-index entry not yet linked to exact 11th Manufacturing final result",
+      "cycle-specific fee/document checklist not reconstructed",
+      "downstream medical/job-file/visa/training/departure exact rules not mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Verify Mongolia 11th Manufacturing final-result linkage and downstream notices",
+    "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    ],
+    "promoteOnlyWhen": [
+      "result artifact clearly identifies current 11th Manufacturing cycle",
+      "Special EPS-TOPIK dates are not reused",
+      "official contact details remain source-context scoped"
+    ]
+  }
+}

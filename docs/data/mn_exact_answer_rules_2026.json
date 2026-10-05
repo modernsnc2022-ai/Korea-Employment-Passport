@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "routeId": "mn-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Use current Mongolia 11th Manufacturing evidence. Keep Special EPS-TOPIK separate and do not auto-link generic result-index entries to the current Manufacturing cycle without cycle/sector proof.",
+  "answers": [
+    {
+      "id": "mn_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is Mongolia's official EPS sending agency?",
+      "answer": "General Office for Labour and Welfare Service (GOLWS).",
+      "writeExactly": "Use GOLWS / hudulmur-halamj.gov.mn as Mongolia's official sending-side channel.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was 11th Manufacturing registration?",
+      "answer": "2026-03-25 through 2026-03-27.",
+      "writeExactly": "11th Mongolia Manufacturing registration: 2026-03-25 through 2026-03-27. Closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_test_notice_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "What is the test announcement date?",
+      "answer": "2026-04-30.",
+      "writeExactly": "HRD Korea schedule: test announcement 2026-04-30.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the test period?",
+      "answer": "2026-05-27 through 2026-06-26.",
+      "writeExactly": "11th Mongolia Manufacturing test period: 2026-05-27 through 2026-06-26.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_point_system",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "Is it a Point System route?",
+      "answer": "Yes. General CBT with Point System = Y.",
+      "writeExactly": "This is the 11th Mongolia Manufacturing Point System route.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=33&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_result_index_state",
+      "stages": [
+        "final_selection"
+      ],
+      "question": "Does the 2026-08-28 Mongolia Point System listing prove the 11th Manufacturing final result?",
+      "answer": "Not yet in KEP. A Mongolia Point System announcement exists in the pass-list index, but exact 11th-Manufacturing linkage still requires verification.",
+      "writeExactly": "Do not promote final selection from the generic 2026-08-28 index listing until cycle/sector linkage is verified.",
+      "verificationStatus": "result_index_exists_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_special_firewall",
+      "stages": [
+        "registration",
+        "exam_fee",
+        "eps_topik"
+      ],
+      "question": "Can 2026 Special EPS-TOPIK dates be used for Regular 11th Manufacturing?",
+      "answer": "No.",
+      "writeExactly": "Special EPS-TOPIK registration/test/result dates belong only to the Special route and must never populate Regular 11th Manufacturing.",
+      "verificationStatus": "verified_special_route_exclusion",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=40&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_skill_structure",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What is the generic Point System Round 2 structure?",
+      "answer": "Physical fitness, interview, basic skills; Job Capacity Assessment can add points.",
+      "writeExactly": "Use as HRD Korea Point System structure only; current Mongolia candidate/schedule details remain notice-specific.",
+      "verificationStatus": "generic_hrd_point_system_structure",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does test success guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}
