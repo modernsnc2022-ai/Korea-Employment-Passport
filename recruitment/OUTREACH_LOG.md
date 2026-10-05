@@ -75,3 +75,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | ANEKARASA — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker WhatsApp groups, paguyuban, or community admins; message used `src=anekarasa_ansan` | **Sent — awaiting reply** |
 
 | 2026-10-05 | WARCOP Indonesia — WhatsApp reply | Indonesian community/business hub in Ansan | Replied "Ok" to the KEP community-connection request | **Acknowledged — follow-up needed to confirm whether they can connect/share** |
+
+| 2026-10-05 | WARCOP Indonesia — follow-up sent | Indonesian community/business hub in Ansan | After initial "Ok" acknowledgement, sent a concise follow-up asking specifically for connection to WhatsApp-group/paguyuban admins or internal sharing to E-9 manufacturing workers | **Sent — awaiting concrete connection/share confirmation** |
