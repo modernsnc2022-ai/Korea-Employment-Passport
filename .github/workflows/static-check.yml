@@ -115,6 +115,13 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tl_baucau_discovery_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tl_other_sector_evidence_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tl_stage_readiness_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_e9_manufacturing_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_e9_manufacturing_2026_ur.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_exact_answer_rules_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_document_packs_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_manufacturing_discovery_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_special_eps_topik_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/pk_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
@@ -185,6 +192,7 @@ jobs:
           test -f docs/cn.html
           test -f docs/kh.html
           test -f docs/tl.html
+          test -f docs/pk.html
           test -f docs/country-pack.js
           test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
