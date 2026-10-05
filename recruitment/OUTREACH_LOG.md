@@ -89,3 +89,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | wonGrow — WhatsApp | Self-organized Indonesian worker cooperative/community in Korea | Sent direct WhatsApp request asking for beta sharing to PMI Korea members / internal community admins; message used `src=wongrow_pmi_korea` | **Sent — awaiting reply** |
 
 | 2026-10-05 | Sirothol Mustaqim Ansan WhatsApp probe | Indonesian Muslim / worker community in Ansan | Tested public number +82 10-2130-4155 via WhatsApp | **Invalid — number is not on WhatsApp; retire direct-number route** |
+
+| 2026-10-05 | Al Muhajirin Pyeongtaek WhatsApp probe | Indonesian PMI community/mosque in Pyeongtaek | Tested public number +82 10-5112-2321 via WhatsApp | **Invalid — number is not on WhatsApp; retire direct-number route** |
