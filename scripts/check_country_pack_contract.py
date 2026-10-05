@@ -50,12 +50,12 @@ require(np_pack.get("lifecycle")=="research_hold","Nepal pack must remain resear
 require(np_pack.get("publicAvailability")=="preview_only","Nepal pack must remain preview_only")
 require(np_pack.get("safety",{}).get("betaIntakeOpen") is False,"Nepal beta intake must remain closed")
 require(np_pack.get("officialSendingAgency",{}).get("url")=="https://epsnepal.gov.np/","Nepal official sending agency URL must remain EPS Nepal")
-require(np_pack.get("recruitmentCycleBasis")=="2025-manufacturing-selection-processing-through-2026","Nepal must not mislabel the current 2025 Manufacturing processing as a new 2026 recruitment cycle")
+require(np_pack.get("recruitmentCycleBasis")=="2026-first-phase-eps-topik-application-announced-2026-07-21","Nepal pack must preserve the verified 2026 first-phase recruitment basis")
 
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
-require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal,"Nepal page must visibly keep beta closed")
+require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 
