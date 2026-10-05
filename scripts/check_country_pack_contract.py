@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal and Vietnam")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam and Philippines")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -188,9 +188,43 @@ require(vn_current.get("epsTopikResult",{}).get("status")=="round1_result_verifi
 require(vn_current.get("skillCompetency",{}).get("status")=="awaiting_final_official_schedule","Vietnam Round 2 must not be promoted before final official schedule verification")
 require(vn_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Vietnam beta must remain blocked while downstream exact rules are unresolved")
 
+
+ph_entry=routes["ph-e9-manufacturing-2026"]
+ph_pack=load("docs/data/ph_e9_manufacturing_2026.json")
+ph_exact=load("docs/data/ph_exact_answer_rules_2026.json")
+ph_docs=load("docs/data/ph_document_packs_2026.json")
+ph_special=load("docs/data/ph_special_eps_topik_2026.json")
+ph_readiness=load("docs/data/ph_stage_readiness_2026.json")
+require(ph_entry.get("lifecycle")=="research_hold" and ph_entry.get("publicAvailability")=="preview_only","Philippines registry route must remain preview-only HOLD")
+require(ph_pack.get("lifecycle")=="research_hold" and ph_pack.get("publicAvailability")=="preview_only","Philippines pack must remain preview-only HOLD")
+require(ph_pack.get("safety",{}).get("betaIntakeOpen") is False,"Philippines beta intake must remain closed")
+require(ph_pack.get("safety",{}).get("specialRouteFactsExcludedFromRegular") is True,"Philippines Special facts must be excluded from Regular route")
+require(ph_pack.get("officialSendingAgency",{}).get("name")=="Department of Migrant Workers (DMW)","Philippines official sending agency must remain DMW")
+require(ph_pack.get("exactAnswerRulesFile")=="data/ph_exact_answer_rules_2026.json","Philippines pack must link exact answers")
+require(ph_pack.get("documentPacksFile")=="data/ph_document_packs_2026.json","Philippines pack must link document packs")
+require(ph_pack.get("stageReadinessFile")=="data/ph_stage_readiness_2026.json","Philippines pack must link readiness")
+require(ph_pack.get("specialRouteEvidenceFile")=="data/ph_special_eps_topik_2026.json","Philippines pack must link separate Special evidence")
+ph_current=ph_readiness.get("currentRegular",{})
+require(ph_current.get("registration",{}).get("status")=="no_open_registration","Philippines DMW portal must remain no-open-registration until official change")
+require(ph_current.get("regularManufacturingSchedule",{}).get("status")=="listed_dates_undecided","Philippines Regular Manufacturing dates must remain undecided until official schedule")
+require(ph_readiness.get("specialRoute",{}).get("mustNotPopulateRegular") is True,"Philippines Special route must never populate Regular rules")
+require(ph_readiness.get("betaReadiness",{}).get("status")=="blocked","Philippines beta must remain blocked")
+require(ph_special.get("excludedFromRegularCountryPack") is True,"Philippines Special evidence must be explicitly excluded from Regular pack")
+require(ph_special.get("facts",{}).get("testFeeUsd")==24 and ph_special.get("facts",{}).get("expectedSuccessfulCandidates")==100,"Philippines Special facts must preserve their own fee/quota only inside special evidence")
+require(ph_special.get("crossSourceScheduleNote",{}).get("status")=="special_route_schedule_sources_differ","Philippines Special DMW/HRD schedule discrepancy must remain isolated from Regular")
+require("Regular Manufacturing" in ph_special.get("crossSourceScheduleNote",{}).get("rule",""),"Philippines Special discrepancy rule must explicitly block promotion into Regular Manufacturing")
+regular_exact_ids={row.get("id") for row in ph_exact.get("answers",[])}
+for exact_id in ["ph_2026_sending_authority","ph_2026_regular_schedule_status","ph_2026_portal_registration_status","ph_2026_special_route_separation","ph_regular_no_job_guarantee"]:
+    require(exact_id in regular_exact_ids,f"Philippines exact-answer catalog missing {exact_id}")
+special_sep=next((row for row in ph_exact.get("answers",[]) if row.get("id")=="ph_2026_special_route_separation"),{})
+require("must not" in str(special_sep.get("writeExactly","")).lower() or "do not" in str(special_sep.get("writeExactly","")).lower(),"Philippines Special/Regular firewall must be explicit")
+ph_doc_ids={p.get("id") for p in ph_docs.get("packs",[])}
+require("ph_current_portal_registration_preparation" in ph_doc_ids,"Philippines current portal preparation pack is required")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
+philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -202,10 +236,13 @@ require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enro
 require("RESEARCH / HOLD" in vietnam and "150" in vietnam and "COLAB" in vietnam,"Vietnam preview must show HOLD, verified Round 1 cutoff and official sending authority")
 require("CURRENT 2026 COHORT STATUS" in vietnam and "Vòng 2" in vietnam,"Vietnam preview must show downstream current-cohort HOLD")
 require('href="beta.html"' not in vietnam and 'id="betaForm"' not in vietnam,"Vietnam preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in philippines and "No registration is currently open" in philippines,"Philippines preview must visibly remain HOLD with no open registration")
+require("SPECIAL ROUTE FIREWALL" in philippines and "US$24" in philippines and "100-person" in philippines,"Philippines preview must visibly separate Special from Regular")
+require('href="beta.html"' not in philippines and 'id="betaForm"' not in philippines,"Philippines preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold" % (len(routes),len(EXPECTED)))

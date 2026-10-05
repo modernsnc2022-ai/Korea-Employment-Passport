@@ -1,0 +1,160 @@
+{
+  "version": "1.0.0",
+  "routeId": "ph-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "principle": "For the Philippines Regular Manufacturing route, use only current DMW/HRD Korea Regular-route evidence. Never import the March 2026 Special EPS-TOPIK schedule, fee, quota or eligibility into the Regular route.",
+  "answers": [
+    {
+      "id": "ph_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is the official Philippine sending agency for EPS?",
+      "answer": "Department of Migrant Workers (DMW).",
+      "writeExactly": "Use DMW's official EPS channels. HRD Korea lists DMW as the Philippine sending agency.",
+      "verificationStatus": "verified_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_regular_schedule_status",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Is the 2026 Regular Manufacturing registration/test schedule open and fixed?",
+      "answer": "No. HRD Korea lists the 11th point-system recruitment in Philippines_Manufacturing, but registration, test and result dates are currently undecided; the DMW portal says no registration is currently open.",
+      "writeExactly": "Regular Manufacturing is listed, but the current registration/test/result dates are undecided and DMW has no open registration. Do not pay or register through an unofficial channel.",
+      "verificationStatus": "verified_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_registration_status",
+      "stages": [
+        "registration"
+      ],
+      "question": "What does the official DMW EPS portal currently say about registration?",
+      "answer": "No registration is currently open.",
+      "writeExactly": "DMW EPS-TOPIK online registration is currently not open. Wait for an official Regular Manufacturing advisory.",
+      "verificationStatus": "verified_current_portal",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_age_snapshot",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What age qualification does the current DMW portal display?",
+      "answer": "The current portal displays 18–38 years old at registration, with birth dates September 20, 1987 through September 19, 2008.",
+      "writeExactly": "Portal snapshot: 18–38, DOB 1987-09-20 through 2008-09-19. Recheck the next Regular Manufacturing advisory because no Regular registration is currently open.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_color_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What color-vision rule is currently displayed by DMW?",
+      "answer": "No total color blindness and/or partial color blindness.",
+      "writeExactly": "Current DMW portal pre-check excludes total or partial color blindness; confirm against the next Regular Manufacturing advisory when registration opens.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_legal_rules",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What legal/travel conditions are currently displayed by DMW?",
+      "answer": "Not restricted from leaving the Philippines; never sentenced to prison or a more severe punishment; no deportation record from Korea.",
+      "writeExactly": "Use the official DMW legal/travel pre-check and re-confirm it in the next Regular advisory.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_korea_stay_limit",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What prior Korea work-duration condition is displayed?",
+      "answer": "Never worked in South Korea for more than five years under E-9 and E-10 visas.",
+      "writeExactly": "Current DMW portal pre-check: no more than five years under E-9/E-10; confirm exact wording in the next Regular advisory.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_contact_rule",
+      "stages": [
+        "registration",
+        "document_verify"
+      ],
+      "question": "What personal contact details should an applicant prepare?",
+      "answer": "An active personal email address and mobile phone number.",
+      "writeExactly": "Prepare your own active personal email and mobile number; do not use a broker's contact as your account contact.",
+      "verificationStatus": "verified_current_portal",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_photo_spec",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What ID photo file does the current DMW portal ask applicants to prepare?",
+      "answer": "Passport-sized photo taken on a white background within the last 6 months; JPG, 13 KB or below, 300×400 pixels.",
+      "writeExactly": "Portal snapshot: recent white-background JPG photo, ≤13 KB, 300×400 px. Recheck when Regular registration opens.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_portal_passport_spec",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What passport scan does the current DMW portal ask applicants to prepare?",
+      "answer": "Scanned passport copy without the signature page; no discoloration, blue only; JPG, 90 KB or below, 800×600 pixels.",
+      "writeExactly": "Portal snapshot: passport scan without signature page, blue/no discoloration, JPG ≤90 KB, 800×600 px. Recheck when Regular registration opens.",
+      "verificationStatus": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_2026_special_route_separation",
+      "stages": [
+        "registration",
+        "exam_fee",
+        "eps_topik"
+      ],
+      "question": "Can the March 2026 Special EPS-TOPIK schedule and US$24 fee be used for new Regular Manufacturing applicants?",
+      "answer": "No. The Special EPS-TOPIK advisory is for former EPS workers who completed a prior contract and returned voluntarily; it is a separate route.",
+      "writeExactly": "Do not reuse Special EPS-TOPIK dates, US$24 fee, 100-person quota or returning-worker eligibility as Regular Manufacturing rules.",
+      "verificationStatus": "verified_special_route_exclusion",
+      "sourceUrl": "https://wcms.dmw.gov.ph/uploads/EPS_TOPIK_Advisory_No_1_s_2026_For_DMW_website_6d6ae0b963.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "ph_regular_no_job_guarantee",
+      "stages": [
+        "final_selection",
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does passing the Regular EPS selection guarantee employment?",
+      "answer": "No. The prior Regular Manufacturing advisory states passing CBT and Skills Test only qualifies a candidate for the EPS Job Roster; it does not guarantee employment.",
+      "writeExactly": "Never promise a job or employer selection based on test passage. Current-cycle downstream processing must still follow official DMW/HRD Korea rules.",
+      "verificationStatus": "verified_principle_prior_cycle",
+      "sourceUrl": "https://dmw.gov.ph/resources/dsms/DMW/Externals/2025/EPS-ADVISORY-06-2025.pdf",
+      "verifiedAt": "2026-10-05"
+    }
+  ]
+}

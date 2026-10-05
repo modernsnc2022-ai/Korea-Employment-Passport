@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "routeId": "ph-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "packs": [
+    {
+      "id": "ph_current_portal_registration_preparation",
+      "title": "Philippines EPS Portal — Current File Preparation Snapshot",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "portal_snapshot_no_open_regular_window",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "warning": "No Regular registration is currently open. These are preparation specs displayed by the current DMW portal; the next Regular Manufacturing advisory controls the final requirements.",
+      "items": [
+        {
+          "id": "ph_personal_email",
+          "label": "Personal email address",
+          "required": true,
+          "rule": "Active personal email displayed as a portal qualification/preparation requirement."
+        },
+        {
+          "id": "ph_mobile",
+          "label": "Mobile phone number",
+          "required": true,
+          "rule": "Active personal mobile number displayed as a portal qualification/preparation requirement."
+        },
+        {
+          "id": "ph_id_photo",
+          "label": "Passport-sized ID photo",
+          "required": true,
+          "rule": "White background, within 6 months, JPG, ≤13 KB, 300×400 px."
+        },
+        {
+          "id": "ph_passport_scan",
+          "label": "Scanned passport copy",
+          "required": true,
+          "rule": "Without signature page; blue/no discoloration; JPG, ≤90 KB, 800×600 px."
+        }
+      ]
+    }
+  ]
+}

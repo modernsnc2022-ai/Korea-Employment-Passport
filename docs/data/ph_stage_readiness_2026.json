@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "routeId": "ph-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-05",
+  "officialRegularSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+  "officialDmwPortal": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+  "interpretationRule": "Regular and Special EPS-TOPIK are separate routes. A Special advisory or prior-cycle Regular advisory may not populate exact current Regular Manufacturing dates, fee, quota or downstream documents.",
+  "currentRegular": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "registration": {
+      "status": "no_open_registration",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "note": "DMW portal currently says no registration is open."
+    },
+    "regularManufacturingSchedule": {
+      "status": "listed_dates_undecided",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "note": "HRD Korea lists the 11th point-system Philippines_Manufacturing route, but registration/test/result dates are undecided."
+    },
+    "qualificationAndFilePreparation": {
+      "status": "portal_snapshot_only",
+      "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
+      "note": "Current portal qualification/file specs may be used for preparation but must be rechecked against the next Regular Manufacturing advisory."
+    },
+    "skillAndFinalSelection": {
+      "status": "awaiting_current_regular_notice",
+      "priorCycleEvidence": [
+        {
+          "cycle": 2025,
+          "sourceUrl": "https://dmw.gov.ph/resources/dsms/DMW/Externals/2025/EPS-ADVISORY-09-2025.pdf",
+          "use": "workflow_shape_only"
+        }
+      ]
+    },
+    "medicalAndJobApplication": {
+      "status": "awaiting_current_regular_notice",
+      "priorCycleEvidence": [
+        {
+          "cycle": 2025,
+          "sourceUrl": "https://dmw.gov.ph/resources/dsms/DMW/Externals/2025/EPS-ADVISORY-06-2025.pdf",
+          "use": "workflow_shape_only"
+        }
+      ]
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_regular_scope",
+      "sourceUrl": "https://dmw.gov.ph/"
+    }
+  },
+  "specialRoute": {
+    "status": "separate_verified_route",
+    "evidenceFile": "data/ph_special_eps_topik_2026.json",
+    "mustNotPopulateRegular": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "Regular Manufacturing registration/test schedule is not yet fixed/open",
+      "current Regular skills/final-selection notice not verified",
+      "current Regular medical/job-roster instructions not verified",
+      "current post-SLC visa/training/departure exact rules not mapped"
+    ]
+  }
+}
