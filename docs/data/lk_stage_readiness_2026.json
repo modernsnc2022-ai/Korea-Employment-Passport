@@ -8,7 +8,8 @@
     "recruitment": {
       "status": "upcoming_verified",
       "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
-      "note": "Instructions due 2026-10-12; application period 2026-10-26 through 2026-10-30."
+      "note": "Instructions due 2026-10-12; application period 2026-10-26 through 2026-10-30.",
+      "publicActionState": "hold_until_2026_10_12_instructions_reviewed"
     },
     "epsTopik": {
       "status": "future_verified_schedule",
@@ -39,6 +40,11 @@
   "nextReviewTrigger": {
     "date": "2026-10-12",
     "subject": "SLBFE application-completion instructions",
-    "officialSource": "https://www.slbfe.lk/"
+    "officialSource": "https://www.slbfe.lk/",
+    "promoteOnlyWhen": [
+      "SLBFE publishes the promised application-completion instructions on or after 2026-10-12",
+      "the actual instructions are reviewed before KEP exposes field-level submission guidance",
+      "the 2026-10-26 through 2026-10-30 window remains unchanged or any official change is explicitly recorded"
+    ]
   }
 }
