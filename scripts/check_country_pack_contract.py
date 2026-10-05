@@ -351,7 +351,7 @@ require("SPECIAL ROUTE FIREWALL" in bangladesh and "10–11 March" in bangladesh
 require("US$28" in bangladesh and "current Bangladesh Regular fee" in bangladesh,"Bangladesh preview must label generic HRD US$28 as non-current Regular fee")
 require('href="beta.html"' not in bangladesh and 'id="betaForm"' not in bangladesh,"Bangladesh preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in srilanka and "1,000" in srilanka and "LKR 9,250" in srilanka,"Sri Lanka preview must show HOLD, current Manufacturing quota and official fee")
-require("12 Oct 2026" in srilanka and "26–30 Oct 2026" in srilanka,"Sri Lanka preview must show current application timeline")
+require("2026-10-12" in srilanka and "2026-10-26" in srilanka and "2026-10-30" in srilanka,"Sri Lanka preview must show current application timeline using locale-neutral ISO dates")
 require('href="beta.html"' not in srilanka and 'id="betaForm"' not in srilanka,"Sri Lanka preview must not expose beta enrollment")
 
 if failures:
