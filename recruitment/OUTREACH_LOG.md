@@ -106,4 +106,4 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 
 | 2026-10-05 | Masjid Nurul Hidayah Anseong — WhatsApp probe | Indonesian KMI mosque/community in Anseong | Tested published number +82 10-6464-4091 in WhatsApp | **Invalid — no WhatsApp search result; retire direct-number route and do not retry** |
 
-| 2026-10-05 | Hwaseong Hangnam Masjid — public mobile | Indonesian mosque/community in Hyangnam-eup, Hwaseong | Recently indexed public mosque directory identifies this as an Indonesian community mosque in a factory area and lists +82 10-8193-0990; source `hwaseong_hangnam_masjid` added | **Ready — WhatsApp availability not yet tested; do not mark sent until confirmed** |
+| 2026-10-05 | Hwaseong Hangnam Masjid — WhatsApp | Indonesian mosque/community in Hyangnam-eup, Hwaseong | Verified +82 10-8193-0990 is active on WhatsApp and sent the KEP E-9 worker-validator recruitment request; explanatory message and `src=hwaseong_hangnam_masjid` beta link were sent separately | **Sent — awaiting reply** |
