@@ -1,110 +1,110 @@
 {
   "eligibility": {
-    "title": "Eligibility check",
-    "action": "For Point System Round 18, verify age 18–39 (DOB 1986-07-03 through 2008-07-02), health/communicable-disease fitness, no color blindness, legal/criminal/travel conditions, no Korea deportation/refusal/illegal-law history, no drug history, and total prior E-9/E-10 stay under 5 years."
+    "title": "ตรวจสอบคุณสมบัติ",
+    "action": "ตรวจสอบอายุ 18–39 ปี วันเกิด 3 ก.ค. 2529 ถึง 2 ก.ค. 2551 สุขภาพ การมองเห็นสี ประวัติอาชญากรรม/การเดินทาง ประวัติในเกาหลี ยาเสพติด และระยะพำนัก E-9/E-10 รวมไม่ถึง 5 ปี ตามประกาศรอบที่ 18"
   },
   "registration": {
-    "title": "Official online registration",
-    "action": "Round 18 registration was accepted online through the official TOEA channel from 2026-07-02 through 2026-07-06. The window is closed."
+    "title": "สมัครอย่างเป็นทางการผ่านระบบออนไลน์",
+    "action": "การรับสมัครรอบที่ 18 เปิดทางระบบ TOEA วันที่ 2–6 ก.ค. 2569 และปิดแล้ว ห้ามสมัครผ่านนายหน้าหรือช่องทางที่ไม่เป็นทางการ"
   },
   "exam_fee": {
-    "title": "EPS-TOPIK / Point System fee",
-    "action": "Official Round 18 application fee: 960 THB, payable through the designated Krungthai Bank payment channel within the official window."
+    "title": "ชำระค่าธรรมเนียมสอบ",
+    "action": "ค่าธรรมเนียมสมัครรอบที่ 18 คือ 960 บาท ชำระผ่านช่องทางธนาคารกรุงไทยที่กำหนดภายในช่วงเวลารับสมัคร"
   },
   "biometric": {
-    "title": "Identity / anti-fraud verification",
-    "action": "Follow the identity-verification requirements in the assigned Round 18 test notice. KEP does not infer extra biometric rules beyond the current official instructions."
+    "title": "ยืนยันตัวตน / ป้องกันการทุจริต",
+    "action": "ปฏิบัติตามข้อกำหนดการยืนยันตัวตนในประกาศสอบที่ได้รับมอบหมาย KEP จะไม่เพิ่มเงื่อนไขชีวมิติที่ไม่มีประกาศรองรับ"
   },
   "document_verify": {
-    "title": "Registration data verification",
-    "action": "Submit the electronic application only once and ensure identity/contact data are correct before final submission. Exact upload/document specifications are not asserted until a current official detailed notice is reviewed."
+    "title": "ตรวจสอบข้อมูลสมัคร",
+    "action": "ยื่นใบสมัครอิเล็กทรอนิกส์เพียงครั้งเดียวและตรวจสอบข้อมูลส่วนตัวให้ถูกต้องก่อนยืนยัน รายละเอียดไฟล์/เอกสารเพิ่มเติมต้องยึดประกาศทางการ"
   },
   "exam_card": {
-    "title": "Exam eligibility / test notice",
-    "action": "DOE planned to publish the Korean-test eligible list on 2026-08-10. Use the official DOE/EPS Thailand notice for the assigned venue and test session."
+    "title": "ตรวจสอบสิทธิและกำหนดสอบ",
+    "action": "กรมการจัดหางานกำหนดประกาศรายชื่อผู้มีสิทธิสอบภาษาเกาหลีวันที่ 10 ส.ค. 2569 ให้ตรวจสอบสถานที่และรอบสอบจากประกาศทางการ"
   },
   "eps_topik": {
-    "title": "EPS-TOPIK — Round 1",
-    "action": "Round 18 is a Point System selection. Use only the current official exam notice for the exact Manufacturing test schedule and result; do not reuse Special EPS-TOPIK dates."
+    "title": "EPS-TOPIK รอบที่ 1",
+    "action": "ใช้กำหนดสอบและผลสอบปัจจุบันจากกรมการจัดหางาน/HRD Korea เท่านั้น ห้ามนำกำหนดสอบ Special EPS-TOPIK มาใช้กับ Point System รอบที่ 18"
   },
   "skill_competency": {
-    "title": "Skills Test — Round 2",
-    "action": "DOE stated that the list of candidates eligible for the skills test would be announced on 2026-10-19. As of this KEP check, that date has not yet arrived; do not pre-promote a skills result or schedule."
+    "title": "ทดสอบทักษะ รอบที่ 2",
+    "action": "กรมการจัดหางานกำหนดประกาศรายชื่อผู้มีสิทธิทดสอบทักษะวันที่ 19 ต.ค. 2569 ก่อนวันดังกล่าวห้ามถือว่ามีผลหรือกำหนดสุดท้ายแล้ว"
   },
   "final_selection": {
-    "title": "Point-based final selection",
-    "action": "Passing the Korean and skills stages does not guarantee employer selection. Final candidate status must follow the current official Point System result notice."
+    "title": "คัดเลือกตามระบบคะแนน",
+    "action": "การผ่านภาษาเกาหลีและทักษะไม่ได้รับประกันว่านายจ้างเกาหลีจะเลือก ต้องรอผลและสถานะอย่างเป็นทางการ"
   },
   "psychology_pre_job": {
-    "title": "Country-specific pre-job checks",
-    "action": "No separate Thailand psychology step is asserted from the verified Round 18 recruitment notice. Do not copy Indonesia-specific psychology requirements."
+    "title": "การตรวจเพิ่มเติมเฉพาะประเทศไทย",
+    "action": "ยังไม่มีหลักฐานว่าประเทศไทยมีขั้นตอนตรวจจิตวิทยาแยกต่างหาก จึงไม่คัดลอกข้อกำหนดของอินโดนีเซียมาใช้"
   },
   "mcu1": {
-    "title": "Medical examination",
-    "action": "Health fitness is an eligibility condition, but KEP has not yet promoted the exact current Round 18 post-selection medical provider/checklist. Follow the current DOE notice when issued."
+    "title": "ตรวจสุขภาพ",
+    "action": "แม้ประกาศกำหนดว่าต้องมีสุขภาพพร้อมทำงาน แต่ KEP ยังไม่ยืนยันรายชื่อสถานพยาบาล/เช็กลิสต์หลังการคัดเลือกรอบที่ 18 ให้ใช้ประกาศล่าสุดเท่านั้น"
   },
   "job_application": {
-    "title": "Employment-candidate file",
-    "action": "Only follow the current DOE/TOEA instruction for the candidate-file stage after Point System selection. Exact Round 18 documents and timing remain under review."
+    "title": "ยื่นแฟ้มผู้สมัครงาน",
+    "action": "หลังผ่านการคัดเลือก ให้ใช้คำสั่งปัจจุบันของกรมการจัดหางาน/TOEA สำหรับแฟ้มผู้สมัครเท่านั้น เอกสารและช่วงเวลารอบที่ 18 ยังอยู่ระหว่างตรวจสอบ"
   },
   "roster": {
-    "title": "EPS candidate roster",
-    "action": "Approved candidates are proposed for Korean employer selection through the official EPS process. No private intermediary can guarantee roster priority."
+    "title": "บัญชีรายชื่อผู้สมัคร EPS",
+    "action": "ผู้ที่ได้รับอนุมัติจะเข้าสู่กระบวนการเสนอให้นายจ้างเกาหลีผ่านระบบ EPS นายหน้าเอกชนไม่สามารถรับประกันลำดับหรือการถูกเลือกได้"
   },
   "employer_selection": {
-    "title": "Korean employer selection",
-    "action": "Wait for employer selection through the official EPS system. Passing the tests or appearing on the roster does not guarantee employer selection."
+    "title": "นายจ้างเกาหลีคัดเลือก",
+    "action": "รอนายจ้างเลือกผ่านระบบ EPS อย่างเป็นทางการ การผ่านสอบหรืออยู่ในบัญชีรายชื่อไม่ได้รับประกันการเลือก"
   },
   "slc": {
-    "title": "Standard Labour Contract (SLC)",
-    "action": "If selected by a Korean employer, follow the current DOE/EPS notice for SLC review/signing and next steps. Do not pay a broker to obtain or alter an SLC."
+    "title": "สัญญาจ้างมาตรฐาน SLC",
+    "action": "หากนายจ้างเลือก ให้ปฏิบัติตามประกาศปัจจุบันของกรมการจัดหางาน/EPS สำหรับการตรวจและลงนามสัญญา"
   },
   "post_slc_requirements": {
-    "title": "Post-SLC Thailand requirements",
-    "action": "Follow only current DOE instructions for training, medical follow-up, visa documents, payments and departure preparation. Older or Special EPS instructions are not current Regular Round 18 rules."
+    "title": "ขั้นตอนหลัง SLC",
+    "action": "ใช้เฉพาะประกาศปัจจุบันของกรมการจัดหางานเรื่องอบรม สุขภาพ เอกสาร วีซ่า ค่าใช้จ่าย และการเตรียมเดินทาง"
   },
   "visa_docs": {
-    "title": "Visa document package",
-    "action": "Use the current DOE/Korean-mission visa notice. Exact Round 18 Manufacturing visa checklist and charges are not yet mapped in KEP."
+    "title": "เอกสารวีซ่า",
+    "action": "ใช้รายการเอกสารและค่าธรรมเนียมล่าสุดจากกรมการจัดหางานและหน่วยงานเกาหลีเท่านั้น KEP ยังไม่ยืนยันเช็กลิสต์รอบที่ 18 แบบครบถ้วน"
   },
   "predeparture_training": {
-    "title": "Pre-departure training",
-    "action": "Complete only the official pre-departure training assigned by DOE. Exact Round 18 cohort timing/fees remain notice-specific."
+    "title": "อบรมก่อนเดินทาง",
+    "action": "เข้ารับการอบรมก่อนเดินทางตามที่กรมการจัดหางานกำหนดเท่านั้น เวลาและค่าธรรมเนียมต้องยึดประกาศของกลุ่มผู้เดินทางจริง"
   },
   "mcu3_departure": {
-    "title": "Final health/departure readiness",
-    "action": "Do not invent an Indonesia-style MCU-III stage. Follow the current Thailand departure notice if a final medical or screening step is explicitly required."
+    "title": "ความพร้อมสุขภาพก่อนเดินทาง",
+    "action": "ไม่สร้างขั้นตอน MCU-III แบบอินโดนีเซียขึ้นเอง หากไทยมีการตรวจสุขภาพสุดท้ายต้องมีประกาศปัจจุบันรองรับ"
   },
   "departure": {
-    "title": "Official departure",
-    "action": "Travel only after the official EPS contract, visa, training and departure requirements are complete and DOE issues the applicable departure instructions."
+    "title": "เดินทางอย่างเป็นทางการ",
+    "action": "เดินทางเมื่อสัญญา วีซ่า การอบรม และข้อกำหนดอื่นครบถ้วนและได้รับคำสั่งเดินทางอย่างเป็นทางการจากกรมการจัดหางาน"
   },
   "korea_entry_training": {
-    "title": "Korea entry + employment education",
-    "action": "After entry, complete the official Korea-side employment education and handover process."
+    "title": "เข้าเกาหลีและอบรมการจ้างงาน",
+    "action": "หลังเข้าประเทศเกาหลีให้เข้ารับการอบรมการจ้างงานและกระบวนการส่งมอบตามระบบทางการ"
   },
   "employer_handover": {
-    "title": "Employer handover",
-    "action": "Confirm workplace, accommodation and emergency contacts during official handover."
+    "title": "ส่งมอบให้นายจ้าง",
+    "action": "ยืนยันสถานที่ทำงาน ที่พัก และช่องทางฉุกเฉินในขั้นตอนส่งมอบอย่างเป็นทางการ"
   },
   "residence_registration": {
-    "title": "Residence Card / foreigner registration",
-    "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card."
+    "title": "ลงทะเบียนพำนัก / Residence Card",
+    "action": "หลังเข้าเกาหลีให้ดำเนินการลงทะเบียนคนต่างชาติ/Residence Card ตามกฎตรวจคนเข้าเมืองปัจจุบัน"
   },
   "eps_insurance_check": {
-    "title": "EPS insurance check",
-    "action": "Confirm required EPS insurance obligations through official EPS information."
+    "title": "ตรวจสอบประกัน EPS",
+    "action": "ตรวจสอบภาระประกันที่เกี่ยวข้องผ่านข้อมูล EPS ทางการ"
   },
   "first_payroll_check": {
-    "title": "First payroll check",
-    "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules."
+    "title": "ตรวจสอบเงินเดือนงวดแรก",
+    "action": "เปรียบเทียบสลิป เงินเข้าบัญชี ชั่วโมงทำงาน และการหักเงินกับ SLC และกฎหมายที่ใช้บังคับ"
   },
   "labor_support_ready": {
-    "title": "Labor support readiness",
-    "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue."
+    "title": "เตรียมช่องทางช่วยเหลือแรงงาน",
+    "action": "เก็บช่องทางช่วยเหลือทางการ สัญญา สลิปเงินเดือน และหลักฐานการทำงานไว้พร้อมใช้"
   },
   "employment_maintenance": {
-    "title": "Employment / workplace-change readiness",
-    "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines."
+    "title": "รักษาสถานะการจ้าง / เปลี่ยนสถานที่ทำงาน",
+    "action": "หากมีเหตุทางกฎหมายให้เปลี่ยนงาน ใช้เฉพาะกระบวนการ EPS หรือศูนย์จัดหางานของเกาหลีและทำตามกำหนดเวลา"
   }
 }
