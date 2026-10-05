@@ -4,8 +4,8 @@
   "sector": "manufacturing",
   "cycle": 2026,
   "goal": "zero-private-broker",
-  "packVersion": "0.3.2",
-  "lastVerified": "2026-10-04",
+  "packVersion": "0.3.3",
+  "lastVerified": "2026-10-06",
   "stages": [
     {
       "id": "eligibility",
@@ -75,32 +75,37 @@
       "title": "EPS-TOPIK",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "Take the official Korean language test.",
+      "action": "The 2026 Manufacturing EPS-TOPIK exam period ran from 4 June through 14 August 2026 at the official KP2MI test locations. The official notice states the Manufacturing minimum score was raised to 60, with ranking still controlling progression.",
       "brokerReplacement": "prep_complete",
       "warning": "Passing stage 1 is not final selection.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectTopikDesc.do?lang=ko",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
       "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectTopikDesc.do?lang=ko",
-      "officialActionLabel": "Buka EPS-TOPIK resmi"
+      "officialActionLabel": "Buka EPS-TOPIK resmi",
+      "supportState": "verified_current_exam_completed"
     },
     {
       "id": "skill_competency",
       "title": "Skill + competency test",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "Prepare for physical fitness, interview, basic skills and documented competency points.",
+      "action": "Wait for the Manufacturing 2026 result / Skill Test notice before acting. The current verified 2026 Skill Test notice found for Fisheries must not be reused for Manufacturing.",
       "brokerReplacement": "prep_complete",
       "sourceUrl": "https://www.hrdkorea.or.kr/1/3/3/2/2",
       "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
-      "officialActionLabel": "Buka Skill Test resmi"
+      "officialActionLabel": "Buka Skill Test resmi",
+      "warning": "As of the 6 October 2026 official-source re-check, KEP has not captured a Manufacturing 2026 Skill Test notice.",
+      "supportState": "held_current_manufacturing_notice"
     },
     {
       "id": "final_selection",
       "title": "Final point-system selection",
       "authority": "HRD Korea / KP2MI",
       "kind": "official_result",
-      "action": "Check the official final result. Selection is ranking-based.",
+      "action": "Do not claim final Manufacturing selection yet. KEP has not captured a current official Manufacturing 2026 result / final-selection notice in the 6 October 2026 re-check.",
       "brokerReplacement": "complete",
-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026"
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "warning": "Completion of the EPS-TOPIK exam period does not prove final Point-System selection.",
+      "supportState": "held_current_manufacturing_result_notice"
     },
     {
       "id": "psychology_pre_job",
@@ -127,12 +132,13 @@
       "title": "Online job application",
       "authority": "Sisko P2MI",
       "kind": "official_action",
-      "action": "Do not submit using another sector's document list. Wait until KP2MI publishes the 2026 Manufacturing online job-application notice, then follow that notice in Sisko P2MI.",
+      "action": "Do not submit using another sector's document list. Manufacturing 2026 is still waiting for its own result/next-stage and online job-application notices; follow the Manufacturing notice in Sisko P2MI only after KP2MI publishes and KEP reviews it.",
       "brokerReplacement": "held_official_notice",
-      "warning": "The 19 August 2026 online job-application notice currently verified is for Fisheries, not Manufacturing. Do not reuse it as a Manufacturing rule.",
+      "warning": "The 19 August 2026 online job-application notice is Fisheries only. It cannot be reused for Manufacturing.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionUrl": "https://kp2mi.go.id/gtog-korea/info",
-      "officialActionLabel": "Check latest Manufacturing notice"
+      "officialActionLabel": "Check latest Manufacturing notice",
+      "supportState": "held_current_manufacturing_notice"
     },
     {
       "id": "roster",
@@ -286,5 +292,34 @@
       "officialActionUrl": "https://1350.moel.go.kr/",
       "officialActionLabel": "Buka layanan 1350"
     }
-  ]
+  ],
+  "currentCohortState": {
+    "checkedAt": "2026-10-06",
+    "registration": {
+      "status": "closed",
+      "closedAt": "2026-02-12T23:59:00+07:00"
+    },
+    "epsTopik": {
+      "status": "completed",
+      "period": "2026-06-04 through 2026-08-14",
+      "manufacturingMinimumScore": 60,
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026"
+    },
+    "manufacturingResult": {
+      "status": "current_official_notice_not_found",
+      "note": "No current KP2MI Manufacturing 2026 EPS-TOPIK result / next-stage notice was captured in the 2026-10-06 official-source re-check."
+    },
+    "skillCompetency": {
+      "status": "current_manufacturing_notice_not_found",
+      "note": "The verified 2026 Skills Test notice found in current search is Fisheries-sector scoped and must not populate Manufacturing."
+    },
+    "jobApplication": {
+      "status": "current_manufacturing_notice_not_found",
+      "note": "The 2026-08-19 online job-application notice is Fisheries-sector scoped. Manufacturing remains held until its own current official notice is published and reviewed."
+    },
+    "sectorIsolation": {
+      "fisheriesCannotPopulateManufacturing": true,
+      "fisheriesJobApplicationSource": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026"
+    }
+  }
 }
