@@ -603,7 +603,41 @@ require(coverage_rows["KG"].get("evidence",{}).get("note","").find("sectorless")
 require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
 require(coverage_rows["TJ"].get("evidence",{}).get("note","").find("sectorless")>=0,"Tajikistan pending reason must preserve sectorless Point System evidence")
 
+
+dashboard=load("docs/data/country_readiness_dashboard_2026.json")
+dashboard_rows={row.get("country"):row for row in dashboard.get("rows",[])}
+require(set(dashboard_rows)==set(coverage_rows),"readiness dashboard must account for the same 17 sending countries as coverage matrix")
+require(dashboard.get("summary",{}).get("sendingCountries")==17,"readiness dashboard must report 17 sending countries")
+require(dashboard.get("summary",{}).get("registeredCountryPacks")==14,"readiness dashboard must report 14 registered Country Packs")
+require(dashboard.get("summary",{}).get("betaHold")==1,"readiness dashboard must report exactly one beta HOLD route")
+require(dashboard.get("summary",{}).get("researchHold")==13,"readiness dashboard must report 13 research HOLD routes")
+require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==3,"readiness dashboard must report 3 pending Manufacturing countries")
+require(dashboard.get("summary",{}).get("datedReviewTriggers")==2,"readiness dashboard must report exactly two dated review triggers")
+require(dashboard.get("summary",{}).get("betaReady")==0,"readiness dashboard must not claim any beta-ready route")
+require(dashboard_rows["ID"].get("packState")=="beta_hold","Indonesia readiness state must remain beta_hold")
+require(dashboard_rows["ID"].get("betaState")=="pending_manual_approval","Indonesia beta must remain pending manual approval")
+for code in registered-{"ID"}:
+    require(dashboard_rows[code].get("packState")=="research_hold",f"{code}: registered non-Indonesia route must remain research_hold")
+    require(dashboard_rows[code].get("betaState")=="blocked",f"{code}: registered research route beta must remain blocked")
+for code in pending:
+    require(dashboard_rows[code].get("packState")=="pending_manufacturing_verification",f"{code}: readiness state must remain pending Manufacturing verification")
+    require(dashboard_rows[code].get("routeId") is None,f"{code}: pending readiness row must not expose a promoted routeId")
+require(dashboard_rows["LK"].get("nextReview",{}).get("date")=="2026-10-12","Sri Lanka readiness review date must remain 2026-10-12")
+require(dashboard_rows["TH"].get("nextReview",{}).get("date")=="2026-10-19","Thailand readiness review date must remain 2026-10-19")
+dated={code for code,row in dashboard_rows.items() if row.get("nextReview",{}).get("type")=="dated_official_review"}
+require(dated=={"LK","TH"},"only Sri Lanka and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
+for code,row in dashboard_rows.items():
+    require(len(row.get("blockers",[]))>=1,f"{code}: readiness row must include at least one blocker")
+    sources=row.get("nextReview",{}).get("officialSources",[])
+    require(len(sources)>=1,f"{code}: readiness row must include an official review source")
+    for source in sources:
+        require(str(source).startswith("https://"),f"{code}: readiness source must use HTTPS")
+    if row.get("routeId"):
+        require(row.get("routeId") in routes,f"{code}: readiness routeId must exist in country registry")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
+readiness_page=(ROOT/"docs/readiness.html").read_text(encoding="utf-8")
+readiness_js=(ROOT/"docs/readiness.js").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
@@ -619,6 +653,10 @@ timorleste=(ROOT/"docs/tl.html").read_text(encoding="utf-8")
 pakistan=(ROOT/"docs/pk.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("PENDING MANUFACTURING VERIFICATION" in countries and "Kyrgyzstan" in countries and "Myanmar" in countries and "Tajikistan" in countries,"countries page must expose pending Manufacturing verification")
+require('href="readiness.html"' in countries,"countries page must link readiness dashboard")
+require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
+require("country_readiness_dashboard_2026.json" in readiness_js,"readiness renderer must load the readiness dashboard data")
+require("No promoted Manufacturing routeId" in readiness_js,"readiness renderer must visibly distinguish pending countries")
 require('href="kg.html"' not in countries and 'href="mm.html"' not in countries and 'href="tj.html"' not in countries,"pending countries must not expose fake Country Pack links")
 require("This is not a Manufacturing Country Pack yet." in countries,"pending-country UI must clearly state that unverified routes are not Country Packs")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
