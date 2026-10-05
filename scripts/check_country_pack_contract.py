@@ -52,10 +52,36 @@ require(np_pack.get("safety",{}).get("betaIntakeOpen") is False,"Nepal beta inta
 require(np_pack.get("officialSendingAgency",{}).get("url")=="https://epsnepal.gov.np/","Nepal official sending agency URL must remain EPS Nepal")
 require(np_pack.get("recruitmentCycleBasis")=="2026-first-phase-eps-topik-application-announced-2026-07-21","Nepal pack must preserve the verified 2026 first-phase recruitment basis")
 
+
+np_exact=load("docs/data/np_exact_answer_rules_2026.json")
+np_docs=load("docs/data/np_document_packs_2026.json")
+require(np_pack.get("exactAnswerRulesFile")=="data/np_exact_answer_rules_2026.json","Nepal pack must link exact-answer rules")
+require(np_pack.get("documentPacksFile")=="data/np_document_packs_2026.json","Nepal pack must link document packs")
+window=np_pack.get("currentApplicationWindow",{})
+require(window.get("opensAt")=="2026-07-27" and window.get("closesAt")=="2026-08-02","Nepal application window must match the verified notice")
+require(window.get("status")=="closed","Nepal first-phase application window must remain closed after 2026-08-02")
+require(window.get("examFeeUsd")==28,"Nepal official exam fee must remain US$28")
+require(window.get("estimatedSelection",{}).get("manufacturing")==5000,"Nepal Manufacturing estimate must remain 5,000")
+require(window.get("estimatedSelection",{}).get("total")==7200,"Nepal total estimate must remain 7,200")
+require(len(np_exact.get("answers",[]))>=22,"Nepal exact-answer catalog must contain the verified 2026 registration/test facts")
+exact_ids={row.get("id") for row in np_exact.get("answers",[])}
+for exact_id in [
+    "np_2026_application_window","np_2026_application_portal","np_2026_exam_fee",
+    "np_2026_age_rule","np_2026_color_vision_rule","np_2026_photo_rule",
+    "np_2026_test_format","np_2026_result_validity"
+]:
+    require(exact_id in exact_ids,f"Nepal exact-answer catalog missing {exact_id}")
+for row in np_exact.get("answers",[]):
+    require(str(row.get("sourceUrl","")).startswith("https://"),f"Nepal exact answer {row.get('id')} must preserve official HTTPS source lineage")
+    require(row.get("verifiedAt")=="2026-10-05",f"Nepal exact answer {row.get('id')} verification date missing")
+np_doc_ids={pack.get("id") for pack in np_docs.get("packs",[])}
+require({"np_2026_eps_topik_registration","np_2026_eps_topik_exam_day"}.issubset(np_doc_ids),"Nepal document packs must cover registration and test day")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
+require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 
