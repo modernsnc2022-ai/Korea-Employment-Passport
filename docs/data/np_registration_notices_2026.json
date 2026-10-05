@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
   "cycle": 2026,
   "reviewedAt": "2026-10-05",
@@ -56,7 +56,13 @@
       "attachmentUrl": null,
       "contentReviewStatus": "title_and_date_verified",
       "effectStatus": "service_resumption_verified_by_official_title",
-      "safeEffect": "Treat the online application system as having resumed after the temporary suspension. No deadline extension is claimed."
+      "safeEffect": "The official notice list shows the online application system resumed after the temporary suspension; an equivalent News entry is also exposed under postdetails/141 with a July 29 timestamp. KEP does not rely on the one-day metadata difference for any deadline claim.",
+      "listedDate": "2026-07-28",
+      "newsTimestampDate": "2026-07-29",
+      "alternatePageUrls": [
+        "https://epsnepal.gov.np/postdetails/141"
+      ],
+      "dateMetadataStatus": "official_notice_list_and_news_surface_differ_by_one_day"
     },
     {
       "id": "np_2026_application_passport_0730",
