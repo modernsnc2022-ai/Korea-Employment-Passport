@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "routeId": "lk-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "officialNotice": "https://www.slbfe.lk/slbfe-announcement/notice-on-the-implementation-of-the-point-based-selection-system-for-foreign-workers-3/",
+  "currentCohort": {
+    "recruitment": {
+      "status": "upcoming_verified",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "note": "Instructions due 2026-10-12; application period 2026-10-26 through 2026-10-30.",
+      "publicActionState": "hold_until_2026_10_12_instructions_reviewed"
+    },
+    "epsTopik": {
+      "status": "future_verified_schedule",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "note": "Test requirements announced 2026-11-16; UBT begins 2026-11-25, overall period may run into March 2027."
+    },
+    "skillCompetency": {
+      "status": "future_process_verified_exact_schedule_pending",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf"
+    },
+    "medicalAndJobApplication": {
+      "status": "post_selection_notice_required",
+      "sourceUrl": "https://www.slbfe.lk/slbfe-recruitment-co/recruitment-korea/"
+    },
+    "postSelectionVisaDeparture": {
+      "status": "verified_process_current_notice_required",
+      "sourceUrl": "https://www.slbfe.lk/slbfe-recruitment-co/recruitment-korea/"
+    }
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "application instructions not yet published (2026-10-12 trigger)",
+      "current downstream post-selection medical/job-file exact instructions are notice-specific",
+      "beta intake not yet validated with Sri Lankan users"
+    ]
+  },
+  "nextReviewTrigger": {
+    "date": "2026-10-12",
+    "subject": "SLBFE application-completion instructions",
+    "officialSource": "https://www.slbfe.lk/",
+    "promoteOnlyWhen": [
+      "SLBFE publishes the promised application-completion instructions on or after 2026-10-12",
+      "the actual instructions are reviewed before KEP exposes field-level submission guidance",
+      "the 2026-10-26 through 2026-10-30 window remains unchanged or any official change is explicitly recorded"
+    ]
+  }
+}
