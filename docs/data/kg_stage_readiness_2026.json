@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "routeId": "kg-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "interpretationRule": "The February Manufacturing notice and HRD Korea 13th Point System city schedules form one cross-source verified Manufacturing cycle. Later additional/general testing and Special EPS-TOPIK remain separate.",
+  "currentCycle": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "manufacturingSectorLinkage": {
+      "status": "verified_cross_source",
+      "localSource": "https://migrant.kg/ru/about/news/vazhnaia-informatsiia-dlia-zhelaiushchikh-uchastvovat-v-testirovanii-na-znanie-koreiskogo-iazyka-v-2026-godu/",
+      "hrdSources": [
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=8&examYear=2026&lang=ko&lcnsId=001",
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=7&examYear=2026&lang=ko&lcnsId=001"
+      ]
+    },
+    "registration": {
+      "status": "closed_verified",
+      "sourceUrl": "https://migrant.kg/ru/about/news/vazhnaia-informatsiia-dlia-zhelaiushchikh-uchastvovat-v-testirovanii-na-znanie-koreiskogo-iazyka-v-2026-godu/",
+      "note": "2026-02-23 through 2026-02-27; fee US$28."
+    },
+    "registrationDocuments": {
+      "status": "verified_current_cycle",
+      "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/"
+    },
+    "epsTopik": {
+      "status": "completed_verified",
+      "sourceUrls": [
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=8&examYear=2026&lang=ko&lcnsId=001",
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=7&examYear=2026&lang=ko&lcnsId=001"
+      ]
+    },
+    "skillsTest": {
+      "status": "completed_verified",
+      "sourceUrl": "https://migrant.kg/ru/about/news/v-bishkeke-sostoialsia-vtoroi-etap-ekzamena-po-koreiskomu-iazyku-skills-test-dlia-trudoustroistva-v-respubliku-koreia/",
+      "note": "2026-05-30 through 2026-05-31 in Bishkek."
+    },
+    "postSelectionRoster": {
+      "status": "verified_current_cycle_historical_window",
+      "sourceUrl": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+      "note": "Medical 2026-06-09~06-11; full package 2026-06-15."
+    },
+    "employerSelectionPrinciple": {
+      "status": "verified_no_guarantee",
+      "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/"
+    },
+    "slcVisaDeparture": {
+      "status": "research_pending_current_exact_rules",
+      "sourceUrl": "https://migrant.kg/"
+    }
+  },
+  "specialRoute": {
+    "status": "separate_verified_route",
+    "evidenceFile": "data/kg_special_eps_topik_2026.json",
+    "mustNotPopulateRegular": true
+  },
+  "additionalRound": {
+    "status": "separate_later_round",
+    "evidenceFile": "data/kg_additional_general_round_2026.json",
+    "mustNotOverwrite13thManufacturing": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "current SLC/post-SLC visa/training/departure exact rules not mapped",
+      "current employer-selected worker flow not validated end-to-end",
+      "Kyrgyzstan user validation not performed"
+    ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Current Kyrgyzstan SLC/post-SLC/visa/training/departure notice for the verified Manufacturing route",
+    "officialSources": [
+      "https://migrant.kg/",
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    ],
+    "promoteOnlyWhen": [
+      "the notice explicitly applies to current EPS candidates/workers",
+      "later additional/general and Special route facts remain separated",
+      "historical June medical dates are not reused for later cohorts"
+    ]
+  }
+}
