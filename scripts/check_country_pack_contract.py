@@ -77,11 +77,37 @@ for row in np_exact.get("answers",[]):
 np_doc_ids={pack.get("id") for pack in np_docs.get("packs",[])}
 require({"np_2026_eps_topik_registration","np_2026_eps_topik_exam_day"}.issubset(np_doc_ids),"Nepal document packs must cover registration and test day")
 
+
+np_registration_notices=load("docs/data/np_registration_notices_2026.json")
+require(np_pack.get("registrationNoticesFile")=="data/np_registration_notices_2026.json","Nepal pack must link the registration supplementary-notice registry")
+notice_policy=np_registration_notices.get("policy",{})
+require(notice_policy.get("deadlineExtensionVerified") is False,"Nepal must not claim a registration deadline extension without reviewed official evidence")
+require(notice_policy.get("autoSupersedePrimaryRules") is False,"Supplementary Nepal notices must never auto-supersede exact rules")
+np_notice_rows={row.get("id"):row for row in np_registration_notices.get("notices",[])}
+for notice_id in [
+    "np_2026_first_phase_primary",
+    "np_2026_application_urgent_0726",
+    "np_2026_application_suspended_0728",
+    "np_2026_application_resumed_0728",
+    "np_2026_application_passport_0730",
+]:
+    require(notice_id in np_notice_rows,f"Nepal registration notice registry missing {notice_id}")
+for notice_id,row in np_notice_rows.items():
+    require(str(row.get("pageUrl","")).startswith("https://epsnepal.gov.np/"),f"{notice_id}: pageUrl must stay on official EPS Nepal")
+    require(bool(str(row.get("contentReviewStatus","")).strip()),f"{notice_id}: contentReviewStatus is required")
+    require(bool(str(row.get("safeEffect","")).strip()),f"{notice_id}: safeEffect is required")
+require(np_notice_rows["np_2026_application_suspended_0728"].get("effectStatus")=="temporary_suspension_verified_by_official_title","Nepal temporary suspension event must remain explicit")
+require(np_notice_rows["np_2026_application_resumed_0728"].get("effectStatus")=="service_resumption_verified_by_official_title","Nepal resumption event must remain explicit")
+require(np_notice_rows["np_2026_application_urgent_0726"].get("contentReviewStatus")=="pending_large_pdf_review","Unreviewed July 26 large PDF must remain pending")
+require(np_notice_rows["np_2026_application_passport_0730"].get("contentReviewStatus")=="title_and_date_verified_content_pending","July 30 passport notice content must remain pending until reviewed")
+require(np_exact.get("operationalNoticesFile")=="data/np_registration_notices_2026.json","Nepal exact answers must link operational notices")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
+require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 
