@@ -5,7 +5,7 @@
   "visa": "E-9",
   "sector": "manufacturing",
   "cycle": 2026,
-  "recruitmentCycleBasis": "2025-manufacturing-selection-processing-through-2026",
+  "recruitmentCycleBasis": "2026-first-phase-eps-topik-application-announced-2026-07-21",
   "goal": "zero-private-broker",
   "packVersion": "0.1.0",
   "lifecycle": "research_hold",
@@ -19,8 +19,9 @@
   },
   "evidenceNotes": [
     "HRD Korea lists Nepal's sending agency as the Department of Foreign Employment and the reception office as EPS Korea Section, Gwarko, Lalitpur.",
-    "EPS Korea Section Nepal is actively publishing 2026 notices for the 2025 Manufacturing selection cycle, including skill/competency, employment application and departure processing.",
-    "HRD Korea currently shows Nepal's new EPS-TOPIK schedule as unconfirmed, so this pack must not present a new 2026 Nepal recruitment window as open."
+    "EPS Korea Section Nepal published the 2026 first-phase Korean-language examination application notice on 2026-07-21. The notice uses the Point Based Selection System and includes Manufacturing among the listed sectors/subsectors.",
+    "The verified Nepal site also shows 2025 Manufacturing selection processing continuing through 2026, including skill/competency results and employment-application processing.",
+    "Nepal remains KEP research HOLD because country-specific document, medical, visa, training and departure requirements are not yet fully mapped into exact-answer rules."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -38,8 +39,8 @@
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "rules",
       "action": "Check only against the current Nepal EPS notice and HRD Korea requirements before applying.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "cycle_notice_required"
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
+      "supportState": "verified_current"
     },
     {
       "id": "registration",
@@ -47,8 +48,8 @@
       "authority": "EPS Korea Section Nepal",
       "kind": "official_action",
       "action": "Use only the application channel and instructions named in the current Nepal EPS notice. Do not pay an intermediary to register you.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "cycle_notice_required"
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
+      "supportState": "verified_current"
     },
     {
       "id": "exam_fee",
@@ -92,7 +93,7 @@
       "authority": "HRD Korea",
       "kind": "official_exam",
       "action": "Take the official EPS-TOPIK only on the schedule announced for Nepal.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/home/main/mainPage.do?lang=kr",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
       "supportState": "verified_current"
     },
     {
@@ -101,7 +102,7 @@
       "authority": "HRD Korea / EPS Korea Section Nepal",
       "kind": "official_exam",
       "action": "Follow the official skill and competency test notice for the applicable manufacturing cohort.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/101",
       "supportState": "verified_current"
     },
     {
@@ -137,8 +138,8 @@
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
       "action": "For the verified 2025 Manufacturing cohort, a job-application notice was published in June 2026. A new 2026 recruitment-cycle rule must not be inferred from that notice.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "verified_current_cycle_limited"
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/127",
+      "supportState": "verified_prior_cycle_processing"
     },
     {
       "id": "roster",
