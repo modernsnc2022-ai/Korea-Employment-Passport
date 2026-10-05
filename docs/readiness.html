@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Korea Employment Passport multi-country readiness and official review triggers.">
+  <meta name="theme-color" content="#071a36">
+  <title>Korea Employment Passport — Country Readiness</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .summary-grid,.readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+    .summary-card,.readiness-card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 8px 28px rgba(7,26,54,.08)}
+    .summary-card strong{display:block;font-size:2rem;margin-top:4px}
+    .badge{display:inline-block;border-radius:999px;padding:5px 10px;font-size:.78rem;font-weight:800;background:#eef2f7;color:#334155}
+    .dated{background:#fff0cc;color:#7a4d00}.pending{background:#f2e9ff;color:#55308d}.beta{background:#e8f6ee;color:#12633a}
+    .readiness-card h3{margin:.6rem 0}.readiness-card ul{padding-left:1.15rem}.readiness-card li{margin:.35rem 0}
+    .trigger{padding-top:10px;border-top:1px solid #e7ebf0;margin-top:12px}.trigger-date{font-weight:900}
+    .source-links a{display:block;margin:.3rem 0;word-break:break-all}
+  </style>
+</head>
+<body>
+<header class="hero">
+  <nav class="nav">
+    <a class="brand" href="countries.html">Korea Employment Passport</a>
+    <a class="nav-link" href="countries.html">Countries</a>
+  </nav>
+  <div class="hero-grid"><section>
+    <span class="eyebrow">2026 COUNTRY READINESS</span>
+    <h1>What is ready,<br><span>what is still evidence-gated.</span></h1>
+    <p class="lead">This dashboard never promotes a route because a test or Point System merely exists. Every country stays gated until current route/cycle/sector evidence supports the next step.</p>
+  </section></div>
+</header>
+<main>
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">COVERAGE</span><h2>EPS sending-country readiness</h2></div>
+    <div id="summary" class="summary-grid" aria-live="polite"></div>
+  </section>
+  <section class="section alt">
+    <div class="section-head"><span class="eyebrow">NEXT OFFICIAL REVIEWS</span><h2>Dated triggers first, then source-triggered HOLDs</h2></div>
+    <div id="readiness" class="readiness-grid" aria-live="polite"></div>
+  </section>
+  <section class="section trust">
+    <h2>Promotion rule</h2>
+    <p>A review date is not an automatic release date. KEP changes a route only after the actual official artifact is reviewed and its country, cycle and sector are proven.</p>
+  </section>
+</main>
+<footer><strong>Korea Employment Passport</strong><span>Country readiness dashboard · 2026</span></footer>
+<script src="readiness.js"></script>
+</body>
+</html>
