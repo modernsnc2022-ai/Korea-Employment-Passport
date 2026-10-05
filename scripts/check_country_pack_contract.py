@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia and China")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China and Cambodia")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -463,6 +463,48 @@ for exact_id in [
 ]:
     require(exact_id in cn_exact_ids,f"China exact-answer catalog missing {exact_id}")
 
+
+kh_entry=routes["kh-e9-manufacturing-2026"]
+kh_pack=load("docs/data/kh_e9_manufacturing_2026.json")
+kh_exact=load("docs/data/kh_exact_answer_rules_2026.json")
+kh_docs=load("docs/data/kh_document_packs_2026.json")
+kh_discovery=load("docs/data/kh_manufacturing_discovery_2026.json")
+kh_other=load("docs/data/kh_other_sector_evidence_2026.json")
+kh_special=load("docs/data/kh_special_eps_topik_2026.json")
+kh_readiness=load("docs/data/kh_stage_readiness_2026.json")
+require(kh_entry.get("lifecycle")=="research_hold" and kh_entry.get("publicAvailability")=="preview_only","Cambodia registry route must remain preview-only HOLD")
+require(kh_pack.get("lifecycle")=="research_hold" and kh_pack.get("publicAvailability")=="preview_only","Cambodia pack must remain preview-only HOLD")
+require(kh_pack.get("safety",{}).get("betaIntakeOpen") is False,"Cambodia beta intake must remain closed")
+require(kh_pack.get("safety",{}).get("discoveryScheduleMustNotBecomeExact") is True,"Cambodia discovery schedule must never auto-promote to exact")
+require(kh_pack.get("safety",{}).get("agricultureFactsExcludedFromManufacturing") is True,"Cambodia Agriculture facts must stay outside Manufacturing")
+require(kh_pack.get("safety",{}).get("specialFactsExcludedFromManufacturing") is True,"Cambodia Special facts must stay outside Manufacturing")
+require(kh_pack.get("safety",{}).get("genericOfficialResultArtifactsRequireCycleSectorLinkage") is True,"Cambodia generic official result artifacts require explicit cycle/sector linkage")
+require(kh_pack.get("officialSendingAgency",{}).get("name")=="Manpower Training and Overseas Sending Board (MTOSB)","Cambodia sending agency must remain MTOSB")
+kh_current=kh_readiness.get("currentManufacturing",{})
+require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("status")=="direct_schedule_artifact_not_captured","Cambodia direct Manufacturing schedule artifact must remain pending")
+require(kh_current.get("discoverySchedule",{}).get("status")=="discovery_only_not_promoted","Cambodia discovery schedule must remain non-promoted")
+require(kh_current.get("skillsCandidateArtifact",{}).get("status")=="official_country_artifact_cycle_sector_linkage_pending","Cambodia skills-candidate artifact linkage must remain gated")
+require(kh_current.get("finalPointResultArtifact",{}).get("status")=="official_country_artifact_cycle_sector_linkage_pending","Cambodia final Point System artifact linkage must remain gated")
+require(kh_current.get("fee",{}).get("status")=="manufacturing_cycle_specific_unverified","Cambodia Manufacturing fee must remain unresolved")
+require(kh_current.get("documents",{}).get("status")=="manufacturing_checklist_not_reconstructed","Cambodia Manufacturing checklist must remain HOLD")
+require(kh_readiness.get("otherSector",{}).get("mustNotPopulateManufacturing") is True,"Cambodia Agriculture evidence must never populate Manufacturing")
+require(kh_readiness.get("specialRoute",{}).get("mustNotPopulateManufacturing") is True,"Cambodia Special evidence must never populate Manufacturing")
+require(kh_readiness.get("betaReadiness",{}).get("status")=="blocked","Cambodia beta must remain blocked")
+require(kh_discovery.get("status")=="discovery_only_not_exact","Cambodia non-official Manufacturing discovery must remain discovery-only")
+require(kh_other.get("excludedFromManufacturing") is True and kh_other.get("sector")=="agriculture_livestock","Cambodia official Agriculture evidence must be explicitly excluded from Manufacturing")
+require(kh_special.get("excludedFromManufacturing") is True,"Cambodia Special artifact must be explicitly excluded from Manufacturing")
+kh_doc_ids={p.get("id") for p in kh_docs.get("packs",[])}
+require({"kh_manufacturing_registration_documents_hold","kh_official_contact_context"}.issubset(kh_doc_ids),"Cambodia document packs must preserve HOLD plus official contact context")
+kh_hold=next((p for p in kh_docs.get("packs",[]) if p.get("id")=="kh_manufacturing_registration_documents_hold"),{})
+require(kh_hold.get("items")==[],"Cambodia Manufacturing document HOLD pack must contain no invented checklist items")
+kh_exact_ids={row.get("id") for row in kh_exact.get("answers",[])}
+for exact_id in [
+    "kh_2026_sending_authority","kh_2026_reception_office","kh_2026_skills_candidate_artifact",
+    "kh_2026_point_result_artifact","kh_2026_manufacturing_schedule_state",
+    "kh_2026_agriculture_firewall","kh_2026_special_firewall","kh_no_job_guarantee"
+]:
+    require(exact_id in kh_exact_ids,f"Cambodia exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -474,6 +516,7 @@ laos=(ROOT/"docs/la.html").read_text(encoding="utf-8")
 uzbekistan=(ROOT/"docs/uz.html").read_text(encoding="utf-8")
 mongolia=(ROOT/"docs/mn.html").read_text(encoding="utf-8")
 china=(ROOT/"docs/cn.html").read_text(encoding="utf-8")
+cambodia=(ROOT/"docs/kh.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -512,10 +555,14 @@ require('href="beta.html"' not in mongolia and 'id="betaForm"' not in mongolia,"
 require("RESEARCH / HOLD" in china and "2026-03-18" in china and "2026-09-11" in china,"China preview must visibly remain HOLD with verified registration/test timeline")
 require("2026-09-30" in china and "US$28" in china and "not promoted" in china,"China preview must preserve generic skill-candidate and fee gates")
 require('href="beta.html"' not in china and 'id="betaForm"' not in china,"China preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in cambodia and "2026-08-06" in cambodia and "2026-08-21" in cambodia,"Cambodia preview must visibly remain HOLD with official August artifacts")
+require("discovery source" in cambodia and "2026-05-22" in cambodia and "not present" not in cambodia,"Cambodia preview must disclose discovery-only Manufacturing schedule without presenting it as official")
+require("Agriculture/Livestock and Special EPS-TOPIK are separate routes" in cambodia,"Cambodia preview must visibly preserve sector/special firewalls")
+require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"Cambodia preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold" % (len(routes),len(EXPECTED)))
