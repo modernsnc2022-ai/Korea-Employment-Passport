@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "routeId": "tj-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Manufacturing sector linkage is cross-source verified because the Tajikistan Ministry's official Manufacturing notice and HRD Korea 2nd Point System share the same 2026-03-02~03-05 registration window.",
+  "answers": [
+    {
+      "id": "tj_2026_manufacturing_linkage",
+      "stages": [
+        "registration",
+        "eps_topik"
+      ],
+      "question": "Is the 2nd Tajikistan Point System a Manufacturing route in KEP?",
+      "answer": "Yes, cross-source verified.",
+      "writeExactly": "The Tajikistan Ministry's official Manufacturing notice matches HRD Korea's 2nd Point System registration window.",
+      "verificationStatus": "verified_cross_source",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was Manufacturing registration?",
+      "answer": "2026-03-02 through 2026-03-05.",
+      "writeExactly": "Tajikistan Manufacturing registration: 2026-03-02 through 2026-03-05. Closed.",
+      "verificationStatus": "verified_cross_source",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_exam_fee",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What fee did the official notice state?",
+      "answer": "330 somoni.",
+      "writeExactly": "Official 2026 Tajikistan Manufacturing exam fee: 330 somoni.",
+      "verificationStatus": "verified_current_local",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_age_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What age/DOB range did the notice state?",
+      "answer": "Age 18–39; DOB 1986-03-03 through 2008-03-02.",
+      "writeExactly": "Use the cycle-specific official DOB range 1986-03-03 through 2008-03-02.",
+      "verificationStatus": "verified_current_local",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_registration_docs",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What registration data/files did the notice require?",
+      "answer": "Phone number, electronic foreign-passport copy, electronic color photo 3.5×4.5 cm on white background.",
+      "writeExactly": "Enter identity data exactly from the foreign passport in Latin letters.",
+      "verificationStatus": "verified_current_local",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_test_notice",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "When was the test announcement date?",
+      "answer": "2026-03-20.",
+      "writeExactly": "HRD Korea 2nd Tajikistan Point System test announcement: 2026-03-20.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the test period?",
+      "answer": "2026-03-28 through 2026-03-29.",
+      "writeExactly": "HRD Korea 2nd Tajikistan Point System test period: 2026-03-28 through 2026-03-29.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_point_system",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "Was it a Point System route?",
+      "answer": "Yes.",
+      "writeExactly": "HRD Korea marks the 2nd Tajikistan General CBT route as Point System = Y.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_final_state",
+      "stages": [
+        "skill_competency",
+        "final_selection"
+      ],
+      "question": "Is the current skills/final result promoted?",
+      "answer": "No.",
+      "writeExactly": "Do not infer current 2nd-cycle skills/final selection until a direct official result artifact is reviewed.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does test success guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

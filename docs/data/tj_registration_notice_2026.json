@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "country": "TJ",
+  "cycle": 2026,
+  "sector": "manufacturing",
+  "verifiedAt": "2026-10-06",
+  "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+  "title": "Official Tajikistan EPS-TOPIK Manufacturing registration notice",
+  "publicationDate": "2026-02-24",
+  "facts": {
+    "registrationPeriod": "2026-03-02 through 2026-03-05",
+    "examFeeSomoni": 330,
+    "ageRange": "18-39",
+    "dobRange": "1986-03-03 through 2008-03-02",
+    "citizenship": "Republic of Tajikistan",
+    "criminalRecordRule": "No criminal record certificate required/verified by the official notice.",
+    "koreaRestrictionRule": "No Korea entry-ban/deportation issue.",
+    "healthRule": "Healthy without infectious disease; health information/certificate referenced.",
+    "registrationData": [
+      "phone number",
+      "electronic foreign passport copy",
+      "electronic color photo 3.5×4.5 cm on white background"
+    ],
+    "address": "Dushanbe, Lohuti Street 80",
+    "contacts": [
+      "221-39-83",
+      "221-39-67",
+      "930934994 (WhatsApp/Telegram)"
+    ]
+  },
+  "crossSourceLink": {
+    "hrdScheduleUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+    "matchingRegistrationPeriod": true,
+    "manufacturingSectorFromLocalOfficialNotice": true
+  }
+}
