@@ -1,0 +1,99 @@
+{
+  "version": "1.0.0",
+  "routeId": "bd-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Regular Manufacturing and Special EPS-TOPIK are separate. Current Bangladesh Regular facts require current BOESL/HRD Korea Regular evidence; generic HRD guidance is baseline only.",
+  "answers": [
+    {
+      "id": "bd_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is Bangladesh's official EPS sending agency?",
+      "answer": "Bangladesh Overseas Employment and Services Limited (BOESL).",
+      "writeExactly": "Use BOESL's official EPS channel. HRD Korea lists BOESL as Bangladesh's sending agency.",
+      "verificationStatus": "verified_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_2026_reception_office",
+      "stages": [
+        "registration"
+      ],
+      "question": "What Bangladesh EPS reception office does HRD Korea list?",
+      "answer": "71, Probashi Kallyan Bhaban, 4th floor, 72 Eskaton Garden Rd, Dhaka 1200; +88-02-9336508.",
+      "writeExactly": "Use the current reception-office listing only after checking for local changes.",
+      "verificationStatus": "verified_current_reception_listing",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_2026_regular_status",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Is a 2026 Regular Manufacturing Bangladesh schedule currently verified by KEP?",
+      "answer": "No. KEP has not verified a current 2026 Regular Manufacturing registration/test schedule from BOESL/HRD Korea.",
+      "writeExactly": "Do not claim a 2026 Regular Manufacturing registration/test window until a current official Regular notice is verified.",
+      "verificationStatus": "regular_schedule_not_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_hrd_generic_visit_fee",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What fee does HRD Korea's generic visiting-registration guide state?",
+      "answer": "US$28 or the equivalent in local currency.",
+      "writeExactly": "This is a generic HRD Korea registration baseline, not a verified current Bangladesh Regular Manufacturing fee.",
+      "verificationStatus": "generic_hrd_baseline_only",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_hrd_generic_visit_docs",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What documents does HRD Korea's generic visiting-registration guide describe?",
+      "answer": "One application sheet with two recent 3.5×4.5 cm passport photos and a copy of ID.",
+      "writeExactly": "Treat this only as generic EPS registration guidance until BOESL publishes the current Bangladesh Regular checklist.",
+      "verificationStatus": "generic_hrd_baseline_only",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_2026_special_route_separation",
+      "stages": [
+        "registration",
+        "exam_fee",
+        "eps_topik"
+      ],
+      "question": "Can the 2026 Bangladesh Special EPS-TOPIK schedule be used for Regular Manufacturing applicants?",
+      "answer": "No. It is a Special CBT route and is separate from Regular Manufacturing.",
+      "writeExactly": "Do not reuse the Special route's registration/test/result dates as Regular Manufacturing rules.",
+      "verificationStatus": "verified_special_route_exclusion",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=005&examNot=20&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "bd_regular_no_job_guarantee",
+      "stages": [
+        "final_selection",
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does passing EPS selection guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

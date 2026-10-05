@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "routeId": "bd-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "bd_hrd_visit_registration_baseline",
+      "title": "Bangladesh EPS Registration — Generic HRD Visiting-Registration Baseline",
+      "appliesTo": [
+        "registration",
+        "exam_fee",
+        "document_verify"
+      ],
+      "status": "generic_hrd_baseline_not_cycle_specific",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "warning": "This is HRD Korea's generic visiting-registration guidance, not a verified current Bangladesh Regular Manufacturing notice. Recheck all items and fee against the next BOESL/HRD Korea Regular notice.",
+      "items": [
+        {
+          "id": "bd_application_sheet",
+          "label": "Application sheet",
+          "required": true,
+          "rule": "Generic HRD visiting-registration baseline."
+        },
+        {
+          "id": "bd_two_photos",
+          "label": "2 recent passport photos",
+          "required": true,
+          "rule": "Recent within 6 months; 3.5×4.5 cm under generic HRD guidance."
+        },
+        {
+          "id": "bd_id_copy",
+          "label": "Copy of ID",
+          "required": true,
+          "rule": "Generic HRD visiting-registration baseline."
+        }
+      ],
+      "feeBaselineUsd": 28,
+      "feeCurrentForBangladeshRegular": false
+    }
+  ]
+}

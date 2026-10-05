@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines and Thailand")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand and Bangladesh")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -248,11 +248,49 @@ require(th_readiness.get("betaReadiness",{}).get("status")=="blocked","Thailand 
 require(th_special.get("excludedFromRegularCountryPack") is True,"Thailand Special evidence must be explicitly excluded from Round 18")
 require(th_special.get("facts",{}).get("testFeeThb")==970,"Thailand Special 970 THB fee must stay isolated in Special evidence")
 
+
+bd_entry=routes["bd-e9-manufacturing-2026"]
+bd_pack=load("docs/data/bd_e9_manufacturing_2026.json")
+bd_exact=load("docs/data/bd_exact_answer_rules_2026.json")
+bd_docs=load("docs/data/bd_document_packs_2026.json")
+bd_special=load("docs/data/bd_special_eps_topik_2026.json")
+bd_readiness=load("docs/data/bd_stage_readiness_2026.json")
+require(bd_entry.get("lifecycle")=="research_hold" and bd_entry.get("publicAvailability")=="preview_only","Bangladesh registry route must remain preview-only HOLD")
+require(bd_pack.get("lifecycle")=="research_hold" and bd_pack.get("publicAvailability")=="preview_only","Bangladesh pack must remain preview-only HOLD")
+require(bd_pack.get("safety",{}).get("betaIntakeOpen") is False,"Bangladesh beta intake must remain closed")
+require(bd_pack.get("safety",{}).get("specialRouteFactsExcludedFromRegular") is True,"Bangladesh Special facts must stay outside Regular Manufacturing")
+require(bd_pack.get("safety",{}).get("genericHrdBaselineNotCurrentCycle") is True,"Generic HRD baseline must not become a current Bangladesh Regular rule")
+require(bd_pack.get("officialSendingAgency",{}).get("name")=="Bangladesh Overseas Employment and Services Limited (BOESL)","Bangladesh sending agency must remain BOESL")
+require(bd_pack.get("exactAnswerRulesFile")=="data/bd_exact_answer_rules_2026.json","Bangladesh pack must link exact answers")
+require(bd_pack.get("documentPacksFile")=="data/bd_document_packs_2026.json","Bangladesh pack must link document packs")
+require(bd_pack.get("stageReadinessFile")=="data/bd_stage_readiness_2026.json","Bangladesh pack must link readiness")
+require(bd_pack.get("specialRouteEvidenceFile")=="data/bd_special_eps_topik_2026.json","Bangladesh pack must link separate Special evidence")
+bd_current=bd_readiness.get("currentRegular",{})
+require(bd_current.get("registrationAndTestSchedule",{}).get("status")=="not_yet_verified_current_regular","Bangladesh Regular registration/test schedule must remain unverified until a current official Regular notice is reviewed")
+require(bd_current.get("genericRegistrationBaseline",{}).get("status")=="process_baseline_only","Bangladesh generic HRD visiting-registration guidance must remain baseline-only")
+require(bd_readiness.get("specialRoute",{}).get("mustNotPopulateRegular") is True,"Bangladesh Special route must never populate Regular rules")
+require(bd_readiness.get("betaReadiness",{}).get("status")=="blocked","Bangladesh beta must remain blocked")
+require(bd_special.get("excludedFromRegularCountryPack") is True,"Bangladesh Special evidence must be explicitly excluded from Regular")
+require(bd_special.get("facts",{}).get("registrationPeriod")=="2026-03-10 through 2026-03-11","Bangladesh Special registration dates must remain isolated")
+require(bd_special.get("facts",{}).get("testDate")=="2026-05-08" and bd_special.get("facts",{}).get("resultDate")=="2026-06-08","Bangladesh Special test/result dates must remain isolated")
+bd_doc_ids={p.get("id") for p in bd_docs.get("packs",[])}
+require("bd_hrd_visit_registration_baseline" in bd_doc_ids,"Bangladesh generic HRD registration baseline pack is required")
+bd_baseline=next((p for p in bd_docs.get("packs",[]) if p.get("id")=="bd_hrd_visit_registration_baseline"),{})
+require(bd_baseline.get("feeBaselineUsd")==28 and bd_baseline.get("feeCurrentForBangladeshRegular") is False,"Bangladesh US$28 generic baseline must never be marked as current Regular fee")
+bd_exact_ids={row.get("id") for row in bd_exact.get("answers",[])}
+for exact_id in [
+    "bd_2026_sending_authority","bd_2026_reception_office","bd_2026_regular_status",
+    "bd_hrd_generic_visit_fee","bd_hrd_generic_visit_docs",
+    "bd_2026_special_route_separation","bd_regular_no_job_guarantee"
+]:
+    require(exact_id in bd_exact_ids,f"Bangladesh exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
 thailand=(ROOT/"docs/th.html").read_text(encoding="utf-8")
+bangladesh=(ROOT/"docs/bd.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -270,10 +308,14 @@ require('href="beta.html"' not in philippines and 'id="betaForm"' not in philipp
 require("RESEARCH / HOLD" in thailand and "2,000" in thailand and "960" in thailand,"Thailand preview must show HOLD, Manufacturing target and official Round 18 fee")
 require("19 ต.ค. 2569" in thailand and "SPECIAL ROUTE FIREWALL" in thailand,"Thailand preview must show current skills-stage gate and Special firewall")
 require('href="beta.html"' not in thailand and 'id="betaForm"' not in thailand,"Thailand preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in bangladesh and "BOESL" in bangladesh,"Bangladesh preview must visibly remain HOLD and identify BOESL")
+require("SPECIAL ROUTE FIREWALL" in bangladesh and "10–11 March" in bangladesh and "8 May" in bangladesh,"Bangladesh preview must visibly isolate the verified Special route")
+require("US$28" in bangladesh and "current Bangladesh Regular fee" in bangladesh,"Bangladesh preview must label generic HRD US$28 as non-current Regular fee")
+require('href="beta.html"' not in bangladesh and 'id="betaForm"' not in bangladesh,"Bangladesh preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold" % (len(routes),len(EXPECTED)))
