@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -114,6 +114,23 @@
       "officialSendingAgency": "Department of Employment, Ministry of Labour",
       "officialSendingAgencyUrl": "https://www.doe.go.th/overseas",
       "note": "Thailand Point System Round 18 is a verified 2026 recruitment cycle. Manufacturing target is 2,000; registration closed on 2026-07-06. KEP keeps the route on HOLD while current skills/result and downstream exact rules are mapped."
+    },
+    {
+      "routeId": "bd-e9-manufacturing-2026",
+      "country": "BD",
+      "countryName": "Bangladesh",
+      "nativeCountryName": "বাংলাদেশ",
+      "visa": "E-9",
+      "sector": "manufacturing",
+      "cycle": 2026,
+      "lifecycle": "research_hold",
+      "publicAvailability": "preview_only",
+      "primaryLanguage": "bn",
+      "routeFile": "data/bd_e9_manufacturing_2026.json",
+      "localizationFile": "data/bd_e9_manufacturing_2026_bn.json",
+      "officialSendingAgency": "Bangladesh Overseas Employment and Services Limited (BOESL)",
+      "officialSendingAgencyUrl": "https://boesl.gov.bd/",
+      "note": "BOESL is the verified Bangladesh EPS sending agency. A 2026 Special EPS-TOPIK exists, but KEP has not yet verified a current 2026 Regular Manufacturing registration/test window; Special facts and generic HRD registration guidance remain isolated from Regular exact rules."
     }
   ]
 }
