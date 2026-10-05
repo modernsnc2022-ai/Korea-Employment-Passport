@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "cycle": 2026,
+  "reviewedAt": "2026-10-05",
+  "policy": {
+    "primaryNoticeRule": "The 2026-07-21 first-phase notice is the verified baseline for registration rules unless a later official notice is reviewed and shown to modify a specific rule.",
+    "supplementaryNoticeRule": "Later notices are tracked independently. Do not infer an extension, replacement rule, passport exception, payment exception or other operational detail from a title alone.",
+    "deadlineExtensionVerified": false,
+    "autoSupersedePrimaryRules": false
+  },
+  "notices": [
+    {
+      "id": "np_2026_first_phase_primary",
+      "publishedAt": "2026-07-21",
+      "titleNe": "सन् २०२६ को प्रथम चरणको कोरियन भाषा परीक्षाको आवेदन फाराम दर्ता गर्ने सम्बन्धि सूचना ।",
+      "titleEn": "2026 first-phase Korean-language examination application registration notice",
+      "type": "primary_registration_notice",
+      "pageUrl": "https://epsnepal.gov.np/postdetails/136",
+      "attachmentUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "contentReviewStatus": "reviewed",
+      "effectStatus": "exact_rules_extracted",
+      "safeEffect": "Baseline exact registration, eligibility, fee, upload and EPS-TOPIK rules are extracted into the Nepal exact-answer catalog."
+    },
+    {
+      "id": "np_2026_application_urgent_0726",
+      "publishedAt": "2026-07-26",
+      "titleNe": "भाषा परीक्षाको आवेदन दिनेहरुका लागि अत्यन्त जरुरी सूचना ।",
+      "titleEn": "Very urgent notice for language-test applicants",
+      "type": "supplementary_registration_notice",
+      "pageUrl": "https://epsnepal.gov.np/postdetails/137",
+      "attachmentUrl": "https://epsnepal.gov.np/uploads/files_video/files_1785066815.pdf",
+      "contentReviewStatus": "pending_large_pdf_review",
+      "effectStatus": "unknown_until_content_reviewed",
+      "safeEffect": "The existence and date of this supplementary notice are verified. Do not change any exact registration rule solely from the title."
+    },
+    {
+      "id": "np_2026_application_suspended_0728",
+      "publishedAt": "2026-07-28",
+      "titleNe": "आवेदन प्रकृया हाललाई स्थगित गरिएको सम्बन्धमा ।",
+      "titleEn": "Notice that the application process was temporarily suspended",
+      "type": "operational_incident",
+      "pageUrl": "https://epsnepal.gov.np/postdetails/138",
+      "attachmentUrl": null,
+      "contentReviewStatus": "title_and_date_verified",
+      "effectStatus": "temporary_suspension_verified_by_official_title",
+      "safeEffect": "Treat the online application process as having experienced a temporary suspension on 2026-07-28. Do not infer a deadline extension or other rule change."
+    },
+    {
+      "id": "np_2026_application_resumed_0728",
+      "publishedAt": "2026-07-28",
+      "titleNe": "अनलाईन दरखास्त प्रणाली पुन: सुचारु भएको सम्बन्धी सूचना ।",
+      "titleEn": "Notice that the online application system resumed",
+      "type": "operational_incident",
+      "pageUrl": "https://epsnepal.gov.np/postdetails/139",
+      "attachmentUrl": null,
+      "contentReviewStatus": "title_and_date_verified",
+      "effectStatus": "service_resumption_verified_by_official_title",
+      "safeEffect": "Treat the online application system as having resumed after the temporary suspension. No deadline extension is claimed."
+    },
+    {
+      "id": "np_2026_application_passport_0730",
+      "publishedAt": "2026-07-30",
+      "titleNe": "अनलाईन दरखास्त पेश गर्ने तथा राहदानी सम्बन्धमा ।",
+      "titleEn": "Notice regarding online application submission and passport",
+      "type": "supplementary_registration_notice",
+      "pageUrl": "https://epsnepal.gov.np/postdetails/143",
+      "attachmentUrl": null,
+      "contentReviewStatus": "title_and_date_verified_content_pending",
+      "effectStatus": "possible_registration_or_passport_rule_supplement",
+      "safeEffect": "A later official passport/application notice exists. Exact passport or submission guidance from the primary notice must not be presented as exhaustive until this notice's content is reviewed."
+    }
+  ]
+}
