@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "minPostId": 136,
+  "officialNoticeIndex": "https://epsnepal.gov.np/notices",
+  "reviewedAt": "2026-10-05",
+  "keywords": [
+    "भाषा परीक्षा",
+    "कोरियन भाषा",
+    "EPS-TOPIK",
+    "Manufacturing",
+    "Skill",
+    "सीप",
+    "रोजगार आवेदन",
+    "स्वास्थ्य",
+    "राहदानी",
+    "अनलाईन दरखास्त",
+    "आवेदन प्रकृया"
+  ],
+  "known": [
+    {
+      "id": 136,
+      "title": "सन् २०२६ को प्रथम चरणको कोरियन भाषा परीक्षाको आवेदन फाराम दर्ता गर्ने सम्बन्धि सूचना ।"
+    },
+    {
+      "id": 137,
+      "title": "भाषा परीक्षाको आवेदन दिनेहरुका लागि अत्यन्त जरुरी सूचना ।"
+    },
+    {
+      "id": 138,
+      "title": "आवेदन प्रकृया हाललाई स्थगित गरिएको सम्बन्धमा ।"
+    },
+    {
+      "id": 139,
+      "title": "अनलाईन दरखास्त प्रणाली पुन: सुचारु भएको सम्बन्धी सूचना ।"
+    },
+    {
+      "id": 143,
+      "title": "अनलाईन दरखास्त पेश गर्ने तथा राहदानी सम्बन्धमा ।"
+    }
+  ],
+  "policy": {
+    "onNewMatchingPost": "review_required",
+    "onKnownTitleChange": "review_required",
+    "ignoreUnmatchedNewPosts": true,
+    "autoPromoteRouteRules": false
+  }
+}
