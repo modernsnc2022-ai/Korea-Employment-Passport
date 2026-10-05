@@ -131,6 +131,13 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tj_document_packs_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tj_registration_notice_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/tj_stage_readiness_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_e9_manufacturing_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_e9_manufacturing_2026_ky.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_exact_answer_rules_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_document_packs_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_special_eps_topik_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_additional_general_round_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/kg_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
@@ -205,6 +212,7 @@ jobs:
           test -f docs/tl.html
           test -f docs/pk.html
           test -f docs/tj.html
+          test -f docs/kg.html
           test -f docs/country-pack.js
           test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
