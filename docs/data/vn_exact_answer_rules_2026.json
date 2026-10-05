@@ -1,0 +1,260 @@
+{
+  "version": "1.1.0",
+  "routeId": "vn-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "principle": "Use the current 2026 COLAB/HRD Korea notice as the exact source. Do not carry forward older Vietnam EPS fees, forms or downstream procedures as current facts without current notice verification.",
+  "primaryNotice": {
+    "title": "Vietnam EPS 2026 recruitment plan",
+    "pageUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx"
+  },
+  "answers": [
+    {
+      "id": "vn_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is the authorized Vietnamese sending body?",
+      "answer": "COLAB (Center of Overseas Labor), under Vietnam's Ministry of Home Affairs, is the sole authorized Vietnamese body for sending workers under EPS.",
+      "writeExactly": "Use COLAB's official EPS channels; do not treat a private broker as an authorized sending body.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_manufacturing_target",
+      "stages": [
+        "registration",
+        "final_selection"
+      ],
+      "question": "What is the 2026 Manufacturing selection target?",
+      "answer": "3,000 workers.",
+      "writeExactly": "2026 Manufacturing target: 3,000.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_exam_fee",
+      "stages": [
+        "exam_fee",
+        "registration"
+      ],
+      "question": "What is the 2026 EPS-TOPIK registration fee?",
+      "answer": "The VND equivalent of US$28.",
+      "writeExactly": "Pay only the VND equivalent of US$28 through the official registration process.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_age_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What age rule applies?",
+      "answer": "18 to 39 years old; the notice states birth dates from 1986-03-24 through 2008-03-23.",
+      "writeExactly": "Applicant must be 18–39 under the 2026 notice: birth date 1986-03-24 through 2008-03-23.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_criminal_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What criminal-history rule applies?",
+      "answer": "No criminal conviction resulting in imprisonment or a more serious legal penalty.",
+      "writeExactly": "Applicant must satisfy the official criminal-history condition in the 2026 COLAB notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_deportation_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "Can a person previously deported from Korea apply?",
+      "answer": "No, subject to the specific voluntary-return exception described in the notice for certain prior illegal-stay cases.",
+      "writeExactly": "Do not mark eligible if previously deported from Korea unless the official notice's documented voluntary-return exception applies.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_e9_e10_limit",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What prior E-9/E-10 stay limit applies?",
+      "answer": "Total Korea residence under E-9 and/or E-10 must be under 5 years.",
+      "writeExactly": "Prior E-9/E-10 stay must total less than 5 years.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_exit_ban",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "Can someone prohibited from leaving Vietnam apply?",
+      "answer": "No.",
+      "writeExactly": "Applicant must not be prohibited from exiting Vietnam.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_family_illegal_stay",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What family illegal-stay condition applies?",
+      "answer": "The notice says the applicant must not have a parent, biological child, sibling, spouse illegally residing in Korea.",
+      "writeExactly": "Check the family illegal-stay condition exactly as stated in the 2026 COLAB notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_health_color",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What health/color conditions are expressly listed?",
+      "answer": "Fit for work in Korea; no syphilis or pulmonary tuberculosis; no color blindness or color-vision disorder.",
+      "writeExactly": "Do not treat an applicant with the expressly disqualifying health/color conditions as eligible.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_registration_method",
+      "stages": [
+        "registration"
+      ],
+      "question": "Can someone else register on the applicant's behalf?",
+      "answer": "No. The worker must register in person at the official receiving location.",
+      "writeExactly": "Register personally at the official receiving point; proxy registration is not allowed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_registration_docs",
+      "stages": [
+        "registration",
+        "document_verify"
+      ],
+      "question": "What are the core test-registration documents?",
+      "answer": "Application form; copy and image file of Citizen ID; two 3.5×4.5 cm photos and photo file taken within 3 months.",
+      "writeExactly": "Prepare the official application form, Citizen ID copy/file, and two recent 3.5×4.5 cm photos plus the photo file.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_identity_lock",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "Can personal identity data be freely changed later?",
+      "answer": "No. The notice says name, date of birth, sex and photo supplied in the test registration are used throughout EPS and cannot be changed.",
+      "writeExactly": "Make identity data and photo match the Citizen ID before registration; do not assume later correction is possible.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_chip_id_exam",
+      "stages": [
+        "biometric",
+        "eps_topik"
+      ],
+      "question": "What identity document is required for anti-fraud verification?",
+      "answer": "Chip-based Citizen ID.",
+      "writeExactly": "Bring the chip-based Citizen ID for the official identity-scanning/matching procedure.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_test_format",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What is the 2026 Round 1 test format?",
+      "answer": "Computer-based Korean test: reading 20 questions / 25 minutes and listening 20 questions / 25 minutes, total 40 questions / 50 minutes, maximum 200 points; color vision is also checked.",
+      "writeExactly": "Round 1: Reading 20/25m + Listening 20/25m = 40 questions/50m, max 200; color-vision check applies.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_round1_result",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "What is the verified 2026 Manufacturing Round 1 result status?",
+      "answer": "COLAB announced the Round 1 result based on HRD Korea's 2026-09-03 notice; Manufacturing cutoff is 150 points.",
+      "writeExactly": "Manufacturing Round 1 cutoff: 150 points under the verified September 2026 result notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_round2_auto",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Must a Round 1 passer separately register for the mandatory skill test?",
+      "answer": "No. Round 1 passers are automatically registered for the mandatory skill test.",
+      "writeExactly": "Round 1 passers are automatically registered for mandatory Round 2 skill testing.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_round2_schedule_state",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Is the final Manufacturing Round 2 schedule verified?",
+      "answer": "The verified Round 1 result notice says COLAB will announce the official skill-test schedule after HRD Korea confirmation.",
+      "writeExactly": "Do not present the earlier projected schedule as final; wait for COLAB's official Round 2 schedule notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_no_job_guarantee",
+      "stages": [
+        "final_selection",
+        "employer_selection"
+      ],
+      "question": "Does passing the tests guarantee work in Korea?",
+      "answer": "No. Passing both rounds only makes the worker eligible to submit the candidate file; employer selection and later procedures still follow.",
+      "writeExactly": "Never promise a job, employer selection, SLC, visa or departure based only on test results.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the official 2026 EPS exam-registration receiving window?",
+      "answer": "March 23 through March 27, 2026.",
+      "writeExactly": "Verified 2026 receiving window: 2026-03-23 through 2026-03-27. The window is closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
+      "verifiedAt": "2026-10-05"
+    }
+  ],
+  "documentPacksFile": "data/vn_document_packs_2026.json"
+}

@@ -1,0 +1,90 @@
+{
+  "version": "1.0.0",
+  "routeId": "vn-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "packs": [
+    {
+      "id": "vn_2026_eps_topik_registration",
+      "title": "Vietnam 2026 EPS-TOPIK Registration",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "verified_current_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "items": [
+        {
+          "id": "vn_registration_form",
+          "label": "Đơn đăng ký dự thi / Application form",
+          "required": true,
+          "rule": "Provided/used at the official receiving location; applicant must register in person."
+        },
+        {
+          "id": "vn_chip_citizen_id",
+          "label": "Căn cước công dân gắn chip / Chip-based Citizen ID",
+          "required": true,
+          "rule": "Prepare a copy and image file; identity data must match the application."
+        },
+        {
+          "id": "vn_registration_photos",
+          "label": "2 photos + image file",
+          "required": true,
+          "rule": "3.5×4.5 cm; taken within 3 months; photo must allow identity matching with Citizen ID."
+        }
+      ]
+    },
+    {
+      "id": "vn_2026_candidate_forms_catalog",
+      "title": "Vietnam EPS 2026 Candidate-file Form Catalog",
+      "appliesTo": [
+        "job_application"
+      ],
+      "status": "official_2026_forms_published_exact_submission_pending",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/2234/HO-SO-DANG-KY-DU-TUYEN-CHUONG-TRINH-EPS-NAM-2025.aspx",
+      "warning": "These official 2026 forms are published by COLAB. Exact submission timing, receiving method and complete Manufacturing cohort checklist are not promoted until a current cohort-specific instruction is reviewed.",
+      "items": [
+        {
+          "id": "vn_candidate_cover",
+          "label": "Bìa hồ sơ / File cover",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB."
+        },
+        {
+          "id": "vn_candidate_consent",
+          "label": "Bản xác nhận đồng ý sử dụng dữ liệu cá nhân",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB."
+        },
+        {
+          "id": "vn_candidate_application",
+          "label": "Bản đăng ký dự tuyển",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB."
+        },
+        {
+          "id": "vn_candidate_cv",
+          "label": "Sơ yếu lý lịch",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB."
+        },
+        {
+          "id": "vn_candidate_commitment",
+          "label": "Bản cam kết",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB."
+        },
+        {
+          "id": "vn_candidate_health",
+          "label": "Giấy khám sức khỏe",
+          "required": true,
+          "rule": "Official 2026 form is published by COLAB; current Manufacturing medical-provider/instruction notice still controls how it is completed."
+        }
+      ]
+    }
+  ],
+  "registrationReceivingEvidence": {
+    "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
+    "receivingDates": "2026-03-23 through 2026-03-27",
+    "scopeNote": "The official receiving-location notice implements the 2026 EPS exam-registration decision covering Manufacturing, Fisheries, Forestry and Service. Exact applicant eligibility remains governed by the sector rules in the primary recruitment notice."
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "country": "VN",
+  "countryName": "Vietnam",
+  "nativeCountryName": "Việt Nam",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-manufacturing-eps-topik-and-point-based-selection",
+  "goal": "zero-private-broker",
+  "packVersion": "0.2.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-05",
+  "officialSendingAgency": {
+    "name": "Center of Overseas Labor (COLAB), Ministry of Home Affairs",
+    "url": "https://colab.moha.gov.vn/",
+    "address": "01 Trịnh Hoài Đức, Phường Ô Chợ Dừa, Hà Nội, Việt Nam",
+    "phone": "024 7303 0199"
+  },
+  "evidenceNotes": [
+    "Vietnam's 2026 EPS recruitment notice is published by COLAB under the Ministry of Home Affairs and identifies COLAB as the sole authorized body for sending Vietnamese workers under EPS.",
+    "The 2026 manufacturing target is 3,000 workers; Round 1 is computer-based EPS-TOPIK plus color-vision screening, followed by mandatory skill testing.",
+    "The official September 2026 Round 1 result notice sets the manufacturing cutoff at 150 points and says successful Round 1 candidates are automatically registered for Round 2; the official Round 2 schedule is to be announced after HRD Korea confirmation.",
+    "KEP keeps Vietnam on research HOLD while exact current manufacturing medical, candidate-file submission, visa, training and departure rules are mapped."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "COLAB / HRD Korea",
+      "kind": "rules",
+      "action": "Check the 2026 Vietnam EPS eligibility conditions: age 18–39, legal/criminal and Korea-stay history, Vietnam exit eligibility, family illegal-stay condition, health/color-vision requirements, and any sector-specific conditions.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "registration",
+      "title": "In-person EPS-TOPIK registration",
+      "authority": "COLAB / provincial receiving authority",
+      "kind": "official_action",
+      "action": "The 2026 official receiving-location notice accepted EPS exam registrations from 2026-03-23 through 2026-03-27. Registration was in person at the official receiving point; proxy registration was not allowed. This window is closed.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "exam_fee",
+      "title": "EPS-TOPIK registration fee",
+      "authority": "COLAB / HRD Korea",
+      "kind": "official_payment",
+      "action": "The 2026 official test-registration fee is the VND equivalent of US$28. Pay only through the official registration process.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity / anti-fraud verification",
+      "authority": "COLAB / HRD Korea",
+      "kind": "official_action",
+      "action": "Bring the chip-based Citizen ID as required for identity scanning and matching. Do not rely on another person's document or mismatched identity data.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "COLAB / provincial receiving authority",
+      "kind": "official_action",
+      "action": "Verify Citizen ID data, application data and photo before registration. Personal identity data used through the EPS process must match and should not be assumed correctable later.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "exam_card",
+      "title": "Exam schedule / admission preparation",
+      "authority": "COLAB / HRD Korea",
+      "kind": "self_service",
+      "action": "Use COLAB's official exam-session and location notice for your assigned manufacturing test session and bring the required original identity document.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "verified_current_notice_required"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — Round 1",
+      "authority": "HRD Korea / COLAB",
+      "kind": "official_exam",
+      "action": "The 2026 manufacturing Round 1 is computer-based Korean testing plus color-vision checking. Reading and listening total 40 questions over 50 minutes, with 200 maximum points.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skill test — Round 2",
+      "authority": "HRD Korea / COLAB",
+      "kind": "official_exam",
+      "action": "Manufacturing candidates who passed Round 1 are automatically registered for the mandatory skill test. As of the verified Round 1 result notice, COLAB said the official Round 2 schedule would be announced after HRD Korea confirmation.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "supportState": "current_schedule_pending"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / COLAB",
+      "kind": "official_result",
+      "action": "Passing Round 1 and the mandatory skill test is required before an applicant may submit the employment-candidate file. Passing tests does not guarantee a Korean employer selection or departure.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_process_current_result_partial"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "COLAB",
+      "kind": "official_requirement",
+      "action": "No separate Vietnam psychology stage is asserted from the current 2026 recruitment notice. Do not copy Indonesia-specific psychology rules.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "COLAB / designated provider",
+      "kind": "official_requirement",
+      "action": "Health eligibility is required, but KEP has not yet promoted an exact current-2026 manufacturing medical-provider/checklist notice. Use only the applicable COLAB notice when published.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "COLAB",
+      "kind": "official_action",
+      "action": "Only workers who pass both selection rounds may submit the file to register as candidates for work in Korea. The 2026 official forms page provides the current candidate-file forms; exact cohort submission instructions remain under review.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/2234/HO-SO-DANG-KY-DU-TUYEN-CHUONG-TRINH-EPS-NAM-2025.aspx",
+      "supportState": "verified_forms_current_exact_submission_pending"
+    },
+    {
+      "id": "roster",
+      "title": "Candidate / job-seeker roster",
+      "authority": "COLAB / HRD Korea",
+      "kind": "official_wait",
+      "action": "After COLAB verifies the candidate file, the official EPS process sends eligible records to Korea for employer selection. No private intermediary can guarantee roster priority.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/644/Quy-trinh-thuc-hien-chuong-trinh-EPS.aspx",
+      "supportState": "verified_process_baseline_currentness_review"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for employer selection through the official EPS process. COLAB is the authorized Vietnamese sending body; a private broker cannot guarantee employer selection.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "supportState": "verified_current_authority"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "Korean employer / HRD Korea / COLAB",
+      "kind": "official_contract",
+      "action": "If selected by a Korean employer, follow the current COLAB notice for the labor contract and the next required steps. Do not pay a private broker to obtain or alter an SLC.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Vietnam requirements",
+      "authority": "COLAB",
+      "kind": "conditional_official",
+      "action": "Follow the current COLAB notice for post-contract training, health, documents, fees and departure preparation. Older process pages are not treated as exact 2026 fee rules.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "COLAB / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current COLAB visa-document notice and current official forms. Exact 2026 manufacturing visa checklist and charges remain under review.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure orientation",
+      "authority": "COLAB",
+      "kind": "official_training",
+      "action": "COLAB publishes 2026 orientation-course notices. Attend only the course assigned by the official notice; exact cohort timing remains notice-specific.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "verified_process_current_notice_required"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "COLAB",
+      "kind": "official_requirement",
+      "action": "COLAB's process includes final health readiness before departure, but exact current-2026 requirements must come from the assigned departure notice.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "verified_process_current_notice_required"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "COLAB",
+      "kind": "official_action",
+      "action": "Travel only under COLAB's official departure plan after all current contract, visa, training and health requirements are completed.",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "supportState": "verified_process_current_notice_required"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during the official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/vn_exact_answer_rules_2026.json",
+  "stageReadinessFile": "data/vn_stage_readiness_2026.json",
+  "documentPacksFile": "data/vn_document_packs_2026.json",
+  "registrationEvidence": {
+    "receivingDates": "2026-03-23 through 2026-03-27",
+    "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
+    "status": "closed"
+  }
+}
