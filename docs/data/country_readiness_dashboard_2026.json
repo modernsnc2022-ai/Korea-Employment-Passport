@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -12,10 +12,10 @@
   ],
   "summary": {
     "sendingCountries": 17,
-    "registeredCountryPacks": 14,
+    "registeredCountryPacks": 15,
     "betaHold": 1,
-    "researchHold": 13,
-    "pendingManufacturingVerification": 3,
+    "researchHold": 14,
+    "pendingManufacturingVerification": 2,
     "datedReviewTriggers": 2,
     "betaReady": 0
   },
@@ -335,19 +335,22 @@
     {
       "country": "TJ",
       "countryName": "Tajikistan",
-      "routeId": null,
-      "packState": "pending_manufacturing_verification",
-      "betaState": "not_applicable",
+      "routeId": "tj-e9-manufacturing-2026",
+      "packState": "research_hold",
+      "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Direct official Manufacturing sector linkage for Tajikistan 2026 Point System",
+        "subject": "Tajikistan 2nd-cycle skills/final-result or post-selection notice",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+          "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "verified 2nd 2026 Point System title is sectorless",
-        "Manufacturing linkage and downstream rules not verified"
+        "current 2nd-cycle skills/final-result artifact not verified",
+        "post-selection medical/job-application exact rules not mapped",
+        "visa/training/departure exact rules not mapped"
       ]
     }
   ]
