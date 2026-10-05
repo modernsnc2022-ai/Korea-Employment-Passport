@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh and Sri Lanka")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka and Laos")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -314,6 +314,39 @@ require(lk_readiness.get("betaReadiness",{}).get("status")=="blocked","Sri Lanka
 lk_doc_ids={p.get("id") for p in lk_docs.get("packs",[])}
 require("lk_2026_point_system_application" in lk_doc_ids,"Sri Lanka application document pack is required")
 
+
+la_entry=routes["la-e9-manufacturing-2026"]
+la_pack=load("docs/data/la_e9_manufacturing_2026.json")
+la_exact=load("docs/data/la_exact_answer_rules_2026.json")
+la_readiness=load("docs/data/la_stage_readiness_2026.json")
+la_prior=load("docs/data/la_prior_round_evidence_2026.json")
+require(la_entry.get("lifecycle")=="research_hold" and la_entry.get("publicAvailability")=="preview_only","Laos registry route must remain preview-only HOLD")
+require(la_pack.get("lifecycle")=="research_hold" and la_pack.get("publicAvailability")=="preview_only","Laos pack must remain preview-only HOLD")
+require(la_pack.get("safety",{}).get("betaIntakeOpen") is False,"Laos beta intake must remain closed")
+require(la_pack.get("safety",{}).get("priorRoundFactsExcludedFromCurrent") is True,"Laos 33rd-round facts must stay outside current 34th rules")
+require(la_pack.get("safety",{}).get("unverifiedFeeQuotaDocumentsMustStayBlank") is True,"Laos unverified fee/quota/documents must remain unresolved")
+require(la_pack.get("officialSendingAgency",{}).get("name")=="Ministry of Labour and Social Welfare Employment Service Center (ESC)","Laos sending agency must remain ESC")
+require(la_pack.get("exactAnswerRulesFile")=="data/la_exact_answer_rules_2026.json","Laos pack must link exact answers")
+require(la_pack.get("stageReadinessFile")=="data/la_stage_readiness_2026.json","Laos pack must link readiness")
+require(la_pack.get("priorRoundEvidenceFile")=="data/la_prior_round_evidence_2026.json","Laos pack must link prior-round evidence")
+la_ids={row.get("id") for row in la_exact.get("answers",[])}
+for exact_id in [
+    "la_2026_sending_authority","la_2026_reception_office","la_2026_34th_registration_window",
+    "la_2026_34th_schedule_state","la_2026_current_fee_state","la_2026_current_quota_state",
+    "la_2026_generic_eligibility_baseline","la_2026_prior_round_firewall"
+]:
+    require(exact_id in la_ids,f"Laos exact-answer catalog missing {exact_id}")
+require(la_readiness.get("currentRound",{}).get("registration",{}).get("status")=="closed_verified","Laos 34th registration must remain closed_verified")
+require(la_readiness.get("currentRound",{}).get("examAndResult",{}).get("status")=="dates_undecided","Laos 34th test/result dates must remain undecided until official notice")
+require(la_readiness.get("currentRound",{}).get("fee",{}).get("status")=="unverified_current_round","Laos 34th fee must remain unresolved")
+require(la_readiness.get("currentRound",{}).get("quota",{}).get("status")=="unverified_current_round","Laos 34th quota must remain unresolved")
+require(la_readiness.get("currentRound",{}).get("documents",{}).get("status")=="unverified_current_round","Laos 34th document checklist must remain unresolved")
+require(la_readiness.get("priorRound",{}).get("mustNotPopulateCurrent") is True,"Laos prior round must never populate current exact rules")
+require(la_readiness.get("betaReadiness",{}).get("status")=="blocked","Laos beta must remain blocked")
+require(la_prior.get("excludedFromCurrent34th") is True,"Laos 33rd-round evidence must be explicitly excluded from current 34th")
+require(la_prior.get("rounds",[{}])[0].get("registrationPeriod")=="2026-03-10 through 2026-03-13","Laos 33rd registration dates must remain isolated")
+require(la_prior.get("rounds",[{}])[0].get("testPeriod")=="2026-04-20 through 2026-04-27","Laos 33rd test dates must remain isolated")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -321,6 +354,7 @@ philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
 thailand=(ROOT/"docs/th.html").read_text(encoding="utf-8")
 bangladesh=(ROOT/"docs/bd.html").read_text(encoding="utf-8")
 srilanka=(ROOT/"docs/lk.html").read_text(encoding="utf-8")
+laos=(ROOT/"docs/la.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -345,10 +379,13 @@ require('href="beta.html"' not in bangladesh and 'id="betaForm"' not in banglade
 require("RESEARCH / HOLD" in srilanka and "1,000" in srilanka and "LKR 9,250" in srilanka,"Sri Lanka preview must show HOLD, current Manufacturing quota and official fee")
 require("12 Oct 2026" in srilanka and "26–30 Oct 2026" in srilanka,"Sri Lanka preview must show current application timeline")
 require('href="beta.html"' not in srilanka and 'id="betaForm"' not in srilanka,"Sri Lanka preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in laos and "7–11 ກັນຍາ 2026" in laos and "Undecided" in laos,"Laos preview must show HOLD, verified registration window and undecided test/result state")
+require("INTENTIONALLY UNRESOLVED" in laos and "PRIOR-ROUND FIREWALL" in laos,"Laos preview must expose unresolved facts and prior-round firewall")
+require('href="beta.html"' not in laos and 'id="betaForm"' not in laos,"Laos preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold" % (len(routes),len(EXPECTED)))
