@@ -154,6 +154,7 @@ vn_entry=routes["vn-e9-manufacturing-2026"]
 vn_pack=load("docs/data/vn_e9_manufacturing_2026.json")
 vn_exact=load("docs/data/vn_exact_answer_rules_2026.json")
 vn_stage_readiness=load("docs/data/vn_stage_readiness_2026.json")
+vn_docs=load("docs/data/vn_document_packs_2026.json")
 require(vn_entry.get("lifecycle")=="research_hold","Vietnam must remain research_hold")
 require(vn_entry.get("publicAvailability")=="preview_only","Vietnam registry route must remain preview_only")
 require(vn_pack.get("lifecycle")=="research_hold" and vn_pack.get("publicAvailability")=="preview_only","Vietnam pack must remain preview-only HOLD")
@@ -161,10 +162,13 @@ require(vn_pack.get("safety",{}).get("betaIntakeOpen") is False,"Vietnam beta in
 require(vn_pack.get("officialSendingAgency",{}).get("url")=="https://colab.moha.gov.vn/","Vietnam official sending authority must remain COLAB")
 require(vn_pack.get("exactAnswerRulesFile")=="data/vn_exact_answer_rules_2026.json","Vietnam pack must link exact answers")
 require(vn_pack.get("stageReadinessFile")=="data/vn_stage_readiness_2026.json","Vietnam pack must link current-cohort readiness")
-require(len(vn_exact.get("answers",[]))>=19,"Vietnam exact-answer catalog must preserve current 2026 registration/test facts")
+require(vn_pack.get("documentPacksFile")=="data/vn_document_packs_2026.json","Vietnam pack must link document packs")
+require(vn_pack.get("registrationEvidence",{}).get("receivingDates")=="2026-03-23 through 2026-03-27","Vietnam registration receiving dates must match the verified official notice")
+require(vn_pack.get("registrationEvidence",{}).get("status")=="closed","Vietnam 2026 registration receiving window must remain closed")
+require(len(vn_exact.get("answers",[]))>=20,"Vietnam exact-answer catalog must preserve current 2026 registration/test facts")
 vn_exact_ids={row.get("id") for row in vn_exact.get("answers",[])}
 for exact_id in [
-    "vn_2026_sending_authority","vn_2026_manufacturing_target","vn_2026_exam_fee",
+    "vn_2026_sending_authority","vn_2026_manufacturing_target","vn_2026_exam_fee","vn_2026_registration_window",
     "vn_2026_age_rule","vn_2026_registration_method","vn_2026_identity_lock",
     "vn_2026_test_format","vn_2026_round1_result","vn_2026_round2_auto",
     "vn_2026_round2_schedule_state","vn_2026_no_job_guarantee"
@@ -173,6 +177,11 @@ for exact_id in [
 for row in vn_exact.get("answers",[]):
     require(str(row.get("sourceUrl","")).startswith("https://colab.moha.gov.vn/"),f"Vietnam exact answer {row.get('id')} must preserve official COLAB source lineage")
     require(row.get("verifiedAt")=="2026-10-05",f"Vietnam exact answer {row.get('id')} verification date missing")
+vn_doc_ids={p.get("id") for p in vn_docs.get("packs",[])}
+require({"vn_2026_eps_topik_registration","vn_2026_candidate_forms_catalog"}.issubset(vn_doc_ids),"Vietnam document packs must cover test registration and the published 2026 candidate forms")
+candidate_pack=next((p for p in vn_docs.get("packs",[]) if p.get("id")=="vn_2026_candidate_forms_catalog"),{})
+require("exact submission" in str(candidate_pack.get("warning","")).lower(),"Vietnam candidate forms must not be presented as a complete current-cohort submission instruction")
+
 vn_current=vn_stage_readiness.get("currentCohort",{})
 require(vn_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Vietnam 2026 registration must remain closed_verified")
 require(vn_current.get("epsTopikResult",{}).get("status")=="round1_result_verified","Vietnam Manufacturing Round 1 result must remain verified")
