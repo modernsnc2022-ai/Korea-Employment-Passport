@@ -116,6 +116,39 @@ for prior in np_current.get("medicalAndJobApplication",{}).get("priorCycleEviden
     require(prior.get("cycle")==2025 and prior.get("use")=="workflow_shape_only","Nepal prior-cycle job-application evidence must never become current exact rules")
 require(np_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Nepal beta must remain blocked while current-cohort downstream notices are unresolved")
 
+
+np_process=load("docs/data/np_eps_process_baseline_2026.json")
+require(np_pack.get("processBaselineFile")=="data/np_eps_process_baseline_2026.json","Nepal pack must link the EPS post-selection process baseline")
+require(np_exact.get("processBaselineFile")=="data/np_eps_process_baseline_2026.json","Nepal exact answers must link the EPS post-selection process baseline")
+require(len(np_exact.get("answers",[]))>=35,"Nepal exact-answer catalog must include verified post-selection process facts")
+process_rows={row.get("id"):row for row in np_process.get("steps",[])}
+for process_id in [
+    "biometric_registration","medical_and_police","employment_application","spas_roster",
+    "automated_job_matching","labor_contract_signature","pdot_training","ccvi_package",
+    "visa_stamping","labor_approval_and_final_flight","departure_airports","reregistration"
+]:
+    require(process_id in process_rows,f"Nepal EPS process baseline missing {process_id}")
+require(process_rows["medical_and_police"].get("baselineMedicalFeeUsd")==55.64,"Nepal medical process baseline must preserve official US$55.64 lineage")
+require(process_rows["employment_application"].get("baselineFeeUsd")==5,"Nepal employment-application baseline must preserve official US$5 lineage")
+require(process_rows["pdot_training"].get("durationDays")==6 and process_rows["pdot_training"].get("baselineFeeUsd")==63,"Nepal PDOT baseline must preserve 6 days / US$63 lineage")
+require(process_rows["ccvi_package"].get("historicalBaselineFeeNpr")==10700,"Nepal CCVI baseline must preserve historical NPR 10,700 lineage")
+require(process_rows["ccvi_package"].get("amountCurrent") is False,"Historical Nepal CCVI amount must never be treated as current")
+require(np_process.get("currentnessPolicy",{}).get("visaPayment")=="volatile_2026_multiple_change_notices","Nepal visa/service fee must remain explicitly volatile")
+post_exact_ids={row.get("id") for row in np_exact.get("answers",[])}
+for exact_id in [
+    "np_2026_biometric_day_before","np_2026_exam_arrival_time","np_2026_medical_police_baseline",
+    "np_2026_job_application_baseline","np_2026_roster_status","np_2026_job_matching_automation",
+    "np_2026_slc_signature","np_2026_pdot_baseline","np_2026_ccvi_package",
+    "np_2026_visa_status","np_2026_labor_approval","np_2026_departure_airports",
+    "np_2026_reregistration_rule"
+]:
+    require(exact_id in post_exact_ids,f"Nepal exact-answer catalog missing {exact_id}")
+post_doc_ids={pack.get("id") for pack in np_docs.get("packs",[])}
+require({"np_employment_application_baseline","np_ccvi_visa_baseline"}.issubset(post_doc_ids),"Nepal document packs must cover employment application and CCVI/visa baseline")
+ccvi_pack=next((pack for pack in np_docs.get("packs",[]) if pack.get("id")=="np_ccvi_visa_baseline"),{})
+require("latest official" in str(ccvi_pack.get("warning","")).lower(),"Nepal CCVI pack must warn against stale visa/service fees")
+require(np_stage_readiness.get("processBaseline",{}).get("status")=="verified_workflow_shape_only","Nepal stable process baseline must not be promoted as current-cohort exact readiness")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
@@ -123,6 +156,7 @@ require("Research HOLD" in nepal and "Beta registration/access अहिले �
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
 require("CURRENT 2026 COHORT STATUS" in nepal and "Skill & Competency" in nepal,"Nepal preview must show current-cohort downstream HOLD status")
+require("POST-SELECTION VERIFIED" in nepal and "6-day" in nepal and "FEIMS" in nepal and "visa/service" in nepal.lower(),"Nepal preview must expose verified process shape without hiding fee volatility")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 

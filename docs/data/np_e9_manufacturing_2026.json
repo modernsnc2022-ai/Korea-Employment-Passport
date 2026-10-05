@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-first-phase-eps-topik-application-announced-2026-07-21",
   "goal": "zero-private-broker",
-  "packVersion": "0.4.0",
+  "packVersion": "0.5.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-05",
@@ -23,7 +23,8 @@
     "The verified Nepal site also shows 2025 Manufacturing selection processing continuing through 2026, including skill/competency results and employment-application processing.",
     "Nepal remains KEP research HOLD because country-specific document, medical, visa, training and departure requirements are not yet fully mapped into exact-answer rules.",
     "During the 2026 first-phase application window, EPS Korea Section published a temporary-suspension notice and a later resumption notice on 2026-07-28. KEP does not infer any deadline extension from those titles; supplementary content is tracked separately.",
-    "As of 2026-10-05, KEP has not promoted a current-2026 first-phase EPS-TOPIK result, Skill & Competency schedule/result, or Manufacturing medical/job-application notice from the official Nepal notice index; 2025-cohort notices remain prior-cycle evidence only."
+    "As of 2026-10-05, KEP has not promoted a current-2026 first-phase EPS-TOPIK result, Skill & Competency schedule/result, or Manufacturing medical/job-application notice from the official Nepal notice index; 2025-cohort notices remain prior-cycle evidence only.",
+    "A March 2026 official EPS Nepal process guide was reviewed for stable post-selection flow, including biometric registration, medical/police checks, employment application, roster, automated job matching, Labor Contract, PDOT, CCVI/visa and final departure. This is process-shape evidence; current-cohort dates, providers and volatile fees remain gated by current official notices."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -71,9 +72,9 @@
       "title": "Identity / biometric requirements",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
-      "action": "No separate biometric rule is being asserted yet for this Nepal pack. Follow only a current official notice if a biometric/identity-capture step is announced.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "The official Nepal EPS process baseline places biometric registration at EPS Korea Section, Gwarko on the day before the assigned exam date with the original passport and admission card. Use the current cohort schedule for the exact appointment.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_cohort_schedule_pending"
     },
     {
       "id": "document_verify",
@@ -125,100 +126,104 @@
       "title": "Pre-job country-specific checks",
       "authority": "EPS Korea Section Nepal",
       "kind": "official_requirement",
-      "action": "Nepal-specific pre-job medical/other requirements are still being mapped. Do not rely on Indonesia-specific psychology or MCU rules.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "No separate Nepal psychology stage is verified in the official Nepal EPS process baseline. Do not copy Indonesia's psychology requirement into the Nepal route.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "no_separate_step_verified"
     },
     {
       "id": "mcu1",
       "title": "Medical examination before job application",
       "authority": "EPS Korea Section Nepal / designated provider",
       "kind": "official_requirement",
-      "action": "Use only the medical examination procedure and provider named for the applicable Nepal cohort.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "The official Nepal EPS process baseline requires a designated-hospital medical examination and an online police report. The March 2026 guide lists Civil, Shukraraj, Korea Friendship and Patan hospitals and a baseline medical fee of US$55.64, but the 2026 first-phase cohort's current provider/fee notice is still required before payment.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_cohort_notice_pending"
     },
     {
       "id": "job_application",
       "title": "Employment application",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
-      "action": "The June 25, 2026 job-application notice is for the 2025 Manufacturing cohort. Do not reuse its dates/documents as the 2026 first-phase cohort job-application rule.",
-      "sourceUrl": "https://epsnepal.gov.np/postdetails/127",
-      "supportState": "verified_prior_cycle_processing",
-      "warning": "2025 Manufacturing cohort processing is evidence of the workflow, not the current 2026 cohort's exact job-application checklist."
+      "action": "The official Nepal EPS process baseline uses passport, ID photo, medical report, police report and employment application form and states a US$5 online fee. The 2026 first-phase cohort must wait for its own official job-application notice before exact dates/documents are promoted.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_cohort_notice_pending",
+      "warning": "The June 25, 2026 Manufacturing notice belongs to the 2025 cohort and must not be reused as the 2026 first-phase submission window."
     },
     {
       "id": "roster",
       "title": "Job-seeker roster",
       "authority": "HRD Korea / EPS Korea Section Nepal",
       "kind": "official_wait",
-      "action": "Track official roster status and keep your registered contact details current.",
-      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessLabor",
-      "supportState": "shared_korea_core"
+      "action": "After the employment application is transmitted into Korea's EPS/SPAS system, applicants can follow status using the official EPS system and their EPS-TOPIK ID.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline"
     },
     {
       "id": "employer_selection",
       "title": "Korean employer selection",
       "authority": "Korean employer / EPS",
       "kind": "official_wait",
-      "action": "Wait for employer selection through the official EPS process. No private broker can guarantee selection.",
-      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessLabor",
-      "supportState": "shared_korea_core"
+      "action": "Employer matching is handled through Korea's online automated job-matching system. Sending-agency/EPS staff and private intermediaries cannot legitimately guarantee or manually force a specific employer selection.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline"
     },
     {
       "id": "slc",
       "title": "Standard Labour Contract (SLC)",
       "authority": "HRD Korea / EPS Korea Section Nepal",
       "kind": "official_contract",
-      "action": "Review employer, pay, hours, accommodation and deductions using the official SLC process.",
-      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessLabor",
-      "supportState": "shared_korea_core"
+      "action": "When an official Labor Contract/SLC is forwarded, follow the current EPS Nepal contract notice and appear in person at EPS Korea Section, Gwarko to sign. Current notices may impose a specific signing/contact deadline.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_notice_overlay"
     },
     {
       "id": "post_slc_requirements",
       "title": "Post-SLC country-specific requirements",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "conditional_official",
-      "action": "Follow only the Nepal cohort notice for post-SLC medical, training or document requirements.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "After SLC, follow Nepal's current EPS contract/departure notices for training, CCVI, visa and any medical/document follow-up. The stable process baseline is known, but current-cohort exact instructions remain notice-gated.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_notice_required"
     },
     {
       "id": "visa_docs",
       "title": "Visa and departure document package",
       "authority": "EPS Korea Section Nepal / Korean mission",
       "kind": "official_requirement",
-      "action": "Use the current Nepal EPS departure and visa-document instructions. Exact checklist remains under country review.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "After CCVI issuance, the official baseline uses a passport/ID-photo/medical/police/citizenship/admission-card/PDOT package for visa processing. Visa/service fees and payment locations changed multiple times in 2026, so only the latest official notice may supply the current amount/location.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_fee_volatile",
+      "officialActionUrl": "https://www.visa.go.kr/",
+      "officialActionLabel": "Open Korea Visa Portal"
     },
     {
       "id": "predeparture_training",
       "title": "Pre-departure preparation / training",
       "authority": "EPS Korea Section Nepal / designated institution",
       "kind": "official_training",
-      "action": "Complete only the official training and preparation required for the applicable Nepal cohort.",
-      "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "action": "The official Nepal EPS baseline includes a 6-day pre-departure training at the National Vocational Training Institute, Bhaisepati, with online application. The March 2026 guide states US$63; current category/cohort notices must be checked before payment or attendance.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_currentness_check_required"
     },
     {
       "id": "mcu3_departure",
       "title": "Final health / departure readiness",
       "authority": "EPS Korea Section Nepal",
       "kind": "official_requirement",
-      "action": "Follow the current departure-call notice for any final medical or departure readiness requirements.",
+      "action": "No separate Nepal final-health-check stage equivalent to Indonesia's MCU-III is verified. Follow the current Nepal departure notice if a final medical recheck is explicitly required.",
       "sourceUrl": "https://epsnepal.gov.np/notices",
-      "supportState": "research_pending"
+      "supportState": "no_separate_step_verified_current_notice_required"
     },
     {
       "id": "departure",
       "title": "Departure to Korea",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
-      "action": "Travel only under the official departure list and instructions for your cohort.",
-      "sourceUrl": "https://epsnepal.gov.np/",
-      "supportState": "verified_current"
+      "action": "The official Nepal EPS baseline requires the final EPS Nepal flight notice, Nepal labor approval through FEIMS, and scheduled pre-departure instructions before the assigned flight. Departure may be from Kathmandu TIA or Gautam Buddha International Airport, Bhairahawa, according to the official flight assignment.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_process_baseline_current_cohort_scope_pending",
+      "officialActionUrl": "https://feims.dofe.gov.np/Common-Login.aspx",
+      "officialActionLabel": "Open official FEIMS labor-approval portal"
     },
     {
       "id": "korea_entry_training",
@@ -279,9 +284,9 @@
       "title": "Employment Maintenance",
       "authority": "MOEL employment center / EPS",
       "kind": "conditional_official",
-      "action": "Use the official EPS or employment-center process if a legally recognized workplace-change reason occurs.",
-      "sourceUrl": "https://eps.go.kr/",
-      "supportState": "shared_korea_core"
+      "action": "For Nepal, re-registration is described for applicants who remain on the roster and were not selected during the first year; use only a current official re-registration notice. After arrival, workplace changes use Korea's official EPS/employment-center process.",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "supportState": "verified_nepal_reregistration_plus_shared_korea_core"
     }
   ],
   "exactAnswerRulesFile": "data/np_exact_answer_rules_2026.json",
@@ -309,5 +314,6 @@
     }
   },
   "registrationNoticesFile": "data/np_registration_notices_2026.json",
-  "stageReadinessFile": "data/np_stage_readiness_2026.json"
+  "stageReadinessFile": "data/np_stage_readiness_2026.json",
+  "processBaselineFile": "data/np_eps_process_baseline_2026.json"
 }
