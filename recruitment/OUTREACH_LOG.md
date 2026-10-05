@@ -97,3 +97,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | PCINU Korea Selatan — WhatsApp | Indonesian Muslim / PMI network in Korea | Sent direct WhatsApp request asking for KEP beta sharing to PMI members and relevant worker WhatsApp groups; message used `src=pcinu_korea` | **Sent — awaiting reply** |
 
 | 2026-10-05 | IKMI Korea / Masjid Al-Falah — WhatsApp | Indonesian Muslim / PMI network in Korea | Sent direct WhatsApp request to +82 10-9892-1197 asking for KEP beta sharing to PMI members and relevant worker WhatsApp groups; message used `src=ikmi_korea` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Gereja SIS Busan / Sooyoungro Indonesian Service | Indonesian church/community in Busan with Indonesian workers and students | Sent email to `infogerejasis@gmail.com` requesting KEP beta sharing to Indonesian worker members or connection to relevant internal/WhatsApp admins; message used `src=gereja_sis_busan` | **Sent — awaiting reply** |
