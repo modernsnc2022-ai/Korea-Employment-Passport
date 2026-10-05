@@ -9,7 +9,16 @@
       "status": "upcoming_verified",
       "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
       "note": "Instructions due 2026-10-12; application period 2026-10-26 through 2026-10-30.",
-      "publicActionState": "hold_until_2026_10_12_instructions_reviewed"
+      "publicActionState": "hold_until_2026_10_12_instructions_reviewed",
+      "scheduleSafety": {
+        "expectedInstructionDate": "2026-10-12",
+        "expectedApplicationWindow": {
+          "opensAt": "2026-10-26",
+          "closesAt": "2026-10-30"
+        },
+        "state": "official_plan_verified_but_reconfirm_after_instruction_notice",
+        "rule": "If the October 12 instructions change, postpone, cancel or qualify the October 26–30 application window, KEP must update the current window before exposing field-level application guidance."
+      }
     },
     "epsTopik": {
       "status": "future_verified_schedule",
