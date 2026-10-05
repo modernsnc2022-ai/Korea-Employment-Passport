@@ -77,3 +77,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | WARCOP Indonesia — WhatsApp reply | Indonesian community/business hub in Ansan | Replied "Ok" to the KEP community-connection request | **Acknowledged — follow-up needed to confirm whether they can connect/share** |
 
 | 2026-10-05 | WARCOP Indonesia — follow-up sent | Indonesian community/business hub in Ansan | After initial "Ok" acknowledgement, sent a concise follow-up asking specifically for connection to WhatsApp-group/paguyuban admins or internal sharing to E-9 manufacturing workers | **Sent — awaiting concrete connection/share confirmation** |
+
+| 2026-10-05 | ANEKARASA — WhatsApp reply | Indonesian community/business hub in Ansan | Admin replied that they will first ask people in their network whether they are interested | **Positive referral step — waiting for interest feedback / introductions** |
