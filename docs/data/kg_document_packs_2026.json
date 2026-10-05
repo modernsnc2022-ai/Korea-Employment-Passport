@@ -1,0 +1,104 @@
+{
+  "version": "1.0.0",
+  "routeId": "kg-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "kg_13th_online_registration",
+      "title": "Kyrgyzstan 13th Manufacturing — Online Registration Pack",
+      "appliesTo": [
+        "registration",
+        "document_verify",
+        "exam_fee"
+      ],
+      "status": "verified_current_cycle",
+      "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/",
+      "items": [
+        {
+          "id": "kg_gmail",
+          "label": "Gmail address",
+          "required": true,
+          "rule": "Required by official online-registration instructions."
+        },
+        {
+          "id": "kg_photo",
+          "label": "Recent 3.5×4.5 cm JPG photo",
+          "required": true,
+          "rule": "White background; taken within the last 6 months."
+        },
+        {
+          "id": "kg_passport",
+          "label": "Foreign passport JPG",
+          "required": true,
+          "rule": "Must be clear/readable."
+        },
+        {
+          "id": "kg_receipt",
+          "label": "US$28 payment receipt image",
+          "required": true,
+          "rule": "Upload an image and keep the receipt for test day."
+        }
+      ],
+      "fee": {
+        "amountUsd": 28,
+        "currentForThisCycle": true
+      }
+    },
+    {
+      "id": "kg_13th_postselection_roster",
+      "title": "Kyrgyzstan 13th Manufacturing — Post-selection / Roster Pack",
+      "appliesTo": [
+        "mcu1",
+        "job_application"
+      ],
+      "status": "verified_current_cycle_historical_window",
+      "sourceUrl": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+      "warning": "These dates/providers belong to the February 2026 13th Manufacturing cycle. Do not reuse them for a later cohort.",
+      "items": [
+        {
+          "id": "kg_police_clearance",
+          "label": "Police-clearance certificate",
+          "required": true,
+          "rule": "Official notice says it can be obtained via the Tunduk mobile app."
+        },
+        {
+          "id": "kg_usd_account",
+          "label": "USD account at Demir Bank",
+          "required": true,
+          "rule": "Required in the 2026-06-08 post-selection notice."
+        },
+        {
+          "id": "kg_medical_clearance",
+          "label": "Medical clearance",
+          "required": true,
+          "rule": "Complete the assigned medical checks in the official window."
+        },
+        {
+          "id": "kg_post_photo",
+          "label": "Two 3.5×4.5 cm photos",
+          "required": true,
+          "rule": "White background, dark clothing."
+        },
+        {
+          "id": "kg_passport_copies",
+          "label": "Color copies of foreign passport and ID passport",
+          "required": true,
+          "rule": "Both listed in the official post-selection notice."
+        }
+      ],
+      "medicalWindow": "2026-06-09 through 2026-06-11",
+      "fullPackageSubmissionDate": "2026-06-15",
+      "providers": {
+        "Bishkek": [
+          "KMMA Medical Center — fluorography — Kasym Tynystanov St. 1",
+          "Unimed Medical Center — analyses, ophthalmologist, ENT — Baytik Baatyr St. 3v"
+        ],
+        "Osh": [
+          "Aqua Lab — analyses — Kurmanjan Datka St. 228",
+          "Family Medicine Center No.12 — ophthalmologist and ENT — Abdykadyrov St. 9",
+          "Family Medicine Center No.10 — fluorography — Askar Shakirov St. 20"
+        ]
+      }
+    }
+  ]
+}
