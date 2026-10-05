@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "routeId": "tl-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "currentManufacturing": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "diliSchedule": {
+      "status": "verified_direct_official",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "note": "Registration 2026-03-09~03-18; announcement 2026-06-09; test 2026-06-18~07-30."
+    },
+    "baucauSchedule": {
+      "status": "discovery_only_direct_detail_pending",
+      "evidenceFile": "data/tl_baucau_discovery_2026.json"
+    },
+    "skillsCandidates": {
+      "status": "official_country_entries_site_sector_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "note": "Four General CBT entries published 2026-09-22."
+    },
+    "finalResult": {
+      "status": "awaiting_verified_current_cycle_final_result",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+    },
+    "fee": {
+      "status": "cycle_specific_unverified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "documents": {
+      "status": "cycle_specific_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "downstream": {
+      "status": "research_pending_current_manufacturing",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "otherSector": {
+    "status": "separate_verified_fishery",
+    "evidenceFile": "data/tl_other_sector_evidence_2026.json",
+    "mustNotPopulateManufacturing": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "Baucau direct official schedule detail not captured",
+      "generic 2026-09-22 skills-candidate entries not linked by site/sector",
+      "cycle-specific fee/document/final-result/downstream exact rules not mapped"
+    ]
+  }
+}

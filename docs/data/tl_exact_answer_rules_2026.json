@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "routeId": "tl-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Dili Manufacturing is direct-official exact evidence. Baucau discovery, Fishery routes and generic East Timor skills-candidate entries may not auto-populate Dili Manufacturing exact rules.",
+  "answers": [
+    {
+      "id": "tl_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is Timor-Leste's official EPS sending agency?",
+      "answer": "National Directorate of Overseas Employment (NDOE).",
+      "writeExactly": "Use NDOE as the Timor-Leste EPS sending-side authority.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_dili_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the 9th Manufacturing Dili registration?",
+      "answer": "2026-03-09 through 2026-03-18.",
+      "writeExactly": "9th Timor-Leste Manufacturing Dili registration: 2026-03-09 through 2026-03-18. Closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_dili_test_notice",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "What was the Dili Manufacturing test announcement date?",
+      "answer": "2026-06-09.",
+      "writeExactly": "HRD Korea schedule: announcement 2026-06-09.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_dili_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the Dili Manufacturing test period?",
+      "answer": "2026-06-18 through 2026-07-30.",
+      "writeExactly": "9th Timor-Leste Manufacturing Dili test period: 2026-06-18 through 2026-07-30.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_point_system",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "Is the Dili route a Point System route?",
+      "answer": "Yes. General CBT with Point System = Y.",
+      "writeExactly": "This is the 9th Timor-Leste Manufacturing Dili Point System route.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_baucau_state",
+      "stages": [
+        "registration",
+        "eps_topik"
+      ],
+      "question": "Are Baucau Manufacturing dates exact in KEP?",
+      "answer": "No. Baucau Manufacturing is discovery-known, but the direct official schedule artifact has not yet been captured.",
+      "writeExactly": "Do not publish Baucau discovery dates as exact until direct official detail is captured.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_2026_skills_candidates_state",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What official East Timor skills-candidate artifacts exist?",
+      "answer": "Four General CBT entries published 2026-09-22.",
+      "writeExactly": "Do not auto-link the generic 1st–4th entries to Dili/Baucau or Manufacturing/Fishery without exact artifact proof.",
+      "verificationStatus": "official_country_artifacts_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tl_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does test success guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

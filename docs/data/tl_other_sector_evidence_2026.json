@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "country": "TL",
+  "cycle": 2026,
+  "routeType": "other_sector_fishery",
+  "excludedFromManufacturing": true,
+  "officialEvidence": [
+    {
+      "title": "9th East Timor Fishery Dili",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=44&examYear=2026&lang=ko&lcnsId=001"
+    },
+    {
+      "title": "9th East Timor Fishery Baucau",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=45&examYear=2026&lang=ko&lcnsId=001"
+    }
+  ],
+  "warning": "Fishery dates and rules must never populate Manufacturing."
+}

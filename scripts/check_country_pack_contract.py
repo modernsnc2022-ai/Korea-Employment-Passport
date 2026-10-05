@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China and Cambodia")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia and Timor-Leste")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -505,6 +505,42 @@ for exact_id in [
 ]:
     require(exact_id in kh_exact_ids,f"Cambodia exact-answer catalog missing {exact_id}")
 
+
+tl_entry=routes["tl-e9-manufacturing-2026"]
+tl_pack=load("docs/data/tl_e9_manufacturing_2026.json")
+tl_exact=load("docs/data/tl_exact_answer_rules_2026.json")
+tl_docs=load("docs/data/tl_document_packs_2026.json")
+tl_discovery=load("docs/data/tl_baucau_discovery_2026.json")
+tl_other=load("docs/data/tl_other_sector_evidence_2026.json")
+tl_readiness=load("docs/data/tl_stage_readiness_2026.json")
+require(tl_entry.get("lifecycle")=="research_hold" and tl_entry.get("publicAvailability")=="preview_only","Timor-Leste registry route must remain preview-only HOLD")
+require(tl_pack.get("lifecycle")=="research_hold" and tl_pack.get("publicAvailability")=="preview_only","Timor-Leste pack must remain preview-only HOLD")
+require(tl_pack.get("safety",{}).get("betaIntakeOpen") is False,"Timor-Leste beta intake must remain closed")
+require(tl_pack.get("safety",{}).get("baucauDiscoveryMustNotBecomeExact") is True,"Timor-Leste Baucau discovery must not auto-promote")
+require(tl_pack.get("safety",{}).get("fisheryFactsExcludedFromManufacturing") is True,"Timor-Leste Fishery facts must stay outside Manufacturing")
+require(tl_pack.get("safety",{}).get("genericSkillsCandidateEntriesRequireSiteSectorLinkage") is True,"Timor-Leste generic skills entries require site/sector linkage")
+require(tl_pack.get("officialSendingAgency",{}).get("name")=="National Directorate of Overseas Employment (NDOE)","Timor-Leste sending agency must remain NDOE")
+tl_current=tl_readiness.get("currentManufacturing",{})
+require(tl_current.get("diliSchedule",{}).get("status")=="verified_direct_official","Timor-Leste Dili Manufacturing schedule must remain direct-official verified")
+require(tl_current.get("baucauSchedule",{}).get("status")=="discovery_only_direct_detail_pending","Timor-Leste Baucau must remain discovery-only until direct detail is captured")
+require(tl_current.get("skillsCandidates",{}).get("status")=="official_country_entries_site_sector_linkage_pending","Timor-Leste skills-candidate entries must remain linkage-pending")
+require(tl_current.get("finalResult",{}).get("status")=="awaiting_verified_current_cycle_final_result","Timor-Leste final result must remain gated")
+require(tl_readiness.get("otherSector",{}).get("mustNotPopulateManufacturing") is True,"Timor-Leste Fishery evidence must never populate Manufacturing")
+require(tl_readiness.get("betaReadiness",{}).get("status")=="blocked","Timor-Leste beta must remain blocked")
+require(tl_discovery.get("exactPromotionAllowed") is False,"Timor-Leste Baucau discovery cannot promote exact rules")
+require(tl_other.get("excludedFromManufacturing") is True,"Timor-Leste Fishery evidence must be explicitly excluded")
+tl_doc_ids={p.get("id") for p in tl_docs.get("packs",[])}
+require({"tl_9th_registration_documents_hold","tl_official_contact"}.issubset(tl_doc_ids),"Timor-Leste document packs must preserve HOLD plus official contact")
+tl_hold=next((p for p in tl_docs.get("packs",[]) if p.get("id")=="tl_9th_registration_documents_hold"),{})
+require(tl_hold.get("items")==[],"Timor-Leste registration HOLD pack must contain no invented checklist items")
+tl_exact_ids={row.get("id") for row in tl_exact.get("answers",[])}
+for exact_id in [
+    "tl_2026_sending_authority","tl_2026_dili_registration_window","tl_2026_dili_test_notice",
+    "tl_2026_dili_test_period","tl_2026_point_system","tl_2026_baucau_state",
+    "tl_2026_skills_candidates_state","tl_no_job_guarantee"
+]:
+    require(exact_id in tl_exact_ids,f"Timor-Leste exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -517,6 +553,7 @@ uzbekistan=(ROOT/"docs/uz.html").read_text(encoding="utf-8")
 mongolia=(ROOT/"docs/mn.html").read_text(encoding="utf-8")
 china=(ROOT/"docs/cn.html").read_text(encoding="utf-8")
 cambodia=(ROOT/"docs/kh.html").read_text(encoding="utf-8")
+timorleste=(ROOT/"docs/tl.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -559,10 +596,13 @@ require("RESEARCH / HOLD" in cambodia and "2026-08-06" in cambodia and "2026-08-
 require("discovery source" in cambodia and "2026-05-22" in cambodia and "does not present those dates as official exact rules" in cambodia,"Cambodia preview must disclose discovery-only Manufacturing schedule and explicitly deny official promotion")
 require("Agriculture/Livestock and Special EPS-TOPIK are separate routes" in cambodia,"Cambodia preview must visibly preserve sector/special firewalls")
 require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"Cambodia preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in timorleste and "2026-03-09" in timorleste and "2026-07-30" in timorleste,"Timor-Leste preview must visibly remain HOLD with direct-official Dili timeline")
+require("DISCOVERY ONLY" in timorleste and "2026-09-22" in timorleste and "Fishery is a separate sector" in timorleste,"Timor-Leste preview must show Baucau discovery, generic skills linkage gate and Fishery firewall")
+require('href="beta.html"' not in timorleste and 'id="betaForm"' not in timorleste,"Timor-Leste preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold" % (len(routes),len(EXPECTED)))

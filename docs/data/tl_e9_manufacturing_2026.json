@@ -1,0 +1,292 @@
+{
+  "country": "TL",
+  "countryName": "Timor-Leste",
+  "nativeCountryName": "Timor-Leste",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-9th-point-system-east-timor-manufacturing-dili-verified",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "National Directorate of Overseas Employment (NDOE)",
+    "authorityEvidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "informationOffice": {
+      "address": "Becora, Cristo Rei, Dili, Timor-Leste",
+      "phone": "7767-4602",
+      "evidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    }
+  },
+  "evidenceNotes": [
+    "HRD Korea identifies NDOE as Timor-Leste's EPS sending agency.",
+    "The 9th East Timor Manufacturing Dili route is verified directly on HRD Korea: registration 2026-03-09 through 2026-03-18, announcement 2026-06-09, test 2026-06-18 through 2026-07-30, General CBT, Point System.",
+    "A Baucau Manufacturing track is known from schedule discovery, but KEP does not promote its exact dates until the direct official detail artifact is captured.",
+    "HRD Korea published four East Timor General CBT skills-candidate entries on 2026-09-22; their public titles do not themselves identify site/sector, so KEP does not auto-link them.",
+    "Fishery Dili/Baucau routes are separate-sector evidence and must never populate Manufacturing exact rules."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "baucauDiscoveryMustNotBecomeExact": true,
+    "fisheryFactsExcludedFromManufacturing": true,
+    "genericSkillsCandidateEntriesRequireSiteSectorLinkage": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "NDOE / HRD Korea",
+      "kind": "rules",
+      "action": "Use only current Timor-Leste Manufacturing rules for complete eligibility. Generic EPS rules are preparation guidance only until the current local notice is verified.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "current_local_notice_required"
+    },
+    {
+      "id": "registration",
+      "title": "9th Point System registration",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_action",
+      "action": "For the verified Dili Manufacturing track, registration ran 2026-03-09 through 2026-03-18. The window is closed.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current_closed"
+    },
+    {
+      "id": "exam_fee",
+      "title": "Application / test fee",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_payment",
+      "action": "KEP has not promoted a cycle-specific Timor-Leste 9th Manufacturing fee. Do not substitute another country or a generic HRD baseline.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "cycle_specific_fee_unverified"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity verification",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_action",
+      "action": "Follow only current Timor-Leste identity and anti-fraud instructions. Do not infer another country's biometric process.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "NDOE",
+      "kind": "official_action",
+      "action": "The exact 9th-round Timor-Leste passport/photo/upload/payment checklist has not yet been reconstructed in KEP.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "cycle_specific_checklist_not_reconstructed"
+    },
+    {
+      "id": "exam_card",
+      "title": "Test announcement / admission",
+      "authority": "NDOE / HRD Korea",
+      "kind": "self_service",
+      "action": "For Dili Manufacturing, HRD Korea records the test announcement date as 2026-06-09.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — 9th Point System Manufacturing",
+      "authority": "HRD Korea / NDOE",
+      "kind": "official_exam",
+      "action": "For Dili Manufacturing, HRD Korea records the test period as 2026-06-18 through 2026-07-30. The route is General CBT with Point System.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current_completed_period"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test — Round 2",
+      "authority": "HRD Korea / NDOE",
+      "kind": "official_exam",
+      "action": "HRD Korea published four East Timor General CBT skills-candidate entries on 2026-09-22. KEP has not yet linked each generic entry to Dili/Baucau and Manufacturing/Fishery with exact artifact proof.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "country_level_candidate_entries_linkage_pending"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / NDOE",
+      "kind": "official_result",
+      "action": "Do not infer final selection from the 2026-09-22 skills-candidate entries. A current 9th Manufacturing final-result artifact must be verified first.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "awaiting_verified_current_cycle_final_result"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "NDOE",
+      "kind": "official_requirement",
+      "action": "No separate Timor-Leste psychology stage is asserted from verified sources. Do not copy Indonesia-specific rules.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "NDOE / authorized provider",
+      "kind": "official_requirement",
+      "action": "Use only current Timor-Leste EPS medical/provider guidance. Exact provider, checklist and fee remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_action",
+      "action": "After verified final selection, follow current Timor-Leste candidate-file instructions. Exact 9th-round documents and timing remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS Job Seekers' Roster",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_wait",
+      "action": "Only officially qualified candidates proceed to employer selection. Private intermediaries cannot guarantee roster priority or placement.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for selection through the official EPS system. No private intermediary can guarantee a specific Korean employer.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / NDOE",
+      "kind": "official_contract",
+      "action": "If selected, follow current official Timor-Leste/EPS instructions for SLC review/signing and next steps.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Timor-Leste requirements",
+      "authority": "NDOE",
+      "kind": "conditional_official",
+      "action": "Follow current official instructions for medical follow-up, training, visa, payments and departure preparation.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "NDOE / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current Timor-Leste/Korean-mission visa checklist and fees. Exact current downstream details are not yet mapped.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "NDOE",
+      "kind": "official_training",
+      "action": "Complete only the official pre-departure training assigned to selected Korea-bound workers.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "NDOE",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage. Follow current Timor-Leste instructions only if a final health recheck is explicitly required.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "NDOE / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after official contract, visa, training and departure requirements are complete.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/tl_exact_answer_rules_2026.json",
+  "documentPacksFile": "data/tl_document_packs_2026.json",
+  "stageReadinessFile": "data/tl_stage_readiness_2026.json",
+  "discoveryEvidenceFile": "data/tl_baucau_discovery_2026.json",
+  "otherSectorEvidenceFile": "data/tl_other_sector_evidence_2026.json"
+}

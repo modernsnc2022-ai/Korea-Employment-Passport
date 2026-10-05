@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Verifika elegibilidade",
+    "action": "Uza deit regra atual Timor-Leste Manufacturing. Regra EPS jerál serve deit hanesan preparasaun."
+  },
+  "registration": {
+    "title": "Rejistu Point System 9",
+    "action": "Ba rota Manufacturing Dili ne'ebé verifikadu, rejistu husi 2026-03-09 to'o 2026-03-18. Janela taka ona."
+  },
+  "exam_fee": {
+    "title": "Taxa aplikasaun / ezame",
+    "action": "KEP seidauk verifika taxa espesífika ba Manufacturing 9. La bele uza taxa nasaun seluk."
+  },
+  "biometric": {
+    "title": "Verifika identidade",
+    "action": "Tuir deit instrusaun atual Timor-Leste kona-ba identidade no anti-fraude."
+  },
+  "document_verify": {
+    "title": "Verifika dokumentu rejistu",
+    "action": "Checklist passport/foto/upload/payment ba ronda 9 seidauk rekonstruidu hotu iha KEP."
+  },
+  "exam_card": {
+    "title": "Anúnsiu data ezame",
+    "action": "Ba Manufacturing Dili, HRD Korea hatudu 2026-06-09 hanesan loron anúnsiu ezame."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Point System 9 Manufacturing",
+    "action": "Ba Manufacturing Dili, periodu ezame 2026-06-18 to'o 2026-07-30. General CBT no Point System."
+  },
+  "skill_competency": {
+    "title": "Skills Test — Ronda 2",
+    "action": "HRD Korea publika entrada kandidatu skills East Timor 4 iha 2026-09-22, maibé ligasaun site/sector seidauk prova."
+  },
+  "final_selection": {
+    "title": "Seleksaun final tuir pontu",
+    "action": "La inferi rezultadu final husi lista kandidatu skills 2026-09-22. Presiza artifact final ronda 9 Manufacturing."
+  },
+  "psychology_pre_job": {
+    "title": "Kontrola espesífiku Timor-Leste",
+    "action": "La iha stage psychology separadu ne'ebé verifikadu. La kopi regra Indonesia."
+  },
+  "mcu1": {
+    "title": "Ezaminasaun médika",
+    "action": "Uza deit orientasaun medical/provider Timor-Leste atual. Provider/checklist/taxa seidauk map hotu."
+  },
+  "job_application": {
+    "title": "Pasta kandidatu servisu",
+    "action": "Depois final result verifikadu, tuir instrusaun atual NDOE/HRD Korea."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "Kandidatu ofisiál deit mak tama prosesu employer selection. Intermediáriu privadu la bele garante prioridade."
+  },
+  "employer_selection": {
+    "title": "Seleksaun husi empregadór Korea",
+    "action": "Hein seleksaun liuhusi sistema EPS ofisiál. Intermediáriu privadu la bele garante empregadór espesífiku."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "Se empregadór hili, tuir instrusaun Timor-Leste/EPS atual ba SLC."
+  },
+  "post_slc_requirements": {
+    "title": "Rekizitu depois SLC",
+    "action": "Uza deit instrusaun atual ba medical follow-up, training, visa, payment no departure."
+  },
+  "visa_docs": {
+    "title": "Dokumentu visa",
+    "action": "Uza checklist no taxa visa atual husi Timor-Leste/Korean mission."
+  },
+  "predeparture_training": {
+    "title": "Treinamentu antes departure",
+    "action": "Kompleta deit treinamentu ofisiál ne'ebé designadu."
+  },
+  "mcu3_departure": {
+    "title": "Saúde final / prontu atu sai",
+    "action": "La kria MCU-III estilo Indonesia automaticamente. Halo deit se instrusaun Timor-Leste husu."
+  },
+  "departure": {
+    "title": "Departure ofisiál",
+    "action": "Sai deit depois contract, visa, training no rekizitu departure kompletu."
+  },
+  "korea_entry_training": {
+    "title": "Tama Korea no employment education",
+    "action": "Depois tama Korea, kompleta employment education no handover ofisiál."
+  },
+  "employer_handover": {
+    "title": "Handover ba empregadór",
+    "action": "Konfirma fatin servisu, alojamentu no kontaktu emerjénsia."
+  },
+  "residence_registration": {
+    "title": "Residence Card / rejistu estranjeiru",
+    "action": "Tuir regra Immigration Korea atual ba rejistu estranjeiru no Residence Card."
+  },
+  "eps_insurance_check": {
+    "title": "Verifika seguransa EPS",
+    "action": "Verifika obrigasaun seguransa EPS husi fonte ofisiál."
+  },
+  "first_payroll_check": {
+    "title": "Verifika saláriu dahuluk",
+    "action": "Kompara payslip no bank deposit ho SLC, oras servisu, dedusaun no regra saláriu."
+  },
+  "labor_support_ready": {
+    "title": "Prontu ba apoiu laborál",
+    "action": "Rai kanal labor-support ofisiál no prova contract/payroll/attendance."
+  },
+  "employment_maintenance": {
+    "title": "Mantén empregu / muda fatin servisu",
+    "action": "Se iha razaun legál, uza prosesu EPS ka employment center Korea ofisiál."
+  }
+}
