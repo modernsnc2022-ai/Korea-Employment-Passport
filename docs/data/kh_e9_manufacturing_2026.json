@@ -1,0 +1,302 @@
+{
+  "country": "KH",
+  "countryName": "Cambodia",
+  "nativeCountryName": "កម្ពុជា",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-manufacturing-official-result-artifacts-cycle-schedule-linkage-pending",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "Manpower Training and Overseas Sending Board (MTOSB)",
+    "website": "https://www.mtosb.gov.kh/",
+    "authorityEvidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "informationOffice": {
+      "address": "Phum Prey Popel, SK. Somrong Krom, Khan Po Sen Chey, Phnom Penh",
+      "phone": "+855-23-822-734",
+      "evidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    },
+    "testCenters": {
+      "evidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectTestsiteGuideList.do?lang=ko",
+      "note": "HRD Korea lists Cambodia test-center entries at National Polytechnic Institute of Cambodia; use the current cycle notice before travel."
+    }
+  },
+  "evidenceNotes": [
+    "HRD Korea identifies MTOSB as Cambodia's EPS sending agency.",
+    "HRD Korea lists the Cambodia information office in Khan Po Sen Chey, Phnom Penh.",
+    "Official HRD Korea candidates-for-skills list contains Cambodia the 2th Test of proficiency in Korean Announcement (General CBT), published 2026-08-06.",
+    "Official HRD Korea pass list contains Cambodia the 2th POINT_EXAM Announcement (General CBT), published 2026-08-21.",
+    "The public titles do not themselves state Manufacturing, so KEP does not auto-link those official artifacts to the Manufacturing route without direct cycle/sector proof.",
+    "A non-official discovery mirror points to a 12th Cambodia Manufacturing Point System with registration 2026-05-22 through 2026-05-25; those dates are discovery-only and not promoted as exact.",
+    "The official 11th Cambodia Agriculture and Livestock schedule is separate-sector evidence and must never populate Manufacturing rules.",
+    "A separate Cambodia Special CBT result was published 2026-09-09 and must remain outside Regular Manufacturing."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "discoveryScheduleMustNotBecomeExact": true,
+    "agricultureFactsExcludedFromManufacturing": true,
+    "specialFactsExcludedFromManufacturing": true,
+    "genericOfficialResultArtifactsRequireCycleSectorLinkage": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "rules",
+      "action": "Use only a current Cambodia Manufacturing notice for complete cycle-specific eligibility. Generic EPS eligibility and Agriculture-sector rules are not current Manufacturing exact rules.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "manufacturing_local_notice_required"
+    },
+    {
+      "id": "registration",
+      "title": "Manufacturing registration",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_action",
+      "action": "KEP has not promoted the 2026 Manufacturing registration window because the direct official Manufacturing schedule artifact has not yet been captured. A non-official discovery source suggests a 12th Manufacturing cycle, but its dates remain discovery-only.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "official_manufacturing_schedule_artifact_pending"
+    },
+    {
+      "id": "exam_fee",
+      "title": "Application / test fee",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_payment",
+      "action": "No Cambodia Manufacturing cycle-specific fee is promoted until a current official Manufacturing notice is captured.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "cycle_specific_fee_unverified"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity verification",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_action",
+      "action": "Follow only current Cambodia official identity and anti-fraud requirements. Do not import another country's biometric steps.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_manufacturing_notice"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "MTOSB",
+      "kind": "official_action",
+      "action": "The current Manufacturing passport/photo/upload/payment checklist is not promoted until a direct official Manufacturing notice is reviewed.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "manufacturing_checklist_not_reconstructed"
+    },
+    {
+      "id": "exam_card",
+      "title": "Manufacturing test-date notice",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "self_service",
+      "action": "The exact official Manufacturing test schedule is not promoted in KEP until the direct schedule detail is captured. Do not reuse Agriculture or Special dates.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "manufacturing_schedule_linkage_pending"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — Manufacturing",
+      "authority": "HRD Korea / MTOSB",
+      "kind": "official_exam",
+      "action": "HRD Korea has an official Cambodia General CBT skills-candidate announcement dated 2026-08-06, but the public title does not itself state Manufacturing. KEP therefore preserves the artifact while keeping exact Manufacturing cycle linkage gated.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "official_country_artifact_sector_linkage_pending"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test — Round 2",
+      "authority": "HRD Korea / MTOSB",
+      "kind": "official_exam",
+      "action": "HRD Korea published Cambodia the 2th Test of proficiency in Korean Announcement (General CBT) on 2026-08-06 as candidates for skills test. KEP will not assert exact Manufacturing linkage until the cycle/sector artifact is verified.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "official_candidate_artifact_linkage_pending"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / MTOSB",
+      "kind": "official_result",
+      "action": "HRD Korea published Cambodia the 2th POINT_EXAM Announcement (General CBT) on 2026-08-21. KEP preserves this official result artifact but does not auto-link it to the Manufacturing route without direct cycle/sector proof.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "supportState": "official_point_result_artifact_linkage_pending"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "MTOSB",
+      "kind": "official_requirement",
+      "action": "No separate Cambodia psychology stage is asserted from the verified Manufacturing evidence.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "MTOSB / authorized provider",
+      "kind": "official_requirement",
+      "action": "Use only current Cambodia Manufacturing medical/provider instructions. Exact provider, checklist and fee remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_action",
+      "action": "After a verified current Manufacturing final result, follow current Cambodia candidate-file instructions. Exact documents and timing remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS Job Seekers' Roster",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_wait",
+      "action": "Only officially qualified candidates proceed to employer selection. Private intermediaries cannot guarantee roster priority or placement.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for selection through the official EPS system. No private intermediary can guarantee a specific Korean employer.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / MTOSB",
+      "kind": "official_contract",
+      "action": "If selected, follow current official Cambodia/EPS instructions for SLC review/signing and next steps.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Cambodia requirements",
+      "authority": "MTOSB",
+      "kind": "conditional_official",
+      "action": "Follow current official instructions for medical follow-up, training, visa documents, payments and departure preparation.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "MTOSB / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current Cambodia/Korean-mission visa checklist and fees. Exact current Manufacturing downstream details are not yet mapped.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "MTOSB",
+      "kind": "official_training",
+      "action": "Complete only the official pre-departure training assigned to selected Korea-bound workers.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "MTOSB",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage. Follow current Cambodia instructions only if a final health recheck is explicitly required.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "MTOSB / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after official contract, visa, training and departure requirements are complete.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/kh_exact_answer_rules_2026.json",
+  "documentPacksFile": "data/kh_document_packs_2026.json",
+  "stageReadinessFile": "data/kh_stage_readiness_2026.json",
+  "discoveryEvidenceFile": "data/kh_manufacturing_discovery_2026.json",
+  "otherSectorEvidenceFile": "data/kh_other_sector_evidence_2026.json",
+  "specialRouteEvidenceFile": "data/kh_special_eps_topik_2026.json"
+}
