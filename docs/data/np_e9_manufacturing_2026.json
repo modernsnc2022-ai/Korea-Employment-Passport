@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-first-phase-eps-topik-application-announced-2026-07-21",
   "goal": "zero-private-broker",
-  "packVersion": "0.3.0",
+  "packVersion": "0.4.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-05",
@@ -22,7 +22,8 @@
     "EPS Korea Section Nepal published the 2026 first-phase Korean-language examination application notice on 2026-07-21. The notice uses the Point Based Selection System and includes Manufacturing among the listed sectors/subsectors.",
     "The verified Nepal site also shows 2025 Manufacturing selection processing continuing through 2026, including skill/competency results and employment-application processing.",
     "Nepal remains KEP research HOLD because country-specific document, medical, visa, training and departure requirements are not yet fully mapped into exact-answer rules.",
-    "During the 2026 first-phase application window, EPS Korea Section published a temporary-suspension notice and a later resumption notice on 2026-07-28. KEP does not infer any deadline extension from those titles; supplementary content is tracked separately."
+    "During the 2026 first-phase application window, EPS Korea Section published a temporary-suspension notice and a later resumption notice on 2026-07-28. KEP does not infer any deadline extension from those titles; supplementary content is tracked separately.",
+    "As of 2026-10-05, KEP has not promoted a current-2026 first-phase EPS-TOPIK result, Skill & Competency schedule/result, or Manufacturing medical/job-application notice from the official Nepal notice index; 2025-cohort notices remain prior-cycle evidence only."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -307,5 +308,6 @@
       "exactSupplementaryContentReviewComplete": false
     }
   },
-  "registrationNoticesFile": "data/np_registration_notices_2026.json"
+  "registrationNoticesFile": "data/np_registration_notices_2026.json",
+  "stageReadinessFile": "data/np_stage_readiness_2026.json"
 }

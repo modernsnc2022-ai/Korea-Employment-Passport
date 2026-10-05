@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-05",
+  "officialNoticeIndex": "https://epsnepal.gov.np/notices",
+  "interpretationRule": "A prior-cycle notice may document workflow shape, but it cannot populate exact dates, documents, medical rules or submission instructions for the 2026 first-phase cohort unless a current-cohort official notice explicitly supports them.",
+  "currentCohort": {
+    "recruitmentRegistration": {
+      "status": "closed_verified",
+      "stageIds": [
+        "eligibility",
+        "registration",
+        "exam_fee",
+        "document_verify"
+      ],
+      "currentSource": "https://epsnepal.gov.np/postdetails/136",
+      "note": "2026 first-phase application notice verified; application window 2026-07-27 through 2026-08-02 is closed."
+    },
+    "epsTopikSchedule": {
+      "status": "awaiting_current_cohort_notice",
+      "stageIds": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "currentSource": "https://epsnepal.gov.np/postdetails/136",
+      "note": "The first-phase notice establishes EPS-TOPIK and test format, but KEP has not verified a later current-cohort individual exam schedule/result notice from the official notice index as of 2026-10-05."
+    },
+    "epsTopikResult": {
+      "status": "awaiting_current_cohort_notice",
+      "stageIds": [
+        "final_selection"
+      ],
+      "currentSource": "https://epsnepal.gov.np/notices",
+      "note": "No 2026 first-phase result notice has been promoted into KEP exact rules as of this check."
+    },
+    "skillCompetency": {
+      "status": "awaiting_current_cohort_notice",
+      "stageIds": [
+        "skill_competency"
+      ],
+      "currentSource": "https://epsnepal.gov.np/notices",
+      "priorCycleEvidence": [
+        {
+          "cycle": 2025,
+          "sourceUrl": "https://epsnepal.gov.np/postdetails/101",
+          "use": "workflow_shape_only",
+          "note": "2025 Manufacturing/Agriculture first-round passers received a Skill & Competency schedule for April 19–28, 2026. Those dates are not reused for the 2026 first-phase cohort."
+        },
+        {
+          "cycle": 2025,
+          "sourceUrl": "https://epsnepal.gov.np/postdetails/113",
+          "use": "workflow_shape_only",
+          "note": "2025 Manufacturing second-round Skill & Competency result notice, published May 11, 2026."
+        }
+      ]
+    },
+    "medicalAndJobApplication": {
+      "status": "awaiting_current_cohort_notice",
+      "stageIds": [
+        "psychology_pre_job",
+        "mcu1",
+        "job_application"
+      ],
+      "currentSource": "https://epsnepal.gov.np/notices",
+      "priorCycleEvidence": [
+        {
+          "cycle": 2025,
+          "sourceUrl": "https://epsnepal.gov.np/postdetails/127",
+          "use": "workflow_shape_only",
+          "note": "June 25, 2026 employment-application notice explicitly belongs to the 2025 Manufacturing cohort."
+        }
+      ]
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_cohort_scope",
+      "stageIds": [
+        "post_slc_requirements",
+        "visa_docs",
+        "predeparture_training",
+        "mcu3_departure",
+        "departure"
+      ],
+      "currentSource": "https://epsnepal.gov.np/notices",
+      "note": "Departure notices exist for workers already in later pipeline stages, but KEP has not scoped them as exact rules for the 2026 first-phase recruitment cohort."
+    }
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "current-cohort EPS-TOPIK schedule/result not yet promoted from an official notice",
+      "current-cohort Skill & Competency notice not yet verified",
+      "current-cohort medical/job-application rules not yet verified",
+      "current-cohort downstream visa/training/departure exact rules not yet scoped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "officialIndex": "https://epsnepal.gov.np/notices",
+    "promoteOnlyWhen": [
+      "an official notice explicitly identifies the 2026 first-phase cohort or an unambiguous 2026 current cohort",
+      "the notice content, not only its title, is reviewed when exact dates/documents/rules are added",
+      "prior-cycle 2025 wording is not reused as a current-cycle exact rule"
+    ]
+  }
+}
