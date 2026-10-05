@@ -63,3 +63,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Rumaisa Korsel — WhatsApp | Indonesian women / migrant-worker community in Korea | Sent direct WhatsApp request to +82 10-4997-1060 asking for internal sharing to Indonesian women E-9 workers; message used `src=rumaisa_korsel` | **Sent — awaiting reply** |
 
 | 2026-10-05 | Kedai Rinjani — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker community or WhatsApp group admins; message used `src=kedai_rinjani_ansan` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Warung Indonesia Solo WhatsApp probe | Indonesian community/business candidate in Pyeongtaek | Tested public number +82 10-8423-5581 via WhatsApp | **Invalid — number is not on WhatsApp; retire route** |
