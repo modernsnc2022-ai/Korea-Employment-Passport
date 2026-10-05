@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan and Mongolia")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia and China")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -430,6 +430,39 @@ for exact_id in [
 ]:
     require(exact_id in mn_exact_ids,f"Mongolia exact-answer catalog missing {exact_id}")
 
+
+cn_entry=routes["cn-e9-manufacturing-2026"]
+cn_pack=load("docs/data/cn_e9_manufacturing_2026.json")
+cn_exact=load("docs/data/cn_exact_answer_rules_2026.json")
+cn_docs=load("docs/data/cn_document_packs_2026.json")
+cn_readiness=load("docs/data/cn_stage_readiness_2026.json")
+require(cn_entry.get("lifecycle")=="research_hold" and cn_entry.get("publicAvailability")=="preview_only","China registry route must remain preview-only HOLD")
+require(cn_pack.get("lifecycle")=="research_hold" and cn_pack.get("publicAvailability")=="preview_only","China pack must remain preview-only HOLD")
+require(cn_pack.get("safety",{}).get("betaIntakeOpen") is False,"China beta intake must remain closed")
+require(cn_pack.get("safety",{}).get("genericHrdFeeNotCurrentCycle") is True,"China generic HRD fee must not become cycle-specific")
+require(cn_pack.get("safety",{}).get("genericSkillsCandidateEntriesNotAutoLinkedToCurrentManufacturing") is True,"China generic skills-candidate entries must not auto-link to current Manufacturing")
+require(cn_pack.get("safety",{}).get("officialContactContextsPreserved") is True,"China official contact contexts must remain source-scoped")
+require(cn_pack.get("officialSendingAgency",{}).get("name")=="Investment Promotion Agency of Ministry of Commerce of P.R China (CIPA)","China sending agency must remain CIPA")
+cn_current=cn_readiness.get("currentCycle",{})
+require(cn_current.get("registration",{}).get("status")=="closed_verified","China 6th registration must remain closed_verified")
+require(cn_current.get("epsTopikSchedule",{}).get("status")=="completed_period_verified","China 6th test period must remain verified")
+require(cn_current.get("skillsCandidates",{}).get("status")=="generic_entries_exist_cycle_linkage_pending","China skills-candidate linkage must remain gated")
+require(cn_current.get("finalResult",{}).get("status")=="awaiting_verified_current_cycle_final_result","China final result must remain gated")
+require(cn_current.get("fee",{}).get("status")=="cycle_specific_unverified","China cycle-specific fee must remain unresolved")
+require(cn_current.get("documents",{}).get("status")=="cycle_specific_checklist_not_reconstructed","China registration checklist must remain HOLD")
+require(cn_readiness.get("betaReadiness",{}).get("status")=="blocked","China beta must remain blocked")
+cn_doc_ids={p.get("id") for p in cn_docs.get("packs",[])}
+require({"cn_6th_registration_documents_hold","cn_official_contact_context"}.issubset(cn_doc_ids),"China document packs must preserve HOLD plus official contact context")
+cn_hold=next((p for p in cn_docs.get("packs",[]) if p.get("id")=="cn_6th_registration_documents_hold"),{})
+require(cn_hold.get("items")==[],"China cycle-specific document HOLD pack must contain no invented checklist items")
+cn_exact_ids={row.get("id") for row in cn_exact.get("answers",[])}
+for exact_id in [
+    "cn_2026_sending_authority","cn_2026_registration_window","cn_2026_test_notice_date",
+    "cn_2026_test_period","cn_2026_point_system","cn_2026_fee_state",
+    "cn_2026_skill_candidate_state","cn_2026_skill_rule","cn_no_job_guarantee"
+]:
+    require(exact_id in cn_exact_ids,f"China exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -440,6 +473,7 @@ srilanka=(ROOT/"docs/lk.html").read_text(encoding="utf-8")
 laos=(ROOT/"docs/la.html").read_text(encoding="utf-8")
 uzbekistan=(ROOT/"docs/uz.html").read_text(encoding="utf-8")
 mongolia=(ROOT/"docs/mn.html").read_text(encoding="utf-8")
+china=(ROOT/"docs/cn.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -475,10 +509,13 @@ require('href="beta.html"' not in uzbekistan and 'id="betaForm"' not in uzbekist
 require("RESEARCH / HOLD" in mongolia and "2026-03-25" in mongolia and "2026-06-26" in mongolia,"Mongolia preview must visibly remain HOLD with verified registration/test timeline")
 require("Special EPS-TOPIK remains a separate route" in mongolia and "Final-result linkage" in mongolia,"Mongolia preview shell must visibly preserve Special and result-linkage gates")
 require('href="beta.html"' not in mongolia and 'id="betaForm"' not in mongolia,"Mongolia preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in china and "2026-03-18" in china and "2026-09-11" in china,"China preview must visibly remain HOLD with verified registration/test timeline")
+require("2026-09-30" in china and "US$28" in china and "not promoted" in china,"China preview must preserve generic skill-candidate and fee gates")
+require('href="beta.html"' not in china and 'id="betaForm"' not in china,"China preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold" % (len(routes),len(EXPECTED)))
