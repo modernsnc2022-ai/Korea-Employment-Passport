@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka and Laos")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos and Uzbekistan")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -360,6 +360,38 @@ for exact_id in [
 ]:
     require(exact_id in la_exact_ids,f"Laos exact-answer catalog missing {exact_id}")
 
+
+uz_entry=routes["uz-e9-manufacturing-2026"]
+uz_pack=load("docs/data/uz_e9_manufacturing_2026.json")
+uz_exact=load("docs/data/uz_exact_answer_rules_2026.json")
+uz_docs=load("docs/data/uz_document_packs_2026.json")
+uz_readiness=load("docs/data/uz_stage_readiness_2026.json")
+require(uz_entry.get("lifecycle")=="research_hold" and uz_entry.get("publicAvailability")=="preview_only","Uzbekistan registry route must remain preview-only HOLD")
+require(uz_pack.get("lifecycle")=="research_hold" and uz_pack.get("publicAvailability")=="preview_only","Uzbekistan pack must remain preview-only HOLD")
+require(uz_pack.get("safety",{}).get("betaIntakeOpen") is False,"Uzbekistan beta intake must remain closed")
+require(uz_pack.get("safety",{}).get("genericHrdFeeNotCurrentCycle") is True,"Uzbekistan generic HRD fee must not become a cycle-specific exact fee")
+require(uz_pack.get("safety",{}).get("contactSourcesPreservedWithoutSilentReconciliation") is True,"Uzbekistan official contact contexts must not be silently reconciled")
+require(uz_pack.get("officialSendingAgency",{}).get("name")=="MIGRATION AGENCY UNDER THE CABINET OF MINSTERS OF THE REPUBLIC OF UZBEKISTAN (AELM)","Uzbekistan sending agency must remain Migration Agency/AELM")
+require(uz_pack.get("documentPacksFile")=="data/uz_document_packs_2026.json","Uzbekistan pack must link document/contact HOLD packs")
+uz_current=uz_readiness.get("currentCycle",{})
+require(uz_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Uzbekistan 9th registration must remain closed_verified")
+require(uz_current.get("epsTopikSchedule",{}).get("status")=="completed_period_verified","Uzbekistan 9th Round 1 test period must remain verified")
+require(uz_current.get("skillsAndFinalResult",{}).get("status")=="awaiting_verified_current_cycle_result_state","Uzbekistan skills/final-result state must remain unpromoted until verified")
+require(uz_current.get("fee",{}).get("status")=="cycle_specific_unverified","Uzbekistan cycle-specific fee must remain unresolved")
+require(uz_current.get("documents",{}).get("status")=="cycle_specific_checklist_not_reconstructed","Uzbekistan cycle-specific registration checklist must remain HOLD")
+require(uz_readiness.get("betaReadiness",{}).get("status")=="blocked","Uzbekistan beta must remain blocked")
+uz_doc_ids={p.get("id") for p in uz_docs.get("packs",[])}
+require({"uz_9th_registration_documents_hold","uz_official_contact_context"}.issubset(uz_doc_ids),"Uzbekistan document packs must preserve HOLD plus official contact context")
+uz_hold=next((p for p in uz_docs.get("packs",[]) if p.get("id")=="uz_9th_registration_documents_hold"),{})
+require(uz_hold.get("items")==[],"Uzbekistan cycle-specific document HOLD pack must contain no invented checklist items")
+uz_exact_ids={row.get("id") for row in uz_exact.get("answers",[])}
+for exact_id in [
+    "uz_2026_sending_authority","uz_2026_registration_window","uz_2026_test_notice_date",
+    "uz_2026_test_period","uz_2026_point_system","uz_2026_contact_context",
+    "uz_2026_fee_state","uz_2026_skill_structure","uz_2026_final_state","uz_no_job_guarantee"
+]:
+    require(exact_id in uz_exact_ids,f"Uzbekistan exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -368,6 +400,7 @@ thailand=(ROOT/"docs/th.html").read_text(encoding="utf-8")
 bangladesh=(ROOT/"docs/bd.html").read_text(encoding="utf-8")
 srilanka=(ROOT/"docs/lk.html").read_text(encoding="utf-8")
 laos=(ROOT/"docs/la.html").read_text(encoding="utf-8")
+uzbekistan=(ROOT/"docs/uz.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -396,10 +429,14 @@ require("RESEARCH / HOLD" in laos and "2026-09-07" in laos and "2026-09-11" in l
 require("INTENTIONALLY UNRESOLVED" in laos and "PRIOR-ROUND FIREWALL" in laos,"Laos preview must show unresolved current rules and prior-round firewall")
 require("2026-03-10" in laos and "2026-04-20" in laos,"Laos preview must visibly isolate 33rd-round dates")
 require('href="beta.html"' not in laos and 'id="betaForm"' not in laos,"Laos preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in uzbekistan and "2026-03-09" in uzbekistan and "2026-04-22" in uzbekistan,"Uzbekistan preview must visibly remain HOLD with verified registration/test timeline")
+require("OFFICIAL CONTACT CONTEXT" in uzbekistan and "INTENTIONALLY UNRESOLVED" in uzbekistan,"Uzbekistan preview must preserve official contact contexts and unresolved current rules")
+require("US$28" in uzbekistan and "current Uzbekistan exact fee" in uzbekistan,"Uzbekistan preview must label generic US$28 baseline as non-current exact fee")
+require('href="beta.html"' not in uzbekistan and 'id="betaForm"' not in uzbekistan,"Uzbekistan preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold" % (len(routes),len(EXPECTED)))

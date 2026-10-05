@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "routeId": "uz-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "officialSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+  "officialSendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+  "interpretationRule": "Only current Uzbekistan or HRD Korea evidence may populate cycle-specific exact rules. Generic fee/document guidance and unresolved result status remain HOLD.",
+  "currentCycle": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "recruitmentRegistration": {
+      "status": "closed_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "note": "2026-03-09 through 2026-03-12."
+    },
+    "epsTopikSchedule": {
+      "status": "completed_period_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "note": "Announcement 2026-03-23; test 2026-04-06 through 2026-04-22."
+    },
+    "skillsAndFinalResult": {
+      "status": "awaiting_verified_current_cycle_result_state",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en"
+    },
+    "fee": {
+      "status": "cycle_specific_unverified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en"
+    },
+    "documents": {
+      "status": "cycle_specific_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "medicalAndJobApplication": {
+      "status": "research_pending_current_cycle",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_cycle",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "current 9th-round skills/final-result state not verified",
+      "cycle-specific fee/document checklist not reconstructed",
+      "downstream medical/job-file/visa/training/departure exact rules not mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Verified current Uzbekistan 9th-round skills/final-result or downstream notice",
+    "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+    ],
+    "promoteOnlyWhen": [
+      "the source clearly identifies the current Uzbekistan 9th Manufacturing cycle",
+      "cycle-specific facts are not inferred from generic HRD guidance",
+      "official contact differences remain source-scoped"
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Muvofiqlikni tekshirish",
+    "action": "Joriy Oʻzbekiston eʼlonidagi talablarni tekshiring. HRD Korea umumiy EPS talablari faqat tayyorgarlik uchun ishlatiladi."
+  },
+  "registration": {
+    "title": "9-Point System roʻyxatdan oʻtish",
+    "action": "Manufacturing uchun roʻyxatdan oʻtish 2026-03-09 dan 2026-03-12 gacha boʻlgan. Ushbu davr yopilgan."
+  },
+  "exam_fee": {
+    "title": "Ariza / imtihon toʻlovi",
+    "action": "9-bosqich Oʻzbekiston uchun aniq joriy toʻlov KEP tomonidan tasdiqlanmagan. Umumiy HRD Korea US$28 ko‘rsatmasi joriy cycle fee sifatida berilmaydi."
+  },
+  "biometric": {
+    "title": "Shaxsni tasdiqlash",
+    "action": "Faqat joriy Oʻzbekiston ko‘rsatmalaridagi identifikatsiya va firibgarlikka qarshi talablarni bajaring."
+  },
+  "document_verify": {
+    "title": "Ariza hujjatlarini tekshirish",
+    "action": "9-bosqich uchun passport/photo/upload/payment checklist toʻliq tasdiqlanmagan. Boshqa davlat checklistini ko‘chirmang."
+  },
+  "exam_card": {
+    "title": "Imtihon sanasi eʼloni",
+    "action": "HRD Korea 9-bosqich Manufacturing uchun imtihon eʼlon sanasini 2026-03-23 deb ko‘rsatadi."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — 9-Point System",
+    "action": "Manufacturing General CBT Point System imtihon davri 2026-04-06 dan 2026-04-22 gacha bo‘lgan."
+  },
+  "skill_competency": {
+    "title": "Skill Test — 2-bosqich",
+    "action": "Point System umumiy tuzilmasida EPS-TOPIKdan o‘tganlar uchun jismoniy test, suhbat va basic skills mavjud. Oʻzbekiston 9-bosqichining joriy natija/schedule holati alohida tasdiqlanishi kerak."
+  },
+  "final_selection": {
+    "title": "Ball asosidagi yakuniy tanlov",
+    "action": "1-bosqich tugagani yakuniy tanlov tugaganini anglatmaydi. Joriy 9-bosqich final-result manbasi tasdiqlanmaguncha HOLD."
+  },
+  "psychology_pre_job": {
+    "title": "Oʻzbekistonga xos qoʻshimcha tekshiruvlar",
+    "action": "Alohida psychology bosqichi tasdiqlanmagan; Indonesia qoidalari ko‘chirilmaydi."
+  },
+  "mcu1": {
+    "title": "Tibbiy ko‘rik",
+    "action": "Faqat joriy rasmiy Oʻzbekiston medical ko‘rsatmalaridan foydalaning; provider/checklist/fee hali HOLD."
+  },
+  "job_application": {
+    "title": "Ish izlovchi hujjatlar paketi",
+    "action": "Yakuniy tanlovdan keyin faqat joriy Migration Agency / HRD Korea ko‘rsatmalariga amal qiling."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "Faqat rasmiy malakali nomzodlar employer-selection jarayoniga o‘tadi. Vositachi ustuvorlikni kafolatlay olmaydi."
+  },
+  "employer_selection": {
+    "title": "Koreyalik ish beruvchi tanlovi",
+    "action": "Tanlov rasmiy EPS tizimi orqali amalga oshiriladi. Xususiy vositachi aniq ish beruvchini kafolatlay olmaydi."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "Ish beruvchi tanlagandan keyin SLC va keyingi bosqichlar uchun joriy rasmiy ko‘rsatmalardan foydalaning."
+  },
+  "post_slc_requirements": {
+    "title": "SLCdan keyingi Oʻzbekiston talablari",
+    "action": "Medical follow-up, training, visa, to‘lov va jo‘nab ketish uchun faqat joriy rasmiy ko‘rsatmalardan foydalaning."
+  },
+  "visa_docs": {
+    "title": "Viza hujjatlari",
+    "action": "Joriy Migration Agency / Koreya missiyasi checklist va to‘lovlarini tekshiring."
+  },
+  "predeparture_training": {
+    "title": "Joʻnab ketishdan oldingi trening",
+    "action": "Faqat rasmiy tayinlangan pre-departure trainingni yakunlang."
+  },
+  "mcu3_departure": {
+    "title": "Yakuniy sogʻliq / joʻnash tayyorgarligi",
+    "action": "Indonesia uslubidagi MCU-III bosqichi avtomatik qo‘shilmaydi; faqat Oʻzbekiston joriy ko‘rsatmasi talab qilsa bajariladi."
+  },
+  "departure": {
+    "title": "Rasmiy joʻnab ketish",
+    "action": "Contract, visa, training va departure talablari toʻliq yakunlangandan keyingina joʻnang."
+  },
+  "korea_entry_training": {
+    "title": "Koreyaga kirish va mehnat taʼlimi",
+    "action": "Koreyaga kirgach rasmiy employment education va handover jarayonini yakunlang."
+  },
+  "employer_handover": {
+    "title": "Ish beruvchiga topshirish",
+    "action": "Rasmiy handover vaqtida ish joyi, turar joy va favqulodda aloqa maʼlumotlarini tasdiqlang."
+  },
+  "residence_registration": {
+    "title": "Residence Card / chet ellikni roʻyxatdan oʻtkazish",
+    "action": "Koreyaga kelgach amaldagi Immigration qoidalari bo‘yicha ro‘yxatdan o‘ting."
+  },
+  "eps_insurance_check": {
+    "title": "EPS sugʻurtasini tekshirish",
+    "action": "Tegishli EPS sugʻurta majburiyatlarini rasmiy manbadan tekshiring."
+  },
+  "first_payroll_check": {
+    "title": "Birinchi ish haqini tekshirish",
+    "action": "Payslip va bank tushumini SLC, ish soati, ushlanmalar va ish haqi qoidalari bilan solishtiring."
+  },
+  "labor_support_ready": {
+    "title": "Mehnat yordami tayyorligi",
+    "action": "Rasmiy labor-support kanallari va contract/payroll/attendance dalillarini saqlang."
+  },
+  "employment_maintenance": {
+    "title": "Ishni saqlash / ish joyini almashtirish",
+    "action": "Qonuniy sabab bo‘lsa Koreyaning rasmiy EPS yoki employment-center jarayonidan foydalaning."
+  }
+}

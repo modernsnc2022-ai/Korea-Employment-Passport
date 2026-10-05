@@ -1,0 +1,131 @@
+{
+  "version": "1.0.0",
+  "routeId": "uz-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Use current official Uzbekistan/HRD Korea evidence for the 9th Manufacturing Point System. Generic HRD registration guidance may not become a cycle-specific exact fee/document rule.",
+  "answers": [
+    {
+      "id": "uz_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is the official Uzbekistan EPS sending agency?",
+      "answer": "Migration Agency under the Cabinet of Ministers of the Republic of Uzbekistan (AELM).",
+      "writeExactly": "Use the Migration Agency / migration.uz official channel for Uzbekistan EPS sending-side instructions.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the 9th Manufacturing registration period?",
+      "answer": "2026-03-09 through 2026-03-12.",
+      "writeExactly": "9th Uzbekistan Manufacturing registration: 2026-03-09 through 2026-03-12. This window is closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_test_notice_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "When was the official test announcement date?",
+      "answer": "2026-03-23.",
+      "writeExactly": "HRD Korea schedule: test announcement date 2026-03-23.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the Manufacturing test period?",
+      "answer": "2026-04-06 through 2026-04-22.",
+      "writeExactly": "9th Uzbekistan Manufacturing test period: 2026-04-06 through 2026-04-22.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_point_system",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "Is this a Point System route?",
+      "answer": "Yes. HRD Korea identifies it as General CBT with Point System = Y.",
+      "writeExactly": "This is the 9th Uzbekistan Manufacturing Point System route.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_contact_context",
+      "stages": [
+        "registration"
+      ],
+      "question": "Why are two official Uzbekistan contact listings preserved?",
+      "answer": "The current general HRD information-office listing and the 9th-cycle schedule page show different contact details.",
+      "writeExactly": "Use each contact in its source context and recheck before visiting; KEP does not silently merge conflicting official contact listings.",
+      "verificationStatus": "verified_cross_source_context",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_fee_state",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What is the exact 9th-round fee?",
+      "answer": "KEP has not verified a cycle-specific Uzbekistan 9th-round fee.",
+      "writeExactly": "Do not quote the generic HRD US$28 visiting-registration baseline as the exact Uzbekistan 9th-round fee.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_skill_structure",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What is the generic Point System Round 2 structure?",
+      "answer": "Skills test: physical fitness, interview and basic skills; Job Capacity Assessment can add points.",
+      "writeExactly": "Use this as HRD Korea's generic Point System structure only; current Uzbekistan candidate/result dates need current-cycle evidence.",
+      "verificationStatus": "generic_hrd_point_system_structure",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_final_state",
+      "stages": [
+        "final_selection"
+      ],
+      "question": "Is the current 9th-round final-result state promoted in KEP?",
+      "answer": "No.",
+      "writeExactly": "Do not infer final selection from Round 1 completion; wait for a verified current-cycle final-result source.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does test success guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}
