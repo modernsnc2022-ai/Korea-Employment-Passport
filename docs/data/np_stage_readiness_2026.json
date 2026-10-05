@@ -108,6 +108,9 @@
   "processBaseline": {
     "status": "verified_workflow_shape_only",
     "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
-    "note": "Stable Nepal EPS workflow shape is verified for biometric, medical/police, employment application, roster, automated matching, SLC, PDOT, CCVI/visa and departure. This does not promote current 2026 first-phase cohort dates/providers/volatile fees."
+    "note": "Stable Nepal EPS workflow shape is verified for biometric, medical/police, employment application, roster, automated matching, SLC, PDOT, CCVI/visa and departure. This does not promote current 2026 first-phase cohort dates/providers/volatile fees.",
+    "workflowShapeVerifiedAt": "2026-10-05",
+    "currentCohortPromotionRule": "A stable process-baseline fact may explain workflow shape, but exact current-cohort dates, providers, fees or submission requirements stay blocked until a current official cohort notice is reviewed.",
+    "feeRule": "Historical baseline amounts may be retained for lineage only; they must not be displayed as current payable amounts when later official fee notices exist."
   }
 }
