@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Kiểm tra điều kiện",
+    "action": "Đối chiếu toàn bộ điều kiện tham gia EPS năm 2026 theo thông báo chính thức của COLAB."
+  },
+  "registration": {
+    "title": "Đăng ký dự thi trực tiếp",
+    "action": "Người lao động phải trực tiếp đăng ký tại điểm tiếp nhận chính thức; không đăng ký hộ."
+  },
+  "exam_fee": {
+    "title": "Lệ phí EPS-TOPIK",
+    "action": "Lệ phí đăng ký dự thi năm 2026 là số tiền Việt Nam tương đương 28 USD và chỉ nộp theo quy trình chính thức."
+  },
+  "biometric": {
+    "title": "Xác minh danh tính / chống gian lận",
+    "action": "Mang Căn cước gắn chip theo yêu cầu để quét và đối chiếu danh tính."
+  },
+  "document_verify": {
+    "title": "Kiểm tra hồ sơ đăng ký",
+    "action": "Đối chiếu thông tin Căn cước, đơn đăng ký và ảnh trước khi nộp; không giả định có thể sửa thông tin cá nhân sau đó."
+  },
+  "exam_card": {
+    "title": "Lịch thi / chuẩn bị dự thi",
+    "action": "Theo dõi thông báo chính thức của COLAB về ca thi, địa điểm thi và giấy tờ phải mang theo."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Vòng 1",
+    "action": "Thi tiếng Hàn trên máy tính và kiểm tra sắc giác theo kế hoạch chính thức năm 2026."
+  },
+  "skill_competency": {
+    "title": "Kiểm tra tay nghề — Vòng 2",
+    "action": "Người đạt Vòng 1 được tự động đăng ký Vòng 2 bắt buộc; chờ lịch chính thức do COLAB công bố."
+  },
+  "final_selection": {
+    "title": "Kết quả tuyển chọn theo hệ thống điểm",
+    "action": "Chỉ người đạt yêu cầu qua cả hai vòng mới đủ điều kiện nộp hồ sơ đăng ký dự tuyển; kết quả thi không bảo đảm được doanh nghiệp lựa chọn."
+  },
+  "psychology_pre_job": {
+    "title": "Kiểm tra bổ sung theo Việt Nam",
+    "action": "Chưa xác nhận một bước kiểm tra tâm lý riêng cho Việt Nam; không sao chép quy định của Indonesia."
+  },
+  "mcu1": {
+    "title": "Khám sức khỏe",
+    "action": "Chỉ sử dụng thông báo hiện hành của COLAB về cơ sở và yêu cầu khám sức khỏe cho đúng đợt."
+  },
+  "job_application": {
+    "title": "Hồ sơ đăng ký dự tuyển",
+    "action": "Sau khi đạt hai vòng, hoàn thiện hồ sơ theo biểu mẫu và thông báo hiện hành của COLAB."
+  },
+  "roster": {
+    "title": "Hồ sơ chờ giới thiệu",
+    "action": "Theo dõi hồ sơ qua kênh chính thức; không có dịch vụ tư nhân nào bảo đảm ưu tiên hồ sơ."
+  },
+  "employer_selection": {
+    "title": "Doanh nghiệp Hàn Quốc lựa chọn",
+    "action": "Chờ doanh nghiệp lựa chọn qua hệ thống EPS; môi giới tư nhân không thể bảo đảm được lựa chọn."
+  },
+  "slc": {
+    "title": "Hợp đồng lao động tiêu chuẩn",
+    "action": "Khi được lựa chọn, kiểm tra hợp đồng và làm các bước tiếp theo theo thông báo chính thức của COLAB."
+  },
+  "post_slc_requirements": {
+    "title": "Yêu cầu sau hợp đồng",
+    "action": "Thực hiện đúng thông báo hiện hành về đào tạo, sức khỏe, giấy tờ, chi phí và chuẩn bị xuất cảnh."
+  },
+  "visa_docs": {
+    "title": "Hồ sơ visa",
+    "action": "Dùng thông báo và biểu mẫu visa hiện hành của COLAB; chưa sử dụng checklist/chi phí cũ làm quy tắc 2026."
+  },
+  "predeparture_training": {
+    "title": "Đào tạo định hướng trước xuất cảnh",
+    "action": "Tham gia đúng khóa đào tạo do COLAB thông báo cho nhóm của bạn."
+  },
+  "mcu3_departure": {
+    "title": "Kiểm tra sức khỏe trước xuất cảnh",
+    "action": "Thực hiện yêu cầu sức khỏe cuối cùng theo đúng thông báo xuất cảnh hiện hành."
+  },
+  "departure": {
+    "title": "Xuất cảnh chính thức",
+    "action": "Chỉ xuất cảnh theo kế hoạch chính thức của COLAB sau khi hoàn thành các thủ tục bắt buộc."
+  },
+  "korea_entry_training": {
+    "title": "Nhập cảnh Hàn Quốc và giáo dục việc làm",
+    "action": "Sau khi nhập cảnh, hoàn thành giáo dục việc làm và quy trình bàn giao chính thức tại Hàn Quốc."
+  },
+  "employer_handover": {
+    "title": "Bàn giao cho doanh nghiệp",
+    "action": "Xác nhận nơi làm việc, chỗ ở và liên hệ khẩn cấp khi bàn giao chính thức."
+  },
+  "residence_registration": {
+    "title": "Đăng ký cư trú / Residence Card",
+    "action": "Thực hiện thủ tục đăng ký người nước ngoài theo quy định hiện hành của Cơ quan Xuất nhập cảnh Hàn Quốc."
+  },
+  "eps_insurance_check": {
+    "title": "Kiểm tra bảo hiểm EPS",
+    "action": "Xác nhận các nghĩa vụ bảo hiểm EPS qua thông tin chính thức."
+  },
+  "first_payroll_check": {
+    "title": "Kiểm tra lương tháng đầu",
+    "action": "Đối chiếu phiếu lương, tiền vào tài khoản, giờ làm và khoản khấu trừ với hợp đồng và quy định áp dụng."
+  },
+  "labor_support_ready": {
+    "title": "Chuẩn bị kênh hỗ trợ lao động",
+    "action": "Lưu kênh hỗ trợ chính thức và bằng chứng hợp đồng, lương, chấm công."
+  },
+  "employment_maintenance": {
+    "title": "Duy trì việc làm / đổi nơi làm việc",
+    "action": "Nếu có lý do hợp pháp để đổi nơi làm việc, sử dụng quy trình chính thức của EPS hoặc Trung tâm việc làm Hàn Quốc."
+  }
+}
