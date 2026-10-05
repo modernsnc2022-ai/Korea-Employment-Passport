@@ -48,6 +48,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_exact_answer_rules_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_document_packs_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_registration_notices_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/np_eps_process_baseline_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
