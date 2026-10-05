@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "routeId": "tj-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "tj_2026_manufacturing_registration",
+      "title": "Tajikistan 2026 Manufacturing Registration",
+      "appliesTo": [
+        "eligibility",
+        "registration",
+        "exam_fee",
+        "document_verify"
+      ],
+      "status": "verified_current_local",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "items": [
+        {
+          "id": "tj_phone",
+          "label": "Phone number",
+          "required": true,
+          "rule": "Official notice requires a phone number."
+        },
+        {
+          "id": "tj_passport",
+          "label": "Electronic foreign passport copy",
+          "required": true,
+          "rule": "Identity data must match the foreign passport and be entered correctly in Latin letters."
+        },
+        {
+          "id": "tj_photo",
+          "label": "Electronic color photo 3.5×4.5 cm",
+          "required": true,
+          "rule": "White background, per official notice."
+        },
+        {
+          "id": "tj_fee",
+          "label": "Exam fee: 330 somoni",
+          "required": true,
+          "rule": "Official 2026 Manufacturing notice."
+        }
+      ]
+    }
+  ]
+}
