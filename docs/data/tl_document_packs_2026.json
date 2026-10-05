@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "routeId": "tl-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "tl_9th_registration_documents_hold",
+      "title": "Timor-Leste 9th Manufacturing — Registration Checklist HOLD",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "cycle_specific_exact_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "warning": "Do not substitute Fishery, Baucau discovery or another country's document specs.",
+      "items": []
+    },
+    {
+      "id": "tl_official_contact",
+      "title": "Timor-Leste official EPS contact",
+      "appliesTo": [
+        "registration"
+      ],
+      "status": "verified_hrd_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "items": [
+        {
+          "id": "tl_ndoe_office",
+          "label": "NDOE information office",
+          "required": false,
+          "rule": "Becora, Cristo Rei, Dili, Timor-Leste; 7767-4602."
+        }
+      ]
+    }
+  ]
+}
