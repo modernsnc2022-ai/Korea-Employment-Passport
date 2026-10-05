@@ -18,7 +18,9 @@
       "question": "When was the 2026 first-phase EPS-TOPIK application window?",
       "answer": "July 27 through August 2, 2026.",
       "writeExactly": "The verified 2026 first-phase application window was 2026-07-27 through 2026-08-02. That window is closed; do not pay a broker to submit a late application.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_application_portal",
@@ -28,7 +30,9 @@
       "question": "Where is the official Nepal EPS application submitted?",
       "answer": "https://eoers.epsnepal.gov.np/",
       "writeExactly": "Submit only through the official EPS Nepal online application portal named in the notice: https://eoers.epsnepal.gov.np/.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_exam_fee",
@@ -39,7 +43,9 @@
       "question": "What was the official EPS-TOPIK application fee for this notice?",
       "answer": "US$28, paid online in Nepalese rupees using the Nepal Rastra Bank exchange rate applicable on the application date.",
       "writeExactly": "Official exam fee: US$28 equivalent in NPR, calculated using the Nepal Rastra Bank exchange rate for the application date and paid online through the application flow.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_age_rule",
@@ -49,7 +55,9 @@
       "question": "What age range applies?",
       "answer": "18 to 39 years old; the notice states eligible birth dates from July 28, 1986 through July 27, 2008.",
       "writeExactly": "Applicant must be at least 18 and not over 39 under this notice: birth date 1986-07-28 through 2008-07-27.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_citizenship",
@@ -59,7 +67,9 @@
       "question": "Must the applicant be a Nepali citizen?",
       "answer": "Yes.",
       "writeExactly": "Applicant must be a Nepali citizen.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_criminal_rule",
@@ -69,7 +79,9 @@
       "question": "What criminal-record condition is stated?",
       "answer": "The applicant must not have been sentenced by a court for a criminal offense.",
       "writeExactly": "Do not treat the applicant as eligible if they have a court sentence for a criminal offense under the notice's eligibility rule.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_korea_deportation_rule",
@@ -79,7 +91,9 @@
       "question": "What Korea illegal-stay/deportation condition is stated?",
       "answer": "The applicant must not have been sent back from Korea after illegally residing there.",
       "writeExactly": "Applicant must not have a history of being returned/deported from Korea for illegal residence.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_nepal_travel_ban_rule",
@@ -89,7 +103,9 @@
       "question": "Can someone barred by the Nepal government from foreign travel apply?",
       "answer": "No.",
       "writeExactly": "Applicant must not be subject to a Nepal government restriction preventing foreign travel.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_e9_e10_stay_limit",
@@ -99,7 +115,9 @@
       "question": "What prior Korea E-9/E-10 stay limit applies?",
       "answer": "The applicant must not have stayed in Korea for 5 years or more in total under E-9 or E-10 status.",
       "writeExactly": "Total prior stay in Korea under E-9 or E-10 must be less than 5 years.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_color_vision_rule",
@@ -109,7 +127,9 @@
       "question": "What color-vision condition is stated?",
       "answer": "Applicants with color blindness or color weakness are not eligible under this notice.",
       "writeExactly": "Color blindness or color weakness fails the stated eligibility condition for this notice.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_sector_choice_lock",
@@ -120,7 +140,9 @@
       "question": "Can an applicant apply to more than one sector or change sector after first-stage selection?",
       "answer": "No. One applicant may apply to only one sector, and the selected sector cannot be changed after passing the first-stage language test.",
       "writeExactly": "Choose one sector only. After first-stage language-test selection, the sector cannot be changed.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_manufacturing_quota",
@@ -131,7 +153,9 @@
       "question": "What is the estimated Manufacturing selection count?",
       "answer": "5,000.",
       "writeExactly": "Estimated Manufacturing selection count under the 2026 first-phase notice: 5,000.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_total_quota",
@@ -142,7 +166,9 @@
       "question": "What is the total estimated selection count across listed sectors?",
       "answer": "7,200.",
       "writeExactly": "Estimated total across Manufacturing, Agriculture & Livestock, Service I and Forestry: 7,200.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_passport_scan",
@@ -153,7 +179,9 @@
       "question": "What passport image is required for online application?",
       "answer": "A scanned JPG image of the passport page containing the applicant photo; width 600 pixels and file size under 89 KB.",
       "writeExactly": "Upload the passport photo-page scan as JPG, width 600 px, under 89 KB.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_contact_required",
@@ -164,7 +192,9 @@
       "question": "Are email and mobile number required?",
       "answer": "Yes. The notice requires the applicant's own email address and mobile number to be entered.",
       "writeExactly": "Enter the applicant's own active email address and mobile number.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_photo_rule",
@@ -175,7 +205,9 @@
       "question": "What photo specification is required?",
       "answer": "Recent color photo taken within 6 months, 3.5 × 4.5 cm, white background, no white clothing, both ears clearly visible; JPG width 100–300 pixels and 8–14 KB.",
       "writeExactly": "Use a recent color photo (within 6 months), 3.5×4.5 cm, white background, no white clothing, both ears visible; JPG 100–300 px wide, 8–14 KB.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_identity_match",
@@ -186,7 +218,9 @@
       "question": "Can name, date of birth, sex or photo differ from the passport and be corrected later?",
       "answer": "No. The notice warns that differing personal details may exclude the applicant from the test and those details cannot be corrected after registration.",
       "writeExactly": "Before submission, make name, date of birth, sex and photo match the passport. Do not assume these fields can be corrected after registration.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_test_location",
@@ -197,7 +231,9 @@
       "question": "Where is the UBT conducted?",
       "answer": "At the UBT building in Bhaisepati, Lalitpur.",
       "writeExactly": "Verified test venue basis: UBT building, Bhaisepati, Lalitpur. Follow the individual schedule/admission notice for the exact session.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_test_format",
@@ -207,7 +243,9 @@
       "question": "What is the EPS-TOPIK first-stage test format?",
       "answer": "Reading: 20 questions, 50 points, 25 minutes. Listening: 20 questions, 50 points, 25 minutes. Total: 40 questions, 100 points, 50 minutes.",
       "writeExactly": "Reading 20 questions / 50 points / 25 min + Listening 20 questions / 50 points / 25 min = 40 questions / 100 points / 50 min.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_exam_day_documents",
@@ -218,7 +256,9 @@
       "question": "What must the applicant bring on test day?",
       "answer": "The same original passport whose copy was submitted with the application, plus the test application slip.",
       "writeExactly": "Bring the same original passport used for the application and the test application slip. The notice says applicants without those originals/documents are not admitted.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_result_validity",
@@ -228,7 +268,9 @@
       "question": "How long is the final successful-candidate result valid?",
       "answer": "2 years from the date the final successful-candidate result is published.",
       "writeExactly": "Final successful-candidate result validity: 2 years from publication of the final result.",
-      "verificationStatus": "verified_official_pdf"
+      "verificationStatus": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "verifiedAt": "2026-10-05"
     },
     {
       "id": "np_2026_private_intermediary",
@@ -240,7 +282,9 @@
       "question": "Should an applicant use a private intermediary for the EPS application?",
       "answer": "No private intermediary is required. The notice directs applicants to the official EPS Nepal online portal.",
       "writeExactly": "Use the official EPS Nepal portal directly. KEP does not treat a private broker, training institute or intermediary as an official submission channel.",
-      "verificationStatus": "derived_from_official_submission_channel"
+      "verificationStatus": "derived_from_official_submission_channel",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
+      "verifiedAt": "2026-10-05"
     }
   ]
 }
