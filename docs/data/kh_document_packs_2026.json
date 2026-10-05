@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "routeId": "kh-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "kh_manufacturing_registration_documents_hold",
+      "title": "Cambodia Manufacturing — Current Checklist HOLD",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "direct_official_manufacturing_checklist_not_captured",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "warning": "Do not substitute Agriculture, Special or another country's document rules.",
+      "items": []
+    },
+    {
+      "id": "kh_official_contact_context",
+      "title": "Cambodia official EPS contact",
+      "appliesTo": [
+        "registration",
+        "exam_card"
+      ],
+      "status": "verified_hrd_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "items": [
+        {
+          "id": "kh_info_office",
+          "label": "MTOSB information office",
+          "required": false,
+          "rule": "Phum Prey Popel, SK. Somrong Krom, Khan Po Sen Chey, Phnom Penh; +855-23-822-734."
+        },
+        {
+          "id": "kh_test_center",
+          "label": "HRD Korea Cambodia test-center listing",
+          "required": false,
+          "rule": "National Polytechnic Institute of Cambodia campus entries are listed by HRD Korea; recheck the current cycle assignment before travel."
+        }
+      ]
+    }
+  ]
+}

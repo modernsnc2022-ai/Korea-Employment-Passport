@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "country": "KH",
+  "cycle": 2026,
+  "sector": "agriculture_livestock",
+  "excludedFromManufacturing": true,
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=5&examYear=2026&lang=ko&lcnsId=001",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "title": "The 11st recruitment of the point system in Cambodia(Agriculture and Livestock)",
+    "registrationPeriod": "2026-01-21 through 2026-01-24",
+    "testAnnouncementDate": "2026-02-13",
+    "testPeriod": "2026-02-23 through 2026-03-19",
+    "pointSystem": true
+  },
+  "warning": "These official dates belong to Agriculture and Livestock and must never populate Manufacturing."
+}

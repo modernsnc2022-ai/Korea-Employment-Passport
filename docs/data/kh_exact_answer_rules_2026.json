@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "routeId": "kh-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Only direct official Cambodia Manufacturing evidence may become exact. Official country-level result artifacts require cycle/sector linkage; Agriculture, Special and non-official discovery dates must not auto-populate Manufacturing.",
+  "answers": [
+    {
+      "id": "kh_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is Cambodia's official EPS sending agency?",
+      "answer": "Manpower Training and Overseas Sending Board (MTOSB).",
+      "writeExactly": "Use MTOSB / mtosb.gov.kh as Cambodia's official sending-side channel.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_reception_office",
+      "stages": [
+        "registration"
+      ],
+      "question": "What current Cambodia EPS information office does HRD Korea list?",
+      "answer": "Phum Prey Popel, SK. Somrong Krom, Khan Po Sen Chey, Phnom Penh; +855-23-822-734.",
+      "writeExactly": "Recheck the HRD Korea information-office listing before an in-person visit.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_skills_candidate_artifact",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What official Cambodia General CBT skills-candidate artifact is published?",
+      "answer": "Cambodia the 2th Test of proficiency in Korean Announcement, published 2026-08-06.",
+      "writeExactly": "Official country-level artifact exists; do not call it the Manufacturing Round 2 list until exact cycle/sector linkage is verified.",
+      "verificationStatus": "official_artifact_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_point_result_artifact",
+      "stages": [
+        "final_selection"
+      ],
+      "question": "What official Cambodia Point System result artifact is published?",
+      "answer": "Cambodia the 2th POINT_EXAM Announcement, General CBT, published 2026-08-21.",
+      "writeExactly": "Preserve the official result artifact, but do not auto-link it to Manufacturing without cycle/sector proof.",
+      "verificationStatus": "official_artifact_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_manufacturing_schedule_state",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Are the 2026 Manufacturing registration/test dates exact in KEP?",
+      "answer": "No. A discovery source suggests a 12th Manufacturing cycle, but the direct official schedule artifact has not been captured.",
+      "writeExactly": "Do not publish discovery-only Manufacturing dates as exact official rules.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_agriculture_firewall",
+      "stages": [
+        "registration",
+        "eps_topik"
+      ],
+      "question": "Can the official 11th Agriculture and Livestock dates be used for Manufacturing?",
+      "answer": "No.",
+      "writeExactly": "The official 11th Agriculture and Livestock schedule is other-sector evidence only.",
+      "verificationStatus": "verified_other_sector_exclusion",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=5&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_special_firewall",
+      "stages": [
+        "registration",
+        "eps_topik"
+      ],
+      "question": "Can Cambodia Special CBT facts populate Manufacturing?",
+      "answer": "No.",
+      "writeExactly": "Special EPS-TOPIK remains a separate route from Regular Manufacturing.",
+      "verificationStatus": "verified_special_route_exclusion",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does passing tests guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

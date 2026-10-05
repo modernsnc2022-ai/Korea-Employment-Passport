@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "routeId": "kh-e9-manufacturing-2026",
+  "status": "discovery_only_not_exact",
+  "sourceUrl": "https://www.leeubt.cloud/",
+  "reviewedAt": "2026-10-06",
+  "discoveredClaim": {
+    "title": "The 12th recruitment of the point system in Cambodia(Manufacturing)",
+    "registrationPeriod": "2026-05-22 through 2026-05-25",
+    "testStart": "2026-06-22",
+    "listedResultDate": "2026-08-06"
+  },
+  "rule": "This non-official mirror is used only to discover the likely current Manufacturing cycle. None of these dates may become exact KEP rules until matched to a direct official HRD Korea or MTOSB Manufacturing artifact."
+}

@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "routeId": "kh-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "currentManufacturing": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "officialRegistrationAndTestSchedule": {
+      "status": "direct_schedule_artifact_not_captured",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+    },
+    "discoverySchedule": {
+      "status": "discovery_only_not_promoted",
+      "evidenceFile": "data/kh_manufacturing_discovery_2026.json"
+    },
+    "skillsCandidateArtifact": {
+      "status": "official_country_artifact_cycle_sector_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "note": "Publication 2026-08-06."
+    },
+    "finalPointResultArtifact": {
+      "status": "official_country_artifact_cycle_sector_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "note": "Publication 2026-08-21."
+    },
+    "fee": {
+      "status": "manufacturing_cycle_specific_unverified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "documents": {
+      "status": "manufacturing_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "downstream": {
+      "status": "research_pending_current_manufacturing",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "otherSector": {
+    "status": "separate_verified_agriculture",
+    "evidenceFile": "data/kh_other_sector_evidence_2026.json",
+    "mustNotPopulateManufacturing": true
+  },
+  "specialRoute": {
+    "status": "separate_official_result_artifact",
+    "evidenceFile": "data/kh_special_eps_topik_2026.json",
+    "mustNotPopulateManufacturing": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "direct official Manufacturing schedule detail not captured",
+      "official 2026-08-06/08-21 artifacts not yet linked by cycle/sector proof",
+      "Manufacturing fee/document/downstream exact rules not mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Capture direct official Cambodia Manufacturing schedule/result linkage",
+    "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+    ],
+    "promoteOnlyWhen": [
+      "the artifact explicitly identifies Manufacturing/current cycle",
+      "Agriculture and Special facts are not reused",
+      "non-official discovery dates are never promoted without official match"
+    ]
+  }
+}
