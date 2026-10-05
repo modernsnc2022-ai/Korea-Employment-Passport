@@ -4,6 +4,7 @@
 |---|---|---|---|---|
 | 2026-10-02 | Indonesia EPS Center / HRD Korea | Official EPS center | Email requesting beta recruitment channels and process feedback | Sent |
 | 2026-10-02 | Inkomunitas | Indonesian community | Email requesting beta volunteer publication | Sent |
+| 2026-10-05 | Inkomunitas — Forum Bebas | Indonesian WNI community in Korea | Published KEP beta-tester recruitment post after account login; post uses `beta.html?src=inkomunitas` | **Posted — https://www.inkomunitas.com/bbs/board.php?bo_table=forum_bebas&wr_id=36** |
 | 2026-10-02 | KMI Korea | Indonesian worker/community network | Email requesting E-9 worker recruitment help | Sent |
 | 2026-10-02 | IKMI Korea | Indonesian community in Korea | Email requesting beta volunteer recruitment | Bounced — legacy email route invalid; retired |
 | 2026-10-03 | IKMI Korea / Masjid Indonesia Seoul | Indonesian community in Korea | Replacement channel verified: official website `https://ikmikorea.org/` exposes a current WhatsApp admin contact button; use admin-permission outreach there, not the bounced email | Ready for manual/admin-approved contact |
@@ -32,9 +33,10 @@
 | 2026-10-05 | EPS-TOPIK & G to G Korea Update (@eps_indo) — `Promo dan Jual Beli` | Telegram public discussion group | Joined group, completed the group's human-verification flow, sent a short posting-intent message, then published the full KEP beta-tester recruitment post with `beta.html?src=telegram_eps_indo`. | **Posted — visible in group and screenshot-confirmed in the user session; no message permalink captured yet** |
 
 Current public-post status:
-- Confirmed public community recruitment posts: **1**
+- Confirmed public community recruitment posts: **2**
 - Admin/repost outreach: multiple channels sent as logged above
 - Telegram `@eps_indo` / `Promo dan Jual Beli`: **posted successfully on 2026-10-05 after group join + human verification**; post is visible in-group and uses `src=telegram_eps_indo`; no direct message permalink captured yet
+- Inkomunitas / `Forum Bebas`: **posted successfully on 2026-10-05**; permalink: `https://www.inkomunitas.com/bbs/board.php?bo_table=forum_bebas&wr_id=36`; uses `src=inkomunitas`
 
 Target groups for admin-approved posting:
 - EPS-TOPIK & G to G Korea Update Telegram
