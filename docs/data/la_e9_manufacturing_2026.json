@@ -287,5 +287,6 @@
   ],
   "exactAnswerRulesFile": "data/la_exact_answer_rules_2026.json",
   "stageReadinessFile": "data/la_stage_readiness_2026.json",
-  "priorRoundEvidenceFile": "data/la_prior_round_evidence_2026.json"
+  "priorRoundEvidenceFile": "data/la_prior_round_evidence_2026.json",
+  "documentPacksFile": "data/la_document_packs_2026.json"
 }
