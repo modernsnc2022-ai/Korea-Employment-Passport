@@ -46,5 +46,16 @@
       "the actual instructions are reviewed before KEP exposes field-level submission guidance",
       "the 2026-10-26 through 2026-10-30 window remains unchanged or any official change is explicitly recorded"
     ]
+  },
+  "specialRoute": {
+    "status": "separate_verified_route",
+    "evidenceFile": "data/lk_special_eps_topik_2026.json",
+    "mustNotPopulateCurrentPointSystem": true
+  },
+  "priorCycle10th": {
+    "status": "completed_prior_cycle",
+    "sourceUrl": "https://www.slbfe.lk/slbfe-recruitment-co/recruitment-korea/",
+    "use": "workflow_history_only",
+    "mustNotPopulateCurrentSeptember2026Rules": true
   }
 }
