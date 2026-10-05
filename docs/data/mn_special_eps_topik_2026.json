@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "country": "MN",
+  "cycle": 2026,
+  "routeType": "special_eps_topik",
+  "excludedFromRegularCountryPack": true,
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=013&examNot=40&examYear=2026&lang=ko&lcnsId=001",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "registrationPeriod": "2026-04-20 through 2026-04-22",
+    "testAnnouncementDate": "2026-05-22",
+    "testDate": "2026-05-26",
+    "finalResultDate": "2026-06-16",
+    "pointSystem": false
+  },
+  "warning": "These dates are for Mongolia Special EPS-TOPIK only and must never populate Regular 11th Manufacturing."
+}
