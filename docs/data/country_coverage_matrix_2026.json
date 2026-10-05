@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "scope": "EPS sending countries listed by HRD Korea; Manufacturing E-9 Country Pack coverage",
+  "officialSendingCountrySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+  "policy": [
+    "A country is marked country_pack_registered only when a Manufacturing-oriented route object exists in country_packs_v1.json.",
+    "A pending country must not be given a Manufacturing Country Pack merely because a country-level Point System exists.",
+    "Sectorless or other-sector schedules cannot auto-populate Manufacturing facts.",
+    "Pending coverage is preferable to invented Manufacturing rules."
+  ],
+  "countries": [
+    {
+      "country": "ID",
+      "countryName": "Indonesia",
+      "status": "country_pack_registered",
+      "routeId": "id-e9-manufacturing-2026"
+    },
+    {
+      "country": "NP",
+      "countryName": "Nepal",
+      "status": "country_pack_registered",
+      "routeId": "np-e9-manufacturing-2026"
+    },
+    {
+      "country": "VN",
+      "countryName": "Vietnam",
+      "status": "country_pack_registered",
+      "routeId": "vn-e9-manufacturing-2026"
+    },
+    {
+      "country": "PH",
+      "countryName": "Philippines",
+      "status": "country_pack_registered",
+      "routeId": "ph-e9-manufacturing-2026"
+    },
+    {
+      "country": "TH",
+      "countryName": "Thailand",
+      "status": "country_pack_registered",
+      "routeId": "th-e9-manufacturing-2026"
+    },
+    {
+      "country": "BD",
+      "countryName": "Bangladesh",
+      "status": "country_pack_registered",
+      "routeId": "bd-e9-manufacturing-2026"
+    },
+    {
+      "country": "LK",
+      "countryName": "Sri Lanka",
+      "status": "country_pack_registered",
+      "routeId": "lk-e9-manufacturing-2026"
+    },
+    {
+      "country": "LA",
+      "countryName": "Laos",
+      "status": "country_pack_registered",
+      "routeId": "la-e9-manufacturing-2026"
+    },
+    {
+      "country": "UZ",
+      "countryName": "Uzbekistan",
+      "status": "country_pack_registered",
+      "routeId": "uz-e9-manufacturing-2026"
+    },
+    {
+      "country": "MN",
+      "countryName": "Mongolia",
+      "status": "country_pack_registered",
+      "routeId": "mn-e9-manufacturing-2026"
+    },
+    {
+      "country": "CN",
+      "countryName": "China",
+      "status": "country_pack_registered",
+      "routeId": "cn-e9-manufacturing-2026"
+    },
+    {
+      "country": "KH",
+      "countryName": "Cambodia",
+      "status": "country_pack_registered",
+      "routeId": "kh-e9-manufacturing-2026"
+    },
+    {
+      "country": "TL",
+      "countryName": "Timor-Leste",
+      "status": "country_pack_registered",
+      "routeId": "tl-e9-manufacturing-2026"
+    },
+    {
+      "country": "PK",
+      "countryName": "Pakistan",
+      "status": "country_pack_registered",
+      "routeId": "pk-e9-manufacturing-2026"
+    },
+    {
+      "country": "KG",
+      "countryName": "Kyrgyzstan",
+      "status": "pending_manufacturing_verification",
+      "officialSendingAgency": "The Center for employment of Citizens Abroad (CEC)",
+      "evidence": {
+        "sendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+        "verified2026CountryRoundSources": [
+          "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=8&examYear=2026&lang=ko&lcnsId=001",
+          "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=7&examYear=2026&lang=ko&lcnsId=001"
+        ],
+        "note": "Direct official 2026 Point System city pages exist for Bishkek and Osh, but the verified titles are sectorless. Manufacturing linkage is not promoted."
+      },
+      "blockers": [
+        "no direct official 2026 Manufacturing-labelled schedule artifact captured",
+        "sector linkage from country-level Point System to Manufacturing is not verified"
+      ]
+    },
+    {
+      "country": "MM",
+      "countryName": "Myanmar",
+      "status": "pending_manufacturing_verification",
+      "officialSendingAgency": "Public Overseas Employment Agency (POEA)",
+      "evidence": {
+        "sendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+        "scheduleIndex": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+        "note": "2026 Myanmar Point System activity is present in public schedule discovery for Agriculture/Livestock, Construction and Forestry. KEP has not captured a direct official Manufacturing-labelled 2026 artifact."
+      },
+      "blockers": [
+        "current Manufacturing-labelled 2026 route not verified",
+        "other-sector schedules must not be reused for Manufacturing"
+      ]
+    },
+    {
+      "country": "TJ",
+      "countryName": "Tajikistan",
+      "status": "pending_manufacturing_verification",
+      "officialSendingAgency": "Agency of Overseas Employment",
+      "evidence": {
+        "sendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+        "verified2026CountryRoundSource": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+        "note": "HRD Korea directly verifies the 2nd 2026 Tajikistan Point System, but the title is sectorless. Manufacturing linkage is not promoted."
+      },
+      "blockers": [
+        "sector linkage from the verified 2nd Point System to Manufacturing is not verified",
+        "Manufacturing-specific documents/fees/downstream rules are not mapped"
+      ]
+    }
+  ],
+  "summary": {
+    "listedSendingCountries": 17,
+    "registeredManufacturingCountryPacks": 14,
+    "pendingManufacturingVerification": 3
+  }
+}
