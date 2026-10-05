@@ -107,3 +107,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Masjid Nurul Hidayah Anseong — WhatsApp probe | Indonesian KMI mosque/community in Anseong | Tested published number +82 10-6464-4091 in WhatsApp | **Invalid — no WhatsApp search result; retire direct-number route and do not retry** |
 
 | 2026-10-05 | Hwaseong Hangnam Masjid — WhatsApp | Indonesian mosque/community in Hyangnam-eup, Hwaseong | Verified +82 10-8193-0990 is active on WhatsApp and sent the KEP E-9 worker-validator recruitment request; explanatory message and `src=hwaseong_hangnam_masjid` beta link were sent separately | **Sent — awaiting reply** |
+
+| 2026-10-05 | Alba Mart Gimhae / Masjid Al-Barokah — Instagram DM | Indonesian business/mosque/community hub in Gimhae | Sent a KEP E-9 worker-validator outreach DM to `@albamart_gimhae`, asking whether the account is still connected to local Indonesian workers / PMI paguyuban and whether it can share or introduce the beta; source `alba_mart_gimhae` reserved for any subsequent beta link | **Sent — awaiting reply; beta link not yet sent pending response** |
