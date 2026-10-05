@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Eligibility check",
+    "action": "For Point System Round 18, verify age 18–39 (DOB 1986-07-03 through 2008-07-02), health/communicable-disease fitness, no color blindness, legal/criminal/travel conditions, no Korea deportation/refusal/illegal-law history, no drug history, and total prior E-9/E-10 stay under 5 years."
+  },
+  "registration": {
+    "title": "Official online registration",
+    "action": "Round 18 registration was accepted online through the official TOEA channel from 2026-07-02 through 2026-07-06. The window is closed."
+  },
+  "exam_fee": {
+    "title": "EPS-TOPIK / Point System fee",
+    "action": "Official Round 18 application fee: 960 THB, payable through the designated Krungthai Bank payment channel within the official window."
+  },
+  "biometric": {
+    "title": "Identity / anti-fraud verification",
+    "action": "Follow the identity-verification requirements in the assigned Round 18 test notice. KEP does not infer extra biometric rules beyond the current official instructions."
+  },
+  "document_verify": {
+    "title": "Registration data verification",
+    "action": "Submit the electronic application only once and ensure identity/contact data are correct before final submission. Exact upload/document specifications are not asserted until a current official detailed notice is reviewed."
+  },
+  "exam_card": {
+    "title": "Exam eligibility / test notice",
+    "action": "DOE planned to publish the Korean-test eligible list on 2026-08-10. Use the official DOE/EPS Thailand notice for the assigned venue and test session."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Round 1",
+    "action": "Round 18 is a Point System selection. Use only the current official exam notice for the exact Manufacturing test schedule and result; do not reuse Special EPS-TOPIK dates."
+  },
+  "skill_competency": {
+    "title": "Skills Test — Round 2",
+    "action": "DOE stated that the list of candidates eligible for the skills test would be announced on 2026-10-19. As of this KEP check, that date has not yet arrived; do not pre-promote a skills result or schedule."
+  },
+  "final_selection": {
+    "title": "Point-based final selection",
+    "action": "Passing the Korean and skills stages does not guarantee employer selection. Final candidate status must follow the current official Point System result notice."
+  },
+  "psychology_pre_job": {
+    "title": "Country-specific pre-job checks",
+    "action": "No separate Thailand psychology step is asserted from the verified Round 18 recruitment notice. Do not copy Indonesia-specific psychology requirements."
+  },
+  "mcu1": {
+    "title": "Medical examination",
+    "action": "Health fitness is an eligibility condition, but KEP has not yet promoted the exact current Round 18 post-selection medical provider/checklist. Follow the current DOE notice when issued."
+  },
+  "job_application": {
+    "title": "Employment-candidate file",
+    "action": "Only follow the current DOE/TOEA instruction for the candidate-file stage after Point System selection. Exact Round 18 documents and timing remain under review."
+  },
+  "roster": {
+    "title": "EPS candidate roster",
+    "action": "Approved candidates are proposed for Korean employer selection through the official EPS process. No private intermediary can guarantee roster priority."
+  },
+  "employer_selection": {
+    "title": "Korean employer selection",
+    "action": "Wait for employer selection through the official EPS system. Passing the tests or appearing on the roster does not guarantee employer selection."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "If selected by a Korean employer, follow the current DOE/EPS notice for SLC review/signing and next steps. Do not pay a broker to obtain or alter an SLC."
+  },
+  "post_slc_requirements": {
+    "title": "Post-SLC Thailand requirements",
+    "action": "Follow only current DOE instructions for training, medical follow-up, visa documents, payments and departure preparation. Older or Special EPS instructions are not current Regular Round 18 rules."
+  },
+  "visa_docs": {
+    "title": "Visa document package",
+    "action": "Use the current DOE/Korean-mission visa notice. Exact Round 18 Manufacturing visa checklist and charges are not yet mapped in KEP."
+  },
+  "predeparture_training": {
+    "title": "Pre-departure training",
+    "action": "Complete only the official pre-departure training assigned by DOE. Exact Round 18 cohort timing/fees remain notice-specific."
+  },
+  "mcu3_departure": {
+    "title": "Final health/departure readiness",
+    "action": "Do not invent an Indonesia-style MCU-III stage. Follow the current Thailand departure notice if a final medical or screening step is explicitly required."
+  },
+  "departure": {
+    "title": "Official departure",
+    "action": "Travel only after the official EPS contract, visa, training and departure requirements are complete and DOE issues the applicable departure instructions."
+  },
+  "korea_entry_training": {
+    "title": "Korea entry + employment education",
+    "action": "After entry, complete the official Korea-side employment education and handover process."
+  },
+  "employer_handover": {
+    "title": "Employer handover",
+    "action": "Confirm workplace, accommodation and emergency contacts during official handover."
+  },
+  "residence_registration": {
+    "title": "Residence Card / foreigner registration",
+    "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card."
+  },
+  "eps_insurance_check": {
+    "title": "EPS insurance check",
+    "action": "Confirm required EPS insurance obligations through official EPS information."
+  },
+  "first_payroll_check": {
+    "title": "First payroll check",
+    "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules."
+  },
+  "labor_support_ready": {
+    "title": "Labor support readiness",
+    "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue."
+  },
+  "employment_maintenance": {
+    "title": "Employment / workplace-change readiness",
+    "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines."
+  }
+}
