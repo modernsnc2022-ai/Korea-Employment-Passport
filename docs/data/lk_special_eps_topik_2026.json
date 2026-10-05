@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "country": "LK",
+  "cycle": 2026,
+  "routeType": "special_eps_topik_returning_worker",
+  "excludedFromCurrentPointSystemCountryPack": true,
+  "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/04/Ins_English.pdf",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "ageRange": "18-39",
+    "dobRange": "1986-04-28 through 2008-04-27",
+    "testFeeUsd": 28,
+    "testFeeLkr": 8716.4,
+    "paymentDates": "2026-04-27 through 2026-04-29",
+    "colorVisionRule": "Color blindness or color deficiency is ineligible.",
+    "priorKoreaStayRule": "Total E-9/E-10 work period must not exceed the official Special-route limit stated in the notice."
+  },
+  "warning": "These Special EPS-TOPIK eligibility dates, fee and payment window belong only to the Special returning-worker route and must never replace the September 2026 Point System rules."
+}

@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-09-28-point-system-notice-manufacturing-1000",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -22,7 +22,8 @@
     "Applications are scheduled for 2026-10-26 through 2026-10-30 via SLBFE, with application-completion instructions to be posted on 2026-10-12.",
     "The official fee is US$28, stated as LKR 9,250. The current notice gives exact passport/photo file requirements.",
     "Test requirements/date and venue announcement is scheduled for 2026-11-16; UBT begins 2026-11-25 and may continue into March 2027.",
-    "The current notice explicitly states roster inclusion does not guarantee employment in Korea."
+    "The current notice explicitly states roster inclusion does not guarantee employment in Korea.",
+    "Sri Lanka also ran a separate Special EPS-TOPIK in 2026 for eligible returning workers; those fee/eligibility facts are isolated from the current September 2026 Point System route."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -31,7 +32,9 @@
     "noVisaGuarantee": true,
     "noDepartureGuarantee": true,
     "noPrivateBrokerRequiredTarget": true,
-    "betaIntakeOpen": false
+    "betaIntakeOpen": false,
+    "specialRouteFactsExcludedFromCurrentPointSystem": true,
+    "prior10thCycleFactsExcludedFromCurrent": true
   },
   "stages": [
     {
@@ -280,5 +283,6 @@
   ],
   "exactAnswerRulesFile": "data/lk_exact_answer_rules_2026.json",
   "documentPacksFile": "data/lk_document_packs_2026.json",
-  "stageReadinessFile": "data/lk_stage_readiness_2026.json"
+  "stageReadinessFile": "data/lk_stage_readiness_2026.json",
+  "specialRouteEvidenceFile": "data/lk_special_eps_topik_2026.json"
 }
