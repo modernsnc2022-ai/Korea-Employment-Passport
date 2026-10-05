@@ -33,7 +33,13 @@
         "final_selection"
       ],
       "currentSource": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
-      "note": "Round 1 passers are automatically registered; the result notice says the final Round 2 schedule will be announced after HRD Korea confirmation."
+      "note": "Round 1 passers are automatically registered; the result notice says the final Round 2 schedule will be announced after HRD Korea confirmation.",
+      "projectedPlanEvidence": {
+        "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+        "earlierProjectedWindow": "2026-10-12 through 2026-10-16",
+        "promotionStatus": "not_final",
+        "rule": "Do not display this projected window as the final Round 2 schedule because the later verified Round 1 result notice says the official schedule will be announced after HRD Korea confirmation."
+      }
     },
     "medicalAndJobApplication": {
       "status": "research_pending_current_cohort_exact_instructions",
