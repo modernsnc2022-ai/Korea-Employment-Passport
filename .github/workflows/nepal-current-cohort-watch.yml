@@ -1,0 +1,28 @@
+name: nepal-current-cohort-watch
+
+on:
+  schedule:
+    - cron: '17 0,6,12,18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Nepal current-cohort notices
+        run: python scripts/check_nepal_current_cohort_notices.py
+      - name: Upload watch result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nepal-current-cohort-notice-result
+          path: monitor/np_current_cohort_notice_result.json
+          if-no-files-found: warn
