@@ -61,3 +61,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Al-Barokah Gimhae WhatsApp probe | Indonesian PMI community/mosque in Gimhae | Tested public directory numbers +82 10-4868-8039 and +82 10-7705-7611 via WhatsApp | **Invalid — both numbers are not on WhatsApp; retire direct-number route** |
 
 | 2026-10-05 | Rumaisa Korsel — WhatsApp | Indonesian women / migrant-worker community in Korea | Sent direct WhatsApp request to +82 10-4997-1060 asking for internal sharing to Indonesian women E-9 workers; message used `src=rumaisa_korsel` | **Sent — awaiting reply** |
+
+| 2026-10-05 | Kedai Rinjani — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker community or WhatsApp group admins; message used `src=kedai_rinjani_ansan` | **Sent — awaiting reply** |
