@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "ពិនិត្យលក្ខខណ្ឌ",
+    "action": "ប្រើសេចក្តីជូនដំណឹង Manufacturing បច្ចុប្បន្នរបស់កម្ពុជាសម្រាប់លក្ខខណ្ឌពេញលេញ។ លក្ខខណ្ឌ EPS ទូទៅ និងវិស័យកសិកម្មមិនមែនជាច្បាប់ Manufacturing បច្ចុប្បន្នទេ។"
+  },
+  "registration": {
+    "title": "ការចុះឈ្មោះ Manufacturing",
+    "action": "KEP មិនទាន់ផ្សព្វផ្សាយថ្ងៃចុះឈ្មោះ Manufacturing ឆ្នាំ 2026 ជា exact rule ទេ ព្រោះមិនទាន់ចាប់បាន official Manufacturing schedule detail ដោយផ្ទាល់។"
+  },
+  "exam_fee": {
+    "title": "ថ្លៃដាក់ពាក្យ / ប្រឡង",
+    "action": "មិនទាន់មាន cycle-specific Manufacturing fee ដែល KEP បានផ្ទៀងផ្ទាត់។"
+  },
+  "biometric": {
+    "title": "ផ្ទៀងផ្ទាត់អត្តសញ្ញាណ",
+    "action": "អនុវត្តតែតាមការណែនាំផ្លូវការបច្ចុប្បន្នរបស់កម្ពុជា។"
+  },
+  "document_verify": {
+    "title": "ផ្ទៀងផ្ទាត់ឯកសារចុះឈ្មោះ",
+    "action": "passport/photo/upload/payment checklist សម្រាប់ Manufacturing បច្ចុប្បន្ននៅ HOLD រហូតដល់មាន official notice ដោយផ្ទាល់។"
+  },
+  "exam_card": {
+    "title": "សេចក្តីជូនដំណឹងថ្ងៃប្រឡង",
+    "action": "កាលវិភាគ Manufacturing exact មិនត្រូវបាន promote រហូតដល់ official schedule detail ត្រូវបានផ្ទៀងផ្ទាត់។"
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Manufacturing",
+    "action": "HRD Korea មាន official General CBT artifact សម្រាប់កម្ពុជាថ្ងៃ 2026-08-06 ប៉ុន្តែចំណងជើងសាធារណៈមិនបញ្ជាក់ Manufacturing ដោយផ្ទាល់។"
+  },
+  "skill_competency": {
+    "title": "Skills Test — ជុំទី 2",
+    "action": "Candidates for skills test របស់កម្ពុជា General CBT ត្រូវបានផ្សព្វផ្សាយ 2026-08-06 ប៉ុន្តែ cycle/sector linkage នៅត្រូវការផ្ទៀងផ្ទាត់។"
+  },
+  "final_selection": {
+    "title": "ការជ្រើសរើសចុងក្រោយ",
+    "action": "Cambodia the 2th POINT_EXAM Announcement ត្រូវបានផ្សព្វផ្សាយ 2026-08-21 ប៉ុន្តែ KEP មិន auto-link ទៅ Manufacturing ដោយគ្មាន cycle/sector proof ទេ។"
+  },
+  "psychology_pre_job": {
+    "title": "ការត្រួតពិនិត្យបន្ថែមសម្រាប់កម្ពុជា",
+    "action": "មិនមាន psychology stage ដាច់ដោយឡែកដែលបានផ្ទៀងផ្ទាត់សម្រាប់ Manufacturing។"
+  },
+  "mcu1": {
+    "title": "ការពិនិត្យសុខភាព",
+    "action": "ប្រើតែការណែនាំ medical/provider បច្ចុប្បន្នរបស់កម្ពុជា។"
+  },
+  "job_application": {
+    "title": "ឯកសារអ្នកស្វែងរកការងារ",
+    "action": "ក្រោយ final result ដែលបានផ្ទៀងផ្ទាត់ ត្រូវអនុវត្តតាមការណែនាំ MTOSB/HRD Korea បច្ចុប្បន្ន។"
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "មានតែបេក្ខជនដែលមានសិទ្ធិផ្លូវការប៉ុណ្ណោះអាចចូល employer-selection process។"
+  },
+  "employer_selection": {
+    "title": "ការជ្រើសរើសដោយនិយោជកកូរ៉េ",
+    "action": "រង់ចាំតាមប្រព័ន្ធ EPS ផ្លូវការ។ អ្នកកណ្ដាលឯកជនមិនអាចធានានិយោជកបានទេ។"
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "បើត្រូវបានជ្រើសរើស ត្រូវអនុវត្តតាមការណែនាំ Cambodia/EPS បច្ចុប្បន្ន។"
+  },
+  "post_slc_requirements": {
+    "title": "តម្រូវការបន្ទាប់ពី SLC",
+    "action": "ប្រើតែការណែនាំផ្លូវការបច្ចុប្បន្នសម្រាប់ medical, training, visa, payment និង departure។"
+  },
+  "visa_docs": {
+    "title": "ឯកសារវីសា",
+    "action": "ប្រើ checklist និង fee បច្ចុប្បន្នរបស់កម្ពុជា/ស្ថានបេសកកម្មកូរ៉េ។"
+  },
+  "predeparture_training": {
+    "title": "ការបណ្តុះបណ្តាលមុនចេញដំណើរ",
+    "action": "បំពេញតែ training ផ្លូវការដែលបានកំណត់។"
+  },
+  "mcu3_departure": {
+    "title": "សុខភាពចុងក្រោយ / ត្រៀមចេញដំណើរ",
+    "action": "មិនបង្កើត Indonesia-style MCU-III ដោយស្វ័យប្រវត្តិទេ។"
+  },
+  "departure": {
+    "title": "ចេញដំណើរផ្លូវការ",
+    "action": "ចេញដំណើរបន្ទាប់ពី contract, visa, training និង departure requirements ត្រូវបានបញ្ចប់។"
+  },
+  "korea_entry_training": {
+    "title": "ចូលកូរ៉េ និង employment education",
+    "action": "ក្រោយចូលកូរ៉េ បំពេញការអប់រំការងារ និង handover ផ្លូវការ។"
+  },
+  "employer_handover": {
+    "title": "ប្រគល់ទៅនិយោជក",
+    "action": "បញ្ជាក់ទីកន្លែងធ្វើការ កន្លែងស្នាក់នៅ និង emergency contacts។"
+  },
+  "residence_registration": {
+    "title": "Residence Card / foreigner registration",
+    "action": "អនុវត្តតាមច្បាប់ Immigration បច្ចុប្បន្នរបស់កូរ៉េ។"
+  },
+  "eps_insurance_check": {
+    "title": "ពិនិត្យ EPS insurance",
+    "action": "ផ្ទៀងផ្ទាត់កាតព្វកិច្ចធានារ៉ាប់រងតាមប្រភព EPS ផ្លូវការ។"
+  },
+  "first_payroll_check": {
+    "title": "ពិនិត្យប្រាក់ខែដំបូង",
+    "action": "ប្រៀបធៀប payslip និង bank deposit ជាមួយ SLC, ម៉ោងធ្វើការ និង deductions។"
+  },
+  "labor_support_ready": {
+    "title": "ត្រៀម labor support",
+    "action": "រក្សាទុក official support channels និង contract/payroll/attendance evidence។"
+  },
+  "employment_maintenance": {
+    "title": "រក្សាការងារ / ប្តូរកន្លែងធ្វើការ",
+    "action": "បើមានមូលហេតុស្របច្បាប់ ប្រើ EPS ឬ employment-center process ផ្លូវការ។"
+  }
+}
