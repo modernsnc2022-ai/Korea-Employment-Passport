@@ -1,0 +1,119 @@
+{
+  "version": "1.0.0",
+  "routeId": "cn-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Use current China 6th Manufacturing evidence. Generic HRD fee guidance and generic China skill-candidate entries cannot automatically become cycle-specific exact facts.",
+  "answers": [
+    {
+      "id": "cn_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is China's official EPS sending agency?",
+      "answer": "Investment Promotion Agency of Ministry of Commerce of P.R China (CIPA).",
+      "writeExactly": "Use CIPA / cipainvest.org.cn as China's official sending-side channel.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the 6th Manufacturing registration period?",
+      "answer": "2026-03-18 through 2026-08-07.",
+      "writeExactly": "China 6th Manufacturing registration: 2026-03-18 through 2026-08-07. Closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_test_notice_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "What was the test announcement date?",
+      "answer": "2026-09-04.",
+      "writeExactly": "HRD Korea schedule: test announcement 2026-09-04.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the test period?",
+      "answer": "2026-09-09 through 2026-09-11.",
+      "writeExactly": "China 6th Manufacturing test period: 2026-09-09 through 2026-09-11.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_point_system",
+      "stages": [
+        "eps_topik",
+        "skill_competency"
+      ],
+      "question": "Is this a Point System route?",
+      "answer": "Yes. General CBT with Point System = Y.",
+      "writeExactly": "This is the China 6th Manufacturing Point System route.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_fee_state",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What is the exact China 6th-cycle fee?",
+      "answer": "KEP has not verified a cycle-specific exact fee.",
+      "writeExactly": "Do not quote HRD Korea's generic US$28 visiting-registration baseline as the exact China 6th-cycle fee.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectVisitGuideDesc.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_skill_candidate_state",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Do the 2026-09-30 China skills-candidate entries prove the exact 6th Manufacturing Round 2 list?",
+      "answer": "Not yet in KEP. Generic China 1st/2nd entries exist but exact cycle linkage remains pending.",
+      "writeExactly": "Do not auto-link generic China skills-candidate entries to the 6th Manufacturing route without cycle proof.",
+      "verificationStatus": "candidate_entries_exist_linkage_pending",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_2026_skill_rule",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What is the 2026 HRD Korea general skills-test rule?",
+      "answer": "All Point System sending countries require skills testing for Korean-test passers; general skills test uses fitness, interview/job ability and basic skills with a 60-point minimum out of 100, plus up to 5 Job Capacity points.",
+      "writeExactly": "Use as the 2026 HRD Korea general Point System skill structure; current China cycle candidate linkage remains separate.",
+      "verificationStatus": "verified_hrd_2026_general_rule",
+      "sourceUrl": "https://www.hrdkorea.or.kr/1/3/3/2/2",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "cn_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does test success guarantee a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
+      "verificationStatus": "shared_eps_principle",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

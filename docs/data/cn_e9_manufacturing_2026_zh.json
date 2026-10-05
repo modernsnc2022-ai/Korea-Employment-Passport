@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "资格确认",
+    "action": "以中国第6次制造业当前官方通知为准。HRD Korea的一般EPS资格条件只作为准备参考。"
+  },
+  "registration": {
+    "title": "第6次积分制报名",
+    "action": "HRD Korea记录的制造业报名期为2026-03-18至2026-08-07，目前已结束。"
+  },
+  "exam_fee": {
+    "title": "报名/考试费用",
+    "action": "KEP尚未确认中国第6次招聘的周期专属费用。HRD Korea一般访问报名的28美元标准不作为当前中国准确费用。"
+  },
+  "biometric": {
+    "title": "身份确认",
+    "action": "仅遵循中国当前官方的身份核验和防舞弊要求，不复制其他国家的生物识别规则。"
+  },
+  "document_verify": {
+    "title": "报名文件核验",
+    "action": "中国第6次招聘的护照、照片、上传文件和付款清单尚未在KEP中完整重建，不使用其他国家的文件规格替代。"
+  },
+  "exam_card": {
+    "title": "考试公告/准考信息",
+    "action": "HRD Korea记录2026-09-04为中国第6次制造业积分制考试公告日。"
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — 第6次积分制",
+    "action": "该路线为制造业、一般CBT、积分制。考试期为2026-09-09至2026-09-11。"
+  },
+  "skill_competency": {
+    "title": "技能考试 — 第二轮",
+    "action": "积分制中EPS-TOPIK合格者需要参加技能考试。2026-09-30有中国技能考试对象公告，但其第1/第2次通用标题尚未与本次第6次制造业完全关联。"
+  },
+  "final_selection": {
+    "title": "积分制最终选拔",
+    "action": "不能仅根据第一轮结束或通用技能考试对象公告推断最终合格。必须先确认第6次制造业的最终结果来源。"
+  },
+  "psychology_pre_job": {
+    "title": "中国特定附加检查",
+    "action": "已核实来源中没有确认独立的心理测试阶段，不复制印尼规则。"
+  },
+  "mcu1": {
+    "title": "体检",
+    "action": "仅使用当前中国EPS官方体检/指定机构说明。第6次的具体机构、清单和费用仍为HOLD。"
+  },
+  "job_application": {
+    "title": "求职材料",
+    "action": "最终选拔确认后，按照中国当前CIPA/HRD Korea说明办理。第6次的具体材料和时间仍待核实。"
+  },
+  "roster": {
+    "title": "EPS求职者名册",
+    "action": "只有正式合格者进入韩国雇主选择流程，私人中介不能保证优先权或录用。"
+  },
+  "employer_selection": {
+    "title": "韩国雇主选择",
+    "action": "通过官方EPS系统等待雇主选择，私人中介不能保证特定雇主。"
+  },
+  "slc": {
+    "title": "标准劳动合同（SLC）",
+    "action": "如被韩国雇主选中，按当前中国/EPS官方说明审核和签署SLC并继续后续步骤。"
+  },
+  "post_slc_requirements": {
+    "title": "SLC后的中国手续",
+    "action": "体检复查、培训、签证、缴费和出境准备仅使用当前官方说明。"
+  },
+  "visa_docs": {
+    "title": "签证材料",
+    "action": "使用当前中国相关机构和韩国使领馆的签证清单与费用。第6次下游细节尚未全部映射。"
+  },
+  "predeparture_training": {
+    "title": "出境前培训",
+    "action": "只完成官方安排给赴韩人员的出境前培训，具体时间、地点和费用以当前通知为准。"
+  },
+  "mcu3_departure": {
+    "title": "最终健康/出境准备",
+    "action": "不自动创建印尼式MCU-III阶段；只有中国当前官方说明明确要求时才进行最终复检。"
+  },
+  "departure": {
+    "title": "正式出境",
+    "action": "合同、签证、培训及其他官方出境条件全部完成后再出境。"
+  },
+  "korea_entry_training": {
+    "title": "入韩及就业教育",
+    "action": "入境韩国后完成官方就业教育和雇主交接流程。"
+  },
+  "employer_handover": {
+    "title": "雇主交接",
+    "action": "正式交接时确认工作地点、住宿和紧急联系方式。"
+  },
+  "residence_registration": {
+    "title": "Residence Card / 外国人登记",
+    "action": "入境韩国后按现行出入境规定办理外国人登记和Residence Card。"
+  },
+  "eps_insurance_check": {
+    "title": "EPS保险确认",
+    "action": "通过官方EPS信息确认适用的保险义务。"
+  },
+  "first_payroll_check": {
+    "title": "首份工资确认",
+    "action": "将工资单和银行入账与SLC、工时、扣款和适用工资规则核对。"
+  },
+  "labor_support_ready": {
+    "title": "劳动援助准备",
+    "action": "保存官方劳动援助渠道及合同、工资、考勤等证据。"
+  },
+  "employment_maintenance": {
+    "title": "维持就业/变更工作场所",
+    "action": "出现法定变更工作场所事由时，使用韩国官方EPS或就业中心流程并遵守期限。"
+  }
+}
