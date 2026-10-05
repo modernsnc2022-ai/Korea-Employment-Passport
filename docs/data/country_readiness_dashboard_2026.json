@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -28,16 +28,27 @@
       "betaState": "pending_manual_approval",
       "nextReview": {
         "type": "official_notice_and_manual_gate",
-        "subject": "2026 Manufacturing online job-application detail notice and beta release gate",
+        "subject": "2026 Manufacturing result / Skill Test / online job-application notice and beta release gate",
         "officialSources": [
-          "https://kp2mi.go.id/gtog-korea/info"
+          "https://kp2mi.go.id/gtog-korea/info",
+          "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026"
         ]
       },
       "blockers": [
-        "current Manufacturing online job-application detailed notice not found",
-        "same-day official-source re-check required before release",
-        "explicit manual beta OPEN decision required"
-      ]
+        "Manufacturing 2026 EPS-TOPIK exam period ended 2026-08-14, but a current Manufacturing result/next-stage notice was not found in the 2026-10-06 official-source re-check",
+        "Manufacturing 2026 Skill Test notice not found; Fisheries Skill Test must not be reused",
+        "Manufacturing online job-application detailed notice not found; 2026-08-19 notice is Fisheries only",
+        "same-day official-source re-check and explicit manual beta OPEN decision still required"
+      ],
+      "currentCohort": {
+        "epsTopikStatus": "completed",
+        "epsTopikPeriod": "2026-06-04 through 2026-08-14",
+        "manufacturingMinimumScore": 60,
+        "manufacturingResultNotice": "not_found_as_of_2026-10-06",
+        "manufacturingSkillTestNotice": "not_found_as_of_2026-10-06",
+        "manufacturingOnlineJobApplicationNotice": "not_found_as_of_2026-10-06",
+        "fisheriesJobApplicationMustNotPopulateManufacturing": true
+      }
     },
     {
       "country": "NP",
