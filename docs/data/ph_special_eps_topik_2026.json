@@ -18,5 +18,21 @@
     "minimumScore": 120,
     "testVenue": "DMW Central Office, Mandaluyong City"
   },
-  "warning": "These dates, fee, quota and eligibility are Special EPS-TOPIK facts and must never be promoted into the Regular Manufacturing route."
+  "warning": "These dates, fee, quota and eligibility are Special EPS-TOPIK facts and must never be promoted into the Regular Manufacturing route.",
+  "crossSourceScheduleNote": {
+    "status": "special_route_schedule_sources_differ",
+    "dmwAdvisory": {
+      "registration": "2026-03-09 14:00 through 2026-03-12 17:00",
+      "test": "2026-03-26 through 2026-03-29",
+      "result": "2026-04-06",
+      "sourceUrl": "https://wcms.dmw.gov.ph/uploads/EPS_TOPIK_Advisory_No_1_s_2026_For_DMW_website_6d6ae0b963.pdf"
+    },
+    "hrdKoreaCurrentSchedule": {
+      "registration": "2026-03-09 through 2026-03-11",
+      "test": "2026-04-11 through 2026-04-12",
+      "result": "2026-04-23",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=011&examNot=21&examYear=2026&lang=ko&lcnsId=001"
+    },
+    "rule": "This discrepancy belongs entirely to the Special returning-worker route. KEP does not resolve or import either schedule into the Regular Manufacturing route."
+  }
 }
