@@ -1,0 +1,285 @@
+{
+  "country": "TH",
+  "countryName": "Thailand",
+  "nativeCountryName": "ประเทศไทย",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-point-system-round-18-manufacturing",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "Department of Employment, Ministry of Labour",
+    "url": "https://www.doe.go.th/overseas",
+    "applicationPortal": "https://toea.doe.go.th/",
+    "hotline": "1506 press 2"
+  },
+  "evidenceNotes": [
+    "Thailand Department of Employment announced Point System Round 18 in 2026 for 3,300 workers: Manufacturing 2,000, Agriculture/Livestock 1,000 and Construction 300.",
+    "Official online registration ran 2026-07-02 through 2026-07-06 and the fee was 960 THB through the designated Krungthai Bank channel.",
+    "Manufacturing accepts male and female applicants; the verified Round 18 age window is 18–39, DOB 1986-07-03 through 2008-07-02.",
+    "DOE announced 2026-08-10 for the Korean-test eligible list and 2026-10-19 for the skills-test eligible list.",
+    "Thailand also ran a separate Special EPS-TOPIK in 2026 for qualified returning workers; those facts are kept outside the Regular Round 18 rules."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "specialRouteFactsExcludedFromRegular": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "Thailand Department of Employment / HRD Korea",
+      "kind": "rules",
+      "action": "For Point System Round 18, verify age 18–39 (DOB 1986-07-03 through 2008-07-02), health/communicable-disease fitness, no color blindness, legal/criminal/travel conditions, no Korea deportation/refusal/illegal-law history, no drug history, and total prior E-9/E-10 stay under 5 years.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "registration",
+      "title": "Official online registration",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_action",
+      "action": "Round 18 registration was accepted online through the official TOEA channel from 2026-07-02 through 2026-07-06. The window is closed.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_closed"
+    },
+    {
+      "id": "exam_fee",
+      "title": "EPS-TOPIK / Point System fee",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_payment",
+      "action": "Official Round 18 application fee: 960 THB, payable through the designated Krungthai Bank payment channel within the official window.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity / anti-fraud verification",
+      "authority": "Thailand Department of Employment / HRD Korea",
+      "kind": "official_action",
+      "action": "Follow the identity-verification requirements in the assigned Round 18 test notice. KEP does not infer extra biometric rules beyond the current official instructions.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "current_notice_required"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration data verification",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_action",
+      "action": "Submit the electronic application only once and ensure identity/contact data are correct before final submission. Exact upload/document specifications are not asserted until a current official detailed notice is reviewed.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_rule_partial"
+    },
+    {
+      "id": "exam_card",
+      "title": "Exam eligibility / test notice",
+      "authority": "Thailand Department of Employment",
+      "kind": "self_service",
+      "action": "DOE planned to publish the Korean-test eligible list on 2026-08-10. Use the official DOE/EPS Thailand notice for the assigned venue and test session.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_announcement_date_current_details_notice_required"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — Round 1",
+      "authority": "HRD Korea / Thailand Department of Employment",
+      "kind": "official_exam",
+      "action": "Round 18 is a Point System selection. Use only the current official exam notice for the exact Manufacturing test schedule and result; do not reuse Special EPS-TOPIK dates.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "supportState": "current_result_not_promoted"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test — Round 2",
+      "authority": "HRD Korea / Thailand Department of Employment",
+      "kind": "official_exam",
+      "action": "DOE stated that the list of candidates eligible for the skills test would be announced on 2026-10-19. As of this KEP check, that date has not yet arrived; do not pre-promote a skills result or schedule.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "awaiting_2026_10_19_candidate_list"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / Thailand Department of Employment",
+      "kind": "official_result",
+      "action": "Passing the Korean and skills stages does not guarantee employer selection. Final candidate status must follow the current official Point System result notice.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_no_guarantee_current_result_pending"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_requirement",
+      "action": "No separate Thailand psychology step is asserted from the verified Round 18 recruitment notice. Do not copy Indonesia-specific psychology requirements.",
+      "sourceUrl": "https://www.doe.go.th/",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "Thailand Department of Employment / designated provider",
+      "kind": "official_requirement",
+      "action": "Health fitness is an eligibility condition, but KEP has not yet promoted the exact current Round 18 post-selection medical provider/checklist. Follow the current DOE notice when issued.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_action",
+      "action": "Only follow the current DOE/TOEA instruction for the candidate-file stage after Point System selection. Exact Round 18 documents and timing remain under review.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS candidate roster",
+      "authority": "Thailand Department of Employment / HRD Korea",
+      "kind": "official_wait",
+      "action": "Approved candidates are proposed for Korean employer selection through the official EPS process. No private intermediary can guarantee roster priority.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_process_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for employer selection through the official EPS system. Passing the tests or appearing on the roster does not guarantee employer selection.",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / Thailand Department of Employment",
+      "kind": "official_contract",
+      "action": "If selected by a Korean employer, follow the current DOE/EPS notice for SLC review/signing and next steps. Do not pay a broker to obtain or alter an SLC.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Thailand requirements",
+      "authority": "Thailand Department of Employment",
+      "kind": "conditional_official",
+      "action": "Follow only current DOE instructions for training, medical follow-up, visa documents, payments and departure preparation. Older or Special EPS instructions are not current Regular Round 18 rules.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "Thailand Department of Employment / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current DOE/Korean-mission visa notice. Exact Round 18 Manufacturing visa checklist and charges are not yet mapped in KEP.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_training",
+      "action": "Complete only the official pre-departure training assigned by DOE. Exact Round 18 cohort timing/fees remain notice-specific.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "Thailand Department of Employment",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage. Follow the current Thailand departure notice if a final medical or screening step is explicitly required.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "Thailand Department of Employment / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after the official EPS contract, visa, training and departure requirements are complete and DOE issues the applicable departure instructions.",
+      "sourceUrl": "https://www.doe.go.th/overseas",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/th_exact_answer_rules_2026.json",
+  "stageReadinessFile": "data/th_stage_readiness_2026.json",
+  "specialRouteEvidenceFile": "data/th_special_eps_topik_2026.json"
+}

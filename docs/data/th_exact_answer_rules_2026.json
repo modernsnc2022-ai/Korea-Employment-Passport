@@ -1,0 +1,193 @@
+{
+  "version": "1.0.0",
+  "routeId": "th-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Use current Thailand DOE/HRD Korea Regular Point System Round 18 evidence. Keep Special EPS-TOPIK facts separate.",
+  "answers": [
+    {
+      "id": "th_2026_round18_manufacturing_quota",
+      "stages": [
+        "registration",
+        "final_selection"
+      ],
+      "question": "What is the Round 18 Manufacturing target?",
+      "answer": "2,000 workers.",
+      "writeExactly": "Round 18 Manufacturing target: 2,000.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_round18_total_quota",
+      "stages": [
+        "registration",
+        "final_selection"
+      ],
+      "question": "What is the total Round 18 target across listed sectors?",
+      "answer": "3,300 workers.",
+      "writeExactly": "Total Round 18 target: 3,300 across Manufacturing, Agriculture/Livestock and Construction.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was Round 18 registration open?",
+      "answer": "July 2 through July 6, 2026.",
+      "writeExactly": "Verified registration window: 2026-07-02 through 2026-07-06. This window is closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_exam_fee",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What was the Round 18 application fee?",
+      "answer": "960 THB.",
+      "writeExactly": "Official Round 18 application fee: 960 THB through the designated Krungthai Bank payment channel.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_age_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What age range applies?",
+      "answer": "18–39 years old; DOB 1986-07-03 through 2008-07-02.",
+      "writeExactly": "Round 18 age rule: 18–39, DOB 1986-07-03 through 2008-07-02.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_gender_manufacturing",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "Can both men and women apply for Manufacturing?",
+      "answer": "Yes.",
+      "writeExactly": "Manufacturing accepts male and female applicants under the verified Round 18 notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_color_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What color-vision condition is stated?",
+      "answer": "Applicant must not be color blind.",
+      "writeExactly": "Round 18 excludes color blindness.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_health_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What general health condition is stated?",
+      "answer": "Applicant must be physically fit and not have a disease that obstructs work or a communicable disease prohibited by Korean authorities.",
+      "writeExactly": "Use the current official health rule and wait for a current provider/checklist notice before medical payment.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_legal_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What legal/travel conditions are stated?",
+      "answer": "Good conduct, no disqualifying criminal history, not barred from leaving Thailand, no Korea deportation/refusal/illegal-law history, and no drug-related history.",
+      "writeExactly": "Check all verified legal/travel conditions before proceeding.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_e9_e10_limit",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What prior Korea stay limit applies?",
+      "answer": "Total prior E-9/E-10 stay must be under 5 years.",
+      "writeExactly": "Prior E-9/E-10 stay must total less than 5 years.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_single_application",
+      "stages": [
+        "registration"
+      ],
+      "question": "Can an applicant submit more than one electronic application?",
+      "answer": "No.",
+      "writeExactly": "Submit only one official electronic application.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_korean_candidate_list_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "When did DOE say the Korean-test eligible list would be announced?",
+      "answer": "August 10, 2026.",
+      "writeExactly": "DOE announced 2026-08-10 as the Korean-test eligible-list publication date.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_skill_candidate_list_date",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "When did DOE say the skills-test eligible list would be announced?",
+      "answer": "October 19, 2026.",
+      "writeExactly": "DOE announced 2026-10-19 as the skills-test eligible-list publication date. Do not pre-promote a result before the official notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_no_job_guarantee",
+      "stages": [
+        "final_selection",
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does passing the tests guarantee selection by a Korean employer?",
+      "answer": "No.",
+      "writeExactly": "Passing/roster approval does not guarantee Korean employer selection.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "th_2026_roster_year2",
+      "stages": [
+        "roster",
+        "employment_maintenance"
+      ],
+      "question": "What happens if no employer selects the candidate within the first roster year?",
+      "answer": "The verified notice says the candidate can request extension into year 2 without retaking the Korean-language test.",
+      "writeExactly": "If no employer selects you during roster year 1, follow the official procedure to request year-2 extension; do not pay a broker for priority.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}

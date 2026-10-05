@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam and Philippines")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines and Thailand")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -221,10 +221,38 @@ require("must not" in str(special_sep.get("writeExactly","")).lower() or "do not
 ph_doc_ids={p.get("id") for p in ph_docs.get("packs",[])}
 require("ph_current_portal_registration_preparation" in ph_doc_ids,"Philippines current portal preparation pack is required")
 
+
+th_entry=routes["th-e9-manufacturing-2026"]
+th_pack=load("docs/data/th_e9_manufacturing_2026.json")
+th_exact=load("docs/data/th_exact_answer_rules_2026.json")
+th_readiness=load("docs/data/th_stage_readiness_2026.json")
+th_special=load("docs/data/th_special_eps_topik_2026.json")
+require(th_entry.get("lifecycle")=="research_hold" and th_entry.get("publicAvailability")=="preview_only","Thailand registry route must remain preview-only HOLD")
+require(th_pack.get("lifecycle")=="research_hold" and th_pack.get("publicAvailability")=="preview_only","Thailand pack must remain preview-only HOLD")
+require(th_pack.get("safety",{}).get("betaIntakeOpen") is False,"Thailand beta intake must remain closed")
+require(th_pack.get("safety",{}).get("specialRouteFactsExcludedFromRegular") is True,"Thailand Special facts must be excluded from Round 18 Regular route")
+require(th_pack.get("officialSendingAgency",{}).get("name")=="Department of Employment, Ministry of Labour","Thailand official sending agency must remain DOE")
+require(th_pack.get("exactAnswerRulesFile")=="data/th_exact_answer_rules_2026.json","Thailand pack must link exact answers")
+require(th_pack.get("stageReadinessFile")=="data/th_stage_readiness_2026.json","Thailand pack must link readiness")
+require(th_pack.get("specialRouteEvidenceFile")=="data/th_special_eps_topik_2026.json","Thailand pack must link separate Special evidence")
+th_exact_ids={row.get("id") for row in th_exact.get("answers",[])}
+for exact_id in [
+    "th_2026_round18_manufacturing_quota","th_2026_registration_window","th_2026_exam_fee",
+    "th_2026_age_rule","th_2026_e9_e10_limit","th_2026_skill_candidate_list_date",
+    "th_2026_no_job_guarantee","th_2026_roster_year2"
+]:
+    require(exact_id in th_exact_ids,f"Thailand exact-answer catalog missing {exact_id}")
+require(th_readiness.get("currentRegular",{}).get("recruitment",{}).get("status")=="closed_verified","Thailand Round 18 registration must remain closed_verified")
+require(th_readiness.get("currentRegular",{}).get("skillCompetency",{}).get("status")=="awaiting_2026_10_19_candidate_list","Thailand skills stage must remain awaiting the 2026-10-19 official candidate list")
+require(th_readiness.get("betaReadiness",{}).get("status")=="blocked","Thailand beta must remain blocked")
+require(th_special.get("excludedFromRegularCountryPack") is True,"Thailand Special evidence must be explicitly excluded from Round 18")
+require(th_special.get("facts",{}).get("testFeeThb")==970,"Thailand Special 970 THB fee must stay isolated in Special evidence")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
+thailand=(ROOT/"docs/th.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -239,10 +267,13 @@ require('href="beta.html"' not in vietnam and 'id="betaForm"' not in vietnam,"Vi
 require("RESEARCH / HOLD" in philippines and "No registration is currently open" in philippines,"Philippines preview must visibly remain HOLD with no open registration")
 require("SPECIAL ROUTE FIREWALL" in philippines and "US$24" in philippines and "100-person" in philippines,"Philippines preview must visibly separate Special from Regular")
 require('href="beta.html"' not in philippines and 'id="betaForm"' not in philippines,"Philippines preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in thailand and "2,000" in thailand and "960" in thailand,"Thailand preview must show HOLD, Manufacturing target and official Round 18 fee")
+require("19 ต.ค. 2569" in thailand and "SPECIAL ROUTE FIREWALL" in thailand,"Thailand preview must show current skills-stage gate and Special firewall")
+require('href="beta.html"' not in thailand and 'id="betaForm"' not in thailand,"Thailand preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold" % (len(routes),len(EXPECTED)))
