@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "np-e9-manufacturing-2026",
   "verifiedAt": "2026-10-05",
   "principle": "Answer exactly from the 2026 Nepal EPS-TOPIK first-phase official notice. If the notice does not determine an answer, do not infer it from Indonesia or an older Nepal cohort.",
@@ -289,8 +289,167 @@
       "verificationStatus": "derived_from_official_submission_channel",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
       "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_biometric_day_before",
+      "stages": [
+        "biometric"
+      ],
+      "question": "When does biometric registration occur?",
+      "answer": "The official Nepal EPS process guide says biometric registration is done at EPS Korea Section, Gwarko on the day before the assigned exam date, with the original passport and admission card.",
+      "writeExactly": "Attend EPS Korea Section, Gwarko on the day before your assigned exam with the original passport and admission card.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_exam_arrival_time",
+      "stages": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "How early should the applicant arrive at the exam building?",
+      "answer": "1.5 hours before the exam.",
+      "writeExactly": "Arrive at the UBT/CBT exam building 1.5 hours before the exam with the original passport and admission card.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_medical_police_baseline",
+      "stages": [
+        "mcu1"
+      ],
+      "question": "What does the official Nepal EPS process say about medical and police checks?",
+      "answer": "Complete medical examination at a designated hospital on the assigned date/time and prepare the police report online. The process guide lists Civil, Shukraraj, Korea Friendship and Patan hospitals and states a baseline medical cost of US$55.64.",
+      "writeExactly": "Use only the currently designated hospital list. The March 2026 process guide lists Civil, Shukraraj, Korea Friendship and Patan and states US$55.64, but recheck the latest provider/fee notice before payment.",
+      "verificationStatus": "verified_official_process_pdf_currentness_check_required",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_job_application_baseline",
+      "stages": [
+        "job_application"
+      ],
+      "question": "What baseline documents are used for the employment-application stage?",
+      "answer": "Passport, ID photo, medical examination report, police report and employment application form; the process guide states a US$5 online fee.",
+      "writeExactly": "The official process baseline uses passport + ID photo + medical report + police report + employment application form and states US$5 online. Do not use this as the 2026 first-phase cohort submission window until its own notice is published.",
+      "verificationStatus": "verified_official_process_pdf_current_cohort_dates_pending",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_roster_status",
+      "stages": [
+        "roster"
+      ],
+      "question": "How can an applicant follow roster/application status?",
+      "answer": "The process guide says the EPS application is transmitted into Korea's system and the individual can check through the official EPS site using the EPS-TOPIK ID.",
+      "writeExactly": "Use the official EPS site and your EPS-TOPIK ID to follow status. Do not pay anyone to 'move' your file.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_job_matching_automation",
+      "stages": [
+        "employer_selection"
+      ],
+      "question": "Can an official or broker manually guarantee employer matching?",
+      "answer": "No. The official Nepal EPS guide describes job matching as an online automated Korean system and states that sending-agency/EPS/other officials cannot manually intervene to recommend a person to a specific employer.",
+      "writeExactly": "Employer matching is automated through the Korean system. No broker, EPS staff member or other official can legitimately guarantee a specific employer selection.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_slc_signature",
+      "stages": [
+        "slc"
+      ],
+      "question": "What happens when a Labor Contract/SLC is forwarded?",
+      "answer": "Follow the current EPS Nepal contract notice and appear in person at EPS Korea Section, Gwarko to sign. A 2026 labor-contract notice instructs listed workers to contact the office and sign within 7 days from the labor-contract date.",
+      "writeExactly": "When your name appears in the official Labor Contract notice, follow that notice and sign in person at EPS Korea Section, Gwarko. Do not rely on a broker to accept or sign for you.",
+      "verificationStatus": "verified_official_process_pdf_current_notice_overlay",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_pdot_baseline",
+      "stages": [
+        "predeparture_training"
+      ],
+      "question": "What is the baseline pre-departure training process?",
+      "answer": "The official EPS process guide describes a 6-day training at the National Vocational Training Institute, Bhaisepati and states a baseline fee of US$63 with online application.",
+      "writeExactly": "Baseline: 6-day training at the National Vocational Training Institute, Bhaisepati; the March 2026 guide states US$63. Recheck the current contract/departure notice because category-specific requirements and fees can change.",
+      "verificationStatus": "verified_official_process_pdf_currentness_check_required",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_ccvi_package",
+      "stages": [
+        "visa_docs"
+      ],
+      "question": "What baseline documents are listed after CCVI issuance?",
+      "answer": "Passport, ID photo, medical report, police report, citizenship photocopy, admission-card photocopy, PDOT certificate photocopy and the CCVI form/payment voucher are listed for in-person submission at EPS Korea Section, Gwarko.",
+      "writeExactly": "Prepare the official CCVI/visa document package and appear at EPS Korea Section, Gwarko as instructed. Do not use the historical NPR 10,700 amount as a current fee without checking the latest visa/service-fee notice.",
+      "verificationStatus": "verified_official_process_pdf_fee_volatile",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_visa_status",
+      "stages": [
+        "visa_docs"
+      ],
+      "question": "Where can visa status be checked?",
+      "answer": "The official EPS Nepal process guide directs workers to the Korea Visa Portal at visa.go.kr.",
+      "writeExactly": "Check visa status through the official Korea Visa Portal. Do not rely on a private intermediary's screenshot or verbal claim.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_labor_approval",
+      "stages": [
+        "departure"
+      ],
+      "question": "What official Nepal step is required before final departure?",
+      "answer": "The EPS process guide says to complete the labor-approval application through FEIMS and follow the final EPS Nepal flight notice and scheduled pre-departure instructions.",
+      "writeExactly": "Before departure, complete the official Nepal labor-approval process through FEIMS and follow the final EPS Nepal flight notice.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_departure_airports",
+      "stages": [
+        "departure"
+      ],
+      "question": "Which Nepal airports can be used for EPS departure?",
+      "answer": "The process guide lists Tribhuvan International Airport, Kathmandu, or Gautam Buddha International Airport, Bhairahawa, according to the assigned flight.",
+      "writeExactly": "Travel only on the assigned official flight; the baseline guide lists Kathmandu TIA or Gautam Buddha International Airport, Bhairahawa.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_reregistration_rule",
+      "stages": [
+        "employment_maintenance"
+      ],
+      "question": "Who is the re-registration step for?",
+      "answer": "The official process guide describes re-registration for applicants who remain on the roster and were not selected during the first year.",
+      "writeExactly": "Re-registration is not a general reset. Use it only when you meet the current official re-registration criteria and notice.",
+      "verificationStatus": "verified_official_process_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "verifiedAt": "2026-10-05"
     }
   ],
   "operationalNoticesFile": "data/np_registration_notices_2026.json",
-  "supplementaryNoticePolicy": "The primary notice is the exact-rule baseline. Later official notices are tracked separately and supersede a rule only after their content is reviewed; titles alone never create an extension or exception."
+  "supplementaryNoticePolicy": "The primary notice is the exact-rule baseline. Later official notices are tracked separately and supersede a rule only after their content is reviewed; titles alone never create an extension or exception.",
+  "processBaselineFile": "data/np_eps_process_baseline_2026.json",
+  "processBaselinePolicy": "The March 2026 official EPS process guide can define stable process structure, but current cohort dates, designated providers and volatile fees must be rechecked against later official notices."
 }
