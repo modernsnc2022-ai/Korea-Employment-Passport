@@ -1,0 +1,293 @@
+{
+  "country": "PK",
+  "countryName": "Pakistan",
+  "nativeCountryName": "پاکستان",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-pakistan-9th-point-system-manufacturing-linkage-pending",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "Overseas Employment Corporation (OEC)",
+    "website": "https://oec.gov.pk/",
+    "authorityEvidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "informationOffice": {
+      "address": "OEC, PMI Auditorium Building Zero Point, Islamabad",
+      "phone": "+92-051-925-3255",
+      "evidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    }
+  },
+  "evidenceNotes": [
+    "HRD Korea identifies OEC as Pakistan's EPS sending agency.",
+    "HRD Korea directly verifies 9th Point System pages for Islamabad and Karachi with registration 2026-03-31 through 2026-04-08, General CBT, Point System, while test announcement and test period remain undecided.",
+    "Those direct official page titles do not explicitly state Manufacturing, so KEP does not promote the city schedules as Manufacturing-specific without sector linkage.",
+    "A non-official schedule mirror lists a separate Pakistan 9th Manufacturing route with dates undecided; this remains discovery-only evidence.",
+    "HRD Korea pass-list index contains a Pakistan Special CBT result artifact published 2026-08-21; Special remains outside Regular Manufacturing."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "cityRoundFactsRequireManufacturingSectorLinkage": true,
+    "discoveryManufacturingTitleMustNotBecomeExact": true,
+    "specialFactsExcludedFromManufacturing": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "OEC / HRD Korea",
+      "kind": "rules",
+      "action": "Use only a current Pakistan Manufacturing notice for complete eligibility. The verified 9th Point System city schedules do not explicitly identify Manufacturing in their public titles.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "manufacturing_sector_linkage_pending"
+    },
+    {
+      "id": "registration",
+      "title": "9th Point System registration",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_action",
+      "action": "HRD Korea directly verifies 9th Point System registration in Islamabad and Karachi from 2026-03-31 through 2026-04-08. KEP does not promote this as Manufacturing-specific until sector linkage is proven.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "official_country_round_sector_linkage_pending"
+    },
+    {
+      "id": "exam_fee",
+      "title": "Application / test fee",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_payment",
+      "action": "No Pakistan Manufacturing cycle-specific fee is promoted until a direct official Manufacturing notice is captured.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "manufacturing_cycle_specific_fee_unverified"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity verification",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_action",
+      "action": "Follow only current Pakistan identity and anti-fraud requirements. Do not import another country's biometric steps.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_manufacturing_notice"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "OEC",
+      "kind": "official_action",
+      "action": "The exact Pakistan Manufacturing passport/photo/upload/payment checklist remains HOLD until a direct current Manufacturing notice is captured.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "manufacturing_checklist_not_reconstructed"
+    },
+    {
+      "id": "exam_card",
+      "title": "Test announcement / admission",
+      "authority": "OEC / HRD Korea",
+      "kind": "self_service",
+      "action": "For the verified Islamabad and Karachi 9th Point System pages, the test-announcement date remains undecided. Do not invent a Manufacturing date.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "official_country_round_dates_undecided"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — Pakistan Manufacturing",
+      "authority": "HRD Korea / OEC",
+      "kind": "official_exam",
+      "action": "The verified Islamabad/Karachi 9th Point System pages are General CBT and Point System, but their public titles do not state Manufacturing. Manufacturing exact schedule remains gated.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "official_country_round_sector_linkage_pending"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test — Round 2",
+      "authority": "HRD Korea / OEC",
+      "kind": "official_exam",
+      "action": "Do not infer a Pakistan Manufacturing skills schedule without a current sector-linked official artifact.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_manufacturing_linkage"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / OEC",
+      "kind": "official_result",
+      "action": "No current Pakistan Manufacturing final-result artifact is promoted. Special EPS-TOPIK result evidence remains a separate route.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "supportState": "research_pending_manufacturing_final_result"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "OEC",
+      "kind": "official_requirement",
+      "action": "No separate Pakistan psychology stage is asserted from the verified sources. Do not copy Indonesia-specific psychology rules.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "OEC / authorized provider",
+      "kind": "official_requirement",
+      "action": "Use only current Pakistan EPS medical/provider guidance. Exact Manufacturing provider, checklist and fee remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_action",
+      "action": "After verified Manufacturing final selection, follow current Pakistan candidate-file instructions. Exact documents and timing remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS Job Seekers' Roster",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_wait",
+      "action": "Only officially qualified candidates proceed to employer selection. Private intermediaries cannot guarantee roster priority or placement.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for selection through the official EPS system. No private intermediary can guarantee a specific Korean employer.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / OEC",
+      "kind": "official_contract",
+      "action": "If selected, follow current official Pakistan/EPS instructions for SLC review/signing and next steps.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending_current_notice"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Pakistan requirements",
+      "authority": "OEC",
+      "kind": "conditional_official",
+      "action": "Follow current official instructions for medical follow-up, training, visa, payments and departure preparation.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "OEC / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current Pakistan/Korean-mission visa checklist and fees. Exact Manufacturing downstream details are not yet mapped.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "OEC",
+      "kind": "official_training",
+      "action": "Complete only the official pre-departure training assigned to selected Korea-bound workers.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "OEC",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage. Follow current Pakistan instructions only if a final recheck is explicitly required.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "OEC / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after official contract, visa, training and departure requirements are complete.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete the official Korea-side employment education and handover process.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/pk_exact_answer_rules_2026.json",
+  "documentPacksFile": "data/pk_document_packs_2026.json",
+  "stageReadinessFile": "data/pk_stage_readiness_2026.json",
+  "discoveryEvidenceFile": "data/pk_manufacturing_discovery_2026.json",
+  "specialRouteEvidenceFile": "data/pk_special_eps_topik_2026.json"
+}
