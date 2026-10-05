@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "country": "MM",
+  "countryName": "Myanmar",
+  "nativeCountryName": "မြန်မာ",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "status": "pending_manufacturing_verification",
+  "routeId": null,
+  "officialSendingAgency": {
+    "name": "Public Overseas Employment Agency (POEA)",
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+  },
+  "officialReception": {
+    "address": "No.(8/1), Nagayone pagoda street, No.(5) Ward, Mayangone Township, Yangon, Myanmar",
+    "phone": "+951-65-1989",
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=ko"
+  },
+  "current2026Evidence": {
+    "hrdScheduleIndex": {
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "observedSectorRows": [
+        {
+          "sector": "Agriculture·Livestock",
+          "title": "The 8th recruitment of the point system in Myanmar(Agriculture·Livestock)",
+          "registrationPeriod": "2026-08-06 through 2026-08-10",
+          "observedTestStart": "2026-09-09",
+          "observedResultDate": "2026-10-16",
+          "verificationNote": "Current public schedule evidence is sector-specific and is not Manufacturing."
+        },
+        {
+          "sector": "Construction",
+          "title": "The 8th recruitment of the point system in Myanmar(Construction)",
+          "registrationPeriod": "2026-08-06 through 2026-08-10",
+          "observedTestStart": "2026-09-18",
+          "observedResultDate": "2026-10-16",
+          "verificationNote": "Current public schedule evidence is sector-specific and is not Manufacturing."
+        },
+        {
+          "sector": "Forestry",
+          "title": "The 8th recruitment of the point system in Myanmar(Forestry)",
+          "registrationPeriod": "2026-08-06 through 2026-08-10",
+          "observedTestStart": "2026-09-17",
+          "observedResultDate": "2026-10-16",
+          "verificationNote": "Current public schedule evidence is sector-specific and is not Manufacturing."
+        }
+      ],
+      "manufacturingRowCaptured": false
+    },
+    "myanmarLabourMinistry": {
+      "epsOpportunityUrl": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+      "observation": "The Ministry EPS opportunity page contains Manufacturing-related historical EPS materials alongside other sectors, but KEP has not captured a current 2026 Manufacturing-labelled recruitment notice from this page."
+    }
+  },
+  "historicalManufacturingEvidence": {
+    "status": "historical_only_not_2026_recruitment",
+    "sourceUrl": "https://www.mol.gov.mm/%E1%80%A1%E1%80%9C%E1%80%AF%E1%80%95%E1%80%BA%E1%80%9E%E1%80%99%E1%80%AC%E1%80%B8%E1%80%9D%E1%80%94%E1%80%BA%E1%80%80%E1%80%BC%E1%80%AE%E1%80%B8%E1%80%8C%E1%80%AC%E1%80%94-%E1%80%92%E1%80%AF-32/",
+    "publicationDate": "2025-07-25",
+    "facts": {
+      "examCycle": "16th EPS-TOPIK Manufacturing second batch",
+      "successfulCandidates": 4249,
+      "jobApplicationPeriod": "2025-07-21 through 2025-08-01",
+      "employerSelectionPrinciple": "Applicants receive a job call only if selected by an employer."
+    },
+    "warning": "This proves a Myanmar Manufacturing EPS workflow existed, but it is a 2025 post-selection artifact and cannot create a 2026 Manufacturing Country Pack."
+  },
+  "promotionRule": {
+    "requiredEvidence": [
+      "A direct official 2026 Myanmar notice or HRD Korea schedule/result artifact explicitly labelled Manufacturing.",
+      "The artifact must identify the current cycle/sector rather than reuse Agriculture/Livestock, Construction or Forestry.",
+      "Cycle-specific dates, fee and registration documents must remain unset until supported by the Manufacturing artifact."
+    ],
+    "prohibitedInference": [
+      "Do not infer Manufacturing from the existence of historical Manufacturing rounds.",
+      "Do not infer Manufacturing from a country-level Point System or from other-sector 2026 schedules.",
+      "Do not reuse Agriculture/Livestock, Construction or Forestry dates, quotas, documents or fees."
+    ]
+  },
+  "nextReviewSources": [
+    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+    "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+  ]
+}
