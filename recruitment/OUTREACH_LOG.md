@@ -32,6 +32,8 @@
 | 2026-10-05 | Korean Centre College (KCC) | EPS-TOPIK/G-to-G training community | Email requesting permission or admin repost to students/alumni | Sent — Gmail message `1a107c08992faa63` |
 | 2026-10-05 | EPS-TOPIK & G to G Korea Update (@eps_indo) — `Promo dan Jual Beli` | Telegram public discussion group | Joined group, completed the group's human-verification flow, sent a short posting-intent message, then published the full KEP beta-tester recruitment post with `beta.html?src=telegram_eps_indo`. | **Posted — visible in group and screenshot-confirmed in the user session; no message permalink captured yet** |
 
+| 2026-10-05 | KMI Korea / Cari Masjid Korea app support | Indonesian Muslim/WNI worker community network in Korea | Email requested connection to KMI central and regional WhatsApp/community admins (KMJJ, FKMWU, FKMID, MITRA PUMITA; Ansan/Incheon/Daegu/Busan/Gyeonggi etc.) for E-9 worker-validator recruitment | Sent — Gmail message `1a10b088f432b386` to `rulyoctareza@gmail.com` |
+
 Current public-post status:
 - Confirmed public community recruitment posts: **2**
 - Admin/repost outreach: multiple channels sent as logged above
