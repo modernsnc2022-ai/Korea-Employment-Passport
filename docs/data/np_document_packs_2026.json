@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
   "verifiedAt": "2026-10-05",
   "packs": [
@@ -60,6 +60,108 @@
           "label": "Test application slip",
           "required": true,
           "rule": "Bring the test application slip."
+        }
+      ]
+    },
+    {
+      "id": "np_employment_application_baseline",
+      "title": "Nepal EPS Employment Application — Process Baseline",
+      "appliesTo": [
+        "job_application"
+      ],
+      "status": "verified_process_baseline_current_cohort_notice_pending",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "warning": "This is the stable process baseline. Do not use it as the 2026 first-phase submission window/checklist until that cohort's own employment-application notice is published.",
+      "items": [
+        {
+          "id": "np_job_passport",
+          "label": "Passport",
+          "required": true,
+          "rule": "Required by the official Nepal EPS employment-application process baseline."
+        },
+        {
+          "id": "np_job_id_photo",
+          "label": "ID photo",
+          "required": true,
+          "rule": "Required by the official Nepal EPS employment-application process baseline."
+        },
+        {
+          "id": "np_job_medical",
+          "label": "Medical examination report",
+          "required": true,
+          "rule": "Use the report from the currently designated official medical process."
+        },
+        {
+          "id": "np_job_police",
+          "label": "Police report",
+          "required": true,
+          "rule": "Prepare the police report through the official process."
+        },
+        {
+          "id": "np_job_form",
+          "label": "Employment application form",
+          "required": true,
+          "rule": "Submit only when the applicable cohort notice opens the employment-application stage."
+        }
+      ]
+    },
+    {
+      "id": "np_ccvi_visa_baseline",
+      "title": "Nepal CCVI / Visa Package — Process Baseline",
+      "appliesTo": [
+        "visa_docs"
+      ],
+      "status": "verified_process_baseline_fee_volatile",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+      "warning": "Visa/service fees changed multiple times during 2026. Never reuse the historical NPR 10,700 baseline amount without checking the latest official fee/payment-location notice.",
+      "items": [
+        {
+          "id": "np_visa_passport",
+          "label": "Passport",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_id_photo",
+          "label": "ID photo",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_medical",
+          "label": "Medical examination report",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_police",
+          "label": "Police report",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_citizenship",
+          "label": "Citizenship photocopy",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_admit_card",
+          "label": "Admission-card photocopy",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item."
+        },
+        {
+          "id": "np_visa_pdot",
+          "label": "PDOT training certificate photocopy",
+          "required": true,
+          "rule": "Baseline CCVI/visa package item; follow the current category-specific training notice."
+        },
+        {
+          "id": "np_visa_payment_voucher",
+          "label": "Current official CCVI/visa payment voucher",
+          "required": true,
+          "rule": "Use only the amount and payment location in the latest official notice."
         }
       ]
     }
