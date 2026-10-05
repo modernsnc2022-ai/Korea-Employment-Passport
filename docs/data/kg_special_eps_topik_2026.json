@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "country": "KG",
+  "cycle": 2026,
+  "routeType": "special_eps_topik_returning_worker",
+  "excludedFromRegular13thManufacturing": true,
+  "sourceUrl": "https://migrant.kg/kg/about/news/tsentr-trudoustroistva-grazhdan-za-rubezhom-obiavliaet-o-provedenii-spetsialnogo-testirovaniia-na-znanie-koreiskogo-iazyka-eps-topik-na-2026-god/",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "eligibility": "Returning workers with qualifying prior legal EPS work and orderly return.",
+    "registrationPeriod": "2026-07-20 through 2026-07-24",
+    "examAnnouncementDate": "2026-08-24",
+    "testPeriod": "2026-09-10 through 2026-09-11",
+    "resultDate": "2026-09-30",
+    "feeUsd": 28
+  },
+  "warning": "Special-route dates, documents and result must never overwrite the Regular February 13th Manufacturing route."
+}

@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "country": "KG",
+  "cycle": 2026,
+  "routeType": "additional_general_eps_topik",
+  "excludedFromRegular13thManufacturing": true,
+  "sourceUrl": "https://www.migrant.kg/kg/about/news/o-provedenii-dopolnitelnogo-testirovaniia-po-koreiskomu-iazyku-eps-topik-v-2026-godu/",
+  "verifiedAt": "2026-10-06",
+  "facts": {
+    "announcedRegistrationPeriod": "2026-08-24 through 2026-08-28",
+    "testDateNotice": "2026-10-07",
+    "projectedTestPeriod": "2026-10-14 through 2026-10-27",
+    "projectedSkillsNotice": "2026-11-17",
+    "projectedSkillsPeriod": "2026-11-21 through 2026-11-22",
+    "projectedFinalList": "2026-12-15"
+  },
+  "warning": "This later additional/general testing round is a separate evidence layer. It must not overwrite the February 13th Manufacturing cycle unless an official artifact explicitly establishes the same route/cycle relationship."
+}

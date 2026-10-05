@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026","tj-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste, Pakistan and Tajikistan")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026","tj-e9-manufacturing-2026","kg-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste, Pakistan, Tajikistan and Kyrgyzstan")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -614,17 +614,62 @@ for exact_id in [
 ]:
     require(exact_id in tj_exact_ids,f"Tajikistan exact-answer catalog missing {exact_id}")
 
+
+kg_entry=routes["kg-e9-manufacturing-2026"]
+kg_pack=load("docs/data/kg_e9_manufacturing_2026.json")
+kg_exact=load("docs/data/kg_exact_answer_rules_2026.json")
+kg_docs=load("docs/data/kg_document_packs_2026.json")
+kg_special=load("docs/data/kg_special_eps_topik_2026.json")
+kg_additional=load("docs/data/kg_additional_general_round_2026.json")
+kg_readiness=load("docs/data/kg_stage_readiness_2026.json")
+require(kg_entry.get("lifecycle")=="research_hold" and kg_entry.get("publicAvailability")=="preview_only","Kyrgyzstan registry route must remain preview-only HOLD")
+require(kg_pack.get("lifecycle")=="research_hold" and kg_pack.get("publicAvailability")=="preview_only","Kyrgyzstan pack must remain preview-only HOLD")
+require(kg_pack.get("safety",{}).get("betaIntakeOpen") is False,"Kyrgyzstan beta intake must remain closed")
+require(kg_pack.get("safety",{}).get("manufacturingSectorCrossSourceVerified") is True,"Kyrgyzstan Manufacturing sector linkage must remain cross-source verified")
+require(kg_pack.get("safety",{}).get("laterGeneralRoundMustNotOverwrite13thManufacturing") is True,"Kyrgyzstan later general round must not overwrite the 13th Manufacturing route")
+require(kg_pack.get("safety",{}).get("specialRouteFactsExcludedFromManufacturing") is True,"Kyrgyzstan Special facts must remain outside Regular Manufacturing")
+require(kg_pack.get("exactAnswerRulesFile")=="data/kg_exact_answer_rules_2026.json","Kyrgyzstan pack must link exact answers")
+require(kg_pack.get("documentPacksFile")=="data/kg_document_packs_2026.json","Kyrgyzstan pack must link document packs")
+require(kg_pack.get("stageReadinessFile")=="data/kg_stage_readiness_2026.json","Kyrgyzstan pack must link readiness")
+kg_current=kg_readiness.get("currentCycle",{})
+require(kg_current.get("manufacturingSectorLinkage",{}).get("status")=="verified_cross_source","Kyrgyzstan Manufacturing sector linkage must remain verified_cross_source")
+require(kg_current.get("registration",{}).get("status")=="closed_verified","Kyrgyzstan 13th registration must remain closed_verified")
+require(kg_current.get("registrationDocuments",{}).get("status")=="verified_current_cycle","Kyrgyzstan registration documents must remain current-cycle verified")
+require(kg_current.get("epsTopik",{}).get("status")=="completed_verified","Kyrgyzstan Round 1 must remain completed_verified")
+require(kg_current.get("skillsTest",{}).get("status")=="completed_verified","Kyrgyzstan Skills Test must remain completed_verified")
+require(kg_current.get("postSelectionRoster",{}).get("status")=="verified_current_cycle_historical_window","Kyrgyzstan June post-selection/roster window must remain verified but historical")
+require(kg_current.get("slcVisaDeparture",{}).get("status")=="research_pending_current_exact_rules","Kyrgyzstan SLC/visa/departure must remain gated")
+require(kg_readiness.get("betaReadiness",{}).get("status")=="blocked","Kyrgyzstan beta must remain blocked")
+require(kg_special.get("excludedFromRegular13thManufacturing") is True,"Kyrgyzstan Special route must be excluded from Regular 13th Manufacturing")
+require(kg_additional.get("excludedFromRegular13thManufacturing") is True,"Kyrgyzstan later additional/general round must be excluded from Regular 13th Manufacturing")
+kg_doc_ids={p.get("id") for p in kg_docs.get("packs",[])}
+require({"kg_13th_online_registration","kg_13th_postselection_roster"}.issubset(kg_doc_ids),"Kyrgyzstan document packs must cover registration and post-selection roster")
+kg_regpack=next((p for p in kg_docs.get("packs",[]) if p.get("id")=="kg_13th_online_registration"),{})
+require(kg_regpack.get("fee",{}).get("amountUsd")==28 and kg_regpack.get("fee",{}).get("currentForThisCycle") is True,"Kyrgyzstan 13th-cycle fee must remain US$28")
+require(len(kg_regpack.get("items",[]))==4,"Kyrgyzstan online registration pack must preserve four verified items")
+kg_postpack=next((p for p in kg_docs.get("packs",[]) if p.get("id")=="kg_13th_postselection_roster"),{})
+require(kg_postpack.get("medicalWindow")=="2026-06-09 through 2026-06-11","Kyrgyzstan current-cycle medical window must remain exact")
+require(kg_postpack.get("fullPackageSubmissionDate")=="2026-06-15","Kyrgyzstan current-cycle full-package submission date must remain exact")
+kg_exact_ids={row.get("id") for row in kg_exact.get("answers",[])}
+for exact_id in [
+    "kg_2026_manufacturing_linkage","kg_2026_registration_window","kg_2026_exam_fee",
+    "kg_2026_registration_files","kg_2026_test_announcement","kg_2026_bishkek_test_period",
+    "kg_2026_osh_test_period","kg_2026_skills_dates","kg_2026_postselection_documents",
+    "kg_2026_roster_rule","kg_2026_anti_broker_rule","kg_2026_later_round_firewall","kg_2026_special_firewall"
+]:
+    require(exact_id in kg_exact_ids,f"Kyrgyzstan exact-answer catalog missing {exact_id}")
+
 coverage=load("docs/data/country_coverage_matrix_2026.json")
 coverage_rows={row.get("country"):row for row in coverage.get("countries",[])}
 expected_sending={"PH","TH","ID","VN","LK","MN","UZ","PK","KH","CN","BD","KG","NP","MM","TL","LA","TJ"}
 require(set(coverage_rows)==expected_sending,"coverage matrix must account for exactly all 17 HRD Korea EPS sending countries")
 require(coverage.get("summary",{}).get("listedSendingCountries")==17,"coverage matrix listedSendingCountries must remain 17")
-require(coverage.get("summary",{}).get("registeredManufacturingCountryPacks")==15,"coverage matrix must report 15 registered Manufacturing Country Packs")
-require(coverage.get("summary",{}).get("pendingManufacturingVerification")==2,"coverage matrix must report 2 pending Manufacturing countries")
+require(coverage.get("summary",{}).get("registeredManufacturingCountryPacks")==16,"coverage matrix must report 16 registered Manufacturing Country Packs")
+require(coverage.get("summary",{}).get("pendingManufacturingVerification")==1,"coverage matrix must report 1 pending Manufacturing country")
 registered={code for code,row in coverage_rows.items() if row.get("status")=="country_pack_registered"}
 pending={code for code,row in coverage_rows.items() if row.get("status")=="pending_manufacturing_verification"}
-require(pending=={"KG","MM"},"only Kyrgyzstan and Myanmar may remain pending Manufacturing verification")
-require(len(registered)==15,"coverage matrix must contain exactly 15 registered Manufacturing Country Packs")
+require(pending=={"MM"},"only Myanmar may remain pending Manufacturing verification")
+require(len(registered)==16,"coverage matrix must contain exactly 16 registered Manufacturing Country Packs")
 registry_countries={entry.get("country") for entry in routes.values()}
 require(registered==registry_countries,"coverage registered-country set must exactly match country_packs_v1 registry")
 for code in registered:
@@ -636,7 +681,8 @@ for code in pending:
     require(code not in registry_countries,f"{code}: pending country must not have a promoted Manufacturing Country Pack")
     require(len(row.get("blockers",[]))>=1,f"{code}: pending coverage row must state blockers")
     require(bool(row.get("officialSendingAgency")),f"{code}: pending coverage row must retain official sending agency")
-require(coverage_rows["KG"].get("evidence",{}).get("note","").find("sectorless")>=0,"Kyrgyzstan pending reason must preserve sectorless Point System evidence")
+require(coverage_rows["KG"].get("routeId")=="kg-e9-manufacturing-2026","Kyrgyzstan coverage row must point to promoted Manufacturing Country Pack")
+require(coverage_rows["KG"].get("promotionEvidence",{}).get("rule","").find("2026-02-23 through 2026-02-27")>=0,"Kyrgyzstan coverage must preserve cross-source Manufacturing promotion evidence")
 require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
 require(coverage_rows["TJ"].get("routeId")=="tj-e9-manufacturing-2026","Tajikistan coverage row must point to promoted Manufacturing Country Pack")
 require(coverage_rows["TJ"].get("promotionEvidence",{}).get("rule","").find("same 2026-03-02 through 2026-03-05 registration window")>=0,"Tajikistan coverage must preserve cross-source Manufacturing promotion evidence")
@@ -646,10 +692,10 @@ dashboard=load("docs/data/country_readiness_dashboard_2026.json")
 dashboard_rows={row.get("country"):row for row in dashboard.get("rows",[])}
 require(set(dashboard_rows)==set(coverage_rows),"readiness dashboard must account for the same 17 sending countries as coverage matrix")
 require(dashboard.get("summary",{}).get("sendingCountries")==17,"readiness dashboard must report 17 sending countries")
-require(dashboard.get("summary",{}).get("registeredCountryPacks")==15,"readiness dashboard must report 15 registered Country Packs")
+require(dashboard.get("summary",{}).get("registeredCountryPacks")==16,"readiness dashboard must report 16 registered Country Packs")
 require(dashboard.get("summary",{}).get("betaHold")==1,"readiness dashboard must report exactly one beta HOLD route")
-require(dashboard.get("summary",{}).get("researchHold")==14,"readiness dashboard must report 14 research HOLD routes")
-require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==2,"readiness dashboard must report 2 pending Manufacturing countries")
+require(dashboard.get("summary",{}).get("researchHold")==15,"readiness dashboard must report 15 research HOLD routes")
+require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==1,"readiness dashboard must report 1 pending Manufacturing country")
 require(dashboard.get("summary",{}).get("datedReviewTriggers")==2,"readiness dashboard must report exactly two dated review triggers")
 require(dashboard.get("summary",{}).get("betaReady")==0,"readiness dashboard must not claim any beta-ready route")
 require(dashboard_rows["ID"].get("packState")=="beta_hold","Indonesia readiness state must remain beta_hold")
@@ -690,15 +736,16 @@ cambodia=(ROOT/"docs/kh.html").read_text(encoding="utf-8")
 timorleste=(ROOT/"docs/tl.html").read_text(encoding="utf-8")
 pakistan=(ROOT/"docs/pk.html").read_text(encoding="utf-8")
 tajikistan=(ROOT/"docs/tj.html").read_text(encoding="utf-8")
+kyrgyzstan=(ROOT/"docs/kg.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
-require("PENDING MANUFACTURING VERIFICATION" in countries and "Kyrgyzstan" in countries and "Myanmar" in countries,"countries page must expose the two pending Manufacturing countries")
-require('href="tj.html"' in countries,"countries page must expose promoted Tajikistan Country Pack")
+require("PENDING MANUFACTURING VERIFICATION" in countries and "Myanmar" in countries,"countries page must expose the remaining pending Manufacturing country")
+require('href="tj.html"' in countries and 'href="kg.html"' in countries,"countries page must expose promoted Tajikistan and Kyrgyzstan Country Packs")
 require('href="readiness.html"' in countries,"countries page must link readiness dashboard")
 require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
 require("country_readiness_dashboard_2026.json" in readiness_js,"readiness renderer must load the readiness dashboard data")
 require("No promoted Manufacturing routeId" in readiness_js,"readiness renderer must visibly distinguish pending countries")
-require('href="kg.html"' not in countries and 'href="mm.html"' not in countries,"pending countries must not expose fake Country Pack links")
-require("This is not a Manufacturing Country Pack yet." in countries,"pending-country UI must clearly state that unverified routes are not Country Packs")
+require('href="kg.html"' in countries and 'href="mm.html"' not in countries,"Kyrgyzstan must be promoted while Myanmar remains pending")
+require("PENDING MANUFACTURING VERIFICATION" in countries,"pending-country UI must clearly preserve the remaining unverified route state")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
@@ -749,10 +796,14 @@ require('href="beta.html"' not in pakistan and 'id="betaForm"' not in pakistan,"
 require("RESEARCH / HOLD" in tajikistan and "330 somoni" in tajikistan and "2026-03-02" in tajikistan and "2026-03-29" in tajikistan,"Tajikistan preview must show verified Manufacturing facts")
 require("3.5×4.5" in tajikistan and "Foreign passport" in tajikistan,"Tajikistan preview must expose verified registration-document basics")
 require('href="beta.html"' not in tajikistan and 'id="betaForm"' not in tajikistan,"Tajikistan preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in kyrgyzstan and "2026-02-23" in kyrgyzstan and "US$28" in kyrgyzstan,"Kyrgyzstan preview must show verified Manufacturing registration and fee")
+require("2026-05-30" in kyrgyzstan and "2026-06-09" in kyrgyzstan and "2 жылдык" in kyrgyzstan,"Kyrgyzstan preview must expose Skills Test, post-selection medical and two-year roster facts")
+require("ANTI-BROKER RULE" in kyrgyzstan and "ROUTE FIREWALLS" in kyrgyzstan,"Kyrgyzstan preview must expose anti-broker and later-route firewalls")
+require('href="beta.html"' not in kyrgyzstan and 'id="betaForm"' not in kyrgyzstan,"Kyrgyzstan preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold pakistan=research_hold tajikistan=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold pakistan=research_hold tajikistan=research_hold kyrgyzstan=research_hold" % (len(routes),len(EXPECTED)))

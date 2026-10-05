@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "EPS sending countries listed by HRD Korea; Manufacturing E-9 Country Pack coverage",
@@ -98,20 +98,17 @@
     {
       "country": "KG",
       "countryName": "Kyrgyzstan",
-      "status": "pending_manufacturing_verification",
-      "officialSendingAgency": "The Center for employment of Citizens Abroad (CEC)",
-      "evidence": {
-        "sendingAgencySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-        "verified2026CountryRoundSources": [
+      "status": "country_pack_registered",
+      "routeId": "kg-e9-manufacturing-2026",
+      "promotionEvidence": {
+        "localManufacturingNotice": "https://migrant.kg/ru/about/news/vazhnaia-informatsiia-dlia-zhelaiushchikh-uchastvovat-v-testirovanii-na-znanie-koreiskogo-iazyka-v-2026-godu/",
+        "hrdPointSystemSchedules": [
           "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=8&examYear=2026&lang=ko&lcnsId=001",
           "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=7&examYear=2026&lang=ko&lcnsId=001"
         ],
-        "note": "Direct official 2026 Point System city pages exist for Bishkek and Osh, but the verified titles are sectorless. Manufacturing linkage is not promoted."
-      },
-      "blockers": [
-        "no direct official 2026 Manufacturing-labelled schedule artifact captured",
-        "sector linkage from country-level Point System to Manufacturing is not verified"
-      ]
+        "postSelectionNotice": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+        "rule": "Official Kyrgyz Manufacturing notice and HRD Korea 13th Point System city schedules share the same 2026-02-23 through 2026-02-27 registration window; the June official notice continues the same Manufacturing cycle into medical/roster preparation."
+      }
     },
     {
       "country": "MM",
@@ -142,7 +139,7 @@
   ],
   "summary": {
     "listedSendingCountries": 17,
-    "registeredManufacturingCountryPacks": 15,
-    "pendingManufacturingVerification": 2
+    "registeredManufacturingCountryPacks": 16,
+    "pendingManufacturingVerification": 1
   }
 }
