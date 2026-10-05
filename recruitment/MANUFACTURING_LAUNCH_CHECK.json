@@ -2,17 +2,21 @@
   "version": "1.0.0",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "scope": "2026 Manufacturing online job-application detailed notice",
-  "checkedAt": "2026-10-04",
+  "checkedAt": "2026-10-06",
   "result": "no_current_manufacturing_job_application_notice",
   "primaryIndex": "https://kp2mi.go.id/gtog-korea/info",
   "officialEvidence": [
     {
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "interpretation": "Official 2026 Manufacturing/Fisheries exam notice. Manufacturing EPS-TOPIK ran 2026-06-04 through 2026-08-14; Manufacturing minimum score is 60. This does not itself establish a Manufacturing result, Skill Test or online job-application notice."
+    },
+    {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
-      "interpretation": "2026 Manufacturing/Fisheries EPS-TOPIK registration notice; not a Manufacturing online job-application detail notice."
+      "interpretation": "2026 Manufacturing/Fisheries Point-System registration notice; it describes the planned two-stage route and psychology/MCU-I dependency but is not a Manufacturing post-exam result/job-application notice."
     },
     {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
-      "interpretation": "2026 online job-application detail notice is explicitly Fisheries-sector scoped and must not be reused for Manufacturing."
+      "interpretation": "2026 online job-application notice is explicitly Fisheries-sector scoped and must not be reused for Manufacturing."
     }
   ],
   "heldQuestions": [
@@ -22,5 +26,18 @@
     "job_edit",
     "job_submit"
   ],
-  "releaseRule": "If a Manufacturing-specific 2026 online job-application notice is found, change result to notice_found_review_required and do not OPEN until structured rules and launch checks are updated."
+  "releaseRule": "Keep beta access HOLD. If current Manufacturing result/Skill Test/job-application evidence is found, review and structure the exact route first; public beta still requires same-day official-source re-check plus explicit manual OPEN approval.",
+  "currentCohortState": {
+    "registration": "closed",
+    "epsTopikExam": "completed_2026-06-04_through_2026-08-14",
+    "manufacturingResultNotice": "not_found_in_current_official_recheck",
+    "manufacturingSkillTestNotice": "not_found_in_current_official_recheck",
+    "manufacturingOnlineJobApplicationNotice": "not_found_in_current_official_recheck",
+    "fisheriesJobApplicationNotice": "verified_but_sector_incompatible"
+  },
+  "upstreamHolds": [
+    "manufacturing_result_or_next_stage_notice",
+    "manufacturing_skill_test_notice",
+    "manufacturing_online_job_application_notice"
+  ]
 }
