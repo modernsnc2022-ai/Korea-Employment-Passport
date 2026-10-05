@@ -1,0 +1,294 @@
+{
+  "country": "TJ",
+  "countryName": "Tajikistan",
+  "nativeCountryName": "Тоҷикистон",
+  "visa": "E-9",
+  "sector": "manufacturing",
+  "cycle": 2026,
+  "recruitmentCycleBasis": "2026-2nd-point-system-tajikistan-manufacturing-cross-source-verified",
+  "goal": "zero-private-broker",
+  "packVersion": "0.1.0",
+  "lifecycle": "research_hold",
+  "publicAvailability": "preview_only",
+  "lastVerified": "2026-10-06",
+  "officialSendingAgency": {
+    "name": "Agency of Overseas Employment",
+    "ministry": "Ministry of Labour, Migration and Employment of Population of the Republic of Tajikistan",
+    "website": "https://mehnat.tj/",
+    "authorityEvidenceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "registrationNoticeUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+    "officialRegistrationAddress": "Dushanbe, Lohuti Street 80",
+    "registrationContacts": [
+      "221-39-83",
+      "221-39-67",
+      "930934994 (WhatsApp/Telegram)"
+    ],
+    "hrdContact": "992372503548"
+  },
+  "evidenceNotes": [
+    "The Tajikistan Ministry of Labour official notice explicitly states EPS-TOPIK employment in the manufacturing sector and registration from 2026-03-02 through 2026-03-05.",
+    "HRD Korea's 2nd Tajikistan Point System page has the same registration period and records test announcement 2026-03-20 and test period 2026-03-28 through 2026-03-29, General CBT, Point System.",
+    "The official local notice states a 330 somoni exam fee, age 18–39 for the cycle, foreign-passport data, and a 3.5×4.5 cm white-background electronic color photo.",
+    "Current 2nd-cycle skills/final result, post-selection medical/job-file, visa/training/departure exact rules remain HOLD."
+  ],
+  "safety": {
+    "noGovernmentImpersonation": true,
+    "noJobGuarantee": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "noPrivateBrokerRequiredTarget": true,
+    "betaIntakeOpen": false,
+    "manufacturingSectorCrossSourceVerified": true,
+    "postSelectionFactsRequireCurrentArtifact": true
+  },
+  "stages": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility check",
+      "authority": "Agency of Overseas Employment / Ministry of Labour",
+      "kind": "rules",
+      "action": "Current Tajikistan Manufacturing notice requires Tajik citizenship, Korean-language ability under EPS-TOPIK, age 18–39 for this cycle (DOB 1986-03-03 through 2008-03-02), no criminal record, no Korea entry ban/deportation issue, and health without infectious disease; use the original official notice for exact applicant assessment.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "verified_current_local"
+    },
+    {
+      "id": "registration",
+      "title": "2nd Point System Manufacturing registration",
+      "authority": "Agency of Overseas Employment / HRD Korea",
+      "kind": "official_action",
+      "action": "Manufacturing applications were accepted 2026-03-02 through 2026-03-05. This local Manufacturing notice matches the HRD Korea 2nd Point System registration window.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "verified_cross_source_closed"
+    },
+    {
+      "id": "exam_fee",
+      "title": "EPS-TOPIK examination fee",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_payment",
+      "action": "The official Tajikistan Manufacturing notice states an examination fee of 330 somoni.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "verified_current_local"
+    },
+    {
+      "id": "biometric",
+      "title": "Identity verification",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_action",
+      "action": "Use the foreign passport and exact identity information required by the current official notice. Information must match the passport and be entered correctly in Latin letters.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "verified_current_local"
+    },
+    {
+      "id": "document_verify",
+      "title": "Registration document verification",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_action",
+      "action": "The official notice requires a phone number, an electronic copy of the foreign passport, and an electronic color photo 3.5×4.5 cm on a white background. Incorrect passport data can invalidate exam participation or later visa processing.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "verified_current_local"
+    },
+    {
+      "id": "exam_card",
+      "title": "Test announcement",
+      "authority": "HRD Korea / Agency of Overseas Employment",
+      "kind": "self_service",
+      "action": "HRD Korea records the test announcement date as 2026-03-20 for Tajikistan's 2nd Point System.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current"
+    },
+    {
+      "id": "eps_topik",
+      "title": "EPS-TOPIK — 2nd Point System Manufacturing",
+      "authority": "HRD Korea / Agency of Overseas Employment",
+      "kind": "official_exam",
+      "action": "HRD Korea records the General CBT Point System test period as 2026-03-28 through 2026-03-29. Manufacturing sector linkage is supported by the matching official Tajikistan local notice.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_cross_source_completed"
+    },
+    {
+      "id": "skill_competency",
+      "title": "Skills Test — Round 2",
+      "authority": "HRD Korea / Agency of Overseas Employment",
+      "kind": "official_exam",
+      "action": "Point System Round 2 skills structure follows HRD Korea policy, but KEP has not yet verified a current Tajikistan 2nd-cycle skills-candidate schedule or result artifact.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
+      "supportState": "current_cycle_artifact_pending"
+    },
+    {
+      "id": "final_selection",
+      "title": "Point-based final selection",
+      "authority": "HRD Korea / Agency of Overseas Employment",
+      "kind": "official_result",
+      "action": "Do not infer final selection from EPS-TOPIK completion. A current Tajikistan 2nd-cycle final-result artifact must be verified before promotion.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "supportState": "current_cycle_result_pending"
+    },
+    {
+      "id": "psychology_pre_job",
+      "title": "Country-specific pre-job checks",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_requirement",
+      "action": "No separate Tajikistan psychology stage is asserted from the verified 2026 Manufacturing sources.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "not_asserted"
+    },
+    {
+      "id": "mcu1",
+      "title": "Medical examination",
+      "authority": "Agency of Overseas Employment / authorized provider",
+      "kind": "official_requirement",
+      "action": "The registration notice requires applicants to be healthy and free from infectious disease, but exact post-selection provider/checklist/fee rules remain current-notice specific.",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "supportState": "post_selection_details_pending"
+    },
+    {
+      "id": "job_application",
+      "title": "Employment-candidate file",
+      "authority": "Agency of Overseas Employment / HRD Korea",
+      "kind": "official_action",
+      "action": "After verified final selection, follow current Tajikistan candidate-file instructions. Exact 2026 post-selection documents and timing remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "roster",
+      "title": "EPS Job Seekers' Roster",
+      "authority": "Agency of Overseas Employment / HRD Korea",
+      "kind": "official_wait",
+      "action": "Only officially qualified candidates proceed into EPS employer selection. Private intermediaries cannot guarantee priority or placement.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "employer_selection",
+      "title": "Korean employer selection",
+      "authority": "Korean employer / EPS",
+      "kind": "official_wait",
+      "action": "Wait for selection through the official EPS system. No private intermediary can guarantee a specific employer.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "supportState": "shared_eps_principle"
+    },
+    {
+      "id": "slc",
+      "title": "Standard Labour Contract (SLC)",
+      "authority": "HRD Korea / Agency of Overseas Employment",
+      "kind": "official_contract",
+      "action": "If selected, follow current official Tajikistan/EPS instructions for SLC review/signing.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "post_slc_requirements",
+      "title": "Post-SLC Tajikistan requirements",
+      "authority": "Agency of Overseas Employment",
+      "kind": "conditional_official",
+      "action": "Follow current official instructions for medical follow-up, training, visa, payments and departure.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "visa_docs",
+      "title": "Visa document package",
+      "authority": "Agency of Overseas Employment / Korean mission",
+      "kind": "official_requirement",
+      "action": "Use the current Tajikistan/Korean-mission visa checklist and fees. Exact 2026 downstream details remain HOLD.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "predeparture_training",
+      "title": "Pre-departure training",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_training",
+      "action": "Complete only official training assigned to selected Korea-bound workers.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "mcu3_departure",
+      "title": "Final health/departure readiness",
+      "authority": "Agency of Overseas Employment",
+      "kind": "official_requirement",
+      "action": "Do not invent an Indonesia-style MCU-III stage; follow current Tajikistan instructions if a final medical recheck is required.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "departure",
+      "title": "Official departure",
+      "authority": "Agency of Overseas Employment / HRD Korea",
+      "kind": "official_action",
+      "action": "Travel only after contract, visa, training and official departure requirements are complete.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "supportState": "research_pending"
+    },
+    {
+      "id": "korea_entry_training",
+      "title": "Korea entry + employment education",
+      "authority": "HRD Korea / employment training institution",
+      "kind": "official_training",
+      "action": "After entry, complete official Korea-side employment education and handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employer_handover",
+      "title": "Employer handover",
+      "authority": "Employment training institution / employer",
+      "kind": "official_completion",
+      "action": "Confirm workplace, accommodation and emergency contacts during official handover.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "residence_registration",
+      "title": "Residence Card / foreigner registration",
+      "authority": "Korea Immigration Service",
+      "kind": "official_requirement",
+      "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card.",
+      "sourceUrl": "https://www.hikorea.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "eps_insurance_check",
+      "title": "EPS insurance check",
+      "authority": "HRD Korea EPS / employer / worker",
+      "kind": "official_requirement",
+      "action": "Confirm required EPS insurance obligations through official EPS information.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "first_payroll_check",
+      "title": "First payroll check",
+      "authority": "Employer / Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules.",
+      "sourceUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "labor_support_ready",
+      "title": "Labor support readiness",
+      "authority": "Ministry of Employment and Labor",
+      "kind": "self_service",
+      "action": "Keep official labor-support routes and contract/payroll evidence ready for wage or labor issues.",
+      "sourceUrl": "https://labor.moel.go.kr/",
+      "supportState": "shared_korea_core"
+    },
+    {
+      "id": "employment_maintenance",
+      "title": "Employment / workplace-change readiness",
+      "authority": "MOEL employment center / EPS",
+      "kind": "conditional_official",
+      "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process.",
+      "sourceUrl": "https://eps.go.kr/",
+      "supportState": "shared_korea_core"
+    }
+  ],
+  "exactAnswerRulesFile": "data/tj_exact_answer_rules_2026.json",
+  "documentPacksFile": "data/tj_document_packs_2026.json",
+  "registrationNoticeFile": "data/tj_registration_notice_2026.json",
+  "stageReadinessFile": "data/tj_stage_readiness_2026.json"
+}
