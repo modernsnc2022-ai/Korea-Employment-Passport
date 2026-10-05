@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-first-phase-eps-topik-application-announced-2026-07-21",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-05",
@@ -48,12 +48,12 @@
       "title": "Official EPS application / registration",
       "authority": "EPS Korea Section Nepal",
       "kind": "official_action",
-      "action": "The verified 2026 first-phase application window was 2026-07-27 through 2026-08-02 and is now closed. Use only the official EPS Nepal portal when a valid application window is open.",
+      "action": "The primary 2026 first-phase notice set an application window of 2026-07-27 through 2026-08-02, now closed. Official supplementary notices during the window included a temporary suspension and later resumption of the online system; no deadline extension is claimed unless separately verified.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
       "supportState": "verified_current",
       "officialActionUrl": "https://eoers.epsnepal.gov.np/",
       "officialActionLabel": "Open official EPS Nepal application portal",
-      "warning": "Do not pay a private intermediary for a late or unofficial application. The verified first-phase 2026 window is closed."
+      "warning": "Do not pay a private intermediary for a late or unofficial application. Operational supplementary notices are tracked separately, and later notices must not be guessed from their titles."
     },
     {
       "id": "exam_fee",
@@ -78,9 +78,9 @@
       "title": "Application document verification",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
-      "action": "Before submission, verify passport identity data and upload files against the official 2026 specifications: passport photo-page JPG 600 px wide under 89 KB and recent application photo 3.5×4.5 cm, JPG 100–300 px wide, 8–14 KB.",
+      "action": "Use the 2026 primary notice as the verified baseline for passport/photo uploads. A later 2026-07-30 official notice specifically concerns online submission and passport; its exact content remains under review, so do not present the primary passport rule as exhaustive.",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "supportState": "verified_current"
+      "supportState": "verified_primary_notice_supplementary_review_pending"
     },
     {
       "id": "exam_card",
@@ -297,6 +297,14 @@
       "service1": 100,
       "forestry": 100,
       "total": 7200
+    },
+    "operationalHistory": {
+      "supplementaryNoticeCount": 4,
+      "temporarySuspensionObserved": true,
+      "resumptionObserved": true,
+      "deadlineExtensionVerified": false,
+      "exactSupplementaryContentReviewComplete": false
     }
-  }
+  },
+  "registrationNoticesFile": "data/np_registration_notices_2026.json"
 }
