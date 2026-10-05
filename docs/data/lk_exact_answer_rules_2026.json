@@ -1,0 +1,259 @@
+{
+  "version": "1.0.0",
+  "routeId": "lk-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "Use the 2026-09-28 SLBFE/HRD Korea point-system notice for current Manufacturing exact facts. Do not reuse the completed 10th Point System as the current recruitment cycle.",
+  "primaryNotice": {
+    "title": "Notice on the Implementation of the Point-Based Selection System for Foreign Workers",
+    "pageUrl": "https://www.slbfe.lk/slbfe-announcement/notice-on-the-implementation-of-the-point-based-selection-system-for-foreign-workers-3/",
+    "pdfUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+    "publishedAt": "2026-09-28"
+  },
+  "answers": [
+    {
+      "id": "lk_2026_manufacturing_quota",
+      "stages": [
+        "registration",
+        "final_selection"
+      ],
+      "question": "What is the scheduled Manufacturing quota?",
+      "answer": "1,000.",
+      "writeExactly": "Current Manufacturing quota: 1,000.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_application_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When is the application period?",
+      "answer": "October 26 through October 30, 2026.",
+      "writeExactly": "Apply through SLBFE during 2026-10-26 through 2026-10-30, subject to official instructions.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_application_instructions_date",
+      "stages": [
+        "registration"
+      ],
+      "question": "When will SLBFE publish application-completion instructions?",
+      "answer": "October 12, 2026.",
+      "writeExactly": "Check SLBFE on 2026-10-12 for application-completion instructions before submitting.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_exam_fee",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What is the application fee?",
+      "answer": "US$28, stated as LKR 9,250.",
+      "writeExactly": "Official fee: US$28 / LKR 9,250 under the current notice.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_age_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What age range applies?",
+      "answer": "18–39; DOB 1986-10-27 through 2008-10-26.",
+      "writeExactly": "Current age rule: 18–39, DOB 1986-10-27 through 2008-10-26.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_criminal_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What criminal-history rule applies?",
+      "answer": "No criminal record of imprisonment or heavier legal punishment.",
+      "writeExactly": "Applicant must satisfy the current criminal-history condition.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_deportation_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What Korea departure-history rule applies?",
+      "answer": "No history of forced deportation or departure from Korea.",
+      "writeExactly": "Applicant must have no forced deportation/departure history from Korea.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_travel_ban",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "Can a person with a travel-ban reason apply?",
+      "answer": "No.",
+      "writeExactly": "Applicant must have no reason for a travel ban.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_color_rule",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What color-vision rule applies?",
+      "answer": "No color blindness or color weakness.",
+      "writeExactly": "Color blindness or color weakness is ineligible.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_e9_e10_limit",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What prior Korea stay limit applies?",
+      "answer": "No experience of staying in Korea for five years or longer under E-9 or E-10, with the notice noting a six-year exception context for certain legally extended employment activity.",
+      "writeExactly": "Use the exact current E-9/E-10 stay rule from the notice; ordinary eligibility requires less than five years.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_one_industry",
+      "stages": [
+        "registration",
+        "final_selection"
+      ],
+      "question": "Can an applicant select more than one industry?",
+      "answer": "No. Select one industry only; it cannot be changed after passing Round 1.",
+      "writeExactly": "Choose one industry only; after Round 1 pass, it cannot be changed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_passport_spec",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What passport scan requirements are stated?",
+      "answer": "One passport copy/file; key identity data must match, file width 600 px and 100 KB or less; passport valid at least 3 months from application date.",
+      "writeExactly": "Make passport identity data match the application; use the current 600 px / ≤100 KB requirement and ensure at least 3 months validity from application.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_photo_spec",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What photo file requirements are stated?",
+      "answer": "3.5×4.5 cm, white background, taken within 6 months, JPG ≤15 KB, 100–300 pixels.",
+      "writeExactly": "Use a recent white-background 3.5×4.5 cm JPG, ≤15 KB, 100–300 px.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_test_notice_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "When will test requirements/date and venue be announced?",
+      "answer": "November 16, 2026.",
+      "writeExactly": "Check SLBFE on/after 2026-11-16 for the official test requirements and individual schedule.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_test_start",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "When does the UBT period begin?",
+      "answer": "November 25, 2026, with the broader period extending into March 2027 subject to change.",
+      "writeExactly": "UBT begins 2026-11-25; individual dates come from SLBFE and the overall period may change.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_test_format",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What is the EPS-TOPIK format?",
+      "answer": "40 multiple-choice questions: 20 reading + 20 listening, 50 minutes total.",
+      "writeExactly": "Round 1: 20 reading + 20 listening = 40 questions / 50 minutes.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_skill_rule",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "What is included in the mandatory Skills Test?",
+      "answer": "Physical fitness (hand/back strength), interview and basic skills test; optional Job Capacity Assessment can add points for verified work experience/training/education/qualifications.",
+      "writeExactly": "Round 2 is mandatory; job-capacity documents can add points if verified.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_skill_floor",
+      "stages": [
+        "skill_competency",
+        "final_selection"
+      ],
+      "question": "What happens below 60% on the Skills Test?",
+      "answer": "Applicants scoring below 60% of the Skills Test maximum are screened out.",
+      "writeExactly": "Skills Test score below 60% of maximum fails the screening rule.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_false_docs_penalty",
+      "stages": [
+        "document_verify",
+        "skill_competency"
+      ],
+      "question": "What happens if submitted documents are false?",
+      "answer": "Results are nullified and the applicant is barred from applying to EPS for four years, with possible legal action.",
+      "writeExactly": "Do not submit false documents; the current notice provides for nullification, a four-year EPS ban and possible legal action.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "lk_2026_no_job_guarantee",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Does final success or roster inclusion guarantee a job?",
+      "answer": "No.",
+      "writeExactly": "Job-seekers roster eligibility does not guarantee employment in Korea.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "verifiedAt": "2026-10-06"
+    }
+  ]
+}
