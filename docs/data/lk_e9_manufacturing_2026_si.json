@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "සුදුසුකම් පරීක්ෂාව",
+    "action": "වයස 18–39 (1986-10-27 සිට 2008-10-26 දක්වා උපන්), සිරදඬුවම් මට්ටමේ අපරාධ වාර්තාවක් නොමැති වීම, කොරියාවෙන් බලහත්කාරයෙන් පිටත්/නෙරපා හැරීමේ ඉතිහාසයක් නොමැති වීම, විදේශ ගමන් තහනමක් නොමැති වීම, වර්ණ අන්ධතාව/වර්ණ දුර්වලතාව නොමැති වීම සහ E-9/E-10 පසුගිය රැඳී සිටීමේ සීමාව නිල නිවේදනයට අනුව පරීක්ෂා කරන්න."
+  },
+  "registration": {
+    "title": "Point System අයදුම් කිරීම",
+    "action": "වත්මන් අයදුම් කාලය 2026-10-26 සිට 2026-10-30 දක්වා SLBFE වෙබ් අඩවිය හරහාය. අයදුම්පත් සම්පූර්ණ කිරීමේ උපදෙස් 2026-10-12 දින SLBFE විසින් පළ කිරීමට නියමිතය."
+  },
+  "exam_fee": {
+    "title": "EPS-TOPIK අයදුම් ගාස්තුව",
+    "action": "වත්මන් නිල ගාස්තුව US$28 / රු. 9,250. ගෙවීම් සඳහා SLBFE නිල උපදෙස් පමණක් අනුගමනය කරන්න."
+  },
+  "biometric": {
+    "title": "අනන්‍යතාව තහවුරු කිරීම",
+    "action": "SLBFE/HRD Korea විසින් නිකුත් කරන වත්මන් අනන්‍යතා තහවුරු කිරීමේ උපදෙස් පමණක් අනුගමනය කරන්න; KEP නිල නිවේදනයෙන් පිටත අතිරේක biometric පියවරක් නිර්මාණය නොකරයි."
+  },
+  "document_verify": {
+    "title": "අයදුම් ලේඛන පරීක්ෂාව",
+    "action": "නිල අයදුම්පත, පාස්පෝට් පිටපත/ගොනුව, අලුත් ඡායාරූප ගොනුව සහ ගාස්තු ගෙවීම් slip සකස් කරන්න. පුද්ගලික තොරතුරු පාස්පෝට් සමඟ ගැළපිය යුතු අතර ප්‍රධාන දත්ත පසුව වෙනස් කළ නොහැක."
+  },
+  "exam_card": {
+    "title": "පරීක්ෂණ දිනය / ස්ථානය",
+    "action": "SLBFE කාලසටහන අනුව 2026-11-16 දින පරීක්ෂණ අවශ්‍යතා, දිනය හා ස්ථානය පිළිබඳ නිවේදනය පළ කිරීමට නියමිතය. පුද්ගලික දිනය SLBFE වෙබ් අඩවියෙන් පරීක්ෂා කරන්න."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — පළමු වටය",
+    "action": "UBT 2026-11-25 සිට ආරම්භ වේ. EPS-TOPIK ප්‍රශ්න 40කි: කියවීම 20 + සවන්දීම 20, මුළු කාලය මිනිත්තු 50කි."
+  },
+  "skill_competency": {
+    "title": "Skills Test — දෙවන වටය",
+    "action": "පළමු වටය සමත් අය සඳහා දෙවන වටය අනිවාර්යයි. ශාරීරික හැකියාව, සම්මුඛ පරීක්ෂණය හා මූලික කුසලතා පරීක්ෂණය ඇතුළත් වන අතර, සත්‍යාපිත පළපුරුද්ද/පුහුණුව/අධ්‍යාපනය/සුදුසුකම් සඳහා Job Capacity ලකුණු ලබා ගත හැක."
+  },
+  "final_selection": {
+    "title": "ලකුණු මත අවසාන තේරීම",
+    "action": "පළමු හා දෙවන වට ලකුණු එකතුව අනුව කර්මාන්ත කෝටාවට අනුව අවසාන තේරීම සිදු කෙරේ. Skills Test උපරිම ලකුණු වලින් 60% ට අඩු නම් තේරීමෙන් ඉවත් කරනු ලැබේ."
+  },
+  "psychology_pre_job": {
+    "title": "ශ්‍රී ලංකාවට විශේෂිත අතිරේක පරීක්ෂා",
+    "action": "වත්මන් නිවේදනයෙන් වෙනම psychology පියවරක් තහවුරු වී නොමැත; Indonesia හි psychology නීති ශ්‍රී ලංකාවට පිටපත් නොකරයි."
+  },
+  "mcu1": {
+    "title": "වෛද්‍ය පරීක්ෂාව",
+    "action": "අවසාන සමත් අය කොරියානු රැකියා වෛද්‍ය සුදුසුකම් සපුරාලිය යුතුය. වත්මන් post-selection වෛද්‍ය දිනය/සපයන්නා සඳහා SLBFE නිවේදනය අනුගමනය කරන්න."
+  },
+  "job_application": {
+    "title": "රැකියා අපේක්ෂක ලියාපදිංචිය",
+    "action": "අවසාන සමත් අය අවශ්‍ය වෛද්‍ය හා ලේඛන පරීක්ෂාවෙන් පසු job-seekers roster සඳහා සුදුසු විය හැක. නිවැරදි candidate-file උපදෙස් සඳහා වත්මන් SLBFE post-selection notice භාවිතා කරන්න."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "අවසාන සමත් අය roster සඳහා සුදුසු විය හැකි නමුත් roster එකට ඇතුළත් වීමෙන් කොරියාවේ රැකියාවක් සහතික නොවේ."
+  },
+  "employer_selection": {
+    "title": "කොරියානු සේවායෝජක තේරීම",
+    "action": "නිල EPS පද්ධතිය හරහා සේවායෝජක තේරීම සඳහා රැඳී සිටින්න. කිසිදු broker කෙනෙකුට තේරීම සහතික කළ නොහැක."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "කොරියානු සේවායෝජකයෙකු තෝරාගත් විට SLBFE හි වත්මන් job agreement/SLC උපදෙස් අනුගමනය කරන්න."
+  },
+  "post_slc_requirements": {
+    "title": "SLC පසු ශ්‍රී ලංකා අවශ්‍යතා",
+    "action": "වෛද්‍ය කාලසටහන්, police report, bond/agreement, training, visa සහ departure සඳහා වත්මන් SLBFE නිවේදන පමණක් භාවිතා කරන්න."
+  },
+  "visa_docs": {
+    "title": "වීසා ලේඛන පැකේජය",
+    "action": "SLBFE වත්මන් visa application උපදෙස් සහ job-agreement-specific අවශ්‍යතා භාවිතා කරන්න. ගාස්තු හා appointment විස්තර notice-specific වේ."
+  },
+  "predeparture_training": {
+    "title": "පිටත්වීමට පෙර පුහුණුව",
+    "action": "කොරියාවට යන තෝරාගත් ශ්‍රමිකයන් සඳහා SLBFE විසින් නියම කරන නිල pre-departure training සම්පූර්ණ කරන්න."
+  },
+  "mcu3_departure": {
+    "title": "අවසාන වෛද්‍ය / departure readiness",
+    "action": "agreement-signed / CCVI-received job seekers සඳහා SLBFE වත්මන් medical schedule භාවිතා කරන්න. Indonesia-style MCU-III පියවරක් නිර්මාණය නොකරයි."
+  },
+  "departure": {
+    "title": "නිල පිටත්වීම",
+    "action": "SLBFE/EPS හරහා agreement, visa, training, medical සහ departure සැලසුම් සියල්ල සම්පූර්ණ වූ පසුව පමණක් ගමන් කරන්න."
+  },
+  "korea_entry_training": {
+    "title": "කොරියාවට ඇතුළු වීම සහ රැකියා අධ්‍යාපනය",
+    "action": "කොරියාවට ඇතුළු වූ පසු නිල employment education සහ employer handover ක්‍රියාවලිය සම්පූර්ණ කරන්න."
+  },
+  "employer_handover": {
+    "title": "සේවායෝජකයා වෙත handover",
+    "action": "නිල handover අවස්ථාවේ සේවා ස්ථානය, නවාතැන් සහ හදිසි සම්බන්ධතා තහවුරු කරන්න."
+  },
+  "residence_registration": {
+    "title": "Residence Card / විදේශික ලියාපදිංචිය",
+    "action": "කොරියාවට පැමිණීමෙන් පසු වත්මන් Immigration නීති අනුව foreigner registration / Residence Card ක්‍රියාවලිය සම්පූර්ණ කරන්න."
+  },
+  "eps_insurance_check": {
+    "title": "EPS රක්ෂණ පරීක්ෂාව",
+    "action": "අදාළ EPS රක්ෂණ වගකීම් නිල EPS තොරතුරු මඟින් තහවුරු කරන්න."
+  },
+  "first_payroll_check": {
+    "title": "පළමු වැටුප පරීක්ෂා කිරීම",
+    "action": "SLC, වැඩ කරන පැය, අඩුකිරීම් සහ වැටුප් නීති සමඟ payslip සහ බැංකු තැන්පතුව සසඳන්න."
+  },
+  "labor_support_ready": {
+    "title": "ශ්‍රම සහාය සඳහා සූදානම් වීම",
+    "action": "නිල labor-support channel, contract, payslip සහ attendance evidence සුරකින්න."
+  },
+  "employment_maintenance": {
+    "title": "රැකියාව පවත්වා ගැනීම / සේවා ස්ථානය මාරු කිරීම",
+    "action": "නීත්‍යානුකූල workplace-change හේතුවක් තිබේ නම් කොරියාවේ නිල EPS හෝ employment-center ක්‍රියාවලිය භාවිතා කරන්න."
+  }
+}
