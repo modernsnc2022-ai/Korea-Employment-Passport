@@ -38,5 +38,19 @@
       "current post-selection medical/job-application exact rules not mapped",
       "current visa/training/departure exact rules not mapped"
     ]
+  },
+  "nextReviewTrigger": {
+    "date": "2026-10-19",
+    "subject": "DOE skills-test eligible-list publication for Point System Round 18",
+    "officialSources": [
+      "https://www.doe.go.th/overseas",
+      "https://www.thaigov.go.th/th/news/165372",
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    ],
+    "promoteOnlyWhen": [
+      "an official DOE or HRD Korea notice identifies the current Round 18 candidates or skills schedule",
+      "the notice content is reviewed before dates, locations or candidate status are added",
+      "Special EPS-TOPIK data are not reused"
+    ]
   }
 }
