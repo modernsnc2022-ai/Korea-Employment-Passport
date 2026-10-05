@@ -91,3 +91,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Sirothol Mustaqim Ansan WhatsApp probe | Indonesian Muslim / worker community in Ansan | Tested public number +82 10-2130-4155 via WhatsApp | **Invalid — number is not on WhatsApp; retire direct-number route** |
 
 | 2026-10-05 | Al Muhajirin Pyeongtaek WhatsApp probe | Indonesian PMI community/mosque in Pyeongtaek | Tested public number +82 10-5112-2321 via WhatsApp | **Invalid — number is not on WhatsApp; retire direct-number route** |
+
+| 2026-10-05 | UT Korea Selatan — WhatsApp | Indonesian PMI/student-worker network in Korea | Sent direct WhatsApp request asking for KEP beta sharing to PMI students/community and relevant internal group admins; message used `src=ut_korea_pmi` | **Sent — awaiting reply** |
