@@ -1,0 +1,186 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "source": {
+    "title": "Detailed information on the Employment Permit System (EPS)",
+    "pageContextUrl": "https://epsnepal.gov.np/notices",
+    "pdfUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
+    "publishedAt": "2026-03-25",
+    "authority": "Government of Nepal / Department of Foreign Employment / EPS Korea Section"
+  },
+  "currentnessPolicy": {
+    "processFlow": "verified_baseline",
+    "cohortDates": "must_use_current_notice",
+    "fees": "recheck_latest_notice_before_payment",
+    "medicalProviders": "recheck_latest_designated-provider_notice",
+    "visaPayment": "volatile_2026_multiple_change_notices"
+  },
+  "steps": [
+    {
+      "id": "biometric_registration",
+      "stageId": "biometric",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section, Gwarko",
+      "rule": "Attend biometric registration at the EPS Korea Section in Gwarko on the day before the assigned exam date with the original passport and admission card."
+    },
+    {
+      "id": "exam_day_biometric",
+      "stageId": "eps_topik",
+      "status": "verified_process_baseline",
+      "authority": "UBT/CBT hall, Bhaisepati",
+      "rule": "Arrive 1.5 hours before the exam with the original passport and admission card. Biometric verification and color-vision checking are part of the exam process."
+    },
+    {
+      "id": "medical_and_police",
+      "stageId": "mcu1",
+      "status": "verified_process_baseline_recheck_provider",
+      "authority": "Designated hospitals / Nepal Police",
+      "designatedHospitalsAsListed": [
+        "Civil",
+        "Shukraraj",
+        "Korea Friendship",
+        "Patan"
+      ],
+      "baselineMedicalFeeUsd": 55.64,
+      "rule": "Complete the medical examination at a designated hospital on the assigned date/time and prepare the police report online. Recheck the current hospital list and fee before payment."
+    },
+    {
+      "id": "employment_application",
+      "stageId": "job_application",
+      "status": "verified_process_baseline_current_cohort_window_pending",
+      "authority": "EPS Korea Section Nepal",
+      "baselineFeeUsd": 5,
+      "requiredBaselineItems": [
+        "passport",
+        "ID photo",
+        "medical examination report",
+        "police report",
+        "employment application form"
+      ],
+      "rule": "For the official employment-application stage, upload the required items through the EPS process and pay the stated online fee. Exact 2026 first-phase cohort dates/checklist must come from its own future notice."
+    },
+    {
+      "id": "spas_roster",
+      "stageId": "roster",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section Nepal / HRD Korea",
+      "rule": "EPS Korea Section transmits the employment application into Korea's SPAS/EPS system; applicants can check status using their EPS-TOPIK ID on the official EPS site."
+    },
+    {
+      "id": "automated_job_matching",
+      "stageId": "employer_selection",
+      "status": "verified_process_baseline",
+      "authority": "Korean Ministry of Employment and Labor / Job Center / employer",
+      "rule": "Job matching is operated through Korea's online automated system; sending-agency staff, HRD/EPS staff or other officials cannot manually guarantee or intervene to place a specific applicant with an employer."
+    },
+    {
+      "id": "labor_contract_signature",
+      "stageId": "slc",
+      "status": "verified_process_baseline_current_notice_overlay",
+      "authority": "HRD Korea / EPS Korea Section Nepal",
+      "rule": "When an SLC/Labor Contract is forwarded, follow the current EPS Nepal contract notice and appear in person at EPS Korea Section, Gwarko to sign. A 2026 contract notice also instructs listed workers to contact the EPS office and sign within 7 days from the labor-contract date."
+    },
+    {
+      "id": "pdot_training",
+      "stageId": "predeparture_training",
+      "status": "verified_process_baseline_current_notice_overlay",
+      "authority": "National Vocational Training Institute, Bhaisepati",
+      "baselineFeeUsd": 63,
+      "durationDays": 6,
+      "rule": "The general EPS process includes a 6-day pre-departure orientation/training in Bhaisepati with an online application. Current contract/departure notices must be checked because training requirements can differ by worker/test category."
+    },
+    {
+      "id": "ccvi_package",
+      "stageId": "visa_docs",
+      "status": "verified_process_baseline_fee_volatile",
+      "authority": "EPS Korea Section Nepal / Korea Immigration Service",
+      "baselineItems": [
+        "passport",
+        "ID photo",
+        "medical examination report",
+        "police report",
+        "citizenship photocopy",
+        "admission-card photocopy",
+        "PDOT certificate photocopy",
+        "CCVI form/payment voucher"
+      ],
+      "historicalBaselineFeeNpr": 10700,
+      "amountCurrent": false,
+      "rule": "After CCVI issuance, the baseline EPS process requires an in-person document package at EPS Korea Section, Gwarko. Do not use the historical NPR 10,700 amount as a current fee without checking the latest 2026 visa/service-fee notice."
+    },
+    {
+      "id": "visa_stamping",
+      "stageId": "visa_docs",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section Nepal / Korea Visa Application Center",
+      "rule": "EPS Korea Section sends the CCVI/visa package for visa stamping. Visa status can be checked through the official Korea Visa Portal."
+    },
+    {
+      "id": "labor_approval_and_final_flight",
+      "stageId": "departure",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section Nepal / Department of Foreign Employment / HRD Korea",
+      "rule": "Use the final EPS Nepal flight notice, complete Nepal labor-approval application through FEIMS, and follow the scheduled EPS office pre-departure orientation/uniform instructions before travel."
+    },
+    {
+      "id": "departure_airports",
+      "stageId": "departure",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section Nepal / designated airline",
+      "rule": "The official baseline lists departure from Tribhuvan International Airport, Kathmandu, or Gautam Buddha International Airport, Bhairahawa, according to the assigned final flight."
+    },
+    {
+      "id": "reregistration",
+      "stageId": "employment_maintenance",
+      "status": "verified_process_baseline",
+      "authority": "EPS Korea Section Nepal",
+      "baselineFeeUsd": 5,
+      "rule": "Re-registration is described for applicants who remain on the roster and were not selected in the first year. Use only a current re-registration notice for dates and exact requirements."
+    }
+  ],
+  "volatilityNotices": [
+    {
+      "publishedAt": "2026-01-01",
+      "subject": "Korean Embassy visa-fee change effective from 2026-01-01",
+      "sourceUrl": "https://epsnepal.gov.np/notices"
+    },
+    {
+      "publishedAt": "2026-07-01",
+      "subject": "Visa fee increase notice",
+      "sourceUrl": "https://epsnepal.gov.np/notices"
+    },
+    {
+      "publishedAt": "2026-07-14",
+      "subject": "Visa fee increase / duplicate-payment refund warning and temporary payment notice",
+      "sourceUrl": "https://epsnepal.gov.np/notices"
+    },
+    {
+      "publishedAt": "2026-08-05",
+      "subject": "Change of place for payment of visa and service fees",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/146"
+    }
+  ],
+  "liveDepartureEvidence": [
+    {
+      "publishedAt": "2026-06-23",
+      "sourceUrl": "https://epsnepal.gov.np/documents/115",
+      "verifiedFact": "Workers without a completed CCVI form were instructed to complete it as soon as possible and to complete PDOT training and be ready for departure."
+    },
+    {
+      "publishedAt": "2026-07-08",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/132",
+      "verifiedFact": "Workers without a completed CCVI form or PDOT training were instructed to complete those steps as soon as possible."
+    },
+    {
+      "publishedAt": "2026-09-18",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/156",
+      "verifiedFact": "EPS Nepal published an official October 5, 2026 Manufacturing regular-worker departure notice/list."
+    },
+    {
+      "publishedAt": "2026-10-02",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/157",
+      "verifiedFact": "EPS Nepal published an official October 13, 2026 Manufacturing regular-worker departure list."
+    }
+  ]
+}
