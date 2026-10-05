@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -12,10 +12,10 @@
   ],
   "summary": {
     "sendingCountries": 17,
-    "registeredCountryPacks": 15,
+    "registeredCountryPacks": 16,
     "betaHold": 1,
-    "researchHold": 14,
-    "pendingManufacturingVerification": 2,
+    "researchHold": 15,
+    "pendingManufacturingVerification": 1,
     "datedReviewTriggers": 2,
     "betaReady": 0
   },
@@ -299,19 +299,21 @@
     {
       "country": "KG",
       "countryName": "Kyrgyzstan",
-      "routeId": null,
-      "packState": "pending_manufacturing_verification",
-      "betaState": "not_applicable",
+      "routeId": "kg-e9-manufacturing-2026",
+      "packState": "research_hold",
+      "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Direct official 2026 Manufacturing-labelled Kyrgyzstan route evidence",
+        "subject": "Current Kyrgyzstan SLC/post-SLC/visa/training/departure notice for the verified Manufacturing route",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+          "https://migrant.kg/",
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "verified 2026 Bishkek/Osh Point System titles are sectorless",
-        "Manufacturing linkage not verified"
+        "current SLC/post-SLC visa/training/departure exact rules not mapped",
+        "current employer-selected worker flow not validated end-to-end",
+        "Kyrgyzstan user validation not performed"
       ]
     },
     {
