@@ -50,6 +50,10 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_registration_notices_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/np_eps_process_baseline_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/vn_e9_manufacturing_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/vn_e9_manufacturing_2026_vi.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/vn_exact_answer_rules_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/vn_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
@@ -109,6 +113,7 @@ jobs:
           test -f docs/privacy.html
           test -f docs/countries.html
           test -f docs/np.html
+          test -f docs/vn.html
           test -f docs/country-pack.js
           test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
