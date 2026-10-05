@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "routeId": "lk-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "lk_2026_point_system_application",
+      "title": "Sri Lanka 2026 Point System Application",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "verified_current_2026",
+      "sourceUrl": "https://www.slbfe.lk/wp-content/uploads/2026/09/Notice-Final-20260928.pdf",
+      "items": [
+        {
+          "id": "lk_application_form",
+          "label": "Official application form",
+          "required": true,
+          "rule": "Distributed through the sending agency; each applicant is allowed one application form."
+        },
+        {
+          "id": "lk_passport_copy",
+          "label": "Passport copy / scan",
+          "required": true,
+          "rule": "Identity must match application; width 600 px; ≤100 KB; passport valid at least 3 months from application date."
+        },
+        {
+          "id": "lk_recent_photo",
+          "label": "Recent passport photo file",
+          "required": true,
+          "rule": "3.5×4.5 cm; white background; within 6 months; JPG ≤15 KB; 100–300 px."
+        },
+        {
+          "id": "lk_fee_slip",
+          "label": "Application fee payment slip",
+          "required": true,
+          "rule": "Current fee US$28 / LKR 9,250 under the official notice."
+        }
+      ]
+    }
+  ]
+}
