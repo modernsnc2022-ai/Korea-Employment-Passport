@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "country": "KH",
+  "cycle": 2026,
+  "routeType": "special_eps_topik",
+  "excludedFromManufacturing": true,
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+  "verifiedAt": "2026-10-06",
+  "officialResultArtifact": {
+    "subject": "Cambodia the 1th Test of proficiency in Korean Announcement",
+    "type": "Special (CBT)",
+    "publicationDate": "2026-09-09"
+  },
+  "warning": "Only the official Special result artifact is promoted here. Special schedule dates from non-official discovery are not exact Manufacturing rules."
+}
