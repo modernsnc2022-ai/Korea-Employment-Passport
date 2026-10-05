@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Талаптарга шайкештикти текшерүү",
+    "action": "2026-жылкы Кыргызстандын Manufacturing расмий жарыясын жана учурдагы EPS эрежелерин колдонуңуз. Так талаптар учурдагы расмий документтерге таянат."
+  },
+  "registration": {
+    "title": "13-Point System Manufacturing каттоосу",
+    "action": "Manufacturing үчүн онлайн каттоо 2026-02-23төн 2026-02-27ге чейин жүргөн. Каттоо жабылды."
+  },
+  "exam_fee": {
+    "title": "EPS-TOPIK экзамен акысы",
+    "action": "Расмий 2026 Manufacturing жарыясында экзамен акысы US$28 деп көрсөтүлгөн."
+  },
+  "biometric": {
+    "title": "Өздүктү тастыктоо",
+    "action": "Паспорт маалыматтарын расмий каттоо нускамасына ылайык так киргизиңиз. Кайталанган арыздар жокко чыгарылат."
+  },
+  "document_verify": {
+    "title": "Каттоо документтерин текшерүү",
+    "action": "Gmail, акыркы 6 айдагы 3.5×4.5 см ак фондогу JPG сүрөт, паспорт көчүрмөсү JPG жана US$28 төлөм квитанциясынын сүрөтү талап кылынат."
+  },
+  "exam_card": {
+    "title": "Экзамен жарыясы",
+    "action": "HRD Korea 13-Point System үчүн экзамен жарыясын 2026-03-30 деп көрсөтөт."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — 13-Point System Manufacturing",
+    "action": "Bishkek: 2026-04-10–04-16; Osh: 2026-04-18–04-19. General CBT, Point System."
+  },
+  "skill_competency": {
+    "title": "Skills Test — 2-тур",
+    "action": "Биринчи этап аяктаганы жана Skills Test болжол менен 2026-05-31 Бишкекте өтөрү расмий жергиликтүү булакта айтылган; акыркы schedule/result artifact ырасталмайынча HOLD."
+  },
+  "final_selection": {
+    "title": "Упай боюнча акыркы тандоо",
+    "action": "EPS-TOPIK аяктаганы акыркы тандоону билдирбейт. 13th Manufacturing final-result artifact текшерилиши керек."
+  },
+  "psychology_pre_job": {
+    "title": "Кыргызстанга мүнөздүү кошумча текшерүү",
+    "action": "Өзүнчө psychology этабы 2026 Manufacturing булактарында тастыкталган эмес."
+  },
+  "mcu1": {
+    "title": "Медициналык кароо",
+    "action": "Учурдагы Кыргызстан EPS medical/provider нускамасын гана колдонуңуз."
+  },
+  "job_application": {
+    "title": "Жумушка талапкер файлы",
+    "action": "Акыркы тандоо ырасталгандан кийин учурдагы расмий көрсөтмөлөрдү колдонуңуз."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "Расмий нускама боюнча тесттен ийгиликтүү өткөндөр 2 жылдык бирдиктүү кандидаттар тизмесине кирет; тесттен өтүү контрактка кепилдик бербейт."
+  },
+  "employer_selection": {
+    "title": "Кореялык иш берүүчүнүн тандоосу",
+    "action": "Иш берүүчү талапкерди өз алдынча тандайт; жеке адамдар же кызмат адамдары тандоого таасир бере албайт."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "Тандалсаңыз, SLC боюнча учурдагы расмий Кыргызстан/EPS көрсөтмөлөрүн аткарыңыз."
+  },
+  "post_slc_requirements": {
+    "title": "SLCден кийинки талаптар",
+    "action": "Medical follow-up, training, visa, payment жана departure үчүн учурдагы расмий көрсөтмөлөрдү колдонуңуз."
+  },
+  "visa_docs": {
+    "title": "Виза документтери",
+    "action": "Кыргызстан/Корея миссиясынын учурдагы visa checklist жана төлөмдөрүн колдонуңуз."
+  },
+  "predeparture_training": {
+    "title": "Кетер алдындагы окуу",
+    "action": "Тандалган кызматкерлер үчүн расмий дайындалган pre-departure trainingди бүтүрүңүз."
+  },
+  "mcu3_departure": {
+    "title": "Акыркы ден соолук/кетүүгө даярдык",
+    "action": "Indonesia-style MCU-III автоматтык түрдө кошулбайт."
+  },
+  "departure": {
+    "title": "Расмий кетүү",
+    "action": "Contract, visa, training жана расмий departure талаптары аяктагандан кийин гана кетиңиз."
+  },
+  "korea_entry_training": {
+    "title": "Кореяга кирүү жана employment education",
+    "action": "Кореяга киргенден кийин расмий employment education жана handover процессин бүтүрүңүз."
+  },
+  "employer_handover": {
+    "title": "Иш берүүчүгө handover",
+    "action": "Иш ордун, турак жайды жана шашылыш байланыштарды ырастаңыз."
+  },
+  "residence_registration": {
+    "title": "Residence Card / чет элдик каттоо",
+    "action": "Кореянын учурдагы Immigration эрежелери боюнча каттоодон өтүңүз."
+  },
+  "eps_insurance_check": {
+    "title": "EPS insurance текшерүү",
+    "action": "Тийиштүү EPS insurance милдеттерин расмий булактан текшериңиз."
+  },
+  "first_payroll_check": {
+    "title": "Биринчи айлыкты текшерүү",
+    "action": "Payslip жана банк түшүмүн SLC, иш убактысы жана deductions менен салыштырыңыз."
+  },
+  "labor_support_ready": {
+    "title": "Эмгек жардамга даярдык",
+    "action": "Расмий labor-support каналдарын жана contract/payroll/attendance далилдерин сактаңыз."
+  },
+  "employment_maintenance": {
+    "title": "Жумушту сактоо / workplace change",
+    "action": "Мыйзамдуу себеп болсо Кореянын расмий EPS же employment-center процессин колдонуңуз."
+  }
+}
