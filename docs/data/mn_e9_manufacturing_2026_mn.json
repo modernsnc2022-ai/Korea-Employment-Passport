@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Шаардлага шалгах",
+    "action": "Одоогийн Монголын 11-р сонгон шалгаруулалтын албан ёсны нөхцөлийг ашиглана. HRD Korea-гийн ерөнхий EPS шаардлага нь зөвхөн бэлтгэлийн суурь мэдээлэл."
+  },
+  "registration": {
+    "title": "11-р Point System бүртгэл",
+    "action": "Үйлдвэрлэлийн 11-р бүртгэл 2026-03-25-аас 2026-03-27 хүртэл явагдсан. Бүртгэл хаагдсан."
+  },
+  "exam_fee": {
+    "title": "Бүртгэл / шалгалтын төлбөр",
+    "action": "Монголын 11-р сонгон шалгаруулалтын яг төлбөрийг KEP одоогоор баталгаажуулаагүй. Special route эсвэл ерөнхий HRD fee-г шууд ашиглахгүй."
+  },
+  "biometric": {
+    "title": "Биеийн байцаалт баталгаажуулах",
+    "action": "Зөвхөн Монголын одоогийн албан ёсны identity/anti-fraud шаардлагыг дагана."
+  },
+  "document_verify": {
+    "title": "Бүртгэлийн баримт шалгах",
+    "action": "11-р сонгон шалгаруулалтын passport/photo/upload/payment checklist-ийг KEP бүрэн сэргээгээгүй. Өөр улсын эсвэл Special route-ийн дүрмийг хуулбарлахгүй."
+  },
+  "exam_card": {
+    "title": "Шалгалтын зар / нэвтрэх мэдээлэл",
+    "action": "HRD Korea 2026-04-30-ныг 11-р Монгол Manufacturing шалгалтын зарын өдөр гэж тэмдэглэсэн."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — 11-р Point System",
+    "action": "Manufacturing General CBT Point System шалгалтын хугацаа 2026-05-27-оос 2026-06-26 хүртэл."
+  },
+  "skill_competency": {
+    "title": "Skills Test — 2-р шат",
+    "action": "Point System-ийн ерөнхий бүтэц нь биеийн хүч, ярилцлага, үндсэн ур чадварын шалгалт болон Job Capacity Assessment нэмэлт оноог агуулна. Монголын 11-р шатны яг candidate/schedule мэдээлэл тусдаа баталгаажна."
+  },
+  "final_selection": {
+    "title": "Оноонд суурилсан эцсийн сонголт",
+    "action": "2026-08-28-ны Mongolia Point System pass-list зар index дээр байгаа ч энэ нь 11-р Manufacturing final-result мөн гэдгийг KEP хараахан бүрэн холбож баталгаажуулаагүй."
+  },
+  "psychology_pre_job": {
+    "title": "Монголд тусгай нэмэлт шалгалт",
+    "action": "Тусдаа psychology шат баталгаажаагүй; Indonesia-ийн дүрмийг Монголд хуулбарлахгүй."
+  },
+  "mcu1": {
+    "title": "Эрүүл мэндийн үзлэг",
+    "action": "Зөвхөн одоогийн Монгол EPS medical/provider зааврыг ашиглана. Provider/checklist/fee одоогоор HOLD."
+  },
+  "job_application": {
+    "title": "Ажил хайгчийн материал",
+    "action": "Эцсийн сонголт баталгаажсаны дараа одоогийн GOLWS/HRD Korea зааврыг дагана."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "Зөвхөн албан ёсоор шаардлага хангасан нэр дэвшигч employer-selection шатанд орно. Хувийн зуучлагч давуу эрх баталж чадахгүй."
+  },
+  "employer_selection": {
+    "title": "Солонгос ажил олгогчийн сонголт",
+    "action": "Сонголтыг зөвхөн албан ёсны EPS системээр хүлээнэ. Хувийн зуучлагч тодорхой ажил олгогч баталж чадахгүй."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "Ажил олгогч сонгосон тохиолдолд SLC болон дараагийн шатны одоогийн албан ёсны Монгол/EPS зааврыг дагана."
+  },
+  "post_slc_requirements": {
+    "title": "SLC-ийн дараах Монголын шаардлага",
+    "action": "Medical follow-up, training, visa, payment болон departure-д зөвхөн одоогийн албан ёсны зааврыг ашиглана."
+  },
+  "visa_docs": {
+    "title": "Визийн баримт",
+    "action": "Одоогийн GOLWS/Солонгосын дипломат төлөөлөгчийн visa checklist болон fee-г шалгана."
+  },
+  "predeparture_training": {
+    "title": "Явахаас өмнөх сургалт",
+    "action": "Солонгос явах сонгогдсон ажилчдад албан ёсоор оноосон pre-departure training-ийг л хийж дуусгана."
+  },
+  "mcu3_departure": {
+    "title": "Эцсийн эрүүл мэнд / явах бэлэн байдал",
+    "action": "Indonesia-style MCU-III шатыг автоматаар үүсгэхгүй. Монголын одоогийн заавар шаардсан тохиолдолд л final recheck хийнэ."
+  },
+  "departure": {
+    "title": "Албан ёсны явах ажиллагаа",
+    "action": "Contract, visa, training болон departure шаардлага албан ёсоор бүрэн дууссаны дараа л явна."
+  },
+  "korea_entry_training": {
+    "title": "Солонгост нэвтрэх ба хөдөлмөрийн сургалт",
+    "action": "Солонгост орсны дараа албан ёсны employment education болон handover-г дуусгана."
+  },
+  "employer_handover": {
+    "title": "Ажил олгогчид шилжүүлэх",
+    "action": "Албан ёсны handover үед ажлын байр, байр, яаралтай холбоо барих мэдээллээ баталгаажуулна."
+  },
+  "residence_registration": {
+    "title": "Residence Card / гадаадын иргэний бүртгэл",
+    "action": "Солонгост ирсний дараа одоогийн Immigration дүрмийн дагуу foreigner registration / Residence Card-аа хийлгэнэ."
+  },
+  "eps_insurance_check": {
+    "title": "EPS даатгал шалгах",
+    "action": "Холбогдох EPS даатгалын үүргийг албан ёсны EPS мэдээллээс шалгана."
+  },
+  "first_payroll_check": {
+    "title": "Эхний цалин шалгах",
+    "action": "Payslip болон банкны орлогыг SLC, ажилласан цаг, суутгал, цалингийн дүрэмтэй тулгана."
+  },
+  "labor_support_ready": {
+    "title": "Хөдөлмөрийн тусламжийн бэлэн байдал",
+    "action": "Албан ёсны labor-support сувгууд болон contract/payroll/attendance нотолгоог хадгална."
+  },
+  "employment_maintenance": {
+    "title": "Ажил эрхлэлтийг хадгалах / ажлын байр солих",
+    "action": "Хууль ёсны шалтгаан гарвал Солонгосын албан ёсны EPS эсвэл employment-center процессыг ашиглана."
+  }
+}
