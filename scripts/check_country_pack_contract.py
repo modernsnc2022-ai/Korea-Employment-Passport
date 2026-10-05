@@ -254,13 +254,17 @@ lk_pack=load("docs/data/lk_e9_manufacturing_2026.json")
 lk_exact=load("docs/data/lk_exact_answer_rules_2026.json")
 lk_docs=load("docs/data/lk_document_packs_2026.json")
 lk_readiness=load("docs/data/lk_stage_readiness_2026.json")
+lk_special=load("docs/data/lk_special_eps_topik_2026.json")
 require(lk_entry.get("lifecycle")=="research_hold" and lk_entry.get("publicAvailability")=="preview_only","Sri Lanka registry route must remain preview-only HOLD")
 require(lk_pack.get("lifecycle")=="research_hold" and lk_pack.get("publicAvailability")=="preview_only","Sri Lanka pack must remain preview-only HOLD")
 require(lk_pack.get("safety",{}).get("betaIntakeOpen") is False,"Sri Lanka beta intake must remain closed")
+require(lk_pack.get("safety",{}).get("specialRouteFactsExcludedFromCurrentPointSystem") is True,"Sri Lanka Special facts must remain outside the current Point System")
+require(lk_pack.get("safety",{}).get("prior10thCycleFactsExcludedFromCurrent") is True,"Sri Lanka completed 10th-cycle facts must remain outside the current September 2026 route")
 require(lk_pack.get("officialSendingAgency",{}).get("name")=="Sri Lanka Bureau of Foreign Employment (SLBFE)","Sri Lanka sending agency must remain SLBFE")
 require(lk_pack.get("exactAnswerRulesFile")=="data/lk_exact_answer_rules_2026.json","Sri Lanka pack must link exact answers")
 require(lk_pack.get("documentPacksFile")=="data/lk_document_packs_2026.json","Sri Lanka pack must link document pack")
 require(lk_pack.get("stageReadinessFile")=="data/lk_stage_readiness_2026.json","Sri Lanka pack must link readiness")
+require(lk_pack.get("specialRouteEvidenceFile")=="data/lk_special_eps_topik_2026.json","Sri Lanka pack must link separate Special evidence")
 lk_ids={row.get("id") for row in lk_exact.get("answers",[])}
 for exact_id in [
     "lk_2026_manufacturing_quota","lk_2026_application_window","lk_2026_application_instructions_date",
@@ -272,6 +276,10 @@ for exact_id in [
 require(lk_readiness.get("currentCohort",{}).get("recruitment",{}).get("status")=="upcoming_verified","Sri Lanka current recruitment must remain upcoming_verified before application opens")
 require(lk_readiness.get("nextReviewTrigger",{}).get("date")=="2026-10-12","Sri Lanka next review trigger must remain 2026-10-12")
 require(lk_readiness.get("betaReadiness",{}).get("status")=="blocked","Sri Lanka beta must remain blocked")
+require(lk_readiness.get("specialRoute",{}).get("mustNotPopulateCurrentPointSystem") is True,"Sri Lanka Special route must never populate the current Point System")
+require(lk_readiness.get("priorCycle10th",{}).get("mustNotPopulateCurrentSeptember2026Rules") is True,"Sri Lanka completed 10th Point System must remain historical only")
+require(lk_special.get("excludedFromCurrentPointSystemCountryPack") is True,"Sri Lanka Special evidence must be explicitly excluded from current Point System")
+require(lk_special.get("facts",{}).get("testFeeUsd")==28 and lk_special.get("facts",{}).get("testFeeLkr")==8716.40,"Sri Lanka Special fee must remain isolated from current LKR 9,250 fee")
 lk_doc_ids={p.get("id") for p in lk_docs.get("packs",[])}
 require("lk_2026_point_system_application" in lk_doc_ids,"Sri Lanka application document pack is required")
 
