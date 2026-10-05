@@ -659,6 +659,21 @@ for exact_id in [
 ]:
     require(exact_id in kg_exact_ids,f"Kyrgyzstan exact-answer catalog missing {exact_id}")
 
+
+mm_verify=load("docs/data/mm_manufacturing_verification_2026.json")
+require(mm_verify.get("status")=="pending_manufacturing_verification","Myanmar verification dossier must remain pending Manufacturing verification")
+require(mm_verify.get("routeId") is None,"Myanmar verification dossier must not expose a promoted routeId")
+require(mm_verify.get("officialSendingAgency",{}).get("name")=="Public Overseas Employment Agency (POEA)","Myanmar sending agency must remain POEA")
+mm_rows=mm_verify.get("current2026Evidence",{}).get("hrdScheduleIndex",{}).get("observedSectorRows",[])
+require({row.get("sector") for row in mm_rows}=={"Agriculture·Livestock","Construction","Forestry"},"Myanmar 2026 negative-evidence dossier must preserve the three captured non-Manufacturing sectors")
+require(mm_verify.get("current2026Evidence",{}).get("hrdScheduleIndex",{}).get("manufacturingRowCaptured") is False,"Myanmar dossier must not claim a captured 2026 Manufacturing row")
+require(mm_verify.get("historicalManufacturingEvidence",{}).get("status")=="historical_only_not_2026_recruitment","Myanmar historical Manufacturing evidence must never become a 2026 route")
+require(mm_verify.get("historicalManufacturingEvidence",{}).get("facts",{}).get("examCycle")=="16th EPS-TOPIK Manufacturing second batch","Myanmar historical Manufacturing cycle lineage must remain explicit")
+require(mm_verify.get("historicalManufacturingEvidence",{}).get("facts",{}).get("successfulCandidates")==4249,"Myanmar historical Manufacturing pass-count lineage must remain 4,249")
+require(mm_verify.get("historicalManufacturingEvidence",{}).get("facts",{}).get("jobApplicationPeriod")=="2025-07-21 through 2025-08-01","Myanmar historical Manufacturing job-application window must remain exact")
+require(len(mm_verify.get("promotionRule",{}).get("requiredEvidence",[]))>=3,"Myanmar promotion rule must state direct current Manufacturing evidence requirements")
+require(len(mm_verify.get("promotionRule",{}).get("prohibitedInference",[]))>=3,"Myanmar promotion rule must prohibit other-sector/historical inference")
+
 coverage=load("docs/data/country_coverage_matrix_2026.json")
 coverage_rows={row.get("country"):row for row in coverage.get("countries",[])}
 expected_sending={"PH","TH","ID","VN","LK","MN","UZ","PK","KH","CN","BD","KG","NP","MM","TL","LA","TJ"}
@@ -684,6 +699,9 @@ for code in pending:
 require(coverage_rows["KG"].get("routeId")=="kg-e9-manufacturing-2026","Kyrgyzstan coverage row must point to promoted Manufacturing Country Pack")
 require(coverage_rows["KG"].get("promotionEvidence",{}).get("rule","").find("2026-02-23 through 2026-02-27")>=0,"Kyrgyzstan coverage must preserve cross-source Manufacturing promotion evidence")
 require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
+require(coverage_rows["MM"].get("verificationDossierFile")=="data/mm_manufacturing_verification_2026.json","Myanmar coverage row must link the verification dossier")
+require(set(coverage_rows["MM"].get("evidence",{}).get("current2026OtherSectors",[]))=={"Agriculture·Livestock","Construction","Forestry"},"Myanmar coverage must preserve captured 2026 non-Manufacturing sectors")
+require(coverage_rows["MM"].get("evidence",{}).get("historicalManufacturingSource","").startswith("https://www.mol.gov.mm/"),"Myanmar coverage must preserve official historical Manufacturing lineage")
 require(coverage_rows["TJ"].get("routeId")=="tj-e9-manufacturing-2026","Tajikistan coverage row must point to promoted Manufacturing Country Pack")
 require(coverage_rows["TJ"].get("promotionEvidence",{}).get("rule","").find("same 2026-03-02 through 2026-03-05 registration window")>=0,"Tajikistan coverage must preserve cross-source Manufacturing promotion evidence")
 
@@ -708,6 +726,9 @@ for code in pending:
     require(dashboard_rows[code].get("routeId") is None,f"{code}: pending readiness row must not expose a promoted routeId")
 require(dashboard_rows["LK"].get("nextReview",{}).get("date")=="2026-10-12","Sri Lanka readiness review date must remain 2026-10-12")
 require(dashboard_rows["TH"].get("nextReview",{}).get("date")=="2026-10-19","Thailand readiness review date must remain 2026-10-19")
+require(dashboard_rows["MM"].get("verificationDossierFile")=="data/mm_manufacturing_verification_2026.json","Myanmar readiness row must link the verification dossier")
+require(dashboard_rows["MM"].get("routeId") is None and dashboard_rows["MM"].get("packState")=="pending_manufacturing_verification","Myanmar must remain pending without a promoted route")
+require(any("mol.gov.mm" in s for s in dashboard_rows["MM"].get("nextReview",{}).get("officialSources",[])),"Myanmar next-review sources must include the Ministry of Labour EPS page")
 dated={code for code,row in dashboard_rows.items() if row.get("nextReview",{}).get("type")=="dated_official_review"}
 require(dated=={"LK","TH"},"only Sri Lanka and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
 for code,row in dashboard_rows.items():
@@ -739,6 +760,7 @@ tajikistan=(ROOT/"docs/tj.html").read_text(encoding="utf-8")
 kyrgyzstan=(ROOT/"docs/kg.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("PENDING MANUFACTURING VERIFICATION" in countries and "Myanmar" in countries,"countries page must expose the remaining pending Manufacturing country")
+require("Agriculture/Livestock, Construction and Forestry" in countries and "16th EPS-TOPIK Manufacturing second-batch" in countries,"Myanmar pending UI must distinguish current non-Manufacturing and historical Manufacturing evidence")
 require('href="tj.html"' in countries and 'href="kg.html"' in countries,"countries page must expose promoted Tajikistan and Kyrgyzstan Country Packs")
 require('href="readiness.html"' in countries,"countries page must link readiness dashboard")
 require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
