@@ -29,12 +29,12 @@
 | 2026-10-04 | LPK Hanggugo | EPS-TOPIK training/community | Email requesting permission or admin repost | Sent |
 | 2026-10-04 | LPK Sukses Kreatif Mandiri (SKM) | EPS-TOPIK/G-to-G training community | Email requesting permission or admin repost | Sent |
 | 2026-10-05 | Korean Centre College (KCC) | EPS-TOPIK/G-to-G training community | Email requesting permission or admin repost to students/alumni | Sent — Gmail message `1a107c08992faa63` |
-| 2026-10-05 | EPS-TOPIK & G to G Korea Update (@eps_indo) | Telegram public discussion group | Rules rechecked; no blanket promotion ban visible. Direct posting was attempted through the available browser path, but no authenticated Telegram session is accessible without closing/modifying the active Edge profile. Original profiles were not modified. | Candidate — direct post still pending authenticated session |
+| 2026-10-05 | EPS-TOPIK & G to G Korea Update (@eps_indo) — `Promo dan Jual Beli` | Telegram public discussion group | Joined group, completed the group's human-verification flow, sent a short posting-intent message, then published the full KEP beta-tester recruitment post with `beta.html?src=telegram_eps_indo`. | **Posted — visible in group and screenshot-confirmed in the user session; no message permalink captured yet** |
 
 Current public-post status:
-- Confirmed public community recruitment posts: **0**
+- Confirmed public community recruitment posts: **1**
 - Admin/repost outreach: multiple channels sent as logged above
-- Telegram `@eps_indo`: rules compatible enough to remain a candidate, but authenticated posting is still blocked
+- Telegram `@eps_indo` / `Promo dan Jual Beli`: **posted successfully on 2026-10-05 after group join + human verification**; post is visible in-group and uses `src=telegram_eps_indo`; no direct message permalink captured yet
 
 Target groups for admin-approved posting:
 - EPS-TOPIK & G to G Korea Update Telegram
