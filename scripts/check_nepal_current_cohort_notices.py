@@ -342,6 +342,7 @@ def main() -> int:
         "routeId": baseline.get("routeId"),
         "checkedAt": datetime.now(timezone.utc).isoformat(),
         "officialNoticeIndex": index_url,
+        "identityStrategy": "normalized_title",
         "state": "review_required" if review_required else "clean",
         "fetchError": error,
         **comparison,
