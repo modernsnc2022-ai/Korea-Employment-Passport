@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "vn-e9-manufacturing-2026",
   "verifiedAt": "2026-10-05",
   "principle": "Use the current 2026 COLAB/HRD Korea notice as the exact source. Do not carry forward older Vietnam EPS fees, forms or downstream procedures as current facts without current notice verification.",
@@ -242,6 +242,19 @@
       "verificationStatus": "verified_official_2026",
       "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
       "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "vn_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the official 2026 EPS exam-registration receiving window?",
+      "answer": "March 23 through March 27, 2026.",
+      "writeExactly": "Verified 2026 receiving window: 2026-03-23 through 2026-03-27. The window is closed.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
+      "verifiedAt": "2026-10-05"
     }
-  ]
+  ],
+  "documentPacksFile": "data/vn_document_packs_2026.json"
 }
