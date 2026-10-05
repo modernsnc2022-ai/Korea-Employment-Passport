@@ -59,3 +59,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Alba Mart / Al-Barokah WhatsApp probe | Indonesian community / mosque network in Gimhae | Tested public Alba Mart-linked number +82 10-5854-6097 via WhatsApp | **Invalid — WhatsApp reports this number is not on WhatsApp; retire this route** |
 
 | 2026-10-05 | Al-Barokah Gimhae WhatsApp probe | Indonesian PMI community/mosque in Gimhae | Tested public directory numbers +82 10-4868-8039 and +82 10-7705-7611 via WhatsApp | **Invalid — both numbers are not on WhatsApp; retire direct-number route** |
+
+| 2026-10-05 | Rumaisa Korsel — WhatsApp | Indonesian women / migrant-worker community in Korea | Sent direct WhatsApp request to +82 10-4997-1060 asking for internal sharing to Indonesian women E-9 workers; message used `src=rumaisa_korsel` | **Sent — awaiting reply** |
