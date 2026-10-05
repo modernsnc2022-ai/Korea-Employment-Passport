@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "routeId": "vn-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-05",
+  "officialNoticeIndex": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+  "interpretationRule": "Current 2026 Manufacturing notices control exact dates and rules. Older COLAB process pages may document workflow shape only and do not automatically define current fees, deposits, medical providers or visa steps.",
+  "currentCohort": {
+    "recruitmentRegistration": {
+      "status": "closed_verified",
+      "stageIds": [
+        "eligibility",
+        "registration",
+        "exam_fee",
+        "document_verify"
+      ],
+      "currentSource": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+      "note": "2026 registration requirements and official receiving method are verified; intake is no longer open."
+    },
+    "epsTopikResult": {
+      "status": "round1_result_verified",
+      "stageIds": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "currentSource": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "note": "Manufacturing Round 1 was conducted in 2026 and the verified cutoff is 150 points."
+    },
+    "skillCompetency": {
+      "status": "awaiting_final_official_schedule",
+      "stageIds": [
+        "skill_competency",
+        "final_selection"
+      ],
+      "currentSource": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+      "note": "Round 1 passers are automatically registered; the result notice says the final Round 2 schedule will be announced after HRD Korea confirmation."
+    },
+    "medicalAndJobApplication": {
+      "status": "research_pending_current_cohort_exact_instructions",
+      "stageIds": [
+        "psychology_pre_job",
+        "mcu1",
+        "job_application"
+      ],
+      "currentSource": "https://colab.moha.gov.vn/tin-tuc/2234/HO-SO-DANG-KY-DU-TUYEN-CHUONG-TRINH-EPS-NAM-2025.aspx",
+      "note": "2026 candidate-file forms are published, but exact Manufacturing cohort submission/medical instructions are not yet mapped into KEP exact rules."
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_cohort_scope",
+      "stageIds": [
+        "post_slc_requirements",
+        "visa_docs",
+        "predeparture_training",
+        "mcu3_departure",
+        "departure"
+      ],
+      "currentSource": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "note": "COLAB publishes training/visa/departure notices, but KEP has not yet scoped exact current Manufacturing cohort instructions."
+    }
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "final official 2026 Manufacturing Round 2 schedule/result not yet verified",
+      "current Manufacturing medical/candidate-file submission instructions not fully mapped",
+      "current post-SLC visa/training/departure exact rules not fully mapped"
+    ]
+  }
+}
