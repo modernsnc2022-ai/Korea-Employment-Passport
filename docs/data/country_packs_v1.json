@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -182,6 +182,23 @@
       "officialSendingAgency": "Migration Agency under the Cabinet of Ministers of the Republic of Uzbekistan (AELM)",
       "officialSendingAgencyUrl": "https://migration.uz/",
       "note": "HRD Korea verifies the 9th Uzbekistan Manufacturing Point System: registration 2026-03-09 through 2026-03-12, test announcement 2026-03-23, test period 2026-04-06 through 2026-04-22. Current skills/final-result and downstream exact rules remain gated."
+    },
+    {
+      "routeId": "mn-e9-manufacturing-2026",
+      "country": "MN",
+      "countryName": "Mongolia",
+      "nativeCountryName": "Монгол Улс",
+      "visa": "E-9",
+      "sector": "manufacturing",
+      "cycle": 2026,
+      "lifecycle": "research_hold",
+      "publicAvailability": "preview_only",
+      "primaryLanguage": "mn",
+      "routeFile": "data/mn_e9_manufacturing_2026.json",
+      "localizationFile": "data/mn_e9_manufacturing_2026_mn.json",
+      "officialSendingAgency": "General Office for Labour and Welfare Service (GOLWS)",
+      "officialSendingAgencyUrl": "https://www.hudulmur-halamj.gov.mn/",
+      "note": "HRD Korea verifies the 11th Mongolia Manufacturing Point System registration and test period. A 2026-08-28 Mongolia Point System pass-list entry exists, but KEP keeps final-result linkage gated until the artifact is tied explicitly to the 11th Manufacturing cycle. Special EPS-TOPIK remains separate."
     }
   ]
 }
