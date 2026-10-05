@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "country": "LA",
+  "cycle": 2026,
+  "routeType": "prior_33rd_point_system_manufacturing",
+  "excludedFromCurrent34thCountryPack": true,
+  "verifiedAt": "2026-10-06",
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=37&examYear=2026&lang=ko&lcnsId=001",
+  "facts": {
+    "title": "The 33nd recruitment of the point system in Laos_Manufacturing",
+    "type": "General CBT",
+    "pointSystem": true,
+    "registrationPeriod": "2026-03-10 through 2026-03-13",
+    "testAnnouncementDate": "2026-04-01",
+    "testPeriod": "2026-04-20 through 2026-04-27",
+    "receptionAddressAtThatRound": "Khamhoung Village Xaythany District, Vientiane Capital, Laos",
+    "receptionPhones": [
+      "001-856-20-5927-0299",
+      "856-21-222635"
+    ]
+  },
+  "warning": "These 33rd-round dates/contact details are prior-round evidence only and must never populate the current 34th-round fee, quota, document rules, test dates or result dates."
+}

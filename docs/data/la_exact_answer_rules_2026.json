@@ -1,0 +1,109 @@
+{
+  "version": "1.1.0",
+  "routeId": "la-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "principle": "For the current Laos 34th Manufacturing Point System, only facts directly supported by current HRD Korea evidence may be exact. Generic EPS rules and the earlier 33rd Laos round remain baseline/prior-round evidence only.",
+  "answers": [
+    {
+      "id": "la_2026_sending_authority",
+      "stages": [
+        "registration",
+        "job_application"
+      ],
+      "question": "Who is the Laos EPS sending/reception agency?",
+      "answer": "Department of Employment of Lao PDR (DOE); HRD Korea separately lists the reception office as the Ministry of Labour and Social Welfare Employment Service Center (ESC).",
+      "writeExactly": "Use Department of Employment of Lao PDR (DOE) as the sending agency; use the HRD Korea reception listing for the current ESC address/contact.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_reception_office",
+      "stages": [
+        "registration"
+      ],
+      "question": "What reception-office contact does HRD Korea currently list?",
+      "answer": "Souphanouvong road, Oubmong Village, Sikottabong District, Vientiane Capital; +856-21 222 255.",
+      "writeExactly": "Current HRD Korea reception listing: ESC, Souphanouvong road, Oubmong Village, Sikottabong District, Vientiane Capital; +856-21 222 255.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_34th_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was registration for the 34th Laos Manufacturing Point System?",
+      "answer": "September 7 through September 11, 2026.",
+      "writeExactly": "34th Laos Manufacturing registration: 2026-09-07 through 2026-09-11. This window is closed.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_34th_schedule_state",
+      "stages": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Are the 34th Manufacturing test and result dates fixed?",
+      "answer": "No. HRD Korea currently lists the test date and result date as undecided.",
+      "writeExactly": "Do not invent a test or result date for the 34th Laos Manufacturing round; HRD Korea currently marks them undecided.",
+      "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_current_fee_state",
+      "stages": [
+        "exam_fee"
+      ],
+      "question": "What is the official 34th-round test/application fee?",
+      "answer": "KEP has not verified a current official 34th-round fee.",
+      "writeExactly": "Do not quote a Laos 34th-round fee until a current official Laos/HRD notice is reviewed.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_current_quota_state",
+      "stages": [
+        "final_selection"
+      ],
+      "question": "What is the official 34th-round Manufacturing quota?",
+      "answer": "KEP has not verified a current official quota.",
+      "writeExactly": "Do not quote a Manufacturing quota for the 34th Laos round until a current official quota/result notice is reviewed.",
+      "verificationStatus": "intentionally_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_generic_eligibility_baseline",
+      "stages": [
+        "eligibility"
+      ],
+      "question": "What general EPS-TOPIK eligibility baseline does HRD Korea state?",
+      "answer": "Age 18–39; no imprisonment-level criminal record; no forced deportation/departure from Korea; no travel restriction; combined E-9/E-10 stay under five years.",
+      "writeExactly": "Use this as a generic HRD EPS baseline only. Recheck the local 34th Laos notice before treating it as the complete current Laos eligibility rule.",
+      "verificationStatus": "generic_hrd_baseline_not_local_exact",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectTopikDesc.do?lang=ko",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_prior_round_firewall",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Can 33rd-round 2026 Laos dates be reused for the current 34th round?",
+      "answer": "No.",
+      "writeExactly": "The 33rd Manufacturing round is prior-round evidence only and must never populate 34th-round dates, fee, quota or documents.",
+      "verificationStatus": "verified_prior_round_separation",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=37&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    }
+  ],
+  "priorRoundEvidenceFile": "data/la_prior_round_evidence_2026.json"
+}

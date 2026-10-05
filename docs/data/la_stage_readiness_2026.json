@@ -1,0 +1,74 @@
+{
+  "version": "1.1.0",
+  "routeId": "la-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "officialHrdSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+  "officialSendingAgencyEvidence": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+  "interpretationRule": "HRD Korea currently verifies the 34th registration period and ESC identity. Local detailed 34th-round fee, quota, documents and downstream requirements remain HOLD until a current official Laos notice is reviewed.",
+  "currentRound": {
+    "sendingAuthority": {
+      "status": "verified_hrd_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "name": "Department of Employment of Lao PDR (DOE)"
+    },
+    "registration": {
+      "status": "closed_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "note": "2026-09-07 through 2026-09-11."
+    },
+    "examAndResult": {
+      "status": "dates_undecided",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    "fee": {
+      "status": "unverified_current_round",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    "quota": {
+      "status": "unverified_current_round",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    "documents": {
+      "status": "unverified_current_round",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    "skillAndFinalSelection": {
+      "status": "awaiting_current_round_notice",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    "medicalAndJobApplication": {
+      "status": "research_pending_current_round",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    },
+    "postSelectionVisaDeparture": {
+      "status": "research_pending_current_round",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    }
+  },
+  "priorRound": {
+    "evidenceFile": "data/la_prior_round_evidence_2026.json",
+    "mustNotPopulateCurrent": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "current 34th test/result dates remain undecided",
+      "current 34th fee/quota/document rules are not locally verified",
+      "downstream medical/job-file/visa/training/departure exact rules are not mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Official 34th Laos Manufacturing test-date or detailed local notice",
+    "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    ],
+    "promoteOnlyWhen": [
+      "the notice clearly identifies the 34th Laos Manufacturing round",
+      "exact fee/quota/documents are supported by the notice content",
+      "33rd-round facts are not reused"
+    ]
+  },
+  "officialReceptionEvidence": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+}

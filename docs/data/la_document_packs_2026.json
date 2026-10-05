@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "routeId": "la-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "policy": "Do not manufacture a current 34th-round checklist from the 33rd round or another country.",
+  "packs": [
+    {
+      "id": "la_34th_registration_documents_hold",
+      "title": "Laos 34th Manufacturing — Current Document Checklist HOLD",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "current_round_exact_checklist_not_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "warning": "The current 34th-round passport/photo/upload/payment checklist has not been verified. This pack intentionally provides no file dimensions, fee amount or required-document claims until a current Laos notice is reviewed.",
+      "items": []
+    },
+    {
+      "id": "la_current_reception_contact",
+      "title": "Laos current EPS reception contact",
+      "appliesTo": [
+        "registration"
+      ],
+      "status": "verified_hrd_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "items": [
+        {
+          "id": "la_reception_office",
+          "label": "Employment Service Center (ESC)",
+          "required": false,
+          "rule": "Souphanouvong road, Oubmong Village, Sikottabong District, Vientiane Capital; +856-21 222 255. Recheck before an in-person visit."
+        }
+      ]
+    }
+  ]
+}
