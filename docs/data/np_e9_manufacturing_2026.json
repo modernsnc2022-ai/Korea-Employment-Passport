@@ -40,7 +40,8 @@
       "kind": "rules",
       "action": "Check only against the current Nepal EPS notice and HRD Korea requirements before applying.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
-      "supportState": "verified_current"
+      "supportState": "verified_current",
+      "warning": "Passing EPS-TOPIK or another selection stage does not guarantee employment in Korea."
     },
     {
       "id": "registration",
@@ -49,7 +50,9 @@
       "kind": "official_action",
       "action": "Use only the application channel and instructions named in the current Nepal EPS notice. Do not pay an intermediary to register you.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
-      "supportState": "verified_current"
+      "supportState": "verified_current",
+      "officialActionUrl": "https://eoers.epsnepal.gov.np/",
+      "officialActionLabel": "Open official EPS Nepal application portal"
     },
     {
       "id": "exam_fee",
