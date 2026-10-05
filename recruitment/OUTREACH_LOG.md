@@ -73,3 +73,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Human Initiative Korea — WhatsApp reply | Indonesian diaspora/community network in Korea | Replied that KEP information had been forwarded to the relevant internal team | **Positive first response — awaiting follow-up from relevant team** |
 
 | 2026-10-05 | ANEKARASA — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker WhatsApp groups, paguyuban, or community admins; message used `src=anekarasa_ansan` | **Sent — awaiting reply** |
+
+| 2026-10-05 | WARCOP Indonesia — WhatsApp reply | Indonesian community/business hub in Ansan | Replied "Ok" to the KEP community-connection request | **Acknowledged — follow-up needed to confirm whether they can connect/share** |
