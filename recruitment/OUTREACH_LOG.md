@@ -112,4 +112,4 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 
 | 2026-10-05 | Masjid At-Taubah Guji, Daegu — WhatsApp probe | Indonesian PMI community mosque in Guji, Daegu | Tested published number +82 10-2890-3086 in WhatsApp | **Invalid — no WhatsApp search result; retire direct-number route and do not retry** |
 
-| 2026-10-05 | Masjid Al-Ishlah Pyeongdong, Gwangju — public mobile | Indonesian PMI community mosque in Pyeongdong, Gwangju | 2026 NU reporting identifies this mosque as a PMI community hub with regular Indonesian-worker gatherings; current public directory lists +82 10-7469-6743; source `al_ishlah_pyeongdong_gwangju` added | **Ready — WhatsApp availability not yet tested; do not mark sent until confirmed** |
+| 2026-10-05 | Masjid Al-Ishlah Pyeongdong, Gwangju — WhatsApp | Indonesian PMI community mosque in Pyeongdong, Gwangju | Verified +82 10-7469-6743 is active on WhatsApp and sent the KEP E-9 worker-validator recruitment request; explanatory message and `src=al_ishlah_pyeongdong_gwangju` beta link were sent separately | **Sent — awaiting reply** |
