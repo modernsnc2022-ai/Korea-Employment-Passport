@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines and Thailand")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","lk-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand and Sri Lanka")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -248,11 +248,39 @@ require(th_readiness.get("betaReadiness",{}).get("status")=="blocked","Thailand 
 require(th_special.get("excludedFromRegularCountryPack") is True,"Thailand Special evidence must be explicitly excluded from Round 18")
 require(th_special.get("facts",{}).get("testFeeThb")==970,"Thailand Special 970 THB fee must stay isolated in Special evidence")
 
+
+lk_entry=routes["lk-e9-manufacturing-2026"]
+lk_pack=load("docs/data/lk_e9_manufacturing_2026.json")
+lk_exact=load("docs/data/lk_exact_answer_rules_2026.json")
+lk_docs=load("docs/data/lk_document_packs_2026.json")
+lk_readiness=load("docs/data/lk_stage_readiness_2026.json")
+require(lk_entry.get("lifecycle")=="research_hold" and lk_entry.get("publicAvailability")=="preview_only","Sri Lanka registry route must remain preview-only HOLD")
+require(lk_pack.get("lifecycle")=="research_hold" and lk_pack.get("publicAvailability")=="preview_only","Sri Lanka pack must remain preview-only HOLD")
+require(lk_pack.get("safety",{}).get("betaIntakeOpen") is False,"Sri Lanka beta intake must remain closed")
+require(lk_pack.get("officialSendingAgency",{}).get("name")=="Sri Lanka Bureau of Foreign Employment (SLBFE)","Sri Lanka sending agency must remain SLBFE")
+require(lk_pack.get("exactAnswerRulesFile")=="data/lk_exact_answer_rules_2026.json","Sri Lanka pack must link exact answers")
+require(lk_pack.get("documentPacksFile")=="data/lk_document_packs_2026.json","Sri Lanka pack must link document pack")
+require(lk_pack.get("stageReadinessFile")=="data/lk_stage_readiness_2026.json","Sri Lanka pack must link readiness")
+lk_ids={row.get("id") for row in lk_exact.get("answers",[])}
+for exact_id in [
+    "lk_2026_manufacturing_quota","lk_2026_application_window","lk_2026_application_instructions_date",
+    "lk_2026_exam_fee","lk_2026_age_rule","lk_2026_one_industry","lk_2026_passport_spec",
+    "lk_2026_photo_spec","lk_2026_test_notice_date","lk_2026_test_start","lk_2026_test_format",
+    "lk_2026_skill_floor","lk_2026_no_job_guarantee"
+]:
+    require(exact_id in lk_ids,f"Sri Lanka exact-answer catalog missing {exact_id}")
+require(lk_readiness.get("currentCohort",{}).get("recruitment",{}).get("status")=="upcoming_verified","Sri Lanka current recruitment must remain upcoming_verified before application opens")
+require(lk_readiness.get("nextReviewTrigger",{}).get("date")=="2026-10-12","Sri Lanka next review trigger must remain 2026-10-12")
+require(lk_readiness.get("betaReadiness",{}).get("status")=="blocked","Sri Lanka beta must remain blocked")
+lk_doc_ids={p.get("id") for p in lk_docs.get("packs",[])}
+require("lk_2026_point_system_application" in lk_doc_ids,"Sri Lanka application document pack is required")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
 thailand=(ROOT/"docs/th.html").read_text(encoding="utf-8")
+srilanka=(ROOT/"docs/lk.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -270,10 +298,13 @@ require('href="beta.html"' not in philippines and 'id="betaForm"' not in philipp
 require("RESEARCH / HOLD" in thailand and "2,000" in thailand and "960" in thailand,"Thailand preview must show HOLD, Manufacturing target and official Round 18 fee")
 require("19 ต.ค. 2569" in thailand and "SPECIAL ROUTE FIREWALL" in thailand,"Thailand preview must show current skills-stage gate and Special firewall")
 require('href="beta.html"' not in thailand and 'id="betaForm"' not in thailand,"Thailand preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in srilanka and "1,000" in srilanka and "LKR 9,250" in srilanka,"Sri Lanka preview must show HOLD, current Manufacturing quota and official fee")
+require("12 Oct 2026" in srilanka and "26–30 Oct 2026" in srilanka,"Sri Lanka preview must show current application timeline")
+require('href="beta.html"' not in srilanka and 'id="betaForm"' not in srilanka,"Sri Lanka preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold srilanka=research_hold" % (len(routes),len(EXPECTED)))
