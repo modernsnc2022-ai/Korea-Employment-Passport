@@ -84,6 +84,11 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/la_document_packs_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/la_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/la_prior_round_evidence_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/uz_e9_manufacturing_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/uz_e9_manufacturing_2026_uz.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/uz_exact_answer_rules_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/uz_document_packs_2026.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/uz_stage_readiness_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
@@ -149,6 +154,7 @@ jobs:
           test -f docs/bd.html
           test -f docs/lk.html
           test -f docs/la.html
+          test -f docs/uz.html
           test -f docs/country-pack.js
           test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
