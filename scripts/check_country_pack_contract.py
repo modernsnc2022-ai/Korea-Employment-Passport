@@ -102,12 +102,27 @@ require(np_notice_rows["np_2026_application_urgent_0726"].get("contentReviewStat
 require(np_notice_rows["np_2026_application_passport_0730"].get("contentReviewStatus")=="title_and_date_verified_content_pending","July 30 passport notice content must remain pending until reviewed")
 require(np_exact.get("operationalNoticesFile")=="data/np_registration_notices_2026.json","Nepal exact answers must link operational notices")
 
+
+np_stage_readiness=load("docs/data/np_stage_readiness_2026.json")
+require(np_pack.get("stageReadinessFile")=="data/np_stage_readiness_2026.json","Nepal pack must link current-cohort stage readiness")
+require(np_stage_readiness.get("checkedAt")=="2026-10-05","Nepal current-cohort readiness check date must be explicit")
+np_current=np_stage_readiness.get("currentCohort",{})
+require(np_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Nepal 2026 registration must remain closed_verified")
+for key in ["epsTopikSchedule","epsTopikResult","skillCompetency","medicalAndJobApplication"]:
+    require(np_current.get(key,{}).get("status")=="awaiting_current_cohort_notice",f"Nepal {key} must remain awaiting a current-cohort official notice")
+for prior in np_current.get("skillCompetency",{}).get("priorCycleEvidence",[]):
+    require(prior.get("cycle")==2025 and prior.get("use")=="workflow_shape_only","Nepal prior-cycle skill evidence must never become current exact rules")
+for prior in np_current.get("medicalAndJobApplication",{}).get("priorCycleEvidence",[]):
+    require(prior.get("cycle")==2025 and prior.get("use")=="workflow_shape_only","Nepal prior-cycle job-application evidence must never become current exact rules")
+require(np_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Nepal beta must remain blocked while current-cohort downstream notices are unresolved")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
+require("CURRENT 2026 COHORT STATUS" in nepal and "Skill & Competency" in nepal,"Nepal preview must show current-cohort downstream HOLD status")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 
