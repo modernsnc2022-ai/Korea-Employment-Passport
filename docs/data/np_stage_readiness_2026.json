@@ -93,5 +93,13 @@
       "current-cohort medical/job-application rules not yet verified",
       "current-cohort downstream visa/training/departure exact rules not yet scoped"
     ]
+  },
+  "nextReviewTrigger": {
+    "officialIndex": "https://epsnepal.gov.np/notices",
+    "promoteOnlyWhen": [
+      "an official notice explicitly identifies the 2026 first-phase cohort or an unambiguous 2026 current cohort",
+      "the notice content, not only its title, is reviewed when exact dates/documents/rules are added",
+      "prior-cycle 2025 wording is not reused as a current-cycle exact rule"
+    ]
   }
 }
