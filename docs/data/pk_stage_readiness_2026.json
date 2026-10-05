@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "routeId": "pk-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "currentManufacturing": {
+    "sendingAuthority": {
+      "status": "verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "cityRoundSchedule": {
+      "status": "official_country_round_sector_linkage_pending",
+      "sources": [
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=30&examYear=2026&lang=ko&lcnsId=001"
+      ],
+      "note": "Registration 2026-03-31~04-08; test announcement/date undecided."
+    },
+    "manufacturingDiscovery": {
+      "status": "discovery_only_not_promoted",
+      "evidenceFile": "data/pk_manufacturing_discovery_2026.json"
+    },
+    "fee": {
+      "status": "manufacturing_cycle_specific_unverified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "documents": {
+      "status": "manufacturing_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "skillsAndFinalResult": {
+      "status": "research_pending_manufacturing_linkage",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+    },
+    "downstream": {
+      "status": "research_pending_current_manufacturing",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "specialRoute": {
+    "status": "separate_official_result_artifact",
+    "evidenceFile": "data/pk_special_eps_topik_2026.json",
+    "mustNotPopulateManufacturing": true
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "direct official Manufacturing sector linkage not captured",
+      "Manufacturing schedule/test dates remain unresolved",
+      "Manufacturing fee/document/final-result/downstream exact rules not mapped"
+    ]
+  }
+}

@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia and Timor-Leste")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste and Pakistan")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -541,6 +541,41 @@ for exact_id in [
 ]:
     require(exact_id in tl_exact_ids,f"Timor-Leste exact-answer catalog missing {exact_id}")
 
+
+pk_entry=routes["pk-e9-manufacturing-2026"]
+pk_pack=load("docs/data/pk_e9_manufacturing_2026.json")
+pk_exact=load("docs/data/pk_exact_answer_rules_2026.json")
+pk_docs=load("docs/data/pk_document_packs_2026.json")
+pk_discovery=load("docs/data/pk_manufacturing_discovery_2026.json")
+pk_special=load("docs/data/pk_special_eps_topik_2026.json")
+pk_readiness=load("docs/data/pk_stage_readiness_2026.json")
+require(pk_entry.get("lifecycle")=="research_hold" and pk_entry.get("publicAvailability")=="preview_only","Pakistan registry route must remain preview-only HOLD")
+require(pk_pack.get("lifecycle")=="research_hold" and pk_pack.get("publicAvailability")=="preview_only","Pakistan pack must remain preview-only HOLD")
+require(pk_pack.get("safety",{}).get("betaIntakeOpen") is False,"Pakistan beta intake must remain closed")
+require(pk_pack.get("safety",{}).get("cityRoundFactsRequireManufacturingSectorLinkage") is True,"Pakistan city-round facts must require Manufacturing linkage")
+require(pk_pack.get("safety",{}).get("discoveryManufacturingTitleMustNotBecomeExact") is True,"Pakistan Manufacturing discovery title must not auto-promote")
+require(pk_pack.get("safety",{}).get("specialFactsExcludedFromManufacturing") is True,"Pakistan Special facts must stay outside Manufacturing")
+require(pk_pack.get("officialSendingAgency",{}).get("name")=="Overseas Employment Corporation (OEC)","Pakistan sending agency must remain OEC")
+pk_current=pk_readiness.get("currentManufacturing",{})
+require(pk_current.get("cityRoundSchedule",{}).get("status")=="official_country_round_sector_linkage_pending","Pakistan city-round schedule must remain sector-linkage pending")
+require(pk_current.get("manufacturingDiscovery",{}).get("status")=="discovery_only_not_promoted","Pakistan Manufacturing discovery must remain non-promoted")
+require(pk_current.get("fee",{}).get("status")=="manufacturing_cycle_specific_unverified","Pakistan Manufacturing fee must remain unresolved")
+require(pk_current.get("documents",{}).get("status")=="manufacturing_checklist_not_reconstructed","Pakistan Manufacturing checklist must remain HOLD")
+require(pk_readiness.get("specialRoute",{}).get("mustNotPopulateManufacturing") is True,"Pakistan Special route must never populate Manufacturing")
+require(pk_readiness.get("betaReadiness",{}).get("status")=="blocked","Pakistan beta must remain blocked")
+require(pk_discovery.get("exactPromotionAllowed") is False,"Pakistan discovery evidence cannot promote exact rules")
+require(pk_special.get("excludedFromManufacturing") is True,"Pakistan Special evidence must be explicitly excluded")
+pk_doc_ids={p.get("id") for p in pk_docs.get("packs",[])}
+require({"pk_manufacturing_registration_documents_hold","pk_official_contact"}.issubset(pk_doc_ids),"Pakistan document packs must preserve HOLD plus official contact")
+pk_hold=next((p for p in pk_docs.get("packs",[]) if p.get("id")=="pk_manufacturing_registration_documents_hold"),{})
+require(pk_hold.get("items")==[],"Pakistan Manufacturing registration HOLD pack must contain no invented checklist items")
+pk_exact_ids={row.get("id") for row in pk_exact.get("answers",[])}
+for exact_id in [
+    "pk_2026_sending_authority","pk_2026_city_registration_window","pk_2026_schedule_state",
+    "pk_2026_manufacturing_linkage","pk_2026_special_firewall","pk_no_job_guarantee"
+]:
+    require(exact_id in pk_exact_ids,f"Pakistan exact-answer catalog missing {exact_id}")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -554,6 +589,7 @@ mongolia=(ROOT/"docs/mn.html").read_text(encoding="utf-8")
 china=(ROOT/"docs/cn.html").read_text(encoding="utf-8")
 cambodia=(ROOT/"docs/kh.html").read_text(encoding="utf-8")
 timorleste=(ROOT/"docs/tl.html").read_text(encoding="utf-8")
+pakistan=(ROOT/"docs/pk.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -599,10 +635,13 @@ require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"
 require("RESEARCH / HOLD" in timorleste and "2026-03-09" in timorleste and "2026-07-30" in timorleste,"Timor-Leste preview must visibly remain HOLD with direct-official Dili timeline")
 require("DISCOVERY ONLY" in timorleste and "2026-09-22" in timorleste and "Fishery is a separate sector" in timorleste,"Timor-Leste preview must show Baucau discovery, generic skills linkage gate and Fishery firewall")
 require('href="beta.html"' not in timorleste and 'id="betaForm"' not in timorleste,"Timor-Leste preview must not expose beta enrollment")
+require("RESEARCH / HOLD" in pakistan and "2026-03-31" in pakistan and "2026-04-08" in pakistan,"Pakistan preview must visibly remain HOLD with verified city-round registration window")
+require("Manufacturing-specific exact rules yet" in pakistan and "DISCOVERY ONLY" in pakistan and "2026-08-21" in pakistan,"Pakistan preview must show Manufacturing linkage gate, discovery-only state and Special result separation")
+require('href="beta.html"' not in pakistan and 'id="betaForm"' not in pakistan,"Pakistan preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold pakistan=research_hold" % (len(routes),len(EXPECTED)))

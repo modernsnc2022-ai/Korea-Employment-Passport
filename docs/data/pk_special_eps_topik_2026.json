@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "country": "PK",
+  "cycle": 2026,
+  "routeType": "special_eps_topik",
+  "excludedFromManufacturing": true,
+  "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+  "verifiedAt": "2026-10-06",
+  "officialResultArtifact": {
+    "subject": "Pakistan the 1th Test of proficiency in Korean Announcement",
+    "type": "Special (CBT)",
+    "publicationDate": "2026-08-21"
+  },
+  "warning": "Special EPS-TOPIK result evidence must never populate Regular Manufacturing."
+}

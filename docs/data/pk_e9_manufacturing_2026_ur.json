@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "اہلیت کی جانچ",
+    "action": "مکمل اہلیت کے لیے موجودہ پاکستان Manufacturing سرکاری نوٹس استعمال کریں۔ عمومی 9th Point System صفحات کو Manufacturing-specific نہیں مانا جائے گا جب تک sector linkage ثابت نہ ہو۔"
+  },
+  "registration": {
+    "title": "9th Point System رجسٹریشن",
+    "action": "اسلام آباد اور کراچی کے سرکاری صفحات پر رجسٹریشن 2026-03-31 سے 2026-04-08 تک تصدیق شدہ ہے، لیکن عنوان میں Manufacturing واضح نہیں۔"
+  },
+  "exam_fee": {
+    "title": "درخواست / امتحان فیس",
+    "action": "Pakistan Manufacturing کی cycle-specific فیس ابھی تصدیق شدہ نہیں۔"
+  },
+  "biometric": {
+    "title": "شناخت کی تصدیق",
+    "action": "صرف موجودہ پاکستان سرکاری identity اور anti-fraud ہدایات پر عمل کریں۔"
+  },
+  "document_verify": {
+    "title": "رجسٹریشن دستاویزات کی جانچ",
+    "action": "Manufacturing passport/photo/upload/payment checklist براہ راست سرکاری Manufacturing نوٹس ملنے تک HOLD ہے۔"
+  },
+  "exam_card": {
+    "title": "امتحان اعلان / داخلہ",
+    "action": "اسلام آباد اور کراچی 9th Point System صفحات پر test announcement ابھی undecided ہے۔"
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Pakistan Manufacturing",
+    "action": "سرکاری شہر والے صفحات General CBT اور Point System ہیں، لیکن Manufacturing sector linkage ابھی ثابت نہیں۔"
+  },
+  "skill_competency": {
+    "title": "Skills Test — Round 2",
+    "action": "Manufacturing-linked سرکاری artifact کے بغیر skills schedule اخذ نہ کریں۔"
+  },
+  "final_selection": {
+    "title": "حتمی Point System انتخاب",
+    "action": "Pakistan Manufacturing کا موجودہ final-result artifact ابھی promote نہیں کیا گیا۔ Special route الگ ہے۔"
+  },
+  "psychology_pre_job": {
+    "title": "پاکستان مخصوص اضافی جانچ",
+    "action": "الگ psychology stage کی تصدیق نہیں ہوئی؛ Indonesia کے قواعد نقل نہیں کیے جائیں گے۔"
+  },
+  "mcu1": {
+    "title": "طبی معائنہ",
+    "action": "صرف موجودہ پاکستان EPS medical/provider ہدایات استعمال کریں۔"
+  },
+  "job_application": {
+    "title": "روزگار امیدوار فائل",
+    "action": "Manufacturing final selection کی تصدیق کے بعد موجودہ OEC/HRD Korea ہدایات پر عمل کریں۔"
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "صرف سرکاری طور پر اہل امیدوار employer selection میں جاتے ہیں۔ نجی بروکر ترجیح کی ضمانت نہیں دے سکتا۔"
+  },
+  "employer_selection": {
+    "title": "کوریائی آجر کا انتخاب",
+    "action": "صرف سرکاری EPS نظام کے ذریعے انتخاب کا انتظار کریں۔"
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "منتخب ہونے پر موجودہ Pakistan/EPS سرکاری SLC ہدایات استعمال کریں۔"
+  },
+  "post_slc_requirements": {
+    "title": "SLC کے بعد پاکستان تقاضے",
+    "action": "medical follow-up, training, visa, payment اور departure کے لیے موجودہ سرکاری ہدایات استعمال کریں۔"
+  },
+  "visa_docs": {
+    "title": "ویزا دستاویزات",
+    "action": "موجودہ پاکستان/کوریائی مشن visa checklist اور fees استعمال کریں۔"
+  },
+  "predeparture_training": {
+    "title": "روانگی سے پہلے تربیت",
+    "action": "صرف سرکاری طور پر مقرر training مکمل کریں۔"
+  },
+  "mcu3_departure": {
+    "title": "آخری صحت / روانگی تیاری",
+    "action": "Indonesia-style MCU-III خودکار طور پر شامل نہیں کیا جائے گا۔"
+  },
+  "departure": {
+    "title": "سرکاری روانگی",
+    "action": "contract, visa, training اور departure requirements مکمل ہونے کے بعد ہی سفر کریں۔"
+  },
+  "korea_entry_training": {
+    "title": "کوریا داخلہ اور employment education",
+    "action": "کوریا پہنچنے کے بعد سرکاری employment education اور handover مکمل کریں۔"
+  },
+  "employer_handover": {
+    "title": "آجر کو handover",
+    "action": "کام کی جگہ، رہائش اور emergency contacts کی تصدیق کریں۔"
+  },
+  "residence_registration": {
+    "title": "Residence Card / غیر ملکی رجسٹریشن",
+    "action": "موجودہ Korean Immigration قواعد کے مطابق رجسٹریشن کریں۔"
+  },
+  "eps_insurance_check": {
+    "title": "EPS insurance جانچ",
+    "action": "سرکاری EPS معلومات سے insurance obligations چیک کریں۔"
+  },
+  "first_payroll_check": {
+    "title": "پہلی تنخواہ کی جانچ",
+    "action": "payslip اور bank deposit کو SLC، working hours اور deductions سے ملائیں۔"
+  },
+  "labor_support_ready": {
+    "title": "لیبر سپورٹ تیاری",
+    "action": "سرکاری labor-support channels اور contract/payroll/attendance evidence محفوظ رکھیں۔"
+  },
+  "employment_maintenance": {
+    "title": "ملازمت برقرار / workplace change",
+    "action": "قانونی وجہ ہو تو Korea کے سرکاری EPS یا employment-center process استعمال کریں۔"
+  }
+}
