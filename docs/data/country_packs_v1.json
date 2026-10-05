@@ -1,5 +1,5 @@
 {
-  "version": "1.13.0",
+  "version": "1.14.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -267,6 +267,23 @@
       "officialSendingAgency": "Overseas Employment Corporation (OEC)",
       "officialSendingAgencyUrl": "https://oec.gov.pk/",
       "note": "HRD Korea directly verifies Pakistan 9th Point System city pages for Islamabad and Karachi, registration 2026-03-31 through 2026-04-08, with test dates undecided. Their public titles do not state Manufacturing, so KEP keeps Manufacturing sector linkage gated. Special EPS-TOPIK remains separate."
+    },
+    {
+      "routeId": "tj-e9-manufacturing-2026",
+      "country": "TJ",
+      "countryName": "Tajikistan",
+      "nativeCountryName": "Тоҷикистон",
+      "visa": "E-9",
+      "sector": "manufacturing",
+      "cycle": 2026,
+      "lifecycle": "research_hold",
+      "publicAvailability": "preview_only",
+      "primaryLanguage": "tg",
+      "routeFile": "data/tj_e9_manufacturing_2026.json",
+      "localizationFile": "data/tj_e9_manufacturing_2026_tg.json",
+      "officialSendingAgency": "Agency of Overseas Employment",
+      "officialSendingAgencyUrl": "https://mehnat.tj/",
+      "note": "Manufacturing sector linkage is cross-source verified: the Tajikistan Ministry official Manufacturing notice and HRD Korea 2nd Point System share registration 2026-03-02 through 2026-03-05. The local notice also verifies a 330 somoni exam fee and registration documents."
     }
   ]
 }
