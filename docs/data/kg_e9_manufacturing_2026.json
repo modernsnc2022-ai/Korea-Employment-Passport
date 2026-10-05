@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-13th-point-system-kyrgyzstan-manufacturing-cross-source-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -19,12 +19,14 @@
     "onlineRegistrationUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/"
   },
   "evidenceNotes": [
-    "Kyrgyzstan's official overseas-employment center explicitly identifies the 2026 EPS-TOPIK recruitment as employment in Korea in the Manufacturing sector.",
+    "Kyrgyzstan's official overseas-employment center explicitly identifies the February 2026 EPS-TOPIK recruitment as employment in Korea in the Manufacturing sector.",
     "The local official Manufacturing registration window 2026-02-23 through 2026-02-27 matches HRD Korea's 13th Point System city schedules for Bishkek and Osh.",
-    "Official local guidance verifies a US$28 exam fee, Gmail, a recent 3.5×4.5 cm white-background JPG photo, passport-copy JPG and payment-receipt image.",
-    "HRD Korea city schedules record test announcement 2026-03-30; Bishkek tests 2026-04-10 through 2026-04-16 and Osh 2026-04-18 through 2026-04-19.",
-    "Local official guidance states test passage does not guarantee a contract, successful candidates enter the roster for two years, and employers independently select candidates.",
-    "A later 2026 additional/general test and 2026 Special EPS-TOPIK exist but remain separate evidence layers and never overwrite the 13th Manufacturing route."
+    "Official local guidance verifies a US$28 fee and online-registration files: Gmail, recent 3.5×4.5 cm white-background JPG photo, passport JPG and payment-receipt image.",
+    "HRD Korea records test announcement 2026-03-30; Bishkek tests 2026-04-10 through 2026-04-16 and Osh tests 2026-04-18 through 2026-04-19.",
+    "The official Kyrgyz center announced the 13th-cycle Skills Test for 2026-05-30 through 2026-05-31 in Bishkek, then reported that the second stage had been completed for Manufacturing candidates.",
+    "A 2026-06-08 official Manufacturing post-selection notice requires successful candidates to prepare police clearance, a USD Demir Bank account, medical clearance, photos and passport/ID copies, with current-cycle medical and document-submission windows.",
+    "Official registration guidance states test success does not guarantee a contract; successful candidates enter a unified roster for two years and Korean employers select independently.",
+    "A later 2026 additional/general test and a separate Special EPS-TOPIK route are isolated and must not overwrite the February 13th Manufacturing route."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -54,7 +56,7 @@
       "title": "13th Point System Manufacturing registration",
       "authority": "Center for Employment of Citizens Abroad / HRD Korea",
       "kind": "official_action",
-      "action": "The official Kyrgyzstan Manufacturing registration period was 2026-02-23 through 2026-02-27. The window is closed.",
+      "action": "The official Kyrgyzstan Manufacturing registration window was 2026-02-23 through 2026-02-27. This window is closed.",
       "sourceUrl": "https://migrant.kg/ru/about/news/vazhnaia-informatsiia-dlia-zhelaiushchikh-uchastvovat-v-testirovanii-na-znanie-koreiskogo-iazyka-v-2026-godu/",
       "supportState": "verified_cross_source_closed"
     },
@@ -63,7 +65,7 @@
       "title": "EPS-TOPIK examination fee",
       "authority": "Center for Employment of Citizens Abroad",
       "kind": "official_payment",
-      "action": "The official 2026 Manufacturing notice states an examination fee of US$28, payable through the designated Eldik/RSK Bank channel.",
+      "action": "The official February 2026 Manufacturing notice states an EPS-TOPIK participation fee of US$28 through the designated Eldik/RSK Bank channel.",
       "sourceUrl": "https://migrant.kg/ru/about/news/vazhnaia-informatsiia-dlia-zhelaiushchikh-uchastvovat-v-testirovanii-na-znanie-koreiskogo-iazyka-v-2026-godu/",
       "supportState": "verified_current_local"
     },
@@ -81,7 +83,7 @@
       "title": "Registration document verification",
       "authority": "Center for Employment of Citizens Abroad",
       "kind": "official_action",
-      "action": "The official online-registration instructions require Gmail, a recent 3.5×4.5 cm white-background JPG photo, passport-copy JPG, and an image of the US$28 payment receipt. Files must be clear/readable and the receipt must be kept for test day.",
+      "action": "Official online registration required a Gmail address, a recent 3.5×4.5 cm white-background JPG photo, passport JPG and an image of the US$28 payment receipt. The receipt had to be kept for test day.",
       "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/",
       "supportState": "verified_current_local"
     },
@@ -90,7 +92,7 @@
       "title": "Test announcement / admission",
       "authority": "HRD Korea / Center for Employment of Citizens Abroad",
       "kind": "self_service",
-      "action": "HRD Korea records 2026-03-30 as the test-announcement date for the 13th Point System city tracks. Use official individual admission instructions.",
+      "action": "HRD Korea records 2026-03-30 as the test-announcement date for both Bishkek and Osh 13th Point System tracks.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=004&examNot=8&examYear=2026&lang=ko&lcnsId=001",
       "supportState": "verified_current"
     },
@@ -108,18 +110,18 @@
       "title": "Skills Test — Round 2",
       "authority": "HRD Korea / Center for Employment of Citizens Abroad",
       "kind": "official_exam",
-      "action": "The local official source confirms Round 1 completion and a preliminary Round 2 Skills Test plan around 2026-05-31 in Bishkek. KEP does not promote a final skills schedule/result until a direct current-cycle artifact is verified.",
-      "sourceUrl": "https://migrant.kg/ru/about/news/pervyi-etap-testirovaniia-na-znanie-koreiskogo-iazyka-uspeshno-zavershen_1KOG/",
-      "supportState": "current_cycle_final_artifact_pending"
+      "action": "The official Kyrgyz center scheduled the second-stage Skills Test for 2026-05-30 through 2026-05-31 in Bishkek and later confirmed completion for candidates in the Manufacturing sector. Manufacturing-related diplomas, certificates and work-experience evidence could receive additional points.",
+      "sourceUrl": "https://migrant.kg/ru/about/news/v-bishkeke-sostoialsia-vtoroi-etap-ekzamena-po-koreiskomu-iazyku-skills-test-dlia-trudoustroistva-v-respubliku-koreia/",
+      "supportState": "verified_current_completed"
     },
     {
       "id": "final_selection",
       "title": "Point-based final selection",
       "authority": "HRD Korea / Center for Employment of Citizens Abroad",
       "kind": "official_result",
-      "action": "Do not infer final selection from Round 1 completion. A current 13th Manufacturing final-result artifact must be reviewed before promotion.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
-      "supportState": "current_cycle_result_pending"
+      "action": "A 2026-06-08 official Manufacturing post-selection notice instructs successful candidates to proceed to medical checks and roster-registration documents. KEP treats this as verified post-selection workflow evidence without claiming an employer/job guarantee.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+      "supportState": "verified_current_postselection_notice"
     },
     {
       "id": "psychology_pre_job",
@@ -135,25 +137,25 @@
       "title": "Medical examination",
       "authority": "Center for Employment of Citizens Abroad / authorized provider",
       "kind": "official_requirement",
-      "action": "Use only current Kyrgyzstan EPS medical/provider guidance. Exact post-selection provider, checklist and fee remain HOLD.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "For the February 13th Manufacturing cycle, the official 2026-06-08 notice required medical screening on 2026-06-09 through 2026-06-11 at named Bishkek/Osh providers. This historical current-cycle window is verified; future applicants must use the next current notice.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+      "supportState": "verified_current_cycle_historical_window"
     },
     {
       "id": "job_application",
       "title": "Employment-candidate file",
       "authority": "Center for Employment of Citizens Abroad / HRD Korea",
       "kind": "official_action",
-      "action": "After verified final selection, follow current Kyrgyzstan job-application instructions. Exact 2026 post-selection documents and timing remain HOLD.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "For successful 13th-cycle Manufacturing candidates, the official post-selection notice required police clearance, a USD Demir Bank account, medical clearance, two 3.5×4.5 photos, color copies of passport and ID, with the full package accepted on 2026-06-15 in Bishkek or Osh. Future cycles require a fresh notice.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/rezultaty-testirovaniia-na-znanie-koreiskogo-iazyka-za-2026-god/",
+      "supportState": "verified_current_cycle_historical_window"
     },
     {
       "id": "roster",
       "title": "EPS Job Seekers' Roster",
       "authority": "Center for Employment of Citizens Abroad / HRD Korea",
       "kind": "official_wait",
-      "action": "The official Kyrgyz registration guidance states successful testers enter a unified candidate roster for two years; passing the test does not guarantee a contract, and the Korean employer independently selects candidates.",
+      "action": "Official Kyrgyz registration guidance states successful testers enter a unified candidate roster for two years. Passing the test does not guarantee a contract; employer selection is independent.",
       "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/",
       "supportState": "verified_current_process_principle"
     },
@@ -162,9 +164,9 @@
       "title": "Korean employer selection",
       "authority": "Korean employer / EPS",
       "kind": "official_wait",
-      "action": "The official Kyrgyz guidance states employers independently select candidates; individuals, legal entities or officials cannot influence contract selection.",
+      "action": "The official Kyrgyz guidance explicitly states that listed candidates are selected independently by Korean employers and that private persons, legal entities, government bodies or officials cannot influence test passage or contract selection.",
       "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/",
-      "supportState": "verified_current_process_principle"
+      "supportState": "verified_current_anti_broker_rule"
     },
     {
       "id": "slc",
@@ -289,5 +291,6 @@
   "registrationNoticeFile": "data/kg_registration_notice_2026.json",
   "laterGeneralRoundEvidenceFile": "data/kg_later_general_round_2026.json",
   "specialRouteEvidenceFile": "data/kg_special_eps_topik_2026.json",
-  "stageReadinessFile": "data/kg_stage_readiness_2026.json"
+  "stageReadinessFile": "data/kg_stage_readiness_2026.json",
+  "additionalRoundEvidenceFile": "data/kg_additional_general_round_2026.json"
 }
