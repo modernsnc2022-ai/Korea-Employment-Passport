@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-manufacturing-eps-topik-and-point-based-selection",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-05",
@@ -47,7 +47,7 @@
       "title": "In-person EPS-TOPIK registration",
       "authority": "COLAB / provincial receiving authority",
       "kind": "official_action",
-      "action": "Register in person at the official receiving point announced by COLAB; proxy registration is not allowed. Use only the 2026 official notice and receiving-location list.",
+      "action": "The 2026 official receiving-location notice accepted EPS exam registrations from 2026-03-23 through 2026-03-27. Registration was in person at the official receiving point; proxy registration was not allowed. This window is closed.",
       "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
       "supportState": "verified_current"
     },
@@ -278,5 +278,11 @@
     }
   ],
   "exactAnswerRulesFile": "data/vn_exact_answer_rules_2026.json",
-  "stageReadinessFile": "data/vn_stage_readiness_2026.json"
+  "stageReadinessFile": "data/vn_stage_readiness_2026.json",
+  "documentPacksFile": "data/vn_document_packs_2026.json",
+  "registrationEvidence": {
+    "receivingDates": "2026-03-23 through 2026-03-27",
+    "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
+    "status": "closed"
+  }
 }
