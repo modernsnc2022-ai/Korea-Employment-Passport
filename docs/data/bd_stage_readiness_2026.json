@@ -50,5 +50,18 @@
       "current Regular eligibility/fee/documents not cycle-verified",
       "downstream medical/job-file/visa/training/departure exact rules not mapped"
     ]
+  },
+  "nextReviewTrigger": {
+    "subject": "Current 2026 Bangladesh Regular Manufacturing EPS notice",
+    "officialSources": [
+      "https://boesl.gov.bd/",
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    ],
+    "promoteOnlyWhen": [
+      "a current BOESL or HRD Korea notice explicitly identifies the Regular Manufacturing recruitment",
+      "the notice gives or links the actual registration/test schedule or current-cycle applicant rules",
+      "Special EPS-TOPIK facts are not reused",
+      "generic HRD registration guidance remains baseline-only unless the Bangladesh notice adopts it"
+    ]
   }
 }
