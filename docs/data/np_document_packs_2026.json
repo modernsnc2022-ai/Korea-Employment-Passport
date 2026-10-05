@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-05",
+  "packs": [
+    {
+      "id": "np_2026_eps_topik_registration",
+      "title": "Nepal 2026 EPS-TOPIK First-Phase Registration",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "items": [
+        {
+          "id": "np_passport_photo_page",
+          "label": "Passport photo-page scan",
+          "required": true,
+          "rule": "JPG; width 600 px; under 89 KB; scan the passport page containing the applicant photo."
+        },
+        {
+          "id": "np_email",
+          "label": "Applicant's own email address",
+          "required": true,
+          "rule": "Enter the applicant's own active email address."
+        },
+        {
+          "id": "np_mobile",
+          "label": "Applicant's own mobile number",
+          "required": true,
+          "rule": "Enter the applicant's own active mobile number."
+        },
+        {
+          "id": "np_recent_photo",
+          "label": "Recent application photo",
+          "required": true,
+          "rule": "Color photo taken within 6 months; 3.5×4.5 cm; white background; no white clothing; both ears visible; JPG width 100–300 px; 8–14 KB."
+        }
+      ]
+    },
+    {
+      "id": "np_2026_eps_topik_exam_day",
+      "title": "Nepal 2026 EPS-TOPIK Test-Day Documents",
+      "appliesTo": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "status": "verified_official_pdf",
+      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
+      "items": [
+        {
+          "id": "np_exam_original_passport",
+          "label": "Original passport",
+          "required": true,
+          "rule": "Bring the same original passport whose copy was submitted during application."
+        },
+        {
+          "id": "np_exam_application_slip",
+          "label": "Test application slip",
+          "required": true,
+          "rule": "Bring the test application slip."
+        }
+      ]
+    }
+  ]
+}
