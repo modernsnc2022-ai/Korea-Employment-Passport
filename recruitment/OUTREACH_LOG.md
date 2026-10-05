@@ -50,3 +50,5 @@ Excluded:
 - EPS-TOPIK INDONESIA Telegram (~6.8k observed): explicit ban on promotion/sales in any form
 
 Rule: no unsolicited commercial advertising; request admin permission where group rules restrict promotion or are unclear.
+
+| 2026-10-05 | KMI Korea — WhatsApp | Indonesian worker/community network in Korea | Sent direct WhatsApp message requesting connection to KMI central/regional WhatsApp admins for current E-9 worker beta validation recruitment; message included KEP beta link and no-guarantee/privacy disclosures | **Sent — awaiting reply** |
