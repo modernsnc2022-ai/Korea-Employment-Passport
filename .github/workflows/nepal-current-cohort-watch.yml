@@ -1,6 +1,11 @@
 name: nepal-current-cohort-watch
 
 on:
+  pull_request:
+    paths:
+      - 'scripts/check_nepal_current_cohort_notices.py'
+      - 'monitor/np_current_cohort_notice_baseline.json'
+      - '.github/workflows/nepal-current-cohort-watch.yml'
   schedule:
     - cron: '17 0,6,12,18 * * *'
   workflow_dispatch:
