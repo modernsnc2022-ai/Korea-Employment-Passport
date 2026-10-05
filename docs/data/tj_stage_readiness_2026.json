@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "routeId": "tj-e9-manufacturing-2026",
+  "cycle": 2026,
+  "checkedAt": "2026-10-06",
+  "currentCycle": {
+    "manufacturingLinkage": {
+      "status": "verified_cross_source",
+      "sources": [
+        "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001"
+      ]
+    },
+    "registration": {
+      "status": "closed_verified",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "note": "2026-03-02 through 2026-03-05; 330 somoni."
+    },
+    "eligibilityAndDocuments": {
+      "status": "verified_current_local",
+      "sourceUrl": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995"
+    },
+    "epsTopikSchedule": {
+      "status": "completed_period_verified",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
+      "note": "Announcement 2026-03-20; test 2026-03-28 through 2026-03-29."
+    },
+    "skillsAndFinalResult": {
+      "status": "awaiting_verified_current_cycle_result",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+    },
+    "medicalAndJobApplication": {
+      "status": "research_pending_post_selection",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "downstream": {
+      "status": "research_pending_post_selection",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    }
+  },
+  "betaReadiness": {
+    "status": "blocked",
+    "blockers": [
+      "current 2nd-cycle skills/final-result artifact not verified",
+      "post-selection medical/job-application exact rules not mapped",
+      "visa/training/departure exact rules not mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "type": "official_notice",
+    "subject": "Tajikistan 2nd-cycle skills/final-result or post-selection notice",
+    "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
+      "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    ],
+    "promoteOnlyWhen": [
+      "artifact identifies current Tajikistan 2nd Point System",
+      "post-selection rules come from current official evidence",
+      "no job/SLC/visa/departure guarantee is implied"
+    ]
+  }
+}
