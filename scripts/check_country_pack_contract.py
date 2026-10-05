@@ -23,7 +23,7 @@ def require(condition,message):
 registry=load("docs/data/country_packs_v1.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
-require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia and Nepal")
+require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal and Vietnam")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
@@ -149,8 +149,39 @@ ccvi_pack=next((pack for pack in np_docs.get("packs",[]) if pack.get("id")=="np_
 require("latest official" in str(ccvi_pack.get("warning","")).lower(),"Nepal CCVI pack must warn against stale visa/service fees")
 require(np_stage_readiness.get("processBaseline",{}).get("status")=="verified_workflow_shape_only","Nepal stable process baseline must not be promoted as current-cohort exact readiness")
 
+
+vn_entry=routes["vn-e9-manufacturing-2026"]
+vn_pack=load("docs/data/vn_e9_manufacturing_2026.json")
+vn_exact=load("docs/data/vn_exact_answer_rules_2026.json")
+vn_stage_readiness=load("docs/data/vn_stage_readiness_2026.json")
+require(vn_entry.get("lifecycle")=="research_hold","Vietnam must remain research_hold")
+require(vn_entry.get("publicAvailability")=="preview_only","Vietnam registry route must remain preview_only")
+require(vn_pack.get("lifecycle")=="research_hold" and vn_pack.get("publicAvailability")=="preview_only","Vietnam pack must remain preview-only HOLD")
+require(vn_pack.get("safety",{}).get("betaIntakeOpen") is False,"Vietnam beta intake must remain closed")
+require(vn_pack.get("officialSendingAgency",{}).get("url")=="https://colab.moha.gov.vn/","Vietnam official sending authority must remain COLAB")
+require(vn_pack.get("exactAnswerRulesFile")=="data/vn_exact_answer_rules_2026.json","Vietnam pack must link exact answers")
+require(vn_pack.get("stageReadinessFile")=="data/vn_stage_readiness_2026.json","Vietnam pack must link current-cohort readiness")
+require(len(vn_exact.get("answers",[]))>=19,"Vietnam exact-answer catalog must preserve current 2026 registration/test facts")
+vn_exact_ids={row.get("id") for row in vn_exact.get("answers",[])}
+for exact_id in [
+    "vn_2026_sending_authority","vn_2026_manufacturing_target","vn_2026_exam_fee",
+    "vn_2026_age_rule","vn_2026_registration_method","vn_2026_identity_lock",
+    "vn_2026_test_format","vn_2026_round1_result","vn_2026_round2_auto",
+    "vn_2026_round2_schedule_state","vn_2026_no_job_guarantee"
+]:
+    require(exact_id in vn_exact_ids,f"Vietnam exact-answer catalog missing {exact_id}")
+for row in vn_exact.get("answers",[]):
+    require(str(row.get("sourceUrl","")).startswith("https://colab.moha.gov.vn/"),f"Vietnam exact answer {row.get('id')} must preserve official COLAB source lineage")
+    require(row.get("verifiedAt")=="2026-10-05",f"Vietnam exact answer {row.get('id')} verification date missing")
+vn_current=vn_stage_readiness.get("currentCohort",{})
+require(vn_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Vietnam 2026 registration must remain closed_verified")
+require(vn_current.get("epsTopikResult",{}).get("status")=="round1_result_verified","Vietnam Manufacturing Round 1 result must remain verified")
+require(vn_current.get("skillCompetency",{}).get("status")=="awaiting_final_official_schedule","Vietnam Round 2 must not be promoted before final official schedule verification")
+require(vn_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Vietnam beta must remain blocked while downstream exact rules are unresolved")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
+vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
@@ -159,10 +190,13 @@ require("CURRENT 2026 COHORT STATUS" in nepal and "Skill & Competency" in nepal,
 require("POST-SELECTION VERIFIED" in nepal and "6-day" in nepal and "FEIMS" in nepal and "visa/service" in nepal.lower(),"Nepal preview must expose verified process shape without hiding fee volatility")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
+require("RESEARCH / HOLD" in vietnam and "150" in vietnam and "COLAB" in vietnam,"Vietnam preview must show HOLD, verified Round 1 cutoff and official sending authority")
+require("CURRENT 2026 COHORT STATUS" in vietnam and "Vòng 2" in vietnam,"Vietnam preview must show downstream current-cohort HOLD")
+require('href="beta.html"' not in vietnam and 'id="betaForm"' not in vietnam,"Vietnam preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
     for failure in failures: print("- "+failure)
     raise SystemExit(1)
 
-print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold" % (len(routes),len(EXPECTED)))
+print("COUNTRY_PACK_CONTRACT_PASS routes=%d stages=%d nepal=research_hold vietnam=research_hold" % (len(routes),len(EXPECTED)))
