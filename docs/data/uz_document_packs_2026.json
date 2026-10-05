@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "routeId": "uz-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "uz_9th_registration_documents_hold",
+      "title": "Uzbekistan 9th Manufacturing — Current Document Checklist HOLD",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "cycle_specific_exact_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
+      "warning": "The exact 9th-round local registration checklist is not promoted. Generic HRD visit-registration documents and another country's file specs must not be substituted.",
+      "items": []
+    },
+    {
+      "id": "uz_official_contact_context",
+      "title": "Uzbekistan official EPS contact context",
+      "appliesTo": [
+        "registration"
+      ],
+      "status": "two_official_source_contexts_preserved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "items": [
+        {
+          "id": "uz_general_info_office",
+          "label": "General HRD information-office listing",
+          "required": false,
+          "rule": "1, Qamarniso Str, Tashkent, Olmazor district; +998-71-202-33-55."
+        },
+        {
+          "id": "uz_9th_schedule_contact",
+          "label": "9th-cycle schedule-page reception contact",
+          "required": false,
+          "rule": "1. Kamarniso St. Almazar region, 100179, Tashkent; +998-90-346-1834."
+        }
+      ]
+    }
+  ]
+}
