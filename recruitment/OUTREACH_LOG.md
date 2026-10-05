@@ -65,3 +65,5 @@ Rule: no unsolicited commercial advertising; request admin permission where grou
 | 2026-10-05 | Kedai Rinjani — WhatsApp | Indonesian community/business hub in Ansan | Sent direct WhatsApp request asking for connection to WNI/E-9 worker community or WhatsApp group admins; message used `src=kedai_rinjani_ansan` | **Sent — awaiting reply** |
 
 | 2026-10-05 | Warung Indonesia Solo WhatsApp probe | Indonesian community/business candidate in Pyeongtaek | Tested public number +82 10-8423-5581 via WhatsApp | **Invalid — number is not on WhatsApp; retire route** |
+
+| 2026-10-05 | Warung Nusantara — WhatsApp | Indonesian community/business hub in Ansan/Wongok-dong | Sent direct WhatsApp request asking for connection to WNI/E-9 worker WhatsApp groups, paguyuban, or community admins; message used `src=warung_nusantara_ansan` | **Sent — awaiting reply** |
