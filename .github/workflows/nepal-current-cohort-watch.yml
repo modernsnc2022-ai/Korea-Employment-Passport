@@ -1,6 +1,8 @@
 name: nepal-current-cohort-watch
 
 on:
+  push:
+    branches: [main]
   pull_request:
     paths:
       - 'scripts/check_nepal_current_cohort_notices.py'
