@@ -576,6 +576,33 @@ for exact_id in [
 ]:
     require(exact_id in pk_exact_ids,f"Pakistan exact-answer catalog missing {exact_id}")
 
+
+coverage=load("docs/data/country_coverage_matrix_2026.json")
+coverage_rows={row.get("country"):row for row in coverage.get("countries",[])}
+expected_sending={"PH","TH","ID","VN","LK","MN","UZ","PK","KH","CN","BD","KG","NP","MM","TL","LA","TJ"}
+require(set(coverage_rows)==expected_sending,"coverage matrix must account for exactly all 17 HRD Korea EPS sending countries")
+require(coverage.get("summary",{}).get("listedSendingCountries")==17,"coverage matrix listedSendingCountries must remain 17")
+require(coverage.get("summary",{}).get("registeredManufacturingCountryPacks")==14,"coverage matrix must report 14 registered Manufacturing Country Packs")
+require(coverage.get("summary",{}).get("pendingManufacturingVerification")==3,"coverage matrix must report 3 pending Manufacturing countries")
+registered={code for code,row in coverage_rows.items() if row.get("status")=="country_pack_registered"}
+pending={code for code,row in coverage_rows.items() if row.get("status")=="pending_manufacturing_verification"}
+require(pending=={"KG","MM","TJ"},"only Kyrgyzstan, Myanmar and Tajikistan may remain pending Manufacturing verification")
+require(len(registered)==14,"coverage matrix must contain exactly 14 registered Manufacturing Country Packs")
+registry_countries={entry.get("country") for entry in routes.values()}
+require(registered==registry_countries,"coverage registered-country set must exactly match country_packs_v1 registry")
+for code in registered:
+    row=coverage_rows[code]
+    require(row.get("routeId") in routes,f"{code}: coverage routeId must exist in country registry")
+    require(routes[row.get("routeId")].get("country")==code,f"{code}: coverage routeId country mismatch")
+for code in pending:
+    row=coverage_rows[code]
+    require(code not in registry_countries,f"{code}: pending country must not have a promoted Manufacturing Country Pack")
+    require(len(row.get("blockers",[]))>=1,f"{code}: pending coverage row must state blockers")
+    require(bool(row.get("officialSendingAgency")),f"{code}: pending coverage row must retain official sending agency")
+require(coverage_rows["KG"].get("evidence",{}).get("note","").find("sectorless")>=0,"Kyrgyzstan pending reason must preserve sectorless Point System evidence")
+require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
+require(coverage_rows["TJ"].get("evidence",{}).get("note","").find("sectorless")>=0,"Tajikistan pending reason must preserve sectorless Point System evidence")
+
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
@@ -591,6 +618,9 @@ cambodia=(ROOT/"docs/kh.html").read_text(encoding="utf-8")
 timorleste=(ROOT/"docs/tl.html").read_text(encoding="utf-8")
 pakistan=(ROOT/"docs/pk.html").read_text(encoding="utf-8")
 require("RESEARCH / HOLD" in countries and "preview_only" not in countries,"countries page must visibly label Nepal HOLD")
+require("PENDING MANUFACTURING VERIFICATION" in countries and "Kyrgyzstan" in countries and "Myanmar" in countries and "Tajikistan" in countries,"countries page must expose pending Manufacturing verification")
+require('href="kg.html"' not in countries and 'href="mm.html"' not in countries and 'href="tj.html"' not in countries,"pending countries must not expose fake Country Pack links")
+require("This is not a Manufacturing Country Pack yet." in countries,"pending-country UI must clearly state that unverified routes are not Country Packs")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
