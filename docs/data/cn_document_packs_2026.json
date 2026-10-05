@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "routeId": "cn-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "packs": [
+    {
+      "id": "cn_6th_registration_documents_hold",
+      "title": "China 6th Manufacturing — Registration Checklist HOLD",
+      "appliesTo": [
+        "registration",
+        "document_verify"
+      ],
+      "status": "cycle_specific_exact_checklist_not_reconstructed",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
+      "warning": "Do not substitute generic HRD visiting-registration specs or another country's file requirements.",
+      "items": []
+    },
+    {
+      "id": "cn_official_contact_context",
+      "title": "China official EPS contact context",
+      "appliesTo": [
+        "registration",
+        "exam_card"
+      ],
+      "status": "official_contexts_preserved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en",
+      "items": [
+        {
+          "id": "cn_general_office",
+          "label": "General information office",
+          "required": false,
+          "rule": "No.28 Donghou Alley, Andingmenwai, Dongcheng District, Beijing, 100710; +86-10-6451-5342."
+        },
+        {
+          "id": "cn_cycle_test_site",
+          "label": "6th-cycle schedule test site",
+          "required": false,
+          "rule": "4th Floor, Public Training Center Building, Lanhe Industrial Cluster Zone, Jinlanshan Street, Xinxian County, Xinyang City; 0086-139-3974-0939."
+        }
+      ]
+    }
+  ]
+}
