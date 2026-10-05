@@ -1,0 +1,110 @@
+{
+  "eligibility": {
+    "title": "Eligibility check",
+    "action": "Verify age 18–39 (DOB 1986-10-27 through 2008-10-26), no imprisonment-level criminal record, no forced deportation/departure from Korea, no travel-ban reason, no color blindness/color weakness, and prior E-9/E-10 stay under the official limit."
+  },
+  "registration": {
+    "title": "Point System application",
+    "action": "The current application period is 2026-10-26 through 2026-10-30 via the SLBFE website. SLBFE says to check its website on 2026-10-12 for instructions on completing applications."
+  },
+  "exam_fee": {
+    "title": "EPS-TOPIK application fee",
+    "action": "Official fee: US$28, stated as LKR 9,250 in the current notice. Follow only SLBFE's official payment instructions."
+  },
+  "biometric": {
+    "title": "Identity verification",
+    "action": "Use the current SLBFE/HRD Korea identity-verification requirements. KEP does not invent a separate biometric step beyond the official notice."
+  },
+  "document_verify": {
+    "title": "Application document verification",
+    "action": "Prepare the official application form, passport copy, recent photo file and payment slip. Identity data must match the passport and key personal details cannot be changed after application."
+  },
+  "exam_card": {
+    "title": "Test date / venue notice",
+    "action": "SLBFE's current timeline sets 2026-11-16 for announcement of test requirements/date and venue information. Individual test dates are published on the SLBFE website."
+  },
+  "eps_topik": {
+    "title": "EPS-TOPIK — Round 1",
+    "action": "Round 1 uses UBT from 2026-11-25 onward, with the overall period extending into March 2027 subject to change. EPS-TOPIK has 40 multiple-choice questions: 20 reading + 20 listening, total 50 minutes."
+  },
+  "skill_competency": {
+    "title": "Skills Test — Round 2",
+    "action": "Only Round 1 passers proceed. The mandatory Skills Test includes physical fitness, interview and basic skills testing; Job Capacity Assessment can add points from verified experience/training/education/qualifications."
+  },
+  "final_selection": {
+    "title": "Point-based final selection",
+    "action": "Final successful candidates are selected by combined Round 1 and Round 2 scores, up to the industry quota. Candidates scoring below 60% of the Skills Test maximum are screened out."
+  },
+  "psychology_pre_job": {
+    "title": "Country-specific pre-job checks",
+    "action": "No separate Sri Lanka psychology stage is asserted from the current point-system notice. Do not copy Indonesia-specific psychology requirements."
+  },
+  "mcu1": {
+    "title": "Medical examination",
+    "action": "Final successful candidates must still satisfy Korea employment medical criteria. Exact current post-selection medical dates/providers are published separately by SLBFE."
+  },
+  "job_application": {
+    "title": "Job-seeker registration",
+    "action": "Final successful candidates may qualify for the job-seekers roster after required medical and document checks. The exact current candidate-file instructions must follow SLBFE's post-selection notice."
+  },
+  "roster": {
+    "title": "EPS Job Seekers' Roster",
+    "action": "Final successful candidates are qualified to be included in the job-seekers roster, but inclusion does not guarantee employment in Korea."
+  },
+  "employer_selection": {
+    "title": "Korean employer selection",
+    "action": "Wait for employer selection through the official EPS process. A broker cannot guarantee employer selection."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "If selected by a Korean employer, follow the current SLBFE instructions for job agreement/SLC and next steps."
+  },
+  "post_slc_requirements": {
+    "title": "Post-SLC Sri Lanka requirements",
+    "action": "Follow only current SLBFE notices for medical schedules, police report, bond/agreement, training, visa and departure preparation."
+  },
+  "visa_docs": {
+    "title": "Visa document package",
+    "action": "Use SLBFE's current visa application instructions and current job-agreement-specific requirements. Exact current charges and appointment details remain notice-specific."
+  },
+  "predeparture_training": {
+    "title": "Pre-departure training",
+    "action": "Complete SLBFE's official pre-departure training assigned to selected Korea-bound workers."
+  },
+  "mcu3_departure": {
+    "title": "Final medical/departure readiness",
+    "action": "Use SLBFE's current medical schedule for agreement-signed / CCVI-received job seekers. Do not invent an Indonesia-style MCU-III stage."
+  },
+  "departure": {
+    "title": "Official departure",
+    "action": "Travel only after official agreement, visa, training, medical and departure arrangements are completed through SLBFE/EPS."
+  },
+  "korea_entry_training": {
+    "title": "Korea entry + employment education",
+    "action": "After entry, complete the official Korea-side employment education and handover process."
+  },
+  "employer_handover": {
+    "title": "Employer handover",
+    "action": "Confirm workplace, accommodation and emergency contacts during official handover."
+  },
+  "residence_registration": {
+    "title": "Residence Card / foreigner registration",
+    "action": "After arrival, follow current Korea Immigration rules for foreigner registration / Residence Card."
+  },
+  "eps_insurance_check": {
+    "title": "EPS insurance check",
+    "action": "Confirm required EPS insurance obligations through official EPS information."
+  },
+  "first_payroll_check": {
+    "title": "First payroll check",
+    "action": "Compare the first payslip and bank deposit with the SLC, working hours, deductions and applicable wage rules."
+  },
+  "labor_support_ready": {
+    "title": "Labor support readiness",
+    "action": "Keep official labor-support routes and contract/payroll evidence ready for any wage or labor issue."
+  },
+  "employment_maintenance": {
+    "title": "Employment / workplace-change readiness",
+    "action": "If a legally recognized workplace-change reason occurs, use Korea's official EPS or employment-center process and observe applicable deadlines."
+  }
+}
