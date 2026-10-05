@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
   "minPostId": 136,
   "officialNoticeIndex": "https://epsnepal.gov.np/notices",
@@ -32,7 +32,11 @@
     },
     {
       "id": 139,
-      "title": "अनलाईन दरखास्त प्रणाली पुन: सुचारु भएको सम्बन्धी सूचना ।"
+      "title": "अनलाईन दरखास्त प्रणाली पुन: सुचारु भएको सम्बन्धी सूचना ।",
+      "aliasPostIds": [
+        139,
+        141
+      ]
     },
     {
       "id": 143,
@@ -41,8 +45,10 @@
   ],
   "policy": {
     "onNewMatchingPost": "review_required",
-    "onKnownTitleChange": "review_required",
     "ignoreUnmatchedNewPosts": true,
-    "autoPromoteRouteRules": false
+    "autoPromoteRouteRules": false,
+    "identityKey": "normalized_title",
+    "duplicatePostIdsForSameTitle": "ignore_as_alias",
+    "onNewMatchingTitle": "review_required"
   }
 }
