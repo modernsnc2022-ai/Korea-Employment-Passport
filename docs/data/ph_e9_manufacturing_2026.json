@@ -7,10 +7,10 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-11th-point-system-regular-manufacturing-listed-schedule-undecided",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
-  "lastVerified": "2026-10-05",
+  "lastVerified": "2026-10-06",
   "officialSendingAgency": {
     "name": "Department of Migrant Workers (DMW)",
     "url": "https://dmw.gov.ph/",
@@ -33,7 +33,9 @@
     "noDepartureGuarantee": true,
     "noPrivateBrokerRequiredTarget": true,
     "betaIntakeOpen": false,
-    "specialRouteFactsExcludedFromRegular": true
+    "specialRouteFactsExcludedFromRegular": true,
+    "regularManufacturingRouteIdentityVerified": true,
+    "undecidedDatesMustNotBeInvented": true
   },
   "stages": [
     {
@@ -52,7 +54,7 @@
       "kind": "official_action",
       "action": "No Regular EPS-TOPIK registration is currently open on the official DMW portal. HRD Korea lists the 11th point-system recruitment in Philippines_Manufacturing, but registration/test/result dates are still undecided.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-      "supportState": "awaiting_regular_schedule"
+      "supportState": "verified_route_listed_dates_undecided"
     },
     {
       "id": "exam_fee",
@@ -88,7 +90,7 @@
       "kind": "self_service",
       "action": "Wait for the official Regular Manufacturing test-date notice and admission instructions. Current HRD Korea schedule fields for the 11th recruitment are undecided.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-      "supportState": "awaiting_regular_schedule"
+      "supportState": "verified_route_listed_dates_undecided"
     },
     {
       "id": "eps_topik",
@@ -97,7 +99,7 @@
       "kind": "official_exam",
       "action": "The 11th point-system Regular Manufacturing route is registered in HRD Korea, but its current registration, test and result dates remain undecided. Do not substitute the 2026 Special EPS-TOPIK schedule.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-      "supportState": "awaiting_regular_schedule"
+      "supportState": "verified_route_listed_dates_undecided"
     },
     {
       "id": "skill_competency",
