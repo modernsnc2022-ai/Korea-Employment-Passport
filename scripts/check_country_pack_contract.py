@@ -68,12 +68,13 @@ exact_ids={row.get("id") for row in np_exact.get("answers",[])}
 for exact_id in [
     "np_2026_application_window","np_2026_application_portal","np_2026_exam_fee",
     "np_2026_age_rule","np_2026_color_vision_rule","np_2026_photo_rule",
-    "np_2026_test_format","np_2026_result_validity"
+    "np_2026_test_format","np_2026_result_validity","np_2026_hrd_manufacturing_schedule_row",
+    "np_2026_hrd_test_date_state","np_2026_registration_cross_source_end_date"
 ]:
     require(exact_id in exact_ids,f"Nepal exact-answer catalog missing {exact_id}")
 for row in np_exact.get("answers",[]):
     require(str(row.get("sourceUrl","")).startswith("https://"),f"Nepal exact answer {row.get('id')} must preserve official HTTPS source lineage")
-    require(row.get("verifiedAt")=="2026-10-05",f"Nepal exact answer {row.get('id')} verification date missing")
+    require(row.get("verifiedAt") in {"2026-10-05","2026-10-06"},f"Nepal exact answer {row.get('id')} verification date missing or invalid")
 np_doc_ids={pack.get("id") for pack in np_docs.get("packs",[])}
 require({"np_2026_eps_topik_registration","np_2026_eps_topik_exam_day"}.issubset(np_doc_ids),"Nepal document packs must cover registration and test day")
 
@@ -104,17 +105,28 @@ require(np_exact.get("operationalNoticesFile")=="data/np_registration_notices_20
 
 
 np_stage_readiness=load("docs/data/np_stage_readiness_2026.json")
+np_hrd_schedule=load("docs/data/np_hrd_schedule_2026.json")
 require(np_pack.get("stageReadinessFile")=="data/np_stage_readiness_2026.json","Nepal pack must link current-cohort stage readiness")
-require(np_stage_readiness.get("checkedAt")=="2026-10-05","Nepal current-cohort readiness check date must be explicit")
+require(np_pack.get("hrdScheduleEvidenceFile")=="data/np_hrd_schedule_2026.json","Nepal pack must link HRD schedule evidence")
+require(np_stage_readiness.get("hrdScheduleEvidenceFile")=="data/np_hrd_schedule_2026.json","Nepal readiness must link HRD schedule evidence")
+require(np_stage_readiness.get("checkedAt")=="2026-10-06","Nepal current-cohort readiness check date must reflect HRD schedule review")
 np_current=np_stage_readiness.get("currentCohort",{})
 require(np_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Nepal 2026 registration must remain closed_verified")
-for key in ["epsTopikSchedule","epsTopikResult","skillCompetency","medicalAndJobApplication"]:
+require(np_current.get("epsTopikSchedule",{}).get("status")=="verified_hrd_current_row_test_dates_undecided","Nepal HRD Manufacturing schedule row must remain verified while test dates stay undecided")
+for key in ["epsTopikResult","skillCompetency","medicalAndJobApplication"]:
     require(np_current.get(key,{}).get("status")=="awaiting_current_cohort_notice",f"Nepal {key} must remain awaiting a current-cohort official notice")
 for prior in np_current.get("skillCompetency",{}).get("priorCycleEvidence",[]):
     require(prior.get("cycle")==2025 and prior.get("use")=="workflow_shape_only","Nepal prior-cycle skill evidence must never become current exact rules")
 for prior in np_current.get("medicalAndJobApplication",{}).get("priorCycleEvidence",[]):
     require(prior.get("cycle")==2025 and prior.get("use")=="workflow_shape_only","Nepal prior-cycle job-application evidence must never become current exact rules")
 require(np_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Nepal beta must remain blocked while current-cohort downstream notices are unresolved")
+np_hrd_rows={row.get("id"):row for row in np_hrd_schedule.get("sources",[])}
+np_hrd_row=np_hrd_rows.get("np_2026_hrd_5th_manufacturing_5part",{})
+require(np_hrd_row.get("facts",{}).get("title")=="The 5th recruitment of the Point system in Nepal_Manufacturing(5부)","Nepal HRD Manufacturing row title must remain exact")
+require(np_hrd_row.get("facts",{}).get("registrationPeriod")=="2026-07-27 through 2026-08-05","Nepal HRD schedule row must preserve 2026-08-05 end date")
+require(np_hrd_row.get("facts",{}).get("testAnnouncementDate") is None and np_hrd_row.get("facts",{}).get("testPeriod") is None,"Nepal HRD test dates must remain undecided")
+require(np_hrd_schedule.get("reconciliation",{}).get("localPrimaryEndDate")=="2026-08-02" and np_hrd_schedule.get("reconciliation",{}).get("hrdScheduleEndDate")=="2026-08-05","Nepal local-vs-HRD registration end-date discrepancy must remain explicit")
+require(np_hrd_schedule.get("reconciliation",{}).get("deadlineExtensionVerifiedFromLocalSupplementaryContent") is False,"Nepal HRD 2026-08-05 row must not be treated as verified local deadline extension")
 
 
 np_process=load("docs/data/np_eps_process_baseline_2026.json")
@@ -806,6 +818,7 @@ require("PENDING MANUFACTURING VERIFICATION" in countries,"pending-country UI mu
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
 require("APPLICATION SYSTEM HISTORY" in nepal and "deadline extension" in nepal.lower(),"Nepal preview must disclose the registration interruption/resumption without claiming an extension")
+require("HRD KOREA CURRENT SCHEDULE ROW" in nepal and "2026-08-05" in nepal and "2026-08-02" in nepal and "Undecided" in nepal,"Nepal preview must expose current HRD schedule row and unresolved cross-source end-date discrepancy")
 require("CURRENT 2026 COHORT STATUS" in nepal and "Skill & Competency" in nepal,"Nepal preview must show current-cohort downstream HOLD status")
 require("POST-SELECTION VERIFIED" in nepal and "6-day" in nepal and "FEIMS" in nepal and "visa/service" in nepal.lower(),"Nepal preview must expose verified process shape without hiding fee volatility")
 require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesia beta enrollment")

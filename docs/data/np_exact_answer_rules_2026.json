@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "routeId": "np-e9-manufacturing-2026",
   "verifiedAt": "2026-10-05",
   "principle": "Answer exactly from the 2026 Nepal EPS-TOPIK first-phase official notice. If the notice does not determine an answer, do not infer it from Indonesia or an older Nepal cohort.",
@@ -446,10 +446,50 @@
       "verificationStatus": "verified_official_process_pdf",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1774432089.pdf",
       "verifiedAt": "2026-10-05"
+    },
+    {
+      "id": "np_2026_hrd_manufacturing_schedule_row",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Does HRD Korea currently list a 2026 Nepal Manufacturing Point System row?",
+      "answer": "Yes. HRD Korea lists 'The 5th recruitment of the Point system in Nepal_Manufacturing(5부)' as General CBT / Point System.",
+      "writeExactly": "Current HRD Korea Manufacturing schedule row verified. Registration is shown as 2026-07-27 through 2026-08-05; test announcement and test period remain undecided.",
+      "verificationStatus": "verified_direct_official_hrd_current",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "np_2026_hrd_test_date_state",
+      "stages": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Are the current Nepal Manufacturing EPS-TOPIK test date and announcement date decided in HRD Korea?",
+      "answer": "No. Both test-announcement date and test period are currently undecided on the verified HRD Korea row.",
+      "writeExactly": "Do not invent a Nepal 2026 first-phase exam date/session. HRD Korea currently marks the announcement date and test period undecided.",
+      "verificationStatus": "verified_direct_official_hrd_undecided",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "np_2026_registration_cross_source_end_date",
+      "stages": [
+        "registration"
+      ],
+      "question": "Why do Nepal local and HRD Korea sources show different registration end dates?",
+      "answer": "The Nepal local primary notice says 2026-08-02, while HRD Korea's current Manufacturing schedule row says 2026-08-05. KEP has not verified from reviewed Nepal supplementary content that the local deadline was extended.",
+      "writeExactly": "Applicant-facing exact local-primary window remains 2026-07-27 through 2026-08-02. Preserve HRD Korea's 2026-08-05 row as cross-source evidence; do not call it a verified Nepal deadline extension.",
+      "verificationStatus": "verified_cross_source_discrepancy_unresolved",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
     }
   ],
   "operationalNoticesFile": "data/np_registration_notices_2026.json",
   "supplementaryNoticePolicy": "The primary notice is the exact-rule baseline. Later official notices are tracked separately and supersede a rule only after their content is reviewed; titles alone never create an extension or exception.",
   "processBaselineFile": "data/np_eps_process_baseline_2026.json",
-  "processBaselinePolicy": "The March 2026 official EPS process guide can define stable process structure, but current cohort dates, designated providers and volatile fees must be rechecked against later official notices."
+  "processBaselinePolicy": "The March 2026 official EPS process guide can define stable process structure, but current cohort dates, designated providers and volatile fees must be rechecked against later official notices.",
+  "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json"
 }
