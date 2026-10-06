@@ -198,6 +198,9 @@ vn_current=vn_stage_readiness.get("currentCohort",{})
 require(vn_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Vietnam 2026 registration must remain closed_verified")
 require(vn_current.get("epsTopikResult",{}).get("status")=="round1_result_verified","Vietnam Manufacturing Round 1 result must remain verified")
 require(vn_current.get("skillCompetency",{}).get("status")=="awaiting_final_official_schedule","Vietnam Round 2 must not be promoted before final official schedule verification")
+require(vn_current.get("skillCompetency",{}).get("projectedPlanEvidence",{}).get("reviewTriggerDate")=="2026-10-12","Vietnam projected Round 2 window must trigger a dated official recheck on 2026-10-12")
+require(vn_stage_readiness.get("nextReviewTrigger",{}).get("type")=="dated_official_review" and vn_stage_readiness.get("nextReviewTrigger",{}).get("date")=="2026-10-12","Vietnam readiness must preserve the 2026-10-12 dated official review trigger")
+require(vn_pack.get("safety",{}).get("projectedRound2WindowMustNotBecomeFinalSchedule") is True,"Vietnam projected Round 2 window must never auto-promote into a final schedule")
 require(vn_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Vietnam beta must remain blocked while downstream exact rules are unresolved")
 
 
@@ -838,6 +841,7 @@ require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesi
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 require("RESEARCH / HOLD" in vietnam and "150" in vietnam and "COLAB" in vietnam,"Vietnam preview must show HOLD, verified Round 1 cutoff and official sending authority")
 require("CURRENT 2026 COHORT STATUS" in vietnam and "Vòng 2" in vietnam,"Vietnam preview must show downstream current-cohort HOLD")
+require("12–16/10/2026" in vietnam and "không coi khoảng dự kiến này là lịch cuối cùng" in vietnam,"Vietnam preview must show the projected Round 2 window only as a non-final dated review boundary")
 require('href="beta.html"' not in vietnam and 'id="betaForm"' not in vietnam,"Vietnam preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in philippines and "No registration is currently open" in philippines,"Philippines preview must visibly remain HOLD with no open registration")
 require("SPECIAL ROUTE FIREWALL" in philippines and "US$24" in philippines and "100-person" in philippines,"Philippines preview must visibly separate Special from Regular")
