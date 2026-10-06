@@ -108,6 +108,20 @@ require(set(review.get("observedCurrentOfficialSectors", [])) == {"Agriculture·
         "Myanmar current observed official sectors must remain the three verified non-Manufacturing sectors")
 require(all(item.get("promotable") is False for item in review.get("historicalManufacturingArtifacts", [])),
         "Historical Myanmar Manufacturing artifacts must stay non-promotable")
+continuity = dossier.get("priorCohortContinuationEvidence", {})
+continuity_url = urlparse(continuity.get("sourceUrl", ""))
+require(continuity.get("status") == "2026_calendar_year_historical_cohort_only",
+        "Myanmar 2026-dated Manufacturing continuity evidence must remain explicitly prior-cohort only")
+require(continuity.get("cohort") == "16th EPS-TOPIK Manufacturing first batch",
+        "Myanmar continuity evidence must preserve the historical 16th Manufacturing first-batch cohort")
+require(continuity.get("facts", {}).get("extensionPeriod") == "2026-03-18 through 2026-03-25",
+        "Myanmar prior-cohort job-application extension window must remain exact")
+require(continuity.get("promotable") is False,
+        "Myanmar prior-cohort continuation evidence must never be promotable")
+require(continuity_url.scheme == "https" and continuity_url.hostname == "www.moi.gov.mm",
+        "Myanmar prior-cohort continuation evidence must remain on the government Ministry of Information host")
+require("not a current 2026 Manufacturing recruitment" in str(continuity.get("warning", "")),
+        "Myanmar continuity warning must explicitly reject current-2026 recruitment promotion")
 
 allowed_hosts = {"epstopik.hrdkorea.or.kr", "mol.gov.mm", "www.mol.gov.mm"}
 accepted_types = {"recruitment", "registration", "schedule", "skills_candidate", "result", "final_result"}
