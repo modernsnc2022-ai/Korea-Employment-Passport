@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -253,17 +253,24 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Direct official Cambodia Manufacturing schedule/result linkage",
+        "subject": "Explicit cycle/sector linkage for Cambodia 12th Manufacturing skills/final result and downstream rules",
         "officialSources": [
           "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
           "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
         ]
       },
       "blockers": [
-        "direct official Manufacturing schedule detail not captured",
         "2026-08-06/08-21 artifacts not linked by cycle/sector proof",
         "Manufacturing fee/document/downstream exact rules not mapped"
-      ]
+      ],
+      "verified": {
+        "manufacturingSchedule": {
+          "status": "direct_official",
+          "registrationPeriod": "2026-05-22 through 2026-05-25",
+          "testAnnouncementDate": "2026-06-12",
+          "testPeriod": "2026-06-22 through 2026-07-15"
+        }
+      }
     },
     {
       "country": "TL",

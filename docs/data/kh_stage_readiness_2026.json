@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "kh-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -9,12 +9,17 @@
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
     },
     "officialRegistrationAndTestSchedule": {
-      "status": "direct_schedule_artifact_not_captured",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+      "status": "verified_direct_official",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+      "registrationPeriod": "2026-05-22 through 2026-05-25",
+      "testAnnouncementDate": "2026-06-12",
+      "testPeriod": "2026-06-22 through 2026-07-15",
+      "pointSystem": true
     },
     "discoverySchedule": {
-      "status": "discovery_only_not_promoted",
-      "evidenceFile": "data/kh_manufacturing_discovery_2026.json"
+      "status": "superseded_by_direct_official_match",
+      "evidenceFile": "data/kh_manufacturing_discovery_2026.json",
+      "note": "The earlier discovery-only registration/test-start claim matched the later direct HRD Korea Manufacturing schedule. Promotion is based only on the direct official source."
     },
     "skillsCandidateArtifact": {
       "status": "official_country_artifact_cycle_sector_linkage_pending",
@@ -52,14 +57,14 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "direct official Manufacturing schedule detail not captured",
       "official 2026-08-06/08-21 artifacts not yet linked by cycle/sector proof",
       "Manufacturing fee/document/downstream exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
-    "subject": "Capture direct official Cambodia Manufacturing schedule/result linkage",
+    "subject": "Verify explicit cycle/sector linkage for Cambodia 12th Manufacturing skills/final-result artifacts and map downstream rules",
     "officialSources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
       "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
       "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"

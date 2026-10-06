@@ -481,8 +481,11 @@ require(kh_pack.get("safety",{}).get("specialFactsExcludedFromManufacturing") is
 require(kh_pack.get("safety",{}).get("genericOfficialResultArtifactsRequireCycleSectorLinkage") is True,"Cambodia generic official result artifacts require explicit cycle/sector linkage")
 require(kh_pack.get("officialSendingAgency",{}).get("name")=="Manpower Training and Overseas Sending Board (MTOSB)","Cambodia sending agency must remain MTOSB")
 kh_current=kh_readiness.get("currentManufacturing",{})
-require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("status")=="direct_schedule_artifact_not_captured","Cambodia direct Manufacturing schedule artifact must remain pending")
-require(kh_current.get("discoverySchedule",{}).get("status")=="discovery_only_not_promoted","Cambodia discovery schedule must remain non-promoted")
+require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("status")=="verified_direct_official","Cambodia direct Manufacturing schedule must remain verified")
+require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("registrationPeriod")=="2026-05-22 through 2026-05-25","Cambodia Manufacturing registration period must remain exact")
+require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("testAnnouncementDate")=="2026-06-12","Cambodia Manufacturing test announcement date must remain exact")
+require(kh_current.get("officialRegistrationAndTestSchedule",{}).get("testPeriod")=="2026-06-22 through 2026-07-15","Cambodia Manufacturing test period must remain exact")
+require(kh_current.get("discoverySchedule",{}).get("status")=="superseded_by_direct_official_match","Cambodia discovery schedule must remain provenance-only after official confirmation")
 require(kh_current.get("skillsCandidateArtifact",{}).get("status")=="official_country_artifact_cycle_sector_linkage_pending","Cambodia skills-candidate artifact linkage must remain gated")
 require(kh_current.get("finalPointResultArtifact",{}).get("status")=="official_country_artifact_cycle_sector_linkage_pending","Cambodia final Point System artifact linkage must remain gated")
 require(kh_current.get("fee",{}).get("status")=="manufacturing_cycle_specific_unverified","Cambodia Manufacturing fee must remain unresolved")
@@ -490,7 +493,8 @@ require(kh_current.get("documents",{}).get("status")=="manufacturing_checklist_n
 require(kh_readiness.get("otherSector",{}).get("mustNotPopulateManufacturing") is True,"Cambodia Agriculture evidence must never populate Manufacturing")
 require(kh_readiness.get("specialRoute",{}).get("mustNotPopulateManufacturing") is True,"Cambodia Special evidence must never populate Manufacturing")
 require(kh_readiness.get("betaReadiness",{}).get("status")=="blocked","Cambodia beta must remain blocked")
-require(kh_discovery.get("status")=="discovery_only_not_exact","Cambodia non-official Manufacturing discovery must remain discovery-only")
+require(kh_discovery.get("status")=="superseded_by_direct_official_confirmation","Cambodia discovery evidence must record direct-official confirmation")
+require(kh_discovery.get("officialConfirmation",{}).get("registrationPeriod")=="2026-05-22 through 2026-05-25","Cambodia discovery confirmation must preserve the official registration period")
 require(kh_other.get("excludedFromManufacturing") is True and kh_other.get("sector")=="agriculture_livestock","Cambodia official Agriculture evidence must be explicitly excluded from Manufacturing")
 require(kh_special.get("excludedFromManufacturing") is True,"Cambodia Special artifact must be explicitly excluded from Manufacturing")
 kh_doc_ids={p.get("id") for p in kh_docs.get("packs",[])}
@@ -500,7 +504,7 @@ require(kh_hold.get("items")==[],"Cambodia Manufacturing document HOLD pack must
 kh_exact_ids={row.get("id") for row in kh_exact.get("answers",[])}
 for exact_id in [
     "kh_2026_sending_authority","kh_2026_reception_office","kh_2026_skills_candidate_artifact",
-    "kh_2026_point_result_artifact","kh_2026_manufacturing_schedule_state",
+    "kh_2026_point_result_artifact","kh_2026_manufacturing_schedule_state","kh_2026_registration_window","kh_2026_test_notice_date","kh_2026_test_period",
     "kh_2026_agriculture_firewall","kh_2026_special_firewall","kh_no_job_guarantee"
 ]:
     require(exact_id in kh_exact_ids,f"Cambodia exact-answer catalog missing {exact_id}")
@@ -815,8 +819,8 @@ require("RESEARCH / HOLD" in china and "2026-03-18" in china and "2026-09-11" in
 require("2026-09-30" in china and "US$28" in china and "not promoted" in china,"China preview must preserve generic skill-candidate and fee gates")
 require('href="beta.html"' not in china and 'id="betaForm"' not in china,"China preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in cambodia and "2026-08-06" in cambodia and "2026-08-21" in cambodia,"Cambodia preview must visibly remain HOLD with official August artifacts")
-require("discovery source" in cambodia and "2026-05-22" in cambodia and "does not present those dates as official exact rules" in cambodia,"Cambodia preview must disclose discovery-only Manufacturing schedule and explicitly deny official promotion")
 require("Agriculture/Livestock and Special EPS-TOPIK are separate routes" in cambodia,"Cambodia preview must visibly preserve sector/special firewalls")
+require("Verified Manufacturing schedule" in cambodia and "2026-05-22" in cambodia and "2026-07-15" in cambodia,"Cambodia preview must show verified 12th Manufacturing schedule")
 require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"Cambodia preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in timorleste and "2026-03-09" in timorleste and "2026-07-30" in timorleste,"Timor-Leste preview must visibly remain HOLD with direct-official Dili timeline")
 require("DISCOVERY ONLY" in timorleste and "2026-09-22" in timorleste and "Fishery is a separate sector" in timorleste,"Timor-Leste preview must show Baucau discovery, generic skills linkage gate and Fishery firewall")
