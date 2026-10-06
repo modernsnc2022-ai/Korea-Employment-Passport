@@ -214,6 +214,7 @@ jobs:
           test -f docs/pk.html
           test -f docs/tj.html
           test -f docs/kg.html
+          test -f docs/mm.html
           test -f docs/country-pack.js
           test -f docs/COMPANY_COMMUNITY_ARCHITECTURE.md
           test -f docs/.nojekyll
