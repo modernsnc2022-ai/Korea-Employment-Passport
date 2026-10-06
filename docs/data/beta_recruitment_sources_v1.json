@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "2.0.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -67,6 +67,8 @@
     "pcim_korea_referral",
     "kp2mi_departure_worker_referral",
     "kp2mi_sending_applicant",
-    "lpk_master_korea"
+    "lpk_master_korea",
+    "lpk_hanaro",
+    "lpk_go_korea"
   ]
 }
