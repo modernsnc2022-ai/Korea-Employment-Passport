@@ -1,5 +1,5 @@
 {
-  "version": "1.8.3",
+  "version": "1.8.4",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -282,16 +282,34 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Baucau direct schedule detail, skills site/sector linkage or final result",
+        "subject": "Skills site/sector linkage, final result, or current fee/document/downstream notice",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "Baucau direct official schedule detail not captured",
         "2026-09-22 skills-candidate entries not linked by site/sector",
         "cycle-specific fee/document/final-result/downstream exact rules not mapped"
-      ]
+      ],
+      "verified": {
+        "manufacturingSchedules": {
+          "Dili": {
+            "status": "direct_official",
+            "registrationPeriod": "2026-03-09 through 2026-03-18",
+            "testAnnouncementDate": "2026-06-09",
+            "testPeriod": "2026-06-18 through 2026-07-30"
+          },
+          "Baucau": {
+            "status": "direct_official",
+            "registrationPeriod": "2026-03-09 through 2026-03-18",
+            "testAnnouncementDate": null,
+            "testAnnouncementStatus": "undecided",
+            "testPeriod": "2026-08-06 through 2026-08-07"
+          }
+        }
+      }
     },
     {
       "country": "PK",

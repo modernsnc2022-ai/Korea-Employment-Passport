@@ -1,12 +1,25 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "country": "TL",
   "cycle": 2026,
-  "routeType": "manufacturing_baucau_discovery",
-  "exactPromotionAllowed": false,
-  "discoveryStatus": "direct_official_detail_not_captured",
+  "routeType": "manufacturing_baucau",
+  "exactPromotionAllowed": true,
+  "discoveryStatus": "promoted_by_direct_official_detail",
   "knownFromScheduleDiscovery": {
     "title": "The 9th recruitment of the point system in East Timor(Manufacturing)_Baucau"
   },
-  "warning": "Do not populate exact Baucau dates until a direct official HRD Korea detail page is captured."
+  "warning": "Promote only the facts shown on the direct HRD Korea Baucau detail page. The test-announcement date remains undecided and must not be inferred.",
+  "directOfficialEvidence": {
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=43&examYear=2026&lang=ko&lcnsId=001",
+    "title": "The 9th recruitment of the point system in East Timor(Manufacturing)_Baucau",
+    "country": "Timor-Leste",
+    "testFormat": "General CBT",
+    "registrationPeriod": "2026-03-09 through 2026-03-18",
+    "testAnnouncementDate": null,
+    "testAnnouncementStatus": "undecided",
+    "testPeriod": "2026-08-06 through 2026-08-07",
+    "pointSystem": true,
+    "receptionPhone": "7767-4602",
+    "verifiedAt": "2026-10-06"
+  }
 }
