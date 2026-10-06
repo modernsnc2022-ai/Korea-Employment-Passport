@@ -657,10 +657,16 @@ test('tester-interest intake is open while beta access remains on hold', async (
   expect(errors).toEqual([]);
 });
 
-test('community source can copy source-attributed applicant and worker invitations', async ({ page }) => {
+test('community source can share or copy source-attributed applicant and worker invitations', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,'share',{
+      configurable:true,
+      value:async ({text}) => { window.__kepLastSharedText=text; }
+    });
+  });
 
   await page.goto('/beta.html?src=lpk_master_korea', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#communitySharePanel')).toBeVisible({ timeout: 10000 });
@@ -678,6 +684,16 @@ test('community source can copy source-attributed applicant and worker invitatio
   expect(result.worker).toContain('#worker-panel');
   expect(result.worker).toContain('Mengirim minat belum mengaktifkan akses panel');
   expect(result.shareInputs).toBe(0);
+
+  await page.locator('#shareCommunityApplicantInviteBtn').click();
+  let shared=await page.evaluate(() => window.__kepLastSharedText || '');
+  expect(shared).toContain('src=lpk_master_korea');
+  expect(shared).toContain('Target validasi awal');
+
+  await page.locator('#shareCommunityWorkerInviteBtn').click();
+  shared=await page.evaluate(() => window.__kepLastSharedText || '');
+  expect(shared).toContain('src=lpk_master_korea');
+  expect(shared).toContain('#worker-panel');
 
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#communitySharePanel')).toBeHidden({ timeout: 10000 });
