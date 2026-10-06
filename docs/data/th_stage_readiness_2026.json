@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "th-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -18,9 +18,20 @@
       "note": "DOE set 2026-08-10 as eligible-list publication date; KEP has not yet promoted an exact current Manufacturing test result from an official result notice."
     },
     "skillCompetency": {
-      "status": "awaiting_2026_10_19_candidate_list",
-      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
-      "note": "DOE stated the skills-test eligible list would be announced on 2026-10-19."
+      "status": "official_country_artifacts_round18_manufacturing_linkage_pending",
+      "localNoticeSourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "localAnnouncedCandidateListDate": "2026-10-19",
+      "hrdCountryIndexSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "hrdCountryIndexPublicationDate": "2026-10-06",
+      "hrdPublicTitleOrdinals": [
+        "3th",
+        "4th",
+        "5th",
+        "6th",
+        "7th",
+        "8th"
+      ],
+      "note": "Six official Thailand General CBT candidate-index entries are visible on HRD Korea as of 2026-10-06, but their public titles do not identify Round 18, Manufacturing/Agriculture/Construction, or Bangkok/Udon Thani. Do not auto-link them to Round 18 Manufacturing or treat them as overriding DOE's announced 2026-10-19 milestone."
     },
     "medicalAndJobApplication": {
       "status": "research_pending_current_round18_notice",
@@ -48,7 +59,8 @@
       "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
     ],
     "promoteOnlyWhen": [
-      "an official DOE or HRD Korea notice identifies the current Round 18 candidates or skills schedule",
+      "an official DOE or HRD Korea notice identifies the current Round 18 Manufacturing candidates or skills schedule",
+      "country-level HRD candidate-index entries are linked to Round 18 plus sector/site before promotion",
       "the notice content is reviewed before dates, locations or candidate status are added",
       "Special EPS-TOPIK data are not reused"
     ]
