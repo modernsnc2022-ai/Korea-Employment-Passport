@@ -67,4 +67,4 @@ Penting:
 
 Daftar melalui halaman beta Korea Employment Passport dan kirim teks pendaftaran minat sesuai petunjuk di sana.
 
-Selain itu, pekerja Indonesia yang sudah bekerja di Korea dengan E-9 akan direkrut melalui panel validasi pengalaman nyata yang terpisah.
+Selain itu, pekerja Indonesia yang sudah bekerja di Korea dengan E-9 dapat mendaftarkan minat untuk panel validasi pengalaman nyata yang terpisah. Pendaftaran minat panel pekerja sudah dapat dibuka lebih dulu, tetapi mengirim minat tidak mengaktifkan akses panel; persetujuan dan KEP ID validator diberikan terpisah setelah review.
