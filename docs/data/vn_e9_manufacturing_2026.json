@@ -22,7 +22,8 @@
     "The 2026 manufacturing target is 3,000 workers; Round 1 is computer-based EPS-TOPIK plus color-vision screening, followed by mandatory skill testing.",
     "The official September 2026 Round 1 result notice sets the manufacturing cutoff at 150 points and says successful Round 1 candidates are automatically registered for Round 2; the official Round 2 schedule is to be announced after HRD Korea confirmation.",
     "The initial official 2026 COLAB plan projected Manufacturing Round 2 for 2026-10-12 through 2026-10-16. The later verified Round 1 result notice still requires a separate HRD-confirmed official schedule, so KEP records 2026-10-12 only as a dated recheck trigger and does not promote the projected window as final.",
-    "KEP keeps Vietnam on research HOLD while exact current manufacturing medical, candidate-file submission, visa, training and departure rules are mapped."
+    "KEP keeps Vietnam on research HOLD while exact current manufacturing medical, candidate-file submission, visa, training and departure rules are mapped.",
+    "As rechecked on 2026-10-06, COLAB's original plan still shows Manufacturing Round 2 as projected for 2026-10-12 through 2026-10-16, while the later Round 1 result notice still says the official skill-test schedule will be announced after HRD Korea confirmation. KEP therefore treats 2026-10-12 as a review trigger, not a final test date."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -31,7 +32,8 @@
     "noVisaGuarantee": true,
     "noDepartureGuarantee": true,
     "noPrivateBrokerRequiredTarget": true,
-    "betaIntakeOpen": false
+    "betaIntakeOpen": false,
+    "projectedRound2WindowMustNotBecomeFinalSchedule": true
   },
   "stages": [
     {
@@ -285,5 +287,13 @@
     "receivingDates": "2026-03-23 through 2026-03-27",
     "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5403/THONG-BAO-DANH-SACH-DIA-DIEM-TIEP-NHAN-DANG-KY-DU-THI-TIENG-HAN-TU-NGAY-2303-27032026.aspx",
     "status": "closed"
+  },
+  "round2ReviewTrigger": {
+    "reviewDate": "2026-10-12",
+    "earlierProjectedWindow": "2026-10-12 through 2026-10-16",
+    "status": "dated_recheck_only_not_final_schedule",
+    "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
+    "controllingLaterNoticeUrl": "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx",
+    "rule": "Recheck COLAB on 2026-10-12 and daily during the projected window, but do not promote 2026-10-12 through 2026-10-16 as the final Round 2 schedule until COLAB publishes the HRD Korea-confirmed official schedule."
   }
 }
