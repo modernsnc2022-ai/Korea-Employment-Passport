@@ -25,8 +25,8 @@ shared_korea_core=load("docs/data/korea_side_e9_core_2026.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 require(registry.get("sharedKoreaCoreFile")=="data/korea_side_e9_core_2026.json","registry must link the shared Korea-side E-9 core")
 shared_rows={row.get("id"):row for row in shared_korea_core.get("stages",[])}
-shared_expected={"employer_selection","slc","predeparture_training","visa_docs","departure","korea_entry_training","employer_handover","residence_registration","eps_insurance_check"}
-require(set(shared_rows)==shared_expected,"shared Korea-side core must contain exactly the seven locked post-selection stages")
+shared_expected={"employer_selection","slc","predeparture_training","visa_docs","departure","korea_entry_training","employer_handover","residence_registration","eps_insurance_check","first_payroll_check","labor_support_ready","employment_maintenance"}
+require(set(shared_rows)==shared_expected,"shared Korea-side core must contain exactly the twelve locked post-selection/post-entry stages")
 for sid,row in shared_rows.items():
     require(str(row.get("sourceUrl","")).startswith("https://"),f"shared Korea-side core {sid} must preserve an HTTPS official source")
     require(str(row.get("status","")).startswith("shared_korea_official"),f"shared Korea-side core {sid} must remain official shared evidence")
@@ -36,6 +36,12 @@ require("at least 7 days" in shared_rows["departure"].get("fact",""),"shared dep
 require("16 hours" in shared_rows["korea_entry_training"].get("fact",""),"shared Korea entry training must preserve the official 16-hour duration")
 require("within 90 days of entry" in shared_rows["residence_registration"].get("fact",""),"shared foreigner-registration fact must preserve the 90-day legal deadline")
 require("15-day enrollment windows" in shared_rows["eps_insurance_check"].get("fact","") and "3-month window" in shared_rows["eps_insurance_check"].get("fact",""),"shared EPS insurance fact must preserve official enrollment windows")
+require("at least once per month" in shared_rows["first_payroll_check"].get("fact","") and "fixed date" in shared_rows["first_payroll_check"].get("fact",""),"shared payroll fact must preserve Labor Standards Act Article 43 frequency/date rule")
+require("1577-0071" in shared_rows["labor_support_ready"].get("fact","") and "Indonesian-language" in shared_rows["labor_support_ready"].get("fact",""),"shared labor-support fact must preserve multilingual HRD Korea counseling access")
+require("workplace-change application" in shared_rows["employment_maintenance"].get("fact","") and "Article 25" in shared_rows["employment_maintenance"].get("fact",""),"shared employment-maintenance fact must preserve statutory workplace-change boundary")
+require(shared_korea_core.get("safety",{}).get("noIndividualPayrollAmountInference") is True,"shared Korea core must not infer individual payroll amounts")
+require(shared_korea_core.get("safety",{}).get("noCaseSpecificWorkplaceChangeApprovalInference") is True,"shared Korea core must not infer case-specific workplace-change approval")
+require(shared_korea_core.get("safety",{}).get("noLegalOutcomeGuarantee") is True,"shared Korea core must not guarantee legal outcomes")
 require(shared_korea_core.get("safety",{}).get("noCountrySpecificEmbassyChecklistInference") is True,"shared Korea core must not infer country-specific embassy checklists")
 require(shared_korea_core.get("safety",{}).get("noIndividualDepartureDateInference") is True,"shared Korea core must not infer individual departure dates")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
