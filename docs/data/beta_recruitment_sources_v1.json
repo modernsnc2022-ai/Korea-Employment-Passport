@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -70,6 +70,9 @@
     "lpk_master_korea",
     "lpk_hanaro",
     "lpk_go_korea",
-    "korea_indonesia_center_referral"
+    "korea_indonesia_center_referral",
+    "bp3mi_dki_applicant",
+    "bp3mi_jateng_applicant",
+    "bp3mi_jatim_applicant"
   ]
 }
