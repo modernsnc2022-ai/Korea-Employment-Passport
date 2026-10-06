@@ -58,7 +58,19 @@ def main():
     require(vn_a==vn_b,"Vietnam live visitor statistics must normalize identically")
     require("EPS notice" in vn_a,"Vietnam notice text must be preserved")
 
-    require(NORMALIZATION_REVISION=="cross-site-volatile-counter-v2","normalization revision drift")
+        mm_clock_a=normalize_source_text(
+        "Official notice Nay Pyi Taw,MM 10:21 AM, Tuesday, 6th October 2026 Government Website Link",
+        "https://www.mol.gov.mm/mol-department-of-labour/",
+    )
+    mm_clock_b=normalize_source_text(
+        "Official notice Nay Pyi Taw,MM 10:22 AM, Tuesday, 6th October 2026 Government Website Link",
+        "https://www.mol.gov.mm/mol-department-of-labour/",
+    )
+    require(mm_clock_a==mm_clock_b,"Myanmar government live clock must normalize identically")
+    require("Official notice" in mm_clock_a and "Government Website Link" in mm_clock_a,
+            "Myanmar semantic page text must survive clock normalization")
+
+    require(NORMALIZATION_REVISION=="cross-site-volatile-widget-v3","normalization revision drift")
     print("SOURCE_NORMALIZATION_SELFTEST_PASS")
 
 if __name__=="__main__":
