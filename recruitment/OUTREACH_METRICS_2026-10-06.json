@@ -1,16 +1,16 @@
 {
-  "version": "3.9.0",
+  "version": "4.0.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 61,
-    "distinctRecipientMailboxes": 51,
+    "sentMessages": 62,
+    "distinctRecipientMailboxes": 52,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T21:27:00+09:00"
+    "lastUpdatedAt": "2026-10-06T21:37:00+09:00"
   },
   "wave2": [
     {
@@ -257,11 +257,11 @@
     {
       "sourceCode": "bp3mi_jabar_applicant",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-06"
     }
   ],
   "bp3miApplicantReferralSummary": {
-    "sentNow": 3,
+    "sentNow": 4,
     "immediateBounceObserved": 0
   },
   "duplicateIncidents": [
