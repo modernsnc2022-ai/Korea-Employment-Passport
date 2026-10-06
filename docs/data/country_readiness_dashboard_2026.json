@@ -16,7 +16,7 @@
     "betaHold": 1,
     "researchHold": 15,
     "pendingManufacturingVerification": 1,
-    "datedReviewTriggers": 2,
+    "datedReviewTriggers": 3,
     "betaReady": 0
   },
   "rows": [
