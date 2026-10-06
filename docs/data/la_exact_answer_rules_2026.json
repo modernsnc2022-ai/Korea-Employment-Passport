@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "la-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "For the current Laos 34th Manufacturing Point System, only facts directly supported by current HRD Korea evidence may be exact. Generic EPS rules and the earlier 33rd Laos round remain baseline/prior-round evidence only.",
@@ -51,6 +51,20 @@
       "answer": "No. HRD Korea currently lists the test date and result date as undecided.",
       "writeExactly": "Do not invent a test or result date for the 34th Laos Manufacturing round; HRD Korea currently marks them undecided.",
       "verificationStatus": "verified_current_hrd",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "la_2026_34th_schedule_row_identity",
+      "stages": [
+        "registration",
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Does HRD Korea show one or more current 34th Laos Manufacturing schedule rows?",
+      "answer": "Two distinct official rows are present: examNot=101 for 'The 34nd recruitment of the point system in Laos_Manufacturing' and examNot=108 for the same title with '(5부)'. Both use the same 2026-09-07 through 2026-09-11 registration window; test announcement/test/result dates remain undecided.",
+      "writeExactly": "Keep Laos 34th Manufacturing examNot=101 and examNot=108 as separate official schedule identities. Do not infer what '(5부)' means and do not merge the rows or invent test/result dates.",
+      "verificationStatus": "verified_official_schedule_identity_firewall",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
