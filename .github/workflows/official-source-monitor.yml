@@ -13,6 +13,7 @@ on:
       - 'scripts/check_official_sources.py'
       - 'scripts/write_source_review_status.py'
       - 'scripts/diagnose_source_volatility.py'
+      - 'scripts/diagnose_changed_source_text.py'
       - '.github/workflows/official-source-monitor.yml'
   workflow_dispatch:
     inputs:
@@ -69,6 +70,10 @@ jobs:
       - name: Diagnose changed KP2MI sources without auto-accepting
         if: steps.result.outputs.changed != '0' && steps.result.outputs.accepted != 'true'
         run: python scripts/diagnose_source_volatility.py --all
+
+      - name: Diagnose changed Myanmar/Vietnam text
+        if: steps.result.outputs.changed != '0' && steps.result.outputs.accepted != 'true'
+        run: python scripts/diagnose_changed_source_text.py
 
       - name: Commit monitor state when changed
         run: |
