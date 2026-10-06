@@ -24,6 +24,8 @@ registry = load("docs/data/country_packs_v1.json")
 coverage = load("docs/data/country_coverage_matrix_2026.json")
 readiness = load("docs/data/country_readiness_dashboard_2026.json")
 sources = load("monitor/sources.json")
+source_hashes = load("monitor/source_hashes.json")
+source_review = load("docs/data/source_review_status.json")
 
 gate = dossier.get("promotionGate", {})
 monitoring = dossier.get("monitoring", {})
@@ -48,6 +50,17 @@ expected_ids = {
 }
 require(required_ids == expected_ids, "Myanmar monitor source IDs must match the four reviewed official watch targets")
 require(expected_ids.issubset(source_by_id), "All Myanmar watch targets must be registered in monitor/sources.json")
+require(source_review.get("configured") == len(sources.get("sources", [])), "Source-review configured count must match monitor/sources.json")
+
+unbaselined = expected_ids - set(source_hashes)
+if unbaselined:
+    pending_ids = set(source_review.get("pendingBaselineSourceIds", []))
+    review_ids = set(source_review.get("reviewRequiredSourceIds", []))
+    require(unbaselined.issubset(pending_ids), "Unbaselined Myanmar sources must be explicitly marked pending baseline review")
+    require(unbaselined.issubset(review_ids), "Unbaselined Myanmar sources must remain review-required")
+    require(source_review.get("state") == "review_required", "Unbaselined Myanmar sources require review_required source state")
+else:
+    require(not (expected_ids & set(source_review.get("pendingBaselineSourceIds", []))), "Baselined Myanmar sources must not remain marked pending baseline")
 
 expected_hosts = {
     "mm_mol_eps_opportunity": "www.mol.gov.mm",
@@ -107,5 +120,6 @@ print(
     "MYANMAR_PROMOTION_GATE_PASS "
     f"allowed={str(gate.get('promotionAllowed')).lower()} "
     f"qualifyingArtifacts={len(qualified)} "
-    f"monitoredSources={len(expected_ids)}"
+    f"monitoredSources={len(expected_ids)} "
+    f"unbaselined={len(unbaselined)}"
 )
