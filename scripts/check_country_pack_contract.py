@@ -25,7 +25,7 @@ shared_korea_core=load("docs/data/korea_side_e9_core_2026.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
 require(registry.get("sharedKoreaCoreFile")=="data/korea_side_e9_core_2026.json","registry must link the shared Korea-side E-9 core")
 shared_rows={row.get("id"):row for row in shared_korea_core.get("stages",[])}
-shared_expected={"employer_selection","slc","predeparture_training","visa_docs","departure","korea_entry_training","employer_handover"}
+shared_expected={"employer_selection","slc","predeparture_training","visa_docs","departure","korea_entry_training","employer_handover","residence_registration","eps_insurance_check"}
 require(set(shared_rows)==shared_expected,"shared Korea-side core must contain exactly the seven locked post-selection stages")
 for sid,row in shared_rows.items():
     require(str(row.get("sourceUrl","")).startswith("https://"),f"shared Korea-side core {sid} must preserve an HTTPS official source")
@@ -34,6 +34,8 @@ require("standard labor contract" in shared_rows["slc"].get("fact","").lower(),"
 require("Confirmation of Visa Issuance" in shared_rows["visa_docs"].get("fact",""),"shared visa flow must preserve Confirmation of Visa Issuance")
 require("at least 7 days" in shared_rows["departure"].get("fact",""),"shared departure flow must preserve the seven-day entry-availability notice")
 require("16 hours" in shared_rows["korea_entry_training"].get("fact",""),"shared Korea entry training must preserve the official 16-hour duration")
+require("within 90 days of entry" in shared_rows["residence_registration"].get("fact",""),"shared foreigner-registration fact must preserve the 90-day legal deadline")
+require("15-day enrollment windows" in shared_rows["eps_insurance_check"].get("fact","") and "3-month window" in shared_rows["eps_insurance_check"].get("fact",""),"shared EPS insurance fact must preserve official enrollment windows")
 require(shared_korea_core.get("safety",{}).get("noCountrySpecificEmbassyChecklistInference") is True,"shared Korea core must not infer country-specific embassy checklists")
 require(shared_korea_core.get("safety",{}).get("noIndividualDepartureDateInference") is True,"shared Korea core must not infer individual departure dates")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
