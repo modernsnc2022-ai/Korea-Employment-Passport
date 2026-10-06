@@ -255,7 +255,7 @@ for exact_id in [
 ]:
     require(exact_id in th_exact_ids,f"Thailand exact-answer catalog missing {exact_id}")
 require(th_readiness.get("currentRegular",{}).get("recruitment",{}).get("status")=="closed_verified","Thailand Round 18 registration must remain closed_verified")
-require(th_readiness.get("currentRegular",{}).get("skillCompetency",{}).get("status")=="awaiting_2026_10_19_candidate_list","Thailand skills stage must remain awaiting the 2026-10-19 official candidate list")
+require(th_readiness.get("currentRegular",{}).get("skillCompetency",{}).get("status")=="official_country_artifacts_round18_manufacturing_linkage_pending","Thailand skills stage must preserve official country artifacts without Round 18 Manufacturing promotion")
 require(th_readiness.get("betaReadiness",{}).get("status")=="blocked","Thailand beta must remain blocked")
 require(th_special.get("excludedFromRegularCountryPack") is True,"Thailand Special evidence must be explicitly excluded from Round 18")
 require(th_special.get("facts",{}).get("testFeeThb")==970,"Thailand Special 970 THB fee must stay isolated in Special evidence")
