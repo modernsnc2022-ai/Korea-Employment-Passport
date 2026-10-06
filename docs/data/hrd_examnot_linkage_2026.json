@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "checkedAt": "2026-10-06",
   "scope": "Official HRD Korea examNot linkage between schedule-detail rows and candidate/final-result index rows",
   "method": {
@@ -127,6 +127,51 @@
         "date": "2026-10-19",
         "rule": "Keep the DOE local-list milestone/instructions distinct; HRD examNot linkage does not invent or cancel local DOE instructions."
       }
+    },
+    {
+      "country": "UZ",
+      "examNation": "001",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "9",
+      "scheduleTitle": "The 9th recruitment of the Point system in Uzbekistan(Manufacturing)",
+      "skillsCandidate": {
+        "title": "Uzbekistan the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-05-27"
+      },
+      "finalResult": {
+        "title": "Uzbekistan the 1th POINT_EXAM Announcement",
+        "publicationDate": "2026-08-27"
+      },
+      "status": "skills_and_final_result_linked",
+      "excludedRows": [
+        {
+          "examNot": "34"
+        },
+        {
+          "examNot": "35"
+        },
+        {
+          "examNot": "36"
+        }
+      ]
+    },
+    {
+      "country": "TJ",
+      "examNation": "017",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "10",
+      "scheduleTitle": "The 2nd recruitment of the Point system in Tajikistan(Manufacturing)",
+      "skillsCandidate": {
+        "title": "Tajikistan the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-04-06"
+      },
+      "finalResult": {
+        "title": "Tajikistan the 1th POINT_EXAM Announcement",
+        "publicationDate": "2026-05-08"
+      },
+      "status": "skills_and_final_result_linked"
     }
   ]
 }
