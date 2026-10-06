@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "checkedAt": "2026-10-06",
   "scope": "Shared Korea-side E-9 process facts that apply after employer selection. Country-specific sending-agency forms, fees, medical providers, embassy checklists, and individual schedules remain route-specific.",
   "officialSources": {
@@ -71,6 +71,22 @@
       "authority": "Employment education institution / employer",
       "fact": "After completing employment education and the required post-arrival health process, the worker is handed over to the employer and placed at the contracted workplace.",
       "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor"
+    },
+    {
+      "id": "residence_registration",
+      "status": "shared_korea_official",
+      "authority": "Korea Immigration Service / local immigration office",
+      "fact": "A foreign national who will stay in Korea for more than 90 days must complete foreigner registration with the immigration office having jurisdiction over the place of stay within 90 days of entry.",
+      "sourceUrl": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=272921",
+      "boundary": "Exact reservation method, local office, required documents, fees, and card issuance logistics must be checked against current Korea Immigration guidance for the worker's actual place of stay."
+    },
+    {
+      "id": "eps_insurance_check",
+      "status": "shared_korea_official",
+      "authority": "HRD Korea EPS / employer / foreign worker",
+      "fact": "EPS has four statutory insurance products: Departure Guarantee Insurance and Guarantee Insurance are employer-side obligations; Return Cost Insurance and Casualty Insurance are worker-side obligations. For a newly entering E-9 worker, the employment contract takes effect on the entry date. The official EPS guidance sets 15-day enrollment windows for Departure Guarantee, Guarantee and Casualty insurance and a 3-month window for Return Cost Insurance.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/intro/intro.do?method=epsInsurances",
+      "boundary": "Premium amount, guarantee-insurance applicability, national pension/health/employment/industrial-accident insurance treatment, and claim procedures depend on the current official rule and individual/workplace conditions."
     }
   ]
 }
