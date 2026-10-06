@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "uz-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Use current official Uzbekistan/HRD Korea evidence for the 9th Manufacturing Point System. Generic HRD registration guidance may not become a cycle-specific exact fee/document rule.",
+  "principle": "Use current 9th Uzbekistan Manufacturing evidence. Skills/final-result linkage is exact only when the official HRD examNot key matches the direct schedule.",
   "answers": [
     {
       "id": "uz_2026_sending_authority",
@@ -107,11 +107,11 @@
       "stages": [
         "final_selection"
       ],
-      "question": "Is the current 9th-round final-result state promoted in KEP?",
-      "answer": "No.",
-      "writeExactly": "Do not infer final selection from Round 1 completion; wait for a verified current-cycle final-result source.",
-      "verificationStatus": "intentionally_unresolved",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
+      "question": "Is the 2026-08-27 Uzbekistan Point System result linked to 9th Manufacturing?",
+      "answer": "Yes. The official final-result row and direct Manufacturing schedule both use examNot=9.",
+      "writeExactly": "9th Uzbekistan Manufacturing final Point System result artifact: published 2026-08-27; linked by official examNot=9.",
+      "verificationStatus": "verified_official_examnot_linkage",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
     {
@@ -126,6 +126,19 @@
       "verificationStatus": "shared_eps_principle",
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_skills_candidate_linkage",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Is the 2026-05-27 Uzbekistan skills-candidate announcement linked to 9th Manufacturing?",
+      "answer": "Yes. The official candidate row and direct Manufacturing schedule both use examNot=9.",
+      "writeExactly": "9th Uzbekistan Manufacturing skills-candidate artifact: published 2026-05-27; linked by official examNot=9. Do not import examNot 34/35/36.",
+      "verificationStatus": "verified_official_examnot_linkage",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
