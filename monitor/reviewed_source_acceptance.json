@@ -1,10 +1,10 @@
 {
-  "version": "1.1.0",
-  "reviewId": "2026-10-06-country-next-review-baseline-r1",
-  "active": false,
+  "version": "1.2.0",
+  "reviewId": "2026-10-06-country-watch-baseline-v3",
+  "active": true,
   "reviewedAt": "2026-10-06",
-  "normalizationRevision": "kp2mi-current-page-date-v1",
-  "reason": "Superseded pending diagnostic review: Vietnam switched from the general COLAB homepage to the EPS-only notice index, while Myanmar official pages showed repeated fingerprint drift. A new exact reviewed manifest will be issued after text-level volatility diagnosis.",
+  "normalizationRevision": "cross-site-volatile-widget-v3",
+  "reason": "Manual review completed for the nine official watch targets after host-scoped normalization removed only Myanmar visitor/IP/live-clock widgets and Vietnam COLAB live visitor counters. Accept these fingerprints as monitoring baselines only. This acceptance does not publish, change or promote any Country Pack rule, route lifecycle, fee, schedule or eligibility fact.",
   "expectedChangedSourceIds": [
     "hrdk_sending_agency_index",
     "kg_migrant_home",
@@ -14,20 +14,34 @@
     "np_eps_notice_index",
     "ph_dmw_home",
     "uz_migration_home",
-    "vn_colab_home"
+    "vn_colab_eps_notices"
   ],
   "expectedBaselineSha256": {
     "mm_mol_eps_opportunity": "83874eaa597f0817f187416f375431eb664b042eae92137215fd31bb2d661743"
   },
   "expectedNewSourceSha256": {
     "np_eps_notice_index": "613f1adaf78553cf64d8d19852d1db4579ce41bd5ab7e916e88c87f388305d91",
-    "vn_colab_home": "3442d109b0e0ac3926300d18914d53cc42575ab3c98b52791f4a52895d2c3099",
+    "vn_colab_eps_notices": "2a7ce7b6eb88937b3d3540aaf4f0eba71e6b16a79f1a3c6a846c29db78a5ad60",
     "ph_dmw_home": "006e69a1b843c9dcac214f3dfde80c5d81cf0e65b71aae7028bc0a83c97afe54",
     "lk_slbfe_home": "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
     "uz_migration_home": "074465cc17c246ceb95a6518e9c1d390b667e0a8e09e61c879027e05eb8081ba",
     "kg_migrant_home": "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
     "hrdk_sending_agency_index": "5067181a8c3081363689d27efd74bf7d0b6fca93547dae0db88c07617477b2eb",
-    "mm_mol_dol_index": "8470a173dc97d1112055833aec857a73ea59471ee3921c69c82ecbffb6504ea4"
+    "mm_mol_dol_index": "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0"
+  },
+  "expectedCurrentSha256": {
+    "mm_mol_eps_opportunity": "fbb0fbe8defcae99c75cae67d8efc52baae1b898523399de58d20462a10c92d4"
+  },
+  "reviewSummary": {
+    "hrdk_sending_agency_index": "Reviewed current HRD Korea sending-agency index; baseline acceptance only.",
+    "np_eps_notice_index": "Reviewed current EPS Nepal notice index including current departure notices; no automatic route promotion.",
+    "vn_colab_eps_notices": "Reviewed EPS-only COLAB notice index; live visitor counters normalized; no automatic Round-2 or downstream promotion.",
+    "ph_dmw_home": "Reviewed current DMW official home/portal surface; no automatic Regular Manufacturing opening.",
+    "lk_slbfe_home": "Reviewed current SLBFE official home/Korea program surface; no route rule changed by baseline acceptance.",
+    "uz_migration_home": "Reviewed current Uzbekistan Migration Agency official home/contact surface; no cycle rule auto-promoted.",
+    "kg_migrant_home": "Accepted as current official Kyrgyzstan watch baseline only; route remains governed by its explicit readiness gates.",
+    "mm_mol_dol_index": "Reviewed Department of Labour index; live clock normalized; no Manufacturing route promotion.",
+    "mm_mol_eps_opportunity": "Reviewed EPS opportunity page; telemetry normalized; no 2026 Manufacturing-labelled promotion artifact established."
   },
   "safety": {
     "requireNoFetchFailures": true,
@@ -38,8 +52,5 @@
     "neverAutoPublishRules": true,
     "neverPromoteRouteFromBaselineAcceptance": true,
     "requireExactCurrentHashes": true
-  },
-  "expectedCurrentSha256": {
-    "mm_mol_eps_opportunity": "8f5063b942e0e86b1181b17285dbd4eb69856ec0f17fd886b0beafcd2b3b405b"
   }
 }
