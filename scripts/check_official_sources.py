@@ -43,7 +43,7 @@ REQUEST_HEADERS = {
     "Accept-Language": "ko,en;q=0.8,id;q=0.7",
 }
 REQUEST_TIMEOUT_SECONDS = 12
-NORMALIZATION_REVISION = "cross-site-volatile-counter-v2"
+NORMALIZATION_REVISION = "cross-site-volatile-widget-v3"
 KP2MI_DYNAMIC_DATE_RE = re.compile(
     r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
     r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b",
@@ -200,6 +200,15 @@ def normalize_source_text(text, final_url):
         normalized = re.sub(
             r"(Your\s+IP\s+Address)\s*[:：]?\s*(?:[0-9a-f:.]+)",
             r"\1 <dynamic-ip>",
+            normalized,
+            flags=re.I,
+        )
+        normalized = re.sub(
+            r"Nay\s+Pyi\s+Taw,MM\s+\d{1,2}:\d{2}\s+(?:AM|PM),\s+"
+            r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
+            r"\d{1,2}(?:st|nd|rd|th)?\s+"
+            r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}",
+            "Nay Pyi Taw,MM <dynamic-local-time>",
             normalized,
             flags=re.I,
         )
