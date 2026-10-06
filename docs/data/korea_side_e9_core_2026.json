@@ -1,0 +1,76 @@
+{
+  "version": "1.0.0",
+  "checkedAt": "2026-10-06",
+  "scope": "Shared Korea-side E-9 process facts that apply after employer selection. Country-specific sending-agency forms, fees, medical providers, embassy checklists, and individual schedules remain route-specific.",
+  "officialSources": {
+    "workerEntry": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+    "workerEmploymentProcess": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessLabor",
+    "employerEmploymentProcess": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessCompany",
+    "epsGovernmentPortal": "https://www.eps.go.kr/eo/EmployJobProc.eo?tabGb=06"
+  },
+  "safety": {
+    "noCountrySpecificVisaFeeInference": true,
+    "noCountrySpecificEmbassyChecklistInference": true,
+    "noIndividualDepartureDateInference": true,
+    "noEmployerSelectionGuarantee": true,
+    "noVisaGuarantee": true,
+    "noDepartureGuarantee": true,
+    "localSendingAgencyNoticeOverridesLocalOperationalDetail": true
+  },
+  "stages": [
+    {
+      "id": "employer_selection",
+      "status": "shared_korea_official",
+      "authority": "Korean employment center / employer / EPS",
+      "fact": "After the Korean government verifies employer eligibility, employers select from officially referred foreign job seekers. Selection is not guaranteed by test passage or any private intermediary.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessCompany"
+    },
+    {
+      "id": "slc",
+      "status": "shared_korea_official",
+      "authority": "Employer / HRD Korea / sending agency",
+      "fact": "When an employment permit is issued, a standard labor contract is prepared and sent through HRD Korea to the sending country. The worker reviews the contract through the sending agency and confirms whether to accept it.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessCompany",
+      "boundary": "Exact signing appointment, local forms, translations, and country-side handling remain sending-country specific."
+    },
+    {
+      "id": "predeparture_training",
+      "status": "shared_korea_official_local_delivery_varies",
+      "authority": "Sending agency / local pre-departure training institution",
+      "fact": "A worker whose labor contract has been concluded completes pre-departure education in the sending country before entry to Korea.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "boundary": "Training duration, location, curriculum details, fees, and required documents may vary by sending country and current cohort."
+    },
+    {
+      "id": "visa_docs",
+      "status": "shared_korea_official_local_checklist_pending",
+      "authority": "Employer or agency / Korea Immigration / Korean mission / sending agency",
+      "fact": "After the labor contract is concluded, the employer or authorized agency obtains a Confirmation of Visa Issuance. HRD Korea sends the confirmation into the sending-country process, and the sending agency applies for the worker's E-9 visa through the Korean mission after required pre-departure steps.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=employProcessCompany",
+      "workerSourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "boundary": "Embassy document checklist, local submission method, visa/admin fee, account balance, and appointment requirements must come from the current country/cohort notice."
+    },
+    {
+      "id": "departure",
+      "status": "shared_korea_official_individual_assignment_required",
+      "authority": "Sending agency / HRD Korea",
+      "fact": "HRD Korea establishes an entry plan for visa-issued workers. The sending agency prepares workers under that plan and confirms entry availability at least 7 days before the planned entry date. Only final confirmed workers enter on the designated date.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor",
+      "boundary": "Never infer an individual's flight or entry date from a group report or another cohort."
+    },
+    {
+      "id": "korea_entry_training",
+      "status": "shared_korea_official",
+      "authority": "HRD Korea / employment education institution",
+      "fact": "After arrival at Incheon Airport, E-9 workers are transferred to an employment education institution and receive 16 hours of employment education. A health examination is conducted again; workers who fail the health examination may be returned to the sending country.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor"
+    },
+    {
+      "id": "employer_handover",
+      "status": "shared_korea_official",
+      "authority": "Employment education institution / employer",
+      "fact": "After completing employment education and the required post-arrival health process, the worker is handed over to the employer and placed at the contracted workplace.",
+      "sourceUrl": "https://eps.hrdkorea.or.kr/e9/user/employment/employment.do?method=immigrationLabor"
+    }
+  ]
+}

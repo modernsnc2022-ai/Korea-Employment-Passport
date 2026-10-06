@@ -14,19 +14,24 @@ async function loadCountryPack(routeId){
   const registry=await loadCountryPackRegistry();
   const entry=routeEntryById(registry,routeId);
   if(!entry)throw new Error('Unsupported KEP route: '+String(routeId||''));
-  const [routeResponse,localeResponse]=await Promise.all([
+  const sharedKoreaCoreFile=registry?.sharedKoreaCoreFile;
+  if(!sharedKoreaCoreFile)throw new Error('Shared Korea-side core file is not configured');
+  const [routeResponse,localeResponse,sharedKoreaCoreResponse]=await Promise.all([
     fetch(entry.routeFile,{cache:'no-store'}),
-    fetch(entry.localizationFile,{cache:'no-store'})
+    fetch(entry.localizationFile,{cache:'no-store'}),
+    fetch(sharedKoreaCoreFile,{cache:'no-store'})
   ]);
   if(!routeResponse.ok)throw new Error('Route pack load failed: '+routeResponse.status);
   if(!localeResponse.ok)throw new Error('Route localization load failed: '+localeResponse.status);
+  if(!sharedKoreaCoreResponse.ok)throw new Error('Shared Korea-side core load failed: '+sharedKoreaCoreResponse.status);
   const pack=await routeResponse.json();
   const locale=await localeResponse.json();
-  validateCountryPackShape(registry,entry,pack,locale);
-  return {registry,entry,pack,locale};
+  const sharedKoreaCore=await sharedKoreaCoreResponse.json();
+  validateCountryPackShape(registry,entry,pack,locale,sharedKoreaCore);
+  return {registry,entry,pack,locale,sharedKoreaCore};
 }
 
-function validateCountryPackShape(registry,entry,pack,locale){
+function validateCountryPackShape(registry,entry,pack,locale,sharedKoreaCore){
   const expected=registry?.commonStageIds||[];
   const actual=(pack?.stages||[]).map(stage=>stage.id);
   if(expected.length!==actual.length||expected.some((id,index)=>actual[index]!==id)){
@@ -44,6 +49,20 @@ function validateCountryPackShape(registry,entry,pack,locale){
     }
     if(!locale?.[stage.id]?.title||!locale?.[stage.id]?.action){
       throw new Error('Country Pack localization missing: '+stage.id);
+    }
+  }
+  const requiredSharedStages=['employer_selection','slc','predeparture_training','visa_docs','departure','korea_entry_training','employer_handover'];
+  const sharedStages=sharedKoreaCore?.stages||[];
+  const sharedIds=sharedStages.map(stage=>stage.id);
+  if(requiredSharedStages.some(id=>!sharedIds.includes(id))){
+    throw new Error('Shared Korea-side core stage contract mismatch');
+  }
+  for(const stage of sharedStages){
+    if(!stage.id||!stage.status||!stage.authority||!stage.fact||!stage.sourceUrl){
+      throw new Error('Shared Korea-side core stage is incomplete: '+String(stage.id||'unknown'));
+    }
+    if(!String(stage.sourceUrl).startsWith('https://')){
+      throw new Error('Shared Korea-side core source must use HTTPS: '+stage.id);
     }
   }
   if(entry.lifecycle==='research_hold'){
