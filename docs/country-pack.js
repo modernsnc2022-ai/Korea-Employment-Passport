@@ -51,7 +51,7 @@ function validateCountryPackShape(registry,entry,pack,locale,sharedKoreaCore){
       throw new Error('Country Pack localization missing: '+stage.id);
     }
   }
-  const requiredSharedStages=['employer_selection','slc','predeparture_training','visa_docs','departure','korea_entry_training','employer_handover','residence_registration','eps_insurance_check'];
+  const requiredSharedStages=['employer_selection','slc','predeparture_training','visa_docs','departure','korea_entry_training','employer_handover','residence_registration','eps_insurance_check','first_payroll_check','labor_support_ready','employment_maintenance'];
   const sharedStages=sharedKoreaCore?.stages||[];
   const sharedIds=sharedStages.map(stage=>stage.id);
   if(requiredSharedStages.some(id=>!sharedIds.includes(id))){
