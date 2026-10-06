@@ -564,9 +564,18 @@ require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCES_URL" in b
         "tester-interest email must carry a controlled non-identifying recruitment source code from shared data")
 require(
     'id="communitySharePanel"' in beta_page
+    and 'id="shareCommunityApplicantInviteBtn"' in beta_page
     and 'id="copyCommunityApplicantInviteBtn"' in beta_page
+    and 'id="shareCommunityWorkerInviteBtn"' in beta_page
     and 'id="copyCommunityWorkerInviteBtn"' in beta_page,
-    "beta page must expose the source-attributed community share kit",
+    "beta page must expose native-share and copy actions for the source-attributed community kit",
+)
+require(
+    "async function shareText(text)" in beta_js
+    and "navigator.share" in beta_js
+    and "await navigator.share({text})" in beta_js
+    and "const ok=await copyText(text)" in beta_js,
+    "community sharing must prefer the native share sheet and fail back to copy without new data collection",
 )
 require(
     "function sourceAttributedBetaUrl(worker=false)" in beta_js
