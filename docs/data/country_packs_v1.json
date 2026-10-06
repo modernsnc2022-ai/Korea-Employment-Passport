@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.11.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -232,7 +232,7 @@
       "localizationFile": "data/kh_e9_manufacturing_2026_km.json",
       "officialSendingAgency": "Manpower Training and Overseas Sending Board (MTOSB)",
       "officialSendingAgencyUrl": "https://www.mtosb.gov.kh/",
-      "note": "Official HRD Korea Cambodia General CBT skills-candidate and Point System result artifacts exist in August 2026, but exact Manufacturing cycle/sector linkage is still gated. A likely 12th Manufacturing schedule is discovery-only until a direct official schedule artifact is captured."
+      "note": "HRD Korea directly verifies the 12th Cambodia Manufacturing Point System: registration 2026-05-22 through 2026-05-25, test announcement 2026-06-12, test period 2026-06-22 through 2026-07-15. August skills/final-result artifacts are official but still require explicit Manufacturing cycle/sector linkage."
     },
     {
       "routeId": "tl-e9-manufacturing-2026",
