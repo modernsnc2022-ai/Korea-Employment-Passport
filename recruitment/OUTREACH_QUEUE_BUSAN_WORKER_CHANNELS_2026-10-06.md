@@ -7,7 +7,7 @@ Snapshot: 2026-10-06
 - Channel: email
 - Public mailbox: `putri@bgcf.or.kr`
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=busan_global_indonesian_desk`
-- Status: ready_not_sent
+- Status: sent_2026-10-06
 - Fit: the foundation officially operates foreign-resident counseling in Indonesian, including employment/wage/immigration and daily-life topics.
 - Ask: voluntarily share the worker-panel interest link with relevant Indonesian E-9 workers or direct KEP to an appropriate worker-community channel.
 - Privacy: never request names, phone numbers, ARC/passport/KTP numbers, home/dormitory addresses, or identity-document images.
@@ -17,7 +17,7 @@ Snapshot: 2026-10-06
 - Channel: email
 - Public mailbox: `somi3438@gmail.com`
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=busan_foreign_resident_center`
-- Status: ready_not_sent
+- Status: sent_2026-10-06
 - Fit: the center provides migrant labor counseling, outreach/mobile counseling, interpretation, education and community-network programs; its public materials include Indonesian-language support.
 - Ask: voluntarily share the worker-panel interest link with relevant Indonesian E-9 workers.
 - Privacy: do not ask the center to disclose worker identity/contact data.
@@ -35,3 +35,8 @@ Snapshot: 2026-10-06
 - KEP is independent and must not imply government affiliation.
 - Never promise employment, employer selection, SLC, visa or departure.
 - Never store applicant/worker PII in GitHub.
+
+## Send result
+- Both initial emails were sent once on 2026-10-06 after same-HEAD gates, deployed routing, and the pre-send guard passed.
+- Immediate bounce check: none observed.
+- Do not send another initial outreach to either source. Any later contact requires an explicit follow-up-ready ledger state.
