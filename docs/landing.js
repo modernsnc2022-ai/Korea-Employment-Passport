@@ -1,7 +1,7 @@
 (()=>{
   const raw=String(new URLSearchParams(location.search).get('src')||'').trim().toLowerCase();
   if(!/^[a-z0-9_]{1,64}$/.test(raw))return;
-  const workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea']);
+  const workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi']);
   if(workerSourceCodes.has(raw)){
     location.replace('beta.html?src='+encodeURIComponent(raw)+'#worker-panel');
     return;

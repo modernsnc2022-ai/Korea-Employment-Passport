@@ -522,7 +522,7 @@ require(
     "landing source attribution must accept only a bounded non-identifying source token",
 )
 require(
-    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea'])" in landing_js
+    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi'])" in landing_js
     and "beta.html?src=" in landing_js
     and "#worker-panel" in landing_js,
     "worker-only recruitment sources must route directly to the worker-interest section",
@@ -569,7 +569,8 @@ require(
         "lpk_samwon","jendela_asa","lpk_ggum","lpk_hana_korea","lpk_hanaman",
         "mendunia_korea","korean_first","lpk_maheswara","lpk_caranta",
         "ubt_eps_topik_app","topiknow_app","kamus_korea_app","jeongsang_eps_app",
-        "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app"
+        "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app",
+        "kbri_seoul_pmi","indonesia_eps_center_hrdk"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )

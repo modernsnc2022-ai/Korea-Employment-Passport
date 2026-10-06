@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -60,6 +60,8 @@
     "jeongsang_eps_app",
     "kosakata_eps_topik_app",
     "ubt_eps_topik_id_app",
-    "ubt_eps_topik_eddie_app"
+    "ubt_eps_topik_eddie_app",
+    "kbri_seoul_pmi",
+    "indonesia_eps_center_hrdk"
   ]
 }
