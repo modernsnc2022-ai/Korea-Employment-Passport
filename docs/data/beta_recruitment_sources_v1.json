@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -78,6 +78,8 @@
     "pui_kmi_worker_referral",
     "bp3mi_jabar_applicant",
     "bp3mi_banten_applicant",
-    "bp3mi_sumut_applicant"
+    "bp3mi_sumut_applicant",
+    "jettyland_eps_app",
+    "zenski_eps_app"
   ]
 }
