@@ -19,6 +19,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check docs/app.js
+          node --check docs/landing.js
           node --check docs/app-runtime.js
           node --check docs/beta.js
           node --check docs/sw.js
@@ -207,6 +208,7 @@ jobs:
       - name: Check required public files
         run: |
           test -f docs/index.html
+          test -f docs/landing.js
           test -f docs/app.html
           test -f docs/beta.html
           test -f docs/beta.css

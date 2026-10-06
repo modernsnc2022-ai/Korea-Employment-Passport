@@ -4,6 +4,22 @@
 > Beta access status: **HOLD until BETA_LAUNCH_GATE passes and explicit approval is recorded.**
 > Sending an application now does not activate beta access or start the 6-month benefit.
 
+## Source-attributed link rule
+
+For every new outreach message, use the controlled recruitment-source code in the landing URL:
+
+`https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=<source_code>`
+
+The landing page preserves that code when the person opens the beta enrollment page, and the application text records only the controlled non-identifying source code. Do not put a person's name, handle, phone number, email address, or other identity data in `src`.
+
+Examples:
+- `?src=epstopik_indonesia`
+- `?src=lpk_ggum`
+- `?src=telegram_eps_indo`
+- `?src=referral`
+
+If the code is unknown or invalid, the beta page falls back to `website`.
+
 ## Message to community admin — application intake can be shared now
 
 Halo Admin. Kami sedang mencari calon tester untuk Korea Employment Passport,
