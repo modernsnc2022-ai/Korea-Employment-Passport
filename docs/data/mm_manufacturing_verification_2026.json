@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -49,7 +49,8 @@
     },
     "myanmarLabourMinistry": {
       "epsOpportunityUrl": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
-      "observation": "The Ministry EPS opportunity page contains Manufacturing-related historical EPS materials alongside other sectors, but KEP has not captured a current 2026 Manufacturing-labelled recruitment notice from this page."
+      "observation": "The Ministry EPS opportunity page contains Manufacturing-related historical EPS materials alongside other sectors, but KEP has not captured a current 2026 Manufacturing-labelled recruitment notice from this page.",
+      "departmentIndexUrl": "https://www.mol.gov.mm/mol-department-of-labour/"
     }
   },
   "historicalManufacturingEvidence": {
@@ -77,6 +78,7 @@
     ]
   },
   "nextReviewSources": [
+    "https://www.mol.gov.mm/mol-department-of-labour/",
     "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
     "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
     "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
@@ -179,7 +181,15 @@
         "routePromotionAllowed": false,
         "rule": "Accepting source fingerprints means only that these current official page versions were reviewed. It does not verify a 2026 Myanmar Manufacturing route and must not alter route status."
       },
-      "conclusion": "All four configured Myanmar official watch targets were fetched and reviewed on 2026-10-06. No direct official 2026 Manufacturing-labelled qualifying artifact was captured. The source versions may be accepted as the monitored baseline, while Manufacturing route promotion remains blocked."
+      "conclusion": "All four configured Myanmar official watch targets were fetched and reviewed on 2026-10-06. No direct official 2026 Manufacturing-labelled qualifying artifact was captured. The source versions may be accepted as the monitored baseline, while Manufacturing route promotion remains blocked.",
+      "supplementalDiscoveryReview": {
+        "reviewedAt": "2026-10-06",
+        "sourceId": "mm_mol_dol_index",
+        "sourceUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+        "finding": "The current Department of Labour index exposes the EPS opportunity section and recent Department of Labour posts, but no direct current 2026 Manufacturing-labelled EPS recruitment, registration, schedule, skills/result or final-result artifact was identified in this review.",
+        "qualifiesForPromotion": false,
+        "baselineState": "pending_source_monitor_acceptance"
+      }
     }
   },
   "monitoring": {
@@ -191,6 +201,10 @@
     ],
     "rule": "Any monitored source change requires review. A changed page never auto-promotes the route; promotion requires promotionGate.requiredAll to be satisfied and reviewed.",
     "lastReviewedAt": "2026-10-06",
-    "baselineAcceptanceState": "reviewed_safe_to_accept_without_route_promotion"
+    "baselineAcceptanceState": "reviewed_safe_to_accept_without_route_promotion",
+    "supplementalDiscoverySourceIds": [
+      "mm_mol_dol_index"
+    ],
+    "supplementalDiscoveryRule": "The Department of Labour index is monitored to catch new EPS notices that may appear outside the dedicated EPS opportunity page. A change is a discovery trigger only and never satisfies the Manufacturing promotion gate by itself."
   }
 }
