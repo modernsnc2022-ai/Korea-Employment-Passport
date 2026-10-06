@@ -1,11 +1,11 @@
 {
-  "version": "4.5.0",
+  "version": "4.6.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 64,
-    "distinctRecipientMailboxes": 54,
+    "sentMessages": 66,
+    "distinctRecipientMailboxes": 56,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
@@ -410,12 +410,16 @@
     {
       "sourceCode": "jettyland_eps_app",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-06"
     },
     {
       "sourceCode": "zenski_eps_app",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-06"
     }
-  ]
+  ],
+  "emailWave7": {
+    "sentNow": 2,
+    "immediateBounceObserved": 0
+  }
 }
