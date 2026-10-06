@@ -553,6 +553,7 @@ pk_docs=load("docs/data/pk_document_packs_2026.json")
 pk_discovery=load("docs/data/pk_manufacturing_discovery_2026.json")
 pk_special=load("docs/data/pk_special_eps_topik_2026.json")
 pk_readiness=load("docs/data/pk_stage_readiness_2026.json")
+pk_oec=load("docs/data/pk_oec_portal_2026.json")
 require(pk_entry.get("lifecycle")=="research_hold" and pk_entry.get("publicAvailability")=="preview_only","Pakistan registry route must remain preview-only HOLD")
 require(pk_pack.get("lifecycle")=="research_hold" and pk_pack.get("publicAvailability")=="preview_only","Pakistan pack must remain preview-only HOLD")
 require(pk_pack.get("safety",{}).get("betaIntakeOpen") is False,"Pakistan beta intake must remain closed")
@@ -560,23 +561,36 @@ require(pk_pack.get("safety",{}).get("cityRoundFactsRequireManufacturingSectorLi
 require(pk_pack.get("safety",{}).get("discoveryManufacturingTitleMustNotBecomeExact") is True,"Pakistan Manufacturing discovery title must not auto-promote")
 require(pk_pack.get("safety",{}).get("specialFactsExcludedFromManufacturing") is True,"Pakistan Special facts must stay outside Manufacturing")
 require(pk_pack.get("officialSendingAgency",{}).get("name")=="Overseas Employment Corporation (OEC)","Pakistan sending agency must remain OEC")
+require(pk_pack.get("oecPortalEvidenceFile")=="data/pk_oec_portal_2026.json","Pakistan pack must link current OEC portal evidence")
 pk_current=pk_readiness.get("currentManufacturing",{})
 require(pk_current.get("cityRoundSchedule",{}).get("status")=="official_country_round_sector_linkage_pending","Pakistan city-round schedule must remain sector-linkage pending")
+require(pk_current.get("oecPortal2026",{}).get("status")=="verified_country_round_operation_manufacturing_linkage_pending","Pakistan OEC portal operation must remain verified without Manufacturing promotion")
 require(pk_current.get("manufacturingDiscovery",{}).get("status")=="discovery_only_not_promoted","Pakistan Manufacturing discovery must remain non-promoted")
 require(pk_current.get("fee",{}).get("status")=="manufacturing_cycle_specific_unverified","Pakistan Manufacturing fee must remain unresolved")
+require(pk_current.get("fee",{}).get("oecPreRegistrationChallan",{}).get("amountPkr")==1000 and pk_current.get("fee",{}).get("oecPreRegistrationChallan",{}).get("epsTopikExamFee") is False,"Pakistan OEC PKR 1,000 challan must never become EPS-TOPIK exam fee")
 require(pk_current.get("documents",{}).get("status")=="manufacturing_checklist_not_reconstructed","Pakistan Manufacturing checklist must remain HOLD")
 require(pk_readiness.get("specialRoute",{}).get("mustNotPopulateManufacturing") is True,"Pakistan Special route must never populate Manufacturing")
 require(pk_readiness.get("betaReadiness",{}).get("status")=="blocked","Pakistan beta must remain blocked")
 require(pk_discovery.get("exactPromotionAllowed") is False,"Pakistan discovery evidence cannot promote exact rules")
 require(pk_special.get("excludedFromManufacturing") is True,"Pakistan Special evidence must be explicitly excluded")
+require(pk_oec.get("scope")=="pakistan_eps_2026_oec_portal_country_round_not_manufacturing_sector_linkage","Pakistan OEC evidence must remain country-round scoped")
+pk_oec_sources={row.get("id"):row for row in pk_oec.get("sources",[])}
+require(pk_oec_sources.get("pk_oec_2026_test_schedule_lookup",{}).get("facts",{}).get("individualScheduleLookupLive") is True,"Pakistan OEC individual test-schedule lookup must remain verified")
+require(pk_oec_sources.get("pk_oec_2026_test_schedule_lookup",{}).get("facts",{}).get("manufacturingSectorLinkageEstablished") is False,"Pakistan OEC schedule lookup must not auto-establish Manufacturing linkage")
+require(pk_oec_sources.get("pk_oec_2026_pre_registration",{}).get("facts",{}).get("feeChallanPkr")==1000 and pk_oec_sources.get("pk_oec_2026_pre_registration",{}).get("facts",{}).get("isEpsTopikExamFee") is False,"Pakistan OEC PKR 1,000 pre-registration challan scope must remain explicit")
+require("treating PKR 1,000 as the EPS-TOPIK exam fee" in pk_oec.get("promotionRules",{}).get("mustRemainHold",[]),"Pakistan OEC evidence must explicitly forbid exam-fee conflation")
 pk_doc_ids={p.get("id") for p in pk_docs.get("packs",[])}
-require({"pk_manufacturing_registration_documents_hold","pk_official_contact"}.issubset(pk_doc_ids),"Pakistan document packs must preserve HOLD plus official contact")
+require({"pk_manufacturing_registration_documents_hold","pk_official_contact","pk_oec_2026_prereg_portal_snapshot"}.issubset(pk_doc_ids),"Pakistan document packs must preserve Manufacturing HOLD, official contact and OEC portal snapshot")
 pk_hold=next((p for p in pk_docs.get("packs",[]) if p.get("id")=="pk_manufacturing_registration_documents_hold"),{})
 require(pk_hold.get("items")==[],"Pakistan Manufacturing registration HOLD pack must contain no invented checklist items")
+pk_oec_pack=next((p for p in pk_docs.get("packs",[]) if p.get("id")=="pk_oec_2026_prereg_portal_snapshot"),{})
+require(pk_oec_pack.get("paidChallan",{}).get("amountPkr")==1000 and pk_oec_pack.get("paidChallan",{}).get("epsTopikExamFee") is False,"Pakistan OEC portal document pack must scope PKR 1,000 as non-exam-fee")
 pk_exact_ids={row.get("id") for row in pk_exact.get("answers",[])}
 for exact_id in [
     "pk_2026_sending_authority","pk_2026_city_registration_window","pk_2026_schedule_state",
-    "pk_2026_manufacturing_linkage","pk_2026_special_firewall","pk_no_job_guarantee"
+    "pk_2026_manufacturing_linkage","pk_2026_special_firewall","pk_no_job_guarantee",
+    "pk_2026_oec_schedule_lookup","pk_2026_oec_prereg_dob","pk_2026_oec_prereg_fields",
+    "pk_2026_oec_prereg_challan","pk_2026_oec_challan_upload","pk_2026_oec_registration_lookup"
 ]:
     require(exact_id in pk_exact_ids,f"Pakistan exact-answer catalog missing {exact_id}")
 
@@ -835,6 +849,8 @@ require("DISCOVERY ONLY" in timorleste and "2026-09-22" in timorleste and "Fishe
 require('href="beta.html"' not in timorleste and 'id="betaForm"' not in timorleste,"Timor-Leste preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in pakistan and "2026-03-31" in pakistan and "2026-04-08" in pakistan,"Pakistan preview must visibly remain HOLD with verified city-round registration window")
 require("Manufacturing-specific exact rules yet" in pakistan and "DISCOVERY ONLY" in pakistan and "2026-08-21" in pakistan,"Pakistan preview must show Manufacturing linkage gate, discovery-only state and Special result separation")
+require("OEC 2026 PORTAL VERIFIED" in pakistan and "1986-03-31" in pakistan and "PKR 1,000" in pakistan,"Pakistan preview must expose OEC 2026 portal operation and scoped pre-registration facts")
+require("EPS-TOPIK exam fee" in pakistan,"Pakistan preview must explicitly prevent PKR 1,000 exam-fee conflation")
 require('href="beta.html"' not in pakistan and 'id="betaForm"' not in pakistan,"Pakistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in tajikistan and "330 somoni" in tajikistan and "2026-03-02" in tajikistan and "2026-03-29" in tajikistan,"Tajikistan preview must show verified Manufacturing facts")
 require("3.5×4.5" in tajikistan and "Foreign passport" in tajikistan,"Tajikistan preview must expose verified registration-document basics")
