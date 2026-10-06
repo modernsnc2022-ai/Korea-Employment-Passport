@@ -5,7 +5,7 @@
   },
   "registration": {
     "title": "आधिकारिक EPS आवेदन / दर्ता",
-    "action": "हालको आधिकारिक सूचनामा उल्लेख गरिएको च्यानल र प्रक्रिया मात्र प्रयोग गर्नुहोस्।"
+    "action": "नेपालको 2026 प्रथम चरणको मुख्य सूचनामा आवेदन अवधि 2026-07-27 देखि 2026-08-02 छ। HRD Korea को हालको 5th Nepal Manufacturing(5부) schedule row मा 2026-08-05 सम्म देखिन्छ। पछि आएको नेपाल आधिकारिक सूचनाको पूर्ण सामग्रीबाट म्याद परिवर्तन पुष्टि नभएसम्म KEP ले 2026-08-02 लाई exact local-primary deadline राख्छ।"
   },
   "exam_fee": {
     "title": "EPS-TOPIK शुल्क भुक्तानी",
@@ -21,11 +21,11 @@
   },
   "exam_card": {
     "title": "परीक्षा प्रवेश कागजात",
-    "action": "आधिकारिक निर्देशनअनुसार परीक्षा प्रवेश कागजात प्राप्त गरी विवरण जाँच गर्नुहोस्।"
+    "action": "HRD Korea को हालको 5th Nepal Manufacturing(5부) Point System row पुष्टि भएको छ, तर test announcement date र test period अझै undecided छन्। व्यक्तिगत परीक्षा मिति वा session अनुमान नगर्नुहोस्।"
   },
   "eps_topik": {
     "title": "EPS-TOPIK",
-    "action": "नेपालका लागि HRD Korea ले घोषणा गरेको आधिकारिक तालिकाअनुसार मात्र परीक्षा दिनुहोस्।"
+    "action": "हालको HRD Korea 5th Nepal Manufacturing(5부) row General CBT / Point System हो। परीक्षा घोषणा मिति र परीक्षा अवधि अझै undecided छन्; आधिकारिक assigned schedule नआएसम्म पर्खनुहोस्।"
   },
   "skill_competency": {
     "title": "सीप तथा दक्षता परीक्षा",
