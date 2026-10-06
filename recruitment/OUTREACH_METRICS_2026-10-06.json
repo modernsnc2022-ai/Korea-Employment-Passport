@@ -1,16 +1,16 @@
 {
-  "version": "6.2.0",
+  "version": "6.3.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 78,
-    "distinctRecipientMailboxes": 67,
+    "sentMessages": 80,
+    "distinctRecipientMailboxes": 69,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T08:32:33+09:00"
+    "lastUpdatedAt": "2026-10-07T08:39:04+09:00"
   },
   "wave2": [
     {
@@ -523,12 +523,23 @@
     {
       "sourceCode": "lpk_yolsimhi",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T08:38:54+09:00",
+      "gmailMessageId": "1a113959c18818ee"
     },
     {
       "sourceCode": "lpk_hanifa",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T08:39:04+09:00",
+      "gmailMessageId": "1a11395c3d344bac"
     }
-  ]
+  ],
+  "emailWave10ApplicantFirst": {
+    "sentNow": 2,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 2,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "Both wave 10 applicant-first emails were sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
+  }
 }
