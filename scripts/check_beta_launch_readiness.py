@@ -551,6 +551,34 @@ require(
 )
 require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCES_URL" in beta_js,
         "tester-interest email must carry a controlled non-identifying recruitment source code from shared data")
+require(
+    'id="communitySharePanel"' in beta_page
+    and 'id="copyCommunityApplicantInviteBtn"' in beta_page
+    and 'id="copyCommunityWorkerInviteBtn"' in beta_page,
+    "beta page must expose the source-attributed community share kit",
+)
+require(
+    "function sourceAttributedBetaUrl(worker=false)" in beta_js
+    and "url.searchParams.set('src',recruitmentSourceCode())" in beta_js
+    and "url.hash=worker?'worker-panel':''" in beta_js,
+    "community share URLs must preserve only the controlled recruitment source and worker anchor",
+)
+require(
+    "function communityApplicantInviteText()" in beta_js
+    and "function communityWorkerInviteText()" in beta_js
+    and "KEP adalah proyek independen" in beta_js,
+    "community share copy must preserve independent-service disclosure",
+)
+require(
+    "$('communitySharePanel').hidden=shareSource==='website'" in beta_js
+    and "$('communityShareSource').textContent=shareSource" in beta_js,
+    "community share kit must stay hidden for unattributed website traffic and visibly preserve its source code",
+)
+require(
+    "Mengirim minat belum mengaktifkan akses panel" in beta_js
+    and "Tidak ada jaminan kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan." in beta_js,
+    "community share copy must preserve worker-access and no-guarantee boundaries",
+)
 require("BETA_INTEREST_PARSE_SELF_TEST_PASS" in beta_interest_parser,
         "privacy-safe tester-interest parser must exist and expose a self-test")
 require("RAW_BODY_NOT_STORED=true" in beta_interest_parser,
