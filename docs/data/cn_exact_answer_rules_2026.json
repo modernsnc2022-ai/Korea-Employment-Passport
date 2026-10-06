@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "cn-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Use current China 6th Manufacturing evidence. Generic HRD fee guidance and generic China skill-candidate entries cannot automatically become cycle-specific exact facts.",
@@ -83,10 +83,10 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "Do the 2026-09-30 China skills-candidate entries prove the exact 6th Manufacturing Round 2 list?",
-      "answer": "Not yet in KEP. Generic China 1st/2nd entries exist but exact cycle linkage remains pending.",
-      "writeExactly": "Do not auto-link generic China skills-candidate entries to the 6th Manufacturing route without cycle proof.",
-      "verificationStatus": "candidate_entries_exist_linkage_pending",
+      "question": "Which China 2026 skills-candidate artifact is linked to the 6th Manufacturing cycle?",
+      "answer": "The official 'China the 1th Test of proficiency in Korean Announcement' row published 2026-09-30 carries examNot=19, matching the 6th Manufacturing schedule. The examNot=85 row is separate.",
+      "writeExactly": "Use only the China skills-candidate row with examNot=19 for the 6th Manufacturing route; do not import examNot=85.",
+      "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -115,5 +115,6 @@
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
