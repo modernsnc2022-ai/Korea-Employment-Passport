@@ -523,7 +523,7 @@ require(
     "landing source attribution must accept only a bounded non-identifying source token",
 )
 require(
-    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral','pui_kmi_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center','seosan_foreign_worker_center','busan_global_indonesian_desk','busan_foreign_resident_center','gimpo_foreign_resident_center'])" in landing_js
+    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral','pui_kmi_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center','seosan_foreign_worker_center','busan_global_indonesian_desk','busan_foreign_resident_center','gimpo_foreign_resident_center','ulsan_foreign_resident_center'])" in landing_js
     and "beta.html?src=" in landing_js
     and "#worker-panel" in landing_js,
     "worker-only recruitment sources must route directly to the worker-interest section",
@@ -628,7 +628,7 @@ require(
         "lpk_hanaro","lpk_go_korea","korea_indonesia_center_referral","appik_purna_korea_referral",
         "pui_kmi_worker_referral","bp3mi_dki_applicant","bp3mi_jateng_applicant","bp3mi_jatim_applicant",
         "bp3mi_jabar_applicant","bp3mi_banten_applicant","bp3mi_sumut_applicant",
-        "jettyland_eps_app","zenski_eps_app","lpk_seoul_lombok","hwaseong_foreign_welfare","yangsan_foreign_worker_center","seosan_foreign_worker_center","busan_global_indonesian_desk","busan_foreign_resident_center","gimpo_foreign_resident_center"
+        "jettyland_eps_app","zenski_eps_app","lpk_seoul_lombok","hwaseong_foreign_welfare","yangsan_foreign_worker_center","seosan_foreign_worker_center","busan_global_indonesian_desk","busan_foreign_resident_center","gimpo_foreign_resident_center","ulsan_foreign_resident_center"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
