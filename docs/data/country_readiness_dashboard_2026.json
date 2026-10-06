@@ -1,5 +1,5 @@
 {
-  "version": "1.8.2",
+  "version": "1.8.3",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -45,10 +45,10 @@
       ],
       "validationGaps": [
         "Manufacturing-specific detailed online job-application document list is still not found as of 2026-10-06",
-        "job_docs and job_name remain answered_hold exact blockers",
-        "job_scan, job_edit and job_submit now have conservative cross-notice Sisko platform baselines",
-        "safe submit guidance requires Menu Pemenuhan Dokumen, confirmation that the application/documents are sent plus progress monitoring, and the official support channel when status is unclear; exact Manufacturing 2026 button label is not asserted",
-        "the two exact safe HOLDs block final Broker Replacement Rate 100% PASS, but do not by themselves block beta activation while the app refuses to guess"
+        "job_docs remains the only answered_hold exact job-application blocker",
+        "job_scan, job_name, job_edit and job_submit now have conservative official safety baselines",
+        "identity safety guidance preserves registered identity exactly, copies document numbers from the corresponding official document, and routes ambiguous address/document-source fields to official help instead of guessing; it does not claim a Manufacturing 2026 field-by-field map",
+        "the one exact safe HOLD blocks final Broker Replacement Rate 100% PASS, but does not by itself block beta activation while the app refuses to guess"
       ]
     },
     {
