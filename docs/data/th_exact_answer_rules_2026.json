@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "th-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Use current Thailand DOE/HRD Korea Regular Point System Round 18 evidence. Keep Special EPS-TOPIK facts separate.",
@@ -194,15 +194,17 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "Do the Thailand General CBT candidate entries published by HRD Korea on 2026-10-06 prove the Round 18 Manufacturing skills-test candidate list?",
-      "answer": "Not yet.",
-      "writeExactly": "HRD Korea shows six Thailand General CBT candidate-index entries (public titles 3th through 8th) dated 2026-10-06. The titles do not identify Round 18, sector or site. DOE's Round 18 notice states 2026-10-19 for the skills-test eligible list. Keep linkage HOLD until an official source connects the artifacts to Round 18 Manufacturing.",
-      "verificationStatus": "official_country_artifacts_linkage_pending",
+      "question": "Can the 2026-10-06 HRD Thailand skills-candidate rows be linked to Round 18 Manufacturing?",
+      "answer": "Yes, for two rows only: examNot=57 matches Round 18 Manufacturing Bangkok and examNot=64 matches Manufacturing Udon Thani. The other four rows map to Agriculture/Livestock or Construction. DOE's separate 2026-10-19 local milestone still requires review.",
+      "writeExactly": "Use HRD examNot 57 and 64 as current Round 18 Manufacturing skills-candidate artifacts; exclude 56/58/63/65 and do not treat this as replacing DOE's 2026-10-19 local instructions.",
+      "verificationStatus": "verified_official_examnot_sector_site_linkage",
       "sourceUrls": [
         "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
         "https://www.thaigov.go.th/th/news/165372"
       ],
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-06",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
