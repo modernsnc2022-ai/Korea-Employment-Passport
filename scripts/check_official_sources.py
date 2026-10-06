@@ -45,13 +45,13 @@ REQUEST_HEADERS = {
 REQUEST_TIMEOUT_SECONDS = 12
 NORMALIZATION_REVISION = "cross-site-volatile-widget-v5"
 KP2MI_DYNAMIC_DATE_RE = re.compile(
-    r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\\s+"
+    r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
     r"(?:"
-    r"\\d{1,2}\\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{4}"
+    r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}"
     r"|"
-    r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2},\\s+\\d{4}"
+    r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}"
     r")"
-    r"(?=\\s+0800-1000\\s+Webmail\\b)",
+    r"(?=\s+0800-1000\s+Webmail\b)",
     flags=re.I,
 )
 
