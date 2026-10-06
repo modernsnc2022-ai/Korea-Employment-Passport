@@ -4,8 +4,8 @@
   "sector": "manufacturing",
   "cycle": 2026,
   "goal": "zero-private-broker",
-  "packVersion": "0.3.2",
-  "lastVerified": "2026-10-04",
+  "packVersion": "0.3.3",
+  "lastVerified": "2026-10-06",
   "stages": [
     {
       "id": "eligibility",
@@ -127,9 +127,9 @@
       "title": "Online job application",
       "authority": "Sisko P2MI",
       "kind": "official_action",
-      "action": "Do not submit using another sector's document list. Wait until KP2MI publishes the 2026 Manufacturing online job-application notice, then follow that notice in Sisko P2MI.",
+      "action": "Current-cycle baseline is verified: for 2026 graduates, MCU I uses a KP2MI-listed health facility and the psychology examination uses the HIMPSI route, with results entered into Sisko P2MI by the provider/HIMPSI. Keep the Manufacturing-specific document, scan, identity-entry, edit and submit rules on HOLD until KP2MI publishes the detailed Manufacturing online job-application notice.",
       "brokerReplacement": "held_official_notice",
-      "warning": "The 19 August 2026 online job-application notice currently verified is for Fisheries, not Manufacturing. Do not reuse it as a Manufacturing rule.",
+      "warning": "The 2026 recruitment notice verifies the MCU I + psychology/Sisko P2MI baseline, but it does not unlock the exact Manufacturing job-application checklist or form-entry rules. The 19 August 2026 detailed online job-application notice is Fisheries-only and must not be reused.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionLabel": "Check latest Manufacturing notice"
@@ -286,5 +286,23 @@
       "officialActionUrl": "https://1350.moel.go.kr/",
       "officialActionLabel": "Buka layanan 1350"
     }
-  ]
+  ],
+  "jobApplicationBaselineEvidence": {
+    "status": "verified_current_cycle_process_baseline_details_held",
+    "verifiedAt": "2026-10-06",
+    "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+    "facts": [
+      "For 2026 graduates, the official 2026 Manufacturing/Fisheries recruitment notice says MCU I must be completed at a KP2MI-listed health facility at the online job-application stage.",
+      "The same notice says the psychology examination is completed through a HIMPSI psychologist under the official route.",
+      "Medical and psychology results are entered directly into Sisko P2MI by the health facility and HIMPSI.",
+      "This baseline does not define the Manufacturing-specific job-application document list, scan rules, identity-entry rules, editing rules or final submission sequence."
+    ],
+    "heldExactQuestions": [
+      "job_docs",
+      "job_scan",
+      "job_name",
+      "job_edit",
+      "job_submit"
+    ]
+  }
 }
