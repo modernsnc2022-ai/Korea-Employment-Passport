@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -334,8 +334,9 @@
       "betaState": "not_applicable",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Direct official 2026 Myanmar Manufacturing-labelled recruitment, schedule or result artifact",
+        "subject": "Direct official 2026 Myanmar Manufacturing-labelled recruitment, schedule or result artifact, including new Department of Labour notices",
         "officialSources": [
+          "https://www.mol.gov.mm/mol-department-of-labour/",
           "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
           "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
           "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
