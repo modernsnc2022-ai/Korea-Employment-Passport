@@ -723,7 +723,7 @@ test('generic attribution stays on landing while preserving the beta link', asyn
 });
 
 test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
-  for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral','pui_kmi_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center','seosan_foreign_worker_center','busan_global_indonesian_desk','busan_foreign_resident_center']) {
+  for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral','pui_kmi_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center','seosan_foreign_worker_center','busan_global_indonesian_desk','busan_foreign_resident_center','gimpo_foreign_resident_center']) {
     await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/beta.html?src='+source+'#worker-panel');
     await expect(page.locator('#worker-panel')).toBeVisible();
