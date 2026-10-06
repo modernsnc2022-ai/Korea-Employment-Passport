@@ -21,7 +21,21 @@ def require(condition,message):
     if not condition: failures.append(message)
 
 registry=load("docs/data/country_packs_v1.json")
+shared_korea_core=load("docs/data/korea_side_e9_core_2026.json")
 require(registry.get("commonStageIds")==EXPECTED,"registry commonStageIds must preserve the locked 27-stage core")
+require(registry.get("sharedKoreaCoreFile")=="data/korea_side_e9_core_2026.json","registry must link the shared Korea-side E-9 core")
+shared_rows={row.get("id"):row for row in shared_korea_core.get("stages",[])}
+shared_expected={"employer_selection","slc","predeparture_training","visa_docs","departure","korea_entry_training","employer_handover"}
+require(set(shared_rows)==shared_expected,"shared Korea-side core must contain exactly the seven locked post-selection stages")
+for sid,row in shared_rows.items():
+    require(str(row.get("sourceUrl","")).startswith("https://"),f"shared Korea-side core {sid} must preserve an HTTPS official source")
+    require(str(row.get("status","")).startswith("shared_korea_official"),f"shared Korea-side core {sid} must remain official shared evidence")
+require("standard labor contract" in shared_rows["slc"].get("fact","").lower(),"shared SLC fact must preserve the standard-labor-contract flow")
+require("Confirmation of Visa Issuance" in shared_rows["visa_docs"].get("fact",""),"shared visa flow must preserve Confirmation of Visa Issuance")
+require("at least 7 days" in shared_rows["departure"].get("fact",""),"shared departure flow must preserve the seven-day entry-availability notice")
+require("16 hours" in shared_rows["korea_entry_training"].get("fact",""),"shared Korea entry training must preserve the official 16-hour duration")
+require(shared_korea_core.get("safety",{}).get("noCountrySpecificEmbassyChecklistInference") is True,"shared Korea core must not infer country-specific embassy checklists")
+require(shared_korea_core.get("safety",{}).get("noIndividualDepartureDateInference") is True,"shared Korea core must not infer individual departure dates")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
 require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026","tj-e9-manufacturing-2026","kg-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste, Pakistan, Tajikistan and Kyrgyzstan")
 
