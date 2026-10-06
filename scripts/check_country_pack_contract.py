@@ -856,6 +856,7 @@ require('href="beta.html"' not in china and 'id="betaForm"' not in china,"China 
 require("RESEARCH / HOLD" in cambodia and "2026-08-06" in cambodia and "2026-08-21" in cambodia,"Cambodia preview must visibly remain HOLD with official August artifacts")
 require("Agriculture/Livestock and Special EPS-TOPIK are separate routes" in cambodia,"Cambodia preview must visibly preserve sector/special firewalls")
 require("Verified Manufacturing schedule" in cambodia and "2026-05-22" in cambodia and "2026-07-15" in cambodia,"Cambodia preview must show verified 12th Manufacturing schedule")
+require("The 12th Manufacturing registration and test schedule is directly verified" in countries and "August skills/final-result artifacts still require exact cycle/sector linkage" in countries,"Cambodia country selector must reflect verified schedule while keeping result linkage gated")
 require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"Cambodia preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in timorleste and "2026-03-09" in timorleste and "2026-07-30" in timorleste,"Timor-Leste preview must visibly remain HOLD with direct-official Dili timeline")
 require("DISCOVERY ONLY" in timorleste and "2026-09-22" in timorleste and "Fishery is a separate sector" in timorleste,"Timor-Leste preview must show Baucau discovery, generic skills linkage gate and Fishery firewall")
