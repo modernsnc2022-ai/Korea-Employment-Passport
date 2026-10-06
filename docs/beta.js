@@ -160,6 +160,19 @@ function communityWorkerInviteText(){
   ].join('\n');
 }
 
+async function shareText(text){
+  if(navigator.share){
+    try{
+      await navigator.share({text});
+      return {ok:true,mode:'share'};
+    }catch(error){
+      if(error?.name==='AbortError')return {ok:false,mode:'cancel'};
+    }
+  }
+  const ok=await copyText(text);
+  return {ok,mode:'copy'};
+}
+
 async function copyText(text){
   if(navigator.clipboard?.writeText){
     try{await navigator.clipboard.writeText(text);return true}catch{}
@@ -233,6 +246,34 @@ $('gmailApplicationBtn').addEventListener('click',()=>{
     out.hidden=false;out.className='result warn';
     out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
   }
+});
+
+$('shareCommunityApplicantInviteBtn').addEventListener('click',async()=>{
+  const out=$('communityShareResult');
+  const result=await shareText(communityApplicantInviteText());
+  out.hidden=false;
+  out.className='result'+(result.ok?'':' warn');
+  out.textContent=result.mode==='share'
+    ?'Menu berbagi dibuka untuk undangan pelamar aktif dengan kode kanal '+recruitmentSourceCode()+'.'
+    :result.mode==='copy'&&result.ok
+      ?'Browser tidak mendukung menu berbagi; undangan pelamar aktif sudah disalin.'
+      :result.mode==='cancel'
+        ?'Berbagi dibatalkan.'
+        :'Browser tidak mengizinkan berbagi atau salin otomatis.';
+});
+
+$('shareCommunityWorkerInviteBtn').addEventListener('click',async()=>{
+  const out=$('communityShareResult');
+  const result=await shareText(communityWorkerInviteText());
+  out.hidden=false;
+  out.className='result'+(result.ok?'':' warn');
+  out.textContent=result.mode==='share'
+    ?'Menu berbagi dibuka untuk undangan pekerja E-9 dengan kode kanal '+recruitmentSourceCode()+'.'
+    :result.mode==='copy'&&result.ok
+      ?'Browser tidak mendukung menu berbagi; undangan pekerja E-9 sudah disalin.'
+      :result.mode==='cancel'
+        ?'Berbagi dibatalkan.'
+        :'Browser tidak mengizinkan berbagi atau salin otomatis.';
 });
 
 $('copyCommunityApplicantInviteBtn').addEventListener('click',async()=>{
