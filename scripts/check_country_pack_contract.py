@@ -40,6 +40,14 @@ require(shared_korea_core.get("safety",{}).get("noCountrySpecificEmbassyChecklis
 require(shared_korea_core.get("safety",{}).get("noIndividualDepartureDateInference") is True,"shared Korea core must not infer individual departure dates")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
 require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026","tj-e9-manufacturing-2026","kg-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste, Pakistan, Tajikistan and Kyrgyzstan")
+require("examNot=57" in routes["th-e9-manufacturing-2026"].get("note","") and "examNot=64" in routes["th-e9-manufacturing-2026"].get("note",""),"Thailand registry note must reflect verified Manufacturing skills linkage")
+require("examNot=9" in routes["uz-e9-manufacturing-2026"].get("note","") and "final Point System result" in routes["uz-e9-manufacturing-2026"].get("note",""),"Uzbekistan registry note must reflect verified skills/final linkage")
+require("examNot=33" in routes["mn-e9-manufacturing-2026"].get("note","") and "2026-08-28" in routes["mn-e9-manufacturing-2026"].get("note",""),"Mongolia registry note must reflect verified final-result linkage")
+require("examNot=19" in routes["cn-e9-manufacturing-2026"].get("note","") and "examNot=85" in routes["cn-e9-manufacturing-2026"].get("note",""),"China registry note must preserve linked and excluded skills rows")
+require("examNot=46" in routes["kh-e9-manufacturing-2026"].get("note","") and "not normalized" in routes["kh-e9-manufacturing-2026"].get("note",""),"Cambodia registry note must reflect examNot linkage and ordinal firewall")
+require("examNot=42" in routes["tl-e9-manufacturing-2026"].get("note","") and "examNot=43" in routes["tl-e9-manufacturing-2026"].get("note","") and "44/45" in routes["tl-e9-manufacturing-2026"].get("note",""),"Timor-Leste registry note must preserve Manufacturing site linkage and Fishery exclusion")
+require("without intermediaries" in routes["tj-e9-manufacturing-2026"].get("note",""),"Tajikistan registry note must preserve official zero-broker framework")
+require("5-day pre-departure training" in routes["kg-e9-manufacturing-2026"].get("note",""),"Kyrgyzstan registry note must reflect verified post-contract country process")
 
 for route_id,entry in routes.items():
     pack=load("docs/"+entry["routeFile"])
