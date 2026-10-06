@@ -7,7 +7,7 @@ Snapshot: 2026-10-06
 - Channel: email
 - Public organization mailbox: `seosan@korcham.net`
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=seosan_foreign_worker_center`
-- Status: ready_not_sent
+- Status: sent_2026-10-06
 
 ## Fit evidence
 - Seosan City states that the Seosan Foreign Worker Support Center serves foreign workers and has counselors for Chinese, Indonesian, Nepali and Mongolian workers.
@@ -20,12 +20,13 @@ Ask the operating organization to forward or share the KEP E-9 worker-validator 
 
 Do not ask the organization to disclose names, phone numbers, residence addresses, ARC/passport/KTP numbers, identity-document images, or any worker list.
 
-## Pre-send gate
-1. Same HEAD must pass static-check, ui-smoke, Pages deployment and beta-launch-gate.
-2. Actual Pages must contain the source code and worker-panel route.
-3. Run `python scripts/check_outreach_send_guard.py --source seosan_foreign_worker_center --mode initial`.
-4. Search Gmail SENT for the public organization mailbox to block duplicate initial outreach.
-5. Send once only, then update the ledger to `sent_2026-10-06`.
+## Send evidence
+1. Same HEAD passed static-check, ui-smoke, Pages deployment and beta-launch-gate.
+2. Actual Pages contained the source code and worker-panel route before send.
+3. The pre-send guard returned `initial_send_allowed`.
+4. Gmail SENT contained no earlier message to the organization mailbox before send.
+5. The initial email was sent once on 2026-10-06.
+6. Immediate bounce check found none. Do not send another initial outreach.
 
 ## Boundaries
 - Worker interest intake is OPEN; worker-panel access remains HOLD/manual.
