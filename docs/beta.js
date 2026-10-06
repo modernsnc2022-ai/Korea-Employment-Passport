@@ -86,6 +86,17 @@ function workerPanelOpen(){
     && Boolean(String(release.retrospectiveApprovedAt||'').trim());
 }
 
+function gmailComposeUrl(to,subject,body){
+  const params=new URLSearchParams({
+    view:'cm',
+    fs:'1',
+    to:String(to||''),
+    su:String(subject||''),
+    body:String(body||'')
+  });
+  return 'https://mail.google.com/mail/?'+params.toString();
+}
+
 function applicationText(){
   const stage=$('applicantStage').value;
   const stageTitle=selectedApplicantStageTitle();
@@ -164,6 +175,23 @@ $('betaApplicationForm').addEventListener('submit',(event)=>{
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
 
+$('gmailApplicationBtn').addEventListener('click',()=>{
+  const out=$('applicationResult');
+  if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
+    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
+  }
+  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
+  }
+  const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
+  const url=gmailComposeUrl(email,'[KEP Beta Interest] Active EPS applicant',applicationText());
+  const opened=window.open(url,'_blank','noopener,noreferrer');
+  if(!opened){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
+  }
+});
+
 $('workerValidatorForm').addEventListener('submit',(event)=>{
   event.preventDefault();
   const out=$('workerValidatorResult');
@@ -177,6 +205,23 @@ $('workerValidatorForm').addEventListener('submit',(event)=>{
   const subject=encodeURIComponent('[KEP E-9 Worker Validator] Retrospective panel');
   const body=encodeURIComponent(workerValidatorText());
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('gmailWorkerValidatorBtn').addEventListener('click',()=>{
+  const out=$('workerValidatorResult');
+  if(!workerPanelOpen()){
+    out.hidden=false;out.className='result warn';out.textContent='Panel validator E-9 belum dibuka.';return;
+  }
+  if(!$('workerInKorea').checked||!$('workerUsedG2G').checked||!$('workerFeedbackAgreement').checked){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi ketiga konfirmasi terlebih dahulu.';return;
+  }
+  const email=betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com';
+  const url=gmailComposeUrl(email,'[KEP E-9 Worker Validator] Retrospective panel',workerValidatorText());
+  const opened=window.open(url,'_blank','noopener,noreferrer');
+  if(!opened){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
+  }
 });
 
 $('copyWorkerValidatorBtn').addEventListener('click',async()=>{
