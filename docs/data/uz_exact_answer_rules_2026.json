@@ -1,8 +1,8 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "uz-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Use current 9th Uzbekistan Manufacturing evidence. Skills/final-result linkage is exact only when the official HRD examNot key matches the direct schedule.",
+  "principle": "Use current 9th Uzbekistan Manufacturing evidence for cycle-specific facts. Country-level 2026 post-selection evidence may answer process questions only when clearly labelled as not 9th-cycle-specific.",
   "answers": [
     {
       "id": "uz_2026_sending_authority",
@@ -138,7 +138,33 @@
       "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_country_manufacturing_contract_process",
+      "stages": [
+        "slc",
+        "post_slc_requirements"
+      ],
+      "question": "Is there official 2026 evidence that Uzbekistan Manufacturing candidates received Korean employment contracts?",
+      "answer": "Yes. On 2026-08-14 the Migration Agency reported 213 Manufacturing employment contracts after the 2026-08-05 through 2026-08-11 SPAS employer-selection stage, with travel-document processing underway.",
+      "writeExactly": "2026 Uzbekistan country-level Manufacturing process: 213 employment contracts reported after the Aug 5–11 SPAS selection; do not claim all 213 belong specifically to the 9th examNot=9 cohort.",
+      "verificationStatus": "verified_official_2026_country_process_not_9th_specific",
+      "sourceUrl": "https://gov.uz/en/migration/news/view/206397",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "uz_2026_predeparture_training_process",
+      "stages": [
+        "predeparture_training"
+      ],
+      "question": "Does Uzbekistan provide official pre-departure training after employer selection for Korea E-9 workers?",
+      "answer": "Yes. Migration Agency guidance says candidates who pass foreign-employer selection receive pre-departure training; the 2026 guidance explicitly references Korea E-9 adaptation.",
+      "writeExactly": "Official pre-departure training is part of the Uzbekistan process after foreign-employer selection. Do not invent the 9th-cycle training date, center, fee or individual assignment.",
+      "verificationStatus": "verified_official_2026_country_process",
+      "sourceUrl": "https://gov.uz/en/migration/news/view/119684",
+      "verifiedAt": "2026-10-06"
     }
   ],
-  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json",
+  "postSelectionProcessEvidenceFile": "data/uz_postselection_process_2026.json"
 }
