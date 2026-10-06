@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-13th-point-system-kyrgyzstan-manufacturing-cross-source-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -26,7 +26,8 @@
     "The official Kyrgyz center announced the 13th-cycle Skills Test for 2026-05-30 through 2026-05-31 in Bishkek, then reported that the second stage had been completed for Manufacturing candidates.",
     "A 2026-06-08 official Manufacturing post-selection notice requires successful candidates to prepare police clearance, a USD Demir Bank account, medical clearance, photos and passport/ID copies, with current-cycle medical and document-submission windows.",
     "Official registration guidance states test success does not guarantee a contract; successful candidates enter a unified roster for two years and Korean employers select independently.",
-    "A later 2026 additional/general test and a separate Special EPS-TOPIK route are isolated and must not overwrite the February 13th Manufacturing route."
+    "A later 2026 additional/general test and a separate Special EPS-TOPIK route are isolated and must not overwrite the February 13th Manufacturing route.",
+    "Official Kyrgyz center reports on 2026-08-11 and 2026-09-29 verify a country-level post-contract process: applicants who had received a contract completed 5-day pre-departure training and were sent to Korea under EPS. This does not identify an individual 13th-cycle departure assignment."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -173,18 +174,18 @@
       "title": "Standard Labour Contract (SLC)",
       "authority": "HRD Korea / Center for Employment of Citizens Abroad",
       "kind": "official_contract",
-      "action": "If selected, follow current official Kyrgyzstan/EPS instructions for SLC review/signing.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending_current_notice"
+      "action": "Official Kyrgyz EPS departure reports identify participants as applicants who had received a contract before entering 5-day pre-departure training. This verifies the post-contract process position, but exact SLC issuance/signing instructions remain current-notice specific.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "supportState": "verified_country_process_contract_received_exact_slc_pending"
     },
     {
       "id": "post_slc_requirements",
       "title": "Post-SLC Kyrgyzstan requirements",
       "authority": "Center for Employment of Citizens Abroad",
       "kind": "conditional_official",
-      "action": "Follow current official instructions for medical follow-up, training, visa, payments and departure.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "Verified 2026 Kyrgyz EPS reports show the sequence contract received → official 5-day pre-departure training → organized departure to Korea. Exact visa documents, visa fees, any final medical recheck and individual departure assignment remain current-notice specific.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "supportState": "verified_country_process_partial_exact_requirements_pending"
     },
     {
       "id": "visa_docs",
@@ -200,9 +201,9 @@
       "title": "Pre-departure training",
       "authority": "Center for Employment of Citizens Abroad",
       "kind": "official_training",
-      "action": "Complete only official pre-departure training assigned to selected Korea-bound workers.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "Official Kyrgyz EPS reports on 2026-08-11 and 2026-09-29 state that applicants who had received a contract completed a 5-day pre-departure course covering Korean-language practice, cultural adaptation, social norms, work ethics and workplace communication.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "supportState": "verified_country_process_2026_five_day"
     },
     {
       "id": "mcu3_departure",
@@ -218,9 +219,9 @@
       "title": "Official departure",
       "authority": "Center for Employment of Citizens Abroad / HRD Korea",
       "kind": "official_action",
-      "action": "Travel only after contract, visa, training and official departure requirements are complete.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "The Center officially organized EPS departure groups to Korea in 2026 after contract receipt and 5-day pre-departure training. Treat these reports as process evidence only; each applicant must wait for their own official departure assignment.",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "supportState": "verified_country_process_2026_individual_assignment_pending"
     },
     {
       "id": "korea_entry_training",
@@ -292,5 +293,6 @@
   "laterGeneralRoundEvidenceFile": "data/kg_later_general_round_2026.json",
   "specialRouteEvidenceFile": "data/kg_special_eps_topik_2026.json",
   "stageReadinessFile": "data/kg_stage_readiness_2026.json",
-  "additionalRoundEvidenceFile": "data/kg_additional_general_round_2026.json"
+  "additionalRoundEvidenceFile": "data/kg_additional_general_round_2026.json",
+  "postContractProcessEvidenceFile": "data/kg_post_contract_process_2026.json"
 }
