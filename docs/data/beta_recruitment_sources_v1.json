@@ -1,5 +1,5 @@
 {
-  "version": "3.5.0",
+  "version": "3.6.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -93,6 +93,7 @@
     "lpk_coa_bina_cerdas",
     "bp3mi_yogya_applicant",
     "lpk_yolsimhi",
-    "lpk_hanifa"
+    "lpk_hanifa",
+    "lpk_jochiwon"
   ]
 }
