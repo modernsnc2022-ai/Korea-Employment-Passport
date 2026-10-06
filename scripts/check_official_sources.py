@@ -203,6 +203,15 @@ def normalize_source_text(text, final_url):
             normalized,
             flags=re.I,
         )
+        normalized = re.sub(
+            r"Nay\s+Pyi\s+Taw,MM\s+\d{1,2}:\d{2}\s+(?:AM|PM),\s+"
+            r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
+            r"\d{1,2}(?:st|nd|rd|th)?\s+"
+            r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}",
+            "Nay Pyi Taw,MM <dynamic-local-time>",
+            normalized,
+            flags=re.I,
+        )
     if host == "colab.moha.gov.vn":
         # COLAB's EPS notice index renders live visitor statistics in Vietnamese.
         # Normalize only the labelled statistics block so notice text remains hashed.
