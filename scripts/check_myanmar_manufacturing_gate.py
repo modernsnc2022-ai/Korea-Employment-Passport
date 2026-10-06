@@ -92,8 +92,8 @@ require(supplemental_review.get("sourceId") == "mm_mol_dol_index",
         "Myanmar supplemental discovery review must identify the Department of Labour index")
 require(supplemental_review.get("qualifiesForPromotion") is False,
         "Myanmar Department of Labour index must remain a discovery trigger, not promotion proof")
-require(supplemental_review.get("baselineState") == "pending_source_monitor_acceptance",
-        "Myanmar supplemental source must remain pending baseline acceptance until the monitor accepts it")
+require(supplemental_review.get("baselineState") == "reviewed_safe_to_accept",
+        "Myanmar supplemental source must record explicit review before baseline acceptance")
 decision = review.get("baselineReviewDecision", {})
 require(decision.get("currentSourceVersionsReviewed") is True, "Myanmar source baseline decision must record explicit source review")
 require(decision.get("baselineAcceptanceAllowed") is True, "Reviewed Myanmar source versions must explicitly allow fingerprint baseline acceptance")
