@@ -1,10 +1,10 @@
 {
   "version": "1.1.0",
   "reviewId": "2026-10-06-country-next-review-baseline-r1",
-  "active": true,
+  "active": false,
   "reviewedAt": "2026-10-06",
   "normalizationRevision": "kp2mi-current-page-date-v1",
-  "reason": "Reviewed the retained stable official next-review endpoints after the first 91-source monitor run. Five unreachable endpoints and two low-value shell/bot endpoints were removed from readiness triggers. The eight new retained sources are official pages used only as change-detection baselines; accepting their fingerprints does not promote any route fact. The changed Myanmar EPS opportunity page and the new Myanmar Department-of-Labour discovery index were re-reviewed and still contain no direct current 2026 Manufacturing-labelled qualifying artifact.",
+  "reason": "Superseded pending diagnostic review: Vietnam switched from the general COLAB homepage to the EPS-only notice index, while Myanmar official pages showed repeated fingerprint drift. A new exact reviewed manifest will be issued after text-level volatility diagnosis.",
   "expectedChangedSourceIds": [
     "hrdk_sending_agency_index",
     "kg_migrant_home",
