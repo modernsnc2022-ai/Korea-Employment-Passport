@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Require every Country Pack next-review official source to be monitored."""
+"""Require current-operational next-review sources to be monitored while keeping future designations separate."""
 
 import json
 import sys
@@ -36,22 +36,29 @@ require(len(urls) == len(set(urls)), "monitor/sources.json URLs must be unique")
 require(review_status.get("configured") == len(sources), "source_review_status configured count must match monitor/sources.json")
 
 expected_countries = {
-    "ID","NP","VN","PH","TH","BD","LK","LA","UZ","MN","CN","KH","TL","PK","KG","MM","TJ"
+    "ID","NP","VN","PH","TH","BD","LK","LA","UZ","MN","CN","KH","TL","PK","KG","MM","TJ","KZ"
 }
 actual_countries = {row.get("country") for row in rows}
-require(actual_countries == expected_countries, "readiness dashboard must cover all 17 EPS sending countries")
+require(actual_countries == expected_countries, "readiness dashboard must cover all 18 officially designated EPS sending countries")
 
 review_urls = set()
 for row in rows:
     country = row.get("country")
     next_review = row.get("nextReview") or {}
+    review_type = next_review.get("type")
     official_sources = next_review.get("officialSources") or []
     require(bool(official_sources), f"{country} nextReview must include at least one official source")
+    future_designation = review_type == "future_operational_setup"
+    if future_designation:
+        require(country == "KZ", "future_operational_setup is reserved for Kazakhstan in the 2026 snapshot")
+        require(row.get("packState") == "future_designated", "Kazakhstan future review type requires future_designated packState")
+        require(row.get("plannedIntroductionYear") == 2028, "Kazakhstan future review must preserve planned 2028 introduction")
     for url in official_sources:
         parsed = urlparse(url)
         require(parsed.scheme == "https" and bool(parsed.hostname), f"{country} nextReview source must be official HTTPS: {url}")
-        require(url in source_urls, f"{country} nextReview source is not monitored: {url}")
-        review_urls.add(url)
+        if not future_designation:
+            require(url in source_urls, f"{country} nextReview source is not monitored: {url}")
+            review_urls.add(url)
 
 missing_hash_ids = source_ids - set(source_hashes)
 pending_ids = set(review_status.get("pendingBaselineSourceIds", []))

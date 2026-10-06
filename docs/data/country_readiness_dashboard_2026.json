@@ -1,5 +1,5 @@
 {
-  "version": "1.8.7",
+  "version": "1.9.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -11,13 +11,14 @@
     "Pending Manufacturing countries have no promoted routeId."
   ],
   "summary": {
-    "sendingCountries": 17,
+    "sendingCountries": 18,
     "registeredCountryPacks": 16,
     "betaHold": 1,
     "researchHold": 15,
     "pendingManufacturingVerification": 1,
     "datedReviewTriggers": 3,
-    "betaReady": 0
+    "betaReady": 0,
+    "futureDesignatedNo2026Route": 1
   },
   "rows": [
     {
@@ -472,6 +473,29 @@
           "publicationDate": "2026-05-08"
         }
       }
+    },
+    {
+      "country": "KZ",
+      "countryName": "Kazakhstan",
+      "routeId": null,
+      "packState": "future_designated",
+      "betaState": "not_applicable",
+      "designationDate": "2026-08-14",
+      "designatedOrder": 18,
+      "plannedIntroductionYear": 2028,
+      "nextReview": {
+        "type": "future_operational_setup",
+        "subject": "Korea-Kazakhstan EPS MOU, local EPS center setup and operational recruitment details before planned 2028 introduction",
+        "officialSources": [
+          "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19786",
+          "https://www.opm.go.kr/opm/news/press-release.do?article.offset=20&articleLimit=10&articleNo=163081&mode=view"
+        ]
+      },
+      "blockers": [
+        "Kazakhstan was designated as the 18th EPS sending country on 2026-08-14, but substantial worker introduction is planned from 2028 rather than 2026",
+        "intergovernmental EPS MOU and local EPS center setup are follow-up work before operational recruitment",
+        "no 2026 Kazakhstan Manufacturing Country Pack may be created from designation status alone"
+      ]
     }
   ]
 }

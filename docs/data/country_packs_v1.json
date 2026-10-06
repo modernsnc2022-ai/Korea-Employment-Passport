@@ -1,5 +1,5 @@
 {
-  "version": "1.14.0",
+  "version": "1.15.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -303,5 +303,19 @@
       "note": "Kyrgyzstan's official February 2026 Manufacturing notice and HRD Korea 13th Point System Bishkek/Osh schedules are cross-verified. Fee, registration documents, Skills Test and June post-selection medical/roster instructions are verified; 2026 official reports also verify the country-level sequence contract received → 5-day pre-departure training → official departure. Exact SLC handling, visa checklist/fees and individual departure assignment remain gated."
     }
   ],
-  "sharedKoreaCoreFile": "data/korea_side_e9_core_2026.json"
+  "sharedKoreaCoreFile": "data/korea_side_e9_core_2026.json",
+  "futureSendingCountryDesignations": [
+    {
+      "country": "KZ",
+      "countryName": "Kazakhstan",
+      "nativeCountryName": "Қазақстан",
+      "designationDate": "2026-08-14",
+      "designatedOrder": 18,
+      "plannedIntroductionYear": 2028,
+      "status": "future_designated_no_current_route",
+      "routeId": null,
+      "officialSource": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19786",
+      "note": "Officially designated as the 18th EPS sending country. Do not create a 2026 route; substantive worker introduction is planned from 2028 after MOU/EPS-center follow-up."
+    }
+  ]
 }

@@ -45,6 +45,13 @@ require(shared_korea_core.get("safety",{}).get("noLegalOutcomeGuarantee") is Tru
 require(shared_korea_core.get("safety",{}).get("noCountrySpecificEmbassyChecklistInference") is True,"shared Korea core must not infer country-specific embassy checklists")
 require(shared_korea_core.get("safety",{}).get("noIndividualDepartureDateInference") is True,"shared Korea core must not infer individual departure dates")
 routes={row.get("routeId"):row for row in registry.get("routes",[])}
+future_designations={row.get("country"):row for row in registry.get("futureSendingCountryDesignations",[])}
+require(set(future_designations)=={"KZ"},"registry future EPS designation set must contain only Kazakhstan in the 2026 snapshot")
+require(future_designations["KZ"].get("status")=="future_designated_no_current_route","Kazakhstan registry status must remain future-designated without a current route")
+require(future_designations["KZ"].get("routeId") is None,"Kazakhstan future designation must not expose a 2026 routeId")
+require(future_designations["KZ"].get("designationDate")=="2026-08-14" and future_designations["KZ"].get("designatedOrder")==18,"Kazakhstan designation date/order must remain official")
+require(future_designations["KZ"].get("plannedIntroductionYear")==2028,"Kazakhstan substantive EPS introduction must remain planned from 2028")
+require("moel.go.kr" in future_designations["KZ"].get("officialSource",""),"Kazakhstan registry designation must preserve official MOEL source")
 require({"id-e9-manufacturing-2026","np-e9-manufacturing-2026","vn-e9-manufacturing-2026","ph-e9-manufacturing-2026","th-e9-manufacturing-2026","bd-e9-manufacturing-2026","lk-e9-manufacturing-2026","la-e9-manufacturing-2026","uz-e9-manufacturing-2026","mn-e9-manufacturing-2026","cn-e9-manufacturing-2026","kh-e9-manufacturing-2026","tl-e9-manufacturing-2026","pk-e9-manufacturing-2026","tj-e9-manufacturing-2026","kg-e9-manufacturing-2026"}.issubset(routes),"registry must include Indonesia, Nepal, Vietnam, Philippines, Thailand, Bangladesh, Sri Lanka, Laos, Uzbekistan, Mongolia, China, Cambodia, Timor-Leste, Pakistan, Tajikistan and Kyrgyzstan")
 require("examNot=57" in routes["th-e9-manufacturing-2026"].get("note","") and "examNot=64" in routes["th-e9-manufacturing-2026"].get("note",""),"Thailand registry note must reflect verified Manufacturing skills linkage")
 require("examNot=9" in routes["uz-e9-manufacturing-2026"].get("note","") and "final Point System result" in routes["uz-e9-manufacturing-2026"].get("note",""),"Uzbekistan registry note must reflect verified skills/final linkage")
@@ -763,17 +770,21 @@ require(len(mm_verify.get("promotionRule",{}).get("prohibitedInference",[]))>=3,
 
 coverage=load("docs/data/country_coverage_matrix_2026.json")
 coverage_rows={row.get("country"):row for row in coverage.get("countries",[])}
-expected_sending={"PH","TH","ID","VN","LK","MN","UZ","PK","KH","CN","BD","KG","NP","MM","TL","LA","TJ"}
-require(set(coverage_rows)==expected_sending,"coverage matrix must account for exactly all 17 HRD Korea EPS sending countries")
-require(coverage.get("summary",{}).get("listedSendingCountries")==17,"coverage matrix listedSendingCountries must remain 17")
+expected_sending={"PH","TH","ID","VN","LK","MN","UZ","PK","KH","CN","BD","KG","NP","MM","TL","LA","TJ","KZ"}
+require(set(coverage_rows)==expected_sending,"coverage matrix must account for all 18 officially designated EPS sending countries as of 2026-10-06")
+require(coverage.get("summary",{}).get("listedSendingCountries")==18,"coverage matrix listedSendingCountries must report 18")
 require(coverage.get("summary",{}).get("registeredManufacturingCountryPacks")==16,"coverage matrix must report 16 registered Manufacturing Country Packs")
 require(coverage.get("summary",{}).get("pendingManufacturingVerification")==1,"coverage matrix must report 1 pending Manufacturing country")
+require(coverage.get("summary",{}).get("futureDesignatedNo2026Route")==1,"coverage matrix must report 1 future-designated country without a 2026 route")
 registered={code for code,row in coverage_rows.items() if row.get("status")=="country_pack_registered"}
 pending={code for code,row in coverage_rows.items() if row.get("status")=="pending_manufacturing_verification"}
+future_designated={code for code,row in coverage_rows.items() if row.get("status")=="designated_future_sending_country"}
 require(pending=={"MM"},"only Myanmar may remain pending Manufacturing verification")
+require(future_designated=={"KZ"},"only Kazakhstan may be future-designated without a 2026 route in this snapshot")
 require(len(registered)==16,"coverage matrix must contain exactly 16 registered Manufacturing Country Packs")
 registry_countries={entry.get("country") for entry in routes.values()}
 require(registered==registry_countries,"coverage registered-country set must exactly match country_packs_v1 registry")
+require("KZ" not in registry_countries,"Kazakhstan must not be inserted into 2026 Manufacturing route registry")
 for code in registered:
     row=coverage_rows[code]
     require(row.get("routeId") in routes,f"{code}: coverage routeId must exist in country registry")
@@ -783,6 +794,12 @@ for code in pending:
     require(code not in registry_countries,f"{code}: pending country must not have a promoted Manufacturing Country Pack")
     require(len(row.get("blockers",[]))>=1,f"{code}: pending coverage row must state blockers")
     require(bool(row.get("officialSendingAgency")),f"{code}: pending coverage row must retain official sending agency")
+for code in future_designated:
+    row=coverage_rows[code]
+    require(row.get("routeId") is None,f"{code}: future-designated country must not expose a 2026 routeId")
+    require(row.get("designationDate")=="2026-08-14" and row.get("designatedOrder")==18,f"{code}: future designation date/order must remain exact")
+    require(row.get("plannedIntroductionYear")==2028,f"{code}: planned introduction year must remain 2028")
+    require("moel.go.kr" in row.get("officialSource",""),f"{code}: future designation must preserve official MOEL evidence")
 require(coverage_rows["KG"].get("routeId")=="kg-e9-manufacturing-2026","Kyrgyzstan coverage row must point to promoted Manufacturing Country Pack")
 require(coverage_rows["KG"].get("promotionEvidence",{}).get("rule","").find("2026-02-23 through 2026-02-27")>=0,"Kyrgyzstan coverage must preserve cross-source Manufacturing promotion evidence")
 require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
@@ -796,12 +813,13 @@ require(coverage_rows["TJ"].get("promotionEvidence",{}).get("rule","").find("sam
 
 dashboard=load("docs/data/country_readiness_dashboard_2026.json")
 dashboard_rows={row.get("country"):row for row in dashboard.get("rows",[])}
-require(set(dashboard_rows)==set(coverage_rows),"readiness dashboard must account for the same 17 sending countries as coverage matrix")
-require(dashboard.get("summary",{}).get("sendingCountries")==17,"readiness dashboard must report 17 sending countries")
+require(set(dashboard_rows)==set(coverage_rows),"readiness dashboard must account for the same 18 sending countries as coverage matrix")
+require(dashboard.get("summary",{}).get("sendingCountries")==18,"readiness dashboard must report 18 sending countries")
 require(dashboard.get("summary",{}).get("registeredCountryPacks")==16,"readiness dashboard must report 16 registered Country Packs")
 require(dashboard.get("summary",{}).get("betaHold")==1,"readiness dashboard must report exactly one beta HOLD route")
 require(dashboard.get("summary",{}).get("researchHold")==15,"readiness dashboard must report 15 research HOLD routes")
 require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==1,"readiness dashboard must report 1 pending Manufacturing country")
+require(dashboard.get("summary",{}).get("futureDesignatedNo2026Route")==1,"readiness dashboard must report 1 future-designated country without a 2026 route")
 require(dashboard.get("summary",{}).get("datedReviewTriggers")==3,"readiness dashboard must report exactly three dated review triggers")
 require(dashboard.get("summary",{}).get("betaReady")==0,"readiness dashboard must not claim any beta-ready route")
 require(dashboard_rows["ID"].get("packState")=="beta_hold","Indonesia readiness state must remain beta_hold")
@@ -816,6 +834,11 @@ for code in registered-{"ID"}:
 for code in pending:
     require(dashboard_rows[code].get("packState")=="pending_manufacturing_verification",f"{code}: readiness state must remain pending Manufacturing verification")
     require(dashboard_rows[code].get("routeId") is None,f"{code}: pending readiness row must not expose a promoted routeId")
+for code in future_designated:
+    require(dashboard_rows[code].get("packState")=="future_designated",f"{code}: readiness state must remain future_designated")
+    require(dashboard_rows[code].get("betaState")=="not_applicable",f"{code}: future-designated route must not claim beta applicability")
+    require(dashboard_rows[code].get("routeId") is None,f"{code}: future-designated readiness row must not expose a 2026 routeId")
+    require(dashboard_rows[code].get("plannedIntroductionYear")==2028,f"{code}: readiness planned introduction year must remain 2028")
 require(dashboard_rows["LK"].get("nextReview",{}).get("date")=="2026-10-12","Sri Lanka readiness review date must remain 2026-10-12")
 require(dashboard_rows["TH"].get("nextReview",{}).get("date")=="2026-10-19","Thailand readiness review date must remain 2026-10-19")
 require(dashboard_rows["MM"].get("verificationDossierFile")=="data/mm_manufacturing_verification_2026.json","Myanmar readiness row must link the verification dossier")
@@ -834,6 +857,8 @@ for code,row in dashboard_rows.items():
         require(row.get("routeId") in routes,f"{code}: readiness routeId must exist in country registry")
 
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
+require("Kazakhstan · Қазақстан" in countries and "FUTURE DESIGNATED · No 2026 route" in countries,"country selector must expose Kazakhstan as future-designated without a 2026 route")
+require("18th EPS sending country" in countries and "planned from 2028" in countries,"country selector must preserve Kazakhstan designation order and 2028 introduction boundary")
 readiness_page=(ROOT/"docs/readiness.html").read_text(encoding="utf-8")
 readiness_js=(ROOT/"docs/readiness.js").read_text(encoding="utf-8")
 myanmar=(ROOT/"docs/mm.html").read_text(encoding="utf-8")
@@ -860,6 +885,8 @@ require('href="readiness.html"' in countries,"countries page must link readiness
 require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
 require("A validation gap is not automatically a beta blocker" in readiness_page,"readiness page must explain that validation gaps are not automatic beta blockers")
 require("country_readiness_dashboard_2026.json" in readiness_js,"readiness renderer must load the readiness dashboard data")
+require("Future designated · no 2026 route" in readiness_js and "futureDesignatedNo2026Route" in readiness_js,"readiness renderer must expose the future-designated country count")
+require("future_designated" in readiness_js,"readiness renderer must preserve a distinct future-designated badge state")
 require("Beta release gates" in readiness_js and "Validation gaps — not automatic beta blockers" in readiness_js,"readiness renderer must render release gates separately from validation gaps")
 require("No promoted Manufacturing routeId" in readiness_js,"readiness renderer must visibly distinguish pending countries")
 require('href="kg.html"' in countries and 'href="mm.html"' in countries,"Kyrgyzstan must stay promoted while Myanmar exposes only a pending verification preview")
