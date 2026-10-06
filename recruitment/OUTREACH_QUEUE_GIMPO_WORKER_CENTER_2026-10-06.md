@@ -15,6 +15,7 @@ Snapshot: 2026-10-06
 - The ask is only voluntary link sharing to relevant Indonesian E-9 workers; KEP must not request private worker lists or contact details.
 
 ## Pre-send gate
+- Duplicate-mailbox check on 2026-10-06: no prior Gmail message to `gimpofc@naver.com` was found before staging.
 1. Controlled source code present in the catalog.
 2. Source routes to `beta.html?...#worker-panel`.
 3. static-check, ui-smoke, Pages and beta-launch-gate pass on the same main HEAD.
