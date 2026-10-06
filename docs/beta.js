@@ -127,6 +127,39 @@ function applicationText(){
   ].join('\n');
 }
 
+function sourceAttributedBetaUrl(worker=false){
+  const url=new URL('beta.html',location.href);
+  url.searchParams.set('src',recruitmentSourceCode());
+  url.hash=worker?'worker-panel':'';
+  return url.toString();
+}
+
+function communityApplicantInviteText(){
+  return [
+    'Korea Employment Passport (KEP) membuka pendaftaran minat beta gratis untuk WNI yang benar-benar sedang menjalani proses resmi G-to-G Korea / EPS E-9.',
+    '',
+    'Target validasi awal sekitar 30 pelamar aktif. Peserta yang disetujui mendapat akses gratis 6 bulan sejak akun beta diaktifkan dan diminta memberi feedback dari proses nyata.',
+    '',
+    'KEP adalah proyek independen, bukan layanan pemerintah atau agen penempatan. Tidak ada jaminan kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.',
+    '',
+    'Daftar minat:',
+    sourceAttributedBetaUrl(false)
+  ].join('\n');
+}
+
+function communityWorkerInviteText(){
+  return [
+    'Korea Employment Passport (KEP) membuka pendaftaran minat untuk panel validasi sekitar 20 pekerja Indonesia yang saat ini bekerja di Korea dengan status E-9 dan sebelumnya melalui Indonesia G-to-G Korea / EPS.',
+    '',
+    'Mengirim minat belum mengaktifkan akses panel. Peserta akan direview terlebih dahulu. Pendaftaran awal tidak meminta foto paspor/KTP/ARC, nomor identitas, nomor telepon, atau alamat rumah/asrama.',
+    '',
+    'KEP adalah proyek independen dan tidak menjanjikan pekerjaan, SLC, visa, atau keberangkatan.',
+    '',
+    'Daftar minat panel pekerja E-9:',
+    sourceAttributedBetaUrl(true)
+  ].join('\n');
+}
+
 async function copyText(text){
   if(navigator.clipboard?.writeText){
     try{await navigator.clipboard.writeText(text);return true}catch{}
@@ -158,6 +191,9 @@ function renderProgram(program){
   const workerIntakeOpen=program.retrospectivePanel?.intakeStatus==='open';
   $('workerPanelClosed').hidden=workerOpen;
   $('workerValidatorForm').hidden=!workerIntakeOpen;
+  const shareSource=recruitmentSourceCode();
+  $('communitySharePanel').hidden=shareSource==='website';
+  $('communityShareSource').textContent=shareSource;
   const pill=$('betaStatusPill');
   pill.textContent=accessOpen
     ?'AKSES BETA OPEN'
@@ -197,6 +233,24 @@ $('gmailApplicationBtn').addEventListener('click',()=>{
     out.hidden=false;out.className='result warn';
     out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
   }
+});
+
+$('copyCommunityApplicantInviteBtn').addEventListener('click',async()=>{
+  const out=$('communityShareResult');
+  const ok=await copyText(communityApplicantInviteText());
+  out.hidden=false;out.className='result'+(ok?'':' warn');
+  out.textContent=ok
+    ?'Undangan pelamar aktif sudah disalin dengan kode kanal '+recruitmentSourceCode()+'.'
+    :'Browser tidak mengizinkan salin otomatis.';
+});
+
+$('copyCommunityWorkerInviteBtn').addEventListener('click',async()=>{
+  const out=$('communityShareResult');
+  const ok=await copyText(communityWorkerInviteText());
+  out.hidden=false;out.className='result'+(ok?'':' warn');
+  out.textContent=ok
+    ?'Undangan pekerja E-9 sudah disalin dengan kode kanal '+recruitmentSourceCode()+'.'
+    :'Browser tidak mengizinkan salin otomatis.';
 });
 
 $('workerValidatorForm').addEventListener('submit',(event)=>{
