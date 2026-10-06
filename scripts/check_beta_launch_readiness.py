@@ -495,6 +495,19 @@ require("30 bukan batas otomatis" in beta_page, "beta enrollment page must state
 require("6 bulan gratis" in beta_page, "beta enrollment page must preserve the six-month benefit copy")
 require("program.application?.intakeStatus==='open'" in beta_js,
         "tester-interest application UI must be gated by intakeStatus, independently of beta access")
+require(
+    'id="gmailApplicationBtn"' in beta_page
+    and 'id="gmailWorkerValidatorBtn"' in beta_page
+    and "function gmailComposeUrl(" in beta_js
+    and "https://mail.google.com/mail/?" in beta_js,
+    "beta intake must preserve a direct Gmail compose fallback in addition to default mailto/copy flows",
+)
+require(
+    "URLSearchParams" in beta_js
+    and "applicationText()" in beta_js
+    and "workerValidatorText()" in beta_js,
+    "Gmail fallback must reuse the same privacy-minimized application bodies instead of collecting new identity fields",
+)
 require("Recruitment source code:" in beta_js and "RECRUITMENT_SOURCES_URL" in beta_js,
         "tester-interest email must carry a controlled non-identifying recruitment source code from shared data")
 require("BETA_INTEREST_PARSE_SELF_TEST_PASS" in beta_interest_parser,
