@@ -453,10 +453,11 @@
     }
   ],
   "workerSupportCenterReferralSummary": {
-    "preparedDrafts": 3,
+    "preparedDrafts": 2,
+    "readyNotSent": 0,
     "sentNow": 3,
     "immediateBounceObserved": 0,
     "confirmedWorkerInterestApplications": 0,
-    "rule": "Hwaseong, Yangsan and Seosan initial outreach were each sent once after deployed routing and pre-send guard checks. Do not send another initial outreach; later contact requires an explicit follow-up-ready ledger state."
+    "rule": "Hwaseong, Yangsan and Seosan initial outreach are sent. Do not send another initial outreach; follow-up requires an explicit follow-up-ready ledger state."
   }
 }
