@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-first-phase-eps-topik-application-announced-2026-07-21",
   "goal": "zero-private-broker",
-  "packVersion": "0.5.0",
+  "packVersion": "0.6.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-05",
@@ -24,7 +24,8 @@
     "Nepal remains KEP research HOLD because country-specific document, medical, visa, training and departure requirements are not yet fully mapped into exact-answer rules.",
     "During the 2026 first-phase application window, EPS Korea Section published a temporary-suspension notice and a later resumption notice on 2026-07-28. KEP does not infer any deadline extension from those titles; supplementary content is tracked separately.",
     "As of 2026-10-05, KEP has not promoted a current-2026 first-phase EPS-TOPIK result, Skill & Competency schedule/result, or Manufacturing medical/job-application notice from the official Nepal notice index; 2025-cohort notices remain prior-cycle evidence only.",
-    "A March 2026 official EPS Nepal process guide was reviewed for stable post-selection flow, including biometric registration, medical/police checks, employment application, roster, automated job matching, Labor Contract, PDOT, CCVI/visa and final departure. This is process-shape evidence; current-cohort dates, providers and volatile fees remain gated by current official notices."
+    "A March 2026 official EPS Nepal process guide was reviewed for stable post-selection flow, including biometric registration, medical/police checks, employment application, roster, automated job matching, Labor Contract, PDOT, CCVI/visa and final departure. This is process-shape evidence; current-cohort dates, providers and volatile fees remain gated by current official notices.",
+    "HRD Korea directly lists the current 5th Nepal Manufacturing(5부) Point System row with registration 2026-07-27 through 2026-08-05, while test announcement/test period remain undecided. Nepal's local primary first-phase notice states 2026-07-27 through 2026-08-02; KEP preserves this cross-source end-date discrepancy without inferring a deadline extension."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -51,12 +52,12 @@
       "title": "Official EPS application / registration",
       "authority": "EPS Korea Section Nepal",
       "kind": "official_action",
-      "action": "The primary 2026 first-phase notice set an application window of 2026-07-27 through 2026-08-02, now closed. Official supplementary notices during the window included a temporary suspension and later resumption of the online system; no deadline extension is claimed unless separately verified.",
+      "action": "The Nepal primary 2026 first-phase notice set 2026-07-27 through 2026-08-02. HRD Korea's current 5th Nepal Manufacturing(5부) schedule row lists 2026-07-27 through 2026-08-05. KEP keeps 2026-08-02 as the applicant-facing exact local-primary deadline until a later Nepal notice is content-reviewed and proven to extend/modify it.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
-      "supportState": "verified_current",
+      "supportState": "verified_local_primary_cross_source_hrd_end_date_unresolved",
       "officialActionUrl": "https://eoers.epsnepal.gov.np/",
       "officialActionLabel": "Open official EPS Nepal application portal",
-      "warning": "Do not pay a private intermediary for a late or unofficial application. Operational supplementary notices are tracked separately, and later notices must not be guessed from their titles."
+      "warning": "Do not treat HRD Korea's 2026-08-05 schedule-row end date as automatic proof that Nepal locally extended the application deadline."
     },
     {
       "id": "exam_fee",
@@ -90,18 +91,18 @@
       "title": "Exam admission document",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "self_service",
-      "action": "For test day, bring the same original passport used in the application and the test application slip; follow the individual official schedule for the assigned session.",
-      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "supportState": "verified_current"
+      "action": "HRD Korea directly lists the current 5th Nepal Manufacturing(5부) Point System row, but the test-announcement date and test period are still undecided. Do not invent an individual exam date/session.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current_hrd_schedule_row_test_dates_undecided"
     },
     {
       "id": "eps_topik",
       "title": "EPS-TOPIK",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "Verified first-stage format: Reading 20 questions / 50 points / 25 minutes + Listening 20 questions / 50 points / 25 minutes. Test venue basis: UBT building, Bhaisepati, Lalitpur; follow the assigned schedule.",
-      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "supportState": "verified_current"
+      "action": "The current HRD Korea 5th Nepal Manufacturing(5부) row is General CBT / Point System. Its test announcement and test period remain undecided. The verified first-stage format remains Reading 20/25m + Listening 20/25m; wait for the official assigned schedule.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "supportState": "verified_current_hrd_schedule_row_test_dates_undecided"
     },
     {
       "id": "skill_competency",
@@ -315,5 +316,6 @@
   },
   "registrationNoticesFile": "data/np_registration_notices_2026.json",
   "stageReadinessFile": "data/np_stage_readiness_2026.json",
-  "processBaselineFile": "data/np_eps_process_baseline_2026.json"
+  "processBaselineFile": "data/np_eps_process_baseline_2026.json",
+  "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json"
 }
