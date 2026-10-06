@@ -13,7 +13,9 @@ New recruitment is centered on people currently in Indonesia who are preparing f
 - Fit: Korean-language training for prospective Korea workers; public site records EPS-TOPIK preparation and past manufacturing/fishery pass cohorts.
 - Source-attributed link: https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_kongbuhapsida
 - Gmail duplicate check on 2026-10-07: 0 prior messages to this mailbox.
-- Status: ready_not_sent
+- Status: sent_2026-10-07
+- Sent at: 2026-10-07 08:30:31 KST
+- Gmail message ID: `1a1138defeb1b5fe`
 
 ### LPK COA Bina Cerdas — Ponorogo
 - Source code: `lpk_coa_bina_cerdas`
@@ -22,7 +24,9 @@ New recruitment is centered on people currently in Indonesia who are preparing f
 - Fit: vocational training organization with Korea-oriented applicant activity; use only an admin-forwarding request, not a job-placement claim.
 - Source-attributed link: https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_coa_bina_cerdas
 - Gmail duplicate check on 2026-10-07: 0 prior messages to this mailbox.
-- Status: ready_not_sent
+- Status: sent_2026-10-07
+- Sent at: 2026-10-07 08:30:43 KST
+- Gmail message ID: `1a1138e21ff57a07`
 
 ### BP3MI D.I. Yogyakarta
 - Source code: `bp3mi_yogya_applicant`
@@ -31,7 +35,9 @@ New recruitment is centered on people currently in Indonesia who are preparing f
 - Fit: official regional BP3MI contact point; ask only for forwarding to current G-to-G Korea/EPS applicants or direction to the appropriate applicant-information channel.
 - Source-attributed link: https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=bp3mi_yogya_applicant
 - Gmail duplicate check on 2026-10-07: 0 prior messages to this mailbox.
-- Status: ready_not_sent
+- Status: sent_2026-10-07
+- Sent at: 2026-10-07 08:32:33 KST
+- Gmail message ID: `1a1138fcb8c95eab`
 
 ## Send boundaries
 
@@ -48,3 +54,10 @@ New recruitment is centered on people currently in Indonesia who are preparing f
 - Source-review state commit: `4bfede3457ba292098a3d34da51110414c774e98`
 - The acceptance was monitoring-baseline only; no route rule, eligibility, fee, schedule, job-application instruction, SLC, visa, or departure guarantee was auto-promoted.
 - Before sending each email, re-check Gmail SENT duplication and current outreach-ledger state for the exact source code.
+
+## Wave 9 send result
+
+- Sent exactly once to all three verified public mailboxes on 2026-10-07 KST.
+- Immediate bounce observed: 0.
+- Confirmed beta-interest applications immediately after send: 0.
+- New initial outreach to these three source codes is now blocked by ledger state; follow-up requires an explicit follow-up-ready state.
