@@ -1,16 +1,16 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 43,
+    "sentMessages": 45,
     "distinctRecipientMailboxes": 39,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T16:30:00+09:00"
+    "lastUpdatedAt": "2026-10-06T17:12:00+09:00"
   },
   "wave2": [
     {
@@ -120,14 +120,19 @@
     {
       "sourceCode": "kbri_seoul_pmi",
       "channel": "email_reply",
-      "status": "followup_ready_not_sent",
+      "status": "followup_sent_2026-10-06",
       "originalSentDate": "2026-10-02"
     },
     {
       "sourceCode": "indonesia_eps_center_hrdk",
       "channel": "email_reply",
-      "status": "followup_ready_not_sent",
+      "status": "followup_sent_2026-10-06",
       "originalSentDate": "2026-10-02"
     }
-  ]
+  ],
+  "officialChannelFollowupSummary": {
+    "sentNow": 2,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 0
+  }
 }
