@@ -397,6 +397,13 @@ for key in ["fee","quota","documents"]:
     require(la_current.get(key,{}).get("status")=="unverified_current_round",f"Laos {key} must remain unverified_current_round")
 require(la_readiness.get("priorRound",{}).get("mustNotPopulateCurrent") is True,"Laos 33rd round must never populate 34th-round rules")
 require(la_readiness.get("betaReadiness",{}).get("status")=="blocked","Laos beta must remain blocked")
+la_schedule_rows=la_readiness.get("currentRound",{}).get("scheduleRows",{})
+require(la_schedule_rows.get("status")=="verified_two_official_rows_keep_distinct","Laos current schedule rows must remain explicitly distinct")
+require({row.get("examNot") for row in la_schedule_rows.get("rows",[])}=={"101","108"},"Laos 34th Manufacturing must preserve official examNot 101/108")
+require(all(row.get("registrationPeriod")=="2026-09-07 through 2026-09-11" for row in la_schedule_rows.get("rows",[])),"Laos 34th schedule rows must preserve the same verified registration window")
+require(all(row.get("testPeriod")=="undecided" and row.get("resultDate")=="undecided" for row in la_schedule_rows.get("rows",[])),"Laos 34th schedule rows must keep test/result dates undecided")
+require(la_pack.get("safety",{}).get("multipleCurrentManufacturingScheduleRowsMustRemainDistinctByExamNot") is True,"Laos duplicate-title Manufacturing rows must remain distinct by examNot")
+require(la_pack.get("safety",{}).get("parentheticalScheduleLabelMeaningMustNotBeInferred") is True,"Laos '(5부)' label meaning must remain non-inferred")
 require(la_prior.get("excludedFromCurrent34thCountryPack") is True,"Laos 33rd-round evidence must be explicitly excluded from current 34th pack")
 require(la_prior.get("facts",{}).get("registrationPeriod")=="2026-03-10 through 2026-03-13","Laos prior registration dates must remain isolated")
 require(la_prior.get("facts",{}).get("testPeriod")=="2026-04-20 through 2026-04-27","Laos prior test dates must remain isolated")
@@ -407,7 +414,7 @@ require(la_hold.get("status")=="current_round_exact_checklist_not_verified" and 
 la_exact_ids={row.get("id") for row in la_exact.get("answers",[])}
 for exact_id in [
     "la_2026_sending_authority","la_2026_reception_office","la_2026_34th_registration_window",
-    "la_2026_34th_schedule_state","la_2026_current_fee_state","la_2026_current_quota_state",
+    "la_2026_34th_schedule_state","la_2026_34th_schedule_row_identity","la_2026_current_fee_state","la_2026_current_quota_state",
     "la_2026_prior_round_firewall"
 ]:
     require(exact_id in la_exact_ids,f"Laos exact-answer catalog missing {exact_id}")
@@ -928,6 +935,7 @@ require("RESEARCH / HOLD" in srilanka and "1,000" in srilanka and "LKR 9,250" in
 require("2026-10-12" in srilanka and "2026-10-26" in srilanka and "2026-10-30" in srilanka,"Sri Lanka preview must show current application timeline using locale-neutral ISO dates")
 require('href="beta.html"' not in srilanka and 'id="betaForm"' not in srilanka,"Sri Lanka preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in laos and "2026-09-07" in laos and "2026-09-11" in laos,"Laos preview must visibly remain HOLD with verified 34th registration window")
+require("examNot=101" in laos and "examNot=108" in laos and "(5부)" in laos,"Laos preview must expose both current Manufacturing schedule identities without collapsing them")
 require("INTENTIONALLY UNRESOLVED" in laos and "PRIOR-ROUND FIREWALL" in laos,"Laos preview must show unresolved current rules and prior-round firewall")
 require("2026-03-10" in laos and "2026-04-20" in laos,"Laos preview must visibly isolate 33rd-round dates")
 require('href="beta.html"' not in laos and 'id="betaForm"' not in laos,"Laos preview must not expose beta enrollment")
