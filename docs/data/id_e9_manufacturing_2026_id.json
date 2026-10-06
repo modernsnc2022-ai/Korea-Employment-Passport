@@ -47,8 +47,8 @@
   },
   "job_application": {
     "title": "Pengajuan lamaran kerja online",
-    "action": "Baseline siklus 2026 sudah terverifikasi: lulusan 2026 melakukan MCU I di fasilitas kesehatan yang tercantum/diakui KP2MI dan pemeriksaan psikologi melalui jalur HIMPSI; hasilnya diinput ke Sisko P2MI oleh fasilitas kesehatan/HIMPSI. Daftar dokumen Manufaktur, aturan scan, pengisian identitas, edit, dan langkah submit tetap HOLD sampai KP2MI menerbitkan pengumuman rinci lamaran online Manufaktur.",
-    "warning": "Pengumuman pendaftaran 2026 memverifikasi baseline MCU I + psikologi/Sisko P2MI, tetapi belum membuka checklist dan aturan pengisian lamaran Manufaktur. Pengumuman rinci 19 Agustus 2026 yang sudah terverifikasi hanya untuk Perikanan dan tidak boleh dipakai sebagai aturan Manufaktur."
+    "action": "Baseline siklus 2026 sudah terverifikasi. Untuk keamanan pengajuan online, dua pengumuman resmi Sisko P2MI juga konsisten: dokumen pendukung harus berupa hasil scan, bukan foto dokumen, dan dokumen lamaran yang sudah dikirim tidak dapat diperbaiki lagi. Tiga detail exact Manufaktur 2026 tetap HOLD: daftar dokumen, sumber acuan field identitas, dan tombol/status submit final.",
+    "warning": "Aturan scan-vs-foto dan tidak-bisa-edit-setelah-kirim adalah baseline aman lintas pengumuman resmi, bukan pengganti pengumuman rinci Manufaktur 2026. Jangan submit sampai tiga detail exact Manufaktur tersebut terverifikasi."
   },
   "roster": {
     "title": "Roster pencari kerja",
