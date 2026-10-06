@@ -819,7 +819,6 @@ require("RESEARCH / HOLD" in china and "2026-03-18" in china and "2026-09-11" in
 require("2026-09-30" in china and "US$28" in china and "not promoted" in china,"China preview must preserve generic skill-candidate and fee gates")
 require('href="beta.html"' not in china and 'id="betaForm"' not in china,"China preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in cambodia and "2026-08-06" in cambodia and "2026-08-21" in cambodia,"Cambodia preview must visibly remain HOLD with official August artifacts")
-require("discovery source" in cambodia and "2026-05-22" in cambodia and "does not present those dates as official exact rules" in cambodia,"Cambodia preview must disclose discovery-only Manufacturing schedule and explicitly deny official promotion")
 require("Agriculture/Livestock and Special EPS-TOPIK are separate routes" in cambodia,"Cambodia preview must visibly preserve sector/special firewalls")
 require("Verified Manufacturing schedule" in cambodia and "2026-05-22" in cambodia and "2026-07-15" in cambodia,"Cambodia preview must show verified 12th Manufacturing schedule")
 require('href="beta.html"' not in cambodia and 'id="betaForm"' not in cambodia,"Cambodia preview must not expose beta enrollment")
