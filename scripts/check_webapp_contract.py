@@ -424,7 +424,7 @@ for question in broker_questions.get("questions", []):
     if (
         question.get("severity") == "high"
         and not question.get("blocksZeroBrokerReady", False)
-        and question_id not in {"job_scan", "job_edit", "job_submit"}
+        and question_id not in {"job_scan", "job_name", "job_edit", "job_submit"}
     ):
         bad_question_content.append(f"{question_id}:high_not_blocking")
     has_verified_route = bool(
@@ -458,16 +458,23 @@ if bad_question_content:
 if unanswered_catalog_questions:
     errors.append("broker-question catalog contains unanswered items: " + ", ".join(sorted(unanswered_catalog_questions)))
 
-# Manufacturing 2026 still has three sector-specific exact HOLDs. Two high-severity
-# questions are resolved only as conservative cross-notice Sisko platform baselines.
-# Keep both sets explicit so safe behavior guidance cannot be mistaken for a
-# Manufacturing 2026 checklist or submit authorization.
-manufacturing_job_hold_ids = {"job_docs", "job_name"}
-manufacturing_job_safe_ids = {"job_scan", "job_edit", "job_submit"}
+# Manufacturing 2026 now has one sector-specific exact HOLD: the document list.
+# Four high-severity questions are resolved only as conservative official safety
+# baselines. Keep both sets explicit so safe guidance cannot be mistaken for the
+# missing Manufacturing 2026 checklist or a field-by-field form specification.
+manufacturing_job_hold_ids = {"job_docs"}
+manufacturing_job_safe_ids = {"job_scan", "job_name", "job_edit", "job_submit"}
 safe_answer_ids = {
     "job_scan": "job_application_scan_safe_platform_baseline_2026",
+    "job_name": "job_application_identity_safe_platform_baseline_2026",
     "job_edit": "job_application_edit_safe_platform_baseline_2026",
     "job_submit": "job_application_submit_safe_platform_baseline_2026",
+}
+safe_verification_status = {
+    "job_scan": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+    "job_name": "verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map",
+    "job_edit": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+    "job_submit": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
 }
 question_by_id = {item.get("id"): item for item in broker_questions.get("questions", [])}
 exact_by_id = {item.get("id"): item for item in exact_answers.get("answers", [])}
@@ -511,7 +518,7 @@ for question_id in sorted(manufacturing_job_safe_ids):
         hold_errors.append(f"{question_id}:safe_must_not_block_zero_broker")
 
     safe_answer = exact_by_id.get(safe_answer_ids[question_id], {})
-    if safe_answer.get("verificationStatus") != "verified_cross_notice_platform_baseline_not_manufacturing_exact":
+    if safe_answer.get("verificationStatus") != safe_verification_status[question_id]:
         hold_errors.append(
             f"{question_id}:safe_verificationStatus={safe_answer.get('verificationStatus')}"
         )
