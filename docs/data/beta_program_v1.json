@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -85,11 +85,10 @@
     ],
     "publicBetaHoldPolicy": {
       "safeOfficialEvidenceHoldsMayRemain": true,
-      "rule": "Three current-cycle exact questions may remain answered_hold during beta because the product explicitly refuses to guess and routes the user safely. Two additional questions have conservative cross-notice platform baselines. The three exact HOLDs block final Broker Replacement Rate 100% PASS, not beta activation by themselves.",
+      "rule": "Two current-cycle exact questions may remain answered_hold during beta because the product explicitly refuses to guess and routes the user safely. Three questions now have conservative cross-notice Sisko platform baselines. The two exact HOLDs block final Broker Replacement Rate 100% PASS, not beta activation by themselves.",
       "currentHeldQuestions": [
         "job_docs",
-        "job_name",
-        "job_submit"
+        "job_name"
       ],
       "safePlatformBaselines": [
         {
@@ -99,6 +98,10 @@
         {
           "questionId": "job_edit",
           "meaning": "Treat final send as non-editable; exact Manufacturing 2026 submit button/status remains unresolved."
+        },
+        {
+          "questionId": "job_submit",
+          "meaning": "Safe completion baseline: upload through Menu Pemenuhan Dokumen, final-send only after review, confirm sent/progress state in Sisko and use the official support channel if unclear; exact Manufacturing 2026 button label remains unresolved."
         }
       ]
     },
