@@ -1,12 +1,34 @@
 {
   "version": "1.1.0",
-  "state": "clean",
+  "state": "review_required",
   "autoPublishRules": false,
-  "configured": 72,
+  "configured": 76,
   "checked": 72,
-  "reviewRequiredUrls": [],
-  "reviewRequiredSourceIds": [],
+  "reviewRequiredUrls": [
+    "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/"
+  ],
+  "reviewRequiredSourceIds": [
+    "mm_hrdk_final_results",
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates",
+    "mm_mol_eps_opportunity"
+  ],
   "fetchFailureUrls": [],
   "fetchFailureSourceIds": [],
-  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
+  "message": "Four newly configured Myanmar official watch targets have no accepted baseline yet. The existing 72 reviewed sources remain accepted; only these four targets require fetch and explicit baseline review.",
+  "pendingBaselineSourceIds": [
+    "mm_hrdk_final_results",
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates",
+    "mm_mol_eps_opportunity"
+  ],
+  "pendingBaselineUrls": [
+    "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/"
+  ]
 }
