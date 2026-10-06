@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "2.0.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -134,5 +134,15 @@
     "sentNow": 2,
     "immediateBounceObserved": 0,
     "newDistinctRecipients": 0
-  }
+  },
+  "responseOutcomes": [
+    {
+      "sourceCode": "topikly",
+      "inboundDate": "2026-10-04",
+      "status": "closed_declined_external_service_policy",
+      "reasonCategory": "partner_policy_no_external_service_promotion",
+      "closureReplySentDate": "2026-10-06",
+      "recontactPolicy": "do_not_recontact_for_beta_distribution"
+    }
+  ]
 }
