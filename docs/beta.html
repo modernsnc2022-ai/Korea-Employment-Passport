@@ -44,7 +44,17 @@
     <section id="closedPanel" class="card closed-panel">
       <span class="status-pill hold">AKSES BETA BELUM DIAKTIFKAN</span>
       <h2>Penggunaan beta belum diaktifkan</h2>
-      <p>Pendaftaran minat dapat dibuka lebih dulu. Setelah produk dinyatakan siap, tim akan meninjau aplikasi dan mengirim KEP ID + link beta kepada peserta yang disetujui. Masa gratis 6 bulan baru dihitung saat akses beta benar-benar diaktifkan.</p>
+      <p>Pendaftaran minat dapat dibuka lebih dulu. Aktivasi beta menunggu tiga gerbang rilis: pemeriksaan ulang sumber resmi pada hari rilis, semua pemeriksaan otomatis pada commit yang sama lulus, dan keputusan OPEN manual. Lima detail lamaran online Manufaktur yang belum terverifikasi tetap ditahan—aplikasi tidak akan menebak. HOLD tersebut menghalangi klaim Broker Replacement 100%, tetapi tidak otomatis melarang dimulainya beta yang aman.</p>
+    </section>
+
+    <section id="releaseGateNote" class="card">
+      <h2>Apa yang benar-benar menahan aktivasi beta?</h2>
+      <ul>
+        <li>Re-check sumber resmi Manufaktur pada hari beta benar-benar akan dibuka.</li>
+        <li>Static check, UI smoke, Pages, dan beta-launch gate harus lulus pada commit yang sama.</li>
+        <li>Keputusan OPEN manual harus dicatat.</li>
+      </ul>
+      <p><strong>Bukan syarat untuk membuka beta:</strong> lima detail lamaran online Manufaktur yang masih HOLD. Selama detail itu ditampilkan sebagai belum terverifikasi dan aplikasi menolak menebak, beta dapat dipakai untuk mengumpulkan bukti nyata. Lima HOLD tersebut tetap harus diselesaikan sebelum klaim final Broker Replacement Rate 100%.</p>
     </section>
 
     <section id="applicationPanel" class="card" hidden>
