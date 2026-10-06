@@ -15,8 +15,10 @@ const SOURCE_REVIEW_STATUS_URL='data/source_review_status.json';
 const OFFICIAL_HELP_URL='data/official_help_channels_v1.json';
 const DEPARTURE_CALLS_URL='data/departure_calls_2026.json';
 const COMPANY_SERVICES_URL='data/company_services_v1.json';
+const SHARED_KOREA_CORE_URL='data/korea_side_e9_core_2026.json';
+const SHARED_KOREA_CORE_ID_URL='data/korea_side_e9_core_2026_id.json';
 const KEYS={done:'kep.doneStages',docs:'kep.docs',gaps:'kep.brokerGaps',contract:'kep.contract',workplace:'kep.workplace',ledger:'kep.costLedger',payroll:'kep.payroll',fieldQuestions:'kep.unresolvedFieldQuestions',rejections:'kep.rejectionCases',betaChecks:'kep.betaZeroBrokerChecks',betaTesterId:'kep.betaTesterId',betaWorkerExperienceYear:'kep.betaWorkerExperienceYear',scopeSelections:'kep.scopeSelections',formWizard:'kep.formWizard',wizardReviewed:'kep.formWizardReviewed',quickSetup:'kep.quickSetupDone'};
-let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,companyServices=null,i18n={},activeStage=null,deferredInstall=null;
+let route=null,rules=null,contractRules=null,workplaceRules=null,workplaceWorkerEvidence=null,documentPacks=null,documentExamples=null,exactAnswers=null,freshnessPolicy=null,brokerQuestions=null,formWizards=null,formLineage=null,sourceReviewStatus=null,officialHelp=null,departureCalls=null,companyServices=null,sharedKoreaCore=null,sharedKoreaCoreId=null,i18n={},activeStage=null,deferredInstall=null;
 let consistencyRisk={stageId:null,hasMismatch:false};
 
 const $=(id)=>document.getElementById(id);
@@ -387,7 +389,9 @@ async function boot(){
       sourceReviewStatus,
       officialHelp,
       departureCalls,
-      companyServices
+      companyServices,
+      sharedKoreaCore,
+      sharedKoreaCoreId
     ]=await Promise.all([
       fetchJsonRequired(ROUTE_URL),
       fetchJsonRequired(RULES_URL),
@@ -439,7 +443,9 @@ async function boot(){
           ads:{enabled:false,label:'IKLAN / SPONSOR'}
         },
         'company community and paid-service policy'
-      )
+      ),
+      fetchJsonRequired(SHARED_KOREA_CORE_URL),
+      fetchJsonRequired(SHARED_KOREA_CORE_ID_URL)
     ]);
     $('routeTitle').textContent='Indonesia → Korea';
     $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
@@ -1079,6 +1085,34 @@ $('preSubmitBtn').addEventListener('click',()=>{
   }
 });
 
+function sharedKoreaCoreStage(stageId){
+  return (sharedKoreaCore?.stages||[]).find(item=>item.id===stageId)||null;
+}
+
+function renderSharedKoreaCore(stage){
+  const section=$('sharedKoreaCoreSection');
+  const row=sharedKoreaCoreStage(stage?.id);
+  const localized=sharedKoreaCoreId?.stages?.[stage?.id]||null;
+  if(!section||!row||!localized){
+    if(section)section.hidden=true;
+    return;
+  }
+  section.hidden=false;
+  $('sharedKoreaCoreTitle').textContent=localized.title||stageTitle(stage);
+  $('sharedKoreaCoreFact').textContent=localized.fact||row.fact;
+  const boundary=$('sharedKoreaCoreBoundary');
+  const boundaryText=localized.boundary||row.boundary||'';
+  boundary.hidden=!boundaryText;
+  boundary.textContent=boundaryText?'Batas aman: '+boundaryText:'';
+  $('sharedKoreaCoreAuthority').textContent=row.authority||'Otoritas resmi Korea';
+  const links=[{url:row.sourceUrl,label:'Sumber resmi Korea'}];
+  if(row.secondarySourceUrl)links.push({url:row.secondarySourceUrl,label:'Sumber resmi tambahan'});
+  $('sharedKoreaCoreSources').innerHTML=links
+    .filter(item=>String(item.url||'').startsWith('https://'))
+    .map(item=>'<a class="source" href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener">'+escapeHtml(item.label)+' ↗</a>')
+    .join('');
+}
+
 function openStage(stage){
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
@@ -1094,6 +1128,7 @@ function openStage(stage){
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
+  renderSharedKoreaCore(stage);
   const officialAction=$('stageOfficialAction');
   if(stage.officialActionUrl){
     officialAction.hidden=false;
