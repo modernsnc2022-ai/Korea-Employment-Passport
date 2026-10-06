@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -65,6 +65,7 @@
     "indonesia_eps_center_hrdk",
     "sbmi_korea_worker_referral",
     "pcim_korea_referral",
-    "kp2mi_departure_worker_referral"
+    "kp2mi_departure_worker_referral",
+    "kp2mi_sending_applicant"
   ]
 }
