@@ -13,7 +13,7 @@ PRIMARY_INDEX = "https://kp2mi.go.id/gtog-korea/info"
 NO_NOTICE = "no_current_manufacturing_job_application_notice"
 NOTICE_FOUND = "notice_found_review_required"
 ALLOWED_RESULTS = {NO_NOTICE, NOTICE_FOUND}
-LOCKED_HOLDS = ["job_docs", "job_scan", "job_name", "job_edit", "job_submit"]
+LOCKED_HOLDS = ["job_docs", "job_name", "job_submit"]
 
 
 def fail(message: str) -> None:
