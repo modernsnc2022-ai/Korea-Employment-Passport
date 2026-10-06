@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "tj-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Manufacturing sector linkage is cross-source verified because the Tajikistan Ministry's official Manufacturing notice and HRD Korea 2nd Point System share the same 2026-03-02~03-05 registration window.",
+  "principle": "Use current Tajikistan 2nd Manufacturing evidence. Skills/final-result linkage is exact only when the official HRD examNot key matches the direct schedule.",
   "answers": [
     {
       "id": "tj_2026_manufacturing_linkage",
@@ -108,10 +108,10 @@
         "skill_competency",
         "final_selection"
       ],
-      "question": "Is the current skills/final result promoted?",
-      "answer": "No.",
-      "writeExactly": "Do not infer current 2nd-cycle skills/final selection until a direct official result artifact is reviewed.",
-      "verificationStatus": "intentionally_unresolved",
+      "question": "Is the 2026-05-08 Tajikistan Point System result linked to 2nd Manufacturing?",
+      "answer": "Yes. The official final-result row and direct Manufacturing schedule both use examNot=10.",
+      "writeExactly": "2nd Tajikistan Manufacturing final Point System result artifact: published 2026-05-08; linked by official examNot=10.",
+      "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -127,6 +127,19 @@
       "verificationStatus": "shared_eps_principle",
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_2026_skills_candidate_linkage",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Is the 2026-04-06 Tajikistan skills-candidate announcement linked to 2nd Manufacturing?",
+      "answer": "Yes. The official candidate row and direct Manufacturing schedule both use examNot=10.",
+      "writeExactly": "2nd Tajikistan Manufacturing skills-candidate artifact: published 2026-04-06; linked by official examNot=10.",
+      "verificationStatus": "verified_official_examnot_linkage",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }

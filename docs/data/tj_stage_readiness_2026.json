@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "tj-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -26,8 +26,21 @@
       "note": "Announcement 2026-03-20; test 2026-03-28 through 2026-03-29."
     },
     "skillsAndFinalResult": {
-      "status": "awaiting_verified_current_cycle_result",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+      "status": "verified_current_cycle_by_examnot",
+      "scheduleExamNot": "10",
+      "skillsCandidate": {
+        "status": "verified",
+        "title": "Tajikistan the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-04-06",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+      },
+      "finalResult": {
+        "status": "verified",
+        "title": "Tajikistan the 1th POINT_EXAM Announcement",
+        "publicationDate": "2026-05-08",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+      },
+      "linkageRule": "Both official rows use examNot=10, matching the direct 2nd Manufacturing schedule."
     },
     "medicalAndJobApplication": {
       "status": "research_pending_post_selection",
@@ -41,14 +54,13 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "current 2nd-cycle skills/final-result artifact not verified",
       "post-selection medical/job-application exact rules not mapped",
       "visa/training/departure exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
     "type": "official_notice",
-    "subject": "Tajikistan 2nd-cycle skills/final-result or post-selection notice",
+    "subject": "Tajikistan 2nd Manufacturing post-selection medical/job-application and visa/training/departure notices",
     "officialSources": [
       "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
       "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995",
@@ -59,5 +71,6 @@
       "post-selection rules come from current official evidence",
       "no job/SLC/visa/departure guarantee is implied"
     ]
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }

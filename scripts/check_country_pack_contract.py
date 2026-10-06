@@ -381,6 +381,7 @@ uz_readiness=load("docs/data/uz_stage_readiness_2026.json")
 require(uz_entry.get("lifecycle")=="research_hold" and uz_entry.get("publicAvailability")=="preview_only","Uzbekistan registry route must remain preview-only HOLD")
 require(uz_pack.get("lifecycle")=="research_hold" and uz_pack.get("publicAvailability")=="preview_only","Uzbekistan pack must remain preview-only HOLD")
 require(uz_pack.get("safety",{}).get("betaIntakeOpen") is False,"Uzbekistan beta intake must remain closed")
+require(uz_pack.get("safety",{}).get("resultLinkageRequiresOfficialExamNotMatch") is True and uz_pack.get("safety",{}).get("currentManufacturingSkillsAndFinalLinkedByExamNot") is True,"Uzbekistan result linkage must require official examNot and preserve current Manufacturing linkage")
 require(uz_pack.get("safety",{}).get("genericHrdFeeNotCurrentCycle") is True,"Uzbekistan generic HRD fee must not become a cycle-specific exact fee")
 require(uz_pack.get("safety",{}).get("contactSourcesPreservedWithoutSilentReconciliation") is True,"Uzbekistan official contact contexts must not be silently reconciled")
 require(uz_pack.get("officialSendingAgency",{}).get("name")=="MIGRATION AGENCY UNDER THE CABINET OF MINSTERS OF THE REPUBLIC OF UZBEKISTAN (AELM)","Uzbekistan sending agency must remain Migration Agency/AELM")
@@ -388,7 +389,7 @@ require(uz_pack.get("documentPacksFile")=="data/uz_document_packs_2026.json","Uz
 uz_current=uz_readiness.get("currentCycle",{})
 require(uz_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Uzbekistan 9th registration must remain closed_verified")
 require(uz_current.get("epsTopikSchedule",{}).get("status")=="completed_period_verified","Uzbekistan 9th Round 1 test period must remain verified")
-require(uz_current.get("skillsAndFinalResult",{}).get("status")=="awaiting_verified_current_cycle_result_state","Uzbekistan skills/final-result state must remain unpromoted until verified")
+require(uz_current.get("skillsAndFinalResult",{}).get("status")=="verified_current_cycle_by_examnot" and uz_current.get("skillsAndFinalResult",{}).get("scheduleExamNot")=="9","Uzbekistan skills/final result must remain linked to 9th Manufacturing by examNot=9")
 require(uz_current.get("fee",{}).get("status")=="cycle_specific_unverified","Uzbekistan cycle-specific fee must remain unresolved")
 require(uz_current.get("documents",{}).get("status")=="cycle_specific_checklist_not_reconstructed","Uzbekistan cycle-specific registration checklist must remain HOLD")
 require(uz_readiness.get("betaReadiness",{}).get("status")=="blocked","Uzbekistan beta must remain blocked")
@@ -400,7 +401,7 @@ uz_exact_ids={row.get("id") for row in uz_exact.get("answers",[])}
 for exact_id in [
     "uz_2026_sending_authority","uz_2026_registration_window","uz_2026_test_notice_date",
     "uz_2026_test_period","uz_2026_point_system","uz_2026_contact_context",
-    "uz_2026_fee_state","uz_2026_skill_structure","uz_2026_final_state","uz_no_job_guarantee"
+    "uz_2026_fee_state","uz_2026_skill_structure","uz_2026_skills_candidate_linkage","uz_2026_final_state","uz_no_job_guarantee"
 ]:
     require(exact_id in uz_exact_ids,f"Uzbekistan exact-answer catalog missing {exact_id}")
 
@@ -627,6 +628,7 @@ tj_readiness=load("docs/data/tj_stage_readiness_2026.json")
 require(tj_entry.get("lifecycle")=="research_hold" and tj_entry.get("publicAvailability")=="preview_only","Tajikistan registry route must remain preview-only HOLD")
 require(tj_pack.get("lifecycle")=="research_hold" and tj_pack.get("publicAvailability")=="preview_only","Tajikistan pack must remain preview-only HOLD")
 require(tj_pack.get("safety",{}).get("betaIntakeOpen") is False,"Tajikistan beta intake must remain closed")
+require(tj_pack.get("safety",{}).get("resultLinkageRequiresOfficialExamNotMatch") is True and tj_pack.get("safety",{}).get("currentManufacturingSkillsAndFinalLinkedByExamNot") is True,"Tajikistan result linkage must require official examNot and preserve current Manufacturing linkage")
 require(tj_pack.get("safety",{}).get("manufacturingSectorCrossSourceVerified") is True,"Tajikistan Manufacturing sector linkage must remain cross-source verified")
 require(tj_pack.get("safety",{}).get("postSelectionFactsRequireCurrentArtifact") is True,"Tajikistan post-selection facts must remain artifact-gated")
 require(tj_pack.get("officialSendingAgency",{}).get("name")=="Agency of Overseas Employment","Tajikistan sending agency must remain Agency of Overseas Employment")
@@ -637,7 +639,7 @@ require(tj_current.get("manufacturingLinkage",{}).get("status")=="verified_cross
 require(tj_current.get("registration",{}).get("status")=="closed_verified","Tajikistan 2026 Manufacturing registration must remain closed_verified")
 require(tj_current.get("eligibilityAndDocuments",{}).get("status")=="verified_current_local","Tajikistan eligibility/documents must remain verified from current local notice")
 require(tj_current.get("epsTopikSchedule",{}).get("status")=="completed_period_verified","Tajikistan EPS-TOPIK schedule must remain verified")
-require(tj_current.get("skillsAndFinalResult",{}).get("status")=="awaiting_verified_current_cycle_result","Tajikistan skills/final result must remain gated")
+require(tj_current.get("skillsAndFinalResult",{}).get("status")=="verified_current_cycle_by_examnot" and tj_current.get("skillsAndFinalResult",{}).get("scheduleExamNot")=="10","Tajikistan skills/final result must remain linked to 2nd Manufacturing by examNot=10")
 require(tj_readiness.get("betaReadiness",{}).get("status")=="blocked","Tajikistan beta must remain blocked")
 require(tj_notice.get("facts",{}).get("registrationPeriod")=="2026-03-02 through 2026-03-05","Tajikistan registration window must match official Manufacturing notice")
 require(tj_notice.get("facts",{}).get("examFeeSomoni")==330,"Tajikistan official exam fee must remain 330 somoni")
@@ -651,7 +653,7 @@ tj_exact_ids={row.get("id") for row in tj_exact.get("answers",[])}
 for exact_id in [
     "tj_2026_manufacturing_linkage","tj_2026_registration_window","tj_2026_exam_fee",
     "tj_2026_age_rule","tj_2026_registration_docs","tj_2026_test_notice",
-    "tj_2026_test_period","tj_2026_point_system","tj_2026_final_state","tj_no_job_guarantee"
+    "tj_2026_test_period","tj_2026_point_system","tj_2026_skills_candidate_linkage","tj_2026_final_state","tj_no_job_guarantee"
 ]:
     require(exact_id in tj_exact_ids,f"Tajikistan exact-answer catalog missing {exact_id}")
 
@@ -868,6 +870,7 @@ require('href="beta.html"' not in laos and 'id="betaForm"' not in laos,"Laos pre
 require("RESEARCH / HOLD" in uzbekistan and "2026-03-09" in uzbekistan and "2026-04-22" in uzbekistan,"Uzbekistan preview must visibly remain HOLD with verified registration/test timeline")
 require("OFFICIAL CONTACT CONTEXT" in uzbekistan and "INTENTIONALLY UNRESOLVED" in uzbekistan,"Uzbekistan preview must preserve official contact contexts and unresolved current rules")
 require("US$28" in uzbekistan and "current Uzbekistan exact fee" in uzbekistan,"Uzbekistan preview must label generic US$28 baseline as non-current exact fee")
+require("examNot=9" in uzbekistan and "2026-05-27" in uzbekistan and "2026-08-27" in uzbekistan,"Uzbekistan preview must show verified examNot skills/final linkage")
 require('href="beta.html"' not in uzbekistan and 'id="betaForm"' not in uzbekistan,"Uzbekistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in mongolia and "2026-03-25" in mongolia and "2026-06-26" in mongolia,"Mongolia preview must visibly remain HOLD with verified registration/test timeline")
 require("Special EPS-TOPIK remains a separate route" in mongolia and "examNot=33" in mongolia and "2026-08-28" in mongolia,"Mongolia preview must preserve Special-route isolation and verified examNot result linkage")
@@ -899,6 +902,7 @@ require("EPS-TOPIK exam fee" in pakistan,"Pakistan preview must explicitly preve
 require('href="beta.html"' not in pakistan and 'id="betaForm"' not in pakistan,"Pakistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in tajikistan and "330 somoni" in tajikistan and "2026-03-02" in tajikistan and "2026-03-29" in tajikistan,"Tajikistan preview must show verified Manufacturing facts")
 require("3.5×4.5" in tajikistan and "Foreign passport" in tajikistan,"Tajikistan preview must expose verified registration-document basics")
+require("examNot=10" in tajikistan and "2026-04-06" in tajikistan and "2026-05-08" in tajikistan,"Tajikistan preview must show verified examNot skills/final linkage")
 require('href="beta.html"' not in tajikistan and 'id="betaForm"' not in tajikistan,"Tajikistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in kyrgyzstan and "2026-02-23" in kyrgyzstan and "US$28" in kyrgyzstan,"Kyrgyzstan preview must show verified Manufacturing registration and fee")
 require("2026-05-30" in kyrgyzstan and "2026-06-09" in kyrgyzstan and "2 жылдык" in kyrgyzstan,"Kyrgyzstan preview must expose Skills Test, post-selection medical and two-year roster facts")
