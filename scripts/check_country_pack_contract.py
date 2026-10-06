@@ -634,6 +634,9 @@ require(tj_pack.get("safety",{}).get("betaIntakeOpen") is False,"Tajikistan beta
 require(tj_pack.get("safety",{}).get("resultLinkageRequiresOfficialExamNotMatch") is True and tj_pack.get("safety",{}).get("currentManufacturingSkillsAndFinalLinkedByExamNot") is True,"Tajikistan result linkage must require official examNot and preserve current Manufacturing linkage")
 require(tj_pack.get("safety",{}).get("manufacturingSectorCrossSourceVerified") is True,"Tajikistan Manufacturing sector linkage must remain cross-source verified")
 require(tj_pack.get("safety",{}).get("postSelectionFactsRequireCurrentArtifact") is True,"Tajikistan post-selection facts must remain artifact-gated")
+require(tj_pack.get("safety",{}).get("officialZeroBrokerFrameworkVerified") is True,"Tajikistan official zero-broker framework evidence must remain verified")
+require(tj_pack.get("officialZeroBrokerEvidence",{}).get("status")=="verified_official_framework_not_cycle_specific","Tajikistan zero-broker evidence must stay framework-scoped rather than cycle-specific")
+require("without intermediaries" in tj_pack.get("officialZeroBrokerEvidence",{}).get("rule",""),"Tajikistan zero-broker evidence must preserve the no-intermediary statement")
 require(tj_pack.get("officialSendingAgency",{}).get("name")=="Agency of Overseas Employment","Tajikistan sending agency must remain Agency of Overseas Employment")
 require(tj_pack.get("registrationNoticeFile")=="data/tj_registration_notice_2026.json","Tajikistan pack must link official registration notice evidence")
 require(tj_pack.get("documentPacksFile")=="data/tj_document_packs_2026.json","Tajikistan pack must link verified registration document pack")
@@ -656,7 +659,7 @@ tj_exact_ids={row.get("id") for row in tj_exact.get("answers",[])}
 for exact_id in [
     "tj_2026_manufacturing_linkage","tj_2026_registration_window","tj_2026_exam_fee",
     "tj_2026_age_rule","tj_2026_registration_docs","tj_2026_test_notice",
-    "tj_2026_test_period","tj_2026_point_system","tj_2026_skills_candidate_linkage","tj_2026_final_state","tj_no_job_guarantee"
+    "tj_2026_test_period","tj_2026_point_system","tj_2026_skills_candidate_linkage","tj_2026_final_state","tj_no_job_guarantee","tj_eps_zero_broker_framework"
 ]:
     require(exact_id in tj_exact_ids,f"Tajikistan exact-answer catalog missing {exact_id}")
 
@@ -906,6 +909,7 @@ require("EPS-TOPIK exam fee" in pakistan,"Pakistan preview must explicitly preve
 require('href="beta.html"' not in pakistan and 'id="betaForm"' not in pakistan,"Pakistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in tajikistan and "330 somoni" in tajikistan and "2026-03-02" in tajikistan and "2026-03-29" in tajikistan,"Tajikistan preview must show verified Manufacturing facts")
 require("3.5×4.5" in tajikistan and "Foreign passport" in tajikistan,"Tajikistan preview must expose verified registration-document basics")
+require("ZERO-BROKER OFFICIAL RULE" in tajikistan and "ройгон ва бе миёнаравҳо" in tajikistan,"Tajikistan preview must expose the official free/no-intermediary EPS framework rule")
 require("examNot=10" in tajikistan and "2026-04-06" in tajikistan and "2026-05-08" in tajikistan,"Tajikistan preview must show verified examNot skills/final linkage")
 require('href="beta.html"' not in tajikistan and 'id="betaForm"' not in tajikistan,"Tajikistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in kyrgyzstan and "2026-02-23" in kyrgyzstan and "US$28" in kyrgyzstan,"Kyrgyzstan preview must show verified Manufacturing registration and fee")

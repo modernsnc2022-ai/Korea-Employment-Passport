@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-2nd-point-system-tajikistan-manufacturing-cross-source-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -29,7 +29,8 @@
     "The Tajikistan Ministry of Labour official notice explicitly states EPS-TOPIK employment in the manufacturing sector and registration from 2026-03-02 through 2026-03-05.",
     "HRD Korea's 2nd Tajikistan Point System page has the same registration period and records test announcement 2026-03-20 and test period 2026-03-28 through 2026-03-29, General CBT, Point System.",
     "The official local notice states a 330 somoni exam fee, age 18–39 for the cycle, foreign-passport data, and a 3.5×4.5 cm white-background electronic color photo.",
-    "HRD Korea's official skills-candidate row published 2026-04-06 and final Point System result row published 2026-05-08 both use examNot=10, matching the direct 2nd Tajikistan Manufacturing schedule. Post-selection medical/job-file, visa/training/departure exact rules remain HOLD."
+    "HRD Korea's official skills-candidate row published 2026-04-06 and final Point System result row published 2026-05-08 both use examNot=10, matching the direct 2nd Tajikistan Manufacturing schedule. Post-selection medical/job-file, visa/training/departure exact rules remain HOLD.",
+    "Tajikistan's Ministry of Labour states in official EPS program guidance that registration and dispatch services provided by the Agency of Overseas Employment are fully free and operate without intermediaries. This 2025 framework evidence is used only for the zero-broker process principle, not for 2026 cycle dates, fees or post-selection requirements."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -42,7 +43,8 @@
     "manufacturingSectorCrossSourceVerified": true,
     "postSelectionFactsRequireCurrentArtifact": true,
     "resultLinkageRequiresOfficialExamNotMatch": true,
-    "currentManufacturingSkillsAndFinalLinkedByExamNot": true
+    "currentManufacturingSkillsAndFinalLinkedByExamNot": true,
+    "officialZeroBrokerFrameworkVerified": true
   },
   "stages": [
     {
@@ -158,18 +160,18 @@
       "title": "EPS Job Seekers' Roster",
       "authority": "Agency of Overseas Employment / HRD Korea",
       "kind": "official_wait",
-      "action": "Only officially qualified candidates proceed into EPS employer selection. Private intermediaries cannot guarantee priority or placement.",
-      "sourceUrl": "https://eps.hrdkorea.or.kr/",
-      "supportState": "shared_eps_principle"
+      "action": "Official Tajikistan EPS framework guidance says registration/dispatch services of the Agency of Overseas Employment are fully free and without intermediaries. Only officially qualified candidates proceed into EPS employer selection; no intermediary can guarantee priority or placement.",
+      "sourceUrl": "https://www.mehnat.tj/tg/news/dt/7e2e6dcf-f800-4902-89b5-812978d69324",
+      "supportState": "verified_official_zero_broker_framework"
     },
     {
       "id": "employer_selection",
       "title": "Korean employer selection",
       "authority": "Korean employer / EPS",
       "kind": "official_wait",
-      "action": "Wait for selection through the official EPS system. No private intermediary can guarantee a specific employer.",
-      "sourceUrl": "https://eps.hrdkorea.or.kr/",
-      "supportState": "shared_eps_principle"
+      "action": "Korean employers select through the official EPS system. Tajikistan's official EPS guidance states Agency registration/dispatch services operate without intermediaries; no broker can guarantee a specific employer.",
+      "sourceUrl": "https://www.mehnat.tj/tg/news/dt/7e2e6dcf-f800-4902-89b5-812978d69324",
+      "supportState": "verified_official_zero_broker_framework"
     },
     {
       "id": "slc",
@@ -293,5 +295,13 @@
   "documentPacksFile": "data/tj_document_packs_2026.json",
   "registrationNoticeFile": "data/tj_registration_notice_2026.json",
   "stageReadinessFile": "data/tj_stage_readiness_2026.json",
-  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json",
+  "officialZeroBrokerEvidence": {
+    "status": "verified_official_framework_not_cycle_specific",
+    "sourceUrl": "https://www.mehnat.tj/tg/news/dt/7e2e6dcf-f800-4902-89b5-812978d69324",
+    "publicationDate": "2025-10-23",
+    "authority": "Ministry of Labour, Migration and Employment of Population of the Republic of Tajikistan",
+    "rule": "Agency services for EPS registration and dispatch are stated as fully free and without intermediaries.",
+    "scopeBoundary": "Use only as a stable EPS channel/anti-broker principle. Do not infer that the 2026 exam fee, medical costs, visa fees, travel costs or other current-cycle charges are zero."
+  }
 }
