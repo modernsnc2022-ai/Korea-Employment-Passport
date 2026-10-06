@@ -198,37 +198,37 @@
     "tlsMode": "ca_verified"
   },
   "kp2mi_registration_2026": {
-    "sha256": "e2b23f1e38b68c8f918c53cb7d2f15056257348336685e1ba5abda504c4bc6f7",
+    "sha256": "71182055f08eb0000cb2729748e4572b379ff9aba3ca84a2a20a2fe82e2b710a",
     "agency": "KP2MI",
     "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
-    "contentLength": 12290,
+    "contentLength": 12286,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_psychology_2026": {
-    "sha256": "da9e0ae0d74531ce68d24779fcca7aec194709bc0667b78777c93485b5555b6a",
+    "sha256": "6320229ce6bdc4469ce48992f617081c5eba917c59d7a5b322cf7850a80936c8",
     "agency": "KP2MI",
     "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026",
-    "contentLength": 7036,
+    "contentLength": 7032,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_visa_mcu_2026": {
-    "sha256": "0dd8eede4a019bac143b456f9fef534b53d231e42cde9562e60048ba79913b59",
+    "sha256": "34543adb7f8a574a11e81e109ddb2db0b3db00ffca5d6091b8887bdfd60b3865",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-pemeriksaan-medical-check-up-mcu-ii-tanggal-08-september-2026-dan-persiapan-pemberkasan-dokumen-visa-bagi-calon-pekerja-migran-indonesia-reguler-program-g-to-g-ke-korea-selatan",
-    "contentLength": 10564,
+    "contentLength": 10560,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_departure_2026": {
-    "sha256": "c0476e137b269026a33da7302c5873d39d80e8b490c7cf9482e52fe09bf2a9d0",
+    "sha256": "fe1dc51e0151fecf8809c08859b9d1a37bf35cbcc82c04b9e4daef0182ddadf6",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-10-agustus-2026",
-    "contentLength": 9291,
+    "contentLength": 9287,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
@@ -288,55 +288,55 @@
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_mcu2_visa_2026_05_26": {
-    "sha256": "678f53e31461aec81564422db5d2a85aabbf67745209b919487ccc89a3b6caa7",
+    "sha256": "23d91c9791103ad28ec4dfca0a72a387039e3e4030b25b336ff7dd575bfd5e60",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-pemeriksaan-medical-check-up-mcu-ii-tanggal-26-mei-2026-dan-persiapan-pemberkasan-dokumen-visa-bagi-calon-pekerja-migran-indonesia-reguler-program-g-to-g-ke-korea-selatan",
-    "contentLength": 10355,
+    "contentLength": 10351,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_mcu2_visa_2026_06_19": {
-    "sha256": "aed9fe54db3b619ab598083bfb6b33b40addca984432b4b993872d68e30f74ff",
+    "sha256": "dd5e8f46299538fd44a1bc68eda09c02774ded9fdbf38278b2aaabf88fc0e686",
     "agency": "KP2MI",
     "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-pemeriksaan-medical-check-up-mcu-ii-tanggal-19-juni-2026-dan-persiapan-pemberkasan-dokumen-visa-bagi-calon-pekerja-migran-indonesia-reguler-program-g-to-g-ke-korea-selatan",
-    "contentLength": 10448,
+    "contentLength": 10444,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_departure_2026_09_15": {
-    "sha256": "e0e7478c7af9b47d22ec91ff7f6f5665c6e26ba0a3b60da118e31aca66a6c836",
+    "sha256": "394ac701c7f4b719464fbac333ee0ba73777948231a8b86c4a46367a143cad8d",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-15-september-2026",
-    "contentLength": 9275,
+    "contentLength": 9271,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave9": {
-    "sha256": "351d190f0e12927085e17a383c45f8b8c605f8e02a62bd6799b82672fd3ecb87",
+    "sha256": "7afa16fa2970ca96f291f88a53eb6fd27c91143e729be7a29ad887152358c8d7",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-bbppmpv-bisnis-pariwisata-29-juni-s-d-04-juli-2026-sawangan-gelombang-9-tahun-2026",
-    "contentLength": 12436,
+    "contentLength": 12432,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_departure_2026_04_27": {
-    "sha256": "e35891eaa395dc227b85eb58203324360da3bc91b17f0ac6a83937453d29a08b",
+    "sha256": "18d3356c20739cd9f7d828e34c8d4d766c2bca117843c1e35d81f9221f76084c",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-27-april-2026",
-    "contentLength": 8558,
+    "contentLength": 8554,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_departure_2026_08_24_25": {
-    "sha256": "203e16d97ddeb5457bf60c77dc69d99c741c4871e1a35cfb44956f125dc0770d",
+    "sha256": "ba08f03fe89d3ec48eca2837d634fa42dddd814817a142d809fcceb69b3e582e",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-24-dan-25-agustus-2026",
-    "contentLength": 9519,
+    "contentLength": 9515,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
@@ -423,46 +423,46 @@
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_job_application_mcu1_2026": {
-    "sha256": "38a801c35c87fe17f16ad6e02315c78bbf32c860b5af5e4a3918b80733bab7b8",
+    "sha256": "ab50df8e2fc96fa337570c561f715886be5e4b60f66e2ef9fbbdaa406292c79f",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
-    "contentLength": 7252,
+    "contentLength": 7248,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_gtog_korea_info_index": {
-    "sha256": "f9bfaa7c42e475c69a63e256aca2abc31fda205706238d0ffd3a77bb72b7d1fb",
+    "sha256": "dfb2b3f53f87b399b6f163194af600c4adadfb7de08fcd6b456f60c5de83701e",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-korea/info",
-    "contentLength": 1555,
+    "contentLength": 1551,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_g2g_important_guidance": {
-    "sha256": "eb15c61d9077bcc5e802bccfefc350148dce2bb33be02ee44511a7eeb9cb3f7b",
+    "sha256": "24e2f90c671dbdd330ff17f0e123bc2fd17440b71c51caca0182a787ac56366b",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hal-hal-penting-yang-harus-diketahui-oleh-cpmi-korea-program-g-to-g",
-    "contentLength": 11200,
+    "contentLength": 11196,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_roster_rereg_2025_12": {
-    "sha256": "8bb223e1be8884d1e0beb4185838742e1128020e38772989a44589435d12724b",
+    "sha256": "55964f0f117da0c92ebc2c831dac68793fa39a086b2eefaabb46c2a3efbd06fd",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pengiriman-berkas-registrasi-ulang-untuk-calon-pekerja-migran-indonesia-yang-telah-habis-masa-berlakunya-roster-sampai-dengan-tanggal-22-desember-2025",
-    "contentLength": 4458,
+    "contentLength": 4454,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_eps_topik_general_exam_2026": {
-    "sha256": "1966900f825a6c99841e2ad65ea2e9fbb63fff0323b8f0cd5a255019d53c9d84",
+    "sha256": "f53e6f99fc43897f6360b9120ff9deb8e2399b6bc83393b249f426fa9e92a268",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
-    "contentLength": 8950,
+    "contentLength": 8946,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
@@ -486,55 +486,55 @@
     "tlsMode": "ca_verified"
   },
   "kp2mi_opp_sawangan_wave10_2026": {
-    "sha256": "af0aef6c509483185b11a4694e46affbf9407bc647fe7e1ddcbebd0197eda63f",
+    "sha256": "d8e002832d63ef0db10dc7baad74ea2fee12e99fc6b9581581f9a50ba359029a",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-bbppmpv-bisnis-pariwisata-31-agustus-s-d-05-september-2026-sawangan-gelombang-10-tahun-2026",
-    "contentLength": 12142,
+    "contentLength": 12138,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave1": {
-    "sha256": "05f98de42fa5061c16383ebc652d1be3f07c5e4f70eac9325f8efd6536eb941a",
+    "sha256": "3fd381a992226dfcf7b41f4ad7d26f6c70eca4848886ae298431299cdbf2e710",
     "agency": "KP2MI",
     "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-bbppmpv-bisnis-pariwisata-05-s-d-10-januari-2026-sawangan-gelombang-1-tahun-2026",
-    "contentLength": 12720,
+    "contentLength": 12716,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave2": {
-    "sha256": "47a56ba59cecbf37c45075e18fa177c0014fd41169ba5eb03711c631c06a95fc",
+    "sha256": "068e550d13056bd72ce2fb9c912d79a4ad9331f806c66b859d98223871aab617",
     "agency": "KP2MI",
     "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-wisma-hijau-06-april-s-d-11-april-2026-depok-gelombang-2-tahun-2026",
-    "contentLength": 12366,
+    "contentLength": 12362,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave4": {
-    "sha256": "df9442791620ff718c942a5ff2d529ea94a1c979e81f4c8d418736813364c4fe",
+    "sha256": "d6cf8c24071b1388ee09032e7b65155f30c698c52a96fdfd78172fb37f2b9f48",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-bbppmpv-bisnis-pariwisata-06-april-s-d-11-april-2026-sawangan-gelombang-4-tahun-2026",
-    "contentLength": 12431,
+    "contentLength": 12427,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_opp_2026_wave3": {
-    "sha256": "32d05baa4ecf43d8b712a137233c1a25fe6687c1584ec36c70c5ec3dccdfd4c8",
+    "sha256": "e2182dae86c422821e5c3e9c00afe8f93728ebf921ad23f3d03b5746685c3001",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-panggilan-orientasi-pra-pemberangkatan-opp-calon-pekerja-migran-indonesia-program-g-to-g-korea-selatan-wisma-hijau-15-20-juni-2026-depok-gelombang-3-tahun-2026",
-    "contentLength": 12437,
+    "contentLength": 12433,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
   },
   "kp2mi_departure_2026_08_31": {
-    "sha256": "a25b8a7e0bf58f7f942c7b71eca89b69464fe1402313d0bb9f1a96d45e0a152c",
+    "sha256": "ce4fee5119c9b32abbe9cd0fe477b9eebf7d7521234d33287316517caf66832c",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-31-agustus-2026",
-    "contentLength": 9263,
+    "contentLength": 9259,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
@@ -612,10 +612,10 @@
     "tlsMode": "ca_verified"
   },
   "kp2mi_contact": {
-    "sha256": "7d3bb2d7a7800d29cf7b4d6382a68749155649104ad1892b1a1de2753d19608b",
+    "sha256": "c7e537baf049ee9393d389ba3e0ad6e3384a085405f4baa478b689ab7a42b733",
     "agency": "KP2MI",
     "url": "https://kp2mi.go.id/index.php/profil-kontak",
-    "contentLength": 2079,
+    "contentLength": 2075,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "pinned_leaf"
@@ -684,19 +684,19 @@
     "tlsMode": "ca_verified"
   },
   "np_eps_notice_index": {
-    "sha256": "613f1adaf78553cf64d8d19852d1db4579ce41bd5ab7e916e88c87f388305d91",
+    "sha256": "57da658d3f0dfed75f7199e56535ed9352eb9e73ef34c2f5dc8f75da195da863",
     "agency": "EPS Nepal",
     "url": "https://epsnepal.gov.np/notices",
-    "contentLength": 14578,
+    "contentLength": 14670,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
   },
   "vn_colab_eps_notices": {
-    "sha256": "2a7ce7b6eb88937b3d3540aaf4f0eba71e6b16a79f1a3c6a846c29db78a5ad60",
+    "sha256": "06548d5a97ad92acb30ed1620f45c5b184d9dfa391cc211b4cc7c5f010a9408d",
     "agency": "Vietnam COLAB EPS notices",
     "url": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
-    "contentLength": 5675,
+    "contentLength": 5642,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
