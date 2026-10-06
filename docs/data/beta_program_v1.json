@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -82,6 +82,22 @@
       "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate green",
       "official-source state clean",
       "explicit manual worker-panel OPEN decision"
+    ],
+    "publicBetaHoldPolicy": {
+      "safeOfficialEvidenceHoldsMayRemain": true,
+      "rule": "A structured current-cycle question may remain answered_hold during beta if the product explicitly refuses to guess and routes the user safely. Such a HOLD blocks final Broker Replacement Rate 100% PASS, not beta activation by itself.",
+      "currentHeldQuestions": [
+        "job_docs",
+        "job_scan",
+        "job_name",
+        "job_edit",
+        "job_submit"
+      ]
+    },
+    "actualOpenGates": [
+      "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate green",
+      "same-day Manufacturing official-source re-check on the actual release day",
+      "explicit manual beta OPEN decision"
     ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.3.2",
+  "version": "1.4.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -28,16 +28,25 @@
       "betaState": "pending_manual_approval",
       "nextReview": {
         "type": "official_notice_and_manual_gate",
-        "subject": "Manufacturing-specific detailed online job-application notice + release-day recheck/manual gate",
+        "subject": "Actual beta release-day source recheck + same-HEAD automated gates + manual OPEN decision",
         "officialSources": [
           "https://kp2mi.go.id/gtog-korea/info"
         ]
       },
       "blockers": [
-        "Manufacturing-specific detailed online job-application checklist/form notice still not found as of 2026-10-06",
-        "MCU I + HIMPSI psychology + provider-to-Sisko result-input baseline is verified, but job_docs/job_scan/job_name/job_edit/job_submit remain held",
-        "repeat same-day official-source re-check on the actual beta release day",
-        "explicit manual beta OPEN decision required"
+        "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate must all succeed",
+        "repeat the Manufacturing official-source re-check on the actual beta release day",
+        "record an explicit manual beta OPEN decision"
+      ],
+      "releaseGates": [
+        "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate must all succeed",
+        "repeat the Manufacturing official-source re-check on the actual beta release day",
+        "record an explicit manual beta OPEN decision"
+      ],
+      "validationGaps": [
+        "Manufacturing-specific detailed online job-application checklist/form notice is still not found as of 2026-10-06",
+        "job_docs, job_scan, job_name, job_edit and job_submit remain answered_hold",
+        "these five safe HOLDs block final Broker Replacement Rate 100% PASS, but do not by themselves block beta activation while the app refuses to guess"
       ]
     },
     {

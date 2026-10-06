@@ -318,6 +318,27 @@ require("gratis selama 6 bulan sejak akun beta diaktifkan" in outreach,
         "Indonesian outreach must state 6 months free from activation")
 program_status = beta_program.get("status")
 release_decision = beta_program.get("releaseDecision", {})
+hold_policy = release_decision.get("publicBetaHoldPolicy", {})
+require(
+    hold_policy.get("safeOfficialEvidenceHoldsMayRemain") is True,
+    "public beta policy must allow safely-held official-evidence gaps without auto-blocking beta activation",
+)
+require(
+    set(hold_policy.get("currentHeldQuestions", [])) == EXPECTED_JOB_HOLDS,
+    "public beta HOLD policy must name exactly the five Manufacturing job-application questions",
+)
+require(
+    "final Broker Replacement Rate 100% PASS" in str(hold_policy.get("rule", "")),
+    "public beta HOLD policy must distinguish beta activation from final Broker Replacement Rate 100% PASS",
+)
+actual_open_gates = release_decision.get("actualOpenGates", [])
+require(
+    len(actual_open_gates) == 3
+    and any("same-HEAD" in str(x) for x in actual_open_gates)
+    and any("same-day" in str(x) for x in actual_open_gates)
+    and any("manual beta OPEN" in str(x) for x in actual_open_gates),
+    "public beta must preserve exactly the three release gates: same-HEAD checks, same-day source recheck, manual OPEN",
+)
 require(program_status in {"hold", "open"}, f"unsupported public beta status: {program_status!r}")
 if program_status == "hold":
     require(release_decision.get("publicBeta") == "pending_manual_approval",
@@ -357,6 +378,11 @@ require(beta_program.get("publicBeta", {}).get("capacityPolicy") == "soft_target
         "public beta must keep 30 as a soft target, not a hard cap")
 require(beta_program.get("application", {}).get("intakeStatus") == "open",
         "tester-interest application intake must be OPEN")
+require('id="releaseGateNote"' in beta_page,
+        "beta page must explain the actual release gates")
+require("lima detail lamaran online Manufaktur yang masih HOLD" in beta_page
+        and "tidak otomatis melarang dimulainya beta" in beta_page,
+        "beta page must distinguish safe validation HOLDs from beta release blockers")
 worker_panel = beta_program.get("retrospectivePanel", {})
 require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
 require(worker_panel.get("separateFromPublicBeta") is True,

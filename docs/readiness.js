@@ -36,13 +36,19 @@
       const badgeClass=row.nextReview?.type==='dated_official_review'?'dated':state==='pending_manufacturing_verification'?'pending':state==='beta_hold'?'beta':'';
       const date=row.nextReview?.date?'<div class="trigger-date">Review date: '+esc(row.nextReview.date)+'</div>':'';
       const blockers=(row.blockers||[]).map(x=>'<li>'+esc(x)+'</li>').join('');
+      const releaseGates=(row.releaseGates||[]).map(x=>'<li>'+esc(x)+'</li>').join('');
+      const validationGaps=(row.validationGaps||[]).map(x=>'<li>'+esc(x)+'</li>').join('');
+      const gateSections=(releaseGates||validationGaps)
+        ? (releaseGates?'<div class="gate-section"><strong>Beta release gates</strong><ul>'+releaseGates+'</ul></div>':'')
+          +(validationGaps?'<div class="gate-section"><strong>Validation gaps — not automatic beta blockers</strong><ul>'+validationGaps+'</ul></div>':'')
+        : '<ul>'+blockers+'</ul>';
       const sources=(row.nextReview?.officialSources||[]).map(url=>'<a href="'+esc(url)+'" rel="noopener">'+esc(url)+'</a>').join('');
       const details=row.detailsPage?'<p><a href="'+esc(row.detailsPage)+'">Open verification details</a></p>':'';
       return '<article class="readiness-card" data-country="'+esc(row.country)+'">'+
         '<span class="badge '+badgeClass+'">'+esc(state)+'</span>'+
         '<h3>'+esc(row.countryName)+' · '+esc(row.country)+'</h3>'+
         (row.routeId?'<p>'+esc(row.routeId)+'</p>':'<p>No promoted Manufacturing routeId</p>')+
-        '<ul>'+blockers+'</ul>'+
+        gateSections+
         '<div class="trigger">'+date+'<strong>'+esc(row.nextReview?.subject||'Official evidence review')+'</strong>'+
         '<div class="source-links">'+sources+'</div>'+details+'</div>'+
       '</article>';
