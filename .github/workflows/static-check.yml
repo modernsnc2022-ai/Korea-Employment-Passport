@@ -159,7 +159,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('research/exam_card_source_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/manifest.webmanifest','utf8'))"
       - name: Check Python monitor scripts
-        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py scripts/check_bqc_scopes.py scripts/check_beta_tracker.py scripts/check_beta_launch_readiness.py scripts/report_beta_progress.py scripts/assign_beta_slot.py scripts/parse_beta_interest.py scripts/record_beta_feedback.py scripts/record_zero_broker_evidence.py scripts/record_manufacturing_launch_check.py scripts/set_beta_release.py scripts/assign_worker_validator.py scripts/parse_worker_interest.py scripts/record_worker_interview.py scripts/publish_worker_evidence.py scripts/check_workplace_worker_evidence.py scripts/diagnose_source_volatility.py scripts/diagnose_changed_source_text.py scripts/test_source_normalization.py scripts/test_source_review_status.py scripts/check_country_pack_contract.py scripts/check_hrd_examnot_linkage.py scripts/check_myanmar_manufacturing_gate.py scripts/check_next_review_monitor_coverage.py
+        run: python -m py_compile scripts/check_official_sources.py scripts/write_source_review_status.py scripts/check_webapp_contract.py scripts/check_bqc_scopes.py scripts/check_beta_tracker.py scripts/check_beta_launch_readiness.py scripts/report_beta_progress.py scripts/assign_beta_slot.py scripts/parse_beta_interest.py scripts/record_beta_feedback.py scripts/record_zero_broker_evidence.py scripts/record_manufacturing_launch_check.py scripts/set_beta_release.py scripts/assign_worker_validator.py scripts/parse_worker_interest.py scripts/check_outreach_send_guard.py scripts/record_worker_interview.py scripts/publish_worker_evidence.py scripts/check_workplace_worker_evidence.py scripts/diagnose_source_volatility.py scripts/diagnose_changed_source_text.py scripts/test_source_normalization.py scripts/test_source_review_status.py scripts/check_country_pack_contract.py scripts/check_hrd_examnot_linkage.py scripts/check_myanmar_manufacturing_gate.py scripts/check_next_review_monitor_coverage.py
       - name: Self-test official-source normalization
         run: python scripts/test_source_normalization.py
       - name: Self-test source-review pending baseline status
@@ -202,6 +202,8 @@ jobs:
         run: python scripts/assign_worker_validator.py --self-test
       - name: Self-test E-9 worker interest parser
         run: python scripts/parse_worker_interest.py --self-test
+      - name: Self-test outreach send guard
+        run: python scripts/check_outreach_send_guard.py --self-test
       - name: Self-test worker interview recorder
         run: python scripts/record_worker_interview.py --self-test
       - name: Self-test worker evidence publisher
