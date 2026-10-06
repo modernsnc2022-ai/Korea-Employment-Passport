@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -187,6 +187,13 @@
       "status": "legacy_email_invalid_do_not_retry",
       "observedDate": "2026-10-02",
       "nextAction": "use_only_newly_verified_current_contact_or_social_channel"
+    }
+  ],
+  "officialApplicantReferral": [
+    {
+      "sourceCode": "kp2mi_sending_applicant",
+      "channel": "email",
+      "status": "gmail_draft_prepared_not_sent"
     }
   ]
 }
