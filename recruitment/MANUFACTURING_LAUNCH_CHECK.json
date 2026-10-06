@@ -1,11 +1,15 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "scope": "2026 Manufacturing online job-application detailed notice",
-  "checkedAt": "2026-10-04",
+  "checkedAt": "2026-10-06",
   "result": "no_current_manufacturing_job_application_notice",
   "primaryIndex": "https://kp2mi.go.id/gtog-korea/info",
   "officialEvidence": [
+    {
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "interpretation": "Official 2026 Manufacturing/Fisheries recruitment notice verifies a current-cycle pre-job baseline for 2026 graduates: MCU I at a KP2MI-listed health facility, psychology through HIMPSI, and direct result entry to Sisko P2MI by the provider/HIMPSI. It is not the missing Manufacturing-specific detailed online job-application checklist/form notice."
+    },
     {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
       "interpretation": "2026 Manufacturing/Fisheries EPS-TOPIK registration notice; not a Manufacturing online job-application detail notice."
@@ -22,5 +26,27 @@
     "job_edit",
     "job_submit"
   ],
-  "releaseRule": "If a Manufacturing-specific 2026 online job-application notice is found, change result to notice_found_review_required and do not OPEN until structured rules and launch checks are updated."
+  "releaseRule": "If a Manufacturing-specific 2026 online job-application notice is found, change result to notice_found_review_required and do not OPEN until structured rules and launch checks are updated.",
+  "sameDayOfficialRecheck": {
+    "status": "completed_no_detailed_manufacturing_notice_found",
+    "checkedAt": "2026-10-06",
+    "queryScope": "KP2MI G-to-G Korea official index and official 2026 Manufacturing/Fisheries recruitment evidence",
+    "repeatOnActualReleaseDay": true
+  },
+  "verifiedBaseline": {
+    "status": "process_baseline_verified_exact_submission_rules_held",
+    "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+    "facts": [
+      "MCU I official-provider path verified for 2026 graduates",
+      "HIMPSI psychology path verified for 2026 graduates",
+      "provider/HIMPSI direct result input to Sisko P2MI verified"
+    ],
+    "stillHeld": [
+      "job_docs",
+      "job_scan",
+      "job_name",
+      "job_edit",
+      "job_submit"
+    ]
+  }
 }

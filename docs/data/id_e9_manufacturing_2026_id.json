@@ -1,1 +1,120 @@
-{"eligibility":{"title":"Cek kelayakan","action":"Periksa usia, pendidikan, riwayat tinggal/deportasi, penglihatan warna, dan persyaratan pada pengumuman resmi yang berlaku."},"registration":{"title":"Pendaftaran online Sisko P2MI","action":"Siapkan data dan lakukan pendaftaran melalui Sisko P2MI sesuai petunjuk resmi yang berlaku."},"exam_fee":{"title":"Pembayaran biaya EPS-TOPIK","action":"Pastikan jumlah, penerima, dan kode pembayaran sesuai pengumuman resmi sebelum membayar.","warning":"Jangan membayar biaya tidak resmi dengan janji pasti mendapat pekerjaan."},"biometric":{"title":"Perekaman sidik jari dan foto","action":"Datang sendiri ke jadwal biometrik resmi dengan dokumen asli yang dipersyaratkan."},"document_verify":{"title":"Verifikasi dokumen pendaftaran","action":"Periksa kualitas scan dan kecocokan data sebelum verifikasi resmi."},"exam_card":{"title":"Cetak kartu ujian","action":"Cetak kartu ujian setelah lolos verifikasi dan periksa kembali data identitas."},"eps_topik":{"title":"Ujian EPS-TOPIK","action":"Ikuti ujian Bahasa Korea resmi dari HRD Korea.","warning":"Lulus tahap pertama bukan kelulusan akhir dan tidak menjamin penempatan kerja."},"skill_competency":{"title":"Skill Test + Competency Test","action":"Persiapkan kekuatan fisik, wawancara, kemampuan dasar, dan bukti kompetensi yang diakui."},"final_selection":{"title":"Seleksi akhir sistem poin","action":"Periksa hasil akhir resmi. Seleksi dilakukan berdasarkan peringkat nilai sesuai ketentuan siklus."},"psychology_pre_job":{"title":"Pemeriksaan psikologi sebelum lamaran","action":"Untuk lulusan 2026 yang terkena aturan ini, selesaikan pemeriksaan psikologi resmi sebelum MCU I dan lamaran online."},"mcu1":{"title":"Medical Check Up I","action":"Lakukan MCU I hanya melalui fasilitas kesehatan yang diakui sesuai aturan resmi yang berlaku."},"job_application":{"title":"Pengajuan lamaran kerja online","action":"Jangan kirim lamaran memakai daftar dokumen sektor lain. Tunggu pengumuman resmi lamaran online Manufaktur 2026 dari KP2MI, lalu ikuti pengumuman itu di Sisko P2MI.","warning":"Pengumuman lamaran online 19 Agustus 2026 yang sudah terverifikasi adalah untuk sektor Perikanan, bukan Manufaktur. Jangan menyalinnya sebagai aturan Manufaktur."},"roster":{"title":"Roster pencari kerja","action":"Pantau status roster dan pastikan nomor telepon serta email tetap aktif.","warning":"Masuk roster tidak berarti pasti dipilih perusahaan."},"employer_selection":{"title":"Pemilihan oleh perusahaan Korea","action":"Tunggu proses pemilihan perusahaan melalui sistem EPS resmi.","warning":"Perantara swasta tidak dapat menjamin secara resmi bahwa Anda akan dipilih perusahaan."},"slc":{"title":"Standard Labour Contract (SLC)","action":"Periksa perusahaan, upah, jam kerja, akomodasi, dan potongan sebelum mengambil keputusan."},"post_slc_requirements":{"title":"Psikologi / MCU II setelah SLC bila diwajibkan","action":"Ikuti pengumuman khusus kelompok SLC Anda dan selesaikan persyaratan psikologi/MCU II yang diwajibkan."},"visa_docs":{"title":"Paket dokumen visa","action":"Gunakan checklist resmi terbaru dan pastikan semua data identitas konsisten sebelum proses visa."},"predeparture_training":{"title":"Persiapan OPP / pra-keberangkatan","action":"Selesaikan seluruh pendidikan dan checklist pra-keberangkatan yang diwajibkan."},"mcu3_departure":{"title":"Pemeriksaan kesehatan akhir sebelum berangkat","action":"Ikuti pengumuman panggilan keberangkatan terbaru untuk MCU-III atau pemeriksaan kesehatan lengkap ulang bila diwajibkan sebelum penerbangan.","warning":"Jenis pemeriksaan akhir bergantung pada masa berlaku MCU sebelumnya dan pengumuman keberangkatan yang berlaku."},"departure":{"title":"Berangkat ke Korea","action":"Selesaikan checklist keberangkatan resmi dan masuk Korea sesuai jadwal yang ditetapkan."},"korea_entry_training":{"title":"Masuk Korea + pendidikan kerja","action":"Setelah tiba, ikuti pendidikan kerja dan pemeriksaan yang diwajibkan sebelum diserahkan ke perusahaan."},"employer_handover":{"title":"Penyerahan ke perusahaan","action":"Konfirmasi lokasi kerja, akomodasi, dan kontak darurat sebelum penyerahan ke perusahaan."},"residence_registration":{"title":"Registrasi orang asing / Residence Card","action":"Jika tinggal di Korea lebih dari 90 hari, lakukan registrasi orang asing pada kantor imigrasi yang berwenang atas tempat tinggal Anda dalam 90 hari sejak masuk Korea.","warning":"Jangan menunggu sampai batas akhir; data tempat kerja atau tempat tinggal mungkin diperlukan."},"eps_insurance_check":{"title":"Periksa asuransi wajib EPS","action":"Pastikan setiap asuransi EPS yang diwajibkan sudah didaftarkan oleh pihak yang bertanggung jawab dalam batas waktu yang berlaku.","warning":"Kewajiban asuransi pihak perusahaan dan pekerja berbeda. Jangan membayar perantara untuk menggantikan proses resmi."},"first_payroll_check":{"title":"Periksa gaji pertama","action":"Bandingkan slip gaji dan uang yang benar-benar masuk ke rekening dengan SLC, jam kerja, potongan, dan upah minimum yang berlaku.","warning":"Upah minimum Korea tahun 2026 adalah KRW 10.320 per jam; hak aktual bergantung pada jam kerja dan aturan upah yang berlaku."},"labor_support_ready":{"title":"Siap melaporkan masalah ketenagakerjaan","action":"Simpan jalur resmi 1350 dan Labor Portal serta bukti slip gaji, transfer bank, catatan kehadiran, dan kontrak jika muncul masalah upah atau ketenagakerjaan."},"employment_maintenance":{"title":"Pemeliharaan status kerja & kesiapan pindah tempat kerja","action":"Jika muncul alasan yang diakui untuk pindah tempat kerja, gunakan EPS atau pusat ketenagakerjaan resmi dan patuhi tenggat yang berlaku.","warning":"Pindah tempat kerja bersifat bersyarat dan sensitif terhadap tenggat. Jangan mengandalkan calo untuk membuat atau menjamin perpindahan."}}
+{
+  "eligibility": {
+    "title": "Cek kelayakan",
+    "action": "Periksa usia, pendidikan, riwayat tinggal/deportasi, penglihatan warna, dan persyaratan pada pengumuman resmi yang berlaku."
+  },
+  "registration": {
+    "title": "Pendaftaran online Sisko P2MI",
+    "action": "Siapkan data dan lakukan pendaftaran melalui Sisko P2MI sesuai petunjuk resmi yang berlaku."
+  },
+  "exam_fee": {
+    "title": "Pembayaran biaya EPS-TOPIK",
+    "action": "Pastikan jumlah, penerima, dan kode pembayaran sesuai pengumuman resmi sebelum membayar.",
+    "warning": "Jangan membayar biaya tidak resmi dengan janji pasti mendapat pekerjaan."
+  },
+  "biometric": {
+    "title": "Perekaman sidik jari dan foto",
+    "action": "Datang sendiri ke jadwal biometrik resmi dengan dokumen asli yang dipersyaratkan."
+  },
+  "document_verify": {
+    "title": "Verifikasi dokumen pendaftaran",
+    "action": "Periksa kualitas scan dan kecocokan data sebelum verifikasi resmi."
+  },
+  "exam_card": {
+    "title": "Cetak kartu ujian",
+    "action": "Cetak kartu ujian setelah lolos verifikasi dan periksa kembali data identitas."
+  },
+  "eps_topik": {
+    "title": "Ujian EPS-TOPIK",
+    "action": "Ikuti ujian Bahasa Korea resmi dari HRD Korea.",
+    "warning": "Lulus tahap pertama bukan kelulusan akhir dan tidak menjamin penempatan kerja."
+  },
+  "skill_competency": {
+    "title": "Skill Test + Competency Test",
+    "action": "Persiapkan kekuatan fisik, wawancara, kemampuan dasar, dan bukti kompetensi yang diakui."
+  },
+  "final_selection": {
+    "title": "Seleksi akhir sistem poin",
+    "action": "Periksa hasil akhir resmi. Seleksi dilakukan berdasarkan peringkat nilai sesuai ketentuan siklus."
+  },
+  "psychology_pre_job": {
+    "title": "Pemeriksaan psikologi sebelum lamaran",
+    "action": "Untuk lulusan 2026 yang terkena aturan ini, selesaikan pemeriksaan psikologi resmi sebelum MCU I dan lamaran online."
+  },
+  "mcu1": {
+    "title": "Medical Check Up I",
+    "action": "Lakukan MCU I hanya melalui fasilitas kesehatan yang diakui sesuai aturan resmi yang berlaku."
+  },
+  "job_application": {
+    "title": "Pengajuan lamaran kerja online",
+    "action": "Baseline siklus 2026 sudah terverifikasi: lulusan 2026 melakukan MCU I di fasilitas kesehatan yang tercantum/diakui KP2MI dan pemeriksaan psikologi melalui jalur HIMPSI; hasilnya diinput ke Sisko P2MI oleh fasilitas kesehatan/HIMPSI. Daftar dokumen Manufaktur, aturan scan, pengisian identitas, edit, dan langkah submit tetap HOLD sampai KP2MI menerbitkan pengumuman rinci lamaran online Manufaktur.",
+    "warning": "Pengumuman pendaftaran 2026 memverifikasi baseline MCU I + psikologi/Sisko P2MI, tetapi belum membuka checklist dan aturan pengisian lamaran Manufaktur. Pengumuman rinci 19 Agustus 2026 yang sudah terverifikasi hanya untuk Perikanan dan tidak boleh dipakai sebagai aturan Manufaktur."
+  },
+  "roster": {
+    "title": "Roster pencari kerja",
+    "action": "Pantau status roster dan pastikan nomor telepon serta email tetap aktif.",
+    "warning": "Masuk roster tidak berarti pasti dipilih perusahaan."
+  },
+  "employer_selection": {
+    "title": "Pemilihan oleh perusahaan Korea",
+    "action": "Tunggu proses pemilihan perusahaan melalui sistem EPS resmi.",
+    "warning": "Perantara swasta tidak dapat menjamin secara resmi bahwa Anda akan dipilih perusahaan."
+  },
+  "slc": {
+    "title": "Standard Labour Contract (SLC)",
+    "action": "Periksa perusahaan, upah, jam kerja, akomodasi, dan potongan sebelum mengambil keputusan."
+  },
+  "post_slc_requirements": {
+    "title": "Psikologi / MCU II setelah SLC bila diwajibkan",
+    "action": "Ikuti pengumuman khusus kelompok SLC Anda dan selesaikan persyaratan psikologi/MCU II yang diwajibkan."
+  },
+  "visa_docs": {
+    "title": "Paket dokumen visa",
+    "action": "Gunakan checklist resmi terbaru dan pastikan semua data identitas konsisten sebelum proses visa."
+  },
+  "predeparture_training": {
+    "title": "Persiapan OPP / pra-keberangkatan",
+    "action": "Selesaikan seluruh pendidikan dan checklist pra-keberangkatan yang diwajibkan."
+  },
+  "mcu3_departure": {
+    "title": "Pemeriksaan kesehatan akhir sebelum berangkat",
+    "action": "Ikuti pengumuman panggilan keberangkatan terbaru untuk MCU-III atau pemeriksaan kesehatan lengkap ulang bila diwajibkan sebelum penerbangan.",
+    "warning": "Jenis pemeriksaan akhir bergantung pada masa berlaku MCU sebelumnya dan pengumuman keberangkatan yang berlaku."
+  },
+  "departure": {
+    "title": "Berangkat ke Korea",
+    "action": "Selesaikan checklist keberangkatan resmi dan masuk Korea sesuai jadwal yang ditetapkan."
+  },
+  "korea_entry_training": {
+    "title": "Masuk Korea + pendidikan kerja",
+    "action": "Setelah tiba, ikuti pendidikan kerja dan pemeriksaan yang diwajibkan sebelum diserahkan ke perusahaan."
+  },
+  "employer_handover": {
+    "title": "Penyerahan ke perusahaan",
+    "action": "Konfirmasi lokasi kerja, akomodasi, dan kontak darurat sebelum penyerahan ke perusahaan."
+  },
+  "residence_registration": {
+    "title": "Registrasi orang asing / Residence Card",
+    "action": "Jika tinggal di Korea lebih dari 90 hari, lakukan registrasi orang asing pada kantor imigrasi yang berwenang atas tempat tinggal Anda dalam 90 hari sejak masuk Korea.",
+    "warning": "Jangan menunggu sampai batas akhir; data tempat kerja atau tempat tinggal mungkin diperlukan."
+  },
+  "eps_insurance_check": {
+    "title": "Periksa asuransi wajib EPS",
+    "action": "Pastikan setiap asuransi EPS yang diwajibkan sudah didaftarkan oleh pihak yang bertanggung jawab dalam batas waktu yang berlaku.",
+    "warning": "Kewajiban asuransi pihak perusahaan dan pekerja berbeda. Jangan membayar perantara untuk menggantikan proses resmi."
+  },
+  "first_payroll_check": {
+    "title": "Periksa gaji pertama",
+    "action": "Bandingkan slip gaji dan uang yang benar-benar masuk ke rekening dengan SLC, jam kerja, potongan, dan upah minimum yang berlaku.",
+    "warning": "Upah minimum Korea tahun 2026 adalah KRW 10.320 per jam; hak aktual bergantung pada jam kerja dan aturan upah yang berlaku."
+  },
+  "labor_support_ready": {
+    "title": "Siap melaporkan masalah ketenagakerjaan",
+    "action": "Simpan jalur resmi 1350 dan Labor Portal serta bukti slip gaji, transfer bank, catatan kehadiran, dan kontrak jika muncul masalah upah atau ketenagakerjaan."
+  },
+  "employment_maintenance": {
+    "title": "Pemeliharaan status kerja & kesiapan pindah tempat kerja",
+    "action": "Jika muncul alasan yang diakui untuk pindah tempat kerja, gunakan EPS atau pusat ketenagakerjaan resmi dan patuhi tenggat yang berlaku.",
+    "warning": "Pindah tempat kerja bersifat bersyarat dan sensitif terhadap tenggat. Jangan mengandalkan calo untuk membuat atau menjamin perpindahan."
+  }
+}

@@ -120,6 +120,42 @@ require(
     manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/info",
     "Manufacturing launch check must use the official KP2MI G-to-G Korea index",
 )
+baseline = route.get("jobApplicationBaselineEvidence", {})
+require(
+    baseline.get("status") == "verified_current_cycle_process_baseline_details_held",
+    "Indonesia job-application current-cycle baseline status must remain verified while exact submission details stay held",
+)
+require(
+    baseline.get("verifiedAt") == "2026-10-06",
+    "Indonesia job-application current-cycle baseline must preserve the 2026-10-06 verification date",
+)
+require(
+    set(baseline.get("heldExactQuestions", [])) == EXPECTED_JOB_HOLDS,
+    "Indonesia job-application baseline must preserve the locked five held exact questions",
+)
+require(
+    len(baseline.get("facts", [])) >= 4
+    and any("Sisko P2MI" in str(x) for x in baseline.get("facts", []))
+    and any("HIMPSI" in str(x) for x in baseline.get("facts", [])),
+    "Indonesia job-application baseline must preserve MCU/HIMPSI/Sisko process evidence",
+)
+require(
+    manufacturing_launch_check.get("checkedAt") == "2026-10-06",
+    "Manufacturing launch evidence must be refreshed on 2026-10-06",
+)
+same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
+require(
+    same_day.get("status") == "completed_no_detailed_manufacturing_notice_found"
+    and same_day.get("repeatOnActualReleaseDay") is True,
+    "Manufacturing launch check must record the completed 2026-10-06 recheck and require another check on release day",
+)
+verified_baseline = manufacturing_launch_check.get("verifiedBaseline", {})
+require(
+    verified_baseline.get("status") == "process_baseline_verified_exact_submission_rules_held"
+    and set(verified_baseline.get("stillHeld", [])) == EXPECTED_JOB_HOLDS,
+    "Manufacturing launch check must distinguish verified pre-job baseline from held submission rules",
+)
+
 job_stage = next((row for row in route.get("stages", []) if row.get("id") == "job_application"), {})
 require(
     job_stage.get("brokerReplacement") == "held_official_notice",
