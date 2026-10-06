@@ -48,17 +48,17 @@
     {
       "sourceCode": "lpk_caranta",
       "channel": "email",
-      "status": "draft_not_yet_prepared"
+      "status": "gmail_draft_prepared_not_sent"
     },
     {
       "sourceCode": "ubt_eps_topik_app",
       "channel": "email",
-      "status": "draft_not_yet_prepared"
+      "status": "gmail_draft_prepared_not_sent"
     },
     {
       "sourceCode": "topiknow_app",
       "channel": "email",
-      "status": "draft_not_yet_prepared"
+      "status": "gmail_draft_prepared_not_sent"
     }
   ]
 }
