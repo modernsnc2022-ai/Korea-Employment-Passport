@@ -14,6 +14,7 @@
       ['Beta HOLD',s.betaHold],
       ['Research HOLD',s.researchHold],
       ['Pending Manufacturing verification',s.pendingManufacturingVerification],
+      ['Future designated · no 2026 route',s.futureDesignatedNo2026Route],
       ['Beta-ready',s.betaReady]
     ];
     summaryEl.innerHTML=summary.map(([label,value])=>'<article class="summary-card"><span>'+esc(label)+'</span><strong>'+esc(value)+'</strong></article>').join('');
@@ -33,7 +34,7 @@
     });
     listEl.innerHTML=rows.map(row=>{
       const state=row.packState||'unknown';
-      const badgeClass=row.nextReview?.type==='dated_official_review'?'dated':state==='pending_manufacturing_verification'?'pending':state==='beta_hold'?'beta':'';
+      const badgeClass=row.nextReview?.type==='dated_official_review'?'dated':state==='pending_manufacturing_verification'?'pending':state==='future_designated'?'future':state==='beta_hold'?'beta':'';
       const date=row.nextReview?.date?'<div class="trigger-date">Review date: '+esc(row.nextReview.date)+'</div>':'';
       const blockers=(row.blockers||[]).map(x=>'<li>'+esc(x)+'</li>').join('');
       const releaseGates=(row.releaseGates||[]).map(x=>'<li>'+esc(x)+'</li>').join('');
