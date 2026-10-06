@@ -43,10 +43,14 @@ REQUEST_HEADERS = {
     "Accept-Language": "ko,en;q=0.8,id;q=0.7",
 }
 REQUEST_TIMEOUT_SECONDS = 12
-NORMALIZATION_REVISION = "cross-site-volatile-widget-v3"
+NORMALIZATION_REVISION = "cross-site-volatile-widget-v4"
 KP2MI_DYNAMIC_DATE_RE = re.compile(
     r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
-    r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b",
+    r"(?:"
+    r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}"
+    r"|"
+    r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}"
+    r")\b",
     flags=re.I,
 )
 
