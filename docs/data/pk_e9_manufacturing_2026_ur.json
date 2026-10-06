@@ -1,15 +1,15 @@
 {
   "eligibility": {
     "title": "اہلیت کی جانچ",
-    "action": "مکمل اہلیت کے لیے موجودہ پاکستان Manufacturing سرکاری نوٹس استعمال کریں۔ عمومی 9th Point System صفحات کو Manufacturing-specific نہیں مانا جائے گا جب تک sector linkage ثابت نہ ہو۔"
+    "action": "OEC کے موجودہ EPS-TOPIK 2026 pre-registration portal پر تاریخ پیدائش کی حد 1986-03-31 سے 2008-03-30 دکھائی گئی ہے۔ اسے Pakistan country-level portal snapshot سمجھیں؛ Manufacturing-specific اہلیت کے لیے sector linkage ابھی درکار ہے۔"
   },
   "registration": {
     "title": "9th Point System رجسٹریشن",
-    "action": "اسلام آباد اور کراچی کے سرکاری صفحات پر رجسٹریشن 2026-03-31 سے 2026-04-08 تک تصدیق شدہ ہے، لیکن عنوان میں Manufacturing واضح نہیں۔"
+    "action": "HRD Korea کے Islamabad/Karachi 9th Point System صفحات پر 2026-03-31 سے 2026-04-08 رجسٹریشن تصدیق شدہ ہے۔ OEC کا 2026 registration/schedule portal بھی فعال ہے، مگر Manufacturing linkage ابھی HOLD ہے۔"
   },
   "exam_fee": {
     "title": "درخواست / امتحان فیس",
-    "action": "Pakistan Manufacturing کی cycle-specific فیس ابھی تصدیق شدہ نہیں۔"
+    "action": "OEC 2026 pre-registration form PKR 1,000 paid challan دکھاتا ہے۔ KEP اسے صرف OEC pre-registration/application challan مانتا ہے، EPS-TOPIK exam fee نہیں۔ Manufacturing-specific exam fee ابھی غیر تصدیق شدہ ہے۔"
   },
   "biometric": {
     "title": "شناخت کی تصدیق",
@@ -17,15 +17,15 @@
   },
   "document_verify": {
     "title": "رجسٹریشن دستاویزات کی جانچ",
-    "action": "Manufacturing passport/photo/upload/payment checklist براہ راست سرکاری Manufacturing نوٹس ملنے تک HOLD ہے۔"
+    "action": "OEC 2026 pre-registration portal applicant/contact fields اور paid challan image (JPEG/JPG/PNG، زیادہ سے زیادہ 200 KB) مانگتا ہے۔ یہ portal snapshot ہے، مکمل Manufacturing checklist نہیں۔"
   },
   "exam_card": {
     "title": "امتحان اعلان / داخلہ",
-    "action": "اسلام آباد اور کراچی 9th Point System صفحات پر test announcement ابھی undecided ہے۔"
+    "action": "OEC کا 2026 'Announcement of Test Venues and Schedules' KLT Number کے ذریعے انفرادی test venue/schedule lookup دیتا ہے۔ Manufacturing کا public bulk date range ابھی promote نہیں کیا گیا۔"
   },
   "eps_topik": {
     "title": "EPS-TOPIK — Pakistan Manufacturing",
-    "action": "سرکاری شہر والے صفحات General CBT اور Point System ہیں، لیکن Manufacturing sector linkage ابھی ثابت نہیں۔"
+    "action": "OEC 2026 portal پر انفرادی EPS-TOPIK test venue/schedule lookup فعال ہے۔ HRD Korea Islamabad/Karachi city pages کی Manufacturing sector linkage ابھی ثابت ہونا باقی ہے۔"
   },
   "skill_competency": {
     "title": "Skills Test — Round 2",
