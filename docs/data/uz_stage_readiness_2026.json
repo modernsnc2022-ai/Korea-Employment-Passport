@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "uz-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -58,21 +58,38 @@
     "postSelectionVisaDeparture": {
       "status": "research_pending_current_cycle",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "countryLevelPostSelectionEvidence": {
+      "status": "verified_2026_country_process_not_9th_specific",
+      "contractProcessing": {
+        "status": "verified_country_level",
+        "manufacturingEmploymentContracts": 213,
+        "selectionPeriod": "2026-08-05 through 2026-08-11",
+        "publicationDate": "2026-08-14",
+        "sourceUrl": "https://gov.uz/en/migration/news/view/206397",
+        "boundary": "Do not claim all 213 contracts belong specifically to examNot=9."
+      },
+      "predepartureTraining": {
+        "status": "verified_country_process",
+        "publicationDate": "2026-01-13",
+        "sourceUrl": "https://gov.uz/en/migration/news/view/119684",
+        "boundary": "Exact 9th-cycle date/location/fees and individual assignment remain notice-specific."
+      }
     }
   },
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
       "cycle-specific fee/document checklist not reconstructed",
-      "downstream medical/job-file/visa/training/departure exact rules not mapped"
+      "current 9th-cycle medical/job-file/visa/individual departure exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
-    "subject": "Uzbekistan 9th Manufacturing fee/document checklist and downstream medical/job-file/visa/training/departure notices",
+    "subject": "Uzbekistan 9th Manufacturing fee/document checklist and cycle-specific medical/job-file/visa/departure notices",
     "officialSources": [
+      "https://gov.uz/en/migration",
       "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
-      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001"
     ],
     "promoteOnlyWhen": [
       "the source clearly identifies the current Uzbekistan 9th Manufacturing cycle",
@@ -80,5 +97,6 @@
       "official contact differences remain source-scoped"
     ]
   },
-  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json",
+  "postSelectionProcessEvidenceFile": "data/uz_postselection_process_2026.json"
 }
