@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -127,6 +127,38 @@
     ],
     "currentReview": {
       "reviewedAt": "2026-10-06",
+      "reviewedSourceIds": [
+        "mm_mol_eps_opportunity",
+        "mm_hrdk_schedule_index",
+        "mm_hrdk_skills_candidates",
+        "mm_hrdk_final_results"
+      ],
+      "sourceFindings": [
+        {
+          "sourceId": "mm_mol_eps_opportunity",
+          "sourceUrl": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+          "finding": "The current official EPS opportunity page contains historical Manufacturing materials and other EPS materials, but no direct current 2026 Manufacturing-labelled recruitment, registration, schedule, skills/result or final-result artifact was captured in this review.",
+          "qualifiesForPromotion": false
+        },
+        {
+          "sourceId": "mm_hrdk_schedule_index",
+          "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+          "finding": "Current reviewed HRD Korea schedule evidence did not provide a direct Myanmar 2026 Manufacturing-labelled schedule artifact. The captured 2026 Myanmar rows remain Agriculture/Livestock, Construction and Forestry.",
+          "qualifiesForPromotion": false
+        },
+        {
+          "sourceId": "mm_hrdk_skills_candidates",
+          "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+          "finding": "No directly reviewed current Myanmar 2026 Manufacturing-labelled skills-candidate artifact was captured.",
+          "qualifiesForPromotion": false
+        },
+        {
+          "sourceId": "mm_hrdk_final_results",
+          "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+          "finding": "No directly reviewed current Myanmar 2026 Manufacturing-labelled final-result artifact was captured.",
+          "qualifiesForPromotion": false
+        }
+      ],
       "qualifyingArtifacts": [],
       "observedCurrentOfficialSectors": [
         "Agriculture·Livestock",
@@ -141,7 +173,13 @@
           "promotable": false
         }
       ],
-      "conclusion": "No direct official 2026 Manufacturing-labelled recruitment, registration, schedule, skills/result or final-result artifact is captured. Route promotion remains blocked."
+      "baselineReviewDecision": {
+        "currentSourceVersionsReviewed": true,
+        "baselineAcceptanceAllowed": true,
+        "routePromotionAllowed": false,
+        "rule": "Accepting source fingerprints means only that these current official page versions were reviewed. It does not verify a 2026 Myanmar Manufacturing route and must not alter route status."
+      },
+      "conclusion": "All four configured Myanmar official watch targets were fetched and reviewed on 2026-10-06. No direct official 2026 Manufacturing-labelled qualifying artifact was captured. The source versions may be accepted as the monitored baseline, while Manufacturing route promotion remains blocked."
     }
   },
   "monitoring": {
@@ -151,6 +189,8 @@
       "mm_hrdk_skills_candidates",
       "mm_hrdk_final_results"
     ],
-    "rule": "Any monitored source change requires review. A changed page never auto-promotes the route; promotion requires promotionGate.requiredAll to be satisfied and reviewed."
+    "rule": "Any monitored source change requires review. A changed page never auto-promotes the route; promotion requires promotionGate.requiredAll to be satisfied and reviewed.",
+    "lastReviewedAt": "2026-10-06",
+    "baselineAcceptanceState": "reviewed_safe_to_accept_without_route_promotion"
   }
 }
