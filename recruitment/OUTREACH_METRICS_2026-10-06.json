@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "snapshotDate": "2026-10-06",
+  "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
+  "emailWave1": {
+    "window": "2026-10-01 through 2026-10-06",
+    "sentMessages": 33,
+    "distinctRecipientMailboxes": 29,
+    "distinctBouncedRecipientMailboxes": 4,
+    "meaningfulInboundReplies": 1,
+    "confirmedBetaInterestApplications": 0,
+    "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success."
+  },
+  "wave2": [
+    {
+      "sourceCode": "lpk_hana_korea",
+      "channel": "whatsapp",
+      "status": "manual_send_pending"
+    },
+    {
+      "sourceCode": "lpk_hanaman",
+      "channel": "email",
+      "status": "gmail_draft_prepared_not_sent"
+    },
+    {
+      "sourceCode": "mendunia_korea",
+      "channel": "whatsapp",
+      "status": "manual_send_pending"
+    },
+    {
+      "sourceCode": "korean_first",
+      "channel": "whatsapp",
+      "status": "manual_send_pending"
+    }
+  ],
+  "conversionPolicy": {
+    "applicationEvidence": "Count only a valid beta-interest application, not an outreach send, delivery, page visit or community-admin reply.",
+    "sourceAttribution": "Use only controlled non-identifying src codes from beta_recruitment_sources_v1.json.",
+    "bounceRule": "Do not retry a confirmed invalid mailbox without a newly verified official contact address.",
+    "channelRule": "Prefer admin-permission/community sharing and current EPS learner pools over repeated generic cold email."
+  }
+}

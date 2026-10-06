@@ -147,6 +147,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/mm_manufacturing_verification_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/company_services_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('recruitment/MANUFACTURING_LAUNCH_CHECK.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('recruitment/OUTREACH_METRICS_2026-10-06.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/departure_calls_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/tls_pins.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('monitor/reviewed_source_acceptance.json','utf8'))"
