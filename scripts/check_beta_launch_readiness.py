@@ -131,7 +131,7 @@ require(
 )
 baseline = route.get("jobApplicationBaselineEvidence", {})
 require(
-    baseline.get("status") == "verified_current_cycle_plus_safe_platform_baselines_exact_details_held",
+    baseline.get("status") == "verified_current_cycle_plus_three_safe_platform_baselines_two_exact_details_held",
     "Indonesia job-application baseline must distinguish current-cycle process evidence, safe platform baselines and exact HOLDs",
 )
 require(
