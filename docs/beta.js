@@ -86,6 +86,17 @@ function workerPanelOpen(){
     && Boolean(String(release.retrospectiveApprovedAt||'').trim());
 }
 
+function gmailComposeUrl(to,subject,body){
+  const params=new URLSearchParams({
+    view:'cm',
+    fs:'1',
+    to:String(to||''),
+    su:String(subject||''),
+    body:String(body||'')
+  });
+  return 'https://mail.google.com/mail/?'+params.toString();
+}
+
 function applicationText(){
   const stage=$('applicantStage').value;
   const stageTitle=selectedApplicantStageTitle();
@@ -162,6 +173,23 @@ $('betaApplicationForm').addEventListener('submit',(event)=>{
   const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
   const body=encodeURIComponent(applicationText());
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('gmailApplicationBtn').addEventListener('click',()=>{
+  const out=$('applicationResult');
+  if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
+    out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
+  }
+  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
+  }
+  const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
+  const url=gmailComposeUrl(email,'[KEP Beta Interest] Active EPS applicant',applicationText());
+  const opened=window.open(url,'_blank','noopener,noreferrer');
+  if(!opened){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
+  }
 });
 
 $('workerValidatorForm').addEventListener('submit',(event)=>{
