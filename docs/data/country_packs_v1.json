@@ -1,5 +1,5 @@
 {
-  "version": "1.12.1",
+  "version": "1.13.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -113,7 +113,7 @@
       "localizationFile": "data/th_e9_manufacturing_2026_th.json",
       "officialSendingAgency": "Department of Employment, Ministry of Labour",
       "officialSendingAgencyUrl": "https://www.doe.go.th/overseas",
-      "note": "Thailand Point System Round 18 is a verified 2026 recruitment cycle. Manufacturing target is 2,000; registration closed on 2026-07-06. KEP keeps the route on HOLD while current skills/result and downstream exact rules are mapped."
+      "note": "Thailand Point System Round 18 is a verified 2026 recruitment cycle. Manufacturing target is 2,000 and registration closed on 2026-07-06. HRD Korea skills-candidate rows are linked to Round 18 Manufacturing by examNot=57 (Bangkok) and examNot=64 (Udon Thani); DOE's 2026-10-19 local skills instructions, final result and downstream exact rules remain gated."
     },
     {
       "routeId": "bd-e9-manufacturing-2026",
@@ -181,7 +181,7 @@
       "localizationFile": "data/uz_e9_manufacturing_2026_uz.json",
       "officialSendingAgency": "Migration Agency under the Cabinet of Ministers of the Republic of Uzbekistan (AELM)",
       "officialSendingAgencyUrl": "https://migration.uz/",
-      "note": "HRD Korea verifies the 9th Uzbekistan Manufacturing Point System: registration 2026-03-09 through 2026-03-12, test announcement 2026-03-23, test period 2026-04-06 through 2026-04-22. Current skills/final-result and downstream exact rules remain gated."
+      "note": "HRD Korea verifies the 9th Uzbekistan Manufacturing Point System: registration 2026-03-09 through 2026-03-12, test announcement 2026-03-23 and test 2026-04-06 through 2026-04-22. Skills-candidate and final Point System result artifacts are linked to this cycle by official examNot=9; fee/documents and downstream exact rules remain gated."
     },
     {
       "routeId": "mn-e9-manufacturing-2026",
@@ -198,7 +198,7 @@
       "localizationFile": "data/mn_e9_manufacturing_2026_mn.json",
       "officialSendingAgency": "General Office for Labour and Welfare Service (GOLWS)",
       "officialSendingAgencyUrl": "https://www.hudulmur-halamj.gov.mn/",
-      "note": "HRD Korea verifies the 11th Mongolia Manufacturing Point System registration and test period. A 2026-08-28 Mongolia Point System pass-list entry exists, but KEP keeps final-result linkage gated until the artifact is tied explicitly to the 11th Manufacturing cycle. Special EPS-TOPIK remains separate."
+      "note": "HRD Korea verifies the 11th Mongolia Manufacturing Point System. The skills-candidate artifact published 2026-07-03 and final Point System result published 2026-08-28 both link to the 11th Manufacturing cycle by official examNot=33. Special EPS-TOPIK remains separate; fee/documents and downstream exact rules remain gated."
     },
     {
       "routeId": "cn-e9-manufacturing-2026",
@@ -215,7 +215,7 @@
       "localizationFile": "data/cn_e9_manufacturing_2026_zh.json",
       "officialSendingAgency": "Investment Promotion Agency of Ministry of Commerce of P.R China (CIPA)",
       "officialSendingAgencyUrl": "https://www.cipainvest.org.cn/",
-      "note": "HRD Korea verifies the China 6th Manufacturing Point System registration, test announcement and test period. Generic China skills-candidate entries dated 2026-09-30 are not auto-linked to this exact cycle; fee, final result and downstream exact rules remain gated."
+      "note": "HRD Korea verifies the China 6th Manufacturing Point System. The 2026-09-30 skills-candidate row with examNot=19 is linked to the 6th Manufacturing cycle; examNot=85 is a separate row and is excluded. Final result, fee/documents and downstream exact rules remain gated."
     },
     {
       "routeId": "kh-e9-manufacturing-2026",
@@ -232,7 +232,7 @@
       "localizationFile": "data/kh_e9_manufacturing_2026_km.json",
       "officialSendingAgency": "Manpower Training and Overseas Sending Board (MTOSB)",
       "officialSendingAgencyUrl": "https://www.mtosb.gov.kh/",
-      "note": "HRD Korea directly verifies the 12th Cambodia Manufacturing Point System: registration 2026-05-22 through 2026-05-25, test announcement 2026-06-12, test period 2026-06-22 through 2026-07-15. August skills/final-result artifacts are official but still require explicit Manufacturing cycle/sector linkage."
+      "note": "HRD Korea directly verifies the 12th Cambodia Manufacturing Point System. The 2026-08-06 skills-candidate row and 2026-08-21 final Point System result both carry examNot=46 and are linked to the 12th Manufacturing cycle. The public '2th' label is not normalized into '12th'; fee/documents and downstream exact rules remain gated."
     },
     {
       "routeId": "tl-e9-manufacturing-2026",
@@ -249,7 +249,7 @@
       "localizationFile": "data/tl_e9_manufacturing_2026_tet.json",
       "officialSendingAgency": "National Directorate of Overseas Employment (NDOE)",
       "officialSendingAgencyUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "note": "HRD Korea directly verifies the 9th Timor-Leste Manufacturing Dili schedule: registration 2026-03-09 through 2026-03-18, test announcement 2026-06-09 and test 2026-06-18 through 2026-07-30. Baucau Manufacturing, generic skills-candidate entries and downstream exact rules remain gated."
+      "note": "HRD Korea directly verifies the 9th Timor-Leste Manufacturing schedules for Dili and Baucau. Skills-candidate rows are linked by official examNot=42 (Dili) and examNot=43 (Baucau); Fishery examNot=44/45 remain excluded. Final result, fee/documents and downstream exact rules remain gated."
     },
     {
       "routeId": "pk-e9-manufacturing-2026",
@@ -283,7 +283,7 @@
       "localizationFile": "data/tj_e9_manufacturing_2026_tg.json",
       "officialSendingAgency": "Agency of Overseas Employment",
       "officialSendingAgencyUrl": "https://mehnat.tj/",
-      "note": "Manufacturing sector linkage is cross-source verified: the Tajikistan Ministry official Manufacturing notice and HRD Korea 2nd Point System share registration 2026-03-02 through 2026-03-05. The local notice also verifies a 330 somoni exam fee and registration documents."
+      "note": "Tajikistan's Ministry official Manufacturing notice and HRD Korea 2nd Point System cross-verify the current route. Skills-candidate and final result are linked by examNot=10. Official Ministry EPS guidance also states Agency registration/dispatch services are free and without intermediaries; post-selection medical/job-file/visa/training/departure exact rules remain gated."
     },
     {
       "routeId": "kg-e9-manufacturing-2026",
@@ -300,7 +300,7 @@
       "localizationFile": "data/kg_e9_manufacturing_2026_ky.json",
       "officialSendingAgency": "The Center for Employment of Citizens Abroad (CEC)",
       "officialSendingAgencyUrl": "https://migrant.kg/",
-      "note": "Manufacturing sector linkage is cross-source verified: the Kyrgyz official February 2026 Manufacturing notice and HRD Korea 13th Point System Bishkek/Osh schedules share registration 2026-02-23 through 2026-02-27. Fee, registration documents, Skills Test and June post-selection medical/roster instructions are verified; SLC/visa/training/departure exact rules remain gated."
+      "note": "Kyrgyzstan's official February 2026 Manufacturing notice and HRD Korea 13th Point System Bishkek/Osh schedules are cross-verified. Fee, registration documents, Skills Test and June post-selection medical/roster instructions are verified; 2026 official reports also verify the country-level sequence contract received → 5-day pre-departure training → official departure. Exact SLC handling, visa checklist/fees and individual departure assignment remain gated."
     }
   ],
   "sharedKoreaCoreFile": "data/korea_side_e9_core_2026.json"
