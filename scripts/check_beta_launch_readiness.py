@@ -76,6 +76,7 @@ beta_feedback_recorder = (ROOT / "scripts/record_beta_feedback.py").read_text(en
 beta_progress_reporter = (ROOT / "scripts/report_beta_progress.py").read_text(encoding="utf-8")
 zero_broker_recorder = (ROOT / "scripts/record_zero_broker_evidence.py").read_text(encoding="utf-8")
 manufacturing_check_recorder = (ROOT / "scripts/record_manufacturing_launch_check.py").read_text(encoding="utf-8")
+outreach_send_guard = (ROOT / "scripts/check_outreach_send_guard.py").read_text(encoding="utf-8")
 
 stage_ids = [row.get("id") for row in route.get("stages", [])]
 require(stage_ids == EXPECTED_STAGES, "supported route must contain the locked 27 stages in exact order")
@@ -579,6 +580,11 @@ require(
     and "Tidak ada jaminan kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan." in beta_js,
     "community share copy must preserve worker-access and no-guarantee boundaries",
 )
+require("OUTREACH_SEND_GUARD_SELF_TEST_PASS" in outreach_send_guard,
+        "fail-closed outreach send guard must exist and expose a self-test")
+require("already_sent_or_closed" in outreach_send_guard
+        and "followup_not_explicitly_ready" in outreach_send_guard,
+        "outreach guard must block duplicate initial sends and unapproved follow-ups")
 require("BETA_INTEREST_PARSE_SELF_TEST_PASS" in beta_interest_parser,
         "privacy-safe tester-interest parser must exist and expose a self-test")
 require("RAW_BODY_NOT_STORED=true" in beta_interest_parser,
