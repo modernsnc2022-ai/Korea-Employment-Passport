@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "tl-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -14,7 +14,15 @@
       "note": "Registration 2026-03-09~03-18; announcement 2026-06-09; test 2026-06-18~07-30."
     },
     "baucauSchedule": {
-      "status": "discovery_only_direct_detail_pending",
+      "status": "verified_direct_official",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=43&examYear=2026&lang=ko&lcnsId=001",
+      "title": "The 9th recruitment of the point system in East Timor(Manufacturing)_Baucau",
+      "registrationPeriod": "2026-03-09 through 2026-03-18",
+      "testAnnouncementDate": null,
+      "testAnnouncementStatus": "undecided",
+      "testPeriod": "2026-08-06 through 2026-08-07",
+      "testFormat": "General CBT",
+      "pointSystem": true,
       "evidenceFile": "data/tl_baucau_discovery_2026.json"
     },
     "skillsCandidates": {
@@ -47,7 +55,6 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "Baucau direct official schedule detail not captured",
       "generic 2026-09-22 skills-candidate entries not linked by site/sector",
       "cycle-specific fee/document/final-result/downstream exact rules not mapped"
     ]
