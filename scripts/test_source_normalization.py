@@ -36,7 +36,7 @@ def main():
         "https://example.gov/notice",
     )
     require(non_kp2mi.startswith("Tuesday, 6 October 2026"),"date normalization must be scoped to KP2MI")
-        mm_a=normalize_source_text(
+    mm_a=normalize_source_text(
         "Users Today : 67 Views This Month : 5215 Your IP Address : 158.23.190.67 EPS Manufacturing notice",
         "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
     )
