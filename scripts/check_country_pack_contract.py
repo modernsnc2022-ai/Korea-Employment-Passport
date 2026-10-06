@@ -769,7 +769,7 @@ require('href="readiness.html"' in countries,"countries page must link readiness
 require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
 require("country_readiness_dashboard_2026.json" in readiness_js,"readiness renderer must load the readiness dashboard data")
 require("No promoted Manufacturing routeId" in readiness_js,"readiness renderer must visibly distinguish pending countries")
-require('href="kg.html"' in countries and 'href="mm.html"' not in countries,"Kyrgyzstan must be promoted while Myanmar remains pending")
+require('href="kg.html"' in countries and 'href="mm.html"' in countries,"Kyrgyzstan must stay promoted while Myanmar exposes only a pending verification preview")
 require("PENDING MANUFACTURING VERIFICATION" in countries,"pending-country UI must clearly preserve the remaining unverified route state")
 require("Research HOLD" in nepal and "Beta registration/access अहिले खुला छैन" in nepal and "2026-07-21" in nepal,"Nepal page must visibly keep beta closed while acknowledging the verified 2026 notice")
 require("2026 EXACT FACTS" in nepal and "US$28" in nepal and "5,000" in nepal,"Nepal preview must expose verified first-phase facts without opening beta")
