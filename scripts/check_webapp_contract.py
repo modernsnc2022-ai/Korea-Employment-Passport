@@ -11,6 +11,8 @@ js = (ROOT / "docs" / "app-runtime.js").read_text(encoding="utf-8")
 css = (ROOT / "docs" / "app-shell.css").read_text(encoding="utf-8")
 route = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026.json").read_text(encoding="utf-8"))
 i18n = json.loads((ROOT / "docs" / "data" / "id_e9_manufacturing_2026_id.json").read_text(encoding="utf-8"))
+shared_korea_core = json.loads((ROOT / "docs" / "data" / "korea_side_e9_core_2026.json").read_text(encoding="utf-8"))
+shared_korea_core_id = json.loads((ROOT / "docs" / "data" / "korea_side_e9_core_2026_id.json").read_text(encoding="utf-8"))
 document_packs = json.loads((ROOT / "docs" / "data" / "document_packs_2026.json").read_text(encoding="utf-8"))
 exact_answers = json.loads((ROOT / "docs" / "data" / "exact_answer_rules_v1.json").read_text(encoding="utf-8"))
 document_examples = json.loads((ROOT / "docs" / "data" / "document_examples_v1.json").read_text(encoding="utf-8"))
@@ -22,6 +24,34 @@ monitor_sources = json.loads((ROOT / "monitor" / "sources.json").read_text(encod
 tls_pins = json.loads((ROOT / "monitor" / "tls_pins.json").read_text(encoding="utf-8-sig"))
 
 errors = []
+
+shared_korea_ids = [row.get("id") for row in shared_korea_core.get("stages", [])]
+expected_shared_korea_ids = [
+    "employer_selection","slc","predeparture_training","visa_docs","departure",
+    "korea_entry_training","employer_handover","residence_registration",
+    "eps_insurance_check","first_payroll_check","labor_support_ready","employment_maintenance",
+]
+if shared_korea_ids != expected_shared_korea_ids:
+    errors.append("shared Korea-side UI core must preserve the exact 12-stage order")
+if set(shared_korea_core_id.get("stages", {})) != set(expected_shared_korea_ids):
+    errors.append("Indonesian shared Korea-side localization must cover exactly the 12 shared stages")
+for sid in expected_shared_korea_ids:
+    localized = shared_korea_core_id.get("stages", {}).get(sid, {})
+    for field in ("title","fact","boundary"):
+        if not str(localized.get(field, "")).strip():
+            errors.append(f"shared Korea-side Indonesian localization missing {sid}:{field}")
+if "SHARED_KOREA_CORE_URL='data/korea_side_e9_core_2026.json'" not in js:
+    errors.append("runtime must load the shared Korea-side official core")
+if "SHARED_KOREA_CORE_ID_URL='data/korea_side_e9_core_2026_id.json'" not in js:
+    errors.append("runtime must load the Indonesian shared Korea-side localization")
+if "function renderSharedKoreaCore(stage)" not in js or "renderSharedKoreaCore(stage);" not in js:
+    errors.append("stage dialog must render shared Korea-side official facts")
+if 'id="sharedKoreaCoreSection"' not in html:
+    errors.append("stage dialog is missing the shared Korea-side official-rule panel")
+if "./data/korea_side_e9_core_2026.json" not in (ROOT / "docs" / "sw.js").read_text(encoding="utf-8"):
+    errors.append("service worker must cache the shared Korea-side official core")
+if "./data/korea_side_e9_core_2026_id.json" not in (ROOT / "docs" / "sw.js").read_text(encoding="utf-8"):
+    errors.append("service worker must cache the shared Korea-side Indonesian localization")
 
 # Indonesian-first UX guard: Korean may remain only as short official labels/terms,
 # never as the primary language of an Exact Answer.
