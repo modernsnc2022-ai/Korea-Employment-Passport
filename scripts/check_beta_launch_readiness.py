@@ -540,7 +540,7 @@ require(
         "website","epstopik_indonesia","topikly","apsan_hakwon","owie_epstopik",
         "lpk_samwon","jendela_asa","lpk_ggum","lpk_hana_korea","lpk_hanaman",
         "mendunia_korea","korean_first","lpk_maheswara","lpk_caranta",
-        "ubt_eps_topik_app","topiknow_app"
+        "ubt_eps_topik_app","topiknow_app","kamus_korea_app"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
