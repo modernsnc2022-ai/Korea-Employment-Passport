@@ -357,6 +357,7 @@ def main():
             changed_ids = {row.get("id") for row in changed if row.get("id")}
             expected_hashes = manifest.get("expectedBaselineSha256", {})
             expected_new_hashes = manifest.get("expectedNewSourceSha256", {})
+            expected_current_hashes = manifest.get("expectedCurrentSha256", {})
             changed_by_id = {row.get("id"): row for row in changed if row.get("id")}
             baseline_ids = set(expected_hashes)
             new_ids = set(expected_new_hashes)
@@ -378,6 +379,17 @@ def main():
                 not new_ids
                 or manifest.get("safety", {}).get("allowReviewedNewSources") is True
             )
+            require_current_hashes = manifest.get("safety", {}).get("requireExactCurrentHashes") is True
+            current_hashes_match = (
+                not require_current_hashes
+                or (
+                    set(expected_current_hashes) == baseline_ids
+                    and all(
+                        changed_by_id.get(source_id, {}).get("after") == expected_current_hashes.get(source_id)
+                        for source_id in baseline_ids
+                    )
+                )
+            )
             manifest_matches = (
                 manifest.get("active") is True
                 and manifest.get("normalizationRevision") == NORMALIZATION_REVISION
@@ -390,6 +402,7 @@ def main():
                 and baseline_matches
                 and new_sources_match
                 and reviewed_new_sources_allowed
+                and current_hashes_match
             )
             if manifest_matches:
                 review_manifest_accepted = True
