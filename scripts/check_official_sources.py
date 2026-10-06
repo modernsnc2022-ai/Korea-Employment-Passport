@@ -43,7 +43,7 @@ REQUEST_HEADERS = {
     "Accept-Language": "ko,en;q=0.8,id;q=0.7",
 }
 REQUEST_TIMEOUT_SECONDS = 12
-NORMALIZATION_REVISION = "kp2mi-current-page-date-v1"
+NORMALIZATION_REVISION = "cross-site-volatile-counter-v2"
 KP2MI_DYNAMIC_DATE_RE = re.compile(
     r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
     r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b",
@@ -182,6 +182,37 @@ def normalize_source_text(text, final_url):
     # Ignore volatile counters that change on every fetch but do not alter the official rule.
     normalized = re.sub(r"(조회(?:수)?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized)
     normalized = re.sub(r"(Views?|Hits?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized, flags=re.I)
+    if host == "mol.gov.mm":
+        # Myanmar Ministry of Labour pages expose request-specific traffic/IP widgets.
+        # They are presentation telemetry, not recruitment or eligibility content.
+        normalized = re.sub(
+            r"(Users\s+Today)\s*[:：]?\s*[0-9][0-9,]*",
+            r"\1 <dynamic-count>",
+            normalized,
+            flags=re.I,
+        )
+        normalized = re.sub(
+            r"(Views\s+This\s+Month)\s*[:：]?\s*[0-9][0-9,]*",
+            r"\1 <dynamic-count>",
+            normalized,
+            flags=re.I,
+        )
+        normalized = re.sub(
+            r"(Your\s+IP\s+Address)\s*[:：]?\s*(?:[0-9a-f:.]+)",
+            r"\1 <dynamic-ip>",
+            normalized,
+            flags=re.I,
+        )
+    if host == "colab.moha.gov.vn":
+        # COLAB's EPS notice index renders live visitor statistics in Vietnamese.
+        # Normalize only the labelled statistics block so notice text remains hashed.
+        for label in ("Trực tuyến", "Hôm nay", "Tháng này", "Tổng số"):
+            normalized = re.sub(
+                rf"({label})\s*[:：]?\s*[0-9][0-9,.]*",
+                rf"\1 <dynamic-count>",
+                normalized,
+                flags=re.I,
+            )
     # KP2MI detail pages render: HH.MM DD Month YYYY <view-count> TITLE...
     normalized = re.sub(
         r"(\b\d{2}\.\d{2}\s+\d{1,2}\s+[A-Za-z]+\s+\d{4})\s+[0-9][0-9,]*\b",
