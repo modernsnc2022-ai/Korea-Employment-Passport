@@ -204,6 +204,8 @@ jobs:
         run: python scripts/parse_worker_interest.py --self-test
       - name: Self-test outreach send guard
         run: python scripts/check_outreach_send_guard.py --self-test
+      - name: Audit outreach ledger against pre-send guard
+        run: python scripts/check_outreach_send_guard.py --audit
       - name: Self-test worker interview recorder
         run: python scripts/record_worker_interview.py --self-test
       - name: Self-test worker evidence publisher

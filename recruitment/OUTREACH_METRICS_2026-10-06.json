@@ -1,5 +1,5 @@
 {
-  "version": "3.3.0",
+  "version": "3.4.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -263,5 +263,121 @@
       "classification": "same_day_duplicate_outreach",
       "action": "do_not_recontact_until_inbound_reply_or_new_verified_need"
     }
-  ]
+  ],
+  "legacyEmailReconciliation": [
+    {
+      "sourceCode": "epstopik_indonesia",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "apsan_hakwon",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "owie_epstopik",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "lpk_samwon",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "jendela_asa",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "lpk_ggum",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "inkomunitas",
+      "status": "sent_2026-10-02_and_2026-10-04",
+      "channel": "email",
+      "recontactPolicy": "do_not_send_new_initial_outreach"
+    },
+    {
+      "sourceCode": "komihwa",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "hanguk_hakwon",
+      "status": "delivery_failed_2026-10-04",
+      "channel": "email",
+      "recontactPolicy": "use_only_newly_verified_contact"
+    },
+    {
+      "sourceCode": "lpk_jayabaya",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "leti_kien",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "seda",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "at_medan",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "wahoru_youtube",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "lpk_hanggugo",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "lpk_skm",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "lpk_kcc",
+      "status": "sent_2026-10-04",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "kmi_korea",
+      "status": "sent_2026-10-02_and_2026-10-05",
+      "channel": "email",
+      "recontactPolicy": "do_not_send_new_initial_outreach"
+    },
+    {
+      "sourceCode": "rumaisa_korsel",
+      "status": "sent_2026-10-05",
+      "channel": "email"
+    },
+    {
+      "sourceCode": "human_initiative_korea",
+      "status": "delivery_failed_2026-10-05",
+      "channel": "email",
+      "recontactPolicy": "use_only_newly_verified_contact"
+    },
+    {
+      "sourceCode": "gereja_sis_busan",
+      "status": "sent_2026-10-05",
+      "channel": "email"
+    }
+  ],
+  "ledgerReconciliationPolicy": {
+    "sourceOfTruth": "Gmail SENT/bounce evidence for legacy outreach plus current source catalog",
+    "rule": "A source recorded as sent, closed, or delivery_failed must not be treated as a fresh initial-outreach target. Follow-up requires an explicit follow-up-ready state.",
+    "updatedAt": "2026-10-06T20:40:00+09:00"
+  }
 }
