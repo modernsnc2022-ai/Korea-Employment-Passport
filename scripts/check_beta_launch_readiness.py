@@ -442,6 +442,20 @@ require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel mus
 require(worker_panel.get("separateFromPublicBeta") is True,
         "E-9 worker panel must remain separate from the active-applicant validation cohort")
 require(worker_panel.get("status") in {"hold", "open"}, "E-9 worker panel must use explicit hold/open status")
+require(worker_panel.get("intakeStatus") == "open",
+        "E-9 worker-panel interest intake must remain OPEN independently of panel access")
+require(worker_panel.get("interestIntakeIndependentFromPanelAccess") is True,
+        "E-9 worker interest intake must remain independent from panel access state")
+require(worker_panel.get("application", {}).get("opensOnlyWhenStatus") is None,
+        "E-9 worker interest intake must not be gated by panel OPEN state")
+require("function workerInterestOpen()" in beta_js
+        and "program.retrospectivePanel?.intakeStatus==='open'" in beta_js
+        and "$('workerValidatorForm').hidden=!workerIntakeOpen" in beta_js,
+        "worker interest form must be gated by interest intake, not worker-panel access")
+require("Recruitment source code: '+recruitmentSourceCode()" in beta_js,
+        "worker-panel interest email must preserve controlled recruitment source attribution")
+require("mengirim minat tidak mengaktifkan akses panel" in beta_page,
+        "worker-panel page must disclose that interest registration does not activate access")
 worker_release_state = release_decision.get("retrospectivePanel")
 worker_release_at = str(release_decision.get("retrospectiveApprovedAt") or "").strip()
 if worker_panel.get("status") == "hold":
