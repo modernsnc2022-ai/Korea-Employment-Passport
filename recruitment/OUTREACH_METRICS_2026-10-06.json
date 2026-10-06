@@ -1,16 +1,16 @@
 {
-  "version": "4.6.0",
+  "version": "4.7.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 66,
+    "sentMessages": 67,
     "distinctRecipientMailboxes": 56,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T21:26:00+09:00"
+    "lastUpdatedAt": "2026-10-06T22:32:00+09:00"
   },
   "wave2": [
     {
@@ -278,9 +278,10 @@
     {
       "sourceCode": "korea_indonesia_center_referral",
       "observedDate": "2026-10-06",
-      "count": 2,
+      "count": 3,
       "classification": "same_day_duplicate_outreach",
-      "action": "do_not_recontact_until_inbound_reply_or_new_verified_need"
+      "action": "do_not_recontact_until_inbound_reply_or_new_verified_need",
+      "lastObservedAt": "2026-10-06T22:32:00+09:00"
     },
     {
       "sourceCode": "kp2mi_departure_worker_referral",
@@ -404,7 +405,8 @@
   "ledgerReconciliationPolicy": {
     "sourceOfTruth": "Gmail SENT/bounce evidence for legacy outreach plus current source catalog",
     "rule": "A source recorded as sent, closed, or delivery_failed must not be treated as a fresh initial-outreach target. Follow-up requires an explicit follow-up-ready state.",
-    "updatedAt": "2026-10-06T20:40:00+09:00"
+    "updatedAt": "2026-10-06T22:32:00+09:00",
+    "preSendExecution": "Run scripts/check_outreach_send_guard.py --source <sourceCode> --mode initial before every new initial email. A non-zero exit blocks the send."
   },
   "wave7": [
     {
