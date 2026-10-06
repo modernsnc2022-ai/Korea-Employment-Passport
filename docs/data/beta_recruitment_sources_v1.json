@@ -1,5 +1,5 @@
 {
-  "version": "3.4.0",
+  "version": "3.5.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -91,6 +91,8 @@
     "ulsan_foreign_resident_center",
     "lpk_kongbuhapsida",
     "lpk_coa_bina_cerdas",
-    "bp3mi_yogya_applicant"
+    "bp3mi_yogya_applicant",
+    "lpk_yolsimhi",
+    "lpk_hanifa"
   ]
 }
