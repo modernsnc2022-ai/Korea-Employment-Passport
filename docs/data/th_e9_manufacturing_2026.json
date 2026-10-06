@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-point-system-round-18-manufacturing",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -22,7 +22,8 @@
     "Official online registration ran 2026-07-02 through 2026-07-06 and the fee was 960 THB through the designated Krungthai Bank channel.",
     "Manufacturing accepts male and female applicants; the verified Round 18 age window is 18–39, DOB 1986-07-03 through 2008-07-02.",
     "DOE announced 2026-08-10 for the Korean-test eligible list and 2026-10-19 for the skills-test eligible list.",
-    "Thailand also ran a separate Special EPS-TOPIK in 2026 for qualified returning workers; those facts are kept outside the Regular Round 18 rules."
+    "Thailand also ran a separate Special EPS-TOPIK in 2026 for qualified returning workers; those facts are kept outside the Regular Round 18 rules.",
+    "On 2026-10-06 HRD Korea's official Candidates for skills test index displayed six Thailand General CBT country-level artifacts titled Thailand the 3th through 8th Test of proficiency in Korean Announcement. Those public titles do not identify Round 18, sector or test site, so KEP does not auto-link them to current Round 18 Manufacturing."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -32,7 +33,8 @@
     "noDepartureGuarantee": true,
     "noPrivateBrokerRequiredTarget": true,
     "betaIntakeOpen": false,
-    "specialRouteFactsExcludedFromRegular": true
+    "specialRouteFactsExcludedFromRegular": true,
+    "countryLevelCandidateArtifactsRequireRoundSectorLinkage": true
   },
   "stages": [
     {
@@ -103,9 +105,9 @@
       "title": "Skills Test — Round 2",
       "authority": "HRD Korea / Thailand Department of Employment",
       "kind": "official_exam",
-      "action": "DOE stated that the list of candidates eligible for the skills test would be announced on 2026-10-19. As of this KEP check, that date has not yet arrived; do not pre-promote a skills result or schedule.",
-      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
-      "supportState": "awaiting_2026_10_19_candidate_list"
+      "action": "HRD Korea's official candidate index now shows six Thailand General CBT entries published 2026-10-06 (public titles 3th through 8th), while DOE's Round 18 notice states 2026-10-19 for the skills-test eligible list. Because the HRD public titles do not identify Round 18, sector or site, preserve them as country-level official artifacts and do not promote them as current Manufacturing candidates until direct linkage is verified.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "official_country_artifacts_round18_manufacturing_linkage_pending"
     },
     {
       "id": "final_selection",
@@ -281,5 +283,26 @@
   ],
   "exactAnswerRulesFile": "data/th_exact_answer_rules_2026.json",
   "stageReadinessFile": "data/th_stage_readiness_2026.json",
-  "specialRouteEvidenceFile": "data/th_special_eps_topik_2026.json"
+  "specialRouteEvidenceFile": "data/th_special_eps_topik_2026.json",
+  "currentOfficialCountryArtifacts": {
+    "observedAt": "2026-10-06",
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "artifactType": "skills_test_candidate_index_entries",
+    "publicTitles": [
+      "Thailand the 3th Test of proficiency in Korean Announcement",
+      "Thailand the 4th Test of proficiency in Korean Announcement",
+      "Thailand the 5th Test of proficiency in Korean Announcement",
+      "Thailand the 6th Test of proficiency in Korean Announcement",
+      "Thailand the 7th Test of proficiency in Korean Announcement",
+      "Thailand the 8th Test of proficiency in Korean Announcement"
+    ],
+    "type": "General (CBT)",
+    "publicationDate": "2026-10-06",
+    "linkageStatus": "country_level_official_artifacts_round_sector_site_linkage_pending",
+    "localNoticeBoundary": {
+      "sourceUrl": "https://www.thaigov.go.th/th/news/165372",
+      "announcedSkillsEligibleListDate": "2026-10-19",
+      "rule": "The earlier HRD Korea country-level index entries do not override or prove the Thailand DOE Round 18 Manufacturing candidate-list milestone without direct round/sector/site linkage."
+    }
+  }
 }
