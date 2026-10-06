@@ -615,7 +615,7 @@ test('tester-interest intake is open while beta access remains on hold', async (
 });
 
 test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
-  for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral']) {
+  for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center']) {
     await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/beta.html?src='+source+'#worker-panel');
     await expect(page.locator('#worker-panel')).toBeVisible();
