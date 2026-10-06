@@ -58,7 +58,7 @@ def main():
     require(vn_a==vn_b,"Vietnam live visitor statistics must normalize identically")
     require("EPS notice" in vn_a,"Vietnam notice text must be preserved")
 
-        mm_clock_a=normalize_source_text(
+    mm_clock_a=normalize_source_text(
         "Official notice Nay Pyi Taw,MM 10:21 AM, Tuesday, 6th October 2026 Government Website Link",
         "https://www.mol.gov.mm/mol-department-of-labour/",
     )
