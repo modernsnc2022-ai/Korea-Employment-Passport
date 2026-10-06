@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "tj-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Use current Tajikistan 2nd Manufacturing evidence. Skills/final-result linkage is exact only when the official HRD examNot key matches the direct schedule.",
@@ -138,6 +138,19 @@
       "writeExactly": "2nd Tajikistan Manufacturing skills-candidate artifact: published 2026-04-06; linked by official examNot=10.",
       "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "tj_eps_zero_broker_framework",
+      "stages": [
+        "roster",
+        "employer_selection"
+      ],
+      "question": "Is a private broker required to register or be dispatched under Tajikistan's official EPS channel?",
+      "answer": "No. Tajikistan's Ministry of Labour states that the Agency of Overseas Employment provides EPS registration and dispatch services free of charge and without intermediaries.",
+      "writeExactly": "Use the official Agency of Overseas Employment channel. Do not pay a private broker for registration, roster priority or employer selection. This framework statement does not mean every separate 2026 exam/medical/visa/travel charge is zero.",
+      "verificationStatus": "verified_official_framework_not_cycle_specific",
+      "sourceUrl": "https://www.mehnat.tj/tg/news/dt/7e2e6dcf-f800-4902-89b5-812978d69324",
       "verifiedAt": "2026-10-06"
     }
   ],
