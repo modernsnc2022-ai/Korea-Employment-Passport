@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -47,6 +47,10 @@
     "at_taubah_guji_daegu",
     "al_ishlah_pyeongdong_gwangju",
     "al_muhajirin_pyeongtaek",
-    "al_anwar_incheon"
+    "al_anwar_incheon",
+    "lpk_hana_korea",
+    "lpk_hanaman",
+    "mendunia_korea",
+    "korean_first"
   ]
 }
