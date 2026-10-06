@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -64,6 +64,8 @@
     "kbri_seoul_pmi",
     "indonesia_eps_center_hrdk",
     "sbmi_korea_worker_referral",
-    "pcim_korea_referral"
+    "pcim_korea_referral",
+    "hwaseong_foreign_welfare",
+    "yangsan_foreign_worker_center"
   ]
 }
