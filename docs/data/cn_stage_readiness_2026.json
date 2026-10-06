@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "cn-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -22,9 +22,18 @@
       "note": "Announcement 2026-09-04; test 2026-09-09 through 2026-09-11."
     },
     "skillsCandidates": {
-      "status": "generic_entries_exist_cycle_linkage_pending",
+      "status": "verified_current_manufacturing_by_examnot",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-      "note": "China 1st/2nd Point System skills-candidate announcements dated 2026-09-30 exist, but exact 6th Manufacturing linkage is not yet promoted."
+      "linked": {
+        "examNot": "19",
+        "title": "China the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-09-30"
+      },
+      "excluded": {
+        "examNot": "85",
+        "title": "China the 2th Test of proficiency in Korean Announcement",
+        "reason": "different examNot; not the direct 6th Manufacturing schedule key"
+      }
     },
     "finalResult": {
       "status": "awaiting_verified_current_cycle_final_result",
@@ -50,13 +59,12 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "generic China skills-candidate entries not yet linked to exact 6th Manufacturing cycle",
       "cycle-specific fee/document checklist not reconstructed",
       "current final result and downstream exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
-    "subject": "Verify China 6th Manufacturing Round 2/final-result linkage and downstream notices",
+    "subject": "China 6th Manufacturing final-result linkage, fee/document checklist and downstream notices",
     "officialSources": [
       "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=014&examNot=19&examYear=2026&lang=ko&lcnsId=001",
       "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
@@ -67,5 +75,6 @@
       "generic HRD fee/document guidance is not treated as cycle-specific",
       "official contact details remain source-context scoped"
     ]
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
