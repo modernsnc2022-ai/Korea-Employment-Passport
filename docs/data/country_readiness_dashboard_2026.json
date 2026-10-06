@@ -1,5 +1,5 @@
 {
-  "version": "1.8.4",
+  "version": "1.8.5",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -118,17 +118,31 @@
       "nextReview": {
         "type": "dated_official_review",
         "date": "2026-10-19",
-        "subject": "DOE Round 18 skills-test eligible-list publication",
+        "subject": "DOE Round 18 local skills-list/instructions after HRD Manufacturing candidate linkage",
         "officialSources": [
           "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
           "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
         ]
       },
       "blockers": [
-        "Round 18 Manufacturing result/skills stage not fully promoted",
+        "DOE 2026-10-19 local skills-list/instructions and final Point System result remain pending",
         "post-selection medical/job-application exact rules not mapped",
         "visa/training/departure exact rules not mapped"
-      ]
+      ],
+      "verified": {
+        "hrdSkillsCandidates": {
+          "status": "official_examnot_sector_site_linked",
+          "publicationDate": "2026-10-06",
+          "BangkokManufacturingExamNot": "57",
+          "UdonThaniManufacturingExamNot": "64",
+          "excludedOtherSectorExamNot": [
+            "56",
+            "58",
+            "63",
+            "65"
+          ]
+        }
+      }
     },
     {
       "country": "BD",
@@ -217,16 +231,27 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "11th Manufacturing final-result linkage and downstream notices",
+        "subject": "11th Manufacturing fee/document checklist and downstream exact rules",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "2026-08-28 generic result-index entry not yet linked to exact 11th Manufacturing final result",
         "cycle-specific fee/document checklist not reconstructed",
         "downstream exact rules not mapped"
-      ]
+      ],
+      "verified": {
+        "skillsCandidate": {
+          "status": "official_examnot_linked",
+          "examNot": "33",
+          "publicationDate": "2026-07-03"
+        },
+        "finalResult": {
+          "status": "official_examnot_linked",
+          "examNot": "33",
+          "publicationDate": "2026-08-28"
+        }
+      }
     },
     {
       "country": "CN",
@@ -236,16 +261,23 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "6th Manufacturing Round 2/final-result linkage and downstream notices",
+        "subject": "6th Manufacturing final result, fee/document checklist and downstream notices",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "generic China skills-candidate entries not linked to exact 6th Manufacturing cycle",
         "cycle-specific fee/document checklist not reconstructed",
         "final result and downstream exact rules not mapped"
-      ]
+      ],
+      "verified": {
+        "skillsCandidate": {
+          "status": "official_examnot_linked",
+          "examNot": "19",
+          "publicationDate": "2026-09-30"
+        }
+      }
     },
     {
       "country": "KH",
@@ -255,14 +287,12 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Explicit cycle/sector linkage for Cambodia 12th Manufacturing skills/final result and downstream rules",
+        "subject": "Cambodia 12th Manufacturing fee/document and downstream exact rules",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+          "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "2026-08-06/08-21 artifacts not linked by cycle/sector proof",
         "Manufacturing fee/document/downstream exact rules not mapped"
       ],
       "verified": {
@@ -271,6 +301,16 @@
           "registrationPeriod": "2026-05-22 through 2026-05-25",
           "testAnnouncementDate": "2026-06-12",
           "testPeriod": "2026-06-22 through 2026-07-15"
+        },
+        "skillsCandidate": {
+          "status": "official_examnot_linked",
+          "examNot": "46",
+          "publicationDate": "2026-08-06"
+        },
+        "finalResult": {
+          "status": "official_examnot_linked",
+          "examNot": "46",
+          "publicationDate": "2026-08-21"
         }
       }
     },
@@ -282,15 +322,13 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Skills site/sector linkage, final result, or current fee/document/downstream notice",
+        "subject": "Final result or current fee/document/downstream notice",
         "officialSources": [
-          "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
           "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
           "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
-        "2026-09-22 skills-candidate entries not linked by site/sector",
         "cycle-specific fee/document/final-result/downstream exact rules not mapped"
       ],
       "verified": {
@@ -308,6 +346,16 @@
             "testAnnouncementStatus": "undecided",
             "testPeriod": "2026-08-06 through 2026-08-07"
           }
+        },
+        "skillsCandidates": {
+          "status": "official_examnot_site_sector_linked",
+          "publicationDate": "2026-09-22",
+          "DiliExamNot": "42",
+          "BaucauExamNot": "43",
+          "excludedFisheryExamNot": [
+            "44",
+            "45"
+          ]
         }
       }
     },
