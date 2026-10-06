@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "pk-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "packs": [
@@ -31,6 +31,42 @@
           "rule": "OEC, PMI Auditorium Building Zero Point, Islamabad; +92-051-925-3255."
         }
       ]
+    },
+    {
+      "id": "pk_oec_2026_prereg_portal_snapshot",
+      "title": "Pakistan OEC 2026 Pre-Registration Portal Snapshot",
+      "appliesTo": [
+        "eligibility",
+        "registration",
+        "exam_fee",
+        "document_verify"
+      ],
+      "status": "verified_country_portal_snapshot_not_manufacturing_complete_checklist",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "warning": "This pack records what the live OEC 2026 pre-registration portal currently displays. It does not establish Manufacturing sector linkage, a complete Manufacturing registration checklist, or the EPS-TOPIK exam fee.",
+      "applicantFields": [
+        "passport possession",
+        "CNIC",
+        "gender",
+        "hope-job type",
+        "mobile number",
+        "district",
+        "preferred OEC office after balloting",
+        "OEC CBT lab after balloting and registration"
+      ],
+      "dobRange": "1986-03-31 through 2008-03-30",
+      "paidChallan": {
+        "amountPkr": 1000,
+        "scope": "OEC pre-registration/application challan",
+        "epsTopikExamFee": false,
+        "uploadMaxKb": 200,
+        "formats": [
+          "JPEG",
+          "JPG",
+          "PNG"
+        ],
+        "originalReceiptRequiredByPortalNote": true
+      }
     }
   ]
 }
