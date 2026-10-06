@@ -425,12 +425,15 @@ uz_pack=load("docs/data/uz_e9_manufacturing_2026.json")
 uz_exact=load("docs/data/uz_exact_answer_rules_2026.json")
 uz_docs=load("docs/data/uz_document_packs_2026.json")
 uz_readiness=load("docs/data/uz_stage_readiness_2026.json")
+uz_postselection=load("docs/data/uz_postselection_process_2026.json")
 require(uz_entry.get("lifecycle")=="research_hold" and uz_entry.get("publicAvailability")=="preview_only","Uzbekistan registry route must remain preview-only HOLD")
 require(uz_pack.get("lifecycle")=="research_hold" and uz_pack.get("publicAvailability")=="preview_only","Uzbekistan pack must remain preview-only HOLD")
 require(uz_pack.get("safety",{}).get("betaIntakeOpen") is False,"Uzbekistan beta intake must remain closed")
 require(uz_pack.get("safety",{}).get("resultLinkageRequiresOfficialExamNotMatch") is True and uz_pack.get("safety",{}).get("currentManufacturingSkillsAndFinalLinkedByExamNot") is True,"Uzbekistan result linkage must require official examNot and preserve current Manufacturing linkage")
 require(uz_pack.get("safety",{}).get("genericHrdFeeNotCurrentCycle") is True,"Uzbekistan generic HRD fee must not become a cycle-specific exact fee")
 require(uz_pack.get("safety",{}).get("contactSourcesPreservedWithoutSilentReconciliation") is True,"Uzbekistan official contact contexts must not be silently reconciled")
+require(uz_pack.get("safety",{}).get("countryLevelPostSelectionEvidenceNotNinthCycleByDefault") is True,"Uzbekistan country-level post-selection evidence must never auto-link to the 9th cycle")
+require(uz_pack.get("postSelectionProcessEvidenceFile")=="data/uz_postselection_process_2026.json","Uzbekistan pack must link the post-selection process evidence file")
 require(uz_pack.get("officialSendingAgency",{}).get("name")=="MIGRATION AGENCY UNDER THE CABINET OF MINSTERS OF THE REPUBLIC OF UZBEKISTAN (AELM)","Uzbekistan sending agency must remain Migration Agency/AELM")
 require(uz_pack.get("documentPacksFile")=="data/uz_document_packs_2026.json","Uzbekistan pack must link document/contact HOLD packs")
 uz_current=uz_readiness.get("currentCycle",{})
@@ -439,16 +442,27 @@ require(uz_current.get("epsTopikSchedule",{}).get("status")=="completed_period_v
 require(uz_current.get("skillsAndFinalResult",{}).get("status")=="verified_current_cycle_by_examnot" and uz_current.get("skillsAndFinalResult",{}).get("scheduleExamNot")=="9","Uzbekistan skills/final result must remain linked to 9th Manufacturing by examNot=9")
 require(uz_current.get("fee",{}).get("status")=="cycle_specific_unverified","Uzbekistan cycle-specific fee must remain unresolved")
 require(uz_current.get("documents",{}).get("status")=="cycle_specific_checklist_not_reconstructed","Uzbekistan cycle-specific registration checklist must remain HOLD")
+uz_post=uz_current.get("countryLevelPostSelectionEvidence",{})
+require(uz_post.get("status")=="verified_2026_country_process_not_9th_specific","Uzbekistan 2026 country post-selection process must remain explicitly non-9th-specific")
+require(uz_post.get("contractProcessing",{}).get("manufacturingEmploymentContracts")==213,"Uzbekistan country-level Manufacturing contract count must remain 213")
+require(uz_post.get("contractProcessing",{}).get("selectionPeriod")=="2026-08-05 through 2026-08-11","Uzbekistan country-level employer-selection period must remain exact")
+require(uz_post.get("predepartureTraining",{}).get("status")=="verified_country_process","Uzbekistan official pre-departure training process must remain verified")
 require(uz_readiness.get("betaReadiness",{}).get("status")=="blocked","Uzbekistan beta must remain blocked")
 uz_doc_ids={p.get("id") for p in uz_docs.get("packs",[])}
 require({"uz_9th_registration_documents_hold","uz_official_contact_context"}.issubset(uz_doc_ids),"Uzbekistan document packs must preserve HOLD plus official contact context")
 uz_hold=next((p for p in uz_docs.get("packs",[]) if p.get("id")=="uz_9th_registration_documents_hold"),{})
 require(uz_hold.get("items")==[],"Uzbekistan cycle-specific document HOLD pack must contain no invented checklist items")
+require(uz_postselection.get("scope")=="Uzbekistan 2026 E-9 country-level post-selection process evidence; not a 9th Manufacturing individual assignment record","Uzbekistan post-selection evidence scope must preserve the 9th-cycle firewall")
+uz_post_sources={row.get("id"):row for row in uz_postselection.get("sources",[])}
+require(uz_post_sources.get("uz_2026_aug_manufacturing_contracts",{}).get("facts",{}).get("manufacturingEmploymentContracts")==213,"Uzbekistan post-selection evidence must preserve 213 Manufacturing contracts")
+require(uz_post_sources.get("uz_2026_predeparture_training_baseline",{}).get("facts",{}).get("koreaE9AdaptationExplicitlyReferenced") is True,"Uzbekistan pre-departure evidence must preserve explicit Korea E-9 scope")
+require(any("all 213 contracts" in rule for rule in uz_postselection.get("promotionRules",{}).get("mustRemainHold",[])),"Uzbekistan post-selection firewall must forbid treating all 213 contracts as examNot=9")
 uz_exact_ids={row.get("id") for row in uz_exact.get("answers",[])}
 for exact_id in [
     "uz_2026_sending_authority","uz_2026_registration_window","uz_2026_test_notice_date",
     "uz_2026_test_period","uz_2026_point_system","uz_2026_contact_context",
-    "uz_2026_fee_state","uz_2026_skill_structure","uz_2026_skills_candidate_linkage","uz_2026_final_state","uz_no_job_guarantee"
+    "uz_2026_fee_state","uz_2026_skill_structure","uz_2026_skills_candidate_linkage","uz_2026_final_state","uz_no_job_guarantee",
+    "uz_2026_country_manufacturing_contract_process","uz_2026_predeparture_training_process"
 ]:
     require(exact_id in uz_exact_ids,f"Uzbekistan exact-answer catalog missing {exact_id}")
 
@@ -943,6 +957,7 @@ require("RESEARCH / HOLD" in uzbekistan and "2026-03-09" in uzbekistan and "2026
 require("OFFICIAL CONTACT CONTEXT" in uzbekistan and "INTENTIONALLY UNRESOLVED" in uzbekistan,"Uzbekistan preview must preserve official contact contexts and unresolved current rules")
 require("US$28" in uzbekistan and "current Uzbekistan exact fee" in uzbekistan,"Uzbekistan preview must label generic US$28 baseline as non-current exact fee")
 require("examNot=9" in uzbekistan and "2026-05-27" in uzbekistan and "2026-08-27" in uzbekistan,"Uzbekistan preview must show verified examNot skills/final linkage")
+require("213 ta mehnat shartnomasi" in uzbekistan and "Pre-departure training" in uzbekistan and "barcha shartnomalarni examNot=9 ga bog‘lamaymiz" in uzbekistan,"Uzbekistan preview must show verified country post-selection process with 9th-cycle firewall")
 require('href="beta.html"' not in uzbekistan and 'id="betaForm"' not in uzbekistan,"Uzbekistan preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in mongolia and "2026-03-25" in mongolia and "2026-06-26" in mongolia,"Mongolia preview must visibly remain HOLD with verified registration/test timeline")
 require("Special EPS-TOPIK remains a separate route" in mongolia and "examNot=33" in mongolia and "2026-08-28" in mongolia,"Mongolia preview must preserve Special-route isolation and verified examNot result linkage")
