@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -84,6 +84,8 @@
     "lpk_seoul_lombok",
     "hwaseong_foreign_welfare",
     "yangsan_foreign_worker_center",
-    "seosan_foreign_worker_center"
+    "seosan_foreign_worker_center",
+    "busan_global_indonesian_desk",
+    "busan_foreign_resident_center"
   ]
 }
