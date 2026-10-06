@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "routeId": "pk-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "scope": "pakistan_eps_2026_oec_portal_country_round_not_manufacturing_sector_linkage",
+  "principle": "These live OEC 2026 portal pages verify current Pakistan EPS-TOPIK operation and applicant preparation fields. They do not by themselves prove that the HRD Korea 9th Islamabad/Karachi city pages are the Manufacturing route.",
+  "sources": [
+    {
+      "id": "pk_oec_2026_test_schedule_lookup",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_2026_test_date",
+      "status": "verified_current_oec_portal",
+      "pageTitle": "Announcement of Test Venues and Schedules",
+      "facts": {
+        "lookupKey": "KLT Number",
+        "individualScheduleLookupLive": true,
+        "publicBulkTestDateRangeEstablished": false,
+        "manufacturingSectorLinkageEstablished": false
+      }
+    },
+    {
+      "id": "pk_oec_2026_pre_registration",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "status": "verified_current_oec_portal_snapshot",
+      "pageTitle": "Pre-Registration Form for Employment in South Korea under EPS-TOPIK 2026",
+      "facts": {
+        "dobRange": "1986-03-31 through 2008-03-30",
+        "asksPassportPossession": true,
+        "asksCnic": true,
+        "asksGender": true,
+        "asksHopeJobType": true,
+        "asksMobile": true,
+        "asksDistrict": true,
+        "feeChallanPkr": 1000,
+        "feeScope": "OEC pre-registration/application challan shown on the portal",
+        "isEpsTopikExamFee": false,
+        "challanImageMaxKb": 200,
+        "challanImageFormats": [
+          "JPEG",
+          "JPG",
+          "PNG"
+        ],
+        "preferredOecOfficeAfterBalloting": true,
+        "oecCbtLabAfterBallotingAndRegistration": true
+      }
+    },
+    {
+      "id": "pk_oec_2026_registration_lookup",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_registeration_portal_2026_new",
+      "status": "verified_current_oec_portal",
+      "pageTitle": "Registration Form for Employment in South Korea under EPS-TOPIK 2026",
+      "facts": {
+        "lookupFields": [
+          "CNIC Number",
+          "Date of Birth"
+        ],
+        "dobRange": "1986-03-31 through 2008-03-30"
+      }
+    }
+  ],
+  "promotionRules": {
+    "mayPromote": [
+      "OEC has a live 2026 individual test-venue/schedule lookup by KLT number",
+      "OEC's 2026 pre-registration portal currently displays the DOB range and preparation fields captured here",
+      "the portal displays a PKR 1,000 pre-registration/application challan requirement"
+    ],
+    "mustRemainHold": [
+      "Manufacturing sector linkage for the HRD Korea 9th Islamabad/Karachi city pages",
+      "a public bulk Manufacturing test date range",
+      "treating PKR 1,000 as the EPS-TOPIK exam fee",
+      "Manufacturing final result",
+      "Manufacturing downstream medical, SLC, visa, training or departure exact rules"
+    ]
+  }
+}

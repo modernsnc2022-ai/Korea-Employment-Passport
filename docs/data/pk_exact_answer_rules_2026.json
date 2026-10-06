@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "pk-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Direct official Pakistan city-round facts are country-level exact only. Manufacturing-specific promotion requires sector linkage. Discovery-only Manufacturing titles and Special-route evidence never auto-populate Regular Manufacturing.",
@@ -80,6 +80,83 @@
       "verificationStatus": "shared_eps_principle",
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_schedule_lookup",
+      "stages": [
+        "exam_card",
+        "eps_topik"
+      ],
+      "question": "Does OEC currently provide a 2026 Pakistan EPS-TOPIK test schedule lookup?",
+      "answer": "Yes. OEC's official 2026 portal has an 'Announcement of Test Venues and Schedules' lookup by KLT number.",
+      "writeExactly": "Use the official OEC KLT-number lookup for an individual's test venue/schedule. This does not by itself establish a public Manufacturing bulk date range or sector linkage.",
+      "verificationStatus": "verified_current_oec_portal_country_round",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_2026_test_date",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_prereg_dob",
+      "stages": [
+        "eligibility",
+        "registration"
+      ],
+      "question": "What DOB range does the current OEC EPS-TOPIK 2026 pre-registration portal display?",
+      "answer": "1986-03-31 through 2008-03-30.",
+      "writeExactly": "OEC 2026 portal snapshot: DOB 1986-03-31 through 2008-03-30. Keep this country-level until Manufacturing-specific linkage/current notice is proven.",
+      "verificationStatus": "verified_current_oec_portal_snapshot",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_prereg_fields",
+      "stages": [
+        "registration",
+        "document_verify"
+      ],
+      "question": "What applicant data does the OEC 2026 pre-registration form currently request?",
+      "answer": "Passport possession, CNIC, gender, hope-job type, mobile number, district, paid fee-challan image, preferred OEC office after balloting and OEC CBT lab after balloting/registration.",
+      "writeExactly": "Treat these as current OEC 2026 pre-registration portal fields, not as a complete Manufacturing registration checklist.",
+      "verificationStatus": "verified_current_oec_portal_snapshot",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_prereg_challan",
+      "stages": [
+        "exam_fee",
+        "document_verify"
+      ],
+      "question": "What PKR 1,000 payment does the OEC 2026 portal show?",
+      "answer": "A paid PKR 1,000 challan is required by the OEC pre-registration/application form.",
+      "writeExactly": "PKR 1,000 is recorded only as the OEC pre-registration/application challan shown on the current portal. Do NOT call it the EPS-TOPIK exam fee.",
+      "verificationStatus": "verified_scope_limited_oec_prereg",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_challan_upload",
+      "stages": [
+        "document_verify"
+      ],
+      "question": "What challan upload format does the OEC pre-registration portal show?",
+      "answer": "JPEG/JPG/PNG, maximum 200 KB.",
+      "writeExactly": "OEC portal snapshot: paid challan image JPEG/JPG/PNG, maximum 200 KB. This is not a complete Manufacturing checklist.",
+      "verificationStatus": "verified_current_oec_portal_snapshot",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "pk_2026_oec_registration_lookup",
+      "stages": [
+        "registration"
+      ],
+      "question": "What fields does the OEC EPS-TOPIK 2026 registration lookup use?",
+      "answer": "CNIC Number and Date of Birth.",
+      "writeExactly": "The current OEC registration portal lookup uses CNIC and DOB; it also displays the 1986-03-31 through 2008-03-30 DOB range.",
+      "verificationStatus": "verified_current_oec_portal",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_registeration_portal_2026_new",
+      "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "oecPortalEvidenceFile": "data/pk_oec_portal_2026.json"
 }

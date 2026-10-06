@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-pakistan-9th-point-system-manufacturing-linkage-pending",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -26,7 +26,9 @@
     "HRD Korea directly verifies 9th Point System pages for Islamabad and Karachi with registration 2026-03-31 through 2026-04-08, General CBT, Point System, while test announcement and test period remain undecided.",
     "Those direct official page titles do not explicitly state Manufacturing, so KEP does not promote the city schedules as Manufacturing-specific without sector linkage.",
     "A non-official schedule mirror lists a separate Pakistan 9th Manufacturing route with dates undecided; this remains discovery-only evidence.",
-    "HRD Korea pass-list index contains a Pakistan Special CBT result artifact published 2026-08-21; Special remains outside Regular Manufacturing."
+    "HRD Korea pass-list index contains a Pakistan Special CBT result artifact published 2026-08-21; Special remains outside Regular Manufacturing.",
+    "OEC's live 2026 portal provides a KLT-number individual test-venue/schedule lookup and a current EPS-TOPIK 2026 pre-registration form. These are Pakistan country-round operational facts; they do not by themselves prove Manufacturing linkage for the HRD Korea city pages.",
+    "The OEC 2026 pre-registration form shows a PKR 1,000 paid challan requirement. KEP records this only as an OEC pre-registration/application challan, not as the EPS-TOPIK exam fee."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -46,27 +48,27 @@
       "title": "Eligibility check",
       "authority": "OEC / HRD Korea",
       "kind": "rules",
-      "action": "Use only a current Pakistan Manufacturing notice for complete eligibility. The verified 9th Point System city schedules do not explicitly identify Manufacturing in their public titles.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
-      "supportState": "manufacturing_sector_linkage_pending"
+      "action": "OEC's current EPS-TOPIK 2026 pre-registration portal displays a DOB range of 1986-03-31 through 2008-03-30. Treat this as a current Pakistan portal snapshot only; Manufacturing-specific eligibility still requires sector linkage/current Manufacturing evidence.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "supportState": "verified_oec_2026_portal_snapshot_manufacturing_linkage_pending"
     },
     {
       "id": "registration",
       "title": "9th Point System registration",
       "authority": "OEC / HRD Korea",
       "kind": "official_action",
-      "action": "HRD Korea directly verifies 9th Point System registration in Islamabad and Karachi from 2026-03-31 through 2026-04-08. KEP does not promote this as Manufacturing-specific until sector linkage is proven.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
-      "supportState": "official_country_round_sector_linkage_pending"
+      "action": "HRD Korea verifies Pakistan 9th Point System city registration 2026-03-31 through 2026-04-08, while OEC's 2026 portal remains live for registration/schedule lookup. The city pages are not promoted as Manufacturing-specific until sector linkage is proven.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_registeration_portal_2026_new",
+      "supportState": "official_country_round_oec_portal_live_sector_linkage_pending"
     },
     {
       "id": "exam_fee",
       "title": "Application / test fee",
       "authority": "OEC / HRD Korea",
       "kind": "official_payment",
-      "action": "No Pakistan Manufacturing cycle-specific fee is promoted until a direct official Manufacturing notice is captured.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "manufacturing_cycle_specific_fee_unverified"
+      "action": "The OEC 2026 pre-registration form displays a PKR 1,000 paid fee challan for that pre-registration/application step. KEP does NOT treat PKR 1,000 as the EPS-TOPIK exam fee; a Manufacturing cycle-specific exam fee remains unverified.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "supportState": "verified_oec_prereg_challan_exam_fee_unverified"
     },
     {
       "id": "biometric",
@@ -82,27 +84,27 @@
       "title": "Registration document verification",
       "authority": "OEC",
       "kind": "official_action",
-      "action": "The exact Pakistan Manufacturing passport/photo/upload/payment checklist remains HOLD until a direct current Manufacturing notice is captured.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "manufacturing_checklist_not_reconstructed"
+      "action": "OEC's 2026 pre-registration portal asks for current applicant/contact data and a paid-challan image (JPEG/JPG/PNG, maximum 200 KB), plus office/CBT-lab preferences after balloting. This is a country-level portal snapshot, not a complete Manufacturing registration checklist.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "supportState": "verified_oec_portal_snapshot_manufacturing_checklist_pending"
     },
     {
       "id": "exam_card",
       "title": "Test announcement / admission",
       "authority": "OEC / HRD Korea",
       "kind": "self_service",
-      "action": "For the verified Islamabad and Karachi 9th Point System pages, the test-announcement date remains undecided. Do not invent a Manufacturing date.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
-      "supportState": "official_country_round_dates_undecided"
+      "action": "OEC now provides a live 2026 'Announcement of Test Venues and Schedules' lookup by KLT number. Use that individual official lookup; KEP still does not publish a Manufacturing bulk test date range without sector-linked evidence.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_2026_test_date",
+      "supportState": "verified_oec_individual_schedule_lookup_manufacturing_bulk_dates_pending"
     },
     {
       "id": "eps_topik",
       "title": "EPS-TOPIK — Pakistan Manufacturing",
       "authority": "HRD Korea / OEC",
       "kind": "official_exam",
-      "action": "The verified Islamabad/Karachi 9th Point System pages are General CBT and Point System, but their public titles do not state Manufacturing. Manufacturing exact schedule remains gated.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
-      "supportState": "official_country_round_sector_linkage_pending"
+      "action": "Pakistan's official OEC 2026 portal supports individual EPS-TOPIK test venue/schedule lookup by KLT number. The HRD Korea Islamabad/Karachi 9th pages remain country-round evidence whose Manufacturing sector linkage is still pending.",
+      "sourceUrl": "https://jobs.oec.gov.pk/eps_topik_2026_test_date",
+      "supportState": "verified_oec_2026_operation_manufacturing_linkage_pending"
     },
     {
       "id": "skill_competency",
@@ -289,5 +291,6 @@
   "documentPacksFile": "data/pk_document_packs_2026.json",
   "stageReadinessFile": "data/pk_stage_readiness_2026.json",
   "discoveryEvidenceFile": "data/pk_manufacturing_discovery_2026.json",
-  "specialRouteEvidenceFile": "data/pk_special_eps_topik_2026.json"
+  "specialRouteEvidenceFile": "data/pk_special_eps_topik_2026.json",
+  "oecPortalEvidenceFile": "data/pk_oec_portal_2026.json"
 }
