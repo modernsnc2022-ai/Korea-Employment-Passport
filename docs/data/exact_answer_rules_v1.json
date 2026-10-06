@@ -1,5 +1,5 @@
 {
-  "version": "1.12.0",
+  "version": "1.13.0",
   "principle": "If an official source determines the answer, answer exactly. If it does not, never guess.",
   "answers": [
     {
@@ -3154,16 +3154,16 @@
         "job_application"
       ],
       "question": "Detail exact Manufaktur 2026 apa yang masih harus menunggu pengumuman resmi?",
-      "answer": "Dua detail exact masih HOLD: daftar dokumen Manufaktur 2026 dan sumber data identitas/alamat/nomor dokumen yang harus dijadikan acuan saat mengisi form.",
-      "writeExactly": "Jangan submit sampai dua detail exact itu tersedia dari pengumuman Manufaktur 2026 yang sesuai. Baseline aman Sisko untuk scan, non-editability setelah kirim, dan cara memastikan proses benar-benar sudah terkirim dapat dipakai untuk keselamatan operasional, tetapi bukan pengganti checklist dan aturan field identitas Manufaktur 2026.",
-      "why": "Pengumuman Perikanan 2026 dan Manufaktur 2025 konsisten mengenai scan, final send yang tidak bisa dikoreksi, Menu Pemenuhan Dokumen, status terkirim/progress check, dan kanal bantuan resmi. Namun daftar dokumen dan sumber field identitas/alamat/nomor dokumen Manufaktur 2026 tetap belum dipublikasikan secara rinci.",
+      "answer": "Dua detail exact masih HOLD: daftar dokumen Manufaktur 2026 dan sumber acuan untuk field alamat/nomor dokumen pada formulir lamaran online.",
+      "writeExactly": "Jangan submit sampai daftar dokumen dan aturan sumber field alamat/nomor dokumen tersedia dari pengumuman Manufaktur 2026 yang sesuai. Untuk nama, tanggal lahir, dan jenis kelamin, gunakan identitas resmi yang konsisten dengan data pendaftaran EPS-TOPIK; jangan membuat variasi baru.",
+      "why": "Pengumuman Manufaktur/Perikanan 2026 menegaskan data identitas pada KTP/paspor dan lembar pendaftaran—nama, tanggal lahir, dan gender—harus konsisten. Namun panduan rinci Manufaktur 2026 yang menjelaskan sumber field alamat dan nomor dokumen pada form lamaran belum ditemukan.",
       "doNotDo": [
         "Jangan menyalin daftar dokumen Perikanan 2026.",
         "Jangan memakai daftar dokumen Manufaktur 2025 sebagai aturan 2026.",
-        "Jangan menebak sumber data field identitas/alamat/nomor dokumen Manufaktur 2026."
+        "Jangan menebak sumber field alamat atau nomor dokumen pada lamaran Manufaktur 2026."
       ],
-      "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
-      "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
       "verifiedAt": "2026-10-06",
       "verificationStatus": "hold_for_official_manufacturing_notice",
       "scopeType": "route_2026",
@@ -6438,6 +6438,28 @@
       "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025",
       "verifiedAt": "2026-10-06",
       "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+      "scopeType": "route_2026",
+      "blocksSubmission": false
+    },
+    {
+      "id": "job_application_identity_core_safe_baseline_2026",
+      "stages": [
+        "job_application"
+      ],
+      "question": "Nama, tanggal lahir, dan jenis kelamin pada proses lamaran harus mengikuti data yang mana?",
+      "answer": "Pertahankan identitas inti yang sama dengan dokumen resmi dan pendaftaran EPS-TOPIK: nama, tanggal lahir, dan jenis kelamin tidak boleh dibuat berbeda. Jika KTP/paspor dan data pendaftaran tidak cocok, jangan meneruskan dengan menebak atau membuat versi nama baru.",
+      "writeExactly": "Gunakan nama, tanggal lahir, dan jenis kelamin yang konsisten dengan KTP/paspor serta data pendaftaran EPS-TOPIK yang sudah diverifikasi. Jangan mengubah ejaan/urutan nama atau data inti hanya untuk menyesuaikan tampilan form. Jika ada ketidaksesuaian resmi, hentikan sebelum final send dan gunakan kanal resmi untuk koreksi/penjelasan.",
+      "why": "Pengumuman resmi 2026 yang mencakup Manufacturing menyatakan perbedaan nama, tanggal lahir, atau gender antara dokumen identitas dan lembar pendaftaran dapat membatalkan proses penempatan. Pengumuman ujian 2026 juga mewajibkan KTP/paspor yang digunakan saat verifikasi pendaftaran. Sending notice resmi 2024 menunjukkan nama/tanggal lahir yang dikirim ke HRD Korea mengikuti sertifikat EPS-TOPIK.",
+      "doNotDo": [
+        "Jangan membuat alias/ejaan baru untuk nama inti tanpa dasar resmi.",
+        "Jangan mengubah tanggal lahir atau gender agar form bisa lolos.",
+        "Baseline ini tidak menentukan sumber field alamat atau nomor dokumen pada form lamaran Manufaktur 2026."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "additionalSourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-sending-berkas-calon-pekerja-migran-indonesia-program-g-to-g-korea-per-tanggal-04-november-2024",
+      "verifiedAt": "2026-10-06",
+      "verificationStatus": "verified_current_cycle_identity_consistency_baseline_not_job_form_mapping",
       "scopeType": "route_2026",
       "blocksSubmission": false
     }
