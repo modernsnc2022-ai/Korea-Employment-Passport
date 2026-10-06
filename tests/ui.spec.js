@@ -684,6 +684,27 @@ test('community source can copy source-attributed applicant and worker invitatio
   expect(errors).toEqual([]);
 });
 
+test('attributed applicant campaigns go directly to the beta intake anchor', async ({ page }) => {
+  await page.goto('/index.html?src=lpk_master_korea', { waitUntil: 'domcontentloaded' });
+  await page.waitForURL('**/beta.html?src=lpk_master_korea#apply');
+  await expect(page.locator('#applicationPanel')).toBeVisible();
+  await expect(page.locator('#applicationPanel')).toContainText('Sekitar 30 detik');
+  await expect(page.locator('#applicationPanel')).toContainText('Tidak perlu nama atau nomor telepon');
+
+  await page.locator('#applicantStage').selectOption('eligibility');
+  await page.locator('#applicantCycle').selectOption('2026');
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+  const application = await page.evaluate(() => applicationText());
+  expect(application).toContain('Recruitment source code: lpk_master_korea');
+});
+
+test('generic attribution stays on landing while preserving the beta link', async ({ page }) => {
+  await page.goto('/index.html?src=community', { waitUntil: 'domcontentloaded' });
+  await expect(page).toHaveURL(/index\.html\?src=community$/);
+  await expect(page.locator('a.button.primary')).toHaveAttribute('href','beta.html?src=community');
+});
+
 test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
   for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral']) {
     await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });

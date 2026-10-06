@@ -528,6 +528,16 @@ require(
     and "#worker-panel" in landing_js,
     "worker-only recruitment sources must route directly to the worker-interest section",
 )
+require(
+    "genericLandingSourceCodes=new Set(['website','email','community','community_admin','social','referral','direct_outreach','partner','other'])" in landing_js
+    and "location.replace('beta.html?src='+encodeURIComponent(raw)+'#apply')" in landing_js,
+    "non-generic attributed campaigns must route directly to the beta intake anchor",
+)
+require('id="apply"' in beta_page,
+        "beta page must expose a stable applicant-intake anchor")
+require("Sekitar 30 detik" in beta_page
+        and "Tidak perlu nama atau nomor telepon" in beta_page,
+        "beta application panel must make the low-friction intake steps explicit")
 require('id="worker-panel"' in beta_page,
         "beta page must expose a stable worker-interest anchor")
 require('id="betaForm"' not in landing_page and 'id="name"' not in landing_page and 'id="contact"' not in landing_page,
