@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "kh-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Direct official HRD Korea evidence now verifies the Cambodia 12th Manufacturing schedule. Result artifacts still require explicit cycle/sector linkage; Agriculture, Special and discovery-only evidence must not populate unrelated rules.",
@@ -140,6 +140,23 @@
       "writeExactly": "12th Cambodia Manufacturing test period: 2026-06-22 through 2026-07-15.",
       "verificationStatus": "verified_direct_official_2026",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_result_ordinal_firewall",
+      "stages": [
+        "skill_competency",
+        "final_selection"
+      ],
+      "question": "Does '2th' in the Cambodia result-list title prove linkage to the 12th Manufacturing recruitment?",
+      "answer": "No.",
+      "writeExactly": "The official schedule says 12th Manufacturing, while the public August result-list titles say 2th. KEP must not transform or substring-match 2th into 12th; direct official cycle/sector linkage is still required.",
+      "verificationStatus": "verified_non_linkage_boundary",
+      "sourceUrls": [
+        "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+        "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+        "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+      ],
       "verifiedAt": "2026-10-06"
     }
   ]

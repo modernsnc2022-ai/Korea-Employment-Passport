@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-12th-point-system-cambodia-manufacturing-direct-official-schedule",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -33,7 +33,8 @@
     "Official HRD Korea pass list contains Cambodia the 2th POINT_EXAM Announcement (General CBT), published 2026-08-21.",
     "The public titles do not themselves state Manufacturing, so KEP does not auto-link those official artifacts to the Manufacturing route without direct cycle/sector proof.",
     "The official 11th Cambodia Agriculture and Livestock schedule is separate-sector evidence and must never populate Manufacturing rules.",
-    "A separate Cambodia Special CBT result was published 2026-09-09 and must remain outside Regular Manufacturing."
+    "A separate Cambodia Special CBT result was published 2026-09-09 and must remain outside Regular Manufacturing.",
+    "Do not normalize, truncate or substring-match the result-list ordinal '2th' into the recruitment ordinal '12th'; those public labels are not a cycle-linkage key."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -46,7 +47,8 @@
     "discoveryScheduleMustNotBecomeExact": true,
     "agricultureFactsExcludedFromManufacturing": true,
     "specialFactsExcludedFromManufacturing": true,
-    "genericOfficialResultArtifactsRequireCycleSectorLinkage": true
+    "genericOfficialResultArtifactsRequireCycleSectorLinkage": true,
+    "resultOrdinalMustNotBeTreatedAsRecruitmentCycle": true
   },
   "stages": [
     {
@@ -307,5 +309,15 @@
     "testPeriod": "2026-06-22 through 2026-07-15",
     "type": "General CBT",
     "pointSystem": true
+  },
+  "resultLinkageFirewall": {
+    "status": "blocked_pending_direct_cycle_sector_linkage",
+    "recruitmentScheduleTitle": "The 12th recruitment of the point system in Cambodia(Manufacturing)",
+    "skillsCandidatePublicTitle": "Cambodia the 2th Test of proficiency in Korean Announcement",
+    "finalPointResultPublicTitle": "Cambodia the 2th POINT_EXAM Announcement",
+    "rule": "The public result-list ordinal '2th' is not evidence that either artifact belongs to the 12th Manufacturing recruitment. Do not normalize, truncate, substring-match or otherwise transform '2th' into '12th'. Promotion requires direct official cycle/sector linkage.",
+    "skillsCandidateSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "finalResultSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+    "scheduleSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001"
   }
 }
