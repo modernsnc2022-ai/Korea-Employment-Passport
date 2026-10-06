@@ -1,5 +1,5 @@
 {
-  "version": "4.4.0",
+  "version": "4.5.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -405,5 +405,17 @@
     "sourceOfTruth": "Gmail SENT/bounce evidence for legacy outreach plus current source catalog",
     "rule": "A source recorded as sent, closed, or delivery_failed must not be treated as a fresh initial-outreach target. Follow-up requires an explicit follow-up-ready state.",
     "updatedAt": "2026-10-06T20:40:00+09:00"
-  }
+  },
+  "wave7": [
+    {
+      "sourceCode": "jettyland_eps_app",
+      "channel": "email",
+      "status": "ready_not_sent"
+    },
+    {
+      "sourceCode": "zenski_eps_app",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ]
 }
