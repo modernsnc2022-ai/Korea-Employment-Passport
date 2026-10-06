@@ -571,7 +571,7 @@ require(
         "ubt_eps_topik_app","topiknow_app","kamus_korea_app","jeongsang_eps_app",
         "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app",
         "kbri_seoul_pmi","indonesia_eps_center_hrdk","sbmi_korea_worker_referral","pcim_korea_referral",
-        "kp2mi_departure_worker_referral"
+        "kp2mi_departure_worker_referral","kp2mi_sending_applicant"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
