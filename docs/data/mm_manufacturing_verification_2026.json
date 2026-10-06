@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -184,6 +184,14 @@
           "sourceUrl": "https://www.moi.gov.mm/nlm/file-download/download/public/4962",
           "cohortContinuityOnly": true,
           "promotable": false
+        },
+        {
+          "year": 2026,
+          "artifactType": "job_application_extension",
+          "cohort": "prior EPS-TOPIK Manufacturing second batch",
+          "sourceUrl": "https://www.gnlm.com.mm/poea-to-accept-eps-topik-job-application-extensions/",
+          "cohortContinuityOnly": true,
+          "promotable": false
         }
       ],
       "baselineReviewDecision": {
@@ -242,6 +250,11 @@
         "source": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
         "finding": "The visible current first page of the final pass list did not expose a Myanmar Manufacturing-labelled entry. This surface check is not treated as an exhaustive historical pagination search.",
         "promotionEffect": "none"
+      },
+      {
+        "source": "https://www.gnlm.com.mm/poea-to-accept-eps-topik-job-application-extensions/",
+        "finding": "A 2026-09-23 state-newspaper report cites POEA accepting 2026-09-24 through 2026-09-30 job-application extensions for prior Manufacturing second-batch passers without job offers. This is continuation evidence for an older cohort, not a new 2026 Manufacturing recruitment cycle.",
+        "promotionEffect": "none"
       }
     ],
     "conclusion": "No new direct official 2026 Manufacturing-labelled actionable artifact was captured. Keep routeId null and promotion blocked.",
@@ -261,5 +274,22 @@
     },
     "promotable": false,
     "warning": "This is a 2026-dated continuation action for an older 16th Manufacturing cohort. It is not a current 2026 Manufacturing recruitment, registration, schedule, skills/result or final-result artifact and cannot satisfy the Manufacturing promotion gate."
+  },
+  "priorCohortContinuationEvidenceSecondBatch": {
+    "status": "2026_calendar_year_historical_cohort_only",
+    "sourceClass": "myanmar_state_newspaper_reporting_poea_notice",
+    "sourceUrl": "https://www.gnlm.com.mm/poea-to-accept-eps-topik-job-application-extensions/",
+    "publicationDate": "2026-09-23",
+    "artifactType": "job_application_extension",
+    "cohort": "prior EPS-TOPIK Manufacturing second batch",
+    "facts": {
+      "authorityNamed": "Public Overseas Employment Agency (POEA)",
+      "extensionPeriod": "2026-09-24 through 2026-09-30",
+      "serviceHours": "09:00 through 16:00",
+      "location": "POEA office, Dagon Myothit (North) Township, Yangon",
+      "purpose": "Extend job applications for prior Manufacturing second-batch passers who had not received a job offer."
+    },
+    "promotable": false,
+    "warning": "This is a 2026-dated continuation action for an older Manufacturing second-batch cohort. It is not a current 2026 Manufacturing recruitment, registration, schedule, skills/result or final-result artifact and cannot satisfy the Manufacturing promotion gate."
   }
 }

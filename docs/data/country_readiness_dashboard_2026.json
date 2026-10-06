@@ -438,7 +438,7 @@
       "blockers": [
         "2026 captured HRD schedule evidence is explicitly Agriculture/Livestock, Construction and Forestry rather than Manufacturing",
         "no direct official 2026 Manufacturing-labelled recruitment/schedule/result artifact captured",
-        "historical 16th EPS-TOPIK Manufacturing post-selection evidence is from 2025 and cannot be promoted as a 2026 route"
+        "2026-dated Manufacturing first-batch and second-batch job-application extensions belong to prior cohorts and cannot be promoted as a new 2026 route"
       ],
       "verificationDossierFile": "data/mm_manufacturing_verification_2026.json",
       "detailsPage": "mm.html"

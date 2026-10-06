@@ -123,6 +123,21 @@ require(continuity_url.scheme == "https" and continuity_url.hostname == "www.moi
 require("not a current 2026 Manufacturing recruitment" in str(continuity.get("warning", "")),
         "Myanmar continuity warning must explicitly reject current-2026 recruitment promotion")
 
+continuity_second = dossier.get("priorCohortContinuationEvidenceSecondBatch", {})
+continuity_second_url = urlparse(continuity_second.get("sourceUrl", ""))
+require(continuity_second.get("status") == "2026_calendar_year_historical_cohort_only",
+        "Myanmar second-batch continuity evidence must remain explicitly prior-cohort only")
+require("Manufacturing second batch" in continuity_second.get("cohort", ""),
+        "Myanmar second-batch continuity evidence must preserve Manufacturing second-batch identity")
+require(continuity_second.get("facts", {}).get("extensionPeriod") == "2026-09-24 through 2026-09-30",
+        "Myanmar second-batch extension window must remain exact")
+require(continuity_second.get("promotable") is False,
+        "Myanmar second-batch continuation evidence must never be promotable")
+require(continuity_second_url.scheme == "https" and continuity_second_url.hostname == "www.gnlm.com.mm",
+        "Myanmar second-batch continuity evidence must remain on the reviewed Global New Light of Myanmar page")
+require("not a current 2026 Manufacturing recruitment" in str(continuity_second.get("warning", "")),
+        "Myanmar second-batch warning must explicitly reject current-2026 recruitment promotion")
+
 allowed_hosts = {"epstopik.hrdkorea.or.kr", "mol.gov.mm", "www.mol.gov.mm"}
 accepted_types = {"recruitment", "registration", "schedule", "skills_candidate", "result", "final_result"}
 
