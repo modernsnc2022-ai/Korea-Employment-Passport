@@ -1,5 +1,5 @@
 {
-  "version": "2.9.0",
+  "version": "3.0.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -83,6 +83,7 @@
     "zenski_eps_app",
     "lpk_seoul_lombok",
     "hwaseong_foreign_welfare",
-    "yangsan_foreign_worker_center"
+    "yangsan_foreign_worker_center",
+    "seosan_foreign_worker_center"
   ]
 }
