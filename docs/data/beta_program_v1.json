@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.7.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -112,6 +112,20 @@
       "same-HEAD static-check, ui-smoke, Pages, and beta-launch-gate green",
       "same-day Manufacturing official-source re-check on the actual release day",
       "explicit manual beta OPEN decision"
-    ]
+    ],
+    "latestAutomatedGateBaseline": {
+      "recordedAt": "2026-10-06",
+      "sourceReviewState": "clean",
+      "sourceReviewCommit": "5527c7f9264abb844d1ca2f088817a20119bc468",
+      "configuredSources": 84,
+      "checkedSources": 84,
+      "reviewRequiredCount": 0,
+      "fetchFailureCount": 0,
+      "reviewManifestId": "2026-10-06-country-watch-baseline-v3",
+      "normalizationRevision": "cross-site-volatile-widget-v3",
+      "purpose": "Trigger and bind the next same-HEAD static-check, ui-smoke, Pages and beta-launch-gate verification after reviewed official-source baseline acceptance.",
+      "doesNotApproveBetaOpen": true,
+      "manualOpenStillRequired": true
+    }
   }
 }
