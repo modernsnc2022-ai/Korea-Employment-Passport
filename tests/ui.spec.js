@@ -657,6 +657,33 @@ test('tester-interest intake is open while beta access remains on hold', async (
   expect(errors).toEqual([]);
 });
 
+test('community source can copy source-attributed applicant and worker invitations', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/beta.html?src=lpk_master_korea', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#communitySharePanel')).toBeVisible({ timeout: 10000 });
+  await expect(page.locator('#communityShareSource')).toHaveText('lpk_master_korea');
+
+  const result = await page.evaluate(() => ({
+    applicant: communityApplicantInviteText(),
+    worker: communityWorkerInviteText(),
+    shareInputs: document.querySelectorAll('#communitySharePanel input').length
+  }));
+  expect(result.applicant).toContain('src=lpk_master_korea');
+  expect(result.applicant).toContain('proyek independen');
+  expect(result.applicant).toContain('Tidak ada jaminan');
+  expect(result.worker).toContain('src=lpk_master_korea');
+  expect(result.worker).toContain('#worker-panel');
+  expect(result.worker).toContain('Mengirim minat belum mengaktifkan akses panel');
+  expect(result.shareInputs).toBe(0);
+
+  await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#communitySharePanel')).toBeHidden({ timeout: 10000 });
+  expect(errors).toEqual([]);
+});
+
 test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
   for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral']) {
     await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });
