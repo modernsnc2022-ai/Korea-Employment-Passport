@@ -144,6 +144,49 @@ test('visa document helper shows one field at a time on mobile', async ({ page }
   expect(errors).toEqual([]);
 });
 
+test('shared Korea-side official core is visible without overriding country action', async ({ page }) => {
+  const errors = await freshPage(page);
+  await page.evaluate(() => {
+    const stage=route.stages.find(row=>row.id==='first_payroll_check');
+    if(!stage)throw new Error('first_payroll_check stage missing');
+    openStage(stage);
+  });
+
+  await expect(page.locator('#stageDialog')).toBeVisible();
+  await expect(page.locator('#sharedKoreaCoreSection')).toBeVisible();
+  await expect(page.locator('#sharedKoreaCoreSection')).toContainText('ATURAN RESMI UMUM DI KOREA');
+  await expect(page.locator('#sharedKoreaCoreTitle')).toContainText('Pemeriksaan gaji pertama');
+  await expect(page.locator('#sharedKoreaCoreFact')).toContainText('sedikitnya sekali setiap bulan');
+  await expect(page.locator('#sharedKoreaCoreBoundary')).toContainText('Jangan menebak jumlah bersih');
+  await expect(page.locator('#sharedKoreaCoreSources a')).toHaveCount(1);
+
+  const state = await page.evaluate(() => {
+    const stage=route.stages.find(row=>row.id==='first_payroll_check');
+    const core=sharedKoreaCoreStage('first_payroll_check');
+    return {
+      routeAction:stageAction(stage),
+      coreFact:sharedKoreaCoreId.stages.first_payroll_check.fact,
+      same:stageAction(stage)===sharedKoreaCoreId.stages.first_payroll_check.fact
+    };
+  });
+  expect(state.routeAction.length).toBeGreaterThan(0);
+  expect(state.coreFact.length).toBeGreaterThan(0);
+  expect(state.same).toBe(false);
+
+  expect(errors).toEqual([]);
+});
+
+test('shared Korea-side panel stays hidden for sending-country-only stage', async ({ page }) => {
+  const errors = await freshPage(page);
+  await page.evaluate(() => {
+    const stage=route.stages.find(row=>row.id==='registration');
+    if(!stage)throw new Error('registration stage missing');
+    openStage(stage);
+  });
+  await expect(page.locator('#sharedKoreaCoreSection')).toBeHidden();
+  expect(errors).toEqual([]);
+});
+
 test('notice-specific answers stay hidden until the user selects the matching notice', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const errors = await freshPage(page);
