@@ -312,14 +312,20 @@
     "pointSystem": true
   },
   "resultLinkageFirewall": {
-    "status": "blocked_pending_direct_cycle_sector_linkage",
+    "status": "verified_by_official_examnot_key",
     "recruitmentScheduleTitle": "The 12th recruitment of the point system in Cambodia(Manufacturing)",
     "skillsCandidatePublicTitle": "Cambodia the 2th Test of proficiency in Korean Announcement",
     "finalPointResultPublicTitle": "Cambodia the 2th POINT_EXAM Announcement",
-    "rule": "The public result-list ordinal '2th' is not evidence that either artifact belongs to the 12th Manufacturing recruitment. Do not normalize, truncate, substring-match or otherwise transform '2th' into '12th'. Promotion requires direct official cycle/sector linkage.",
+    "rule": "The public result-list ordinal '2th' is not evidence that either artifact belongs to the 12th Manufacturing recruitment. Do not normalize, truncate or substring-match '2th' into '12th'. Linkage is independently verified because the official schedule, skills-candidate row and final-result row all carry examNot=46 for Cambodia 2026 General CBT.",
     "skillsCandidateSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
     "finalResultSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
-    "scheduleSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001"
+    "scheduleSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+    "officialJoinKey": {
+      "examNation": "002",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "46"
+    }
   },
   "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
