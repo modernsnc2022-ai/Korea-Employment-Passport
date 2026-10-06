@@ -1,16 +1,16 @@
 {
-  "version": "2.7.0",
+  "version": "2.8.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 50,
-    "distinctRecipientMailboxes": 43,
+    "sentMessages": 51,
+    "distinctRecipientMailboxes": 44,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T18:58:00+09:00"
+    "lastUpdatedAt": "2026-10-06"
   },
   "wave2": [
     {
@@ -193,7 +193,11 @@
     {
       "sourceCode": "kp2mi_sending_applicant",
       "channel": "email",
-      "status": "gmail_draft_prepared_not_sent"
+      "status": "sent_2026-10-06"
     }
-  ]
+  ],
+  "officialApplicantReferralSummary": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0
+  }
 }
