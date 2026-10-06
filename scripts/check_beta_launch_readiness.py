@@ -70,6 +70,7 @@ mvp_validation = (ROOT / "docs/MVP_VALIDATION.md").read_text(encoding="utf-8")
 outreach = (ROOT / "recruitment/OUTREACH_ID.md").read_text(encoding="utf-8")
 beta_tracker = (ROOT / "recruitment/BETA_TESTER_TRACKER.csv").read_text(encoding="utf-8-sig")
 worker_recorder = (ROOT / "scripts/record_worker_interview.py").read_text(encoding="utf-8")
+worker_interest_parser = (ROOT / "scripts/parse_worker_interest.py").read_text(encoding="utf-8")
 beta_interest_parser = (ROOT / "scripts/parse_beta_interest.py").read_text(encoding="utf-8")
 beta_feedback_recorder = (ROOT / "scripts/record_beta_feedback.py").read_text(encoding="utf-8")
 beta_progress_reporter = (ROOT / "scripts/report_beta_progress.py").read_text(encoding="utf-8")
@@ -339,6 +340,11 @@ require("interview_status" in publisher and "!= \"completed\"" in publisher,
         "worker evidence publisher must require interview completion before publication")
 require('worker["interview_status"] = "completed"' not in publisher,
         "worker evidence publisher must not complete interviews as a side effect")
+require("WORKER_INTEREST_PARSE_SELF_TEST_PASS" in worker_interest_parser,
+        "privacy-safe worker-interest parser must exist and expose a self-test")
+require("RAW_BODY_NOT_STORED=true" in worker_interest_parser
+        and "WORKER_SLOT_NOT_ASSIGNED=true" in worker_interest_parser,
+        "worker-interest parser must keep raw mail private and must not assign a validator slot before approval")
 require("WORKER_INTERVIEW_RECORD_SELF_TEST_PASS" in worker_recorder,
         "privacy-safe worker interview recorder must exist and expose a self-test")
 require('"interview_status"] = "completed"' in worker_recorder,
