@@ -29,6 +29,7 @@ source_review = load("docs/data/source_review_status.json")
 
 gate = dossier.get("promotionGate", {})
 monitoring = dossier.get("monitoring", {})
+surface_recheck = dossier.get("latestPublicSurfaceRecheck", {})
 route = next((row for row in registry.get("routes", []) if row.get("country") == "MM"), None)
 coverage_row = next((row for row in coverage.get("countries", []) if row.get("country") == "MM"), {})
 readiness_row = next((row for row in readiness.get("rows", []) if row.get("country") == "MM"), {})
@@ -40,6 +41,9 @@ require(isinstance(gate.get("promotionAllowed"), bool), "Myanmar promotionAllowe
 require(isinstance(gate.get("currentManufacturingArtifactPresent"), bool), "Myanmar current Manufacturing artifact presence must be explicit")
 require(len(gate.get("requiredAll", [])) >= 4, "Myanmar promotion gate must preserve all required evidence dimensions")
 require(len(gate.get("forbiddenAsPromotionProof", [])) >= 5, "Myanmar promotion gate must preserve forbidden-inference rules")
+require(surface_recheck.get("promotionAllowed") is False, "Myanmar direct public-surface recheck must not promote the route")
+require("No new direct official 2026 Manufacturing-labelled actionable artifact was captured" in str(surface_recheck.get("conclusion", "")), "Myanmar surface recheck must preserve the no-current-Manufacturing conclusion")
+require(len(surface_recheck.get("observations", [])) >= 4, "Myanmar surface recheck must record all four public surfaces")
 
 required_ids = set(monitoring.get("requiredSourceIds", []))
 expected_ids = {
