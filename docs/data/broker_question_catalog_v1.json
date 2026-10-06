@@ -697,11 +697,11 @@
       "question": "Tombol/status apa yang menandakan lamaran benar-benar terkirim?",
       "severity": "high",
       "category": "action",
-      "answerId": "job_application_manufacturing_2026_wait_notice",
-      "status": "answered_hold",
+      "answerId": "job_application_submit_safe_platform_baseline_2026",
+      "status": "answered",
       "discoveredBy": "product_design",
-      "blocksZeroBrokerReady": true,
-      "note": "Exact Manufacturing 2026 rule remains HOLD until the detailed sector-specific online job-application notice is verified."
+      "blocksZeroBrokerReady": false,
+      "note": "Resolved as a safe operational Sisko baseline: upload is not enough; confirm the application/documents are sent and monitor progress. Exact Manufacturing 2026 button label is not claimed."
     },
     {
       "id": "roster_meaning",
