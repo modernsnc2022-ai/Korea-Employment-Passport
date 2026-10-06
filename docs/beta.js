@@ -207,6 +207,23 @@ $('workerValidatorForm').addEventListener('submit',(event)=>{
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
 
+$('gmailWorkerValidatorBtn').addEventListener('click',()=>{
+  const out=$('workerValidatorResult');
+  if(!workerPanelOpen()){
+    out.hidden=false;out.className='result warn';out.textContent='Panel validator E-9 belum dibuka.';return;
+  }
+  if(!$('workerInKorea').checked||!$('workerUsedG2G').checked||!$('workerFeedbackAgreement').checked){
+    out.hidden=false;out.className='result warn';out.textContent='Lengkapi ketiga konfirmasi terlebih dahulu.';return;
+  }
+  const email=betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com';
+  const url=gmailComposeUrl(email,'[KEP E-9 Worker Validator] Retrospective panel',workerValidatorText());
+  const opened=window.open(url,'_blank','noopener,noreferrer');
+  if(!opened){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
+  }
+});
+
 $('copyWorkerValidatorBtn').addEventListener('click',async()=>{
   const out=$('workerValidatorResult');
   if(!workerPanelOpen()){
