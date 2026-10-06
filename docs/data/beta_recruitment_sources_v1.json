@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.5.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -76,6 +76,7 @@
     "bp3mi_jatim_applicant",
     "appik_purna_korea_referral",
     "pui_kmi_worker_referral",
-    "bp3mi_jabar_applicant"
+    "bp3mi_jabar_applicant",
+    "bp3mi_banten_applicant"
   ]
 }
