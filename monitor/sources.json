@@ -359,6 +359,26 @@
       "id": "moel_1350_contact",
       "agency": "Ministry of Employment and Labor",
       "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do"
+    },
+    {
+      "id": "mm_mol_eps_opportunity",
+      "agency": "Myanmar Ministry of Labour",
+      "url": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/"
+    },
+    {
+      "id": "mm_hrdk_schedule_index",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en"
+    },
+    {
+      "id": "mm_hrdk_skills_candidates",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+    },
+    {
+      "id": "mm_hrdk_final_results",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
     }
   ]
 }
