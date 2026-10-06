@@ -24,7 +24,12 @@ EXPECTED_STAGES = [
     "korea_entry_training","employer_handover","residence_registration",
     "eps_insurance_check","first_payroll_check","labor_support_ready","employment_maintenance",
 ]
-EXPECTED_JOB_HOLDS = {"job_docs","job_scan","job_name","job_edit","job_submit"}
+EXPECTED_JOB_HOLDS = {"job_docs","job_name","job_submit"}
+EXPECTED_JOB_SAFE_BASELINES = {"job_scan","job_edit"}
+EXPECTED_SAFE_ANSWER_IDS = {
+    "job_scan": "job_application_scan_safe_platform_baseline_2026",
+    "job_edit": "job_application_edit_safe_platform_baseline_2026",
+}
 
 failures: list[str] = []
 
@@ -107,10 +112,13 @@ holds = {
 }
 require(holds == EXPECTED_JOB_HOLDS, f"Manufacturing job-application HOLD set changed: {sorted(holds)}")
 require(
-    manufacturing_launch_check.get("heldQuestions") == [
-        "job_docs", "job_scan", "job_name", "job_edit", "job_submit"
-    ],
-    "Manufacturing launch-check record must preserve the locked five HOLD questions",
+    set(manufacturing_launch_check.get("heldQuestions", [])) == EXPECTED_JOB_HOLDS,
+    "Manufacturing launch-check record must preserve exactly the three exact HOLD questions",
+)
+require(
+    {row.get("questionId") for row in manufacturing_launch_check.get("safePlatformBaselines", [])}
+    == EXPECTED_JOB_SAFE_BASELINES,
+    "Manufacturing launch-check record must preserve exactly the two safe platform baselines",
 )
 require(
     manufacturing_launch_check.get("result") == "no_current_manufacturing_job_application_notice",
@@ -122,8 +130,8 @@ require(
 )
 baseline = route.get("jobApplicationBaselineEvidence", {})
 require(
-    baseline.get("status") == "verified_current_cycle_process_baseline_details_held",
-    "Indonesia job-application current-cycle baseline status must remain verified while exact submission details stay held",
+    baseline.get("status") == "verified_current_cycle_plus_safe_platform_baselines_exact_details_held",
+    "Indonesia job-application baseline must distinguish current-cycle process evidence, safe platform baselines and exact HOLDs",
 )
 require(
     baseline.get("verifiedAt") == "2026-10-06",
@@ -131,7 +139,19 @@ require(
 )
 require(
     set(baseline.get("heldExactQuestions", [])) == EXPECTED_JOB_HOLDS,
-    "Indonesia job-application baseline must preserve the locked five held exact questions",
+    "Indonesia job-application baseline must preserve exactly the three held exact questions",
+)
+require(
+    {row.get("questionId") for row in baseline.get("safePlatformBaselines", [])}
+    == EXPECTED_JOB_SAFE_BASELINES,
+    "Indonesia job-application baseline must preserve job_scan/job_edit as the two safe platform baselines",
+)
+require(
+    all(
+        row.get("verificationStatus") == "verified_cross_notice_platform_baseline_not_manufacturing_exact"
+        for row in baseline.get("safePlatformBaselines", [])
+    ),
+    "Indonesia safe job-application baselines must remain explicitly non-exact for Manufacturing 2026",
 )
 require(
     len(baseline.get("facts", [])) >= 4
@@ -151,9 +171,10 @@ require(
 )
 verified_baseline = manufacturing_launch_check.get("verifiedBaseline", {})
 require(
-    verified_baseline.get("status") == "process_baseline_verified_exact_submission_rules_held"
-    and set(verified_baseline.get("stillHeld", [])) == EXPECTED_JOB_HOLDS,
-    "Manufacturing launch check must distinguish verified pre-job baseline from held submission rules",
+    verified_baseline.get("status") == "process_and_safe_platform_baselines_verified_three_exact_submission_rules_held"
+    and set(verified_baseline.get("stillHeld", [])) == EXPECTED_JOB_HOLDS
+    and set(verified_baseline.get("safePlatformBaselines", [])) == EXPECTED_JOB_SAFE_BASELINES,
+    "Manufacturing launch check must distinguish verified process/safe baselines from the three exact held rules",
 )
 
 job_stage = next((row for row in route.get("stages", []) if row.get("id") == "job_application"), {})
@@ -164,9 +185,27 @@ require(
 for q in questions:
     if q.get("id") in EXPECTED_JOB_HOLDS:
         require(
-            q.get("answerId") == "job_application_manufacturing_2026_wait_notice",
-            f"{q.get('id')} must stay on the verified-wait answer until an official Manufacturing 2026 notice exists",
+            q.get("answerId") == "job_application_manufacturing_2026_wait_notice"
+            and q.get("status") == "answered_hold"
+            and q.get("blocksZeroBrokerReady") is True,
+            f"{q.get('id')} must stay an exact blocking HOLD until an official Manufacturing 2026 notice exists",
         )
+    if q.get("id") in EXPECTED_JOB_SAFE_BASELINES:
+        require(
+            q.get("answerId") == EXPECTED_SAFE_ANSWER_IDS[q.get("id")]
+            and q.get("status") == "answered"
+            and q.get("blocksZeroBrokerReady") is False,
+            f"{q.get('id')} must remain a resolved non-blocking safe platform baseline",
+        )
+
+answer_by_id = {row.get("id"): row for row in load_json("docs/data/exact_answer_rules_v1.json").get("answers", [])}
+for qid, answer_id in EXPECTED_SAFE_ANSWER_IDS.items():
+    safe_answer = answer_by_id.get(answer_id, {})
+    require(
+        safe_answer.get("verificationStatus") == "verified_cross_notice_platform_baseline_not_manufacturing_exact"
+        and safe_answer.get("blocksSubmission") is False,
+        f"{qid} safe baseline must remain explicitly non-exact and non-authorizing for Manufacturing submission",
+    )
 
 require(source.get("autoPublishRules") is False, "official-source rules must never auto-publish")
 require(int(source.get("configured", 0)) > 0, "official-source monitor must configure at least one source")
@@ -325,7 +364,12 @@ require(
 )
 require(
     set(hold_policy.get("currentHeldQuestions", [])) == EXPECTED_JOB_HOLDS,
-    "public beta HOLD policy must name exactly the five Manufacturing job-application questions",
+    "public beta HOLD policy must name exactly the three exact Manufacturing job-application questions",
+)
+require(
+    {row.get("questionId") for row in hold_policy.get("safePlatformBaselines", [])}
+    == EXPECTED_JOB_SAFE_BASELINES,
+    "public beta policy must preserve job_scan/job_edit as two safe platform baselines",
 )
 require(
     "final Broker Replacement Rate 100% PASS" in str(hold_policy.get("rule", "")),
@@ -380,9 +424,10 @@ require(beta_program.get("application", {}).get("intakeStatus") == "open",
         "tester-interest application intake must be OPEN")
 require('id="releaseGateNote"' in beta_page,
         "beta page must explain the actual release gates")
-require("lima detail lamaran online Manufaktur yang masih HOLD" in beta_page
+require("tiga detail exact lamaran online Manufaktur yang masih HOLD" in beta_page
+        and "Dua pertanyaan lain" in beta_page
         and "tidak otomatis melarang dimulainya beta" in beta_page,
-        "beta page must distinguish safe validation HOLDs from beta release blockers")
+        "beta page must distinguish three exact HOLDs, two safe baselines and beta release blockers")
 worker_panel = beta_program.get("retrospectivePanel", {})
 require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
 require(worker_panel.get("separateFromPublicBeta") is True,
