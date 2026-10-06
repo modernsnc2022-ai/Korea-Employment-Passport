@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "scope": "2026 Manufacturing online job-application detailed notice",
   "checkedAt": "2026-10-06",
@@ -21,10 +21,9 @@
   ],
   "heldQuestions": [
     "job_docs",
-    "job_name",
-    "job_submit"
+    "job_name"
   ],
-  "releaseRule": "If a Manufacturing-specific 2026 online job-application notice is found, review and structure the remaining exact rules before enabling real submission guidance. Existing scan/edit safety baselines do not authorize submission by themselves.",
+  "releaseRule": "If a Manufacturing-specific 2026 detailed online job-application notice is found, review the remaining exact document-list and identity-field rules before enabling real submission guidance. Existing scan/edit/send-confirmation baselines do not authorize submission by themselves.",
   "sameDayOfficialRecheck": {
     "status": "completed_no_detailed_manufacturing_notice_found",
     "checkedAt": "2026-10-06",
@@ -32,23 +31,24 @@
     "repeatOnActualReleaseDay": true
   },
   "verifiedBaseline": {
-    "status": "process_and_safe_platform_baselines_verified_three_exact_submission_rules_held",
+    "status": "process_and_three_safe_platform_baselines_verified_two_exact_submission_rules_held",
     "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
     "facts": [
       "MCU I official-provider path verified for 2026 graduates",
       "HIMPSI psychology path verified for 2026 graduates",
       "provider/HIMPSI direct result input to Sisko P2MI verified",
       "cross-notice Sisko baseline verified: supporting documents are scanned rather than photographed",
-      "cross-notice Sisko baseline verified: sent application documents cannot be corrected"
+      "cross-notice Sisko baseline verified: sent application documents cannot be corrected",
+      "cross-notice Sisko baseline verified: completion is checked through sent/progress state in Sisko and official support is available for sending issues"
     ],
     "stillHeld": [
       "job_docs",
-      "job_name",
-      "job_submit"
+      "job_name"
     ],
     "safePlatformBaselines": [
       "job_scan",
-      "job_edit"
+      "job_edit",
+      "job_submit"
     ]
   },
   "safePlatformBaselines": [
@@ -65,6 +65,15 @@
       "questionId": "job_edit",
       "status": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
       "rule": "Treat sent application documents as non-editable and verify everything before final send; exact Manufacturing 2026 final button/status remains held.",
+      "sourceUrls": [
+        "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+        "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
+      ]
+    },
+    {
+      "questionId": "job_submit",
+      "status": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+      "rule": "Upload via Menu Pemenuhan Dokumen, perform final send only after review, then confirm Sisko reflects sent/progress state and monitor it. If status is unclear, use the official sendingkorea@gmail.com channel; exact Manufacturing 2026 button label remains unclaimed.",
       "sourceUrls": [
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
