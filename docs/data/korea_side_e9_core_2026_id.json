@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "language": "id",
+  "checkedAt": "2026-10-06",
+  "stages": {
+    "employer_selection": {
+      "title": "Seleksi perusahaan di Korea",
+      "fact": "Setelah kelayakan perusahaan diperiksa oleh pemerintah Korea, perusahaan memilih pekerja dari pencari kerja asing yang dirujuk melalui sistem resmi EPS. Lulus ujian atau memakai perantara swasta tidak menjamin dipilih perusahaan.",
+      "boundary": "Jangan anggap lulus tes, masuk roster, atau membayar pihak ketiga sebagai jaminan mendapat perusahaan."
+    },
+    "slc": {
+      "title": "Kontrak kerja standar (SLC)",
+      "fact": "Setelah izin mempekerjakan diterbitkan, kontrak kerja standar dibuat dan dikirim melalui HRD Korea ke negara pengirim. Pekerja meninjau kontrak melalui lembaga pengirim lalu memutuskan menerima atau tidak.",
+      "boundary": "Jadwal penandatanganan, formulir lokal, terjemahan, dan tata cara di Indonesia tetap mengikuti pengumuman resmi Indonesia/cohort Anda."
+    },
+    "predeparture_training": {
+      "title": "Pendidikan sebelum keberangkatan",
+      "fact": "Pekerja yang sudah menandatangani kontrak kerja menyelesaikan pendidikan sebelum keberangkatan di negara pengirim sebelum masuk Korea.",
+      "boundary": "Durasi, lokasi, materi, biaya, dan dokumen pendidikan dapat berbeda menurut negara pengirim dan cohort."
+    },
+    "visa_docs": {
+      "title": "Alur E-9 setelah kontrak",
+      "fact": "Setelah kontrak selesai, pemberi kerja atau lembaga yang berwenang memperoleh Confirmation of Visa Issuance. HRD Korea meneruskannya ke proses negara pengirim, lalu pengajuan visa E-9 dilakukan melalui perwakilan Korea setelah langkah pra-keberangkatan yang diwajibkan.",
+      "boundary": "Checklist kedutaan, cara pengajuan, biaya visa/administrasi, saldo rekening, dan janji temu harus mengikuti pengumuman resmi Indonesia/cohort yang sedang berlaku."
+    },
+    "departure": {
+      "title": "Rencana masuk dan keberangkatan",
+      "fact": "HRD Korea menyusun rencana masuk bagi pekerja yang visanya telah diterbitkan. Lembaga pengirim menyiapkan pekerja berdasarkan rencana itu dan mengonfirmasi kesiapan masuk sedikitnya 7 hari sebelum tanggal rencana masuk. Hanya pekerja yang sudah dikonfirmasi masuk pada tanggal yang ditetapkan.",
+      "boundary": "Jangan menyimpulkan tanggal penerbangan pribadi dari laporan kelompok atau cohort lain."
+    },
+    "korea_entry_training": {
+      "title": "Pendidikan kerja setelah tiba di Korea",
+      "fact": "Setelah tiba di Bandara Incheon, pekerja E-9 dipindahkan ke lembaga pendidikan kerja dan menerima pendidikan kerja selama 16 jam. Pemeriksaan kesehatan dilakukan kembali; kegagalan pada pemeriksaan kesehatan dapat berujung pada pemulangan ke negara pengirim.",
+      "boundary": "Ikuti instruksi lembaga resmi untuk jadwal, lokasi, dan pemeriksaan pribadi Anda."
+    },
+    "employer_handover": {
+      "title": "Penyerahan ke perusahaan",
+      "fact": "Setelah pendidikan kerja dan proses kesehatan pasca-kedatangan selesai, pekerja diserahkan kepada pemberi kerja dan ditempatkan di tempat kerja sesuai kontrak.",
+      "boundary": "Jangan menganggap penempatan di lokasi tertentu selesai sebelum serah-terima resmi."
+    },
+    "residence_registration": {
+      "title": "Registrasi orang asing",
+      "fact": "Orang asing yang akan tinggal di Korea lebih dari 90 hari wajib melakukan registrasi orang asing pada kantor imigrasi yang berwenang atas tempat tinggalnya dalam 90 hari sejak masuk Korea.",
+      "boundary": "Reservasi, kantor yang berwenang, dokumen, biaya, dan proses penerbitan kartu harus dicek pada panduan Imigrasi Korea yang berlaku untuk tempat tinggal aktual."
+    },
+    "eps_insurance_check": {
+      "title": "Pemeriksaan asuransi wajib EPS",
+      "fact": "EPS memiliki empat produk asuransi wajib: Departure Guarantee Insurance dan Guarantee Insurance merupakan kewajiban pihak pemberi kerja; Return Cost Insurance dan Casualty Insurance merupakan kewajiban pekerja. Panduan EPS menetapkan jendela 15 hari untuk Departure Guarantee, Guarantee, dan Casualty Insurance serta 3 bulan untuk Return Cost Insurance.",
+      "boundary": "Besaran premi, penerapan Guarantee Insurance, jaminan sosial lain, dan prosedur klaim bergantung pada aturan resmi yang berlaku serta kondisi pekerja/tempat kerja."
+    },
+    "first_payroll_check": {
+      "title": "Pemeriksaan gaji pertama",
+      "fact": "Pasal 43 Labor Standards Act Korea pada prinsipnya mewajibkan upah dibayar langsung dan penuh kepada pekerja, serta dibayar sedikitnya sekali setiap bulan pada tanggal yang tetap. Gunakan gaji pertama sebagai titik pemeriksaan terhadap kontrak tertulis dan catatan kerja aktual.",
+      "boundary": "Jangan menebak jumlah bersih, potongan yang sah, lembur, pajak, atau tanggal gajian tertentu tanpa kontrak, slip gaji, catatan kerja, dan aturan yang berlaku."
+    },
+    "labor_support_ready": {
+      "title": "Siapkan kanal bantuan ketenagakerjaan",
+      "fact": "HRD Korea mengoperasikan Foreign Workforce Counseling Center di 1577-0071 pukul 09.00–18.00. Layanan mencakup konsultasi EPS/ketenagakerjaan, pertanyaan asuransi, dukungan keluhan dan interpretasi, termasuk layanan bahasa Indonesia. Kanal resmi lain mencakup Employment Center, Immigration Contact Center 1345, dan Korea Legal Aid 132 sesuai masalahnya.",
+      "boundary": "Gunakan lembaga yang berwenang untuk masalah nyata Anda. Panduan umum KEP bukan putusan hukum dan tidak menjamin hasil penyelesaian."
+    },
+    "employment_maintenance": {
+      "title": "Mempertahankan pekerjaan dan perubahan tempat kerja",
+      "fact": "Pekerja E-9 tidak memiliki hak tanpa batas untuk pindah tempat kerja sesuka hati. Berdasarkan Pasal 25 Act on the Employment of Foreign Workers, permohonan perubahan tempat kerja dapat diajukan jika alasan hukum terpenuhi, termasuk penghentian atau penolakan perpanjangan oleh pemberi kerja dan keadaan yang bukan kesalahan pekerja seperti penutupan usaha, pembatasan izin kerja, akomodasi yang tidak memenuhi ketentuan, pelanggaran kondisi kerja, atau perlakuan tidak adil.",
+      "boundary": "Jangan berhenti kerja, meninggalkan tempat kerja, atau menganggap perubahan pasti disetujui hanya berdasarkan panduan umum. Kelayakan, tenggat, dampak imigrasi, dan bukti harus dikonfirmasi dengan Employment Center/otoritas yang berwenang."
+    }
+  }
+}
