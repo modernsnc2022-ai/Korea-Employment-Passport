@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "routeId": "kg-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "scope": "country_process_2026_not_individual_departure_assignment",
+  "principle": "These sources verify the Kyrgyzstan EPS post-contract process shape in 2026. They do not establish an individual applicant's SLC signing date, visa checklist, visa fee or assigned departure date.",
+  "sources": [
+    {
+      "id": "kg_eps_departure_2026_09_29",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "status": "verified_official_current",
+      "facts": {
+        "eventDate": "2026-09-29",
+        "publicationDate": "2026-09-30",
+        "contractReceivedBeforeTraining": true,
+        "predepartureTrainingDays": 5,
+        "departureToKoreaObserved": true
+      }
+    },
+    {
+      "id": "kg_eps_departure_2026_08_11",
+      "sourceUrl": "https://migrant.kg/kg/about/news/11-avgusta-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "status": "verified_official_current",
+      "facts": {
+        "eventDate": "2026-08-11",
+        "contractReceivedBeforeTraining": true,
+        "predepartureTrainingDays": 5,
+        "departureToKoreaObserved": true
+      }
+    },
+    {
+      "id": "kg_eps_process_baseline",
+      "sourceUrl": "https://migrant.kg/media/uploads/2025/10/08/wfsusb.pdf",
+      "status": "verified_official_process_baseline",
+      "facts": {
+        "stages": [
+          "online_registration",
+          "eps_topik",
+          "skills_test",
+          "medical_and_roster"
+        ],
+        "noContractGuarantee": true,
+        "employerSelectionIndependent": true
+      }
+    }
+  ],
+  "promotionRules": {
+    "mayPromote": [
+      "contract-received applicants proceed to official pre-departure training",
+      "official pre-departure training lasts 5 days in the verified 2026 departure reports",
+      "the Center organizes official departure groups to Korea under EPS"
+    ],
+    "mustRemainHold": [
+      "individual SLC signing date or signing procedure",
+      "individual visa checklist, visa fee or appointment",
+      "individual final medical recheck requirement",
+      "individual departure date or flight assignment",
+      "claim that every observed departure group belongs to the February 13th Manufacturing cohort"
+    ]
+  }
+}
