@@ -66,6 +66,7 @@
     "sbmi_korea_worker_referral",
     "pcim_korea_referral",
     "kp2mi_departure_worker_referral",
-    "kp2mi_sending_applicant"
+    "kp2mi_sending_applicant",
+    "lpk_master_korea"
   ]
 }
