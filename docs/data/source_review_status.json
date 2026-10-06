@@ -1,34 +1,14 @@
 {
   "version": "1.1.0",
-  "state": "review_required",
+  "state": "clean",
   "autoPublishRules": false,
   "configured": 76,
   "checked": 76,
-  "reviewRequiredUrls": [
-    "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
-    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/"
-  ],
-  "reviewRequiredSourceIds": [
-    "mm_hrdk_final_results",
-    "mm_hrdk_schedule_index",
-    "mm_hrdk_skills_candidates",
-    "mm_mol_eps_opportunity"
-  ],
-  "pendingBaselineUrls": [
-    "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-    "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
-    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/"
-  ],
-  "pendingBaselineSourceIds": [
-    "mm_hrdk_final_results",
-    "mm_hrdk_schedule_index",
-    "mm_hrdk_skills_candidates",
-    "mm_mol_eps_opportunity"
-  ],
+  "reviewRequiredUrls": [],
+  "reviewRequiredSourceIds": [],
+  "pendingBaselineUrls": [],
+  "pendingBaselineSourceIds": [],
   "fetchFailureUrls": [],
   "fetchFailureSourceIds": [],
-  "message": "New official watch targets have no accepted baseline yet; fetch and review them before baseline acceptance or route promotion."
+  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
 }

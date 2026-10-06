@@ -646,5 +646,41 @@
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
+  },
+  "mm_mol_eps_opportunity": {
+    "sha256": "83874eaa597f0817f187416f375431eb664b042eae92137215fd31bb2d661743",
+    "agency": "Myanmar Ministry of Labour",
+    "url": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+    "contentLength": 7974,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "mm_hrdk_schedule_index": {
+    "sha256": "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
+    "agency": "HRD Korea EPS-TOPIK",
+    "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+    "contentLength": 2365,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "mm_hrdk_skills_candidates": {
+    "sha256": "651c6940e1a6fc9f0a763464c8ff80d0c8936246339b033186817a0dc7f61e49",
+    "agency": "HRD Korea EPS-TOPIK",
+    "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "contentLength": 2499,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "mm_hrdk_final_results": {
+    "sha256": "f87a32ec92c65a049d03ce89f50a6b3b4db83cea93b700226818aa0855f6ad65",
+    "agency": "HRD Korea EPS-TOPIK",
+    "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+    "contentLength": 2438,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
   }
 }
