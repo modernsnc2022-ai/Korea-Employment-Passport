@@ -627,7 +627,7 @@ require(
         "kp2mi_departure_worker_referral","kp2mi_sending_applicant","lpk_master_korea",
         "lpk_hanaro","lpk_go_korea","korea_indonesia_center_referral","appik_purna_korea_referral",
         "pui_kmi_worker_referral","bp3mi_dki_applicant","bp3mi_jateng_applicant","bp3mi_jatim_applicant",
-        "bp3mi_jabar_applicant"
+        "bp3mi_jabar_applicant","bp3mi_banten_applicant"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
