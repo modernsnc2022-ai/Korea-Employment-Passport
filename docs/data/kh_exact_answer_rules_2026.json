@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "routeId": "kh-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Direct official HRD Korea evidence now verifies the Cambodia 12th Manufacturing schedule. Result artifacts still require explicit cycle/sector linkage; Agriculture, Special and discovery-only evidence must not populate unrelated rules.",
@@ -35,9 +35,9 @@
         "skill_competency"
       ],
       "question": "What official Cambodia General CBT skills-candidate artifact is published?",
-      "answer": "Cambodia the 2th Test of proficiency in Korean Announcement, published 2026-08-06.",
-      "writeExactly": "Official country-level artifact exists; do not call it the Manufacturing Round 2 list until exact cycle/sector linkage is verified.",
-      "verificationStatus": "official_artifact_linkage_pending",
+      "answer": "Yes. The 2026-08-06 official skills-candidate row carries examNot=46, matching the direct 12th Manufacturing schedule.",
+      "writeExactly": "12th Cambodia Manufacturing skills-candidate artifact: published 2026-08-06; linked by official examNot=46.",
+      "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -47,9 +47,9 @@
         "final_selection"
       ],
       "question": "What official Cambodia Point System result artifact is published?",
-      "answer": "Cambodia the 2th POINT_EXAM Announcement, General CBT, published 2026-08-21.",
-      "writeExactly": "Preserve the official result artifact, but do not auto-link it to Manufacturing without cycle/sector proof.",
-      "verificationStatus": "official_artifact_linkage_pending",
+      "answer": "Yes. The 2026-08-21 official Point System final-result row carries examNot=46, matching the direct 12th Manufacturing schedule.",
+      "writeExactly": "12th Cambodia Manufacturing final Point System result artifact: published 2026-08-21; linked by official examNot=46.",
+      "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -149,9 +149,9 @@
         "final_selection"
       ],
       "question": "Does '2th' in the Cambodia result-list title prove linkage to the 12th Manufacturing recruitment?",
-      "answer": "No.",
-      "writeExactly": "The official schedule says 12th Manufacturing, while the public August result-list titles say 2th. KEP must not transform or substring-match 2th into 12th; direct official cycle/sector linkage is still required.",
-      "verificationStatus": "verified_non_linkage_boundary",
+      "answer": "No. '2th' must not be normalized into '12th'. The current linkage is valid only because the official HTML row uses examNot=46, the same key as the 12th Manufacturing schedule.",
+      "writeExactly": "Do not match 2th to 12th by text. Use the verified official examNot=46 linkage only.",
+      "verificationStatus": "verified_firewall_with_independent_examnot_linkage",
       "sourceUrls": [
         "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
         "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
@@ -159,5 +159,6 @@
       ],
       "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
