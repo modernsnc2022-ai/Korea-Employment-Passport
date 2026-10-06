@@ -6,7 +6,7 @@ Snapshot: 2026-10-06
 - Channel: email
 - Public mailbox: `gimpofc@naver.com`
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=gimpo_foreign_resident_center`
-- Status: sent_2026-10-06
+- Status: sent_2026-10-07
 
 ## Fit
 - Gimpo officially operates foreign-resident communities that include an Indonesian community.
@@ -31,6 +31,6 @@ Snapshot: 2026-10-06
 
 ## Send result
 - Deployment gate SHA: `14e4976e24803b43d74d5346e6468c80f1e025c3`; static-check, ui-smoke, Pages and beta-launch-gate all passed on this same HEAD before send.
-- Initial email sent once on 2026-10-06 after same-HEAD gates, deployed routing, duplicate-mailbox recheck, and the pre-send guard passed.
+- Initial email sent once on 2026-10-07 KST after same-HEAD gates, deployed routing, duplicate-mailbox recheck, and the pre-send guard passed.
 - Immediate bounce check: none observed.
 - Do not send another initial outreach. Any later contact requires an explicit follow-up-ready ledger state.
