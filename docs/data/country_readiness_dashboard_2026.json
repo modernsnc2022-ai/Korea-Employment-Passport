@@ -1,5 +1,5 @@
 {
-  "version": "1.8.6",
+  "version": "1.8.7",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -16,7 +16,7 @@
     "betaHold": 1,
     "researchHold": 15,
     "pendingManufacturingVerification": 1,
-    "datedReviewTriggers": 2,
+    "datedReviewTriggers": 3,
     "betaReady": 0
   },
   "rows": [
@@ -77,8 +77,9 @@
       "packState": "research_hold",
       "betaState": "blocked",
       "nextReview": {
-        "type": "official_notice",
-        "subject": "Final 2026 Manufacturing Round 2 schedule/result or downstream notice",
+        "type": "dated_official_review",
+        "date": "2026-10-12",
+        "subject": "Final HRD-confirmed 2026 Manufacturing Round 2 schedule",
         "officialSources": [
           "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx"
         ]
@@ -87,7 +88,14 @@
         "final official 2026 Manufacturing Round 2 schedule/result not yet verified",
         "current Manufacturing medical/candidate-file instructions not fully mapped",
         "post-SLC visa/training/departure exact rules not fully mapped"
-      ]
+      ],
+      "verified": {
+        "round2ProjectedWindow": {
+          "status": "review_trigger_only_not_final",
+          "window": "2026-10-12 through 2026-10-16",
+          "recheckedAt": "2026-10-06"
+        }
+      }
     },
     {
       "country": "PH",

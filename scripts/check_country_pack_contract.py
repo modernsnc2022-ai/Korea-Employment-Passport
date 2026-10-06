@@ -198,6 +198,9 @@ vn_current=vn_stage_readiness.get("currentCohort",{})
 require(vn_current.get("recruitmentRegistration",{}).get("status")=="closed_verified","Vietnam 2026 registration must remain closed_verified")
 require(vn_current.get("epsTopikResult",{}).get("status")=="round1_result_verified","Vietnam Manufacturing Round 1 result must remain verified")
 require(vn_current.get("skillCompetency",{}).get("status")=="awaiting_final_official_schedule","Vietnam Round 2 must not be promoted before final official schedule verification")
+require(vn_current.get("skillCompetency",{}).get("projectedPlanEvidence",{}).get("reviewTriggerDate")=="2026-10-12","Vietnam projected Round 2 window must trigger a dated official recheck on 2026-10-12")
+require(vn_stage_readiness.get("nextReviewTrigger",{}).get("type")=="dated_official_review" and vn_stage_readiness.get("nextReviewTrigger",{}).get("date")=="2026-10-12","Vietnam readiness must preserve the 2026-10-12 dated official review trigger")
+require(vn_pack.get("safety",{}).get("projectedRound2WindowMustNotBecomeFinalSchedule") is True,"Vietnam projected Round 2 window must never auto-promote into a final schedule")
 require(vn_stage_readiness.get("betaReadiness",{}).get("status")=="blocked","Vietnam beta must remain blocked while downstream exact rules are unresolved")
 
 
@@ -766,7 +769,7 @@ require(dashboard.get("summary",{}).get("registeredCountryPacks")==16,"readiness
 require(dashboard.get("summary",{}).get("betaHold")==1,"readiness dashboard must report exactly one beta HOLD route")
 require(dashboard.get("summary",{}).get("researchHold")==15,"readiness dashboard must report 15 research HOLD routes")
 require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==1,"readiness dashboard must report 1 pending Manufacturing country")
-require(dashboard.get("summary",{}).get("datedReviewTriggers")==2,"readiness dashboard must report exactly two dated review triggers")
+require(dashboard.get("summary",{}).get("datedReviewTriggers")==3,"readiness dashboard must report exactly three dated review triggers")
 require(dashboard.get("summary",{}).get("betaReady")==0,"readiness dashboard must not claim any beta-ready route")
 require(dashboard_rows["ID"].get("packState")=="beta_hold","Indonesia readiness state must remain beta_hold")
 require(dashboard_rows["ID"].get("betaState")=="pending_manual_approval","Indonesia beta must remain pending manual approval")
@@ -787,7 +790,7 @@ require(dashboard_rows["MM"].get("detailsPage")=="mm.html","Myanmar readiness ro
 require(dashboard_rows["MM"].get("routeId") is None and dashboard_rows["MM"].get("packState")=="pending_manufacturing_verification","Myanmar must remain pending without a promoted route")
 require(any("mol.gov.mm" in s for s in dashboard_rows["MM"].get("nextReview",{}).get("officialSources",[])),"Myanmar next-review sources must include the Ministry of Labour EPS page")
 dated={code for code,row in dashboard_rows.items() if row.get("nextReview",{}).get("type")=="dated_official_review"}
-require(dated=={"LK","TH"},"only Sri Lanka and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
+require(dated=={"LK","VN","TH"},"only Sri Lanka, Vietnam and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
 for code,row in dashboard_rows.items():
     require(len(row.get("blockers",[]))>=1,f"{code}: readiness row must include at least one blocker")
     sources=row.get("nextReview",{}).get("officialSources",[])
@@ -838,6 +841,7 @@ require('href="beta.html"' not in nepal,"Nepal preview must not link to Indonesi
 require('id="betaForm"' not in nepal,"Nepal preview must not contain a beta enrollment form")
 require("RESEARCH / HOLD" in vietnam and "150" in vietnam and "COLAB" in vietnam,"Vietnam preview must show HOLD, verified Round 1 cutoff and official sending authority")
 require("CURRENT 2026 COHORT STATUS" in vietnam and "Vòng 2" in vietnam,"Vietnam preview must show downstream current-cohort HOLD")
+require("12–16/10/2026" in vietnam and "không coi khoảng dự kiến này là lịch cuối cùng" in vietnam,"Vietnam preview must show the projected Round 2 window only as a non-final dated review boundary")
 require('href="beta.html"' not in vietnam and 'id="betaForm"' not in vietnam,"Vietnam preview must not expose beta enrollment")
 require("RESEARCH / HOLD" in philippines and "No registration is currently open" in philippines,"Philippines preview must visibly remain HOLD with no open registration")
 require("SPECIAL ROUTE FIREWALL" in philippines and "US$24" in philippines and "100-person" in philippines,"Philippines preview must visibly separate Special from Regular")
