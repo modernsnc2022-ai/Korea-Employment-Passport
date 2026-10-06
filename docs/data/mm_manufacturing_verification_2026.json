@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -81,5 +81,76 @@
     "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
     "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
     "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
-  ]
+  ],
+  "promotionGate": {
+    "status": "blocked",
+    "promotionAllowed": false,
+    "currentManufacturingArtifactPresent": false,
+    "requiredAll": [
+      {
+        "id": "official_source",
+        "rule": "Evidence must come directly from HRD Korea EPS-TOPIK or Myanmar Ministry of Labour / official POEA channel.",
+        "allowedHosts": [
+          "epstopik.hrdkorea.or.kr",
+          "mol.gov.mm"
+        ]
+      },
+      {
+        "id": "current_cycle",
+        "rule": "The artifact must identify the current 2026 cycle rather than a historical cohort.",
+        "requiredCycle": 2026
+      },
+      {
+        "id": "explicit_sector",
+        "rule": "The artifact must explicitly identify Manufacturing; country-level Point System evidence is insufficient.",
+        "requiredSector": "Manufacturing"
+      },
+      {
+        "id": "actionable_artifact",
+        "rule": "At least one direct recruitment, registration, schedule, skills/result or final-result artifact must be captured for the current Manufacturing cycle.",
+        "acceptedArtifactTypes": [
+          "recruitment",
+          "registration",
+          "schedule",
+          "skills_candidate",
+          "result",
+          "final_result"
+        ]
+      }
+    ],
+    "forbiddenAsPromotionProof": [
+      "Agriculture/Livestock, Construction or Forestry dates, fees, quotas or documents.",
+      "Historical 2025 Manufacturing job-application evidence.",
+      "Validity-extension, roster-extension or re-registration evidence for an older Manufacturing cohort.",
+      "Third-party summaries, mirrors, social reposts or search snippets without a directly reviewed official artifact.",
+      "A country-level Point System artifact whose public text does not explicitly identify Manufacturing."
+    ],
+    "currentReview": {
+      "reviewedAt": "2026-10-06",
+      "qualifyingArtifacts": [],
+      "observedCurrentOfficialSectors": [
+        "Agriculture·Livestock",
+        "Construction",
+        "Forestry"
+      ],
+      "historicalManufacturingArtifacts": [
+        {
+          "year": 2025,
+          "artifactType": "job_application",
+          "sourceUrl": "https://www.mol.gov.mm/%E1%80%A1%E1%80%9C%E1%80%AF%E1%80%95%E1%80%BA%E1%80%9E%E1%80%99%E1%80%AC%E1%80%B8%E1%80%9D%E1%80%94%E1%80%BA%E1%80%80%E1%80%BC%E1%80%AE%E1%80%B8%E1%80%8C%E1%80%AC%E1%80%94-%E1%80%92%E1%80%AF-32/",
+          "promotable": false
+        }
+      ],
+      "conclusion": "No direct official 2026 Manufacturing-labelled recruitment, registration, schedule, skills/result or final-result artifact is captured. Route promotion remains blocked."
+    }
+  },
+  "monitoring": {
+    "requiredSourceIds": [
+      "mm_mol_eps_opportunity",
+      "mm_hrdk_schedule_index",
+      "mm_hrdk_skills_candidates",
+      "mm_hrdk_final_results"
+    ],
+    "rule": "Any monitored source change requires review. A changed page never auto-promotes the route; promotion requires promotionGate.requiredAll to be satisfied and reviewed."
+  }
 }
