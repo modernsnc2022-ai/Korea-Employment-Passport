@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.9.1",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -220,15 +220,15 @@
       "betaState": "blocked",
       "nextReview": {
         "type": "official_notice",
-        "subject": "Uzbekistan 9th Manufacturing fee/document checklist and downstream notices",
+        "subject": "Uzbekistan 9th Manufacturing fee/document checklist and cycle-specific medical/job-file/visa/departure notices",
         "officialSources": [
-          "https://migration.uz/",
+          "https://gov.uz/en/migration",
           "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
         ]
       },
       "blockers": [
         "cycle-specific fee/document checklist not reconstructed",
-        "downstream exact rules not mapped"
+        "current 9th-cycle medical/job-file/visa/individual departure exact rules not mapped"
       ],
       "verified": {
         "skillsCandidate": {
@@ -240,6 +240,12 @@
           "status": "official_examnot_linked",
           "examNot": "9",
           "publicationDate": "2026-08-27"
+        },
+        "countryPostSelection": {
+          "status": "verified_2026_country_process_not_9th_specific",
+          "manufacturingContractsReported": 213,
+          "contractPublicationDate": "2026-08-14",
+          "predepartureTrainingProcess": true
         }
       }
     },
