@@ -396,16 +396,6 @@
       "url": "https://dmw.gov.ph/"
     },
     {
-      "id": "th_doe_overseas",
-      "agency": "Thailand Department of Employment",
-      "url": "https://www.doe.go.th/overseas"
-    },
-    {
-      "id": "bd_boesl_home",
-      "agency": "Bangladesh BOESL",
-      "url": "https://boesl.gov.bd/"
-    },
-    {
       "id": "lk_slbfe_home",
       "agency": "Sri Lanka SLBFE",
       "url": "https://www.slbfe.lk/"
@@ -416,34 +406,9 @@
       "url": "https://migration.uz/"
     },
     {
-      "id": "mn_golws_home",
-      "agency": "Mongolia GOLWS",
-      "url": "https://www.hudulmur-halamj.gov.mn/"
-    },
-    {
-      "id": "cn_cipa_home",
-      "agency": "China CIPA",
-      "url": "https://www.cipainvest.org.cn/"
-    },
-    {
-      "id": "kh_mtosb_home",
-      "agency": "Cambodia MTOSB",
-      "url": "https://www.mtosb.gov.kh/"
-    },
-    {
-      "id": "pk_oec_home",
-      "agency": "Pakistan OEC",
-      "url": "https://oec.gov.pk/"
-    },
-    {
       "id": "kg_migrant_home",
       "agency": "Kyrgyzstan CEC",
       "url": "https://migrant.kg/"
-    },
-    {
-      "id": "tj_manufacturing_notice",
-      "agency": "Tajikistan Agency of Overseas Employment",
-      "url": "https://mehnat.tj/tg/news/dt/f96574bc-e8fb-427f-96c9-4a1ba22e9995"
     },
     {
       "id": "hrdk_sending_agency_index",

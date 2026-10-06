@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -140,7 +140,10 @@
           "sourceId": "mm_mol_eps_opportunity",
           "sourceUrl": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
           "finding": "The current official EPS opportunity page contains historical Manufacturing materials and other EPS materials, but no direct current 2026 Manufacturing-labelled recruitment, registration, schedule, skills/result or final-result artifact was captured in this review.",
-          "qualifiesForPromotion": false
+          "qualifiesForPromotion": false,
+          "reviewedFingerprintSha256": "8f5063b942e0e86b1181b17285dbd4eb69856ec0f17fd886b0beafcd2b3b405b",
+          "previousReviewedFingerprintSha256": "83874eaa597f0817f187416f375431eb664b042eae92137215fd31bb2d661743",
+          "reviewNote": "The changed current page was re-reviewed on 2026-10-06; historical Manufacturing materials remain present, but no direct 2026 Manufacturing-labelled qualifying artifact was found."
         },
         {
           "sourceId": "mm_hrdk_schedule_index",
@@ -188,7 +191,8 @@
         "sourceUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
         "finding": "The current Department of Labour index exposes the EPS opportunity section and recent Department of Labour posts, but no direct current 2026 Manufacturing-labelled EPS recruitment, registration, schedule, skills/result or final-result artifact was identified in this review.",
         "qualifiesForPromotion": false,
-        "baselineState": "pending_source_monitor_acceptance"
+        "baselineState": "reviewed_safe_to_accept",
+        "reviewedFingerprintSha256": "8470a173dc97d1112055833aec857a73ea59471ee3921c69c82ecbffb6504ea4"
       }
     }
   },
@@ -201,7 +205,7 @@
     ],
     "rule": "Any monitored source change requires review. A changed page never auto-promotes the route; promotion requires promotionGate.requiredAll to be satisfied and reviewed.",
     "lastReviewedAt": "2026-10-06",
-    "baselineAcceptanceState": "reviewed_safe_to_accept_without_route_promotion",
+    "baselineAcceptanceState": "reviewed_sources_pending_one_time_acceptance_without_route_promotion",
     "supplementalDiscoverySourceIds": [
       "mm_mol_dol_index"
     ],

@@ -356,11 +356,38 @@ def main():
             expected_ids = set(manifest.get("expectedChangedSourceIds", []))
             changed_ids = {row.get("id") for row in changed if row.get("id")}
             expected_hashes = manifest.get("expectedBaselineSha256", {})
-            baseline_matches = (
-                set(expected_hashes) == expected_ids
-                and all(
-                    baseline.get(source_id, {}).get("sha256") == expected_hashes.get(source_id)
-                    for source_id in expected_ids
+            expected_new_hashes = manifest.get("expectedNewSourceSha256", {})
+            expected_current_hashes = manifest.get("expectedCurrentSha256", {})
+            changed_by_id = {row.get("id"): row for row in changed if row.get("id")}
+            baseline_ids = set(expected_hashes)
+            new_ids = set(expected_new_hashes)
+            partition_matches = (
+                not (baseline_ids & new_ids)
+                and (baseline_ids | new_ids) == expected_ids
+            )
+            baseline_matches = all(
+                baseline.get(source_id, {}).get("sha256") == expected_hashes.get(source_id)
+                for source_id in baseline_ids
+            )
+            new_sources_match = all(
+                source_id not in baseline
+                and changed_by_id.get(source_id, {}).get("reason") == "new_unbaselined_source"
+                and changed_by_id.get(source_id, {}).get("after") == expected_new_hashes.get(source_id)
+                for source_id in new_ids
+            )
+            reviewed_new_sources_allowed = (
+                not new_ids
+                or manifest.get("safety", {}).get("allowReviewedNewSources") is True
+            )
+            require_current_hashes = manifest.get("safety", {}).get("requireExactCurrentHashes") is True
+            current_hashes_match = (
+                not require_current_hashes
+                or (
+                    set(expected_current_hashes) == baseline_ids
+                    and all(
+                        changed_by_id.get(source_id, {}).get("after") == expected_current_hashes.get(source_id)
+                        for source_id in baseline_ids
+                    )
                 )
             )
             manifest_matches = (
@@ -371,7 +398,11 @@ def main():
                 and manifest.get("safety", {}).get("requireExactBaselineHashes") is True
                 and manifest.get("safety", {}).get("oneTimeByBaselineHash") is True
                 and changed_ids == expected_ids
+                and partition_matches
                 and baseline_matches
+                and new_sources_match
+                and reviewed_new_sources_allowed
+                and current_hashes_match
             )
             if manifest_matches:
                 review_manifest_accepted = True
