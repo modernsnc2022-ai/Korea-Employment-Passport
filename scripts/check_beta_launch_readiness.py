@@ -523,7 +523,7 @@ require(
     "landing source attribution must accept only a bounded non-identifying source token",
 )
 require(
-    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral'])" in landing_js
+    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral'])" in landing_js
     and "beta.html?src=" in landing_js
     and "#worker-panel" in landing_js,
     "worker-only recruitment sources must route directly to the worker-interest section",
@@ -625,7 +625,7 @@ require(
         "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app",
         "kbri_seoul_pmi","indonesia_eps_center_hrdk","sbmi_korea_worker_referral","pcim_korea_referral",
         "kp2mi_departure_worker_referral","kp2mi_sending_applicant","lpk_master_korea",
-        "lpk_hanaro","lpk_go_korea","korea_indonesia_center_referral",
+        "lpk_hanaro","lpk_go_korea","korea_indonesia_center_referral","appik_purna_korea_referral",
         "bp3mi_dki_applicant","bp3mi_jateng_applicant","bp3mi_jatim_applicant"
     },
     "shared recruitment-source catalog is missing a required controlled code",
