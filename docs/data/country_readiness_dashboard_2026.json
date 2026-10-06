@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "scope": "KEP Manufacturing Country Pack readiness and next official review trigger",
@@ -78,7 +78,7 @@
         "type": "official_notice",
         "subject": "Final 2026 Manufacturing Round 2 schedule/result or downstream notice",
         "officialSources": [
-          "https://colab.moha.gov.vn/"
+          "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx"
         ]
       },
       "blockers": [
