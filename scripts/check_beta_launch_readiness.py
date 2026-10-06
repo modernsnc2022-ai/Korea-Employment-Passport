@@ -569,7 +569,8 @@ require(
         "lpk_samwon","jendela_asa","lpk_ggum","lpk_hana_korea","lpk_hanaman",
         "mendunia_korea","korean_first","lpk_maheswara","lpk_caranta",
         "ubt_eps_topik_app","topiknow_app","kamus_korea_app","jeongsang_eps_app",
-        "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app"
+        "kosakata_eps_topik_app","ubt_eps_topik_id_app","ubt_eps_topik_eddie_app",
+        "pui_kmi_korea"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
