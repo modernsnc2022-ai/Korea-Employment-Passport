@@ -29,6 +29,8 @@ A participant does not have to disclose passport/KTP/ARC numbers or other sensit
 
 Target B remains 20 Indonesians already working in Korea on E-9.
 
+Interest registration for this retrospective panel may remain **OPEN before panel access is approved**. Sending an interest message does not activate a worker-validator KEP ID or open access. Approval/activation still requires the separate worker-panel release decision.
+
 This group is a **retrospective validation panel**, separate from the active-applicant cohort. Their role is to check whether instructions, document expectations, timing, workplace reality information, and broker-replacement claims match actual experience.
 
 ## Primary success metric
