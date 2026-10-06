@@ -769,7 +769,7 @@ require(dashboard.get("summary",{}).get("registeredCountryPacks")==16,"readiness
 require(dashboard.get("summary",{}).get("betaHold")==1,"readiness dashboard must report exactly one beta HOLD route")
 require(dashboard.get("summary",{}).get("researchHold")==15,"readiness dashboard must report 15 research HOLD routes")
 require(dashboard.get("summary",{}).get("pendingManufacturingVerification")==1,"readiness dashboard must report 1 pending Manufacturing country")
-require(dashboard.get("summary",{}).get("datedReviewTriggers")==2,"readiness dashboard must report exactly two dated review triggers")
+require(dashboard.get("summary",{}).get("datedReviewTriggers")==3,"readiness dashboard must report exactly three dated review triggers")
 require(dashboard.get("summary",{}).get("betaReady")==0,"readiness dashboard must not claim any beta-ready route")
 require(dashboard_rows["ID"].get("packState")=="beta_hold","Indonesia readiness state must remain beta_hold")
 require(dashboard_rows["ID"].get("betaState")=="pending_manual_approval","Indonesia beta must remain pending manual approval")
@@ -790,7 +790,7 @@ require(dashboard_rows["MM"].get("detailsPage")=="mm.html","Myanmar readiness ro
 require(dashboard_rows["MM"].get("routeId") is None and dashboard_rows["MM"].get("packState")=="pending_manufacturing_verification","Myanmar must remain pending without a promoted route")
 require(any("mol.gov.mm" in s for s in dashboard_rows["MM"].get("nextReview",{}).get("officialSources",[])),"Myanmar next-review sources must include the Ministry of Labour EPS page")
 dated={code for code,row in dashboard_rows.items() if row.get("nextReview",{}).get("type")=="dated_official_review"}
-require(dated=={"LK","TH"},"only Sri Lanka and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
+require(dated=={"LK","VN","TH"},"only Sri Lanka, Vietnam and Thailand should have dated official review triggers in the 2026-10-06 snapshot")
 for code,row in dashboard_rows.items():
     require(len(row.get("blockers",[]))>=1,f"{code}: readiness row must include at least one blocker")
     sources=row.get("nextReview",{}).get("officialSources",[])
