@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -51,6 +51,10 @@
     "lpk_hana_korea",
     "lpk_hanaman",
     "mendunia_korea",
-    "korean_first"
+    "korean_first",
+    "lpk_maheswara",
+    "lpk_caranta",
+    "ubt_eps_topik_app",
+    "topiknow_app"
   ]
 }
