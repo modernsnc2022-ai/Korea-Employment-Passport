@@ -5,9 +5,9 @@ Snapshot: 2026-10-07 KST
 - Source code: `ulsan_foreign_resident_center`
 - Channel: email
 - Public mailbox: `ulsanscfw@naver.com`
-- Gmail state: draft prepared, not sent
+- Gmail state: sent once
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=ulsan_foreign_resident_center`
-- Status: gmail_draft_prepared_not_sent
+- Status: sent_2026-10-07
 
 ## Fit
 - Ulsan City links the Foreign Residents Support Center as an official resident-support service.
@@ -33,3 +33,11 @@ Snapshot: 2026-10-07 KST
 - KEP is independent, not a government service or placement agency.
 - Never promise employment, employer selection, SLC, visa or departure.
 - Never store applicant/worker PII in GitHub.
+
+## Send result
+- Initial email sent once on 2026-10-07 KST after same-HEAD static/UI/Pages/beta-launch gates passed.
+- Pages deployment artifact for the same HEAD contained the Ulsan worker source, worker-panel route and worker form.
+- Pre-send guard-equivalent fail-closed check returned `initial_send_allowed` against the same main HEAD; local runner was unavailable, so the checked-in guard contract and same-HEAD ledger/catalog were evaluated directly.
+- Final Gmail `in:sent` duplicate check before send: 0 prior messages.
+- Immediate bounce check: none observed.
+- Do not send another initial outreach. Any later contact requires an explicit follow-up-ready ledger state.
