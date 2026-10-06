@@ -44,6 +44,7 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('docs/data/beta_program_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/beta_recruitment_sources_v1.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/country_packs_v1.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('docs/data/korea_side_e9_core_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/country_coverage_matrix_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/country_readiness_dashboard_2026.json','utf8'))"
           node -e "JSON.parse(require('fs').readFileSync('docs/data/hrd_examnot_linkage_2026.json','utf8'))"
