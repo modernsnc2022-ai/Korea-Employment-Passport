@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "tl-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Dili Manufacturing is direct-official exact evidence. Baucau discovery, Fishery routes and generic East Timor skills-candidate entries may not auto-populate Dili Manufacturing exact rules.",
+  "principle": "Dili and Baucau Manufacturing schedules are direct-official exact evidence. Fishery routes and generic East Timor skills-candidate entries may not auto-populate Manufacturing skills/final-result rules.",
   "answers": [
     {
       "id": "tl_2026_sending_authority",
@@ -70,13 +70,14 @@
       "id": "tl_2026_baucau_state",
       "stages": [
         "registration",
+        "exam_card",
         "eps_topik"
       ],
-      "question": "Are Baucau Manufacturing dates exact in KEP?",
-      "answer": "No. Baucau Manufacturing is discovery-known, but the direct official schedule artifact has not yet been captured.",
-      "writeExactly": "Do not publish Baucau discovery dates as exact until direct official detail is captured.",
-      "verificationStatus": "intentionally_unresolved",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "question": "What are the directly verified 9th Manufacturing Baucau schedule facts?",
+      "answer": "Registration 2026-03-09 through 2026-03-18; test-announcement date remains undecided; test period 2026-08-06 through 2026-08-07; General CBT; Point System = Y.",
+      "writeExactly": "Baucau Manufacturing: registration 2026-03-09 through 2026-03-18; announcement date undecided; test 2026-08-06 through 2026-08-07. Do not invent an announcement date.",
+      "verificationStatus": "verified_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=43&examYear=2026&lang=ko&lcnsId=001",
       "verifiedAt": "2026-10-06"
     },
     {
