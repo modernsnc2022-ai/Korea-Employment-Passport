@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0",
+  "version": "3.2.0",
   "route": "ID-E9-MFG-GENERAL",
   "metric": "Broker Question Coverage",
   "rule": "High-severity unresolved questions block Zero-Broker Ready status for that stage.",
@@ -673,11 +673,11 @@
       "question": "Nama/alamat/nomor dokumen mengikuti sumber yang mana?",
       "severity": "high",
       "category": "identity",
-      "answerId": "job_application_manufacturing_2026_wait_notice",
-      "status": "answered_hold",
+      "answerId": "job_application_identity_safe_platform_baseline_2026",
+      "status": "answered",
       "discoveredBy": "product_design",
-      "blocksZeroBrokerReady": true,
-      "note": "Exact Manufacturing 2026 rule remains HOLD until the detailed sector-specific online job-application notice is verified."
+      "blocksZeroBrokerReady": false,
+      "note": "Resolved as a conservative official identity-safety baseline: preserve registered identity exactly, copy document numbers from the matching official document, and use the official support channel instead of guessing when an address/document-source field is ambiguous. This does not claim a Manufacturing 2026 field-by-field form map."
     },
     {
       "id": "job_edit",
