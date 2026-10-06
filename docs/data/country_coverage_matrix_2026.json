@@ -1,8 +1,8 @@
 {
-  "version": "1.3.1",
+  "version": "1.4.0",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
-  "scope": "EPS sending countries listed by HRD Korea; Manufacturing E-9 Country Pack coverage",
+  "scope": "EPS sending-country status as of 2026-10-06; 2026 Manufacturing E-9 Country Pack coverage",
   "officialSendingCountrySource": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
   "policy": [
     "A country is marked country_pack_registered only when a Manufacturing-oriented route object exists in country_packs_v1.json.",
@@ -147,11 +147,27 @@
         "hrdPointSystemSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=017&examNot=10&examYear=2026&lang=ko&lcnsId=001",
         "rule": "Official local Manufacturing notice and HRD Korea 2nd Point System share the same 2026-03-02 through 2026-03-05 registration window."
       }
+    },
+    {
+      "country": "KZ",
+      "countryName": "Kazakhstan",
+      "status": "designated_future_sending_country",
+      "routeId": null,
+      "designationDate": "2026-08-14",
+      "designatedOrder": 18,
+      "plannedIntroductionYear": 2028,
+      "officialSource": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19786",
+      "note": "Korea designated Kazakhstan as the 18th EPS sending country on 2026-08-14. Substantial worker introduction is planned from 2028 after follow-up work such as an intergovernmental EPS MOU and local EPS center setup. KEP must not create a 2026 Manufacturing Country Pack from this designation."
     }
   ],
   "summary": {
-    "listedSendingCountries": 17,
+    "listedSendingCountries": 18,
     "registeredManufacturingCountryPacks": 16,
-    "pendingManufacturingVerification": 1
-  }
+    "pendingManufacturingVerification": 1,
+    "futureDesignatedNo2026Route": 1
+  },
+  "officialSendingCountrySources": [
+    "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19786"
+  ]
 }
