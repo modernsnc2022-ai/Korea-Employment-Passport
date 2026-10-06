@@ -38,7 +38,10 @@
         "sourceUrl": "https://colab.moha.gov.vn/tin-tuc/5396/THONG-BAO-KE-HOACH-TUYEN-CHON-NGUOI-LAO-DONG-DI-LAM-VIEC-TAI-HAN-QUOC-THEO-CHUONG-TRINH-EPS-NAM-2026.aspx",
         "earlierProjectedWindow": "2026-10-12 through 2026-10-16",
         "promotionStatus": "not_final",
-        "rule": "Do not display this projected window as the final Round 2 schedule because the later verified Round 1 result notice says the official schedule will be announced after HRD Korea confirmation."
+        "rule": "Do not display this projected window as the final Round 2 schedule because the later verified Round 1 result notice says the official schedule will be announced after HRD Korea confirmation.",
+        "recheckedAt": "2026-10-06",
+        "reviewTriggerDate": "2026-10-12",
+        "statusAsOfReview": "later_round1_notice_still_controls_final_schedule"
       },
       "datedRecheck": {
         "date": "2026-10-12",
@@ -80,6 +83,20 @@
       "final official 2026 Manufacturing Round 2 schedule/result not yet verified",
       "current Manufacturing medical/candidate-file submission instructions not fully mapped",
       "current post-SLC visa/training/departure exact rules not fully mapped"
+    ]
+  },
+  "nextReviewTrigger": {
+    "type": "dated_official_review",
+    "date": "2026-10-12",
+    "subject": "Vietnam 2026 Manufacturing Round 2 final HRD-confirmed schedule",
+    "officialSources": [
+      "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "https://colab.moha.gov.vn/tin-tuc/5676/Thong-bao-ket-qua-ky-thi-tieng-Han-Vong-1-nganh-san-xuat-che-tao-nam-2026.aspx"
+    ],
+    "promoteOnlyWhen": [
+      "COLAB publishes the final Manufacturing Round 2 schedule after HRD Korea confirmation",
+      "the notice explicitly applies to the current 2026 Manufacturing cohort",
+      "projected 2026-10-12 through 2026-10-16 dates are not promoted merely because the projected window has arrived"
     ]
   }
 }
