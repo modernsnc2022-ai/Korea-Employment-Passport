@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.12.0",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -302,5 +302,6 @@
       "officialSendingAgencyUrl": "https://migrant.kg/",
       "note": "Manufacturing sector linkage is cross-source verified: the Kyrgyz official February 2026 Manufacturing notice and HRD Korea 13th Point System Bishkek/Osh schedules share registration 2026-02-23 through 2026-02-27. Fee, registration documents, Skills Test and June post-selection medical/roster instructions are verified; SLC/visa/training/departure exact rules remain gated."
     }
-  ]
+  ],
+  "sharedKoreaCoreFile": "data/korea_side_e9_core_2026.json"
 }
