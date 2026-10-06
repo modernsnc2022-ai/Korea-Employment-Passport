@@ -648,10 +648,10 @@
     "tlsMode": "ca_verified"
   },
   "mm_mol_eps_opportunity": {
-    "sha256": "83874eaa597f0817f187416f375431eb664b042eae92137215fd31bb2d661743",
+    "sha256": "fbb0fbe8defcae99c75cae67d8efc52baae1b898523399de58d20462a10c92d4",
     "agency": "Myanmar Ministry of Labour",
     "url": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
-    "contentLength": 7974,
+    "contentLength": 7976,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"
@@ -679,6 +679,78 @@
     "agency": "HRD Korea EPS-TOPIK",
     "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
     "contentLength": 2438,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "np_eps_notice_index": {
+    "sha256": "613f1adaf78553cf64d8d19852d1db4579ce41bd5ab7e916e88c87f388305d91",
+    "agency": "EPS Nepal",
+    "url": "https://epsnepal.gov.np/notices",
+    "contentLength": 14578,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "vn_colab_eps_notices": {
+    "sha256": "2a7ce7b6eb88937b3d3540aaf4f0eba71e6b16a79f1a3c6a846c29db78a5ad60",
+    "agency": "Vietnam COLAB EPS notices",
+    "url": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+    "contentLength": 5675,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "ph_dmw_home": {
+    "sha256": "006e69a1b843c9dcac214f3dfde80c5d81cf0e65b71aae7028bc0a83c97afe54",
+    "agency": "Philippines DMW",
+    "url": "https://dmw.gov.ph/",
+    "contentLength": 197,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "lk_slbfe_home": {
+    "sha256": "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
+    "agency": "Sri Lanka SLBFE",
+    "url": "https://www.slbfe.lk/",
+    "contentLength": 15049,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "uz_migration_home": {
+    "sha256": "074465cc17c246ceb95a6518e9c1d390b667e0a8e09e61c879027e05eb8081ba",
+    "agency": "Uzbekistan Migration Agency",
+    "url": "https://migration.uz/",
+    "contentLength": 1189,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "kg_migrant_home": {
+    "sha256": "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
+    "agency": "Kyrgyzstan CEC",
+    "url": "https://migrant.kg/",
+    "contentLength": 13638,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "hrdk_sending_agency_index": {
+    "sha256": "5067181a8c3081363689d27efd74bf7d0b6fca93547dae0db88c07617477b2eb",
+    "agency": "HRD Korea EPS-TOPIK",
+    "url": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+    "contentLength": 2062,
+    "mode": "normalized_text",
+    "contentType": "text/html",
+    "tlsMode": "ca_verified"
+  },
+  "mm_mol_dol_index": {
+    "sha256": "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0",
+    "agency": "Myanmar Ministry of Labour",
+    "url": "https://www.mol.gov.mm/mol-department-of-labour/",
+    "contentLength": 7780,
     "mode": "normalized_text",
     "contentType": "text/html",
     "tlsMode": "ca_verified"

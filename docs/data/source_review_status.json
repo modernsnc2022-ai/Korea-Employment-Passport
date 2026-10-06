@@ -1,52 +1,14 @@
 {
   "version": "1.1.0",
-  "state": "review_required",
+  "state": "clean",
   "autoPublishRules": false,
   "configured": 84,
   "checked": 84,
-  "reviewRequiredUrls": [
-    "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
-    "https://dmw.gov.ph/",
-    "https://epsnepal.gov.np/notices",
-    "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-    "https://migrant.kg/",
-    "https://migration.uz/",
-    "https://www.mol.gov.mm/mol-department-of-labour/",
-    "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
-    "https://www.slbfe.lk/"
-  ],
-  "reviewRequiredSourceIds": [
-    "hrdk_sending_agency_index",
-    "kg_migrant_home",
-    "lk_slbfe_home",
-    "mm_mol_dol_index",
-    "mm_mol_eps_opportunity",
-    "np_eps_notice_index",
-    "ph_dmw_home",
-    "uz_migration_home",
-    "vn_colab_eps_notices"
-  ],
-  "pendingBaselineUrls": [
-    "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
-    "https://dmw.gov.ph/",
-    "https://epsnepal.gov.np/notices",
-    "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-    "https://migrant.kg/",
-    "https://migration.uz/",
-    "https://www.mol.gov.mm/mol-department-of-labour/",
-    "https://www.slbfe.lk/"
-  ],
-  "pendingBaselineSourceIds": [
-    "hrdk_sending_agency_index",
-    "kg_migrant_home",
-    "lk_slbfe_home",
-    "mm_mol_dol_index",
-    "np_eps_notice_index",
-    "ph_dmw_home",
-    "uz_migration_home",
-    "vn_colab_eps_notices"
-  ],
+  "reviewRequiredUrls": [],
+  "reviewRequiredSourceIds": [],
+  "pendingBaselineUrls": [],
+  "pendingBaselineSourceIds": [],
   "fetchFailureUrls": [],
   "fetchFailureSourceIds": [],
-  "message": "New official watch targets have no accepted baseline yet; fetch and review them before baseline acceptance or route promotion."
+  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
 }
