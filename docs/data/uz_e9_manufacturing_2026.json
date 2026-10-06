@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-9th-point-system-uzbekistan-manufacturing",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -31,7 +31,9 @@
     "The 9th Uzbekistan Point System route is explicitly Manufacturing, General CBT and Point System.",
     "Registration ran 2026-03-09 through 2026-03-12; test announcement was 2026-03-23; test period was 2026-04-06 through 2026-04-22.",
     "HRD Korea's general information-office listing and the cycle-specific schedule page show different official contact details; KEP preserves both with their source context rather than silently reconciling them.",
-    "HRD Korea's official skills-candidate row (2026-05-27) and final Point System result row (2026-08-27) both use examNot=9, matching the direct 9th Manufacturing schedule. Fee, exact registration document checklist and downstream medical/visa/departure details remain HOLD."
+    "HRD Korea's official skills-candidate row (2026-05-27) and final Point System result row (2026-08-27) both use examNot=9, matching the direct 9th Manufacturing schedule. Fee, exact registration document checklist and downstream medical/visa/departure details remain HOLD.",
+    "Uzbekistan Migration Agency reported on 2026-08-14 that 213 Manufacturing employment contracts arrived after a 2026 SPAS employer-selection round and travel documents were being processed. This is country-level 2026 Manufacturing post-selection evidence, not proof that all contracts belong to examNot=9.",
+    "Migration Agency's 2026-01-13 guidance confirms official pre-departure training for candidates selected by foreign employers, explicitly referencing Korea E-9 adaptation. Exact 9th-cycle training date/location/fees remain notice-specific."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -44,7 +46,8 @@
     "genericHrdFeeNotCurrentCycle": true,
     "contactSourcesPreservedWithoutSilentReconciliation": true,
     "resultLinkageRequiresOfficialExamNotMatch": true,
-    "currentManufacturingSkillsAndFinalLinkedByExamNot": true
+    "currentManufacturingSkillsAndFinalLinkedByExamNot": true,
+    "countryLevelPostSelectionEvidenceNotNinthCycleByDefault": true
   },
   "stages": [
     {
@@ -178,9 +181,9 @@
       "title": "Standard Labour Contract (SLC)",
       "authority": "HRD Korea / Migration Agency",
       "kind": "official_contract",
-      "action": "If selected by a Korean employer, follow current official Uzbekistan/EPS instructions for SLC review/signing and next steps.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending_current_notice"
+      "action": "Uzbekistan Migration Agency reported 213 Manufacturing employment contracts received after the 2026-08-05 through 2026-08-11 SPAS employer-selection stage, with travel-document processing underway. This verifies a 2026 country-level Manufacturing contract process, not an individual 9th-cycle SLC date or acceptance.",
+      "sourceUrl": "https://gov.uz/en/migration/news/view/206397",
+      "supportState": "verified_2026_country_process_not_9th_specific"
     },
     {
       "id": "post_slc_requirements",
@@ -205,9 +208,9 @@
       "title": "Pre-departure training",
       "authority": "Migration Agency",
       "kind": "official_training",
-      "action": "Complete only the official pre-departure training assigned to selected Korea-bound workers. Exact duration/location/fees remain current-notice specific.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-      "supportState": "research_pending"
+      "action": "Migration Agency states that candidates who pass foreign-employer selection receive official pre-departure training covering destination-country labor law, employer relations, safety, daily life/cultural adaptation and language review; the 2026 guidance explicitly references Korea E-9 adaptation. Exact 9th-cycle training date/location/fees remain current-notice specific.",
+      "sourceUrl": "https://gov.uz/en/migration/news/view/119684",
+      "supportState": "verified_2026_country_process_not_9th_specific"
     },
     {
       "id": "mcu3_departure",
@@ -294,5 +297,6 @@
   "exactAnswerRulesFile": "data/uz_exact_answer_rules_2026.json",
   "documentPacksFile": "data/uz_document_packs_2026.json",
   "stageReadinessFile": "data/uz_stage_readiness_2026.json",
-  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json",
+  "postSelectionProcessEvidenceFile": "data/uz_postselection_process_2026.json"
 }
