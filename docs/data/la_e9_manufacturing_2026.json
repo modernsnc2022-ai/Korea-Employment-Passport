@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-34th-point-system-laos-manufacturing",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -27,7 +27,8 @@
     "HRD Korea separately lists the current Laos reception office as Ministry of Labour and Social Welfare Employment Service Center (ESC), Souphanouvong road, Oubmong Village, Sikottabong District, Vientiane Capital.",
     "HRD Korea lists 34th Point System Laos Manufacturing registration as 2026-09-07 through 2026-09-11; the test-date announcement, test date and result date remain undecided.",
     "The 33rd Laos Manufacturing round is retained only as prior-round evidence: registration 2026-03-10 through 2026-03-13, test announcement 2026-04-01, test period 2026-04-20 through 2026-04-27.",
-    "Current 34th-round fee, quota, local document checklist, medical providers and downstream charges remain HOLD until a current detailed official notice is reviewed."
+    "Current 34th-round fee, quota, local document checklist, medical providers and downstream charges remain HOLD until a current detailed official notice is reviewed.",
+    "HRD Korea exposes two separate current 34th Laos Manufacturing schedule rows: examNot=101 and examNot=108. Both use the same 2026-09-07 through 2026-09-11 registration window and both leave the test announcement/test/result dates undecided; KEP keeps them distinct and does not infer the meaning of the '(5부)' label."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -38,7 +39,9 @@
     "noPrivateBrokerRequiredTarget": true,
     "betaIntakeOpen": false,
     "priorRoundFactsExcludedFromCurrent": true,
-    "unverifiedFeeQuotaDocumentsMustStayBlank": true
+    "unverifiedFeeQuotaDocumentsMustStayBlank": true,
+    "multipleCurrentManufacturingScheduleRowsMustRemainDistinctByExamNot": true,
+    "parentheticalScheduleLabelMeaningMustNotBeInferred": true
   },
   "stages": [
     {
@@ -288,5 +291,33 @@
   "exactAnswerRulesFile": "data/la_exact_answer_rules_2026.json",
   "stageReadinessFile": "data/la_stage_readiness_2026.json",
   "priorRoundEvidenceFile": "data/la_prior_round_evidence_2026.json",
-  "documentPacksFile": "data/la_document_packs_2026.json"
+  "documentPacksFile": "data/la_document_packs_2026.json",
+  "currentScheduleRows": {
+    "status": "verified_two_official_rows_keep_distinct",
+    "joinKey": "examNation=016 + examYear=2026 + lcnsId=001 + examNot",
+    "commonRegistrationPeriod": "2026-09-07 through 2026-09-11",
+    "rows": [
+      {
+        "examNot": "101",
+        "publicTitle": "The 34nd recruitment of the point system in Laos_Manufacturing",
+        "pointSystem": true,
+        "registrationPeriod": "2026-09-07 through 2026-09-11",
+        "testAnnouncement": "undecided",
+        "testPeriod": "undecided",
+        "resultDate": "undecided",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=101&examYear=2026&lang=ko&lcnsId=001"
+      },
+      {
+        "examNot": "108",
+        "publicTitle": "The 34nd recruitment of the point system in Laos_Manufacturing(5부)",
+        "pointSystem": true,
+        "registrationPeriod": "2026-09-07 through 2026-09-11",
+        "testAnnouncement": "undecided",
+        "testPeriod": "undecided",
+        "resultDate": "undecided",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=108&examYear=2026&lang=ko&lcnsId=001"
+      }
+    ],
+    "rule": "Do not collapse examNot 101 and 108 into one artifact and do not infer what the '(5부)' label means. Preserve both official schedule identities until a Laos/HRD notice explicitly explains their relationship."
+  }
 }
