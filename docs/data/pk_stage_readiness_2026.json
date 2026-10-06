@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "pk-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -14,7 +14,7 @@
         "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=29&examYear=2026&lang=ko&lcnsId=001",
         "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=003&examNot=30&examYear=2026&lang=ko&lcnsId=001"
       ],
-      "note": "Registration 2026-03-31~04-08; test announcement/date undecided."
+      "note": "HRD Korea city pages verify registration 2026-03-31~04-08 and still show test dates undecided, while OEC now exposes an individual KLT-number test venue/schedule lookup. Manufacturing sector linkage and a public bulk Manufacturing date range remain unverified."
     },
     "manufacturingDiscovery": {
       "status": "discovery_only_not_promoted",
@@ -22,11 +22,23 @@
     },
     "fee": {
       "status": "manufacturing_cycle_specific_unverified",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "oecPreRegistrationChallan": {
+        "status": "verified_scope_limited_not_exam_fee",
+        "amountPkr": 1000,
+        "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+        "scope": "OEC pre-registration/application challan",
+        "epsTopikExamFee": false
+      }
     },
     "documents": {
       "status": "manufacturing_checklist_not_reconstructed",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
+      "oecPortalSnapshot": {
+        "status": "verified_country_portal_snapshot_not_complete_manufacturing_checklist",
+        "sourceUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+        "evidenceFile": "data/pk_oec_portal_2026.json"
+      }
     },
     "skillsAndFinalResult": {
       "status": "research_pending_manufacturing_linkage",
@@ -35,6 +47,13 @@
     "downstream": {
       "status": "research_pending_current_manufacturing",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
+    },
+    "oecPortal2026": {
+      "status": "verified_country_round_operation_manufacturing_linkage_pending",
+      "scheduleLookupUrl": "https://jobs.oec.gov.pk/eps_topik_2026_test_date",
+      "registrationLookupUrl": "https://jobs.oec.gov.pk/eps_topik_registeration_portal_2026_new",
+      "preRegistrationUrl": "https://jobs.oec.gov.pk/eps_pre_reg_form_2026",
+      "note": "OEC has a live KLT-number test venue/schedule lookup and current 2026 pre-registration/registration portals. These verify Pakistan EPS operation but not Manufacturing sector linkage for the HRD Korea city pages."
     }
   },
   "specialRoute": {
@@ -46,8 +65,8 @@
     "status": "blocked",
     "blockers": [
       "direct official Manufacturing sector linkage not captured",
-      "Manufacturing schedule/test dates remain unresolved",
-      "Manufacturing fee/document/final-result/downstream exact rules not mapped"
+      "Manufacturing public bulk test-date mapping and final-result linkage remain unresolved",
+      "Manufacturing exam fee/full checklist/downstream exact rules are not mapped"
     ]
   }
 }
