@@ -885,6 +885,8 @@ require('href="readiness.html"' in countries,"countries page must link readiness
 require("2026 COUNTRY READINESS" in readiness_page and 'id="summary"' in readiness_page and 'id="readiness"' in readiness_page,"readiness page must expose summary and readiness containers")
 require("A validation gap is not automatically a beta blocker" in readiness_page,"readiness page must explain that validation gaps are not automatic beta blockers")
 require("country_readiness_dashboard_2026.json" in readiness_js,"readiness renderer must load the readiness dashboard data")
+require("Future designated · no 2026 route" in readiness_js and "futureDesignatedNo2026Route" in readiness_js,"readiness renderer must expose the future-designated country count")
+require("future_designated" in readiness_js,"readiness renderer must preserve a distinct future-designated badge state")
 require("Beta release gates" in readiness_js and "Validation gaps — not automatic beta blockers" in readiness_js,"readiness renderer must render release gates separately from validation gaps")
 require("No promoted Manufacturing routeId" in readiness_js,"readiness renderer must visibly distinguish pending countries")
 require('href="kg.html"' in countries and 'href="mm.html"' in countries,"Kyrgyzstan must stay promoted while Myanmar exposes only a pending verification preview")
