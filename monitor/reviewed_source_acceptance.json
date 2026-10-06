@@ -29,9 +29,6 @@
     "hrdk_sending_agency_index": "5067181a8c3081363689d27efd74bf7d0b6fca93547dae0db88c07617477b2eb",
     "mm_mol_dol_index": "8470a173dc97d1112055833aec857a73ea59471ee3921c69c82ecbffb6504ea4"
   },
-  "reviewedCurrentSha256": {
-    "mm_mol_eps_opportunity": "8f5063b942e0e86b1181b17285dbd4eb69856ec0f17fd886b0beafcd2b3b405b"
-  },
   "safety": {
     "requireNoFetchFailures": true,
     "requireExactChangedSourceSet": true,
@@ -39,6 +36,10 @@
     "oneTimeByBaselineHash": true,
     "allowReviewedNewSources": true,
     "neverAutoPublishRules": true,
-    "neverPromoteRouteFromBaselineAcceptance": true
+    "neverPromoteRouteFromBaselineAcceptance": true,
+    "requireExactCurrentHashes": true
+  },
+  "expectedCurrentSha256": {
+    "mm_mol_eps_opportunity": "8f5063b942e0e86b1181b17285dbd4eb69856ec0f17fd886b0beafcd2b3b405b"
   }
 }
