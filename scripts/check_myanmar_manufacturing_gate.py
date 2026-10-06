@@ -50,6 +50,9 @@ expected_ids = {
 }
 require(required_ids == expected_ids, "Myanmar monitor source IDs must match the four reviewed official watch targets")
 require(expected_ids.issubset(source_by_id), "All Myanmar watch targets must be registered in monitor/sources.json")
+supplemental_ids = set(monitoring.get("supplementalDiscoverySourceIds", []))
+require(supplemental_ids == {"mm_mol_dol_index"}, "Myanmar supplemental discovery watch must remain the Department of Labour index")
+require(supplemental_ids.issubset(source_by_id), "Myanmar supplemental discovery watch must be registered in monitor/sources.json")
 require(source_review.get("configured") == len(sources.get("sources", [])), "Source-review configured count must match monitor/sources.json")
 
 unbaselined = expected_ids - set(source_hashes)
@@ -73,12 +76,24 @@ for source_id, host in expected_hosts.items():
     parsed = urlparse(row.get("url", ""))
     require(parsed.scheme == "https" and parsed.hostname == host, f"{source_id} must remain on reviewed official HTTPS host {host}")
 
+supplemental = source_by_id.get("mm_mol_dol_index", {})
+supplemental_url = urlparse(supplemental.get("url", ""))
+require(supplemental_url.scheme == "https" and supplemental_url.hostname == "www.mol.gov.mm",
+        "Myanmar Department of Labour discovery index must remain on the official HTTPS host")
+
 review = gate.get("currentReview", {})
 reviewed_source_ids = set(review.get("reviewedSourceIds", []))
 require(reviewed_source_ids == expected_ids, "Myanmar current review must cover all four official watch targets")
 findings = review.get("sourceFindings", [])
 require({item.get("sourceId") for item in findings} == expected_ids, "Myanmar current review must record one finding for each watch target")
 require(all(item.get("qualifiesForPromotion") is False for item in findings), "Reviewed Myanmar watch targets must remain non-promotable unless a qualifying artifact is explicitly recorded")
+supplemental_review = review.get("supplementalDiscoveryReview", {})
+require(supplemental_review.get("sourceId") == "mm_mol_dol_index",
+        "Myanmar supplemental discovery review must identify the Department of Labour index")
+require(supplemental_review.get("qualifiesForPromotion") is False,
+        "Myanmar Department of Labour index must remain a discovery trigger, not promotion proof")
+require(supplemental_review.get("baselineState") == "pending_source_monitor_acceptance",
+        "Myanmar supplemental source must remain pending baseline acceptance until the monitor accepts it")
 decision = review.get("baselineReviewDecision", {})
 require(decision.get("currentSourceVersionsReviewed") is True, "Myanmar source baseline decision must record explicit source review")
 require(decision.get("baselineAcceptanceAllowed") is True, "Reviewed Myanmar source versions must explicitly allow fingerprint baseline acceptance")
@@ -130,6 +145,6 @@ print(
     "MYANMAR_PROMOTION_GATE_PASS "
     f"allowed={str(gate.get('promotionAllowed')).lower()} "
     f"qualifyingArtifacts={len(qualified)} "
-    f"monitoredSources={len(expected_ids)} "
+    f"monitoredSources={len(expected_ids) + len(supplemental_ids)} "
     f"unbaselined={len(unbaselined)}"
 )
