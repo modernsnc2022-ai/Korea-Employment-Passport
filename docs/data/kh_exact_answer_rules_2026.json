@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "kh-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Only direct official Cambodia Manufacturing evidence may become exact. Official country-level result artifacts require cycle/sector linkage; Agriculture, Special and non-official discovery dates must not auto-populate Manufacturing.",
+  "principle": "Direct official HRD Korea evidence now verifies the Cambodia 12th Manufacturing schedule. Result artifacts still require explicit cycle/sector linkage; Agriculture, Special and discovery-only evidence must not populate unrelated rules.",
   "answers": [
     {
       "id": "kh_2026_sending_authority",
@@ -61,10 +61,10 @@
         "eps_topik"
       ],
       "question": "Are the 2026 Manufacturing registration/test dates exact in KEP?",
-      "answer": "No. A discovery source suggests a 12th Manufacturing cycle, but the direct official schedule artifact has not been captured.",
-      "writeExactly": "Do not publish discovery-only Manufacturing dates as exact official rules.",
-      "verificationStatus": "intentionally_unresolved",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "answer": "Yes. HRD Korea directly verifies the 12th Cambodia Manufacturing Point System.",
+      "writeExactly": "Registration: 2026-05-22 through 2026-05-25; test announcement: 2026-06-12; test period: 2026-06-22 through 2026-07-15; General CBT; Point System.",
+      "verificationStatus": "verified_direct_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
       "verifiedAt": "2026-10-06"
     },
     {
@@ -104,6 +104,42 @@
       "writeExactly": "Never promise employer selection, SLC, visa or departure from test passage alone.",
       "verificationStatus": "shared_eps_principle",
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_registration_window",
+      "stages": [
+        "registration"
+      ],
+      "question": "When was the 12th Manufacturing registration period?",
+      "answer": "2026-05-22 through 2026-05-25.",
+      "writeExactly": "12th Cambodia Manufacturing registration: 2026-05-22 through 2026-05-25. The window is closed.",
+      "verificationStatus": "verified_direct_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_test_notice_date",
+      "stages": [
+        "exam_card"
+      ],
+      "question": "What was the 12th Manufacturing test-announcement date?",
+      "answer": "2026-06-12.",
+      "writeExactly": "HRD Korea test-announcement date: 2026-06-12.",
+      "verificationStatus": "verified_direct_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kh_2026_test_period",
+      "stages": [
+        "eps_topik"
+      ],
+      "question": "What was the 12th Manufacturing test period?",
+      "answer": "2026-06-22 through 2026-07-15.",
+      "writeExactly": "12th Cambodia Manufacturing test period: 2026-06-22 through 2026-07-15.",
+      "verificationStatus": "verified_direct_official_2026",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=002&examNot=46&examYear=2026&lang=ko&lcnsId=001",
       "verifiedAt": "2026-10-06"
     }
   ]
