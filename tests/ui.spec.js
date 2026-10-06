@@ -614,6 +614,21 @@ test('tester-interest intake is open while beta access remains on hold', async (
   expect(errors).toEqual([]);
 });
 
+test('worker-only recruitment source goes directly to worker interest intake', async ({ page }) => {
+  await page.goto('/index.html?src=ut_korea_pmi', { waitUntil: 'domcontentloaded' });
+  await page.waitForURL('**/beta.html?src=ut_korea_pmi#worker-panel');
+  await expect(page.locator('#worker-panel')).toBeVisible();
+  await expect(page.locator('#workerValidatorForm')).toBeVisible();
+  await expect(page.locator('#workerPanelClosed')).toBeVisible();
+  await expect(page.locator('#applicationPanel')).toBeVisible();
+
+  await page.locator('#workerInKorea').check();
+  await page.locator('#workerUsedG2G').check();
+  await page.locator('#workerFeedbackAgreement').check();
+  const interest = await page.evaluate(() => workerValidatorText());
+  expect(interest).toContain('Recruitment source code: ut_korea_pmi');
+});
+
 test('unknown recruitment source code falls back to website', async ({ page }) => {
   await page.goto('/beta.html?src=%3Cscript%3Ebad%3C/script%3E', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.querySelectorAll('#applicantStage option').length === 28);
