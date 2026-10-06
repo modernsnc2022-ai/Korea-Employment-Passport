@@ -5,7 +5,7 @@
   },
   "registration": {
     "title": "ការចុះឈ្មោះ Manufacturing",
-    "action": "KEP មិនទាន់ផ្សព្វផ្សាយថ្ងៃចុះឈ្មោះ Manufacturing ឆ្នាំ 2026 ជា exact rule ទេ ព្រោះមិនទាន់ចាប់បាន official Manufacturing schedule detail ដោយផ្ទាល់។"
+    "action": "HRD Korea បញ្ជាក់ដោយផ្ទាល់ថា ការចុះឈ្មោះ Point System លើកទី 12 សម្រាប់ Manufacturing គឺពី 2026-05-22 ដល់ 2026-05-25។ បច្ចុប្បន្នបិទការចុះឈ្មោះហើយ។"
   },
   "exam_fee": {
     "title": "ថ្លៃដាក់ពាក្យ / ប្រឡង",
@@ -21,11 +21,11 @@
   },
   "exam_card": {
     "title": "សេចក្តីជូនដំណឹងថ្ងៃប្រឡង",
-    "action": "កាលវិភាគ Manufacturing exact មិនត្រូវបាន promote រហូតដល់ official schedule detail ត្រូវបានផ្ទៀងផ្ទាត់។"
+    "action": "HRD Korea កំណត់ថ្ងៃប្រកាសការប្រឡងសម្រាប់ Point System លើកទី 12 ផ្នែក Manufacturing ជា 2026-06-12។"
   },
   "eps_topik": {
     "title": "EPS-TOPIK — Manufacturing",
-    "action": "HRD Korea មាន official General CBT artifact សម្រាប់កម្ពុជាថ្ងៃ 2026-08-06 ប៉ុន្តែចំណងជើងសាធារណៈមិនបញ្ជាក់ Manufacturing ដោយផ្ទាល់។"
+    "action": "Point System លើកទី 12 របស់កម្ពុជា គឺ Manufacturing · General CBT · Point System។ រយៈពេលប្រឡងដែលបានបញ្ជាក់គឺ 2026-06-22 ដល់ 2026-07-15។"
   },
   "skill_competency": {
     "title": "Skills Test — ជុំទី 2",
