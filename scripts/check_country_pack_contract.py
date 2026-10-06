@@ -700,6 +700,7 @@ require(coverage_rows["KG"].get("routeId")=="kg-e9-manufacturing-2026","Kyrgyzst
 require(coverage_rows["KG"].get("promotionEvidence",{}).get("rule","").find("2026-02-23 through 2026-02-27")>=0,"Kyrgyzstan coverage must preserve cross-source Manufacturing promotion evidence")
 require(coverage_rows["MM"].get("evidence",{}).get("note","").find("Manufacturing")>=0,"Myanmar pending reason must explicitly discuss missing Manufacturing verification")
 require(coverage_rows["MM"].get("verificationDossierFile")=="data/mm_manufacturing_verification_2026.json","Myanmar coverage row must link the verification dossier")
+require(coverage_rows["MM"].get("previewFile")=="mm.html","Myanmar pending coverage row must link the public verification preview")
 require(set(coverage_rows["MM"].get("evidence",{}).get("current2026OtherSectors",[]))=={"Agriculture·Livestock","Construction","Forestry"},"Myanmar coverage must preserve captured 2026 non-Manufacturing sectors")
 require(coverage_rows["MM"].get("evidence",{}).get("historicalManufacturingSource","").startswith("https://www.mol.gov.mm/"),"Myanmar coverage must preserve official historical Manufacturing lineage")
 require(coverage_rows["TJ"].get("routeId")=="tj-e9-manufacturing-2026","Tajikistan coverage row must point to promoted Manufacturing Country Pack")
@@ -727,6 +728,7 @@ for code in pending:
 require(dashboard_rows["LK"].get("nextReview",{}).get("date")=="2026-10-12","Sri Lanka readiness review date must remain 2026-10-12")
 require(dashboard_rows["TH"].get("nextReview",{}).get("date")=="2026-10-19","Thailand readiness review date must remain 2026-10-19")
 require(dashboard_rows["MM"].get("verificationDossierFile")=="data/mm_manufacturing_verification_2026.json","Myanmar readiness row must link the verification dossier")
+require(dashboard_rows["MM"].get("detailsPage")=="mm.html","Myanmar readiness row must link the public verification preview")
 require(dashboard_rows["MM"].get("routeId") is None and dashboard_rows["MM"].get("packState")=="pending_manufacturing_verification","Myanmar must remain pending without a promoted route")
 require(any("mol.gov.mm" in s for s in dashboard_rows["MM"].get("nextReview",{}).get("officialSources",[])),"Myanmar next-review sources must include the Ministry of Labour EPS page")
 dated={code for code,row in dashboard_rows.items() if row.get("nextReview",{}).get("type")=="dated_official_review"}
@@ -743,6 +745,7 @@ for code,row in dashboard_rows.items():
 countries=(ROOT/"docs/countries.html").read_text(encoding="utf-8")
 readiness_page=(ROOT/"docs/readiness.html").read_text(encoding="utf-8")
 readiness_js=(ROOT/"docs/readiness.js").read_text(encoding="utf-8")
+myanmar=(ROOT/"docs/mm.html").read_text(encoding="utf-8")
 nepal=(ROOT/"docs/np.html").read_text(encoding="utf-8")
 vietnam=(ROOT/"docs/vn.html").read_text(encoding="utf-8")
 philippines=(ROOT/"docs/ph.html").read_text(encoding="utf-8")
@@ -822,6 +825,10 @@ require("RESEARCH / HOLD" in kyrgyzstan and "2026-02-23" in kyrgyzstan and "US$2
 require("2026-05-30" in kyrgyzstan and "2026-06-09" in kyrgyzstan and "2 жылдык" in kyrgyzstan,"Kyrgyzstan preview must expose Skills Test, post-selection medical and two-year roster facts")
 require("ANTI-BROKER RULE" in kyrgyzstan and "ROUTE FIREWALLS" in kyrgyzstan,"Kyrgyzstan preview must expose anti-broker and later-route firewalls")
 require('href="beta.html"' not in kyrgyzstan and 'id="betaForm"' not in kyrgyzstan,"Kyrgyzstan preview must not expose beta enrollment")
+require("PENDING MANUFACTURING VERIFICATION" in myanmar and "No promoted Manufacturing routeId" in myanmar,"Myanmar preview must remain pending without a promoted Manufacturing route")
+require("Agriculture/Livestock" in myanmar and "Construction" in myanmar and "Forestry" in myanmar,"Myanmar preview must show the three captured 2026 non-Manufacturing sectors")
+require("16th EPS-TOPIK Manufacturing second batch" in myanmar and "4,249" in myanmar and "2025-07-21" in myanmar,"Myanmar preview must preserve historical Manufacturing lineage without promoting it")
+require('href="beta.html"' not in myanmar and 'id="betaForm"' not in myanmar,"Myanmar verification preview must not expose beta enrollment")
 
 if failures:
     print("COUNTRY_PACK_CONTRACT_FAIL")
