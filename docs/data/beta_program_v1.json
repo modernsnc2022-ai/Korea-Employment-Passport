@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -43,13 +43,16 @@
     "applicationIndependentFromPublicBeta": true,
     "application": {
       "email": "modernsnc2022@gmail.com",
-      "opensOnlyWhenStatus": "open"
+      "opensOnlyWhenStatus": null,
+      "interestSubject": "[KEP E-9 Worker Validator Interest] Retrospective panel"
     },
     "eligibility": [
       "Currently working in Korea with E-9 status",
       "Previously went through Indonesia G-to-G Korea / EPS process",
       "Willing to compare app guidance with real experience and report mismatches"
-    ]
+    ],
+    "intakeStatus": "open",
+    "interestIntakeIndependentFromPanelAccess": true
   },
   "privacy": {
     "publicApplicationDoesNotRequire": [
