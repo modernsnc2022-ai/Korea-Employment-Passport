@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-9th-point-system-east-timor-manufacturing-dili-baucau-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.2.0",
+  "packVersion": "0.3.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -24,7 +24,7 @@
     "HRD Korea identifies NDOE as Timor-Leste's EPS sending agency.",
     "The 9th East Timor Manufacturing Dili route is verified directly on HRD Korea: registration 2026-03-09 through 2026-03-18, announcement 2026-06-09, test 2026-06-18 through 2026-07-30, General CBT, Point System.",
     "The 9th East Timor Manufacturing Baucau route is now verified directly on HRD Korea: registration 2026-03-09 through 2026-03-18, test announcement still undecided, test 2026-08-06 through 2026-08-07, General CBT, Point System.",
-    "HRD Korea published four East Timor General CBT skills-candidate entries on 2026-09-22; their public titles do not themselves identify site/sector, so KEP does not auto-link them.",
+    "HRD Korea's 2026-09-22 skills-candidate rows are now site/sector linked by examNot: 42=Dili Manufacturing, 43=Baucau Manufacturing; 44/45 are Fishery and remain excluded.",
     "Fishery Dili/Baucau routes are separate-sector evidence and must never populate Manufacturing exact rules."
   ],
   "safety": {
@@ -38,7 +38,8 @@
     "fisheryFactsExcludedFromManufacturing": true,
     "genericSkillsCandidateEntriesRequireSiteSectorLinkage": true,
     "baucauExactFactsRequireDirectOfficialSource": true,
-    "baucauDirectOfficialDetailVerified": true
+    "baucauDirectOfficialDetailVerified": true,
+    "manufacturingSkillsCandidatesLinkedByExamNot": true
   },
   "stages": [
     {
@@ -109,9 +110,9 @@
       "title": "Skills Test — Round 2",
       "authority": "HRD Korea / NDOE",
       "kind": "official_exam",
-      "action": "HRD Korea published four East Timor General CBT skills-candidate entries on 2026-09-22. KEP has not yet linked each generic entry to Dili/Baucau and Manufacturing/Fishery with exact artifact proof.",
+      "action": "HRD Korea's 2026-09-22 candidate rows link directly by examNot: 42 to Dili Manufacturing and 43 to Baucau Manufacturing. examNot 44/45 are Fishery and are excluded from this route.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-      "supportState": "country_level_candidate_entries_linkage_pending"
+      "supportState": "verified_current_manufacturing_candidates"
     },
     {
       "id": "final_selection",
@@ -304,5 +305,6 @@
       "testAnnouncementStatus": "undecided",
       "testPeriod": "2026-08-06 through 2026-08-07"
     }
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }

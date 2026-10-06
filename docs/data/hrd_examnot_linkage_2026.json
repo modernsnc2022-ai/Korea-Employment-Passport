@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "checkedAt": "2026-10-06",
+  "scope": "Official HRD Korea examNot linkage between schedule-detail rows and candidate/final-result index rows",
+  "method": {
+    "rule": "Link only when examNation, examYear, lcnsId and examNot match the direct official schedule-detail identity. Public ordinal labels such as 1th/2th/4th are display labels and are never used as the cycle join key.",
+    "candidateIndex": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+    "finalResultIndex": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+  },
+  "mappings": [
+    {
+      "country": "MN",
+      "examNation": "013",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "33",
+      "scheduleTitle": "The 11th recruitment of the Point system in Mongolia(Manufacturing)",
+      "skillsCandidate": {
+        "title": "Mongolia the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-07-03"
+      },
+      "finalResult": {
+        "title": "Mongolia the 1th POINT_EXAM Announcement",
+        "publicationDate": "2026-08-28"
+      },
+      "status": "skills_and_final_result_linked"
+    },
+    {
+      "country": "KH",
+      "examNation": "002",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "46",
+      "scheduleTitle": "The 12th recruitment of the point system in Cambodia(Manufacturing)",
+      "skillsCandidate": {
+        "title": "Cambodia the 2th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-08-06"
+      },
+      "finalResult": {
+        "title": "Cambodia the 2th POINT_EXAM Announcement",
+        "publicationDate": "2026-08-21"
+      },
+      "status": "skills_and_final_result_linked",
+      "warning": "The public 2th label is not normalized into 12th. Linkage is based solely on matching official examNot=46."
+    },
+    {
+      "country": "CN",
+      "examNation": "014",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "examNot": "19",
+      "scheduleTitle": "The 6th recruitment of the Point system in China(Manufacturing)",
+      "skillsCandidate": {
+        "title": "China the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-09-30"
+      },
+      "status": "skills_candidate_linked",
+      "excludedRows": [
+        {
+          "examNot": "85",
+          "title": "China the 2th Test of proficiency in Korean Announcement",
+          "reason": "different official examNot; not imported into the 6th Manufacturing route"
+        }
+      ]
+    },
+    {
+      "country": "TL",
+      "examNation": "015",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "manufacturing": [
+        {
+          "examNot": "42",
+          "scheduleTitle": "The 9th recruitment of the point system in East Timor(Manufacturing)_Dili",
+          "skillsCandidateTitle": "East Timor the 1th Test of proficiency in Korean Announcement",
+          "publicationDate": "2026-09-22"
+        },
+        {
+          "examNot": "43",
+          "scheduleTitle": "The 9th recruitment of the point system in East Timor(Manufacturing)_Baucau",
+          "skillsCandidateTitle": "East Timor the 2th Test of proficiency in Korean Announcement",
+          "publicationDate": "2026-09-22"
+        }
+      ],
+      "excludedFishery": [
+        {
+          "examNot": "44",
+          "site": "Dili"
+        },
+        {
+          "examNot": "45",
+          "site": "Baucau"
+        }
+      ],
+      "status": "manufacturing_skills_candidates_linked"
+    },
+    {
+      "country": "TH",
+      "examNation": "010",
+      "examYear": "2026",
+      "lcnsId": "001",
+      "manufacturing": [
+        {
+          "examNot": "57",
+          "site": "Bangkok",
+          "scheduleTitle": "The 18th recruitment of the Point system in Thailand_Manufacturing(Bangkok)",
+          "skillsCandidateTitle": "Thailand the 4th Test of proficiency in Korean Announcement",
+          "publicationDate": "2026-10-06"
+        },
+        {
+          "examNot": "64",
+          "site": "Udon Thani",
+          "scheduleTitle": "The 18th recruitment of the Point system in Thailand_Manufacturing(Udon Thani)",
+          "skillsCandidateTitle": "Thailand the 7th Test of proficiency in Korean Announcement",
+          "publicationDate": "2026-10-06"
+        }
+      ],
+      "excludedOtherSectorExamNot": [
+        "56",
+        "58",
+        "63",
+        "65"
+      ],
+      "status": "manufacturing_skills_candidates_linked",
+      "localMilestone": {
+        "source": "https://www.thaigov.go.th/th/news/165372",
+        "date": "2026-10-19",
+        "rule": "Keep the DOE local-list milestone/instructions distinct; HRD examNot linkage does not invent or cancel local DOE instructions."
+      }
+    }
+  ]
+}

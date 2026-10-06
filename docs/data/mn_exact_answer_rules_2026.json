@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "mn-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
-  "principle": "Use current Mongolia 11th Manufacturing evidence. Keep Special EPS-TOPIK separate and do not auto-link generic result-index entries to the current Manufacturing cycle without cycle/sector proof.",
+  "principle": "Use current Mongolia 11th Manufacturing evidence. Official result linkage is established only by matching the HRD examNot key; Special EPS-TOPIK remains separate.",
   "answers": [
     {
       "id": "mn_2026_sending_authority",
@@ -71,10 +71,10 @@
       "stages": [
         "final_selection"
       ],
-      "question": "Does the 2026-08-28 Mongolia Point System listing prove the 11th Manufacturing final result?",
-      "answer": "Not yet in KEP. A Mongolia Point System announcement exists in the pass-list index, but exact 11th-Manufacturing linkage still requires verification.",
-      "writeExactly": "Do not promote final selection from the generic 2026-08-28 index listing until cycle/sector linkage is verified.",
-      "verificationStatus": "result_index_exists_linkage_pending",
+      "question": "Is the 2026-08-28 Mongolia Point System result linked to the 11th Manufacturing cycle?",
+      "answer": "Yes. The official result row and direct Manufacturing schedule both use examNot=33.",
+      "writeExactly": "11th Mongolia Manufacturing final Point System result artifact: published 2026-08-28; linked by official examNot=33.",
+      "verificationStatus": "verified_official_examnot_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -116,6 +116,19 @@
       "verificationStatus": "shared_eps_principle",
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "mn_2026_skills_candidate_linkage",
+      "stages": [
+        "skill_competency"
+      ],
+      "question": "Is the 2026-07-03 Mongolia skills-candidate announcement linked to 11th Manufacturing?",
+      "answer": "Yes. The official candidate row and direct Manufacturing schedule both use examNot=33.",
+      "writeExactly": "11th Mongolia Manufacturing skills-candidate artifact: published 2026-07-03; linked by official examNot=33.",
+      "verificationStatus": "verified_official_examnot_linkage",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }

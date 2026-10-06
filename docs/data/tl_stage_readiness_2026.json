@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "tl-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -26,9 +26,21 @@
       "evidenceFile": "data/tl_baucau_discovery_2026.json"
     },
     "skillsCandidates": {
-      "status": "official_country_entries_site_sector_linkage_pending",
+      "status": "verified_current_manufacturing_sites_by_examnot",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
-      "note": "Four General CBT entries published 2026-09-22."
+      "publicationDate": "2026-09-22",
+      "Dili": {
+        "examNot": "42",
+        "title": "East Timor the 1th Test of proficiency in Korean Announcement"
+      },
+      "Baucau": {
+        "examNot": "43",
+        "title": "East Timor the 2th Test of proficiency in Korean Announcement"
+      },
+      "excludedFisheryExamNot": [
+        "44",
+        "45"
+      ]
     },
     "finalResult": {
       "status": "awaiting_verified_current_cycle_final_result",
@@ -55,8 +67,8 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "generic 2026-09-22 skills-candidate entries not linked by site/sector",
       "cycle-specific fee/document/final-result/downstream exact rules not mapped"
     ]
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
