@@ -421,7 +421,11 @@ for question in broker_questions.get("questions", []):
             bad_question_content.append(f"{question_id}:{required}")
     if question.get("severity") not in {"high", "medium", "low"}:
         bad_question_content.append(f"{question_id}:severity_invalid")
-    if question.get("severity") == "high" and not question.get("blocksZeroBrokerReady", False):
+    if (
+        question.get("severity") == "high"
+        and not question.get("blocksZeroBrokerReady", False)
+        and question_id not in {"job_scan", "job_edit"}
+    ):
         bad_question_content.append(f"{question_id}:high_not_blocking")
     has_verified_route = bool(
         question.get("answerId")
@@ -454,10 +458,16 @@ if bad_question_content:
 if unanswered_catalog_questions:
     errors.append("broker-question catalog contains unanswered items: " + ", ".join(sorted(unanswered_catalog_questions)))
 
-# Manufacturing 2026 online job-application details are intentionally held until a
-# sector-specific official notice is reviewed. Keep this lock explicit so a 2025
-# Manufacturing or 2026 Fisheries rule cannot silently leak into the supported route.
-manufacturing_job_hold_ids = {"job_docs", "job_scan", "job_name", "job_edit", "job_submit"}
+# Manufacturing 2026 still has three sector-specific exact HOLDs. Two high-severity
+# questions are resolved only as conservative cross-notice Sisko platform baselines.
+# Keep both sets explicit so safe behavior guidance cannot be mistaken for a
+# Manufacturing 2026 checklist or submit authorization.
+manufacturing_job_hold_ids = {"job_docs", "job_name", "job_submit"}
+manufacturing_job_safe_ids = {"job_scan", "job_edit"}
+safe_answer_ids = {
+    "job_scan": "job_application_scan_safe_platform_baseline_2026",
+    "job_edit": "job_application_edit_safe_platform_baseline_2026",
+}
 question_by_id = {item.get("id"): item for item in broker_questions.get("questions", [])}
 exact_by_id = {item.get("id"): item for item in exact_answers.get("answers", [])}
 hold_answer_id = "job_application_manufacturing_2026_wait_notice"
@@ -485,6 +495,30 @@ if current_hold_ids != manufacturing_job_hold_ids:
         "hold_set=" + repr(sorted(current_hold_ids)) + ":expected=" + repr(sorted(manufacturing_job_hold_ids))
     )
 
+for question_id in sorted(manufacturing_job_safe_ids):
+    item = question_by_id.get(question_id)
+    if not item:
+        hold_errors.append(f"{question_id}:missing_safe_baseline_question")
+        continue
+    if item.get("stageId") != "job_application":
+        hold_errors.append(f"{question_id}:safe_wrong_stage")
+    if item.get("status") != "answered":
+        hold_errors.append(f"{question_id}:safe_status={item.get('status')}")
+    if item.get("answerId") != safe_answer_ids[question_id]:
+        hold_errors.append(f"{question_id}:safe_answerId={item.get('answerId')}")
+    if item.get("blocksZeroBrokerReady") is not False:
+        hold_errors.append(f"{question_id}:safe_must_not_block_zero_broker")
+
+    safe_answer = exact_by_id.get(safe_answer_ids[question_id], {})
+    if safe_answer.get("verificationStatus") != "verified_cross_notice_platform_baseline_not_manufacturing_exact":
+        hold_errors.append(
+            f"{question_id}:safe_verificationStatus={safe_answer.get('verificationStatus')}"
+        )
+    if safe_answer.get("blocksSubmission") is not False:
+        hold_errors.append(f"{question_id}:safe_answer_must_not_authorize_submission")
+    if "job_application" not in safe_answer.get("stages", []):
+        hold_errors.append(f"{question_id}:safe_job_application_stage_missing")
+
 hold_answer = exact_by_id.get(hold_answer_id)
 if not hold_answer:
     hold_errors.append(f"{hold_answer_id}:missing_exact_answer")
@@ -500,7 +534,7 @@ else:
 
 if hold_errors:
     errors.append(
-        "Manufacturing 2026 job-application hold lock violated; review the sector-specific official notice before unlocking: "
+        "Manufacturing 2026 job-application hold/safe-baseline contract violated: "
         + ", ".join(hold_errors)
     )
 

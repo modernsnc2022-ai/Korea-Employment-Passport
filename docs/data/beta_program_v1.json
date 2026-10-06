@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -85,13 +85,21 @@
     ],
     "publicBetaHoldPolicy": {
       "safeOfficialEvidenceHoldsMayRemain": true,
-      "rule": "A structured current-cycle question may remain answered_hold during beta if the product explicitly refuses to guess and routes the user safely. Such a HOLD blocks final Broker Replacement Rate 100% PASS, not beta activation by itself.",
+      "rule": "Three current-cycle exact questions may remain answered_hold during beta because the product explicitly refuses to guess and routes the user safely. Two additional questions have conservative cross-notice platform baselines. The three exact HOLDs block final Broker Replacement Rate 100% PASS, not beta activation by themselves.",
       "currentHeldQuestions": [
         "job_docs",
-        "job_scan",
         "job_name",
-        "job_edit",
         "job_submit"
+      ],
+      "safePlatformBaselines": [
+        {
+          "questionId": "job_scan",
+          "meaning": "Supporting-document scan-vs-photo behavior is safe to guide; exact Manufacturing 2026 checklist/file specs remain unresolved."
+        },
+        {
+          "questionId": "job_edit",
+          "meaning": "Treat final send as non-editable; exact Manufacturing 2026 submit button/status remains unresolved."
+        }
       ]
     },
     "actualOpenGates": [
