@@ -30,6 +30,7 @@ Snapshot: 2026-10-06
 - Never store applicant/worker PII in GitHub.
 
 ## Send result
+- Deployment gate SHA: `14e4976e24803b43d74d5346e6468c80f1e025c3`; static-check, ui-smoke, Pages and beta-launch-gate all passed on this same HEAD before send.
 - Initial email sent once on 2026-10-06 after same-HEAD gates, deployed routing, duplicate-mailbox recheck, and the pre-send guard passed.
 - Immediate bounce check: none observed.
 - Do not send another initial outreach. Any later contact requires an explicit follow-up-ready ledger state.
