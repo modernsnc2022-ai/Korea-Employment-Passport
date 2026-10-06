@@ -1,5 +1,5 @@
 {
-  "version": "3.2.0",
+  "version": "3.3.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -87,6 +87,7 @@
     "seosan_foreign_worker_center",
     "busan_global_indonesian_desk",
     "busan_foreign_resident_center",
-    "gimpo_foreign_resident_center"
+    "gimpo_foreign_resident_center",
+    "ulsan_foreign_resident_center"
   ]
 }
