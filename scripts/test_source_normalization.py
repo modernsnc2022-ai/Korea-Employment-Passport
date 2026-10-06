@@ -34,6 +34,18 @@ def main():
     month_first_normalized=normalize_source_text(month_first,KP2MI)
     require(month_first_normalized==a,
             "KP2MI month-first dynamic page date must normalize to the same stable header")
+
+    prefixed=(
+        "KP2MI | KEMENTERIAN PELINDUNGAN PEKERJA MIGRAN INDONESIA/"
+        "BADAN PELINDUNGAN PEKERJA MIGRAN INDONESIA "
+        "Wednesday, 7 October 2026 0800-1000 Webmail "
+        "PENGUMUMAN Manufacturing quota 1000"
+    )
+    prefixed_norm=normalize_source_text(prefixed,KP2MI)
+    require("Wednesday, 7 October 2026" not in prefixed_norm,
+            "KP2MI dynamic header date must normalize even when preceded by agency branding")
+    require("<dynamic-page-date> 0800-1000 Webmail" in prefixed_norm,
+            "KP2MI header context must be preserved around the normalized date")
     for value in ("1000","350000","1260000","1500000","27 January 2026"):
         require(value in a,f"semantic notice value must be preserved: {value}")
 
@@ -80,7 +92,7 @@ def main():
     require("Official notice" in mm_clock_a and "Government Website Link" in mm_clock_a,
             "Myanmar semantic page text must survive clock normalization")
 
-    require(NORMALIZATION_REVISION=="cross-site-volatile-widget-v4","normalization revision drift")
+    require(NORMALIZATION_REVISION=="cross-site-volatile-widget-v5","normalization revision drift")
     print("SOURCE_NORMALIZATION_SELFTEST_PASS")
 
 if __name__=="__main__":
