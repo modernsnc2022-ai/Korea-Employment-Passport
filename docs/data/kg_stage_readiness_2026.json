@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "kg-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -48,8 +48,24 @@
       "sourceUrl": "https://migrant.kg/kg/about/news/otkryta-onlain-registratsiia-na-obshchee-testirovanie-po-programme-eps-topik-dlia-trudoustroistva-v-respublike-koreia/"
     },
     "slcVisaDeparture": {
-      "status": "research_pending_current_exact_rules",
-      "sourceUrl": "https://migrant.kg/"
+      "status": "partial_process_verified_exact_slc_visa_pending",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "note": "Post-contract training and organized departure are verified at country-process level. Exact SLC signing, visa checklist/fees and any final medical recheck remain HOLD."
+    },
+    "slcContractProcess": {
+      "status": "verified_country_process_exact_slc_pending",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "note": "Official 2026 departure reports describe training participants as applicants who had already received a contract. Exact SLC issuance/signing instructions remain current-notice specific."
+    },
+    "predepartureTraining": {
+      "status": "verified_country_process_2026_five_day",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "note": "Official 2026 departure reports verify 5-day pre-departure training for contract recipients."
+    },
+    "departureProcess": {
+      "status": "verified_country_process_2026_individual_assignment_pending",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "note": "The Center organized 2026 EPS departure groups to Korea after contract receipt and pre-departure training. Individual departure dates still require an applicant-specific official assignment."
     }
   },
   "specialRoute": {
@@ -65,21 +81,21 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "current SLC/post-SLC visa/training/departure exact rules not mapped",
-      "current employer-selected worker flow not validated end-to-end",
+      "exact SLC signing and visa document/fee rules are not mapped",
+      "individual departure-assignment handling is not validated end-to-end",
       "Kyrgyzstan user validation not performed"
     ]
   },
   "nextReviewTrigger": {
-    "subject": "Current Kyrgyzstan SLC/post-SLC/visa/training/departure notice for the verified Manufacturing route",
+    "subject": "Current Kyrgyzstan SLC-signing/visa-document notice or applicant-specific departure instruction",
     "officialSources": [
       "https://migrant.kg/",
       "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
     ],
     "promoteOnlyWhen": [
-      "the notice explicitly applies to current EPS candidates/workers",
-      "later additional/general and Special route facts remain separated",
-      "historical June medical dates are not reused for later cohorts"
+      "the source gives exact current SLC signing or visa-document/payment instructions, or an applicant-specific official departure assignment flow",
+      "country-level departure-event dates are not reused as an individual's assigned date",
+      "later general and Special routes remain separate from the February 13th Manufacturing cycle"
     ]
   }
 }
