@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.15.1",
   "defaultRouteId": "id-e9-manufacturing-2026",
   "commonStageIds": [
     "eligibility",
@@ -181,7 +181,7 @@
       "localizationFile": "data/uz_e9_manufacturing_2026_uz.json",
       "officialSendingAgency": "Migration Agency under the Cabinet of Ministers of the Republic of Uzbekistan (AELM)",
       "officialSendingAgencyUrl": "https://migration.uz/",
-      "note": "HRD Korea verifies the 9th Uzbekistan Manufacturing Point System: registration 2026-03-09 through 2026-03-12, test announcement 2026-03-23 and test 2026-04-06 through 2026-04-22. Skills-candidate and final Point System result artifacts are linked to this cycle by official examNot=9; fee/documents and downstream exact rules remain gated."
+      "note": "HRD Korea verifies the 9th Uzbekistan Manufacturing Point System and examNot=9 skills/final results. Separately, Uzbekistan Migration Agency verifies a 2026 country-level Manufacturing post-selection process with 213 employment contracts reported on 2026-08-14 and official pre-departure training after employer selection; those country-level facts are not treated as proof of an individual 9th-cycle SLC, visa package or departure assignment."
     },
     {
       "routeId": "mn-e9-manufacturing-2026",
