@@ -33,18 +33,18 @@ A structured rule that is still on `answered_hold` because the official route de
 - Official-source review is current and clean for the rules used to declare PASS.
 
 ## Current Manufacturing 2026 official-evidence dependency
-Three Manufacturing online job-application questions remain explicit exact official-evidence HOLDs until a Manufacturing-specific 2026 notice is verified:
+Two Manufacturing online job-application questions remain explicit exact official-evidence HOLDs until a Manufacturing-specific 2026 notice is verified:
 
 - `job_docs`
 - `job_name`
-- `job_submit`
 
-Two additional questions now have conservative cross-notice Sisko platform baselines and no longer count as unresolved zero-broker blockers:
+Three additional questions now have conservative cross-notice Sisko platform baselines and no longer count as unresolved zero-broker blockers:
 
 - `job_scan`: supporting documents are scanned rather than photographed; this does not define the exact Manufacturing 2026 checklist or file specs.
-- `job_edit`: treat final send as non-editable; this does not define the exact Manufacturing 2026 submit button/status.
+- `job_edit`: treat final send as non-editable.
+- `job_submit`: upload through Menu Pemenuhan Dokumen, confirm the application/documents are actually sent and monitor progress in Sisko; if status is unclear, use the official sendingkorea@gmail.com channel. The exact Manufacturing 2026 button label is not claimed.
 
-These safe baselines do not authorize submission while the three exact HOLDs remain.
+These safe baselines do not authorize submission while the two exact HOLDs remain.
 
 They do **not** require the beta itself to stay closed, because the app intentionally refuses to guess. They **do** prevent final Broker Replacement Rate 100% PASS until each is resolved from official evidence or explicitly routed to official Human Help under the reviewed rule set.
 
