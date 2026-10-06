@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "verifiedAt": "2026-10-06",
+  "scope": "current_2026_hrd_manufacturing_schedule_row_with_local_registration_window_conflict_unresolved",
+  "sources": [
+    {
+      "id": "np_2026_hrd_5th_manufacturing_5part",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "status": "verified_direct_official_current",
+      "facts": {
+        "title": "The 5th recruitment of the Point system in Nepal_Manufacturing(5부)",
+        "testType": "General CBT",
+        "pointSystem": true,
+        "registrationPeriod": "2026-07-27 through 2026-08-05",
+        "testAnnouncementDate": null,
+        "testPeriod": null,
+        "dateState": "undecided",
+        "receptionAddress": "UBT Hall, Gwarko, Lalitpur(Opposite to Guna Cinema Hall)",
+        "receptionPhone": "01-5520445"
+      }
+    },
+    {
+      "id": "np_2026_local_first_phase_primary",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
+      "status": "verified_local_primary_notice",
+      "facts": {
+        "publishedAt": "2026-07-21",
+        "registrationPeriod": "2026-07-27 through 2026-08-02"
+      }
+    }
+  ],
+  "reconciliation": {
+    "status": "unresolved_cross_source_registration_end_date",
+    "localPrimaryEndDate": "2026-08-02",
+    "hrdScheduleEndDate": "2026-08-05",
+    "deadlineExtensionVerifiedFromLocalSupplementaryContent": false,
+    "safeRule": "Keep the local primary notice's 2026-08-02 exact application window in applicant-facing exact rules until a later Nepal official notice is content-reviewed and shown to extend/modify it. Preserve the HRD Korea 2026-08-05 schedule-row end date as direct official cross-source evidence, not as automatic proof of a local deadline extension."
+  },
+  "promotionRules": {
+    "mayPromote": [
+      "a current HRD Korea Nepal Manufacturing 5th Point System row exists",
+      "the current HRD row is General CBT / Point System",
+      "the HRD row currently leaves test announcement and test period undecided",
+      "the HRD row lists the Gwarko UBT Hall reception contact"
+    ],
+    "mustRemainHold": [
+      "claim that the local application deadline was extended to 2026-08-05",
+      "individual or bulk exam date/session",
+      "current 2026 first-phase result",
+      "current Skill & Competency schedule/result"
+    ]
+  }
+}
