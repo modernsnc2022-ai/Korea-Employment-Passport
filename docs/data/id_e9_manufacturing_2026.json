@@ -4,7 +4,7 @@
   "sector": "manufacturing",
   "cycle": 2026,
   "goal": "zero-private-broker",
-  "packVersion": "0.3.5",
+  "packVersion": "0.3.6",
   "lastVerified": "2026-10-06",
   "stages": [
     {
@@ -127,9 +127,9 @@
       "title": "Online job application",
       "authority": "Sisko P2MI",
       "kind": "official_action",
-      "action": "Current-cycle pre-job baseline is verified. Cross-notice Sisko safety baselines now cover scan-vs-photo, non-editability after final send, and safe confirmation of sent/progress state through Sisko plus the official support channel. Exact Manufacturing 2026 document list and identity/address/document-number source of truth remain HOLD.",
+      "action": "Current-cycle pre-job baseline is verified. Cross-notice/current-cycle safety baselines now cover scan-vs-photo, identity consistency and non-guessing for ambiguous identity fields, non-editability after final send, and safe confirmation of sent/progress state through Sisko plus the official support channel. Only the exact Manufacturing 2026 online job-application document list remains HOLD.",
       "brokerReplacement": "held_official_notice",
-      "warning": "The three Sisko safety baselines do not replace the missing detailed Manufacturing 2026 notice. Do not submit until the exact Manufacturing document list and field source-of-truth rules are verified.",
+      "warning": "The four safety baselines do not replace the missing detailed Manufacturing 2026 document checklist. Do not submit until the exact Manufacturing 2026 document list is verified.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionLabel": "Check latest Manufacturing notice"
@@ -288,7 +288,7 @@
     }
   ],
   "jobApplicationBaselineEvidence": {
-    "status": "verified_current_cycle_plus_three_safe_platform_baselines_two_exact_details_held",
+    "status": "verified_current_cycle_plus_four_safe_platform_baselines_one_exact_detail_held",
     "verifiedAt": "2026-10-06",
     "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
     "facts": [
@@ -296,14 +296,15 @@
       "The same notice says the psychology examination is completed through a HIMPSI psychologist under the official route.",
       "Medical and psychology results are entered directly into Sisko P2MI by the health facility and HIMPSI.",
       "Two official Sisko P2MI job-application notices (Fisheries 2026 and Manufacturing 2025) independently state that supporting documents are scanned rather than photographed.",
-      "Those two official notices also independently state that application documents already sent cannot be corrected.",
-      "Two official Sisko P2MI job-application notices independently state that supporting documents are uploaded through Menu Pemenuhan Dokumen, sent applications cannot be corrected, and applicants must monitor progress in Sisko.",
+      "Current 2026 official recruitment rules require name, date of birth and gender to match the identity card/registration data; current 2026 skills guidance also requires passport identity to match the EPS application.",
+      "The resulting safe identity baseline preserves registered identity exactly, copies document numbers from the matching official document, and routes ambiguous address/document-source fields to official help instead of guessing.",
+      "Official Sisko notices independently state that application documents already sent cannot be corrected.",
+      "Official Sisko notices independently state that supporting documents are uploaded through Menu Pemenuhan Dokumen, sent applications cannot be corrected, and applicants must monitor progress in Sisko.",
       "Those notices provide sendingkorea@gmail.com as the official support channel for online-application sending issues.",
-      "The remaining exact Manufacturing 2026 gaps are the sector-specific document list and the source of truth for identity/address/document-number fields."
+      "The remaining exact Manufacturing 2026 gap is the sector-specific online job-application document list."
     ],
     "heldExactQuestions": [
-      "job_docs",
-      "job_name"
+      "job_docs"
     ],
     "safePlatformBaselines": [
       {
@@ -312,6 +313,13 @@
         "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
         "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
         "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
+      },
+      {
+        "questionId": "job_name",
+        "rule": "Preserve registered identity exactly: name/date of birth/gender must match official registration identity, passport identity must remain consistent with the EPS application, and document numbers must be copied from the corresponding official document. If an address/document-source field is ambiguous, do not guess; use the official support channel. This is not a field-by-field Manufacturing 2026 form map.",
+        "verificationStatus": "verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map",
+        "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+        "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-perikanan-tahun-2026"
       },
       {
         "questionId": "job_edit",

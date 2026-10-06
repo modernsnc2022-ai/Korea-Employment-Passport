@@ -33,18 +33,18 @@ A structured rule that is still on `answered_hold` because the official route de
 - Official-source review is current and clean for the rules used to declare PASS.
 
 ## Current Manufacturing 2026 official-evidence dependency
-Two Manufacturing online job-application questions remain explicit exact official-evidence HOLDs until a Manufacturing-specific 2026 notice is verified:
+One Manufacturing online job-application question remains an explicit exact official-evidence HOLD until a Manufacturing-specific 2026 detailed notice is verified:
 
 - `job_docs`
-- `job_name`
 
-Three additional questions now have conservative cross-notice Sisko platform baselines and no longer count as unresolved zero-broker blockers:
+Four additional questions now have conservative official safety baselines and no longer count as unresolved zero-broker blockers:
 
 - `job_scan`: supporting documents are scanned rather than photographed; this does not define the exact Manufacturing 2026 checklist or file specs.
+- `job_name`: preserve registered identity exactly; copy document numbers from the corresponding official document; if address/document-source fields are ambiguous, do not guess—use official help. This is not a Manufacturing 2026 field-by-field map.
 - `job_edit`: treat final send as non-editable.
 - `job_submit`: upload through Menu Pemenuhan Dokumen, confirm the application/documents are actually sent and monitor progress in Sisko; if status is unclear, use the official sendingkorea@gmail.com channel. The exact Manufacturing 2026 button label is not claimed.
 
-These safe baselines do not authorize submission while the two exact HOLDs remain.
+The identity baseline preserves registered identity and routes ambiguous field-source questions to official help; it does not claim a Manufacturing 2026 field-by-field map. These safe baselines do not replace the one remaining exact Manufacturing document checklist HOLD.
 
 They do **not** require the beta itself to stay closed, because the app intentionally refuses to guess. They **do** prevent final Broker Replacement Rate 100% PASS until each is resolved from official evidence or explicitly routed to official Human Help under the reviewed rule set.
 

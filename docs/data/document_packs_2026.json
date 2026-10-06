@@ -1,5 +1,5 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "route": "ID-E9-MFG-GENERAL-2026",
   "packs": [
     {
@@ -116,8 +116,8 @@
         "job_application"
       ],
       "status": "awaiting_sector_notice",
-      "title": "Lamaran online Manufaktur 2026 — 2 detail exact masih menunggu",
-      "message": "Checklist dokumen Manufaktur 2026 dan sumber acuan field identitas/alamat/nomor dokumen belum terverifikasi. Tiga baseline aman Sisko sudah diketahui: dokumen pendukung di-scan, final send diperlakukan sebagai tidak dapat diedit, dan pengiriman harus dikonfirmasi melalui status terkirim/progress di Sisko dengan kanal bantuan resmi bila status tidak jelas. Baseline ini tidak membuka submit.",
+      "title": "Lamaran online Manufaktur 2026 — 1 detail exact masih menunggu",
+      "message": "Hanya checklist dokumen lamaran online Manufaktur 2026 yang masih belum terverifikasi. Empat baseline aman sudah tersedia: dokumen pendukung di-scan; identitas yang sudah terdaftar harus dijaga konsisten dan field sumber yang ambigu tidak boleh ditebak; final send diperlakukan sebagai tidak dapat diedit; dan pengiriman harus dikonfirmasi melalui status terkirim/progress di Sisko dengan kanal bantuan resmi bila status tidak jelas. Baseline ini tidak menggantikan checklist sektor.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "items": [],
       "lastChecked": "2026-10-06",
@@ -126,6 +126,11 @@
           "questionId": "job_scan",
           "rule": "Dokumen pendukung harus berupa hasil scan, bukan foto dokumen; exact checklist/file specs Manufaktur 2026 belum ditetapkan.",
           "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact"
+        },
+        {
+          "questionId": "job_name",
+          "rule": "Jaga nama/tanggal lahir/gender tetap konsisten dengan identitas pendaftaran dan pastikan identitas paspor sesuai aplikasi EPS; salin nomor dokumen dari dokumen resmi yang terkait. Bila sumber field alamat/nomor tidak jelas, jangan menebak dan gunakan kanal bantuan resmi. Ini bukan field map exact Manufaktur 2026.",
+          "verificationStatus": "verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map"
         },
         {
           "questionId": "job_edit",

@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "scope": "2026 Manufacturing online job-application detailed notice",
   "checkedAt": "2026-10-06",
@@ -17,13 +17,16 @@
     {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
       "interpretation": "2026 online job-application detail notice is explicitly Fisheries-sector scoped and must not be reused for Manufacturing."
+    },
+    {
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-perikanan-tahun-2026",
+      "interpretation": "Official 2026 skills guidance confirms passport identity must match the EPS application or the applicant may be excluded from the job-seeker roster/entry. Used only as an identity-consistency safety baseline, not as a Manufacturing document checklist."
     }
   ],
   "heldQuestions": [
-    "job_docs",
-    "job_name"
+    "job_docs"
   ],
-  "releaseRule": "If a Manufacturing-specific 2026 detailed online job-application notice is found, review the remaining exact document-list and identity-field rules before enabling real submission guidance. Existing scan/edit/send-confirmation baselines do not authorize submission by themselves.",
+  "releaseRule": "If a Manufacturing-specific 2026 detailed online job-application notice is found, review and structure the exact document list before enabling real submission guidance. Existing scan/identity/edit/send-confirmation baselines do not define the missing sector-specific checklist.",
   "sameDayOfficialRecheck": {
     "status": "completed_no_detailed_manufacturing_notice_found",
     "checkedAt": "2026-10-06",
@@ -31,22 +34,24 @@
     "repeatOnActualReleaseDay": true
   },
   "verifiedBaseline": {
-    "status": "process_and_three_safe_platform_baselines_verified_two_exact_submission_rules_held",
+    "status": "process_and_four_safe_platform_baselines_verified_one_exact_submission_rule_held",
     "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
     "facts": [
       "MCU I official-provider path verified for 2026 graduates",
       "HIMPSI psychology path verified for 2026 graduates",
       "provider/HIMPSI direct result input to Sisko P2MI verified",
       "cross-notice Sisko baseline verified: supporting documents are scanned rather than photographed",
+      "current-cycle identity baseline verified: name/date of birth/gender must match registration identity and passport identity must match the EPS application",
+      "safe identity fallback verified: copy document numbers from the corresponding official document and use official help rather than guessing when field source is ambiguous",
       "cross-notice Sisko baseline verified: sent application documents cannot be corrected",
       "cross-notice Sisko baseline verified: completion is checked through sent/progress state in Sisko and official support is available for sending issues"
     ],
     "stillHeld": [
-      "job_docs",
-      "job_name"
+      "job_docs"
     ],
     "safePlatformBaselines": [
       "job_scan",
+      "job_name",
       "job_edit",
       "job_submit"
     ]
@@ -59,6 +64,15 @@
       "sourceUrls": [
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
+      ]
+    },
+    {
+      "questionId": "job_name",
+      "status": "verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map",
+      "rule": "Keep registered identity exact; copy document numbers from the corresponding official document; if address/document-source fields are ambiguous, stop and use official support rather than guessing. No Manufacturing 2026 field-by-field map is claimed.",
+      "sourceUrls": [
+        "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+        "https://kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-perikanan-tahun-2026"
       ]
     },
     {
