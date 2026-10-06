@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "ph-e9-manufacturing-2026",
   "cycle": 2026,
-  "checkedAt": "2026-10-05",
+  "checkedAt": "2026-10-06",
   "officialRegularSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
   "officialDmwPortal": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
   "interpretationRule": "Regular and Special EPS-TOPIK are separate routes. A Special advisory or prior-cycle Regular advisory may not populate exact current Regular Manufacturing dates, fee, quota or downstream documents.",
@@ -12,14 +12,18 @@
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko"
     },
     "registration": {
-      "status": "no_open_registration",
+      "status": "verified_route_no_open_registration_dates_undecided",
       "sourceUrl": "https://eps.dmw.gov.ph/Public/EPSMain.aspx",
       "note": "DMW portal currently says no registration is open."
     },
     "regularManufacturingSchedule": {
-      "status": "listed_dates_undecided",
+      "status": "verified_route_listed_dates_undecided",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
-      "note": "HRD Korea lists the 11th point-system Philippines_Manufacturing route, but registration/test/result dates are undecided."
+      "note": "HRD Korea lists the 11th point-system Philippines_Manufacturing route, but registration/test/result dates are undecided.",
+      "routeTitle": "The 11th recruitment of the point system in Philippines_Manufacturing",
+      "registrationDateStatus": "undecided",
+      "testDateStatus": "undecided",
+      "resultDateStatus": "undecided"
     },
     "qualificationAndFilePreparation": {
       "status": "portal_snapshot_only",
