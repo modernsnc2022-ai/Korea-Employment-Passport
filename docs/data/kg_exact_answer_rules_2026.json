@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "kg-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Use the February 2026 Manufacturing recruitment and its directly linked current-cycle notices. Later additional/general testing and Special EPS-TOPIK are separate evidence layers and must not overwrite the 13th Manufacturing route.",
@@ -213,6 +213,44 @@
       "verificationStatus": "verified_special_route_exclusion",
       "sourceUrl": "https://migrant.kg/kg/about/news/tsentr-trudoustroistva-grazhdan-za-rubezhom-obiavliaet-o-provedenii-spetsialnogo-testirovaniia-na-znanie-koreiskogo-iazyka-eps-topik-na-2026-god/",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kg_2026_contract_before_training_process",
+      "stages": [
+        "slc",
+        "post_slc_requirements"
+      ],
+      "question": "What is verified about the Kyrgyz EPS process after employer selection?",
+      "answer": "Official 2026 Kyrgyz departure reports describe the people entering pre-departure training as applicants who had already received a contract.",
+      "writeExactly": "Country-level process evidence: contract received before official pre-departure training. Do not infer an individual's SLC signing date or procedure from these reports.",
+      "verificationStatus": "verified_country_process_2026_exact_slc_pending",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kg_2026_predeparture_training_five_day",
+      "stages": [
+        "predeparture_training"
+      ],
+      "question": "How long is the verified Kyrgyz EPS pre-departure training in the 2026 departure reports?",
+      "answer": "5 days.",
+      "writeExactly": "Verified country-process fact: the Center conducted 5-day pre-departure training for contract recipients in the 2026-08-11 and 2026-09-29 departure groups.",
+      "verificationStatus": "verified_country_process_2026",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "kg_2026_departure_process",
+      "stages": [
+        "departure"
+      ],
+      "question": "Is official EPS departure from Kyrgyzstan observed in 2026?",
+      "answer": "Yes. The Center reported multiple 2026 groups completing pre-departure training and departing to Korea under EPS.",
+      "writeExactly": "Use this only as process evidence. Never present a reported group date as an individual applicant's assigned departure date.",
+      "verificationStatus": "verified_country_process_2026_individual_assignment_pending",
+      "sourceUrl": "https://migrant.kg/kg/about/news/29-sentiabria-2026-goda-sostoialos-predvyezdnoe-obuchenie-i-otpravka-ocherednoi-gruppy-nashikh-grazhdan-v-respubliku-koreia-po-sisteme-trudoustroistva-eps/",
+      "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "postContractProcessEvidenceFile": "data/kg_post_contract_process_2026.json"
 }

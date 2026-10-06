@@ -626,6 +626,7 @@ kg_docs=load("docs/data/kg_document_packs_2026.json")
 kg_special=load("docs/data/kg_special_eps_topik_2026.json")
 kg_additional=load("docs/data/kg_additional_general_round_2026.json")
 kg_readiness=load("docs/data/kg_stage_readiness_2026.json")
+kg_post_contract=load("docs/data/kg_post_contract_process_2026.json")
 require(kg_entry.get("lifecycle")=="research_hold" and kg_entry.get("publicAvailability")=="preview_only","Kyrgyzstan registry route must remain preview-only HOLD")
 require(kg_pack.get("lifecycle")=="research_hold" and kg_pack.get("publicAvailability")=="preview_only","Kyrgyzstan pack must remain preview-only HOLD")
 require(kg_pack.get("safety",{}).get("betaIntakeOpen") is False,"Kyrgyzstan beta intake must remain closed")
@@ -642,10 +643,16 @@ require(kg_current.get("registrationDocuments",{}).get("status")=="verified_curr
 require(kg_current.get("epsTopik",{}).get("status")=="completed_verified","Kyrgyzstan Round 1 must remain completed_verified")
 require(kg_current.get("skillsTest",{}).get("status")=="completed_verified","Kyrgyzstan Skills Test must remain completed_verified")
 require(kg_current.get("postSelectionRoster",{}).get("status")=="verified_current_cycle_historical_window","Kyrgyzstan June post-selection/roster window must remain verified but historical")
-require(kg_current.get("slcVisaDeparture",{}).get("status")=="research_pending_current_exact_rules","Kyrgyzstan SLC/visa/departure must remain gated")
+require(kg_current.get("slcVisaDeparture",{}).get("status")=="partial_process_verified_exact_slc_visa_pending","Kyrgyzstan post-contract process may be verified while exact SLC/visa rules remain gated")
+require(kg_current.get("slcContractProcess",{}).get("status")=="verified_country_process_exact_slc_pending","Kyrgyzstan contract-before-training process must remain verified without inventing exact SLC instructions")
+require(kg_current.get("predepartureTraining",{}).get("status")=="verified_country_process_2026_five_day","Kyrgyzstan pre-departure training must remain verified as a 5-day country process")
+require(kg_current.get("departureProcess",{}).get("status")=="verified_country_process_2026_individual_assignment_pending","Kyrgyzstan departure process must remain verified while individual assignments stay gated")
 require(kg_readiness.get("betaReadiness",{}).get("status")=="blocked","Kyrgyzstan beta must remain blocked")
 require(kg_special.get("excludedFromRegular13thManufacturing") is True,"Kyrgyzstan Special route must be excluded from Regular 13th Manufacturing")
 require(kg_additional.get("excludedFromRegular13thManufacturing") is True,"Kyrgyzstan later additional/general round must be excluded from Regular 13th Manufacturing")
+require(kg_post_contract.get("scope")=="country_process_2026_not_individual_departure_assignment","Kyrgyzstan post-contract evidence must remain country-process scoped")
+require(all(src.get("facts",{}).get("predepartureTrainingDays")==5 for src in kg_post_contract.get("sources",[]) if src.get("id","").startswith("kg_eps_departure_")),"Kyrgyzstan post-contract evidence must preserve 5-day training")
+require("individual departure date or flight assignment" in kg_post_contract.get("promotionRules",{}).get("mustRemainHold",[]),"Kyrgyzstan individual departure assignment must remain HOLD")
 kg_doc_ids={p.get("id") for p in kg_docs.get("packs",[])}
 require({"kg_13th_online_registration","kg_13th_postselection_roster"}.issubset(kg_doc_ids),"Kyrgyzstan document packs must cover registration and post-selection roster")
 kg_regpack=next((p for p in kg_docs.get("packs",[]) if p.get("id")=="kg_13th_online_registration"),{})
@@ -659,7 +666,8 @@ for exact_id in [
     "kg_2026_manufacturing_linkage","kg_2026_registration_window","kg_2026_exam_fee",
     "kg_2026_registration_files","kg_2026_test_announcement","kg_2026_bishkek_test_period",
     "kg_2026_osh_test_period","kg_2026_skills_dates","kg_2026_postselection_documents",
-    "kg_2026_roster_rule","kg_2026_anti_broker_rule","kg_2026_later_round_firewall","kg_2026_special_firewall"
+    "kg_2026_roster_rule","kg_2026_anti_broker_rule","kg_2026_later_round_firewall","kg_2026_special_firewall",
+    "kg_2026_contract_before_training_process","kg_2026_predeparture_training_five_day","kg_2026_departure_process"
 ]:
     require(exact_id in kg_exact_ids,f"Kyrgyzstan exact-answer catalog missing {exact_id}")
 
