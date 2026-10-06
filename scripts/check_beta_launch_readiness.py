@@ -628,7 +628,7 @@ require(
         "lpk_hanaro","lpk_go_korea","korea_indonesia_center_referral","appik_purna_korea_referral",
         "pui_kmi_worker_referral","bp3mi_dki_applicant","bp3mi_jateng_applicant","bp3mi_jatim_applicant",
         "bp3mi_jabar_applicant","bp3mi_banten_applicant","bp3mi_sumut_applicant",
-        "jettyland_eps_app","zenski_eps_app"
+        "jettyland_eps_app","zenski_eps_app","lpk_seoul_lombok"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
