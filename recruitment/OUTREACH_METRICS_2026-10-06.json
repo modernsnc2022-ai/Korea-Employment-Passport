@@ -1,16 +1,16 @@
 {
-  "version": "5.2.0",
+  "version": "5.3.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 70,
-    "distinctRecipientMailboxes": 59,
+    "sentMessages": 71,
+    "distinctRecipientMailboxes": 60,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T23:20:44+09:00"
+    "lastUpdatedAt": "2026-10-06T23:38:06+09:00"
   },
   "wave2": [
     {
@@ -449,15 +449,14 @@
     {
       "sourceCode": "seosan_foreign_worker_center",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-06"
     }
   ],
   "workerSupportCenterReferralSummary": {
-    "preparedDrafts": 2,
-    "readyNotSent": 1,
-    "sentNow": 2,
+    "preparedDrafts": 3,
+    "sentNow": 3,
     "immediateBounceObserved": 0,
     "confirmedWorkerInterestApplications": 0,
-    "rule": "Seosan may be sent only after same-HEAD routing deployment and the pre-send guard pass. Existing Hwaseong/Yangsan sources must not receive another initial outreach."
+    "rule": "Hwaseong, Yangsan and Seosan initial outreach were each sent once after deployed routing and pre-send guard checks. Do not send another initial outreach; later contact requires an explicit follow-up-ready ledger state."
   }
 }
