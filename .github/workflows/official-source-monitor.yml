@@ -9,6 +9,7 @@ on:
       - 'monitor/sources.json'
       - 'monitor/source_hashes.json'
       - 'monitor/tls_pins.json'
+      - 'monitor/reviewed_source_acceptance.json'
       - 'scripts/check_official_sources.py'
       - 'scripts/write_source_review_status.py'
       - 'scripts/diagnose_source_volatility.py'
@@ -43,7 +44,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.accept_current }}" = "true" ]; then
             EXTRA="--accept-current"
           fi
-          python scripts/check_official_sources.py --init-if-empty $EXTRA
+          python scripts/check_official_sources.py --init-if-empty --review-manifest monitor/reviewed_source_acceptance.json $EXTRA
 
       - name: Read result
         id: result
@@ -52,6 +53,8 @@ jobs:
           echo "failures=$(jq '.failures | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "initialized=$(jq -r '.initialized' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "accepted=$(jq -r '.acceptedCurrent' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "review_manifest_accepted=$(jq -r '.reviewManifestAccepted // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
+          echo "review_manifest_id=$(jq -r '.reviewManifestId // ""' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "acceptance_blocked=$(jq -r '.acceptanceBlocked // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "partial_acceptance=$(jq -r '.partialAcceptance // false' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
           echo "preserved_failures=$(jq '.preservedFailureSourceIds | length' monitor/check_result.json)" >> "$GITHUB_OUTPUT"
@@ -135,6 +138,7 @@ jobs:
           echo "- Changed: ${{ steps.result.outputs.changed }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Fetch failures: ${{ steps.result.outputs.failures }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Accepted reviewed baseline: ${{ steps.result.outputs.accepted }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Reviewed manifest acceptance: ${{ steps.result.outputs.review_manifest_accepted }} (${{ steps.result.outputs.review_manifest_id }})" >> "$GITHUB_STEP_SUMMARY"
           echo "- Partial acceptance: ${{ steps.result.outputs.partial_acceptance }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Failed sources preserved on prior baseline: ${{ steps.result.outputs.preserved_failures }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Acceptance blocked: ${{ steps.result.outputs.acceptance_blocked }}" >> "$GITHUB_STEP_SUMMARY"

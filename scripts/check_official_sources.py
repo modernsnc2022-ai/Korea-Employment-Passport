@@ -43,6 +43,12 @@ REQUEST_HEADERS = {
     "Accept-Language": "ko,en;q=0.8,id;q=0.7",
 }
 REQUEST_TIMEOUT_SECONDS = 12
+NORMALIZATION_REVISION = "kp2mi-current-page-date-v1"
+KP2MI_DYNAMIC_DATE_RE = re.compile(
+    r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
+    r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b",
+    flags=re.I,
+)
 
 def _verified_fetch(url):
     req = urllib.request.Request(url, headers=REQUEST_HEADERS)
@@ -164,22 +170,15 @@ def _fetch_response(url, tls_pins, redirects=3):
             raise
         return _pinned_fetch(url, tls_pins, redirects=redirects)
 
-def fetch_fingerprint(url, tls_pins=None):
-    raw, content_type, charset, final_url, tls_mode = _fetch_response(url, tls_pins or {})
-
-    if content_type == "application/pdf" or final_url.lower().split("?", 1)[0].endswith(".pdf"):
-        return {
-            "sha256": hashlib.sha256(raw).hexdigest(),
-            "contentLength": len(raw),
-            "mode": "binary",
-            "contentType": content_type or "application/pdf",
-            "tlsMode": tls_mode,
-        }
-
-    html = raw.decode(charset, errors="replace")
-    extractor = TextExtractor()
-    extractor.feed(html)
-    normalized = re.sub(r"\s+", " ", " ".join(extractor.parts)).strip()
+def normalize_source_text(text, final_url):
+    normalized = re.sub(r"\s+", " ", text).strip()
+    host = (urlparse(final_url).hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if host == "kp2mi.go.id":
+        # KP2MI renders today's date in the common page header. It is not
+        # notice content and changes every day across unrelated official pages.
+        normalized = KP2MI_DYNAMIC_DATE_RE.sub("<dynamic-page-date>", normalized, count=1)
     # Ignore volatile counters that change on every fetch but do not alter the official rule.
     normalized = re.sub(r"(조회(?:수)?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized)
     normalized = re.sub(r"(Views?|Hits?)\s*[:：]?\s*[0-9][0-9,]*", r"\1 <dynamic-count>", normalized, flags=re.I)
@@ -196,6 +195,24 @@ def fetch_fingerprint(url, tls_pins=None):
         normalized,
         flags=re.I,
     )
+    return normalized
+
+def fetch_fingerprint(url, tls_pins=None):
+    raw, content_type, charset, final_url, tls_mode = _fetch_response(url, tls_pins or {})
+
+    if content_type == "application/pdf" or final_url.lower().split("?", 1)[0].endswith(".pdf"):
+        return {
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "contentLength": len(raw),
+            "mode": "binary",
+            "contentType": content_type or "application/pdf",
+            "tlsMode": tls_mode,
+        }
+
+    html = raw.decode(charset, errors="replace")
+    extractor = TextExtractor()
+    extractor.feed(html)
+    normalized = normalize_source_text(" ".join(extractor.parts), final_url)
     return {
         "sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
         "contentLength": len(normalized),
@@ -211,6 +228,7 @@ def main():
     p.add_argument("--output", default="monitor/check_result.json")
     p.add_argument("--tls-pins", default="monitor/tls_pins.json")
     p.add_argument("--accept-current", action="store_true")
+    p.add_argument("--review-manifest", default=None, help="Optional one-time reviewed acceptance manifest")
     p.add_argument("--init-if-empty", action="store_true")
     p.add_argument("--workers", type=int, default=4, help="Concurrent source fetches across independent hosts (1-8)")
     p.add_argument("--per-host", type=int, default=1, help="Maximum concurrent fetches to the same canonical host (1-3)")
@@ -329,6 +347,36 @@ def main():
                 "reason": reason,
             })
 
+    review_manifest_accepted = False
+    review_manifest_id = None
+    if args.review_manifest:
+        manifest_path = Path(args.review_manifest)
+        if manifest_path.exists() and changed and not failures:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+            expected_ids = set(manifest.get("expectedChangedSourceIds", []))
+            changed_ids = {row.get("id") for row in changed if row.get("id")}
+            expected_hashes = manifest.get("expectedBaselineSha256", {})
+            baseline_matches = (
+                set(expected_hashes) == expected_ids
+                and all(
+                    baseline.get(source_id, {}).get("sha256") == expected_hashes.get(source_id)
+                    for source_id in expected_ids
+                )
+            )
+            manifest_matches = (
+                manifest.get("active") is True
+                and manifest.get("normalizationRevision") == NORMALIZATION_REVISION
+                and manifest.get("safety", {}).get("requireNoFetchFailures") is True
+                and manifest.get("safety", {}).get("requireExactChangedSourceSet") is True
+                and manifest.get("safety", {}).get("requireExactBaselineHashes") is True
+                and manifest.get("safety", {}).get("oneTimeByBaselineHash") is True
+                and changed_ids == expected_ids
+                and baseline_matches
+            )
+            if manifest_matches:
+                review_manifest_accepted = True
+                review_manifest_id = manifest.get("reviewId")
+
     initialized = False
     accepted = False
     partial_acceptance = False
@@ -346,7 +394,7 @@ def main():
         else:
             acceptance_blocked = True
 
-    if args.accept_current:
+    if args.accept_current or review_manifest_accepted:
         # Manual review may approve the sources that were fetched successfully while
         # preserving the last reviewed fingerprint for unrelated temporary failures.
         # Failed sources are never overwritten or treated as reviewed.
@@ -364,6 +412,9 @@ def main():
     result = {
         "initialized": initialized,
         "acceptedCurrent": accepted,
+        "reviewManifestAccepted": review_manifest_accepted,
+        "reviewManifestId": review_manifest_id,
+        "normalizationRevision": NORMALIZATION_REVISION,
         "partialAcceptance": partial_acceptance,
         "acceptanceBlocked": acceptance_blocked,
         "acceptedSourceIds": accepted_source_ids,
