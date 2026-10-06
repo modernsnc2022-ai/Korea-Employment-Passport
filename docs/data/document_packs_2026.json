@@ -116,8 +116,8 @@
         "job_application"
       ],
       "status": "awaiting_sector_notice",
-      "title": "Lamaran online Manufaktur 2026 — 3 detail exact masih menunggu",
-      "message": "Checklist dokumen Manufaktur 2026, sumber acuan field identitas, dan tanda submit final belum terverifikasi. Dua baseline aman Sisko sudah diketahui: dokumen pendukung di-scan (bukan difoto), dan dokumen lamaran yang sudah dikirim diperlakukan sebagai tidak dapat dikoreksi. Baseline ini tidak membuka submit.",
+      "title": "Lamaran online Manufaktur 2026 — 2 detail exact masih menunggu",
+      "message": "Checklist dokumen Manufaktur 2026 dan sumber acuan field identitas/alamat/nomor dokumen belum terverifikasi. Tiga baseline aman Sisko sudah diketahui: dokumen pendukung di-scan, final send diperlakukan sebagai tidak dapat diedit, dan pengiriman harus dikonfirmasi melalui status terkirim/progress di Sisko dengan kanal bantuan resmi bila status tidak jelas. Baseline ini tidak membuka submit.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "items": [],
       "lastChecked": "2026-10-06",
@@ -130,6 +130,11 @@
         {
           "questionId": "job_edit",
           "rule": "Perlakukan pengiriman final sebagai tidak dapat diedit; exact tombol/status submit Manufaktur 2026 belum ditetapkan.",
+          "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact"
+        },
+        {
+          "questionId": "job_submit",
+          "rule": "Upload melalui Menu Pemenuhan Dokumen; setelah final send pastikan Sisko menunjukkan lamaran/dokumen sudah terkirim dan pantau progress. Jika tidak jelas gunakan kanal bantuan resmi; exact tombol Manufaktur 2026 tidak diklaim.",
           "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact"
         }
       ]

@@ -47,8 +47,8 @@
   },
   "job_application": {
     "title": "Pengajuan lamaran kerja online",
-    "action": "Baseline siklus 2026 sudah terverifikasi. Untuk keamanan pengajuan online, dua pengumuman resmi Sisko P2MI juga konsisten: dokumen pendukung harus berupa hasil scan, bukan foto dokumen, dan dokumen lamaran yang sudah dikirim tidak dapat diperbaiki lagi. Tiga detail exact Manufaktur 2026 tetap HOLD: daftar dokumen, sumber acuan field identitas, dan tombol/status submit final.",
-    "warning": "Aturan scan-vs-foto dan tidak-bisa-edit-setelah-kirim adalah baseline aman lintas pengumuman resmi, bukan pengganti pengumuman rinci Manufaktur 2026. Jangan submit sampai tiga detail exact Manufaktur tersebut terverifikasi."
+    "action": "Baseline siklus 2026 sudah terverifikasi. Tiga baseline aman Sisko kini dapat dipandu tanpa broker: dokumen pendukung di-scan, final send diperlakukan sebagai tidak dapat diedit, dan setelah mengirim peserta harus memastikan lamaran/dokumen sudah terkirim lalu memantau perkembangan di Sisko; bila tidak jelas gunakan sendingkorea@gmail.com. Dua detail exact Manufaktur 2026 tetap HOLD: daftar dokumen dan sumber acuan field identitas/alamat/nomor dokumen.",
+    "warning": "Tiga baseline aman Sisko bukan pengganti pengumuman rinci Manufaktur 2026. Jangan submit sampai dua detail exact Manufaktur tersebut terverifikasi."
   },
   "roster": {
     "title": "Roster pencari kerja",

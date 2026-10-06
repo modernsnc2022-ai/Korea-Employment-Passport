@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.12.0",
   "principle": "If an official source determines the answer, answer exactly. If it does not, never guess.",
   "answers": [
     {
@@ -3153,14 +3153,14 @@
       "stages": [
         "job_application"
       ],
-      "question": "Detail Manufaktur 2026 apa yang masih harus menunggu pengumuman resmi?",
-      "answer": "Tiga detail exact masih HOLD: daftar dokumen Manufaktur 2026, sumber data identitas yang harus dijadikan acuan saat mengisi form, dan tombol/status yang membuktikan lamaran benar-benar terkirim.",
-      "writeExactly": "Jangan submit sampai tiga detail exact itu tersedia dari pengumuman Manufaktur 2026 yang sesuai. Aturan aman lintas-pengumuman tentang lampiran hasil scan dan larangan edit setelah pengiriman dapat dipakai sebagai baseline kehati-hatian, tetapi bukan pengganti checklist/tombol submit Manufaktur 2026.",
-      "why": "Pengumuman rinci Perikanan 2026 dan Manufaktur 2025 sama-sama menunjukkan perilaku Sisko untuk scan lampiran dan tidak bisa mengoreksi setelah pengiriman. Namun keduanya belum cukup untuk menetapkan daftar dokumen, sumber field identitas, atau label submit/status khusus Manufaktur 2026.",
+      "question": "Detail exact Manufaktur 2026 apa yang masih harus menunggu pengumuman resmi?",
+      "answer": "Dua detail exact masih HOLD: daftar dokumen Manufaktur 2026 dan sumber data identitas/alamat/nomor dokumen yang harus dijadikan acuan saat mengisi form.",
+      "writeExactly": "Jangan submit sampai dua detail exact itu tersedia dari pengumuman Manufaktur 2026 yang sesuai. Baseline aman Sisko untuk scan, non-editability setelah kirim, dan cara memastikan proses benar-benar sudah terkirim dapat dipakai untuk keselamatan operasional, tetapi bukan pengganti checklist dan aturan field identitas Manufaktur 2026.",
+      "why": "Pengumuman Perikanan 2026 dan Manufaktur 2025 konsisten mengenai scan, final send yang tidak bisa dikoreksi, Menu Pemenuhan Dokumen, status terkirim/progress check, dan kanal bantuan resmi. Namun daftar dokumen dan sumber field identitas/alamat/nomor dokumen Manufaktur 2026 tetap belum dipublikasikan secara rinci.",
       "doNotDo": [
         "Jangan menyalin daftar dokumen Perikanan 2026.",
         "Jangan memakai daftar dokumen Manufaktur 2025 sebagai aturan 2026.",
-        "Jangan menebak field identitas atau tombol/status submit Manufaktur 2026."
+        "Jangan menebak sumber data field identitas/alamat/nomor dokumen Manufaktur 2026."
       ],
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
@@ -6412,6 +6412,27 @@
         "Jangan menekan final send untuk mencoba-coba.",
         "Jangan berasumsi kesalahan bisa diperbaiki setelah kirim.",
         "Jangan menganggap baseline ini membuktikan label tombol/status exact Manufaktur 2026."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+      "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025",
+      "verifiedAt": "2026-10-06",
+      "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+      "scopeType": "route_2026",
+      "blocksSubmission": false
+    },
+    {
+      "id": "job_application_submit_safe_platform_baseline_2026",
+      "stages": [
+        "job_application"
+      ],
+      "question": "Bagaimana memastikan lamaran online benar-benar sudah terkirim tanpa menebak tombol Manufaktur 2026?",
+      "answer": "Jangan anggap upload dokumen saja sebagai selesai. Dokumen persyaratan diunggah melalui Menu Pemenuhan Dokumen, kemudian pengiriman final harus menghasilkan kondisi lamaran/dokumen sudah terkirim. Setelah itu pantau perkembangan di akun Sisko P2MI. Jika tidak ada tanda terkirim/progress yang jelas, jangan menganggap selesai; gunakan kanal resmi sendingkorea@gmail.com.",
+      "writeExactly": "Upload lampiran melalui Menu Pemenuhan Dokumen. Sebelum final send periksa semuanya. Setelah mengirim, pastikan Sisko menunjukkan bahwa lamaran/dokumen sudah terkirim dan pantau perkembangan secara berkala. KEP tidak mengklaim nama tombol UI exact Manufaktur 2026. Jika status pengiriman tidak jelas, hubungi sendingkorea@gmail.com dengan subject LAMARAN ONLINE_NAMA CALON PEKERJA MIGRAN INDONESIA_EPS-TOPIK ID.",
+      "why": "Pengumuman resmi Perikanan 2026 dan Manufaktur 2025 sama-sama menyebut Menu Pemenuhan Dokumen, dokumen yang telah terkirim tidak dapat diperbaiki, dan peserta harus mengecek perkembangan lamaran di Sisko. Keduanya juga memberi kanal email resmi yang sama untuk masalah pengiriman lamaran.",
+      "doNotDo": [
+        "Jangan menganggap file yang baru di-upload otomatis berarti lamaran final sudah terkirim.",
+        "Jangan menebak nama tombol Manufaktur 2026.",
+        "Jangan membayar broker untuk mengecek status; gunakan akun Sisko dan kanal bantuan resmi."
       ],
       "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
       "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025",

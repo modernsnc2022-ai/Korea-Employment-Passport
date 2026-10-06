@@ -424,7 +424,7 @@ for question in broker_questions.get("questions", []):
     if (
         question.get("severity") == "high"
         and not question.get("blocksZeroBrokerReady", False)
-        and question_id not in {"job_scan", "job_edit"}
+        and question_id not in {"job_scan", "job_edit", "job_submit"}
     ):
         bad_question_content.append(f"{question_id}:high_not_blocking")
     has_verified_route = bool(
@@ -462,11 +462,12 @@ if unanswered_catalog_questions:
 # questions are resolved only as conservative cross-notice Sisko platform baselines.
 # Keep both sets explicit so safe behavior guidance cannot be mistaken for a
 # Manufacturing 2026 checklist or submit authorization.
-manufacturing_job_hold_ids = {"job_docs", "job_name", "job_submit"}
-manufacturing_job_safe_ids = {"job_scan", "job_edit"}
+manufacturing_job_hold_ids = {"job_docs", "job_name"}
+manufacturing_job_safe_ids = {"job_scan", "job_edit", "job_submit"}
 safe_answer_ids = {
     "job_scan": "job_application_scan_safe_platform_baseline_2026",
     "job_edit": "job_application_edit_safe_platform_baseline_2026",
+    "job_submit": "job_application_submit_safe_platform_baseline_2026",
 }
 question_by_id = {item.get("id"): item for item in broker_questions.get("questions", [])}
 exact_by_id = {item.get("id"): item for item in exact_answers.get("answers", [])}
