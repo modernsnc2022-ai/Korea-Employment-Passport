@@ -1,5 +1,5 @@
 {
-  "version": "6.3.0",
+  "version": "6.4.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -541,5 +541,12 @@
     "newDistinctRecipients": 2,
     "confirmedBetaInterestApplications": 0,
     "rule": "Both wave 10 applicant-first emails were sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave11ApplicantFirst": [
+    {
+      "sourceCode": "lpk_jochiwon",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ]
 }
