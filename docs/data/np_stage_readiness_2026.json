@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
   "cycle": 2026,
-  "checkedAt": "2026-10-05",
+  "checkedAt": "2026-10-06",
   "officialNoticeIndex": "https://epsnepal.gov.np/notices",
   "interpretationRule": "A prior-cycle notice may document workflow shape, but it cannot populate exact dates, documents, medical rules or submission instructions for the 2026 first-phase cohort unless a current-cohort official notice explicitly supports them.",
   "currentCohort": {
@@ -15,16 +15,24 @@
         "document_verify"
       ],
       "currentSource": "https://epsnepal.gov.np/postdetails/136",
-      "note": "2026 first-phase application notice verified; application window 2026-07-27 through 2026-08-02 is closed."
+      "note": "2026 first-phase application notice verified; application window 2026-07-27 through 2026-08-02 is closed.",
+      "crossSourceSchedule": {
+        "status": "registration_end_date_unresolved",
+        "hrdSource": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+        "hrdRegistrationPeriod": "2026-07-27 through 2026-08-05",
+        "localPrimaryRegistrationPeriod": "2026-07-27 through 2026-08-02",
+        "deadlineExtensionVerified": false,
+        "rule": "Keep the local primary exact deadline until a later Nepal official notice is content-reviewed and proves a change."
+      }
     },
     "epsTopikSchedule": {
-      "status": "awaiting_current_cohort_notice",
+      "status": "verified_hrd_current_row_test_dates_undecided",
       "stageIds": [
         "exam_card",
         "eps_topik"
       ],
-      "currentSource": "https://epsnepal.gov.np/postdetails/136",
-      "note": "The first-phase notice establishes EPS-TOPIK and test format, but KEP has not verified a later current-cohort individual exam schedule/result notice from the official notice index as of 2026-10-05."
+      "currentSource": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "note": "HRD Korea directly lists the 5th Nepal Manufacturing(5부) route as General CBT / Point System, registration 2026-07-27 through 2026-08-05, with test announcement and test period undecided. The registration end-date discrepancy with Nepal's local primary 2026-08-02 notice remains unresolved and is not treated as an extension."
     },
     "epsTopikResult": {
       "status": "awaiting_current_cohort_notice",
@@ -91,7 +99,7 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "current-cohort EPS-TOPIK schedule/result not yet promoted from an official notice",
+      "current 2026 first-phase test announcement/date and result remain undecided or unpromoted; HRD Manufacturing schedule row is verified",
       "current-cohort Skill & Competency notice not yet verified",
       "current-cohort medical/job-application rules not yet verified",
       "current-cohort downstream visa/training/departure exact rules not yet scoped"
@@ -112,5 +120,6 @@
     "workflowShapeVerifiedAt": "2026-10-05",
     "currentCohortPromotionRule": "A stable process-baseline fact may explain workflow shape, but exact current-cohort dates, providers, fees or submission requirements stay blocked until a current official cohort notice is reviewed.",
     "feeRule": "Historical baseline amounts may be retained for lineage only; they must not be displayed as current payable amounts when later official fee notices exist."
-  }
+  },
+  "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json"
 }
