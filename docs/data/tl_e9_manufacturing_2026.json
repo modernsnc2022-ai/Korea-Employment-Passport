@@ -5,9 +5,9 @@
   "visa": "E-9",
   "sector": "manufacturing",
   "cycle": 2026,
-  "recruitmentCycleBasis": "2026-9th-point-system-east-timor-manufacturing-dili-verified",
+  "recruitmentCycleBasis": "2026-9th-point-system-east-timor-manufacturing-dili-baucau-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -23,7 +23,7 @@
   "evidenceNotes": [
     "HRD Korea identifies NDOE as Timor-Leste's EPS sending agency.",
     "The 9th East Timor Manufacturing Dili route is verified directly on HRD Korea: registration 2026-03-09 through 2026-03-18, announcement 2026-06-09, test 2026-06-18 through 2026-07-30, General CBT, Point System.",
-    "A Baucau Manufacturing track is known from schedule discovery, but KEP does not promote its exact dates until the direct official detail artifact is captured.",
+    "The 9th East Timor Manufacturing Baucau route is now verified directly on HRD Korea: registration 2026-03-09 through 2026-03-18, test announcement still undecided, test 2026-08-06 through 2026-08-07, General CBT, Point System.",
     "HRD Korea published four East Timor General CBT skills-candidate entries on 2026-09-22; their public titles do not themselves identify site/sector, so KEP does not auto-link them.",
     "Fishery Dili/Baucau routes are separate-sector evidence and must never populate Manufacturing exact rules."
   ],
@@ -35,9 +35,10 @@
     "noDepartureGuarantee": true,
     "noPrivateBrokerRequiredTarget": true,
     "betaIntakeOpen": false,
-    "baucauDiscoveryMustNotBecomeExact": true,
     "fisheryFactsExcludedFromManufacturing": true,
-    "genericSkillsCandidateEntriesRequireSiteSectorLinkage": true
+    "genericSkillsCandidateEntriesRequireSiteSectorLinkage": true,
+    "baucauExactFactsRequireDirectOfficialSource": true,
+    "baucauDirectOfficialDetailVerified": true
   },
   "stages": [
     {
@@ -288,5 +289,20 @@
   "documentPacksFile": "data/tl_document_packs_2026.json",
   "stageReadinessFile": "data/tl_stage_readiness_2026.json",
   "discoveryEvidenceFile": "data/tl_baucau_discovery_2026.json",
-  "otherSectorEvidenceFile": "data/tl_other_sector_evidence_2026.json"
+  "otherSectorEvidenceFile": "data/tl_other_sector_evidence_2026.json",
+  "verifiedManufacturingSites": {
+    "Dili": {
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=42&examYear=2026&lang=ko&lcnsId=001",
+      "registrationPeriod": "2026-03-09 through 2026-03-18",
+      "testAnnouncementDate": "2026-06-09",
+      "testPeriod": "2026-06-18 through 2026-07-30"
+    },
+    "Baucau": {
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=015&examNot=43&examYear=2026&lang=ko&lcnsId=001",
+      "registrationPeriod": "2026-03-09 through 2026-03-18",
+      "testAnnouncementDate": null,
+      "testAnnouncementStatus": "undecided",
+      "testPeriod": "2026-08-06 through 2026-08-07"
+    }
+  }
 }
