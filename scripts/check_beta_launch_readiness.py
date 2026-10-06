@@ -521,6 +521,14 @@ require(
     "/^[a-z0-9_]{1,64}$/" in landing_js,
     "landing source attribution must accept only a bounded non-identifying source token",
 )
+require(
+    "workerSourceCodes=new Set(['ut_korea_pmi','wongrow_pmi_korea'])" in landing_js
+    and "beta.html?src=" in landing_js
+    and "#worker-panel" in landing_js,
+    "worker-only recruitment sources must route directly to the worker-interest section",
+)
+require('id="worker-panel"' in beta_page,
+        "beta page must expose a stable worker-interest anchor")
 require('id="betaForm"' not in landing_page and 'id="name"' not in landing_page and 'id="contact"' not in landing_page,
         "public landing must not collect identity/contact data in a legacy beta form")
 require("Pendaftaran minat beta sudah dibuka" in beta_page, "beta enrollment page must state that tester-interest intake is open")
