@@ -848,8 +848,12 @@ test('bare OPEN status cannot bypass explicit release approval', async ({ page }
   await page.goto('/beta.html', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#applicationPanel')).toBeVisible();
   await expect(page.locator('#closedPanel')).toBeVisible();
-  await expect(page.locator('#workerValidatorForm')).toBeHidden();
+  // Interest intake is intentionally independent from actual panel access.
+  await expect(page.locator('#workerValidatorForm')).toBeVisible();
+  await expect(page.locator('#workerValidatorForm')).toContainText('Pendaftaran minat panel pekerja E-9 OPEN');
+  // Bare status=open still must not bypass the explicit worker-panel release decision.
   await expect(page.locator('#workerPanelClosed')).toBeVisible();
+  await expect(page.locator('#workerPanelClosed')).toContainText('mengirim minat tidak mengaktifkan akses panel');
 });
 
 test('beta OPEN path remains functional and identity-minimal', async ({ page }) => {
