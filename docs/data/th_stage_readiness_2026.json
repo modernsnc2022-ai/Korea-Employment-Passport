@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "th-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -18,20 +18,46 @@
       "note": "DOE set 2026-08-10 as eligible-list publication date; KEP has not yet promoted an exact current Manufacturing test result from an official result notice."
     },
     "skillCompetency": {
-      "status": "official_country_artifacts_round18_manufacturing_linkage_pending",
+      "status": "verified_round18_manufacturing_candidates_by_examnot",
       "localNoticeSourceUrl": "https://www.thaigov.go.th/th/news/165372",
       "localAnnouncedCandidateListDate": "2026-10-19",
       "hrdCountryIndexSourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "hrdCountryIndexPublicationDate": "2026-10-06",
-      "hrdPublicTitleOrdinals": [
-        "3th",
-        "4th",
-        "5th",
-        "6th",
-        "7th",
-        "8th"
+      "manufacturingRows": [
+        {
+          "examNot": "57",
+          "site": "Bangkok",
+          "publicTitle": "Thailand the 4th Test of proficiency in Korean Announcement"
+        },
+        {
+          "examNot": "64",
+          "site": "Udon Thani",
+          "publicTitle": "Thailand the 7th Test of proficiency in Korean Announcement"
+        }
       ],
-      "note": "Six official Thailand General CBT candidate-index entries are visible on HRD Korea as of 2026-10-06, but their public titles do not identify Round 18, Manufacturing/Agriculture/Construction, or Bangkok/Udon Thani. Do not auto-link them to Round 18 Manufacturing or treat them as overriding DOE's announced 2026-10-19 milestone."
+      "excludedOtherSectorRows": [
+        {
+          "examNot": "56",
+          "sector": "Agriculture/Livestock",
+          "site": "Bangkok"
+        },
+        {
+          "examNot": "58",
+          "sector": "Construction",
+          "site": "Bangkok"
+        },
+        {
+          "examNot": "63",
+          "sector": "Construction",
+          "site": "Udon Thani"
+        },
+        {
+          "examNot": "65",
+          "sector": "Agriculture/Livestock",
+          "site": "Udon Thani"
+        }
+      ],
+      "note": "The two Manufacturing candidate rows are linked by the same official examNot keys as the Round 18 Manufacturing schedules. This does not replace DOE's separate 2026-10-19 local-list/instruction milestone."
     },
     "medicalAndJobApplication": {
       "status": "research_pending_current_round18_notice",
@@ -45,14 +71,14 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "current Round 18 Manufacturing result/skills stage not fully promoted",
+      "current Round 18 final Point System result and DOE local skills instructions remain pending",
       "current post-selection medical/job-application exact rules not mapped",
       "current visa/training/departure exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
     "date": "2026-10-19",
-    "subject": "DOE skills-test eligible-list publication for Point System Round 18",
+    "subject": "DOE Round 18 local skills-list/instructions and later final-result/downstream notices",
     "officialSources": [
       "https://www.doe.go.th/overseas",
       "https://www.thaigov.go.th/th/news/165372",
@@ -64,5 +90,6 @@
       "the notice content is reviewed before dates, locations or candidate status are added",
       "Special EPS-TOPIK data are not reused"
     ]
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
