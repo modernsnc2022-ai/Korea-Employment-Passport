@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "uz-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
@@ -22,8 +22,26 @@
       "note": "Announcement 2026-03-23; test 2026-04-06 through 2026-04-22."
     },
     "skillsAndFinalResult": {
-      "status": "awaiting_verified_current_cycle_result_state",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en"
+      "status": "verified_current_cycle_by_examnot",
+      "scheduleExamNot": "9",
+      "skillsCandidate": {
+        "status": "verified",
+        "title": "Uzbekistan the 1th Test of proficiency in Korean Announcement",
+        "publicationDate": "2026-05-27",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en"
+      },
+      "finalResult": {
+        "status": "verified",
+        "title": "Uzbekistan the 1th POINT_EXAM Announcement",
+        "publicationDate": "2026-08-27",
+        "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en"
+      },
+      "excludedExamNot": [
+        "34",
+        "35",
+        "36"
+      ],
+      "linkageRule": "Only examNot=9 is imported because it matches the direct 9th Manufacturing schedule."
     },
     "fee": {
       "status": "cycle_specific_unverified",
@@ -45,13 +63,12 @@
   "betaReadiness": {
     "status": "blocked",
     "blockers": [
-      "current 9th-round skills/final-result state not verified",
       "cycle-specific fee/document checklist not reconstructed",
       "downstream medical/job-file/visa/training/departure exact rules not mapped"
     ]
   },
   "nextReviewTrigger": {
-    "subject": "Verified current Uzbekistan 9th-round skills/final-result or downstream notice",
+    "subject": "Uzbekistan 9th Manufacturing fee/document checklist and downstream medical/job-file/visa/training/departure notices",
     "officialSources": [
       "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
       "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=001&examNot=9&examYear=2026&lang=ko&lcnsId=001",
@@ -62,5 +79,6 @@
       "cycle-specific facts are not inferred from generic HRD guidance",
       "official contact differences remain source-scoped"
     ]
-  }
+  },
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
