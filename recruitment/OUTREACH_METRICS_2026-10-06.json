@@ -1,5 +1,5 @@
 {
-  "version": "4.9.0",
+  "version": "5.0.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -434,5 +434,23 @@
   "emailWave8": {
     "sentNow": 1,
     "immediateBounceObserved": 0
+  },
+  "workerSupportCenterReferral": [
+    {
+      "sourceCode": "hwaseong_foreign_welfare",
+      "channel": "email",
+      "status": "gmail_draft_prepared_not_sent"
+    },
+    {
+      "sourceCode": "yangsan_foreign_worker_center",
+      "channel": "email",
+      "status": "gmail_draft_prepared_not_sent"
+    }
+  ],
+  "workerSupportCenterReferralSummary": {
+    "preparedDrafts": 2,
+    "sentNow": 0,
+    "confirmedWorkerInterestApplications": 0,
+    "rule": "Run the pre-send guard and confirm deployed worker-panel routing before sending."
   }
 }
