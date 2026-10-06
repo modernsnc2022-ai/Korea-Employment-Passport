@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "tl-e9-manufacturing-2026",
   "verifiedAt": "2026-10-06",
   "principle": "Dili and Baucau Manufacturing schedules are direct-official exact evidence. Fishery routes and generic East Timor skills-candidate entries may not auto-populate Manufacturing skills/final-result rules.",
@@ -85,10 +85,10 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "What official East Timor skills-candidate artifacts exist?",
-      "answer": "Four General CBT entries published 2026-09-22.",
-      "writeExactly": "Do not auto-link the generic 1st–4th entries to Dili/Baucau or Manufacturing/Fishery without exact artifact proof.",
-      "verificationStatus": "official_country_artifacts_linkage_pending",
+      "question": "Which 2026-09-22 East Timor skills-candidate rows belong to Manufacturing?",
+      "answer": "examNot=42 is Dili Manufacturing and examNot=43 is Baucau Manufacturing. examNot=44/45 are Fishery and excluded.",
+      "writeExactly": "Use only examNot 42/43 for Timor-Leste Manufacturing skills candidates; exclude 44/45 Fishery.",
+      "verificationStatus": "verified_official_examnot_site_sector_linkage",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
       "verifiedAt": "2026-10-06"
     },
@@ -105,5 +105,6 @@
       "sourceUrl": "https://eps.hrdkorea.or.kr/",
       "verifiedAt": "2026-10-06"
     }
-  ]
+  ],
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
