@@ -60,6 +60,7 @@ departure_calls = load_json("docs/data/departure_calls_2026.json")
 manufacturing_launch_check = load_json("recruitment/MANUFACTURING_LAUNCH_CHECK.json")
 runtime = (ROOT / "docs/app-runtime.js").read_text(encoding="utf-8")
 landing_page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
+landing_js = (ROOT / "docs/landing.js").read_text(encoding="utf-8")
 app_page = (ROOT / "docs/app.html").read_text(encoding="utf-8")
 beta_page = (ROOT / "docs/beta.html").read_text(encoding="utf-8")
 beta_js = (ROOT / "docs/beta.js").read_text(encoding="utf-8")
@@ -488,6 +489,18 @@ require(
 )
 require('href="beta.html"' in landing_page,
         "public landing must route tester enrollment to beta.html")
+require('src="landing.js"' in landing_page,
+        "public landing must load the recruitment-source attribution helper")
+require(
+    "new URLSearchParams(location.search).get('src')" in landing_js
+    and "a[href=\"beta.html\"]" in landing_js
+    and "beta.html?src=" in landing_js,
+    "landing source attribution must propagate src into every beta enrollment link",
+)
+require(
+    "/^[a-z0-9_]{1,64}$/" in landing_js,
+    "landing source attribution must accept only a bounded non-identifying source token",
+)
 require('id="betaForm"' not in landing_page and 'id="name"' not in landing_page and 'id="contact"' not in landing_page,
         "public landing must not collect identity/contact data in a legacy beta form")
 require("Pendaftaran minat beta sudah dibuka" in beta_page, "beta enrollment page must state that tester-interest intake is open")
