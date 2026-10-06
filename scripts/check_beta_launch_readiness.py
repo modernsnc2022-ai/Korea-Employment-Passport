@@ -538,7 +538,8 @@ require(
 require(
     set(recruitment_sources.get("codes", [])) >= {
         "website","epstopik_indonesia","topikly","apsan_hakwon","owie_epstopik",
-        "lpk_samwon","jendela_asa","lpk_ggum"
+        "lpk_samwon","jendela_asa","lpk_ggum","lpk_hana_korea","lpk_hanaman",
+        "mendunia_korea","korean_first"
     },
     "shared recruitment-source catalog is missing a required controlled code",
 )
