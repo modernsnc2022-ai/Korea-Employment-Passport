@@ -614,19 +614,21 @@ test('tester-interest intake is open while beta access remains on hold', async (
   expect(errors).toEqual([]);
 });
 
-test('worker-only recruitment source goes directly to worker interest intake', async ({ page }) => {
-  await page.goto('/index.html?src=ut_korea_pmi', { waitUntil: 'domcontentloaded' });
-  await page.waitForURL('**/beta.html?src=ut_korea_pmi#worker-panel');
-  await expect(page.locator('#worker-panel')).toBeVisible();
-  await expect(page.locator('#workerValidatorForm')).toBeVisible();
-  await expect(page.locator('#workerPanelClosed')).toBeVisible();
-  await expect(page.locator('#applicationPanel')).toBeVisible();
+test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
+  for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi']) {
+    await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/beta.html?src='+source+'#worker-panel');
+    await expect(page.locator('#worker-panel')).toBeVisible();
+    await expect(page.locator('#workerValidatorForm')).toBeVisible();
+    await expect(page.locator('#workerPanelClosed')).toBeVisible();
+    await expect(page.locator('#applicationPanel')).toBeVisible();
 
-  await page.locator('#workerInKorea').check();
-  await page.locator('#workerUsedG2G').check();
-  await page.locator('#workerFeedbackAgreement').check();
-  const interest = await page.evaluate(() => workerValidatorText());
-  expect(interest).toContain('Recruitment source code: ut_korea_pmi');
+    await page.locator('#workerInKorea').check();
+    await page.locator('#workerUsedG2G').check();
+    await page.locator('#workerFeedbackAgreement').check();
+    const interest = await page.evaluate(() => workerValidatorText());
+    expect(interest).toContain('Recruitment source code: '+source);
+  }
 });
 
 test('unknown recruitment source code falls back to website', async ({ page }) => {
