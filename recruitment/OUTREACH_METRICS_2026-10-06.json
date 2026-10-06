@@ -1,16 +1,16 @@
 {
-  "version": "3.7.0",
+  "version": "3.8.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-06",
-    "sentMessages": 60,
-    "distinctRecipientMailboxes": 50,
+    "sentMessages": 61,
+    "distinctRecipientMailboxes": 51,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-06T21:15:00+09:00"
+    "lastUpdatedAt": "2026-10-06T21:27:00+09:00"
   },
   "wave2": [
     {
@@ -183,7 +183,7 @@
     {
       "sourceCode": "pui_kmi_worker_referral",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-06"
     }
   ],
   "emailAlternativeConversion": {
@@ -195,7 +195,7 @@
     "immediateBounceObserved": 0
   },
   "workerPanelReferralSummary": {
-    "sentNow": 3,
+    "sentNow": 4,
     "immediateBounceObserved": 0
   },
   "contactHygiene": [
