@@ -1,5 +1,5 @@
 {
-  "version": "5.9.0",
+  "version": "6.0.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -479,5 +479,31 @@
     "immediateBounceObserved": 0,
     "confirmedWorkerInterestApplications": 0,
     "rule": "Hwaseong, Yangsan, Seosan, two Busan official channels, Gimpo and Ulsan are sent. Do not send another initial outreach; follow-up requires an explicit follow-up-ready ledger state."
-  }
+  },
+  "acquisitionPriority": {
+    "effectiveDate": "2026-10-07",
+    "primaryCohort": "Indonesia-based active G-to-G Korea / EPS E-9 applicants",
+    "effortAllocation": "80-90% applicant acquisition; 10-20% Korea-based retrospective worker validation",
+    "koreaWorkerExpansion": "paused_new_center_discovery",
+    "koreaWorkerNextAction": "reply-led follow-up only; no new initial support-center expansion",
+    "primaryKpi": "confirmedBetaInterestApplications",
+    "currentConfirmedBetaInterestApplications": 0
+  },
+  "wave9ApplicantFirst": [
+    {
+      "sourceCode": "lpk_kongbuhapsida",
+      "channel": "email",
+      "status": "ready_not_sent"
+    },
+    {
+      "sourceCode": "lpk_coa_bina_cerdas",
+      "channel": "email",
+      "status": "ready_not_sent"
+    },
+    {
+      "sourceCode": "bp3mi_yogya_applicant",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ]
 }

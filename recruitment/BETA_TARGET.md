@@ -25,6 +25,19 @@ Expected feedback participation:
 
 A participant does not have to disclose passport/KTP/ARC numbers or other sensitive identity documents to apply or receive the beta benefit.
 
+## Acquisition priority — applicant first
+
+Recruitment effort is applicant-first. Until the base active-applicant target is reached, new acquisition work should prioritize people currently in Indonesia who are preparing for or actively progressing through the official G-to-G Korea / EPS E-9 process.
+
+Operating allocation:
+- put roughly 80–90% of new recruitment effort into Indonesia-based active applicants and high-intent applicant pools;
+- keep Korea-based E-9 worker recruitment to roughly 10–20% as retrospective validation support;
+- do not keep expanding Korean foreign-resident/support-center outreach merely to increase send volume;
+- existing Korea worker-support outreach may be followed up only when a substantive reply arrives or an explicit follow-up-ready state is recorded;
+- prioritize current EPS-TOPIK learners, passed candidates, roster/job-application candidates, SLC/pre-departure candidates, LPK learner pools, and official BP3MI/KP2MI applicant-information channels.
+
+Conversion success remains a valid beta-interest application, not email volume.
+
 ## Separate validation panel: 20 E-9 workers already in Korea
 
 Target B remains 20 Indonesians already working in Korea on E-9.

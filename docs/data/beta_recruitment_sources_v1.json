@@ -1,5 +1,5 @@
 {
-  "version": "3.3.0",
+  "version": "3.4.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -88,6 +88,9 @@
     "busan_global_indonesian_desk",
     "busan_foreign_resident_center",
     "gimpo_foreign_resident_center",
-    "ulsan_foreign_resident_center"
+    "ulsan_foreign_resident_center",
+    "lpk_kongbuhapsida",
+    "lpk_coa_bina_cerdas",
+    "bp3mi_yogya_applicant"
   ]
 }
