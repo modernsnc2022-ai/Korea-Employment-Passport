@@ -40,3 +40,11 @@ New recruitment is centered on people currently in Indonesia who are preparing f
 - No job, employer-selection, SLC, visa, or departure guarantee.
 - Beta-interest intake may be open while beta access remains HOLD.
 - Run the outreach send guard immediately before every initial email and block on any sent/closed/delivery_failed state.
+
+## Pre-send source-review seal
+
+- Official-source review state: `clean`
+- Accepted review manifest: `2026-10-07-kp2mi-header-and-country-index-review-v5`
+- Source-review state commit: `4bfede3457ba292098a3d34da51110414c774e98`
+- The acceptance was monitoring-baseline only; no route rule, eligibility, fee, schedule, job-application instruction, SLC, visa, or departure guarantee was auto-promoted.
+- Before sending each email, re-check Gmail SENT duplication and current outreach-ledger state for the exact source code.
