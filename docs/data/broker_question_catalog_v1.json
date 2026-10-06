@@ -670,14 +670,26 @@
     {
       "id": "job_name",
       "stageId": "job_application",
-      "question": "Nama/alamat/nomor dokumen mengikuti sumber yang mana?",
+      "question": "Nama/tanggal lahir/jenis kelamin harus mengikuti data yang mana?",
+      "severity": "high",
+      "category": "identity",
+      "answerId": "job_application_identity_core_safe_baseline_2026",
+      "status": "answered",
+      "discoveredBy": "product_design",
+      "blocksZeroBrokerReady": false,
+      "note": "Resolved for identity core using current 2026 Manufacturing/Fisheries evidence: keep name, DOB and gender consistent with verified official identity/EPS-TOPIK registration data. Address/document-number mapping is tracked separately."
+    },
+    {
+      "id": "job_address_doc_number",
+      "stageId": "job_application",
+      "question": "Alamat dan nomor dokumen pada form lamaran Manufaktur 2026 harus mengikuti sumber yang mana?",
       "severity": "high",
       "category": "identity",
       "answerId": "job_application_manufacturing_2026_wait_notice",
       "status": "answered_hold",
-      "discoveredBy": "product_design",
+      "discoveredBy": "official_evidence_split",
       "blocksZeroBrokerReady": true,
-      "note": "Exact Manufacturing 2026 rule remains HOLD until the detailed sector-specific online job-application notice is verified."
+      "note": "Exact source-of-truth mapping for address/document-number fields remains HOLD until the detailed Manufacturing 2026 online job-application guide is verified."
     },
     {
       "id": "job_edit",
