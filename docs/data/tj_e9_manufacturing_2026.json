@@ -7,7 +7,7 @@
   "cycle": 2026,
   "recruitmentCycleBasis": "2026-2nd-point-system-tajikistan-manufacturing-cross-source-verified",
   "goal": "zero-private-broker",
-  "packVersion": "0.1.0",
+  "packVersion": "0.2.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
   "lastVerified": "2026-10-06",
@@ -29,7 +29,7 @@
     "The Tajikistan Ministry of Labour official notice explicitly states EPS-TOPIK employment in the manufacturing sector and registration from 2026-03-02 through 2026-03-05.",
     "HRD Korea's 2nd Tajikistan Point System page has the same registration period and records test announcement 2026-03-20 and test period 2026-03-28 through 2026-03-29, General CBT, Point System.",
     "The official local notice states a 330 somoni exam fee, age 18–39 for the cycle, foreign-passport data, and a 3.5×4.5 cm white-background electronic color photo.",
-    "Current 2nd-cycle skills/final result, post-selection medical/job-file, visa/training/departure exact rules remain HOLD."
+    "HRD Korea's official skills-candidate row published 2026-04-06 and final Point System result row published 2026-05-08 both use examNot=10, matching the direct 2nd Tajikistan Manufacturing schedule. Post-selection medical/job-file, visa/training/departure exact rules remain HOLD."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -40,7 +40,9 @@
     "noPrivateBrokerRequiredTarget": true,
     "betaIntakeOpen": false,
     "manufacturingSectorCrossSourceVerified": true,
-    "postSelectionFactsRequireCurrentArtifact": true
+    "postSelectionFactsRequireCurrentArtifact": true,
+    "resultLinkageRequiresOfficialExamNotMatch": true,
+    "currentManufacturingSkillsAndFinalLinkedByExamNot": true
   },
   "stages": [
     {
@@ -111,18 +113,18 @@
       "title": "Skills Test — Round 2",
       "authority": "HRD Korea / Agency of Overseas Employment",
       "kind": "official_exam",
-      "action": "Point System Round 2 skills structure follows HRD Korea policy, but KEP has not yet verified a current Tajikistan 2nd-cycle skills-candidate schedule or result artifact.",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=en",
-      "supportState": "current_cycle_artifact_pending"
+      "action": "HRD Korea's official skills-candidate row published 2026-04-06 uses examNot=10, exactly matching the 2nd Tajikistan Manufacturing schedule.",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "supportState": "verified_current_candidate_artifact"
     },
     {
       "id": "final_selection",
       "title": "Point-based final selection",
       "authority": "HRD Korea / Agency of Overseas Employment",
       "kind": "official_result",
-      "action": "Do not infer final selection from EPS-TOPIK completion. A current Tajikistan 2nd-cycle final-result artifact must be verified before promotion.",
+      "action": "HRD Korea's official Point System final-result row published 2026-05-08 uses examNot=10, exactly matching the 2nd Tajikistan Manufacturing schedule. Final test selection does not guarantee employer selection.",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
-      "supportState": "current_cycle_result_pending"
+      "supportState": "verified_current_final_result_artifact"
     },
     {
       "id": "psychology_pre_job",
@@ -290,5 +292,6 @@
   "exactAnswerRulesFile": "data/tj_exact_answer_rules_2026.json",
   "documentPacksFile": "data/tj_document_packs_2026.json",
   "registrationNoticeFile": "data/tj_registration_notice_2026.json",
-  "stageReadinessFile": "data/tj_stage_readiness_2026.json"
+  "stageReadinessFile": "data/tj_stage_readiness_2026.json",
+  "examNotLinkageEvidenceFile": "data/hrd_examnot_linkage_2026.json"
 }
