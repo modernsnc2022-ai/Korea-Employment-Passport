@@ -1,11 +1,11 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "routeId": "la-e9-manufacturing-2026",
   "cycle": 2026,
   "checkedAt": "2026-10-06",
   "officialHrdSchedule": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
   "officialSendingAgencyEvidence": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/onlineRecptionDesc.do?lang=ko",
-  "interpretationRule": "HRD Korea currently verifies the 34th registration period and ESC identity. Local detailed 34th-round fee, quota, documents and downstream requirements remain HOLD until a current official Laos notice is reviewed.",
+  "interpretationRule": "HRD Korea currently verifies the 34th registration period and two distinct Manufacturing schedule rows (examNot 101 and 108). Keep those rows separate; do not infer the '(5부)' label. Local detailed 34th-round fee, quota, documents and downstream requirements remain HOLD until a current official Laos notice is reviewed.",
   "currentRound": {
     "sendingAuthority": {
       "status": "verified_hrd_current",
@@ -44,6 +44,31 @@
     "postSelectionVisaDeparture": {
       "status": "research_pending_current_round",
       "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/recp/guide/selectReceptionGuideList.do?lang=en"
+    },
+    "scheduleRows": {
+      "status": "verified_two_official_rows_keep_distinct",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "rows": [
+        {
+          "examNot": "101",
+          "publicTitle": "The 34nd recruitment of the point system in Laos_Manufacturing",
+          "registrationPeriod": "2026-09-07 through 2026-09-11",
+          "testAnnouncement": "undecided",
+          "testPeriod": "undecided",
+          "resultDate": "undecided",
+          "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=101&examYear=2026&lang=ko&lcnsId=001"
+        },
+        {
+          "examNot": "108",
+          "publicTitle": "The 34nd recruitment of the point system in Laos_Manufacturing(5부)",
+          "registrationPeriod": "2026-09-07 through 2026-09-11",
+          "testAnnouncement": "undecided",
+          "testPeriod": "undecided",
+          "resultDate": "undecided",
+          "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=016&examNot=108&examYear=2026&lang=ko&lcnsId=001"
+        }
+      ],
+      "interpretationRule": "Keep examNot 101 and 108 separate. Do not infer the meaning of '(5부)' or use either row to invent test/result dates."
     }
   },
   "priorRound": {
