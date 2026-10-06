@@ -32,7 +32,18 @@ def source_rows(metrics, source):
     return [row for row in walk(metrics) if isinstance(row, dict) and row.get("sourceCode") == source]
 
 
+def duplicate_incident(metrics, source):
+    for row in metrics.get("duplicateIncidents", []):
+        if row.get("sourceCode") == source and str(row.get("action", "")).startswith("do_not_recontact"):
+            return row
+    return None
+
+
 def decide(metrics, source, mode):
+    incident = duplicate_incident(metrics, source)
+    if incident is not None:
+        return False, "duplicate_incident_do_not_recontact"
+
     rows = source_rows(metrics, source)
     statuses = [str(row.get("status", "")) for row in rows if row.get("status")]
 
@@ -76,6 +87,17 @@ def audit(metrics, sources):
                 f"conflicting_initial_state:{source}:{','.join(sorted(statuses))}"
             )
 
+    for incident in metrics.get("duplicateIncidents", []):
+        source = str(incident.get("sourceCode", ""))
+        count = incident.get("count")
+        action = str(incident.get("action", ""))
+        if source not in sources:
+            problems.append(f"unsupported_duplicate_incident_source:{source}")
+        if not isinstance(count, int) or count < 2:
+            problems.append(f"invalid_duplicate_incident_count:{source}:{count}")
+        if not action.startswith("do_not_recontact"):
+            problems.append(f"unsafe_duplicate_incident_action:{source}:{action}")
+
     legacy = metrics.get("legacyEmailReconciliation", [])
     legacy_sources = [str(row.get("sourceCode", "")) for row in legacy]
     if len(legacy_sources) != len(set(legacy_sources)):
@@ -101,6 +123,18 @@ def self_test():
     assert decide(sample, "delta", "initial") == (False, "already_sent_or_closed")
     assert decide(sample, "epsilon", "initial") == (False, "already_sent_or_closed")
     ok, problems = audit(sample, {"alpha","beta","gamma","delta","epsilon"})
+    assert ok and not problems
+    dup = {
+        "a": [{"sourceCode":"alpha","status":"sent_2026-10-06"}],
+        "duplicateIncidents": [{
+            "sourceCode":"alpha",
+            "count":2,
+            "action":"do_not_recontact_until_inbound_reply_or_new_verified_need",
+        }],
+    }
+    assert decide(dup, "alpha", "initial") == (False, "duplicate_incident_do_not_recontact")
+    assert decide(dup, "alpha", "followup") == (False, "duplicate_incident_do_not_recontact")
+    ok, problems = audit(dup, {"alpha"})
     assert ok and not problems
     conflict = {
         "a": [{"sourceCode":"alpha","status":"sent_2026-10-06"}],
