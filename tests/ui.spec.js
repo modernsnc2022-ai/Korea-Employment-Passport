@@ -702,7 +702,8 @@ test('attributed applicant campaigns go directly to the beta intake anchor', asy
 test('generic attribution stays on landing while preserving the beta link', async ({ page }) => {
   await page.goto('/index.html?src=community', { waitUntil: 'domcontentloaded' });
   await expect(page).toHaveURL(/index\.html\?src=community$/);
-  await expect(page.locator('a.button.primary')).toHaveAttribute('href','beta.html?src=community');
+  const attributedPrimaryLinks=page.locator('a.button.primary[href="beta.html?src=community"]');
+  await expect(attributedPrimaryLinks).toHaveCount(2);
 });
 
 test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
