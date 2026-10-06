@@ -4,7 +4,7 @@
   "sector": "manufacturing",
   "cycle": 2026,
   "goal": "zero-private-broker",
-  "packVersion": "0.3.3",
+  "packVersion": "0.3.4",
   "lastVerified": "2026-10-06",
   "stages": [
     {
@@ -127,9 +127,9 @@
       "title": "Online job application",
       "authority": "Sisko P2MI",
       "kind": "official_action",
-      "action": "Current-cycle baseline is verified: for 2026 graduates, MCU I uses a KP2MI-listed health facility and the psychology examination uses the HIMPSI route, with results entered into Sisko P2MI by the provider/HIMPSI. Keep the Manufacturing-specific document, scan, identity-entry, edit and submit rules on HOLD until KP2MI publishes the detailed Manufacturing online job-application notice.",
+      "action": "Current-cycle pre-job baseline is verified. For online application safety, official 2026 Fisheries and 2025 Manufacturing Sisko notices also agree that supporting documents are scanned rather than photographed and that sent application documents cannot be corrected. Exact Manufacturing 2026 document list, identity-field source of truth, and final submit/status label remain HOLD.",
       "brokerReplacement": "held_official_notice",
-      "warning": "The 2026 recruitment notice verifies the MCU I + psychology/Sisko P2MI baseline, but it does not unlock the exact Manufacturing job-application checklist or form-entry rules. The 19 August 2026 detailed online job-application notice is Fisheries-only and must not be reused.",
+      "warning": "The scan-vs-photo and post-send non-editability rules are conservative cross-notice Sisko baselines, not a substitute for the missing detailed Manufacturing 2026 notice. Do not submit until the exact Manufacturing document list, identity-entry rule and final submit/status marker are verified.",
       "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionUrl": "https://kp2mi.go.id/gtog-korea/info",
       "officialActionLabel": "Check latest Manufacturing notice"
@@ -288,21 +288,37 @@
     }
   ],
   "jobApplicationBaselineEvidence": {
-    "status": "verified_current_cycle_process_baseline_details_held",
+    "status": "verified_current_cycle_plus_safe_platform_baselines_exact_details_held",
     "verifiedAt": "2026-10-06",
     "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
     "facts": [
       "For 2026 graduates, the official 2026 Manufacturing/Fisheries recruitment notice says MCU I must be completed at a KP2MI-listed health facility at the online job-application stage.",
       "The same notice says the psychology examination is completed through a HIMPSI psychologist under the official route.",
       "Medical and psychology results are entered directly into Sisko P2MI by the health facility and HIMPSI.",
-      "This baseline does not define the Manufacturing-specific job-application document list, scan rules, identity-entry rules, editing rules or final submission sequence."
+      "Two official Sisko P2MI job-application notices (Fisheries 2026 and Manufacturing 2025) independently state that supporting documents are scanned rather than photographed.",
+      "Those two official notices also independently state that application documents already sent cannot be corrected.",
+      "The remaining exact Manufacturing 2026 gaps are the sector-specific document list, identity-field source of truth, and final submit/status marker."
     ],
     "heldExactQuestions": [
       "job_docs",
-      "job_scan",
       "job_name",
-      "job_edit",
       "job_submit"
+    ],
+    "safePlatformBaselines": [
+      {
+        "questionId": "job_scan",
+        "rule": "Supporting documents must be scanned, not photographed; keep scans clear and correctly oriented. This does not define the Manufacturing 2026 exact checklist/file specs.",
+        "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+        "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+        "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
+      },
+      {
+        "questionId": "job_edit",
+        "rule": "Treat final send as non-editable: verify all data and attachments before sending. This does not define the Manufacturing 2026 final button/status label.",
+        "verificationStatus": "verified_cross_notice_platform_baseline_not_manufacturing_exact",
+        "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+        "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
+      }
     ]
   }
 }
