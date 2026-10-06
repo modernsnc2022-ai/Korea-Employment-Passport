@@ -74,6 +74,16 @@ for source_id, host in expected_hosts.items():
     require(parsed.scheme == "https" and parsed.hostname == host, f"{source_id} must remain on reviewed official HTTPS host {host}")
 
 review = gate.get("currentReview", {})
+reviewed_source_ids = set(review.get("reviewedSourceIds", []))
+require(reviewed_source_ids == expected_ids, "Myanmar current review must cover all four official watch targets")
+findings = review.get("sourceFindings", [])
+require({item.get("sourceId") for item in findings} == expected_ids, "Myanmar current review must record one finding for each watch target")
+require(all(item.get("qualifiesForPromotion") is False for item in findings), "Reviewed Myanmar watch targets must remain non-promotable unless a qualifying artifact is explicitly recorded")
+decision = review.get("baselineReviewDecision", {})
+require(decision.get("currentSourceVersionsReviewed") is True, "Myanmar source baseline decision must record explicit source review")
+require(decision.get("baselineAcceptanceAllowed") is True, "Reviewed Myanmar source versions must explicitly allow fingerprint baseline acceptance")
+require(decision.get("routePromotionAllowed") is False, "Myanmar baseline acceptance must not imply route promotion")
+require("does not verify" in str(decision.get("rule", "")).lower(), "Myanmar baseline decision must explicitly distinguish source review from route verification")
 qualifying = review.get("qualifyingArtifacts", [])
 require(set(review.get("observedCurrentOfficialSectors", [])) == {"Agriculture·Livestock", "Construction", "Forestry"},
         "Myanmar current observed official sectors must remain the three verified non-Manufacturing sectors")
