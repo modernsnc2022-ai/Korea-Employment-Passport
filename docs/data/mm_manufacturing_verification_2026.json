@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "country": "MM",
   "countryName": "Myanmar",
   "nativeCountryName": "မြန်မာ",
@@ -210,5 +210,33 @@
       "mm_mol_dol_index"
     ],
     "supplementalDiscoveryRule": "The Department of Labour index is monitored to catch new EPS notices that may appear outside the dedicated EPS opportunity page. A change is a discovery trigger only and never satisfies the Manufacturing promotion gate by itself."
+  },
+  "latestPublicSurfaceRecheck": {
+    "reviewedAt": "2026-10-06T12:07:00+09:00",
+    "scope": "Direct public-page recheck; not a substitute for the monitored full-source review.",
+    "observations": [
+      {
+        "source": "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+        "finding": "The official Myanmar Ministry of Labour EPS page visibly contains a Manufacturing pass-list link, but that visible entry does not itself identify a 2026 cycle/date. The currently visible 11th EPS-TOPIK notice is explicitly Agriculture/Construction, so the Manufacturing link cannot satisfy the current-cycle promotion gate.",
+        "promotionEffect": "none"
+      },
+      {
+        "source": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+        "finding": "The current public schedule surface reviewed on 2026-10-06 did not expose a Myanmar 2026 Manufacturing-labelled row on the visible current page. Existing dossier evidence continues to identify current Myanmar Agriculture/Livestock, Construction and Forestry rows.",
+        "promotionEffect": "none"
+      },
+      {
+        "source": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+        "finding": "The visible current first page of the skills-candidate list did not expose a Myanmar Manufacturing-labelled entry. This surface check is not treated as an exhaustive historical pagination search.",
+        "promotionEffect": "none"
+      },
+      {
+        "source": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+        "finding": "The visible current first page of the final pass list did not expose a Myanmar Manufacturing-labelled entry. This surface check is not treated as an exhaustive historical pagination search.",
+        "promotionEffect": "none"
+      }
+    ],
+    "conclusion": "No new direct official 2026 Manufacturing-labelled actionable artifact was captured. Keep routeId null and promotion blocked.",
+    "promotionAllowed": false
   }
 }
