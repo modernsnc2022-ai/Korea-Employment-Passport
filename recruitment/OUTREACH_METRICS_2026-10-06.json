@@ -1,5 +1,5 @@
 {
-  "version": "5.7.0",
+  "version": "5.8.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -465,14 +465,19 @@
       "sourceCode": "gimpo_foreign_resident_center",
       "channel": "email",
       "status": "sent_2026-10-06"
+    },
+    {
+      "sourceCode": "ulsan_foreign_resident_center",
+      "channel": "email",
+      "status": "gmail_draft_prepared_not_sent"
     }
   ],
   "workerSupportCenterReferralSummary": {
-    "preparedDrafts": 2,
-    "readyNotSent": 0,
+    "preparedDrafts": 3,
+    "readyNotSent": 1,
     "sentNow": 6,
     "immediateBounceObserved": 0,
     "confirmedWorkerInterestApplications": 0,
-    "rule": "Hwaseong, Yangsan, Seosan, two Busan official channels and Gimpo are sent. Do not send another initial outreach; follow-up requires an explicit follow-up-ready ledger state."
+    "rule": "Six worker-support channels are sent. Ulsan draft is prepared but must pass same-HEAD deployment and pre-send guard before sending."
   }
 }
