@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -85,15 +85,18 @@
     ],
     "publicBetaHoldPolicy": {
       "safeOfficialEvidenceHoldsMayRemain": true,
-      "rule": "Two current-cycle exact questions may remain answered_hold during beta because the product explicitly refuses to guess and routes the user safely. Three questions now have conservative cross-notice Sisko platform baselines. The two exact HOLDs block final Broker Replacement Rate 100% PASS, not beta activation by themselves.",
+      "rule": "One current-cycle exact question may remain answered_hold during beta because the product explicitly refuses to guess and routes the user safely. Four questions now have conservative official Sisko/identity safety baselines. The one exact HOLD blocks final Broker Replacement Rate 100% PASS, not beta activation by itself.",
       "currentHeldQuestions": [
-        "job_docs",
-        "job_name"
+        "job_docs"
       ],
       "safePlatformBaselines": [
         {
           "questionId": "job_scan",
           "meaning": "Supporting-document scan-vs-photo behavior is safe to guide; exact Manufacturing 2026 checklist/file specs remain unresolved."
+        },
+        {
+          "questionId": "job_name",
+          "meaning": "Safe identity baseline: preserve registered identity exactly, copy document numbers from the matching official document, and route ambiguous address/document-source fields to official help; no Manufacturing 2026 field-by-field mapping is claimed."
         },
         {
           "questionId": "job_edit",
