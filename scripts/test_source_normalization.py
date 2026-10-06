@@ -36,7 +36,29 @@ def main():
         "https://example.gov/notice",
     )
     require(non_kp2mi.startswith("Tuesday, 6 October 2026"),"date normalization must be scoped to KP2MI")
-    require(NORMALIZATION_REVISION=="kp2mi-current-page-date-v1","normalization revision drift")
+        mm_a=normalize_source_text(
+        "Users Today : 67 Views This Month : 5215 Your IP Address : 158.23.190.67 EPS Manufacturing notice",
+        "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+    )
+    mm_b=normalize_source_text(
+        "Users Today : 72 Views This Month : 5220 Your IP Address : 203.0.113.10 EPS Manufacturing notice",
+        "https://www.mol.gov.mm/mol-department-of-labour/eps-opportunity/",
+    )
+    require(mm_a==mm_b,"Myanmar visitor/IP telemetry must normalize identically")
+    require("EPS Manufacturing notice" in mm_a,"Myanmar notice text must be preserved")
+
+    vn_a=normalize_source_text(
+        "THỐNG KÊ Trực tuyến: 380 Hôm nay: 28,238 Tháng này: 10,584,997 Tổng số: 121,573,863 EPS notice",
+        "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+    )
+    vn_b=normalize_source_text(
+        "THỐNG KÊ Trực tuyến: 384 Hôm nay: 28,242 Tháng này: 10,585,001 Tổng số: 121,573,867 EPS notice",
+        "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+    )
+    require(vn_a==vn_b,"Vietnam live visitor statistics must normalize identically")
+    require("EPS notice" in vn_a,"Vietnam notice text must be preserved")
+
+    require(NORMALIZATION_REVISION=="cross-site-volatile-counter-v2","normalization revision drift")
     print("SOURCE_NORMALIZATION_SELFTEST_PASS")
 
 if __name__=="__main__":
