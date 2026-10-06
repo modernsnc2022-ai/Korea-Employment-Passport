@@ -1,5 +1,5 @@
 {
-  "version": "2.8.0",
+  "version": "2.9.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -81,6 +81,8 @@
     "bp3mi_sumut_applicant",
     "jettyland_eps_app",
     "zenski_eps_app",
-    "lpk_seoul_lombok"
+    "lpk_seoul_lombok",
+    "hwaseong_foreign_welfare",
+    "yangsan_foreign_worker_center"
   ]
 }
