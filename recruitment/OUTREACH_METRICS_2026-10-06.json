@@ -1,5 +1,5 @@
 {
-  "version": "5.3.0",
+  "version": "5.4.0",
   "snapshotDate": "2026-10-06",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -450,14 +450,24 @@
       "sourceCode": "seosan_foreign_worker_center",
       "channel": "email",
       "status": "sent_2026-10-06"
+    },
+    {
+      "sourceCode": "busan_global_indonesian_desk",
+      "channel": "email",
+      "status": "ready_not_sent"
+    },
+    {
+      "sourceCode": "busan_foreign_resident_center",
+      "channel": "email",
+      "status": "ready_not_sent"
     }
   ],
   "workerSupportCenterReferralSummary": {
     "preparedDrafts": 2,
-    "readyNotSent": 0,
+    "readyNotSent": 2,
     "sentNow": 3,
     "immediateBounceObserved": 0,
     "confirmedWorkerInterestApplications": 0,
-    "rule": "Hwaseong, Yangsan and Seosan initial outreach are sent. Do not send another initial outreach; follow-up requires an explicit follow-up-ready ledger state."
+    "rule": "Hwaseong, Yangsan and Seosan are sent. Busan official channels are staged but must pass same-HEAD deploy and pre-send guard before sending."
   }
 }
