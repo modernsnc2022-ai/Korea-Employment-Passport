@@ -6,7 +6,7 @@ Snapshot: 2026-10-06
 - Channel: email
 - Public mailbox: `gimpofc@naver.com`
 - Attribution link: `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=gimpo_foreign_resident_center`
-- Status: ready_not_sent
+- Status: sent_2026-10-06
 
 ## Fit
 - Gimpo officially operates foreign-resident communities that include an Indonesian community.
@@ -28,3 +28,8 @@ Snapshot: 2026-10-06
 - KEP is independent, not a government service or placement agency.
 - Never promise employment, employer selection, SLC, visa or departure.
 - Never store applicant/worker PII in GitHub.
+
+## Send result
+- Initial email sent once on 2026-10-06 after same-HEAD gates, deployed routing, duplicate-mailbox recheck, and the pre-send guard passed.
+- Immediate bounce check: none observed.
+- Do not send another initial outreach. Any later contact requires an explicit follow-up-ready ledger state.
