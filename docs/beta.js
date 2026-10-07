@@ -103,6 +103,54 @@ function gmailComposeUrl(to,subject,body){
   return 'https://mail.google.com/mail/?'+params.toString();
 }
 
+function directIntakeEndpoint(){
+  return String(betaProgram?.application?.directIntake?.endpoint||'').trim();
+}
+
+function directIntakeEnabled(){
+  const endpoint=directIntakeEndpoint();
+  if(!endpoint)return false;
+  try{return new URL(endpoint).protocol==='https:'}catch{return false}
+}
+
+function applicantFormComplete(){
+  return Boolean($('activeProcess').checked&&$('feedbackAgreement').checked&&$('applicantStage').value&&$('applicantCycle').value);
+}
+
+function validContactEmail(value){
+  const email=String(value||'').trim();
+  return email.length<=254&&/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+}
+
+function directApplicantPayload(){
+  return {
+    kind:'active_applicant',
+    contactEmail:String($('applicantContactEmail').value||'').trim(),
+    stageId:$('applicantStage').value,
+    stageTitle:selectedApplicantStageTitle(),
+    cycle:$('applicantCycle').value,
+    sourceCode:recruitmentSourceCode(),
+    activeProcess:$('activeProcess').checked===true,
+    feedbackAgreement:$('feedbackAgreement').checked===true,
+    website:String($('intakeWebsite').value||'')
+  };
+}
+
+async function submitDirectApplicant(){
+  const response=await fetch(directIntakeEndpoint(),{
+    method:'POST',
+    mode:'cors',
+    credentials:'omit',
+    cache:'no-store',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(directApplicantPayload())
+  });
+  let payload={};
+  try{payload=await response.json()}catch{}
+  if(!response.ok)throw new Error(String(payload?.error||'HTTP '+response.status));
+  return payload;
+}
+
 function applicationText(){
   const stage=$('applicantStage').value;
   const stageTitle=selectedApplicantStageTitle();
@@ -207,6 +255,13 @@ function renderProgram(program){
   const shareSource=recruitmentSourceCode();
   $('communitySharePanel').hidden=shareSource==='website';
   $('communityShareSource').textContent=shareSource;
+  const direct=directIntakeEnabled();
+  $('directIntakeFields').hidden=!direct;
+  $('applicantContactEmail').required=direct;
+  $('betaApplicationSubmitBtn').textContent=direct?'Kirim pendaftaran':'Kirim lewat aplikasi email';
+  $('applicationSendHelp').textContent=direct
+    ?'Pendaftaran dikirim langsung di halaman ini. Jika pengiriman langsung gagal, gunakan “Buka Gmail” atau “Salin teks pendaftaran” sebagai cadangan.'
+    :'Jika tombol email tidak membuka aplikasi, gunakan “Buka Gmail”. Jika Gmail juga tidak tersedia, salin teks lalu kirim manual ke alamat yang ditampilkan setelah menyalin.';
   const pill=$('betaStatusPill');
   pill.textContent=accessOpen
     ?'AKSES BETA OPEN'
@@ -216,14 +271,36 @@ function renderProgram(program){
   pill.className='status-pill '+(intakeOpen||accessOpen?'open':'hold');
 }
 
-$('betaApplicationForm').addEventListener('submit',(event)=>{
+$('betaApplicationForm').addEventListener('submit',async(event)=>{
   event.preventDefault();
   const out=$('applicationResult');
   if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
-  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+  if(!applicantFormComplete()){
     out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
+  }
+  if(directIntakeEnabled()){
+    if(!validContactEmail($('applicantContactEmail').value)){
+      out.hidden=false;out.className='result warn';out.textContent='Masukkan alamat email yang valid untuk menerima keputusan beta.';return;
+    }
+    const button=$('betaApplicationSubmitBtn');
+    button.disabled=true;
+    const previous=button.textContent;
+    button.textContent='Mengirim…';
+    try{
+      const result=await submitDirectApplicant();
+      out.hidden=false;out.className='result';
+      out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+String(result.submissionId||'diterima')+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
+      $('betaApplicationForm').reset();
+    }catch{
+      out.hidden=false;out.className='result warn';
+      out.textContent='Pengiriman langsung belum berhasil. Data belum dianggap terkirim. Gunakan “Buka Gmail” atau “Salin teks pendaftaran” sebagai cadangan.';
+    }finally{
+      button.disabled=false;
+      button.textContent=previous;
+    }
+    return;
   }
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
@@ -236,7 +313,7 @@ $('gmailApplicationBtn').addEventListener('click',()=>{
   if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
-  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+  if(!applicantFormComplete()){
     out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
   }
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
@@ -347,7 +424,7 @@ $('copyApplicationBtn').addEventListener('click',async()=>{
   if(!betaProgram||betaProgram.application?.intakeStatus!=='open'){
     out.hidden=false;out.className='result warn';out.textContent='Pendaftaran minat beta belum dibuka.';return;
   }
-  if(!$('activeProcess').checked||!$('feedbackAgreement').checked||!$('applicantStage').value||!$('applicantCycle').value){
+  if(!applicantFormComplete()){
     out.hidden=false;out.className='result warn';out.textContent='Lengkapi tahap, tahun proses EPS, dan kedua persetujuan terlebih dahulu.';return;
   }
   const ok=await copyText(applicationText());
