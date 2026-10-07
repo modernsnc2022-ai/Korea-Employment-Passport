@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "1.11.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -658,9 +658,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://kursusbahasakoreaonline.com/",
-      "note": "Current public site describes online/offline EPS-TOPIK classes and uses WA 081298483482. One initial to the organization only."
+      "note": "Initial admin-permission request manually sent to the public organization WhatsApp +62 812-9848-3482 on 2026-10-07. Do not duplicate through affiliate/member or sibling channels."
     }
   ]
 }
