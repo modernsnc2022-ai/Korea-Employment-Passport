@@ -1063,9 +1063,9 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_send_pending",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Current official website and public business listing confirm Korea-employment preparation and the same public contact number. Both connected Gmail accounts plus origin/main name/domain/phone checks found no prior Suryatama outreach before this pending record."
+      "note": "Initial admin-permission request sent to public WhatsApp +62 819-1456-5363 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
