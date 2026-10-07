@@ -1,5 +1,5 @@
 {
-  "version": "3.23.0",
+  "version": "3.25.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -122,6 +122,8 @@
     "hannihon_kediri_eps",
     "lpk_jung_sarang_eps",
     "mendunia_korea_batam",
-    "lpk_hanaro_ngawi"
+    "lpk_hanaro_ngawi",
+    "mirai_college_korea",
+    "lpk_lintang_ndaru_tegal"
   ]
 }
