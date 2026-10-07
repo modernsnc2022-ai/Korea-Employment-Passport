@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0",
+  "version": "1.48.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -999,9 +999,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Current UBT site offers student enrollment and tokenized simulation test; Korea flow continues through departure."
+      "note": "Initial admin-permission request sent to public contact +62 812-2602-671 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
