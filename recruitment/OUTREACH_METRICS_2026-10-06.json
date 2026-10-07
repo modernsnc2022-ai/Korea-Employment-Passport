@@ -1,16 +1,16 @@
 {
-  "version": "7.4.0",
+  "version": "7.6.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 86,
-    "distinctRecipientMailboxes": 75,
+    "sentMessages": 87,
+    "distinctRecipientMailboxes": 76,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T09:48:36+09:00"
+    "lastUpdatedAt": "2026-10-07T09:54:57+09:00"
   },
   "wave2": [
     {
@@ -575,6 +575,14 @@
       "observedDate": "2026-10-07",
       "status": "same_operator_already_contacted",
       "action": "do_not_send_new_initial_outreach; treat future Lee UBT discovery as existing ubt_eps_topik_app"
+    },
+    {
+      "canonicalSourceCode": "jeongsang_eps_app",
+      "observedMailbox": "karyainibudhi@gmail.com",
+      "observedName": "Karya IniBudhi / UBT EPS TOPIK 2026 - JEONGSANG / BELAJAR EPS TOPIK (UBT)",
+      "observedDate": "2026-10-07",
+      "status": "same_operator_already_contacted",
+      "action": "do_not_send_new_initial_outreach for sibling Karya IniBudhi EPS-TOPIK apps; treat as existing jeongsang_eps_app operator"
     }
   ],
   "emailWave12ApplicantFirst": {
@@ -646,7 +654,16 @@
     {
       "sourceCode": "eps_topik_bank_id",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T09:54:57+09:00",
+      "gmailMessageId": "1a113db3b2f8ed1a"
     }
-  ]
+  ],
+  "emailWave16ApplicantFirst": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 1,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "EPS-TOPIK BANK Indonesia outreach was sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
+  }
 }
