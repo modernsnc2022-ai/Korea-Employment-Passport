@@ -1,5 +1,5 @@
 {
-  "version": "1.14.0",
+  "version": "1.15.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -705,9 +705,9 @@
       "kepFit": "high",
       "expectedReach": "medium, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://mayantara.sch.id/kursus/bahasa-korea/",
-      "note": "Official site explicitly offers an EPS-TOPIK preparation package and lists the same public WhatsApp on the course page/footer."
+      "note": "Initial admin-permission request manually sent to public WhatsApp +62 813-3344-4179 on 2026-10-07. Do not duplicate through sibling channels."
     }
   ]
 }
