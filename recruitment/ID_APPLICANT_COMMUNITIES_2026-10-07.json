@@ -1,5 +1,5 @@
 {
-  "version": "1.38.0",
+  "version": "1.39.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -937,9 +937,23 @@
         "departure"
       ],
       "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
+      "priority": "A",
+      "note": "Initial admin-permission request sent to public WhatsApp +62 821-1937-6474 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_bima_mandiri_cirebon",
+      "name": "LPK BIMA MANDIRI — Cirebon",
+      "platform": "LPK / WhatsApp + business listing",
+      "adminContact": "WhatsApp/phone +62 881-0236-87981",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korean language preparation"
+      ],
+      "applicantDensity": "high",
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "A",
-      "note": "Current official site documents the full Korea flow through visa and departure and posts 2026 Korea departures."
+      "note": "Current business listing active; public training materials show EPS-TOPIK focus. Use current phone only."
     }
   ]
 }
