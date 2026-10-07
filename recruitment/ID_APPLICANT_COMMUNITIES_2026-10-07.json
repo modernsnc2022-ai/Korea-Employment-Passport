@@ -1,5 +1,5 @@
 {
-  "version": "1.21.0",
+  "version": "1.22.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -784,6 +784,32 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://lpkjungsarang.vercel.app/",
       "note": "Initial admin-permission request sent to the verified public WhatsApp +62 858-7040-3062 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "mendunia_korea_batam",
+      "platform": "Training provider / WhatsApp + web",
+      "name": "Mendunia Korea — Batam",
+      "url": "https://batammendunia.id/mendunia-korea/",
+      "access": "public organization contact",
+      "audienceSize": "Exact current enrolment not public.",
+      "recentActivity": "Official site crawled October 2026 and exposes active consultation contact.",
+      "applicantStages": [
+        "Korean language prep",
+        "EPS-TOPIK preparation",
+        "G-to-G Korea preparation",
+        "sending data awareness",
+        "departure paperwork guidance"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 812-7496-2266",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://batammendunia.id/mendunia-korea/",
+      "note": "Official site says Mendunia Korea accompanies participants from study through exam registration, with paperwork assistance when needed; class discussion uses WhatsApp groups."
     }
   ]
 }
