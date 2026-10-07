@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.10.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -635,9 +635,9 @@
       "kepFit": "very high",
       "expectedReach": "medium, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://lpkbonghwa.wordpress.com/",
-      "note": "Public site explicitly describes support for CPMI Korea through EPS-TOPIK/Skill Test and exposes Facebook, Instagram and TikTok, but use WhatsApp for the single initial."
+      "note": "Initial admin-permission request manually sent to the public organization WhatsApp +62 877-6552-5354 on 2026-10-07. Do not duplicate through Facebook, Instagram, TikTok, or other sibling channels."
     },
     {
       "id": "lpk_ansan_cirebon",
