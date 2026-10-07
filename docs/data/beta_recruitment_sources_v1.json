@@ -1,5 +1,5 @@
 {
-  "version": "3.38.0",
+  "version": "3.39.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -135,6 +135,7 @@
     "lpks_bhs_korea_cilacap",
     "lpk_seoul_cilacap",
     "lpk_mugunghwa_cilacap",
-    "lpk_ilmu_tangerang"
+    "lpk_ilmu_tangerang",
+    "lpk_acc_indramayu"
   ]
 }
