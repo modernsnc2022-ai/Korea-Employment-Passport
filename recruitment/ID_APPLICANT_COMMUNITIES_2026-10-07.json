@@ -1,5 +1,5 @@
 {
-  "version": "1.37.0",
+  "version": "1.38.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -918,9 +918,28 @@
         "Korea job preparation"
       ],
       "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
+      "priority": "A",
+      "note": "Initial admin-permission request sent to public WhatsApp +62 878-8655-6000 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_bhinneka_temanggung",
+      "name": "LPK Bhinneka Temanggung",
+      "platform": "LPK / WhatsApp + web",
+      "url": "https://lpkbhinneka.com/",
+      "adminContact": "WhatsApp +62 821-1937-6474",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Skill Test preparation",
+        "contract waiting",
+        "Prelim/OPP",
+        "visa",
+        "departure"
+      ],
+      "applicantDensity": "very high",
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "A",
-      "note": "Official site says 1000+ alumni and has dedicated Korea instructors."
+      "note": "Current official site documents the full Korea flow through visa and departure and posts 2026 Korea departures."
     }
   ]
 }
