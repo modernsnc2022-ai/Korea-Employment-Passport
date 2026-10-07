@@ -210,3 +210,20 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=hana_education
 
 Terima kasih, Admin.
 
+## A13 — HanNihon Language Center (Kediri)
+Source: `hannihon_kediri_eps`
+Channel: WhatsApp `+62 813-3336-3636`
+
+Halo Admin HanNihon Language Center. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi G-to-G Korea / EPS E-9 secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat HanNihon mendampingi calon pekerja Korea melalui persiapan EPS-TOPIK dan program G-to-G Korea. Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta, nomor telepon, email, paspor/KTP, atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=hannihon_kediri_eps
+
+Terima kasih, Admin.
+
