@@ -1,5 +1,5 @@
 {
-  "version": "1.35.0",
+  "version": "1.36.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -903,9 +903,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Operator is an EPS-TOPIK practitioner/instructor. Public site states educational reach of 10,000+ learners."
+      "note": "Initial collaboration/share request sent to public WhatsApp +62 813-1523-9959 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
