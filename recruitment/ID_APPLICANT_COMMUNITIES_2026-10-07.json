@@ -1,5 +1,5 @@
 {
-  "version": "1.36.0",
+  "version": "1.37.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -906,6 +906,21 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial collaboration/share request sent to public WhatsApp +62 813-1523-9959 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_yamaguchi_eps",
+      "name": "LPK Yamaguchi Indonesia — Brebes/Purwokerto",
+      "platform": "LPK / WhatsApp + web",
+      "url": "https://lpkyamaguchi.id/",
+      "adminContact": "WhatsApp +62 878-8655-6000",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea job preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Official site says 1000+ alumni and has dedicated Korea instructors."
     }
   ]
 }
