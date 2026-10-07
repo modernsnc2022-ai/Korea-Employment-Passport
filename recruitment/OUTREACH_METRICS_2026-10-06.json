@@ -1,5 +1,5 @@
 {
-  "version": "8.4.0",
+  "version": "8.5.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -795,18 +795,24 @@
       "operator": "Kekorea / EPSTOPIK.ID",
       "channel": "whatsapp",
       "contact": "+62 898-1913-655",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07",
       "priority": "A1",
-      "rule": "One initial outreach across the Kekorea/EPSTOPIK.ID ecosystem only. Do not contact the Kekorea brand separately."
+      "rule": "Initial outreach sent once across the Kekorea/EPSTOPIK.ID ecosystem. Do not send another initial to either brand; follow-up requires explicit follow-up-ready state.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 898-1913-655",
+      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07."
     },
     {
       "sourceCode": "giwonhae_eps",
       "operator": "GiwonHae EPS-Topik",
       "channel": "whatsapp",
       "contact": "+62 819-123-123-52",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07",
       "priority": "A2",
-      "rule": "Use GiwonHae's public operator WhatsApp, not official/KP2MI process mailboxes quoted in GiwonHae informational articles."
+      "rule": "Initial outreach sent once to GiwonHae's public operator WhatsApp. Do not send another initial; follow-up requires explicit follow-up-ready state.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 819-123-123-52",
+      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07."
     },
     {
       "sourceCode": "angga_fanda_eps",
@@ -814,9 +820,14 @@
       "channel": "whatsapp",
       "contact": "+62 857-3122-7837",
       "alternateContact": "+62 881-0265-84227",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07_via_alternate",
       "priority": "A3",
-      "rule": "Send one initial request to the primary WhatsApp only. Do not also send the same initial message to the alternate number unless the primary route is verified unusable."
+      "rule": "Primary route was unusable, so the single initial outreach was sent through the alternate number. Do not send the same initial to either number; follow-up requires explicit follow-up-ready state.",
+      "sentChannel": "whatsapp",
+      "primaryContactStatus": "unavailable_for_send",
+      "sentContact": "+62 881-0265-84227",
+      "alternateUsed": true,
+      "evidence": "User confirmed primary route was not usable and the initial outreach was sent once through the alternate WhatsApp on 2026-10-07."
     },
     {
       "sourceCode": "telegram_eps_topik_indonesia_large",
@@ -842,5 +853,16 @@
     "afterSend": "Immediately change manual_send_pending to sent_<date> with the actual channel/message evidence.",
     "privacy": "Never request member lists, phone numbers, emails, passports, identity documents, or other participant personal data.",
     "duplicateRule": "One initial outreach per operator ecosystem even when multiple apps, groups, numbers, or brands exist."
+  },
+  "manualCommunityAdminOutreachSummary": {
+    "sentNow": 3,
+    "sentDate": "2026-10-07",
+    "distinctOperatorEcosystems": 3,
+    "channels": [
+      "whatsapp"
+    ],
+    "emailCountersChanged": false,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "Kekorea/EPSTOPIK.ID, GiwonHae and Angga Fanda admin-permission requests are now sent. Angga used the alternate WhatsApp only because the primary route was unavailable. Do not resend any of these initial messages."
   }
 }
