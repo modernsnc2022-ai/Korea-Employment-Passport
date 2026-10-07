@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -186,13 +186,15 @@
       ],
       "applicantDensity": "high",
       "promoPolicy": "operator permission required",
-      "adminContact": "site contact / course operator",
+      "adminContact": "guru@kursusindonesia.com",
       "directPost": "course group access depends on enrollment/admin",
       "kepFit": "high",
       "expectedReach": "medium",
       "priority": "A",
-      "outreachState": "new_operator_guard_required",
-      "evidenceUrl": "https://kursusindonesia.com/kursus/text-book-eps-topik-2024-terjemahan-bahasa-indonesia/"
+      "outreachState": "sent_2026-10-07_do_not_resend",
+      "evidenceUrl": "https://kursusindonesia.com/kursus/text-book-eps-topik-2024-terjemahan-bahasa-indonesia/",
+      "sendEvidence": "Gmail message 1a11445ddc09e85d",
+      "contactEvidence": "Official contact page Cloudflare-protected email decoded from source HTML."
     },
     {
       "id": "kekorea_eps",
