@@ -1,5 +1,5 @@
 {
-  "version": "3.17.0",
+  "version": "3.18.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -116,6 +116,7 @@
     "lpk_asiana_semarang",
     "lpk_bonghwa_pati",
     "lpk_ansan_cirebon",
-    "lpk_bina_cerdas"
+    "lpk_bina_cerdas",
+    "mayantara_school_eps"
   ]
 }
