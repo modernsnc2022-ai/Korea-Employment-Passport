@@ -64,6 +64,16 @@
       <p>Kirim minat sekarang. Ini belum mengaktifkan akses beta. Tim akan melihat jumlah pendaftar terlebih dahulu lalu melakukan persetujuan. Target awal sekitar 30 tester, bukan hard cap otomatis.</p>
       <p><strong>Sekitar 30 detik:</strong> pilih tahap, pilih tahun proses, centang 2 konfirmasi, lalu kirim. Tidak perlu nama atau nomor telepon. KEP independen dan tidak menjanjikan kelulusan, pekerjaan, SLC, visa, atau keberangkatan.</p>
 
+      <div id="directIntakeFields" hidden>
+        <label>Email untuk keputusan beta
+          <input id="applicantContactEmail" type="email" maxlength="254" autocomplete="email" inputmode="email" placeholder="nama@example.com">
+        </label>
+        <small>Dipakai hanya untuk review, keputusan beta/KEP ID, dan komunikasi beta yang diperlukan. Jika mode kirim langsung aktif, data aplikasi disimpan privat maksimal 90 hari dan tidak masuk repositori publik.</small>
+        <label class="hp-field" aria-hidden="true">Website
+          <input id="intakeWebsite" type="text" tabindex="-1" autocomplete="off">
+        </label>
+      </div>
+
       <form id="betaApplicationForm">
         <label>Tahap tepat Anda sekarang
           <select id="applicantStage" required>
@@ -90,11 +100,11 @@
         </label>
 
         <div class="actions">
-          <button class="primary" type="submit">Kirim lewat aplikasi email</button>
+          <button id="betaApplicationSubmitBtn" class="primary" type="submit">Kirim lewat aplikasi email</button>
           <button id="gmailApplicationBtn" class="secondary" type="button">Buka Gmail</button>
           <button id="copyApplicationBtn" class="secondary" type="button">Salin teks pendaftaran</button>
         </div>
-        <small class="send-help">Jika tombol email tidak membuka aplikasi, gunakan “Buka Gmail”. Jika Gmail juga tidak tersedia, salin teks lalu kirim manual ke alamat yang ditampilkan setelah menyalin.</small>
+        <small id="applicationSendHelp" class="send-help">Jika tombol email tidak membuka aplikasi, gunakan “Buka Gmail”. Jika Gmail juga tidak tersedia, salin teks lalu kirim manual ke alamat yang ditampilkan setelah menyalin.</small>
         <div id="applicationResult" class="result" hidden></div>
       </form>
     </section>
@@ -116,7 +126,7 @@
     <section class="card privacy">
       <h2>Privasi saat mendaftar</h2>
       <p>Untuk mendaftar sebagai calon tester, kami tidak meminta nama, nomor paspor, nomor KTP, nomor ARC, nomor telepon, alamat rumah, atau foto dokumen identitas.</p>
-      <p>Karena pendaftaran dikirim lewat email, alamat email pengirim akan terlihat oleh tim dan digunakan untuk peninjauan serta komunikasi beta. Alamat tersebut tidak dimasukkan ke repositori publik.</p>
+      <p>Jika pendaftaran dikirim lewat email, alamat email pengirim terlihat oleh tim. Jika mode kirim langsung diaktifkan, pengguna memasukkan alamat email sendiri dan hanya data minimum aplikasi yang dikirim ke penyimpanan intake privat. Dalam kedua mode, alamat email digunakan hanya untuk peninjauan, keputusan beta/KEP ID, dan komunikasi beta yang diperlukan; tidak dimasukkan ke repositori publik.</p>
       <p>Jangan kirim gambar paspor/KTP/ARC untuk mendapatkan akses beta. <a href="privacy.html">Baca pemberitahuan privasi</a>.</p>
     </section>
 
