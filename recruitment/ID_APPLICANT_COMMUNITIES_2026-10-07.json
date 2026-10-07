@@ -1,5 +1,5 @@
 {
-  "version": "1.19.0",
+  "version": "1.20.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -758,6 +758,32 @@
       "outreachState": "blocked_invalid_whatsapp_2026-10-07",
       "evidenceUrl": "https://hannihon.com/",
       "note": "Publicly listed +62 813-3336-3636 failed as an active WhatsApp route per user test. Do not reuse this number; require a newly verified contact route."
+    },
+    {
+      "id": "lpk_jung_sarang_eps",
+      "platform": "LPK / WhatsApp + web",
+      "name": "LPK Jung Sarang",
+      "url": "https://lpkjungsarang.vercel.app/",
+      "access": "public organization contact",
+      "audienceSize": "Exact current enrolment not public.",
+      "recentActivity": "Website and WhatsApp route reachable/crawled October 2026.",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "G-to-G Korea preparation",
+        "manufacturing",
+        "shipbuilding",
+        "fishing"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 858-7040-3062",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://lpkjungsarang.vercel.app/",
+      "note": "WhatsApp number verified by resolving the current site wa.me link, rather than relying only on printed text."
     }
   ]
 }
