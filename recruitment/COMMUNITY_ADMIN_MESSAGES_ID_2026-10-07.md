@@ -384,3 +384,22 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_bhinneka_t
 
 Terima kasih, Admin.
 
+## A26 — LPK BIMA MANDIRI (Cirebon)
+Source: `lpk_bima_mandiri_cirebon`
+Channel: WhatsApp `+62 881-0236-87981`
+
+Halo Admin LPK BIMA MANDIRI. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi EPS / G-to-G Korea secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK BIMA MANDIRI memberikan pelatihan Bahasa Korea dan persiapan EPS-TOPIK bagi calon pekerja Korea.
+
+Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_bima_mandiri_cirebon
+
+Terima kasih, Admin.
+
