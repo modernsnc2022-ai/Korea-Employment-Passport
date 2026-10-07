@@ -1,5 +1,5 @@
 {
-  "version": "8.25.0",
+  "version": "8.28.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -973,6 +973,27 @@
       "priority": "A16",
       "rule": "One initial admin-permission request to the public main-office WhatsApp only. Do not use the student registration form or collect participant credentials/documents.",
       "evidence": "Current official site lists EPS-TOPIK, Skill Test and official G-to-G Korea preparation, with public main contact +62 856-9541-5758. Gmail and GitHub duplicate checks returned zero."
+    },
+    {
+      "sourceCode": "mirai_college_korea",
+      "operator": "Mirai College Indonesia",
+      "channel": "whatsapp",
+      "contact": "+62 856-2420-7275",
+      "priority": "A17",
+      "status": "sent_2026-10-07",
+      "sentChannel": "whatsapp",
+      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready."
+    },
+    {
+      "sourceCode": "lpk_lintang_ndaru_tegal",
+      "operator": "LPK Lintang Ndaru / LPK Mansae — Tegal",
+      "channel": "whatsapp",
+      "contact": "+62 877-6151-4265",
+      "status": "manual_send_pending",
+      "priority": "A18",
+      "rule": "One initial admin-permission request to the public organization WhatsApp only. Treat LPK Lintang Ndaru and LPK Mansae as one operator ecosystem; do not duplicate via either email address or sibling channel.",
+      "evidence": "Current official lpkmansae.com site lists G-to-G Korea preparation, EPS-TOPIK-related training and public WhatsApp +62 877-6151-4265. Both Gmail accounts and current KEP repository returned zero prior contact."
     }
   ],
   "manualCommunityAdminPolicy": {
