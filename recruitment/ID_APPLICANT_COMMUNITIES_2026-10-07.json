@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -77,7 +77,9 @@
       "expectedReach": "very high",
       "priority": "A",
       "outreachState": "new_operator_duplicate_check_required",
-      "evidenceUrl": "https://epstopik.id/"
+      "evidenceUrl": "https://epstopik.id/",
+      "identityGroup": "kekorea_epstopik_id_same_operator",
+      "note": "EPSTOPIK.ID identifies itself as 'by Kekorea'; use one outreach across both brands."
     },
     {
       "id": "winaya_group_eps",
@@ -98,8 +100,9 @@
       "kepFit": "very high",
       "expectedReach": "high",
       "priority": "A",
-      "outreachState": "new_operator_guard_required",
-      "evidenceUrl": "https://taplink.cc/winayagroupofficial"
+      "outreachState": "sent_2026-10-07_do_not_resend",
+      "evidenceUrl": "https://taplink.cc/winayagroupofficial",
+      "sendEvidence": "Gmail message 1a114407e666bf68"
     },
     {
       "id": "giwonhae_eps",
@@ -151,7 +154,7 @@
       "name": "PekerjaMigran.id — Korea Selatan",
       "url": "https://pekerjamigran.id/komunitas/korea-selatan",
       "access": "public read; login required to post",
-      "audienceSize": "344 members; 61 discussions; 6 replies",
+      "audienceSize": "public snapshots vary: 266 members/42 discussions/3 replies on opened page; search index also showed 344/61/6",
       "recentActivity": "EPS-TOPIK discussion ~2 months old at 2026-10 crawl",
       "applicantStages": [
         "EPS-TOPIK prep",
@@ -160,12 +163,12 @@
       ],
       "applicantDensity": "medium-high",
       "promoPolicy": "spam/ads prohibited; moderator permission required",
-      "adminContact": "Komunitas PekerjaMigran.id Admin",
+      "adminContact": "on-site moderator/contact route only; public contact page currently has no email/WhatsApp populated",
       "directPost": "login_required_and_noncommercial_rule",
       "kepFit": "high",
       "expectedReach": "medium",
       "priority": "A",
-      "outreachState": "admin_permission_required",
+      "outreachState": "admin_permission_required_no_direct_public_contact",
       "evidenceUrl": "https://pekerjamigran.id/komunitas/korea-selatan"
     },
     {
@@ -209,9 +212,10 @@
       "directPost": "verify current community posting permissions",
       "kepFit": "high",
       "expectedReach": "high if current counts confirm",
-      "priority": "A",
-      "outreachState": "identity_and_contact_verification_required",
-      "evidenceUrl": "https://kekorea.com/blog/detail/2/strategi-lulus-eps-topik-dalam-3-bulan"
+      "priority": "C",
+      "outreachState": "alias_of_epstopik_id_platform_do_not_contact_separately",
+      "evidenceUrl": "https://kekorea.com/blog/detail/2/strategi-lulus-eps-topik-dalam-3-bulan",
+      "identityGroup": "kekorea_epstopik_id_same_operator"
     },
     {
       "id": "coderrebornx_eps_2026",
@@ -320,8 +324,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high",
       "priority": "A",
-      "outreachState": "identity_reconciliation_required_against_existing_epstopik_indonesia_before_any_send",
-      "evidenceUrl": "https://epstopikkorea.id/join-class/"
+      "outreachState": "existing_source_epstopik_indonesia_sent_2026-10-04_do_not_resend",
+      "evidenceUrl": "https://epstopikkorea.id/join-class/",
+      "identityEvidence": "Gmail SENT 1a1067c9f5887f55 to admin@epstopikkorea.id"
     },
     {
       "id": "telegram_eps_topik_indonesia_channel",

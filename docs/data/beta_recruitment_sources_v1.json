@@ -1,5 +1,5 @@
 {
-  "version": "3.14.0",
+  "version": "3.14.1",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -111,7 +111,6 @@
     "giwonhae_eps",
     "angga_fanda_eps",
     "kursusindonesia_eps",
-    "kekorea_eps",
     "soal_eps_topik_indonesia_fb"
   ]
 }
