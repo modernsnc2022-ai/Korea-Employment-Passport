@@ -1,5 +1,5 @@
 {
-  "version": "3.13.0",
+  "version": "3.14.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -102,6 +102,16 @@
     "bbpvp_bandung_root_industry",
     "eps_topik_bank_id",
     "bina_insani_mtc_magelang",
-    "coderrebornx_eps_2026"
+    "coderrebornx_eps_2026",
+    "telegram_eps_topik_indonesia_large",
+    "telegram_eps_topik_indonesia_channel",
+    "pekerjamigran_korea_community",
+    "epstopik_id_platform",
+    "winaya_group_eps",
+    "giwonhae_eps",
+    "angga_fanda_eps",
+    "kursusindonesia_eps",
+    "kekorea_eps",
+    "soal_eps_topik_indonesia_fb"
   ]
 }
