@@ -1,5 +1,5 @@
 {
-  "version": "1.28.0",
+  "version": "1.29.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -850,9 +850,9 @@
         "preliminary training/departure awareness"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Public page offers online/offline EPS-TOPIK classes and guidance through the G-to-G Korea sequence."
+      "note": "Initial admin-permission request sent to public WhatsApp +62 857-7009-5240 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
