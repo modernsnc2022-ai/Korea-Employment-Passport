@@ -1,5 +1,5 @@
 {
-  "version": "1.18.0",
+  "version": "1.19.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -755,9 +755,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "blocked_invalid_whatsapp_2026-10-07",
       "evidenceUrl": "https://hannihon.com/",
-      "note": "Fresh organization-level route verified against both Gmail accounts and GitHub ledger."
+      "note": "Publicly listed +62 813-3336-3636 failed as an active WhatsApp route per user test. Do not reuse this number; require a newly verified contact route."
     }
   ]
 }
