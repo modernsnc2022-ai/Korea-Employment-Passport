@@ -1,16 +1,16 @@
 {
-  "version": "7.0.0",
+  "version": "7.1.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 83,
-    "distinctRecipientMailboxes": 72,
+    "sentMessages": 84,
+    "distinctRecipientMailboxes": 73,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T09:28:47+09:00"
+    "lastUpdatedAt": "2026-10-07T09:41:13+09:00"
   },
   "wave2": [
     {
@@ -607,7 +607,16 @@
     {
       "sourceCode": "gni_cilegon_eps",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T09:41:13+09:00",
+      "gmailMessageId": "1a113ceabefbb812"
     }
-  ]
+  ],
+  "emailWave14ApplicantFirst": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 1,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "GNI Cilegon outreach was sent exactly once to info@gnindonesia.org after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
+  }
 }
