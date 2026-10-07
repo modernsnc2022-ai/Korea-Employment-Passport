@@ -55,9 +55,9 @@
       "kepFit": "high if moderator approves",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "manual_telegram_admin_permission_ready_do_not_post_directly",
+      "outreachState": "telegram_owner_dm_sent_2026-10-07_waiting_permission_do_not_resend",
       "evidenceUrl": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj",
-      "note": "Public group rules prohibit promotion/product selling. A third-party Telegram index ties the group to GongbuGO and says GongbuGO CS contact should be handled by private chat to Admin. Use this only as routing evidence; do not infer or guess a private email."
+      "note": "Permission-first private DM sent on 2026-10-07 to the Telegram group owner shown as Heung So Lee. Do not post again in the group and do not send another initial admin/owner DM; wait for reply."
     },
     {
       "id": "epstopik_id_platform",
