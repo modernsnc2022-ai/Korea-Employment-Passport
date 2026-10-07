@@ -539,3 +539,25 @@ Tautan:
 https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_suryatama_cilacap
 
 Terima kasih, Admin.
+
+
+## A35 — LPK Changmun Hakkyo (Grobogan)
+Source: `lpk_changmun_hakkyo_grobogan`
+Channel: WhatsApp `+62 813-7252-3423`
+
+Halo Admin LPK Changmun Hakkyo. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi EPS / G-to-G Korea secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK Changmun Hakkyo membuka pelatihan Bahasa Korea untuk CPMI Korea dan membimbing persiapan proses kerja resmi G-to-G Korea.
+
+Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta, nomor telepon, email, paspor/KTP, atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata.
+
+KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_changmun_hakkyo_grobogan
+
+Terima kasih, Admin.
