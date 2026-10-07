@@ -1,5 +1,5 @@
 {
-  "version": "1.23.0",
+  "version": "1.26.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -809,6 +809,33 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "A",
       "note": "Use public organization WhatsApp only; do not use student registration form."
+    },
+    {
+      "id": "mirai_college_korea",
+      "name": "Mirai College Indonesia",
+      "platform": "training provider / WhatsApp + web",
+      "adminContact": "WhatsApp +62 856-2420-7275",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend"
+    },
+    {
+      "id": "lpk_lintang_ndaru_tegal",
+      "name": "LPK Lintang Ndaru / LPK Mansae — Tegal",
+      "platform": "LPK / WhatsApp + web",
+      "url": "https://lpkmansae.com/",
+      "adminContact": "WhatsApp +62 877-6151-4265",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "G-to-G Korea preparation",
+        "manufacturing",
+        "fishing",
+        "shipbuilding",
+        "service"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Treat LPK Lintang Ndaru and LPK Mansae as one operator ecosystem. One initial outreach only."
     }
   ]
 }
