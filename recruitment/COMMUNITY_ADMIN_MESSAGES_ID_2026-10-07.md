@@ -53,3 +53,40 @@ Tautan:
 https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=angga_fanda_eps
 
 Terima kasih banyak, Kak.
+
+## A4 — EPS-TOPIK INDONESIA Telegram group
+Source: `telegram_eps_topik_indonesia_large`
+Channel: Telegram `@epstopikindonesia2` / open the group and privately message one listed Admin
+Rule: **Do not post the KEP link to the group before permission.**
+
+Halo Admin. Mohon izin menghubungi secara pribadi. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi G-to-G Korea / EPS E-9 dengan lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat grup EPS-TOPIK INDONESIA memiliki banyak calon peserta yang sesuai, tetapi kami juga memahami aturan grup melarang promosi. Karena itu kami tidak akan memposting apa pun tanpa izin Admin.
+
+Apakah Admin berkenan meninjau undangan beta KEP terlebih dahulu dan, jika dianggap sesuai serta bermanfaat bagi anggota dewasa yang benar-benar sedang menjalani proses resmi EPS/G-to-G Korea, mengizinkan Admin membagikannya atau mengizinkan kami membagikannya sesuai aturan grup?
+
+Kami tidak meminta daftar anggota atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri. Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback dari proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, SLC, visa, atau keberangkatan.
+
+Tautan untuk ditinjau Admin:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=telegram_eps_topik_indonesia_large
+
+Terima kasih. Kami akan mengikuti keputusan dan aturan grup.
+
+## A5 — PekerjaMigran.id Korea community
+Source: `pekerjamigran_korea_community`
+Channel: on-site moderator/legitimate partnership contact **when available**
+Current state: **Do not post as a discussion yet. Public direct contact is currently unavailable.**
+
+Halo Admin PekerjaMigran.id. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI memahami dan mengikuti tahapan resmi G-to-G Korea / EPS E-9 tanpa bergantung pada broker swasta.
+
+Kami melihat komunitas Korea Selatan di PekerjaMigran.id mencakup calon PMI dan peserta skema EPS. Kami memahami aturan komunitas melarang spam/iklan, jadi kami tidak akan memposting undangan beta tanpa izin moderator.
+
+Apakah Admin bersedia meninjau undangan beta KEP dan memberi tahu apakah undangan ini boleh dibagikan kepada anggota dewasa yang benar-benar sedang menjalani proses resmi EPS/G-to-G Korea? Kami tidak meminta daftar anggota atau data pribadi apa pun; peserta yang tertarik mendaftar sendiri.
+
+KEP bukan layanan pemerintah atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, SLC, visa, atau keberangkatan. Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback dari proses nyata.
+
+Tautan untuk ditinjau Admin:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=pekerjamigran_korea_community
+
+Terima kasih. Kami akan mengikuti aturan dan keputusan moderator.
+
