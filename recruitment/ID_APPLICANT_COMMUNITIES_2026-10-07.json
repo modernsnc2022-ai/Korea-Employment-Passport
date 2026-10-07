@@ -1,5 +1,5 @@
 {
-  "version": "1.26.0",
+  "version": "1.27.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -833,9 +833,9 @@
         "service"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Treat LPK Lintang Ndaru and LPK Mansae as one operator ecosystem. One initial outreach only."
+      "note": "Initial admin-permission request sent to public organization WhatsApp +62 877-6151-4265 on 2026-10-07. Treat LPK Lintang Ndaru / LPK Mansae as one operator ecosystem; do not duplicate initial outreach."
     }
   ]
 }
