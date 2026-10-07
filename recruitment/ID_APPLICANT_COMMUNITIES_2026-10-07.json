@@ -1,5 +1,5 @@
 {
-  "version": "1.42.0",
+  "version": "1.43.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -954,6 +954,21 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial admin-permission request sent to public WhatsApp/phone +62 881-0236-87981 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpks_bhs_korea_cilacap",
+      "name": "LPKS BHS KOREA — Cilacap",
+      "platform": "LPK / Linktree + WhatsApp",
+      "url": "https://linktr.ee/lpks.bhskoreacilacap",
+      "adminContact": "WhatsApp +62 882-2545-1135",
+      "applicantStages": [
+        "Korean language preparation",
+        "Korea job preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Current Linktree joined July 2025 and links active WhatsApp/social channels. One initial outreach only."
     }
   ]
 }
