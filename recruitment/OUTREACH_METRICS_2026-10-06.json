@@ -1,5 +1,5 @@
 {
-  "version": "8.8.0",
+  "version": "8.9.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -854,10 +854,12 @@
       "operator": "LPK CHEONAN Kursus Bahasa Korea — Ungaran/Semarang",
       "channel": "whatsapp",
       "contact": "+62 858-4865-2838",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07",
       "priority": "A6",
-      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not use staff/past-employee personal email addresses or duplicate via Instagram unless the WhatsApp route is verified unusable.",
-      "evidence": "Current Waze listing crawled 2026-10-07 exposes 0858-4865-2838 and instagram.com/lpkcheonan_semarang; both connected Gmail accounts and current KEP repository contained no prior Cheonan outreach."
+      "rule": "Initial admin-permission request sent once to the public LPK CHEONAN WhatsApp. Do not resend through WhatsApp, Instagram, staff email, or other sibling channels unless an explicit follow-up-ready state is recorded.",
+      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 858-4865-2838"
     },
     {
       "sourceCode": "lpk_asiana_semarang",
@@ -913,5 +915,14 @@
     "pekerjamigranA5": "blocked_until_legitimate_admin_contact_route_exists",
     "duplicateSearch": "Both connected Gmail accounts returned no GongbuGO/PekerjaMigran campaign messages in the last 60 days.",
     "safetyRule": "Do not infer private contact details from unrelated ecosystem companies or repurpose emergency/government forms."
+  },
+  "manualCommunityAdminOutreachSummaryCheonan": {
+    "sentNow": 1,
+    "sentDate": "2026-10-07",
+    "sourceCode": "lpk_cheonan_semarang",
+    "channel": "whatsapp",
+    "contact": "+62 858-4865-2838",
+    "confirmedBetaInterestApplications": 0,
+    "rule": "Initial outreach sent once; wait for inbound or explicit follow-up-ready state."
   }
 }
