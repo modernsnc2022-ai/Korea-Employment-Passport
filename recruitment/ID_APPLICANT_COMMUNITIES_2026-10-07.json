@@ -1,5 +1,5 @@
 {
-  "version": "1.39.0",
+  "version": "1.40.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -951,9 +951,9 @@
         "Korean language preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Current business listing active; public training materials show EPS-TOPIK focus. Use current phone only."
+      "note": "Initial admin-permission request sent to public WhatsApp/phone +62 881-0236-87981 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }

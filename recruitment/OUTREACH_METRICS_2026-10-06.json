@@ -1,5 +1,5 @@
 {
-  "version": "8.41.0",
+  "version": "8.42.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1072,10 +1072,12 @@
       "operator": "LPK BIMA MANDIRI — Cirebon",
       "channel": "whatsapp",
       "contact": "+62 881-0236-87981",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07",
       "priority": "A26",
-      "rule": "One initial admin-permission request to the current public business WhatsApp/phone only. Do not duplicate to historical numbers unless current route is verified unusable.",
-      "evidence": "Current business listing shows active Korean language school in Cirebon with phone +62 881-0236-87981. Public EPS-TOPIK training material exists. Both Gmail accounts and KEP repository returned zero prior outreach."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 881-0236-87981"
     }
   ],
   "manualCommunityAdminPolicy": {
