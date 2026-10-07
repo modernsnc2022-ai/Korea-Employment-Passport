@@ -1,5 +1,5 @@
 {
-  "version": "3.16.0",
+  "version": "3.17.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -115,6 +115,7 @@
     "lpk_cheonan_semarang",
     "lpk_asiana_semarang",
     "lpk_bonghwa_pati",
-    "lpk_ansan_cirebon"
+    "lpk_ansan_cirebon",
+    "lpk_bina_cerdas"
   ]
 }
