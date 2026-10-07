@@ -1,5 +1,5 @@
 {
-  "version": "1.29.0",
+  "version": "1.30.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -853,6 +853,21 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial admin-permission request sent to public WhatsApp +62 857-7009-5240 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "ybs_indonesia_eps",
+      "name": "PT. YBS Indonesia / Yoboseyo Korean Jakarta Indonesia",
+      "platform": "training provider / WhatsApp + web",
+      "url": "https://ybsindonesia.com/",
+      "adminContact": "WhatsApp +62 812-9347-4535",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea job preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Use first public organization WhatsApp only; second listed number belongs to the same operator ecosystem."
     }
   ]
 }
