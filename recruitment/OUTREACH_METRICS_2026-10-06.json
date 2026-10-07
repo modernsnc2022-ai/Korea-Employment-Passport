@@ -1,5 +1,5 @@
 {
-  "version": "8.48.0",
+  "version": "8.49.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1102,6 +1102,16 @@
       "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 857-1353-3432"
+    },
+    {
+      "sourceCode": "lpk_mugunghwa_cilacap",
+      "operator": "UBT LPK MUGUNGHWA CILACAP",
+      "channel": "whatsapp",
+      "contact": "+62 812-2602-671",
+      "status": "manual_send_pending",
+      "priority": "A30",
+      "rule": "One initial admin-permission request to the current public contact only. Do not contact individual students or use registration forms.",
+      "evidence": "Current UBT site mugunghwakorea.com lists contact 08122602671 and active student/test flows. Public program page covers EPS-TOPIK, Skill Test, Sending Dokumen, Preliminary Training, and departure. Both Gmail accounts and KEP repository returned zero prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
