@@ -1,5 +1,5 @@
 {
-  "version": "1.30.0",
+  "version": "1.31.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -865,9 +865,9 @@
         "Korea job preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Use first public organization WhatsApp only; second listed number belongs to the same operator ecosystem."
+      "note": "Initial admin-permission request sent to +62 812-9347-4535 on 2026-10-07. Do not duplicate to +62 812-9049-0066 or sibling channels."
     }
   ]
 }
