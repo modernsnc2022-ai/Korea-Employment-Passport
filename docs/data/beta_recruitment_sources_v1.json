@@ -1,5 +1,5 @@
 {
-  "version": "3.15.0",
+  "version": "3.16.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -112,6 +112,9 @@
     "angga_fanda_eps",
     "kursusindonesia_eps",
     "soal_eps_topik_indonesia_fb",
-    "lpk_cheonan_semarang"
+    "lpk_cheonan_semarang",
+    "lpk_asiana_semarang",
+    "lpk_bonghwa_pati",
+    "lpk_ansan_cirebon"
   ]
 }

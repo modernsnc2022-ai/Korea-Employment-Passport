@@ -108,3 +108,54 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_cheonan_se
 
 Jika Admin berkenan, undangan singkat ini dapat langsung diteruskan kepada peserta yang sesuai. Terima kasih.
 
+## A7 — LPK ASIANA Bawen/Semarang
+Source: `lpk_asiana_semarang`
+Channel: WhatsApp `+62 822-3163-5522`
+
+Halo Admin LPK ASIANA. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi G-to-G Korea / EPS E-9 secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK ASIANA memiliki kelas EPS-TOPIK untuk calon pekerja Korea. Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_asiana_semarang
+
+Terima kasih, Admin.
+
+## A8 — LPK Bonghwa Pati
+Source: `lpk_bonghwa_pati`
+Channel: WhatsApp `+62 877-6552-5354`
+
+Halo Admin LPK Bonghwa Pati. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti proses resmi G-to-G Korea / EPS E-9 tanpa bergantung pada broker swasta.
+
+Karena LPK Bonghwa mendampingi calon PMI Korea dalam persiapan EPS-TOPIK dan Skill Test, kami ingin meminta izin agar undangan beta KEP dapat dibagikan kepada peserta dewasa yang benar-benar sedang menjalani proses resmi tersebut.
+
+Kami tidak meminta daftar peserta, nomor telepon, email, atau dokumen pribadi siapa pun. Peserta yang tertarik mendaftar sendiri. Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata.
+
+KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_bonghwa_pati
+
+Terima kasih, Admin.
+
+## A9 — LPK Ansan Cirebon
+Source: `lpk_ansan_cirebon`
+Channel: WhatsApp `+62 812-9848-3482`
+
+Halo Admin LPK Ansan Cirebon. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi G-to-G Korea / EPS E-9 secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK Ansan memiliki peserta kursus EPS-TOPIK online maupun offline untuk calon pekerja Korea. Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta atau data pribadi siapa pun; peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_ansan_cirebon
+
+Terima kasih, Admin.
+
