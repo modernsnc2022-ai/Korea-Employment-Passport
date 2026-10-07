@@ -1,5 +1,5 @@
 {
-  "version": "1.16.0",
+  "version": "1.18.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -732,6 +732,32 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "evidenceUrl": "https://kursuskorea.com/",
       "note": "Keep separate from other entities named LPK HANA; this record is specifically kursuskorea.com Surabaya/Malang ecosystem."
+    },
+    {
+      "id": "hannihon_kediri_eps",
+      "platform": "LPK / WhatsApp + web",
+      "name": "HanNihon Language Center — Kediri",
+      "url": "https://hannihon.com/",
+      "access": "public organization contact",
+      "audienceSize": "Official site states 500+ alumni; exact current Korea-course enrolment not public.",
+      "recentActivity": "Official site crawled today / October 2026.",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "G-to-G Korea preparation",
+        "manufacturing",
+        "fishing",
+        "shipbuilding"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 813-3336-3636",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://hannihon.com/",
+      "note": "Fresh organization-level route verified against both Gmail accounts and GitHub ledger."
     }
   ]
 }
