@@ -1,5 +1,5 @@
 {
-  "version": "1.48.0",
+  "version": "1.49.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -1002,6 +1002,23 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial admin-permission request sent to public contact +62 812-2602-671 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_ilmu_tangerang",
+      "name": "LPK ILMU / Ilmu Learning Center — Tangerang Selatan",
+      "platform": "LPK / WhatsApp + web",
+      "url": "https://ilmulearningcenter.com/en/",
+      "adminContact": "WhatsApp +62 817-7957-8817",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "G-to-G preparation",
+        "document processing",
+        "departure preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Current official site says full support from language training and documents through departure."
     }
   ]
 }
