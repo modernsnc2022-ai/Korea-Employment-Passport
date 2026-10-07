@@ -1,5 +1,5 @@
 {
-  "version": "1.20.0",
+  "version": "1.21.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -781,9 +781,9 @@
       "kepFit": "very high",
       "expectedReach": "medium, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://lpkjungsarang.vercel.app/",
-      "note": "WhatsApp number verified by resolving the current site wa.me link, rather than relying only on printed text."
+      "note": "Initial admin-permission request sent to the verified public WhatsApp +62 858-7040-3062 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
