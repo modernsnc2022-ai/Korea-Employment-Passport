@@ -1,5 +1,5 @@
 {
-  "version": "8.3.0",
+  "version": "8.4.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -788,5 +788,59 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "KursusIndonesia outreach was sent exactly once after both connected Gmail accounts returned no prior message, the protected public mailbox was recovered from the official contact page, and the latest-main send guard returned initial_send_allowed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
+  },
+  "manualCommunityAdminQueue": [
+    {
+      "sourceCode": "epstopik_id_platform",
+      "operator": "Kekorea / EPSTOPIK.ID",
+      "channel": "whatsapp",
+      "contact": "+62 898-1913-655",
+      "status": "manual_send_pending",
+      "priority": "A1",
+      "rule": "One initial outreach across the Kekorea/EPSTOPIK.ID ecosystem only. Do not contact the Kekorea brand separately."
+    },
+    {
+      "sourceCode": "giwonhae_eps",
+      "operator": "GiwonHae EPS-Topik",
+      "channel": "whatsapp",
+      "contact": "+62 819-123-123-52",
+      "status": "manual_send_pending",
+      "priority": "A2",
+      "rule": "Use GiwonHae's public operator WhatsApp, not official/KP2MI process mailboxes quoted in GiwonHae informational articles."
+    },
+    {
+      "sourceCode": "angga_fanda_eps",
+      "operator": "Angga David Irfanda / Angga Fanda",
+      "channel": "whatsapp",
+      "contact": "+62 857-3122-7837",
+      "alternateContact": "+62 881-0265-84227",
+      "status": "manual_send_pending",
+      "priority": "A3",
+      "rule": "Send one initial request to the primary WhatsApp only. Do not also send the same initial message to the alternate number unless the primary route is verified unusable."
+    },
+    {
+      "sourceCode": "telegram_eps_topik_indonesia_large",
+      "operator": "EPS-TOPIK INDONESIA Telegram group",
+      "channel": "telegram",
+      "contact": "group invite only",
+      "status": "admin_contact_required_not_send_ready",
+      "priority": "A4",
+      "rule": "Promotion/selling is explicitly prohibited; do not post KEP link directly. Obtain moderator permission first."
+    },
+    {
+      "sourceCode": "pekerjamigran_korea_community",
+      "operator": "PekerjaMigran.id Korea community",
+      "channel": "on_site_moderator",
+      "contact": "Komunitas PekerjaMigran.id Admin",
+      "status": "admin_contact_required_not_send_ready",
+      "priority": "A5",
+      "rule": "Community rules prohibit spam/ads. Use moderator permission only; do not create promotional discussion without approval."
+    }
+  ],
+  "manualCommunityAdminPolicy": {
+    "beforeSend": "Run the current outreach send guard and check both connected Gmail accounts plus the manual queue/ledger for prior operator contact.",
+    "afterSend": "Immediately change manual_send_pending to sent_<date> with the actual channel/message evidence.",
+    "privacy": "Never request member lists, phone numbers, emails, passports, identity documents, or other participant personal data.",
+    "duplicateRule": "One initial outreach per operator ecosystem even when multiple apps, groups, numbers, or brands exist."
   }
 }
