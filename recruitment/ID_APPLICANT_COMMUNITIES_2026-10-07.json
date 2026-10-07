@@ -1080,9 +1080,9 @@
         "preliminary training"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_send_pending",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
-      "note": "Current official site advertises 2026/2027 Korean-language enrollment for CPMI Korea and exposes an official WhatsApp link to +62 813-7252-3423. Both connected Gmail accounts plus origin/main name/domain/phone checks found no prior Changmun outreach."
+      "note": "Initial admin-permission request sent to public WhatsApp +62 813-7252-3423 on 2026-10-07. Do not duplicate initial outreach."
     }
   ]
 }
