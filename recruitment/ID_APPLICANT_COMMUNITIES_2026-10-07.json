@@ -34,8 +34,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high intent",
       "priority": "A",
-      "outreachState": "new_direct_community_candidate",
-      "evidenceUrl": "https://t.me/eps_indo"
+      "outreachState": "posted_2026-10-05_owner_dm_sent_2026-10-07_waiting_reply_do_not_resend",
+      "evidenceUrl": "https://t.me/eps_indo",
+      "note": "Full KEP beta post was already published in-group on 2026-10-05. On 2026-10-07 the user privately messaged the visible group owner Heung So Lee. Do not resend or add another post; wait for reply."
     },
     {
       "id": "telegram_eps_topik_indonesia_large",
@@ -55,9 +56,9 @@
       "kepFit": "high if moderator approves",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "telegram_owner_dm_sent_2026-10-07_waiting_permission_do_not_resend",
+      "outreachState": "manual_telegram_admin_permission_ready_do_not_post_directly",
       "evidenceUrl": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj",
-      "note": "Permission-first private DM sent on 2026-10-07 to the Telegram group owner shown as Heung So Lee. Do not post again in the group and do not send another initial admin/owner DM; wait for reply."
+      "note": "Not contacted yet. Keep this 6,713-member group separate from @eps_indo / EPS-TOPIK & G to G Korea Update. Promotion/product sales are prohibited; only one private permission request to a listed Admin is allowed before any group post."
     },
     {
       "id": "epstopik_id_platform",

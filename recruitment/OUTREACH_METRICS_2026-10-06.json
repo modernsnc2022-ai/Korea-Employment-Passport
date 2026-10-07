@@ -830,16 +830,25 @@
       "evidence": "User confirmed primary route was not usable and the initial outreach was sent once through the alternate WhatsApp on 2026-10-07."
     },
     {
+      "sourceCode": "telegram_eps_indo",
+      "operator": "EPS-TOPIK & G to G Korea Update (@eps_indo)",
+      "channel": "telegram",
+      "contact": "public group / visible owner Heung So Lee",
+      "status": "sent_2026-10-05_owner_dm_2026-10-07_waiting_reply",
+      "priority": "A4-local",
+      "rule": "Group beta post already published and owner DM already sent. Do not post or send another initial DM; wait for inbound reply.",
+      "evidence": "OUTREACH_LOG records the full KEP beta post on 2026-10-05. User screenshot on 2026-10-07 shows the 218-member group and visible owner Heung So Lee; user confirmed the private DM was sent.",
+      "linkAttributionNote": "The 2026-10-07 owner DM accidentally used ?src=telegram_eps_topik_indonesia_large even though the contacted operator was @eps_indo. Treat any resulting click attribution with this correction."
+    },
+    {
       "sourceCode": "telegram_eps_topik_indonesia_large",
       "operator": "EPS-TOPIK INDONESIA Telegram group",
       "channel": "telegram",
       "contact": "@epstopikindonesia2 / Telegram group admin",
-      "status": "sent_2026-10-07_waiting_admin_permission",
+      "status": "manual_send_pending",
       "priority": "A4",
-      "rule": "Permission-first owner/admin DM already sent. Do not resend and do not post in the group unless explicit permission is received.",
-      "evidence": "User confirmed manual Telegram private message sent to the group owner shown as Heung So Lee on 2026-10-07.",
-      "sentChannel": "telegram_private_dm",
-      "sentContact": "group owner: Heung So Lee"
+      "rule": "Permission-first only: privately message one listed group Admin. Do not post KEP in the group unless explicit approval is received.",
+      "evidence": "Current public group listing shows 6,713 members / 92 online and prohibits promotion/sales; this operator has not yet been contacted. Keep separate from @eps_indo."
     },
     {
       "sourceCode": "pekerjamigran_korea_community",
