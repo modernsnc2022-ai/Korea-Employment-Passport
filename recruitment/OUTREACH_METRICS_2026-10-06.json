@@ -1,16 +1,16 @@
 {
-  "version": "8.0.0",
+  "version": "8.1.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 88,
-    "distinctRecipientMailboxes": 77,
+    "sentMessages": 89,
+    "distinctRecipientMailboxes": 78,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 2,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T10:19:00+09:00"
+    "lastUpdatedAt": "2026-10-07T11:36:00+09:00"
   },
   "wave2": [
     {
@@ -39,7 +39,8 @@
     "sourceAttribution": "Use only controlled non-identifying src codes from beta_recruitment_sources_v1.json.",
     "bounceRule": "Do not retry a confirmed invalid mailbox without a newly verified official contact address.",
     "channelRule": "Prefer admin-permission/community sharing and current EPS learner pools over repeated generic cold email.",
-    "preSendGuard": "Before any new outreach send, check sourceCode against the current outreach ledger. If a source is already sent/closed, block a new initial send. Follow-up requires an explicit follow-up-ready ledger entry."
+    "preSendGuard": "Before any new outreach send, check sourceCode against the current outreach ledger. If a source is already sent/closed, block a new initial send. Follow-up requires an explicit follow-up-ready ledger entry.",
+    "forwardCopyRule": "For new partner/admin outreach, include a short copy-paste Indonesian invite block containing the same source-attributed beta URL so the recipient can forward it directly without rewriting."
   },
   "wave3": [
     {
@@ -716,5 +717,23 @@
     "preferredValidation": "scripts/run_colab_ci.sh",
     "preferredSourceMonitor": "scripts/run_colab_source_monitor.sh",
     "reason": "GitHub billing alert reported 1,801 of 2,000 included Actions minutes used; preserve remaining budget."
+  },
+  "wave18ApplicantFirst": [
+    {
+      "sourceCode": "coderrebornx_eps_2026",
+      "channel": "email",
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T11:36:00+09:00",
+      "gmailMessageId": "1a1143a4e57ab5cb",
+      "operatorMailbox": "coderrebornx@gmail.com",
+      "operatorScope": "single_operator_multiple_apps_one_initial_outreach"
+    }
+  ],
+  "emailWave18ApplicantFirst": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 1,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "CoderRebornX outreach was sent exactly once after Gmail duplicate search found no prior campaign message. Do not send another initial outreach to this operator or sibling apps; follow-up requires an explicit follow-up-ready state."
   }
 }
