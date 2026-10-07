@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -71,12 +71,12 @@
       ],
       "applicantDensity": "very high",
       "promoPolicy": "unknown; operator permission required",
-      "adminContact": "site/WhatsApp Channel operator",
+      "adminContact": "WhatsApp +62 898-1913-655",
       "directPost": "operator-controlled",
       "kepFit": "very high",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "new_operator_duplicate_check_required",
+      "outreachState": "manual_whatsapp_ready_not_sent",
       "evidenceUrl": "https://epstopik.id/",
       "identityGroup": "kekorea_epstopik_id_same_operator",
       "note": "EPSTOPIK.ID identifies itself as 'by Kekorea'; use one outreach across both brands."
@@ -118,12 +118,12 @@
       ],
       "applicantDensity": "high",
       "promoPolicy": "operator permission required",
-      "adminContact": "WhatsApp 0819 123 123 52",
+      "adminContact": "WhatsApp +62 819-123-123-52",
       "directPost": "operator-controlled",
       "kepFit": "very high",
       "expectedReach": "medium-high",
       "priority": "A",
-      "outreachState": "new_operator_guard_required",
+      "outreachState": "manual_whatsapp_ready_not_sent",
       "evidenceUrl": "https://giwonhae.com/"
     },
     {
@@ -140,13 +140,14 @@
       ],
       "applicantDensity": "high",
       "promoPolicy": "unknown; ask admin first",
-      "adminContact": "WhatsApp Angga Fanda link in Linktree",
+      "adminContact": "Primary WhatsApp +62 857-3122-7837; alternate +62 881-0265-84227",
       "directPost": "group join link exists",
       "kepFit": "very high because roster-stage content is explicit",
       "expectedReach": "unknown but high-intent",
       "priority": "A",
-      "outreachState": "new_social_admin_candidate",
-      "evidenceUrl": "https://linktr.ee/anggadavidirfanda"
+      "outreachState": "manual_whatsapp_ready_not_sent_primary_only",
+      "evidenceUrl": "https://linktr.ee/anggadavidirfanda",
+      "note": "Linktree exposes EPS-TOPIK material, a WhatsApp contact, a second WhatsApp route labeled group, and explicit Update Data Roster content."
     },
     {
       "id": "pekerjamigran_korea_community",
@@ -154,8 +155,8 @@
       "name": "PekerjaMigran.id — Korea Selatan",
       "url": "https://pekerjamigran.id/komunitas/korea-selatan",
       "access": "public read; login required to post",
-      "audienceSize": "public snapshots vary: 266 members/42 discussions/3 replies on opened page; search index also showed 344/61/6",
-      "recentActivity": "EPS-TOPIK discussion ~2 months old at 2026-10 crawl",
+      "audienceSize": "dynamic snapshots vary; latest indexed community pages show active site-level counts up to 404 members / 564 discussions / 263 replies, while Korea-specific and other snapshots are smaller",
+      "recentActivity": "site-wide community activity within hours/days; Korea EPS-TOPIK moderator post visible in current index",
       "applicantStages": [
         "EPS-TOPIK prep",
         "documents/visa",
