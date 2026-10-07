@@ -1,5 +1,5 @@
 {
-  "version": "7.1.0",
+  "version": "7.2.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -618,5 +618,17 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "GNI Cilegon outreach was sent exactly once to info@gnindonesia.org after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave15ApplicantFirst": [
+    {
+      "sourceCode": "bbpvp_serang_root_industry",
+      "channel": "email",
+      "status": "ready_not_sent"
+    },
+    {
+      "sourceCode": "bbpvp_bandung_root_industry",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ]
 }
