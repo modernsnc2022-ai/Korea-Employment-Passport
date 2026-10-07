@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -592,6 +592,75 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "evidenceUrl": "https://www.waze.com/id/live-map/directions/id/central-java/lpk-cheonan-kursus-bahasa-korea?to=place.ChIJq5rj06WIcC4R_ByspM7F4FQ",
       "note": "Use only the public organization contact. Do not use a former employee's personal career email. Older brochures contain outdated process/fee claims and are not factual route sources."
+    },
+    {
+      "id": "lpk_asiana_semarang",
+      "platform": "LPK / WhatsApp + web",
+      "name": "LPK ASIANA — Bawen/Semarang",
+      "url": "https://lpkasiana.com/",
+      "access": "public organization contact",
+      "audienceSize": "Current exact student count not public.",
+      "recentActivity": "Official site and registration/contact pages crawled within 2-3 weeks of 2026-10-07.",
+      "applicantStages": [
+        "EPS-TOPIK prep"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 822-3163-5522",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://lpkasiana.com/kontak/",
+      "note": "Official site currently offers EPS-TOPIK 1/2 classes and publishes the same WhatsApp on multiple pages."
+    },
+    {
+      "id": "lpk_bonghwa_pati",
+      "platform": "LPK / WhatsApp + social",
+      "name": "LPK Bonghwa Pati",
+      "url": "https://lpkbonghwa.wordpress.com/",
+      "access": "public organization contact",
+      "audienceSize": "Current exact student count not public.",
+      "recentActivity": "Site was crawlable in 2026-09/10; exact posting cadence is not established.",
+      "applicantStages": [
+        "EPS-TOPIK prep",
+        "skill test prep",
+        "procedural Korea guidance"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 877-6552-5354",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://lpkbonghwa.wordpress.com/",
+      "note": "Public site explicitly describes support for CPMI Korea through EPS-TOPIK/Skill Test and exposes Facebook, Instagram and TikTok, but use WhatsApp for the single initial."
+    },
+    {
+      "id": "lpk_ansan_cirebon",
+      "platform": "LPK / WhatsApp + web",
+      "name": "LPK Ansan Cirebon",
+      "url": "https://kursusbahasakoreaonline.com/",
+      "access": "public organization contact",
+      "audienceSize": "Official site says hundreds of students; exact current active count not public.",
+      "recentActivity": "Official site crawled within two weeks of 2026-10-07.",
+      "applicantStages": [
+        "EPS-TOPIK prep",
+        "G-to-G process guidance"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 812-9848-3482",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://kursusbahasakoreaonline.com/",
+      "note": "Current public site describes online/offline EPS-TOPIK classes and uses WA 081298483482. One initial to the organization only."
     }
   ]
 }
