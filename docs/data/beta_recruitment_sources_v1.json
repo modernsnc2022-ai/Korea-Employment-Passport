@@ -1,5 +1,5 @@
 {
-  "version": "3.31.0",
+  "version": "3.32.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -129,6 +129,7 @@
     "ybs_indonesia_eps",
     "lpk_hana_korea_lampung",
     "lee_ubt_eps",
-    "lpk_yamaguchi_eps"
+    "lpk_yamaguchi_eps",
+    "lpk_bhinneka_temanggung"
   ]
 }
