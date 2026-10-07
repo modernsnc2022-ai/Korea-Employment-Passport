@@ -1,5 +1,5 @@
 {
-  "version": "1.34.0",
+  "version": "1.35.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -883,9 +883,29 @@
         "G-to-G Korea"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "auto_reply_received_2026-10-07_waiting_human",
       "priority": "A",
       "note": "Current site posts 2026 pre-departure, visa/document and skill-test information. Keep separate from other similarly named HANA organizations."
+    },
+    {
+      "id": "lee_ubt_eps",
+      "name": "Lee UBT EPS-TOPIK",
+      "platform": "EPS-TOPIK platform / WhatsApp + web",
+      "url": "https://www.leeubt.cloud/",
+      "adminContact": "WhatsApp +62 813-1523-9959",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Skill Test awareness",
+        "SLC",
+        "MCU",
+        "visa",
+        "OPP",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Operator is an EPS-TOPIK practitioner/instructor. Public site states educational reach of 10,000+ learners."
     }
   ]
 }
