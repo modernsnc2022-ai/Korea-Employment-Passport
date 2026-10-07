@@ -1,5 +1,5 @@
 {
-  "version": "6.5.0",
+  "version": "6.6.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -557,5 +557,22 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "The Jochiwon applicant-first email was sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave12ApplicantFirst": [
+    {
+      "sourceCode": "lpk_stgl",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ],
+  "identityReconciliation": [
+    {
+      "canonicalSourceCode": "ubt_eps_topik_app",
+      "observedMailbox": "leeubt26@gmail.com",
+      "observedName": "Lee UBT EPS-TOPIK / Ardhi Imron Sholihin",
+      "observedDate": "2026-10-07",
+      "status": "same_operator_already_contacted",
+      "action": "do_not_send_new_initial_outreach; treat future Lee UBT discovery as existing ubt_eps_topik_app"
+    }
+  ]
 }
