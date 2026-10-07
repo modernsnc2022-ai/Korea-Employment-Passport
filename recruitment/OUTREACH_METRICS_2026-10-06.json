@@ -1,5 +1,5 @@
 {
-  "version": "8.23.0",
+  "version": "8.25.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -953,6 +953,26 @@
       "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 858-7040-3062"
+    },
+    {
+      "sourceCode": "mendunia_korea_batam",
+      "operator": "Mendunia Korea / PT Batam Sukses Mendunia",
+      "channel": "whatsapp",
+      "contact": "+62 812-7496-2266",
+      "status": "followup_sent_2026-10-07_waiting_korea_pic",
+      "priority": "A15",
+      "rule": "Initial outreach and one clarification follow-up sent. Do not resend; wait for human/PIC reply.",
+      "evidence": "User confirmed initial WhatsApp send, received Japanese-program auto-response, then sent clarification asking for Mendunia Korea/PIC."
+    },
+    {
+      "sourceCode": "lpk_hanaro_ngawi",
+      "operator": "LPK Hanaro — Ngawi",
+      "channel": "whatsapp",
+      "contact": "+62 856-9541-5758",
+      "status": "manual_send_pending",
+      "priority": "A16",
+      "rule": "One initial admin-permission request to the public main-office WhatsApp only. Do not use the student registration form or collect participant credentials/documents.",
+      "evidence": "Current official site lists EPS-TOPIK, Skill Test and official G-to-G Korea preparation, with public main contact +62 856-9541-5758. Gmail and GitHub duplicate checks returned zero."
     }
   ],
   "manualCommunityAdminPolicy": {
