@@ -1,5 +1,5 @@
 {
-  "version": "7.6.0",
+  "version": "7.7.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -583,6 +583,15 @@
       "observedDate": "2026-10-07",
       "status": "same_operator_already_contacted",
       "action": "do_not_send_new_initial_outreach for sibling Karya IniBudhi EPS-TOPIK apps; treat as existing jeongsang_eps_app operator"
+    },
+    {
+      "canonicalSourceCode": "ubt_eps_topik_id_app",
+      "observedMailbox": "ubtepstopik@gmail.com",
+      "observedName": "UBT EPS Topik Indonesia / Cep Iwan Setiawan",
+      "observedDate": "2026-10-07",
+      "status": "same_operator_already_contacted",
+      "evidence": "Existing SENT message 1a11013057630eca contains ?src=ubt_eps_topik_id_app",
+      "action": "do_not_send_new_initial_outreach; treat future UBT EPS Topik discovery as existing ubt_eps_topik_id_app"
     }
   ],
   "emailWave12ApplicantFirst": {
@@ -665,5 +674,15 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "EPS-TOPIK BANK Indonesia outreach was sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave17ApplicantFirst": [
+    {
+      "sourceCode": "bina_insani_mtc_magelang",
+      "channel": "email",
+      "status": "ready_not_sent",
+      "initialMailbox": "lkp.binainsanimagelang@gmail.com",
+      "alternateMailbox": "lpk_binainsani@yahoo.co.id",
+      "alternateMailboxPolicy": "same_organization_do_not_send_duplicate_initial_outreach"
+    }
+  ]
 }
