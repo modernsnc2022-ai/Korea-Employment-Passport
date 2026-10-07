@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -63,13 +63,39 @@
       "phone number",
       "home address"
     ],
-    "note": "Application email is handled outside the public repository. Never send identity-document images for beta enrollment.",
-    "emailHandling": "Application sender email is visible in the private email system and used only for application review, approval/KEP-ID reply, and necessary beta communication; never store it in the public repository."
+    "note": "Until direct intake is activated, applications are sent by email. When direct intake is activated, only the minimum application fields and contact email are stored in private intake storage with automatic expiry; never store them in the public repository.",
+    "emailHandling": "Application sender email is visible in the private email system and used only for application review, approval/KEP-ID reply, and necessary beta communication; never store it in the public repository.",
+    "directIntakeRetentionDays": 90,
+    "directIntakeNoIpStorage": true
   },
   "application": {
     "email": "modernsnc2022@gmail.com",
     "opensOnlyWhenStatus": null,
-    "intakeStatus": "open"
+    "intakeStatus": "open",
+    "directIntake": {
+      "mode": "email_fallback_until_endpoint_configured",
+      "endpoint": "",
+      "provider": "cloudflare_workers_kv",
+      "retentionDays": 90,
+      "contactEmailRequired": true,
+      "storedFields": [
+        "contact email",
+        "current official stage ID/title",
+        "EPS process cycle",
+        "recruitment source code",
+        "participation confirmations",
+        "submission timestamp"
+      ],
+      "neverStore": [
+        "passport/KTP/ARC images",
+        "identity document numbers",
+        "phone number",
+        "home/dorm address",
+        "health information",
+        "bank information",
+        "client IP"
+      ]
+    }
   },
   "releaseDecision": {
     "publicBeta": "pending_manual_approval",
