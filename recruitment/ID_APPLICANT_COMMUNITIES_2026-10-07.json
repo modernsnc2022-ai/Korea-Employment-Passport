@@ -1,5 +1,5 @@
 {
-  "version": "1.46.0",
+  "version": "1.47.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -984,6 +984,24 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial admin-permission request sent to public WhatsApp +62 857-1353-3432 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_mugunghwa_cilacap",
+      "name": "UBT LPK MUGUNGHWA CILACAP",
+      "platform": "LPK / UBT website + WhatsApp",
+      "url": "https://www.mugunghwakorea.com/",
+      "adminContact": "WhatsApp +62 812-2602-671",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Skill Test",
+        "Sending Dokumen",
+        "Preliminary Training",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Current UBT site offers student enrollment and tokenized simulation test; Korea flow continues through departure."
     }
   ]
 }
