@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -43,20 +43,21 @@
       "name": "EPS-TOPIK INDONESIA 고용허가제 한국어능력시험",
       "url": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj",
       "access": "public invite",
-      "audienceSize": "6,713 members; 92 online",
+      "audienceSize": "6,713 members; 92 online on current public Telegram listing (2026-10-07)",
       "recentActivity": "current listing crawled 2026-10-07",
       "applicantStages": [
         "EPS-TOPIK prep"
       ],
       "applicantDensity": "high",
       "promoPolicy": "Promotion and product sales explicitly prohibited. KEP must not post without admin permission.",
-      "adminContact": "Telegram group admin via group",
+      "adminContact": "@epstopikindonesia2 / open group and privately message a listed Admin",
       "directPost": "do_not_post_without_permission",
       "kepFit": "high if moderator approves",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "admin_permission_required",
-      "evidenceUrl": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj"
+      "outreachState": "manual_telegram_admin_permission_ready_do_not_post_directly",
+      "evidenceUrl": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj",
+      "note": "Public group rules prohibit promotion/product selling. A third-party Telegram index ties the group to GongbuGO and says GongbuGO CS contact should be handled by private chat to Admin. Use this only as routing evidence; do not infer or guess a private email."
     },
     {
       "id": "epstopik_id_platform",
@@ -156,7 +157,7 @@
       "name": "PekerjaMigran.id — Korea Selatan",
       "url": "https://pekerjamigran.id/komunitas/korea-selatan",
       "access": "public read; login required to post",
-      "audienceSize": "dynamic snapshots vary; latest indexed community pages show active site-level counts up to 404 members / 564 discussions / 263 replies, while Korea-specific and other snapshots are smaller",
+      "audienceSize": "Dynamic public counts vary by page/index; site homepage showed 529 community members and 2,416 forum discussions on 2026-10-07, while Korea/community snapshots are smaller.",
       "recentActivity": "site-wide community activity within hours/days; Korea EPS-TOPIK moderator post visible in current index",
       "applicantStages": [
         "EPS-TOPIK prep",
@@ -165,13 +166,14 @@
       ],
       "applicantDensity": "medium-high",
       "promoPolicy": "spam/ads prohibited; moderator permission required",
-      "adminContact": "on-site moderator/contact route only; public contact page currently has no email/WhatsApp populated",
+      "adminContact": "Komunitas PekerjaMigran.id Admin; no public direct contact channel currently exposed",
       "directPost": "login_required_and_noncommercial_rule",
       "kepFit": "high",
       "expectedReach": "medium",
       "priority": "A",
-      "outreachState": "admin_permission_required_no_direct_public_contact",
-      "evidenceUrl": "https://pekerjamigran.id/komunitas/korea-selatan"
+      "outreachState": "blocked_public_direct_contact_unavailable_no_promo_post",
+      "evidenceUrl": "https://pekerjamigran.id/komunitas/korea-selatan",
+      "note": "Korea category explicitly includes PMI/EPS users, but community rules prohibit spam/ads. Public contact page says direct contact channels are not currently available. Do not use unrelated ecosystem-company contacts or post KEP without moderator permission."
     },
     {
       "id": "kursusindonesia_eps",

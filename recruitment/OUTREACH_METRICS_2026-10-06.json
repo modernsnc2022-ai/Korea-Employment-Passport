@@ -1,5 +1,5 @@
 {
-  "version": "8.5.0",
+  "version": "8.6.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -833,19 +833,21 @@
       "sourceCode": "telegram_eps_topik_indonesia_large",
       "operator": "EPS-TOPIK INDONESIA Telegram group",
       "channel": "telegram",
-      "contact": "group invite only",
-      "status": "admin_contact_required_not_send_ready",
+      "contact": "@epstopikindonesia2 / Telegram group admin",
+      "status": "manual_telegram_admin_permission_ready",
       "priority": "A4",
-      "rule": "Promotion/selling is explicitly prohibited; do not post KEP link directly. Obtain moderator permission first."
+      "rule": "Do not post KEP in the group. Send one private permission request to a group Admin only; share the beta link in-group only after explicit approval.",
+      "evidence": "Current public group listing shows 6,713 members / 92 online and prohibits promotion/sales; external listing identifies @epstopikindonesia2 and directs GongbuGO CS questions to Admin by private chat."
     },
     {
       "sourceCode": "pekerjamigran_korea_community",
       "operator": "PekerjaMigran.id Korea community",
       "channel": "on_site_moderator",
-      "contact": "Komunitas PekerjaMigran.id Admin",
-      "status": "admin_contact_required_not_send_ready",
+      "contact": "Komunitas PekerjaMigran.id Admin / on-site route only",
+      "status": "blocked_public_direct_contact_unavailable",
       "priority": "A5",
-      "rule": "Community rules prohibit spam/ads. Use moderator permission only; do not create promotional discussion without approval."
+      "rule": "Do not create a promotional discussion or use unrelated emergency/government channels. Wait for a legitimate on-site moderator/partnership contact route, then request permission before sharing KEP.",
+      "evidence": "The public contact page currently states direct PekerjaMigran.id contact channels are not available. Korea community rules prohibit spam/ads and identify only 'Komunitas PekerjaMigran.id Admin' as moderator."
     }
   ],
   "manualCommunityAdminPolicy": {
@@ -864,5 +866,12 @@
     "emailCountersChanged": false,
     "confirmedBetaInterestApplications": 0,
     "rule": "Kekorea/EPSTOPIK.ID, GiwonHae and Angga Fanda admin-permission requests are now sent. Angga used the alternate WhatsApp only because the primary route was unavailable. Do not resend any of these initial messages."
+  },
+  "communityAdminRoutingUpdate": {
+    "updatedDate": "2026-10-07",
+    "telegramA4": "manual_permission_message_ready_no_direct_group_post",
+    "pekerjamigranA5": "blocked_until_legitimate_admin_contact_route_exists",
+    "duplicateSearch": "Both connected Gmail accounts returned no GongbuGO/PekerjaMigran campaign messages in the last 60 days.",
+    "safetyRule": "Do not infer private contact details from unrelated ecosystem companies or repurpose emergency/government forms."
   }
 }
