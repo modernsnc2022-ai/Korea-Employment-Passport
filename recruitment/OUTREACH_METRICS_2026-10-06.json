@@ -1,5 +1,5 @@
 {
-  "version": "7.8.0",
+  "version": "8.0.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -7,10 +7,10 @@
     "sentMessages": 88,
     "distinctRecipientMailboxes": 77,
     "distinctBouncedRecipientMailboxes": 4,
-    "meaningfulInboundReplies": 1,
+    "meaningfulInboundReplies": 2,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T10:08:34+09:00"
+    "lastUpdatedAt": "2026-10-07T10:19:00+09:00"
   },
   "wave2": [
     {
@@ -144,6 +144,14 @@
       "reasonCategory": "partner_policy_no_external_service_promotion",
       "closureReplySentDate": "2026-10-06",
       "recontactPolicy": "do_not_recontact_for_beta_distribution"
+    },
+    {
+      "sourceCode": "indonesia_eps_center_hrdk",
+      "inboundDate": "2026-10-07",
+      "status": "closed_no_external_cooperation",
+      "reasonCategory": "hrd_korea_indonesia_eps_center_can_cooperate_only_with_kp2mi_under_mou",
+      "inboundMessageId": "1a113f00df5b1ced",
+      "recontactPolicy": "do_not_recontact_for_beta_distribution_or_partnership"
     }
   ],
   "workerPanelFollowup": [
@@ -693,5 +701,20 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "Bina Insani MTC Magelang outreach was sent exactly once after same-HEAD gates passed. Do not send the same initial outreach to the Yogyakarta alternate mailbox; follow-up requires an explicit follow-up-ready state."
+  },
+  "ciExecutionPolicy": {
+    "effectiveDate": "2026-10-07",
+    "mode": "colab_kaggle_lightning_first",
+    "githubActionsAutomaticRuns": "disabled_for_custom_validation_workflows",
+    "githubActionsManualOnly": [
+      "static-check",
+      "ui-smoke",
+      "beta-launch-gate",
+      "official-source-monitor",
+      "source-volatility-diagnostic"
+    ],
+    "preferredValidation": "scripts/run_colab_ci.sh",
+    "preferredSourceMonitor": "scripts/run_colab_source_monitor.sh",
+    "reason": "GitHub billing alert reported 1,801 of 2,000 included Actions minutes used; preserve remaining budget."
   }
 }

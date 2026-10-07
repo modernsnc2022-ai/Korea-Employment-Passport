@@ -1,10 +1,6 @@
 name: source-volatility-diagnostic
 
 on:
-  push:
-    paths:
-      - 'scripts/diagnose_source_volatility.py'
-      - '.github/workflows/source-volatility-diagnostic.yml'
   workflow_dispatch:
 
 permissions:

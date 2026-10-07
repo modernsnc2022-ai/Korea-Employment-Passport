@@ -1,20 +1,6 @@
 name: official-source-monitor
 
 on:
-  schedule:
-    - cron: '17 */6 * * *'
-  push:
-    branches: [main]
-    paths:
-      - 'monitor/sources.json'
-      - 'monitor/source_hashes.json'
-      - 'monitor/tls_pins.json'
-      - 'monitor/reviewed_source_acceptance.json'
-      - 'scripts/check_official_sources.py'
-      - 'scripts/write_source_review_status.py'
-      - 'scripts/diagnose_source_volatility.py'
-      - 'scripts/diagnose_changed_source_text.py'
-      - '.github/workflows/official-source-monitor.yml'
   workflow_dispatch:
     inputs:
       accept_current:
