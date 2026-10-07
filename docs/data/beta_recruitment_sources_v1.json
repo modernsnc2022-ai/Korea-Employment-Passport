@@ -1,5 +1,5 @@
 {
-  "version": "3.12.0",
+  "version": "3.13.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -101,6 +101,7 @@
     "bbpvp_serang_root_industry",
     "bbpvp_bandung_root_industry",
     "eps_topik_bank_id",
-    "bina_insani_mtc_magelang"
+    "bina_insani_mtc_magelang",
+    "coderrebornx_eps_2026"
   ]
 }
