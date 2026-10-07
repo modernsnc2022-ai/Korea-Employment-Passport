@@ -1,5 +1,5 @@
 {
-  "version": "1.51.0",
+  "version": "1.52.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -1032,9 +1032,9 @@
         "recent departure alumni"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "auto_reply_received_2026-10-07_waiting_human",
       "priority": "A",
-      "note": "Recent 2026 posts show active new Korea cohorts plus multiple students departing for Korea. Use the number repeated in recent posts."
+      "note": "Initial outreach sent; auto-reply asks not to rechat/spam while waiting. No further outbound until human response."
     }
   ]
 }
