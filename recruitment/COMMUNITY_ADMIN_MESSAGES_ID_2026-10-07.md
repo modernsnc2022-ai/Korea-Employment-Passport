@@ -519,3 +519,23 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpks_jklc_kedi
 
 Terima kasih, Admin.
 
+## A34 — LPK Suryatama Korea (Cilacap)
+Source: `lpk_suryatama_cilacap`
+Channel: WhatsApp `+62 819-1456-5363`
+
+Halo Admin LPK Suryatama Korea. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi EPS / G-to-G Korea secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK Suryatama Korea mendampingi calon pekerja melalui persiapan bahasa Korea, keterampilan kerja, dan persiapan kerja ke Korea.
+
+Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta, nomor telepon, email, paspor/KTP, atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata.
+
+KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_suryatama_cilacap
+
+Terima kasih, Admin.
