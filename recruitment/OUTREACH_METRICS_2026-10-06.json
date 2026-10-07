@@ -1,5 +1,5 @@
 {
-  "version": "8.32.0",
+  "version": "8.33.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1014,10 +1014,12 @@
       "operator": "PT. YBS Indonesia / Yoboseyo Korean Jakarta Indonesia",
       "channel": "whatsapp",
       "contact": "+62 812-9347-4535",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07",
       "priority": "A20",
-      "rule": "One initial admin-permission request to the first public organization WhatsApp only. Treat both published WhatsApp numbers as one operator ecosystem and do not duplicate to the second number unless the first is unusable.",
-      "evidence": "Current official YBS pages list a Korea EPS-TOPIK program and public WhatsApp numbers 0812-9347-4535 / 0812-9049-0066. Both Gmail accounts and current KEP repository returned zero prior contact."
+      "rule": "Initial outreach sent to first public organization WhatsApp. Do not send to second YBS number or sibling channels unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed manual WhatsApp send to the first public YBS number in KEP chat on 2026-10-07.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 812-9347-4535"
     }
   ],
   "manualCommunityAdminPolicy": {
