@@ -1,16 +1,16 @@
 {
-  "version": "8.1.0",
+  "version": "8.2.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 89,
-    "distinctRecipientMailboxes": 78,
+    "sentMessages": 90,
+    "distinctRecipientMailboxes": 79,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 2,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T11:36:00+09:00"
+    "lastUpdatedAt": "2026-10-07T11:45:33+09:00"
   },
   "wave2": [
     {
@@ -601,6 +601,23 @@
       "status": "same_operator_already_contacted",
       "evidence": "Existing SENT message 1a11013057630eca contains ?src=ubt_eps_topik_id_app",
       "action": "do_not_send_new_initial_outreach; treat future UBT EPS Topik discovery as existing ubt_eps_topik_id_app"
+    },
+    {
+      "canonicalSourceCode": "epstopik_indonesia",
+      "observedName": "epstopikkorea.id",
+      "observedMailbox": "admin@epstopikkorea.id",
+      "observedDate": "2026-10-07",
+      "status": "same_operator_or_source_already_contacted",
+      "evidence": "Existing SENT message 1a1067c9f5887f55 to admin@epstopikkorea.id on 2026-10-04",
+      "action": "do_not_send_new_initial_outreach to epstopikkorea.id WhatsApp/Telegram/class groups; wait for inbound or explicit follow-up-ready state"
+    },
+    {
+      "canonicalSourceCode": "epstopik_id_platform",
+      "observedName": "Kekorea / EPSTOPIK.ID",
+      "observedDate": "2026-10-07",
+      "status": "same_operator_ecosystem",
+      "evidence": "EPSTOPIK.ID page identifies itself as 'by Kekorea'",
+      "action": "treat kekorea_eps as alias of epstopik_id_platform for outreach; one initial outreach maximum across the ecosystem"
     }
   ],
   "emailWave12ApplicantFirst": {
@@ -735,5 +752,23 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "CoderRebornX outreach was sent exactly once after Gmail duplicate search found no prior campaign message. Do not send another initial outreach to this operator or sibling apps; follow-up requires an explicit follow-up-ready state."
+  },
+  "wave19ApplicantCommunity": [
+    {
+      "sourceCode": "winaya_group_eps",
+      "channel": "email",
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T11:45:33+09:00",
+      "gmailMessageId": "1a114407e666bf68",
+      "operatorMailbox": "groupwinaya@gmail.com",
+      "target": "Winaya Group WhatsApp groups/channel EPS-TOPIK learner community"
+    }
+  ],
+  "emailWave19ApplicantCommunity": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 1,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "Winaya Group initial outreach was sent exactly once after both connected Gmail accounts returned no prior message and the current send-guard logic returned initial_send_allowed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
   }
 }
