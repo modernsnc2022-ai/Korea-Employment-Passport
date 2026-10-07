@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -589,9 +589,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://www.waze.com/id/live-map/directions/id/central-java/lpk-cheonan-kursus-bahasa-korea?to=place.ChIJq5rj06WIcC4R_ByspM7F4FQ",
-      "note": "Use only the public organization contact. Do not use a former employee's personal career email. Older brochures contain outdated process/fee claims and are not factual route sources."
+      "note": "Initial admin-permission request manually sent to the public organization WhatsApp +62 858-4865-2838 on 2026-10-07. Do not duplicate through Instagram or personal staff channels."
     },
     {
       "id": "lpk_asiana_semarang",
