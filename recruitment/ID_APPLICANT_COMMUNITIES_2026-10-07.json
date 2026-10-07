@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.16.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -708,6 +708,30 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://mayantara.sch.id/kursus/bahasa-korea/",
       "note": "Initial admin-permission request manually sent to public WhatsApp +62 813-3344-4179 on 2026-10-07. Do not duplicate through sibling channels."
+    },
+    {
+      "id": "hana_education_eps",
+      "platform": "LPK / WhatsApp + web",
+      "name": "Hana Education — Surabaya/Malang",
+      "url": "https://kursuskorea.com/",
+      "access": "public organization contact",
+      "audienceSize": "Exact current enrolment not public.",
+      "recentActivity": "Official site and registration forms crawled in October 2026.",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Skill Test preparation",
+        "G-to-G Korea preparation"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 821-7773-3177",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://kursuskorea.com/",
+      "note": "Keep separate from other entities named LPK HANA; this record is specifically kursuskorea.com Surabaya/Malang ecosystem."
     }
   ]
 }
