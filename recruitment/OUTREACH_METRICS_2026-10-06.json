@@ -1,5 +1,5 @@
 {
-  "version": "6.9.0",
+  "version": "7.0.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -602,5 +602,12 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "AEC Semarang initial outreach was sent exactly once to aecsemarang@gmail.com after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send the same initial outreach to the alternate mailbox; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave14ApplicantFirst": [
+    {
+      "sourceCode": "gni_cilegon_eps",
+      "channel": "email",
+      "status": "ready_not_sent"
+    }
+  ]
 }
