@@ -1,5 +1,5 @@
 {
-  "version": "8.7.0",
+  "version": "8.8.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -858,6 +858,36 @@
       "priority": "A6",
       "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not use staff/past-employee personal email addresses or duplicate via Instagram unless the WhatsApp route is verified unusable.",
       "evidence": "Current Waze listing crawled 2026-10-07 exposes 0858-4865-2838 and instagram.com/lpkcheonan_semarang; both connected Gmail accounts and current KEP repository contained no prior Cheonan outreach."
+    },
+    {
+      "sourceCode": "lpk_asiana_semarang",
+      "operator": "LPK ASIANA — Bawen/Semarang",
+      "channel": "whatsapp",
+      "contact": "+62 822-3163-5522",
+      "status": "manual_send_pending",
+      "priority": "A7",
+      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not duplicate through the website contact form unless WhatsApp is verified unusable.",
+      "evidence": "Current official site contact page crawled 2026-10-07 publishes WhatsApp +62 822 3163 5522 and current EPS-TOPIK classes; both Gmail accounts and KEP repository had no prior Asiana outreach."
+    },
+    {
+      "sourceCode": "lpk_bonghwa_pati",
+      "operator": "LPK Bonghwa Pati",
+      "channel": "whatsapp",
+      "contact": "+62 877-6552-5354",
+      "status": "manual_send_pending",
+      "priority": "A8",
+      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not duplicate through Facebook/Instagram/TikTok unless WhatsApp is verified unusable.",
+      "evidence": "Public LPK Bonghwa site currently exposes WhatsApp 087765525354 and explicitly targets CPMI Korea / EPS-TOPIK / Skill Test; both Gmail accounts and KEP repository had no prior Bonghwa outreach."
+    },
+    {
+      "sourceCode": "lpk_ansan_cirebon",
+      "operator": "LPK Ansan Cirebon",
+      "channel": "whatsapp",
+      "contact": "+62 812-9848-3482",
+      "status": "manual_send_pending",
+      "priority": "A9",
+      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not use affiliate/member channels for duplicate outreach.",
+      "evidence": "Current official site crawl publishes WA 081298483482, describes online/offline EPS-TOPIK courses and hundreds of students; both Gmail accounts and KEP repository had no prior Ansan outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
