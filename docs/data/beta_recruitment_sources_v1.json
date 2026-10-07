@@ -1,5 +1,5 @@
 {
-  "version": "3.29.0",
+  "version": "3.30.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -127,6 +127,7 @@
     "lpk_lintang_ndaru_tegal",
     "siliwangi_hakwon_eps",
     "ybs_indonesia_eps",
-    "lpk_hana_korea_lampung"
+    "lpk_hana_korea_lampung",
+    "lee_ubt_eps"
   ]
 }

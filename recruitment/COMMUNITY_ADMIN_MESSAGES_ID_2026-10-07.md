@@ -329,3 +329,22 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_hana_korea
 
 Terima kasih, Admin.
 
+## A23 — Lee UBT EPS-TOPIK
+Source: `lee_ubt_eps`
+Channel: WhatsApp `+62 813-1523-9959`
+
+Halo Kak Ardhi / Admin Lee UBT EPS-TOPIK. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi EPS / G-to-G Korea secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat Lee UBT digunakan oleh calon pekerja Korea untuk persiapan EPS-TOPIK dan juga menyediakan informasi proses lanjutan seperti Skill Test, SLC, MCU, visa, OPP, dan keberangkatan.
+
+Saat ini kami mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea. Apakah Kak/Admin berkenan membagikan undangan beta KEP kepada pengguna atau komunitas Lee UBT yang sesuai?
+
+Kami tidak meminta daftar pengguna atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lee_ubt_eps
+
+Terima kasih.
+
