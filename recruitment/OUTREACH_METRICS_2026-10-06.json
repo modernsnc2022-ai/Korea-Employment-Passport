@@ -1,5 +1,5 @@
 {
-  "version": "7.8.0",
+  "version": "7.9.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -39,7 +39,8 @@
     "sourceAttribution": "Use only controlled non-identifying src codes from beta_recruitment_sources_v1.json.",
     "bounceRule": "Do not retry a confirmed invalid mailbox without a newly verified official contact address.",
     "channelRule": "Prefer admin-permission/community sharing and current EPS learner pools over repeated generic cold email.",
-    "preSendGuard": "Before any new outreach send, check sourceCode against the current outreach ledger. If a source is already sent/closed, block a new initial send. Follow-up requires an explicit follow-up-ready ledger entry."
+    "preSendGuard": "Before any new outreach send, check sourceCode against the current outreach ledger. If a source is already sent/closed, block a new initial send. Follow-up requires an explicit follow-up-ready ledger entry.",
+    "forwardCopyRule": "For new partner/admin outreach, include a short copy-paste Indonesian invite block containing the same source-attributed beta URL so the recipient can forward it directly without rewriting."
   },
   "wave3": [
     {
@@ -693,5 +694,14 @@
     "newDistinctRecipients": 1,
     "confirmedBetaInterestApplications": 0,
     "rule": "Bina Insani MTC Magelang outreach was sent exactly once after same-HEAD gates passed. Do not send the same initial outreach to the Yogyakarta alternate mailbox; follow-up requires an explicit follow-up-ready state."
-  }
+  },
+  "wave18ApplicantFirst": [
+    {
+      "sourceCode": "coderrebornx_eps_2026",
+      "channel": "email",
+      "status": "ready_not_sent",
+      "operatorMailbox": "coderrebornx@gmail.com",
+      "operatorScope": "single_operator_multiple_apps_one_initial_outreach"
+    }
+  ]
 }
