@@ -90,3 +90,21 @@ https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=pekerjamigran_
 
 Terima kasih. Kami akan mengikuti aturan dan keputusan moderator.
 
+## A6 — LPK CHEONAN Ungaran/Semarang
+Source: `lpk_cheonan_semarang`
+Channel: WhatsApp `+62 858-4865-2838`
+Rule: Send one initial request to the public organization WhatsApp only. Do not contact staff/past employees personally.
+
+Halo Admin LPK CHEONAN. Kami sedang mengembangkan Korea Employment Passport (KEP), proyek independen untuk membantu WNI mengikuti tahapan resmi G-to-G Korea / EPS E-9 secara lebih terstruktur tanpa bergantung pada broker swasta.
+
+Kami melihat LPK CHEONAN mendampingi peserta persiapan EPS-TOPIK dan proses menuju kerja resmi ke Korea. Saat ini kami sedang mencari sekitar 30 calon peserta beta yang benar-benar sedang mempersiapkan atau menjalani proses resmi EPS/G-to-G Korea.
+
+Apakah Admin berkenan membagikan undangan beta KEP kepada peserta dewasa yang sesuai? Kami tidak meminta daftar peserta, nomor telepon, email, paspor/KTP, atau data pribadi siapa pun. Peserta yang tertarik mendaftar sendiri.
+
+Peserta beta yang disetujui mendapat akses gratis 6 bulan sejak aktivasi dan diminta memberi feedback berdasarkan proses nyata. KEP bukan layanan pemerintah, HRD Korea, KP2MI/BP3MI, atau agen penempatan dan tidak menjamin kelulusan, pekerjaan, employer selection, SLC, visa, atau keberangkatan.
+
+Tautan:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=lpk_cheonan_semarang
+
+Jika Admin berkenan, undangan singkat ini dapat langsung diteruskan kepada peserta yang sesuai. Terima kasih.
+
