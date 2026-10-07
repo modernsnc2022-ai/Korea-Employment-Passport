@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.12.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -661,6 +661,30 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://kursusbahasakoreaonline.com/",
       "note": "Initial admin-permission request manually sent to the public organization WhatsApp +62 812-9848-3482 on 2026-10-07. Do not duplicate through affiliate/member or sibling channels."
+    },
+    {
+      "id": "lpk_bina_cerdas",
+      "platform": "LPK / WhatsApp + web",
+      "name": "LPK Bina Cerdas — Tegal/Brebes/Pejagan",
+      "url": "https://kerjakorea-magangjepang.com/",
+      "access": "public organization contact",
+      "audienceSize": "Official site says the institution has trained thousands since 2013; exact current active Korea-course count not public.",
+      "recentActivity": "Official site crawled 2026-10-07 and shows current WhatsApp contact.",
+      "applicantStages": [
+        "EPS-TOPIK prep",
+        "G-to-G Korea preparation",
+        "fisheries skills"
+      ],
+      "applicantDensity": "very high",
+      "promoPolicy": "operator permission required",
+      "adminContact": "WhatsApp +62 858-7011-1548",
+      "directPost": "do_not_post; ask operator to share",
+      "kepFit": "very high",
+      "expectedReach": "medium-high, high-intent",
+      "priority": "A",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "evidenceUrl": "https://kerjakorea-magangjepang.com/",
+      "note": "Current site has Tegal, Brebes and Pejagan locations and routes its public contact button to the same organization WhatsApp."
     }
   ]
 }
