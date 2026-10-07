@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -611,9 +611,9 @@
       "kepFit": "very high",
       "expectedReach": "medium-high, high-intent",
       "priority": "A",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "evidenceUrl": "https://lpkasiana.com/kontak/",
-      "note": "Official site currently offers EPS-TOPIK 1/2 classes and publishes the same WhatsApp on multiple pages."
+      "note": "Initial admin-permission request manually sent to the public organization WhatsApp +62 822-3163-5522 on 2026-10-07. Do not duplicate via website form or other sibling channels."
     },
     {
       "id": "lpk_bonghwa_pati",
