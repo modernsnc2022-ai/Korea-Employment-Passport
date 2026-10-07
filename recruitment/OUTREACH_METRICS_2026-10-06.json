@@ -1,5 +1,5 @@
 {
-  "version": "8.53.0",
+  "version": "8.54.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1132,10 +1132,12 @@
       "operator": "LPK ACC Indramayu",
       "channel": "whatsapp",
       "contact": "+62 811-2277-343",
-      "status": "manual_send_pending",
+      "status": "auto_reply_received_2026-10-07_waiting_human",
       "priority": "A32",
-      "rule": "One initial admin-permission request to the current contact used in recent 2026 Korea-class posts only. Do not use older directory variants or contact individual students.",
-      "evidence": "Recent June-August 2026 Korea G-to-G class and departure posts repeatedly list 0811-2277-343. Both Gmail accounts and KEP repository returned zero prior outreach."
+      "rule": "Do not send any additional message until a human reply arrives.",
+      "evidence": "User confirmed manual WhatsApp send, followed by automatic queue message asking not to rechat/spam until staff replies.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 811-2277-343"
     }
   ],
   "manualCommunityAdminPolicy": {
