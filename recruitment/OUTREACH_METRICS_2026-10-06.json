@@ -845,10 +845,12 @@
       "operator": "EPS-TOPIK INDONESIA Telegram group",
       "channel": "telegram",
       "contact": "@epstopikindonesia2 / Telegram group admin",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-07_waiting_admin_permission",
       "priority": "A4",
-      "rule": "Permission-first only: privately message one listed group Admin. Do not post KEP in the group unless explicit approval is received.",
-      "evidence": "Current public group listing shows 6,713 members / 92 online and prohibits promotion/sales; this operator has not yet been contacted. Keep separate from @eps_indo."
+      "rule": "Permission-first admin DM already sent. Do not resend and do not post in the group unless explicit permission is received.",
+      "evidence": "User screenshot confirmed manual Telegram private message sent on 2026-10-07 to listed admin 이동해 (李東瀚).",
+      "sentChannel": "telegram_private_dm",
+      "sentContact": "listed admin: 이동해 (李東瀚)"
     },
     {
       "sourceCode": "pekerjamigran_korea_community",

@@ -56,9 +56,9 @@
       "kepFit": "high if moderator approves",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "manual_telegram_admin_permission_ready_do_not_post_directly",
+      "outreachState": "telegram_admin_dm_sent_2026-10-07_waiting_permission_do_not_resend",
       "evidenceUrl": "https://t.me/joinchat/Uz1Kh1ZQtvWKjooj",
-      "note": "Not contacted yet. Keep this 6,713-member group separate from @eps_indo / EPS-TOPIK & G to G Korea Update. Promotion/product sales are prohibited; only one private permission request to a listed Admin is allowed before any group post."
+      "note": "Permission-first private DM sent on 2026-10-07 to the listed Telegram admin shown as 이동해 (李東瀚). Do not post in the group and do not send another initial admin DM; wait for reply."
     },
     {
       "id": "epstopik_id_platform",
