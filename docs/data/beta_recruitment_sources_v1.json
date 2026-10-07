@@ -1,5 +1,5 @@
 {
-  "version": "3.8.0",
+  "version": "3.9.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -96,6 +96,7 @@
     "lpk_hanifa",
     "lpk_jochiwon",
     "lpk_stgl",
-    "aec_semarang"
+    "aec_semarang",
+    "gni_cilegon_eps"
   ]
 }
