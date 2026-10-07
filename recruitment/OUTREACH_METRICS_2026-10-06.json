@@ -1,5 +1,5 @@
 {
-  "version": "8.13.0",
+  "version": "8.14.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -902,10 +902,12 @@
       "operator": "LPK Bina Cerdas — Tegal/Brebes/Pejagan",
       "channel": "whatsapp",
       "contact": "+62 858-7011-1548",
-      "status": "manual_send_pending",
+      "status": "replied_2026-10-07_identity_clarification",
       "priority": "A10",
-      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not duplicate through branch or other channels unless this route is verified unusable.",
-      "evidence": "Current official site crawl on 2026-10-07 exposes WhatsApp +62 858-7011-1548 and Korea-language/G-to-G training; both Gmail accounts and current KEP repository had no prior Bina Cerdas outreach."
+      "rule": "Initial outreach already sent. Do not resend. Continue only inside the existing WhatsApp thread.",
+      "evidence": "User confirmed manual WhatsApp send; LPK Bina Cerdas replied asking who was contacting them and from where. A KEP identity/independence clarification reply was prepared in chat.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 858-7011-1548"
     }
   ],
   "manualCommunityAdminPolicy": {
@@ -967,5 +969,14 @@
     "contact": "+62 812-9848-3482",
     "confirmedBetaInterestApplications": 0,
     "rule": "Initial outreach sent once; wait for inbound or explicit follow-up-ready state."
+  },
+  "manualCommunityAdminOutreachSummaryBinaCerdas": {
+    "sentDate": "2026-10-07",
+    "sourceCode": "lpk_bina_cerdas",
+    "channel": "whatsapp",
+    "contact": "+62 858-7011-1548",
+    "inboundReply": "identity_clarification_request",
+    "confirmedBetaInterestApplications": 0,
+    "rule": "Initial outreach sent and inbound reply received; continue only in existing thread."
   }
 }
