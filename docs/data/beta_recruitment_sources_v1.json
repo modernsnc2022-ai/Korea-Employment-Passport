@@ -1,5 +1,5 @@
 {
-  "version": "3.21.0",
+  "version": "3.23.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -120,6 +120,8 @@
     "mayantara_school_eps",
     "hana_education_eps",
     "hannihon_kediri_eps",
-    "lpk_jung_sarang_eps"
+    "lpk_jung_sarang_eps",
+    "mendunia_korea_batam",
+    "lpk_hanaro_ngawi"
   ]
 }
