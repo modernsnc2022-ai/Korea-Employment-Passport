@@ -1,16 +1,16 @@
 {
-  "version": "6.6.0",
+  "version": "6.7.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
     "window": "2026-10-01 through 2026-10-07",
-    "sentMessages": 81,
-    "distinctRecipientMailboxes": 70,
+    "sentMessages": 82,
+    "distinctRecipientMailboxes": 71,
     "distinctBouncedRecipientMailboxes": 4,
     "meaningfulInboundReplies": 1,
     "confirmedBetaInterestApplications": 0,
     "interpretation": "Email outreach has produced no confirmed applicant yet. Do not treat sent-message volume as recruitment success.",
-    "lastUpdatedAt": "2026-10-07T08:46:06+09:00"
+    "lastUpdatedAt": "2026-10-07T09:21:33+09:00"
   },
   "wave2": [
     {
@@ -562,7 +562,9 @@
     {
       "sourceCode": "lpk_stgl",
       "channel": "email",
-      "status": "ready_not_sent"
+      "status": "sent_2026-10-07",
+      "sentAt": "2026-10-07T09:21:33+09:00",
+      "gmailMessageId": "1a113bca6996a00d"
     }
   ],
   "identityReconciliation": [
@@ -574,5 +576,12 @@
       "status": "same_operator_already_contacted",
       "action": "do_not_send_new_initial_outreach; treat future Lee UBT discovery as existing ubt_eps_topik_app"
     }
-  ]
+  ],
+  "emailWave12ApplicantFirst": {
+    "sentNow": 1,
+    "immediateBounceObserved": 0,
+    "newDistinctRecipients": 1,
+    "confirmedBetaInterestApplications": 0,
+    "rule": "The STGL applicant-first email was sent exactly once after same-HEAD static/UI/Pages/beta-launch gates passed. Do not send another initial outreach; follow-up requires an explicit follow-up-ready state."
+  }
 }
