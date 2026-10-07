@@ -1,5 +1,5 @@
 {
-  "version": "3.9.0",
+  "version": "3.10.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -97,6 +97,8 @@
     "lpk_jochiwon",
     "lpk_stgl",
     "aec_semarang",
-    "gni_cilegon_eps"
+    "gni_cilegon_eps",
+    "bbpvp_serang_root_industry",
+    "bbpvp_bandung_root_industry"
   ]
 }
