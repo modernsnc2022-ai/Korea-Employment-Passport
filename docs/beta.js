@@ -119,7 +119,7 @@ function applicantFormComplete(){
 
 function validContactEmail(value){
   const email=String(value||'').trim();
-  return email.length<=254&&/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+  return email.length<=254&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function directApplicantPayload(){
