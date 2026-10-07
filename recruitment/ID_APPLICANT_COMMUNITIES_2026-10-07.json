@@ -1,5 +1,5 @@
 {
-  "version": "1.52.0",
+  "version": "1.53.0",
   "snapshotDate": "2026-10-07",
   "purpose": "Indonesia-based EPS/G-to-G applicant community acquisition map. Count ecosystems/operators, not every sibling channel, to avoid inflated reach and duplicate outreach.",
   "scoring": {
@@ -1035,6 +1035,21 @@
       "outreachState": "auto_reply_received_2026-10-07_waiting_human",
       "priority": "A",
       "note": "Initial outreach sent; auto-reply asks not to rechat/spam while waiting. No further outbound until human response."
+    },
+    {
+      "id": "lpks_jklc_kediri",
+      "name": "LPKS JKLC — Kediri",
+      "platform": "LPK / WhatsApp",
+      "adminContact": "WhatsApp +62 812-1517-8371",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS/G-to-G preparation",
+        "pre-departure support"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Fresh 2026 directory evidence; standalone official site not independently verified. Use one initial message only."
     }
   ]
 }
