@@ -1,5 +1,5 @@
 {
-  "version": "3.14.1",
+  "version": "3.15.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -111,6 +111,7 @@
     "giwonhae_eps",
     "angga_fanda_eps",
     "kursusindonesia_eps",
-    "soal_eps_topik_indonesia_fb"
+    "soal_eps_topik_indonesia_fb",
+    "lpk_cheonan_semarang"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "8.6.0",
+  "version": "8.7.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -848,6 +848,16 @@
       "priority": "A5",
       "rule": "Do not create a promotional discussion or use unrelated emergency/government channels. Wait for a legitimate on-site moderator/partnership contact route, then request permission before sharing KEP.",
       "evidence": "The public contact page currently states direct PekerjaMigran.id contact channels are not available. Korea community rules prohibit spam/ads and identify only 'Komunitas PekerjaMigran.id Admin' as moderator."
+    },
+    {
+      "sourceCode": "lpk_cheonan_semarang",
+      "operator": "LPK CHEONAN Kursus Bahasa Korea — Ungaran/Semarang",
+      "channel": "whatsapp",
+      "contact": "+62 858-4865-2838",
+      "status": "manual_send_pending",
+      "priority": "A6",
+      "rule": "One initial admin-permission request to the public organization WhatsApp only. Do not use staff/past-employee personal email addresses or duplicate via Instagram unless the WhatsApp route is verified unusable.",
+      "evidence": "Current Waze listing crawled 2026-10-07 exposes 0858-4865-2838 and instagram.com/lpkcheonan_semarang; both connected Gmail accounts and current KEP repository contained no prior Cheonan outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
