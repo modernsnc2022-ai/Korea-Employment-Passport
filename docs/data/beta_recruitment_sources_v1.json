@@ -1,5 +1,5 @@
 {
-  "version": "3.33.0",
+  "version": "3.34.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -131,6 +131,7 @@
     "lee_ubt_eps",
     "lpk_yamaguchi_eps",
     "lpk_bhinneka_temanggung",
-    "lpk_bima_mandiri_cirebon"
+    "lpk_bima_mandiri_cirebon",
+    "karirluar_eps"
   ]
 }
