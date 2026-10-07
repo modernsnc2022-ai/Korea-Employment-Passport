@@ -1187,6 +1187,16 @@
       "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 813-7252-3423"
+    },
+    {
+      "sourceCode": "lpk_zea_wonosobo",
+      "operator": "LPK ZEA — Wonosobo",
+      "channel": "whatsapp",
+      "contact": "+62 852-0122-4333",
+      "status": "manual_send_pending",
+      "priority": "A36",
+      "rule": "Initial outreach prepared after dual-Gmail and origin/main name/domain/phone duplicate checks. Run send guard immediately before manual send.",
+      "evidence": "Current official LPK ZEA site exposes 085201224333 and documents G-to-G Korea stages from EPS-TOPIK/Skill Test through Sending Data/roster, SLC, OPP/Prelim, visa and departure."
     }
   ],
   "manualCommunityAdminPolicy": {

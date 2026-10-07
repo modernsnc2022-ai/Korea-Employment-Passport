@@ -1084,6 +1084,28 @@
       "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
       "priority": "A",
       "note": "Initial admin-permission request sent to public WhatsApp +62 813-7252-3423 on 2026-10-07. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_zea_wonosobo",
+      "name": "LPK ZEA — Wonosobo",
+      "platform": "LPK / official website + WhatsApp",
+      "url": "https://zeahangukohakwon.com/",
+      "adminContact": "WhatsApp +62 852-0122-4333",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK",
+        "Skill Test",
+        "MCU and document preparation",
+        "Sending Data / roster",
+        "SLC",
+        "OPP / preliminary education",
+        "CCVI / visa",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Current official site exposes public contact 085201224333 and documents the G-to-G Korea path through EPS-TOPIK, Skill Test, Sending Data/roster, SLC, OPP/Prelim, visa and departure. Both connected Gmail accounts and origin/main name/domain/phone checks returned no prior ZEA outreach."
     }
   ]
 }
