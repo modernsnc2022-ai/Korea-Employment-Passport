@@ -1305,6 +1305,16 @@
       "evidence": "User confirmed Telegram private DM sent to @baxtiyorjon_91_2392929 on 2026-10-08.",
       "sentChannel": "telegram_private_dm",
       "sentContact": "@baxtiyorjon_91_2392929"
+    },
+    {
+      "sourceCode": "uz_koreya24soat",
+      "operator": "Koreya 24 soat",
+      "channel": "telegram_bot_contact",
+      "contact": "@koreya24soat_bot",
+      "status": "manual_send_pending",
+      "priority": "UZ-A4",
+      "rule": "Use the channel's published bot/contact path once. Do not post directly to the channel. If the bot cannot accept free messages or only automates unrelated functions, close and skip.",
+      "evidence": "Public @koreya24soat channel has about 15.5K subscribers, covers EPS-TOPIK/SPAS/employer-selection/departure, and publicly lists @koreya24soat_bot."
     }
   ],
   "manualCommunityAdminPolicy": {

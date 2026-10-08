@@ -93,6 +93,25 @@
       "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "UZ-A3",
       "note": "User confirmed initial Telegram outreach to @baxtiyorjon_91_2392929 on 2026-10-08. Treat @eps_uzz and linked operator channels as one operator ecosystem; do not duplicate initial outreach."
+    },
+    {
+      "id": "uz_koreya24soat",
+      "country": "UZ",
+      "countryName": "Uzbekistan",
+      "name": "Koreya 24 soat",
+      "platform": "Telegram channel",
+      "url": "https://t.me/koreya24soat",
+      "adminContact": "Telegram @koreya24soat_bot",
+      "applicantStages": [
+        "EPS-TOPIK",
+        "SPAS/job seeker roster",
+        "employer selection",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_telegram_ready_not_sent",
+      "priority": "UZ-A4",
+      "note": "Public channel has about 15.5K subscribers and posts EPS-TOPIK, SPAS, employer-selection and departure updates. It publicly lists @koreya24soat_bot as its contact path. Dual Gmail/GitHub checks found no prior outreach."
     }
   ]
 }
