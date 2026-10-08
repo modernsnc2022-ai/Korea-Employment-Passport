@@ -109,9 +109,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "closed_invalid_contact_path_2026-10-08_do_not_send",
       "priority": "UZ-A4",
-      "note": "Public channel has about 15.5K subscribers and posts EPS-TOPIK, SPAS, employer-selection and departure updates. It publicly lists @koreya24soat_bot as its contact path. Dual Gmail/GitHub checks found no prior outreach."
+      "note": "User screenshot shows @koreya24soat_bot is a tiny 2-subscriber Telegram channel, not a viable operator contact/bot. Do not send. Reverify a real operator contact before any future outreach."
     }
   ]
 }
