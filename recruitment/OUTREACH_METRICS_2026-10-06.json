@@ -1,5 +1,5 @@
 {
-  "version": "8.57.0",
+  "version": "8.58.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1475,6 +1475,16 @@
       "evidence": "Gmail send succeeded from modernsnc2022@gmail.com to ngoaingugialong.vn@gmail.com on 2026-10-08 after WhatsApp lookup found no account.",
       "sentChannel": "email",
       "sentContact": "ngoaingugialong.vn@gmail.com"
+    },
+    {
+      "sourceCode": "vn_migii_eps_topik",
+      "operator": "Migii TOPIK / Language Skills Studio",
+      "channel": "whatsapp",
+      "contact": "+84 354 7373 64",
+      "status": "manual_send_pending",
+      "priority": "VN-A2",
+      "rule": "Send one permission-first WhatsApp message only after the user verifies the account identity. Do not duplicate via email or another channel unless requested.",
+      "evidence": "Current Google Play listing shows Migii TOPIK actively maintained with EPS-TOPIK prep and 500K+ installs; developer replies publish WhatsApp +84 354 7373 64. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {

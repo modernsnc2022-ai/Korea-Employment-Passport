@@ -1,5 +1,5 @@
 {
-  "version": "3.41.0",
+  "version": "3.42.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -165,6 +165,7 @@
     "np_toddle_hetauda_eps",
     "np_angel_bhasha_center",
     "np_ichhi_hana_international",
-    "vn_gialong_eps_hadong"
+    "vn_gialong_eps_hadong",
+    "vn_migii_eps_topik"
   ]
 }
