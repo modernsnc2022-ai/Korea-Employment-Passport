@@ -1393,10 +1393,12 @@
       "operator": "Agency for Employment Abroad / EPS-TOPIK Korea in Tajikistan",
       "channel": "whatsapp",
       "contact": "+992 930 934 994",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "TJ-A3",
-      "rule": "Government contact. Send one permission-first review request only. Explicitly state KEP is independent and unaffiliated. Do not ask for participant data or post directly to official channels without written approval.",
-      "evidence": "2026 Tajik Ministry/Agency notices publish +992 930 934 994 for WhatsApp/Telegram and link the official EPS-TOPIK Korea in Tajikistan information channel."
+      "rule": "Permission-first review request already sent. Do not resend without explicit approval.",
+      "evidence": "User confirmed WhatsApp send to +992 93 093 4994 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+992 93 093 4994"
     }
   ],
   "manualCommunityAdminPolicy": {
