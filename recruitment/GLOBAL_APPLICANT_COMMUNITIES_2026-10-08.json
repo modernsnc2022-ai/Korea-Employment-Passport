@@ -385,6 +385,24 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "VN-A2",
       "note": "Current Google Play listing shows an actively updated Migii TOPIK app with 500K+ installs and EPS-TOPIK preparation features. Developer support replies publish WhatsApp +84 354 7373 64. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify the WhatsApp account identity before sending."
+    },
+    {
+      "id": "vn_pass_eps_topik_thesaem",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "PASS EPS-TOPIK / The Saem English Education Center",
+      "platform": "EPS-TOPIK app / hotline / email",
+      "url": "https://play.google.com/store/apps/details?id=com.admin.app_jindo",
+      "adminContact": "Hotline +84 931 412 656; email passepstopik@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock exams",
+        "exam-format practice"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A3",
+      "note": "Google Play listing updated 2026-08-29 shows active EPS-TOPIK exam preparation, mock exams and community support. Public hotline +84 931 412 656 and support email passepstopik@gmail.com. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify whether the hotline is registered on WhatsApp and matches PASS EPS-TOPIK/The Saem before sending."
     }
   ]
 }

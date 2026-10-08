@@ -1,5 +1,5 @@
 {
-  "version": "8.58.0",
+  "version": "8.59.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1485,6 +1485,16 @@
       "priority": "VN-A2",
       "rule": "Send one permission-first WhatsApp message only after the user verifies the account identity. Do not duplicate via email or another channel unless requested.",
       "evidence": "Current Google Play listing shows Migii TOPIK actively maintained with EPS-TOPIK prep and 500K+ installs; developer replies publish WhatsApp +84 354 7373 64. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_pass_eps_topik_thesaem",
+      "operator": "PASS EPS-TOPIK / The Saem English Education Center",
+      "channel": "whatsapp",
+      "contact": "+84 931 412 656",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A3",
+      "rule": "Check whether the public hotline is registered on WhatsApp and verify operator identity before any permission-first outreach. Do not duplicate via email unless WhatsApp is unavailable or the operator requests another channel.",
+      "evidence": "Google Play listing updated 2026-08-29 publishes +84 931 412 656 for PASS EPS-TOPIK support. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
