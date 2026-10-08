@@ -1469,10 +1469,10 @@
       "operator": "Trung tâm Ngoại ngữ Gia Long — Hà Đông",
       "channel": "zalo",
       "contact": "0988 617 289",
-      "status": "manual_send_pending",
+      "status": "manual_zalo_or_email_pending",
       "priority": "VN-A1",
-      "rule": "Send one permission-first Zalo message to the official public Zalo/Hotline after account identity check. Do not duplicate via email or other channels unless requested.",
-      "evidence": "Official Gia Long site currently lists EPS-TOPIK training, active 2026 EPS classes/exam updates, and Zalo/Hotline 0988 617 289. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach."
+      "rule": "Do not use WhatsApp; user lookup on 2026-10-08 found the public number is not registered there. Use one official initial channel only: Zalo 0988 617 289 or ngoaingugialong.vn@gmail.com.",
+      "evidence": "Official Gia Long site currently lists EPS-TOPIK training, active 2026 EPS classes/exam updates, and Zalo/Hotline 0988 617 289. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. User confirmed WhatsApp lookup returned no account on 2026-10-08."
     }
   ],
   "manualCommunityAdminPolicy": {
