@@ -108,7 +108,8 @@
       {
         "sourceCode": "ut_korea_pmi",
         "channel": "email",
-        "status": "sent_2026-10-06"
+        "status": "delivery_delayed_2026-10-08_gmail_retry_pending",
+        "evidence": "Gmail DSN on 2026-10-08 reports recipient server timeouts for utkorea.id and automatic retry in about 23 hours. Do not resend manually while Gmail retry is pending."
       },
       {
         "sourceCode": "wongrow_pmi_korea",
@@ -1469,12 +1470,10 @@
       "operator": "Trung tâm Ngoại ngữ Gia Long — Hà Đông",
       "channel": "zalo",
       "contact": "0988 617 289",
-      "status": "sent_2026-10-08",
+      "status": "email_bounced_inactive_2026-10-08",
       "priority": "VN-A1",
-      "rule": "Initial outreach already sent by email. Do not resend via Zalo, WhatsApp or another channel unless explicitly moved to follow-up ready.",
-      "evidence": "Gmail send succeeded from modernsnc2022@gmail.com to ngoaingugialong.vn@gmail.com on 2026-10-08 after WhatsApp lookup found no account.",
-      "sentChannel": "email",
-      "sentContact": "ngoaingugialong.vn@gmail.com"
+      "rule": "Email delivery failed permanently because the published Gmail account is inactive. Do not count this as sent/delivered. Use Zalo only if choosing a fallback contact route.",
+      "evidence": "Gmail Delivery Status Notification on 2026-10-08: 550 5.2.1 recipient account ngoaingugialong.vn@gmail.com is inactive."
     },
     {
       "sourceCode": "vn_migii_eps_topik",
