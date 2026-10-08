@@ -128,9 +128,9 @@
         "Korea employment information"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "UZ-A5",
-      "note": "Public @koreystili_markaz channel has about 18.7K subscribers, promotes Korea employment/EPS-TOPIK information and posts employer/contract-selection discussion. It explicitly lists @korean_teacher07 for advertising/collaboration. Exact-handle Gmail and GitHub checks returned no prior outreach."
+      "note": "User confirmed initial Telegram outreach to @korean_teacher07 on 2026-10-08. Treat @koreystili_markaz and linked operator channels as one ecosystem; do not duplicate initial outreach."
     }
   ]
 }
