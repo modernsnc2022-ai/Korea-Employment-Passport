@@ -1277,10 +1277,20 @@
       "operator": "EPS UZBEKISTAN / KOREAN_SEM",
       "channel": "telegram",
       "contact": "@KOREAN_SEM",
-      "status": "manual_send_pending",
+      "status": "closed_paid_dm_required_2026-10-08",
       "priority": "UZ-A1",
-      "rule": "Send one private permission-first DM to @KOREAN_SEM. Treat EPS_UZ, Eps_topik_kanali, linked stage-specific groups and YouTube @korean_topik_channel as one operator ecosystem; no duplicate initial outreach.",
-      "evidence": "Public EPS UZBEKISTAN posts identify @KOREAN_SEM and link separate Skill Test, exam-passer, and contract-selection-waiting groups plus YouTube @korean_topik_channel."
+      "rule": "Do not pay Telegram Stars for initial outreach and do not retry this linked operator ecosystem unless an inbound free contact route appears.",
+      "evidence": "User screenshot shows @Korean_sem charges 35,000 Telegram Stars per message."
+    },
+    {
+      "sourceCode": "uz_epskorea1_rekmigration",
+      "operator": "Migration uz eps go kr. Korea mehnat uz",
+      "channel": "telegram",
+      "contact": "@rekmigration",
+      "status": "manual_send_pending",
+      "priority": "UZ-A2",
+      "rule": "Contact the public channel contact once. Do not post directly to the large channel/group without operator permission. If Telegram imposes a paid-message gate, close and skip without payment.",
+      "evidence": "Public @epskorea1 channel has roughly 28k-30k subscribers, covers EPS-TOPIK through Skill Test/SPAS/contract/departure, and publicly lists @rekmigration as contact."
     }
   ],
   "manualCommunityAdminPolicy": {

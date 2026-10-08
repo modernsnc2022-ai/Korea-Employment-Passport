@@ -52,9 +52,29 @@
         "waiting for employer/contract selection"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "closed_paid_dm_required_2026-10-08_do_not_retry",
       "priority": "UZ-A1",
-      "note": "Public EPS UZBEKISTAN posts link @KOREAN_SEM, @Eps_topik_kanali, YouTube @korean_topik_channel, and separate groups for Skill Test preparation, exam passers, and people waiting for contract/employer selection. Treat these as one operator ecosystem and contact @KOREAN_SEM only for initial outreach. Dual Gmail and GitHub checks returned no prior contact."
+      "note": "Telegram @Korean_sem requires 35,000 Stars per incoming message. User screenshot confirmed paid-message gate. Skip this operator ecosystem; do not pay or retry."
+    },
+    {
+      "id": "uz_epskorea1_rekmigration",
+      "country": "UZ",
+      "countryName": "Uzbekistan",
+      "name": "Migration uz eps go kr. Korea mehnat uz",
+      "platform": "Telegram channel + linked EPS stage groups",
+      "url": "https://t.me/epskorea1",
+      "adminContact": "Telegram @rekmigration",
+      "applicantStages": [
+        "EPS-TOPIK",
+        "Skill Test",
+        "SPAS/job seeker roster",
+        "employer/contract selection",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_telegram_ready_not_sent",
+      "priority": "UZ-A2",
+      "note": "Public channel @epskorea1 has roughly 28k-30k subscribers and publishes current EPS-TOPIK, Skill Test, SPAS, contract-selection and departure information. Channel description exposes @rekmigration as the public contact. Treat linked groups/channels as one operator ecosystem. Dual Gmail/GitHub checks returned no prior outreach."
     }
   ]
 }
