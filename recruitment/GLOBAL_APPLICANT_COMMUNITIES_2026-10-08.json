@@ -364,9 +364,9 @@
         "2026 EPS exam preparation"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_zalo_or_email_ready_not_sent",
+      "outreachState": "email_sent_2026-10-08_do_not_resend",
       "priority": "VN-A1",
-      "note": "Current 2026 official-site posts show active EPS classes, EPS-TOPIK exam preparation and 2026 exam updates. Both connected Gmail accounts and the GitHub recruitment ledger returned no prior Gia Long outreach. User checked WhatsApp on 2026-10-08 and the number was not registered there; use Zalo or official email, not WhatsApp."
+      "note": "Current 2026 official-site posts show active EPS classes, EPS-TOPIK exam preparation and 2026 exam updates. Both connected Gmail accounts and the GitHub recruitment ledger returned no prior Gia Long outreach. User checked WhatsApp on 2026-10-08 and the number was not registered there; use Zalo or official email, not WhatsApp. Initial outreach sent by email from modernsnc2022@gmail.com to ngoaingugialong.vn@gmail.com on 2026-10-08; do not duplicate via Zalo or other channels unless explicitly moved to follow-up ready."
     }
   ]
 }
