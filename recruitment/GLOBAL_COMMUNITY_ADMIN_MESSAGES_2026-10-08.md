@@ -89,3 +89,27 @@ Ko‘rib chiqish uchun:
 https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=uz_epskorea1_rekmigration
 
 Rahmat. Kanal va guruh qoidalariga amal qilamiz.
+
+
+## UZ-A3 — Eps-topik | Ishchi viza
+Source: `uz_eps_uzz_baxtiyorjon`
+Channel: Telegram `@baxtiyorjon_91_2392929`
+
+Assalomu alaykum. Biz Korea Employment Passport (KEP) nomli mustaqil loyihani ishlab chiqmoqdamiz. KEP Koreyada E-9 orqali ishlashni rejalashtirayotgan nomzodlarga rasmiy EPS jarayonini bosqichma-bosqich tushunish va kuzatishda yordam berishga mo‘ljallangan.
+
+Sizning @eps_uzz kanalingizda EPS-TOPIK, Skill Test va SPAS ish izlovchilar bazasi bo‘yicha faol va foydali ma’lumotlar berilishini ko‘rdik.
+
+Hozir O‘zbekistondagi rasmiy EPS jarayonida haqiqatan qatnashayotgan kichik guruh nomzodlarni KEP Uzbekistan yo‘lini real tajribasi asosida tekshirish uchun beta-validator sifatida qidirmoqdamiz.
+
+Agar ma’qul bo‘lsa, taklifimizni ko‘rib chiqib, mos keladigan voyaga yetgan EPS nomzodlariga ulashishingiz mumkinmi?
+
+Biz a’zolar ro‘yxati, telefon raqamlari, pasport/ID ma’lumotlari yoki boshqa shaxsiy ma’lumotlarni so‘ramaymiz. Qiziqqanlar o‘zlari ro‘yxatdan o‘tadilar.
+
+Tasdiqlangan ishtirokchilar aktivatsiyadan boshlab 6 oygacha bepul foydalanish imkoniga ega bo‘lishi mumkin va real EPS tajribasi asosida fikr-mulohaza beradilar.
+
+KEP davlat xizmati, HRD Korea, yuboruvchi tashkilot, ishga joylashtirish agentligi yoki broker emas va imtihon, ish beruvchi tanlovi, SLC, viza yoki jo‘nab ketishni kafolatlamaydi.
+
+Ko‘rib chiqish uchun:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=uz_eps_uzz_baxtiyorjon
+
+Rahmat. Kanal qoidalariga amal qilamiz.
