@@ -72,9 +72,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "UZ-A2",
-      "note": "Public channel @epskorea1 has roughly 28k-30k subscribers and publishes current EPS-TOPIK, Skill Test, SPAS, contract-selection and departure information. Channel description exposes @rekmigration as the public contact. Treat linked groups/channels as one operator ecosystem. Dual Gmail/GitHub checks returned no prior outreach."
+      "note": "User confirmed initial Telegram outreach to @rekmigration on 2026-10-08. Treat @epskorea1 and linked EPS groups/channels as one operator ecosystem; do not duplicate initial outreach."
     }
   ]
 }

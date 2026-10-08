@@ -1287,10 +1287,12 @@
       "operator": "Migration uz eps go kr. Korea mehnat uz",
       "channel": "telegram",
       "contact": "@rekmigration",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "UZ-A2",
-      "rule": "Contact the public channel contact once. Do not post directly to the large channel/group without operator permission. If Telegram imposes a paid-message gate, close and skip without payment.",
-      "evidence": "Public @epskorea1 channel has roughly 28k-30k subscribers, covers EPS-TOPIK through Skill Test/SPAS/contract/departure, and publicly lists @rekmigration as contact."
+      "rule": "Initial outreach already sent to @rekmigration. Do not resend across @epskorea1 or linked operator channels unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed Telegram private DM sent to @rekmigration on 2026-10-08.",
+      "sentChannel": "telegram_private_dm",
+      "sentContact": "@rekmigration"
     }
   ],
   "manualCommunityAdminPolicy": {
