@@ -453,3 +453,27 @@ KEP कुनै सरकारी सेवा, HRD Korea, sending agency, rec
 https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=np_ichhi_hana_international
 
 धन्यवाद।
+
+
+## VN-A1 — Trung tâm Ngoại ngữ Gia Long — Hà Đông
+Source: `vn_gialong_eps_hadong`
+Channel: Zalo `0988 617 289`
+
+Xin chào. Chúng tôi đang phát triển Korea Employment Passport (KEP), một dự án độc lập nhằm giúp những người muốn làm việc tại Hàn Quốc theo diện E-9 hiểu và theo dõi các bước của quy trình EPS / G-to-G chính thức.
+
+Chúng tôi thấy Trung tâm Ngoại ngữ Gia Long hiện đang tổ chức các lớp EPS-TOPIK và cập nhật thông tin, lịch thi EPS năm 2026.
+
+Hiện chúng tôi đang tìm một số ít ứng viên tại Việt Nam thực sự đang tham gia quy trình EPS chính thức để thử nghiệm lộ trình Vietnam của KEP với vai trò beta-validator dựa trên trải nghiệm thực tế của họ.
+
+Nếu thấy phù hợp, anh/chị có thể xem lời mời của chúng tôi trước và chia sẻ với các học viên/ứng viên EPS trưởng thành phù hợp được không?
+
+Chúng tôi không xin danh sách học viên, số điện thoại, email, hộ chiếu/CCCD hoặc dữ liệu cá nhân khác. Người quan tâm sẽ tự đăng ký.
+
+Những người tham gia beta được chấp thuận có thể sử dụng miễn phí tối đa 6 tháng kể từ khi kích hoạt và sẽ cung cấp phản hồi dựa trên hành trình EPS thực tế của họ.
+
+KEP không phải là dịch vụ của chính phủ, HRD Korea, cơ quan phái cử, công ty tuyển dụng hay môi giới, và không đảm bảo đỗ kỳ thi, được chủ sử dụng lao động lựa chọn, SLC, visa hoặc xuất cảnh.
+
+Link:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=vn_gialong_eps_hadong
+
+Cảm ơn.
