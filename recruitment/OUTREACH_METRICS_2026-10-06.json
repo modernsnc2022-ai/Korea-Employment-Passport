@@ -1235,6 +1235,16 @@
       "evidence": "User confirmed manual WhatsApp send to +62 813-1461-7531 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 813-1461-7531"
+    },
+    {
+      "sourceCode": "lpks_hyeong_nim_pati",
+      "operator": "LPKS Hyeong Nim — Pati",
+      "channel": "whatsapp",
+      "contact": "+62 852-9033-1755",
+      "status": "manual_send_pending",
+      "priority": "A40",
+      "rule": "Initial outreach prepared after dual-Gmail and origin/main name/phone/email duplicate checks. Run send guard immediately before manual send.",
+      "evidence": "Current public directory lists LPKS Hyeong Nim, Sonorejo/Jakenan/Pati, contact 085290331755; 2023 local job-fair report also lists the institution as a participant seeking applicants."
     }
   ],
   "manualCommunityAdminPolicy": {
