@@ -403,6 +403,25 @@
       "outreachState": "whatsapp_unavailable_2026-10-08_do_not_send",
       "priority": "VN-A3",
       "note": "Google Play listing updated 2026-08-29 shows active EPS-TOPIK exam preparation, mock exams and community support. Public hotline +84 931 412 656 and support email passepstopik@gmail.com. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify whether the hotline is registered on WhatsApp and matches PASS EPS-TOPIK/The Saem before sending. User checked WhatsApp on 2026-10-08 and the public hotline was not registered; do not retry WhatsApp."
+    },
+    {
+      "id": "vn_eps_topik_hub_bacninh",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "EPS TOPIK HUB / Bắc Ninh offline class",
+      "platform": "EPS-TOPIK study hub / offline class / phone",
+      "url": "https://epstopikvn.com/Epsinfo",
+      "adminContact": "Phone 0971 379 786",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock exams",
+        "round 2 preparation",
+        "departure updates"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A4",
+      "note": "Current site remains active with 2026 EPS notices, mock-test/study resources and departure updates. It advertises direct offline EPS-TOPIK classes in Bắc Ninh and public contact 0971 379 786. Both connected Gmail accounts and GitHub ledger returned no prior outreach. Check WhatsApp registration and account identity before sending."
     }
   ]
 }
