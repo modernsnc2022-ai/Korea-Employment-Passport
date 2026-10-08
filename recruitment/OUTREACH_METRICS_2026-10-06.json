@@ -1311,10 +1311,10 @@
       "operator": "Koreya 24 soat",
       "channel": "telegram_bot_contact",
       "contact": "@koreya24soat_bot",
-      "status": "manual_send_pending",
+      "status": "closed_invalid_contact_path_2026-10-08",
       "priority": "UZ-A4",
-      "rule": "Use the channel's published bot/contact path once. Do not post directly to the channel. If the bot cannot accept free messages or only automates unrelated functions, close and skip.",
-      "evidence": "Public @koreya24soat channel has about 15.5K subscribers, covers EPS-TOPIK/SPAS/employer-selection/departure, and publicly lists @koreya24soat_bot."
+      "rule": "Do not send to @koreya24soat_bot. Reverify a genuine operator contact before any future outreach.",
+      "evidence": "User screenshot shows @koreya24soat_bot is a 2-subscriber channel, not a usable contact bot."
     }
   ],
   "manualCommunityAdminPolicy": {
