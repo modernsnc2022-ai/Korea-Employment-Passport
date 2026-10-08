@@ -43,3 +43,27 @@ Review link:
 https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=kh_hun_makara_eps
 
 Thank you. We will follow your community/channel rules.
+
+
+## UZ-A1 — EPS UZBEKISTAN / KOREAN_SEM
+Source: `uz_eps_uz_korean_sem`
+Channel: Telegram `@KOREAN_SEM`
+
+Assalomu alaykum. Biz Korea Employment Passport (KEP) nomli mustaqil loyihani ishlab chiqmoqdamiz. KEP Koreyada ishlashni rejalashtirayotgan nomzodlarga rasmiy EPS / G-to-G jarayonini bosqichma-bosqich tushunish va kuzatishda yordam berishni maqsad qiladi, norasmiy vositachilarga qaram bo‘lmasdan.
+
+EPS UZBEKISTAN kanalingizda EPS-TOPIK, Skill Test, imtihondan o‘tganlar va ish beruvchi/shartnoma tanlovini kutayotgan nomzodlar uchun alohida guruhlar borligini ko‘rdik.
+
+Hozir biz O‘zbekistondagi rasmiy EPS jarayonida haqiqatan qatnashayotgan kichik guruh nomzodlarni KEP Uzbekistan yo‘lini real tajribasi asosida tekshirish uchun beta-validator sifatida qidirmoqdamiz.
+
+Agar Sizga ma’qul bo‘lsa, taklifimizni ko‘rib chiqib, mos keladigan voyaga yetgan EPS nomzodlariga ulashishingiz mumkinmi?
+
+Biz Sizdan a’zolar ro‘yxati, telefon raqamlari, pasport/ID ma’lumotlari yoki boshqa shaxsiy ma’lumotlarni so‘ramaymiz. Qiziqqan nomzodlar o‘zlari ro‘yxatdan o‘tadilar.
+
+Tasdiqlangan beta ishtirokchilari aktivatsiyadan boshlab 6 oygacha bepul foydalanish imkoniga ega bo‘lishi mumkin va ular real EPS jarayoniga asoslangan fikr-mulohaza beradilar.
+
+KEP davlat xizmati, HRD Korea, yuboruvchi tashkilot, ishga joylashtirish agentligi yoki broker emas. KEP imtihondan o‘tish, ish beruvchi tanlovi, SLC, viza yoki jo‘nab ketishni kafolatlamaydi.
+
+Ko‘rib chiqish uchun havola:
+https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta-global.html?src=uz_eps_uz_korean_sem
+
+Rahmat. Kanal va guruh qoidalariga amal qilamiz.
