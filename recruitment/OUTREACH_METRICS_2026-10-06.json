@@ -1,5 +1,5 @@
 {
-  "version": "8.56.0",
+  "version": "8.57.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1463,6 +1463,16 @@
       "priority": "NP-A5",
       "rule": "Send one permission-first WhatsApp message to one listed official number after identity check. Do not message both numbers as separate initial outreach.",
       "evidence": "September 2026 public posts show weekly EPS-TOPIK mock exams and public WhatsApp numbers +977 9861106379 / +977 9841819667."
+    },
+    {
+      "sourceCode": "vn_gialong_eps_hadong",
+      "operator": "Trung tâm Ngoại ngữ Gia Long — Hà Đông",
+      "channel": "zalo",
+      "contact": "0988 617 289",
+      "status": "manual_send_pending",
+      "priority": "VN-A1",
+      "rule": "Send one permission-first Zalo message to the official public Zalo/Hotline after account identity check. Do not duplicate via email or other channels unless requested.",
+      "evidence": "Official Gia Long site currently lists EPS-TOPIK training, active 2026 EPS classes/exam updates, and Zalo/Hotline 0988 617 289. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {

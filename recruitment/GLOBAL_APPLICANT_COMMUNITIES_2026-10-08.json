@@ -349,6 +349,24 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "NP-A5",
       "note": "Current September 2026 public posts advertise weekly paper-based EPS-TOPIK mock exams in Bagbazar and list WhatsApp +977 9861106379 / +977 9841819667. Dual Gmail/GitHub checks returned no prior outreach."
+    },
+    {
+      "id": "vn_gialong_eps_hadong",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Ngoại ngữ Gia Long — Hà Đông",
+      "platform": "EPS-TOPIK training center / Zalo / email",
+      "url": "https://ngoaingugialong.vn/",
+      "adminContact": "Zalo/Hotline 0988 617 289; email ngoaingugialong.vn@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock tests",
+        "2026 EPS exam preparation"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_zalo_ready_not_sent",
+      "priority": "VN-A1",
+      "note": "Current 2026 official-site posts show active EPS classes, EPS-TOPIK exam preparation and 2026 exam updates. Both connected Gmail accounts and the GitHub recruitment ledger returned no prior Gia Long outreach."
     }
   ]
 }
