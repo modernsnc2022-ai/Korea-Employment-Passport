@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "checkedAt": "2026-10-08",
+  "candidates": [
+    {
+      "id": "kh_klc_cambodia",
+      "country": "KH",
+      "countryName": "Cambodia",
+      "name": "KLC Cambodia — Korean Language Center",
+      "platform": "Training center / Telegram / Facebook / YouTube / TikTok",
+      "url": "https://www.klccambodia.com/",
+      "adminContact": "Telegram @camkarona; phone +855 10 400 148 / +855 99 703 001",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_telegram_ready_not_sent",
+      "priority": "KH-A1",
+      "note": "Official site states KLC primarily operates EPS-TOPIK preparation for Cambodian students seeking work in Korea under EPS, with Telegram, Facebook, TikTok and YouTube channels. Dual Gmail and GitHub code-search checks found no prior KLC Cambodia outreach."
+    }
+  ]
+}
