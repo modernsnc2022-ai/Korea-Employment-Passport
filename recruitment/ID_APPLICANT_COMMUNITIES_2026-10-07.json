@@ -1157,9 +1157,9 @@
         "official G-to-G Korea preparation"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "A",
-      "note": "2025 official LPK Muchigae post targets CPMI Korea, uses HRD-Korea 2024 textbook, EPS-TOPIK UBT simulation, Skill Test/interview/physical training, and lists Admin WhatsApp 0813-1461-7531. Both connected Gmail accounts and GitHub code search returned no prior Muchigae outreach."
+      "note": "User confirmed initial WhatsApp outreach was sent to +62 813-1461-7531 on 2026-10-08. Do not duplicate initial outreach."
     }
   ]
 }
