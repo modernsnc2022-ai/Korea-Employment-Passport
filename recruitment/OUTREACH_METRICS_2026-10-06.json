@@ -1229,10 +1229,12 @@
       "operator": "LPK Muchigae — Garut",
       "channel": "whatsapp",
       "contact": "+62 813-1461-7531",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "A39",
-      "rule": "Initial outreach prepared after dual-Gmail and GitHub duplicate checks. Run send guard immediately before manual send.",
-      "evidence": "Official 2025 LPK Muchigae post serves CPMI Korea with EPS-TOPIK UBT, Skill Test/interview/physical training and lists Admin WhatsApp 0813-1461-7531."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed manual WhatsApp send to +62 813-1461-7531 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 813-1461-7531"
     }
   ],
   "manualCommunityAdminPolicy": {
