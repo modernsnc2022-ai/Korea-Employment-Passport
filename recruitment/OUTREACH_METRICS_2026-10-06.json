@@ -1299,10 +1299,12 @@
       "operator": "Eps-topik | Ishchi viza",
       "channel": "telegram",
       "contact": "@baxtiyorjon_91_2392929",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "UZ-A3",
-      "rule": "Send one private permission-first DM to the listed channel contact. Do not post directly in the channel without approval. If a paid-message gate appears, close and skip without payment.",
-      "evidence": "Public @eps_uzz channel has about 3.1K subscribers, covers 2026 EPS-TOPIK, Skill Test and SPAS/job-seeker stages, and lists @baxtiyorjon_91_2392929 as contact."
+      "rule": "Initial outreach already sent. Do not resend across @eps_uzz or linked operator channels unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed Telegram private DM sent to @baxtiyorjon_91_2392929 on 2026-10-08.",
+      "sentChannel": "telegram_private_dm",
+      "sentContact": "@baxtiyorjon_91_2392929"
     }
   ],
   "manualCommunityAdminPolicy": {

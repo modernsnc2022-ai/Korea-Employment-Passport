@@ -90,9 +90,9 @@
         "SPAS / job seeker roster"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "UZ-A3",
-      "note": "Public @eps_uzz channel has about 3.1K subscribers and current 2026 EPS-TOPIK/Skill Test/SPAS applicant information. Channel publicly lists @baxtiyorjon_91_2392929 for contact. Dual Gmail and GitHub checks returned no prior outreach."
+      "note": "User confirmed initial Telegram outreach to @baxtiyorjon_91_2392929 on 2026-10-08. Treat @eps_uzz and linked operator channels as one operator ecosystem; do not duplicate initial outreach."
     }
   ]
 }
