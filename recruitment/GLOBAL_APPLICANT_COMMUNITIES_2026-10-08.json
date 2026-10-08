@@ -146,9 +146,9 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "MN-A1",
-      "note": "Official Mongolia site offers EPS-TOPIK training for people preparing to work in Korea and lists customer-center phone +976 8801-8529. User confirmed the number is available on WhatsApp. Dual Gmail and GitHub checks found no prior outreach."
+      "note": "User confirmed initial WhatsApp outreach to Global HRD Institute Mongolia at +976 8801 8529 on 2026-10-08. Do not duplicate via phone/email unless requested by the operator."
     }
   ]
 }
