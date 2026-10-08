@@ -1247,6 +1247,16 @@
       "evidence": "User confirmed manual WhatsApp send to +62 852-9033-1755 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 852-9033-1755"
+    },
+    {
+      "sourceCode": "kh_klc_cambodia",
+      "operator": "KLC Cambodia — Korean Language Center",
+      "channel": "telegram",
+      "contact": "@camkarona",
+      "status": "manual_send_pending",
+      "priority": "KH-A1",
+      "rule": "Initial outreach prepared after dual-Gmail and GitHub duplicate checks. Contact one operator account only; do not duplicate via phone/email unless the operator requests another channel.",
+      "evidence": "Official KLC Cambodia site states it mainly prepares Khmer students for EPS-TOPIK/work in Korea and publicly lists Telegram camkarona, Facebook KLC Cambodia, TikTok camkarona and YouTube KLC Cambodia."
     }
   ],
   "manualCommunityAdminPolicy": {
