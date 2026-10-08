@@ -331,6 +331,24 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "NP-A4",
       "note": "2026 public posts show EPS-TOPIK preparation, weekly Friday mock exams, exam-pattern classes, and public WhatsApp +977 9761802102. Dual Gmail/GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "id": "np_ichhi_hana_international",
+      "country": "NP",
+      "countryName": "Nepal",
+      "name": "Ichhi Hana International Academy",
+      "platform": "EPS-TOPIK academy / weekly paper-based mock exam / WhatsApp",
+      "url": "https://www.schoolandcollegelistings.com/NP/Kathmandu/102570625649877/Ichhi-Hana-International-Academy",
+      "adminContact": "WhatsApp +977 9861106379 / +977 9841819667; phone 01-5350919",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "weekly mock exam",
+        "exam preparation"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "NP-A5",
+      "note": "Current September 2026 public posts advertise weekly paper-based EPS-TOPIK mock exams in Bagbazar and list WhatsApp +977 9861106379 / +977 9841819667. Dual Gmail/GitHub checks returned no prior outreach."
     }
   ]
 }
