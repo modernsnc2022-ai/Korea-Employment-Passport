@@ -277,6 +277,24 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "NP-A2",
       "note": "Official site states K.P. Time Institute has taught Korean since 2008, reports 10k+ students passed, and operates a dedicated EPS-TOPIK testing platform with WhatsApp support. Dual Gmail/GitHub checks returned no prior outreach."
+    },
+    {
+      "id": "np_yonsei_korean_academy",
+      "country": "NP",
+      "countryName": "Nepal",
+      "name": "Yonsei Korean Academy, Chabahil, Kathmandu",
+      "platform": "EPS-TOPIK academy / UBT practice / WhatsApp",
+      "url": "https://www.schoolandcollegelistings.com/NP/Kathmandu/104962118601989/Yonsei-Korean-Academy%2C-Chabahil%2C-Kathmandu-%EC%97%B0%EC%84%B8-%ED%95%9C%EA%B5%AD%EC%96%B4-%ED%95%99%EC%9B%90",
+      "adminContact": "WhatsApp +977 986-1677985; phone 01-5902095",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "UBT mock practice",
+        "2026 application guidance"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "NP-A3",
+      "note": "Current 2026 public posts show EPS-TOPIK application guidance, new-pattern UBT sets, chapter practice and mobile/tablet mock testing. Public WhatsApp is +977 986-1677985. Dual Gmail/GitHub checks returned no prior outreach."
     }
   ]
 }
