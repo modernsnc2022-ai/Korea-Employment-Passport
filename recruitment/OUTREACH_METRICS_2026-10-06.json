@@ -1211,6 +1211,16 @@
       "evidence": "User confirmed manual WhatsApp send to +62 819-0658-6914 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 819-0658-6914"
+    },
+    {
+      "sourceCode": "lpk_sangkur_pena_kendal",
+      "operator": "LPKS Sangkur Pena — Kendal",
+      "channel": "whatsapp",
+      "contact": "+62 882-1257-2593",
+      "status": "manual_send_pending",
+      "priority": "A38",
+      "rule": "Initial outreach prepared after dual-Gmail and origin/main name/phone duplicate checks. Run send guard immediately before manual send.",
+      "evidence": "Public Kendal profile identifies the institution as EPS-TOPIK / official G-to-G Korea manufacturing preparation and lists admin WhatsApp 0882-1257-2593."
     }
   ],
   "manualCommunityAdminPolicy": {
