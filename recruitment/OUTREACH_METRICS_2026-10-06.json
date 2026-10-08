@@ -1327,6 +1327,16 @@
       "evidence": "User confirmed Telegram private DM sent to @korean_teacher07 on 2026-10-08.",
       "sentChannel": "telegram_private_dm",
       "sentContact": "@korean_teacher07"
+    },
+    {
+      "sourceCode": "mn_global_hrd_eps",
+      "operator": "Global HRD Institute Mongolia",
+      "channel": "whatsapp",
+      "contact": "+976 8801 8529",
+      "status": "manual_send_pending",
+      "priority": "MN-A1",
+      "rule": "Send one permission-first WhatsApp message to the public customer-center number. Do not duplicate via phone/email unless requested by the operator.",
+      "evidence": "Official Mongolia site offers EPS-TOPIK training for Korea-bound applicants and lists +976 8801-8529; user confirmed WhatsApp availability."
     }
   ],
   "manualCommunityAdminPolicy": {
