@@ -1127,6 +1127,22 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "A",
       "note": "User confirmed initial WhatsApp outreach was sent to +62 819-0658-6914 on 2026-10-08. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lpk_sangkur_pena_kendal",
+      "name": "LPKS Sangkur Pena — Kendal",
+      "platform": "LPK / public web listing + WhatsApp",
+      "url": "https://www.bloggerkendal.com/2024/01/sangkur-pena-lpk-korea-terdekat-di-kendal.html",
+      "adminContact": "WhatsApp +62 882-1257-2593",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation",
+        "G-to-G Korea manufacturing preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Public Kendal profile identifies LPKS Sangkur Pena as a Korea-training institution for EPS-TOPIK / G-to-G manufacturing applicants and lists admin WhatsApp 0882-1257-2593. Both connected Gmail accounts and origin/main name/phone checks returned no prior outreach."
     }
   ]
 }
