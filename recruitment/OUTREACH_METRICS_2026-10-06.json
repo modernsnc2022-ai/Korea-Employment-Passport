@@ -1480,10 +1480,12 @@
       "operator": "Migii TOPIK / Language Skills Studio",
       "channel": "facebook",
       "contact": "Migii TOPIK official fanpage (link supplied by former WhatsApp contact)",
-      "status": "manual_facebook_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "VN-A2",
-      "rule": "Former WhatsApp support contact said they no longer work on Migii and redirected outreach to the official fanpage. Send one permission-first message to that fanpage only; do not continue the full pitch in WhatsApp.",
-      "evidence": "User screenshot on 2026-10-08 shows the WhatsApp contact replying 'Dạ hiện tại mình ko' and 'Bạn liên hệ fanpage giúp mình nha', then sending the Migii TOPIK Facebook fanpage link."
+      "rule": "Initial outreach already sent to the official Migii TOPIK Facebook fanpage after explicit redirect from the former WhatsApp contact. Do not resend across linked channels unless explicitly moved to follow-up ready.",
+      "evidence": "User confirmed the two-part Facebook Messenger outreach was sent to the official Migii TOPIK fanpage on 2026-10-08.",
+      "sentChannel": "facebook_messenger",
+      "sentContact": "Migii TOPIK official fanpage"
     },
     {
       "sourceCode": "vn_pass_eps_topik_thesaem",
