@@ -1357,10 +1357,12 @@
       "operator": "Sets Oyu Academy",
       "channel": "email",
       "contact": "setsoyu.mongolian@gmail.com",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "MN-A3",
-      "rule": "Send one permission-first email to the official Mongolia contact address. Do not duplicate via phone/social unless requested by the operator.",
-      "evidence": "Official website and current public academy profiles list EPS-TOPIK/Korean training and setsoyu.mongolian@gmail.com as contact."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "Gmail send succeeded to setsoyu.mongolian@gmail.com from modernsnc2022@gmail.com on 2026-10-08.",
+      "sentChannel": "email",
+      "sentContact": "setsoyu.mongolian@gmail.com"
     }
   ],
   "manualCommunityAdminPolicy": {
