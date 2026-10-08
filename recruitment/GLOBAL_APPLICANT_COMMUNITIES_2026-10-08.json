@@ -367,6 +367,24 @@
       "outreachState": "email_sent_2026-10-08_do_not_resend",
       "priority": "VN-A1",
       "note": "Current 2026 official-site posts show active EPS classes, EPS-TOPIK exam preparation and 2026 exam updates. Both connected Gmail accounts and the GitHub recruitment ledger returned no prior Gia Long outreach. User checked WhatsApp on 2026-10-08 and the number was not registered there; use Zalo or official email, not WhatsApp. Initial outreach sent by email from modernsnc2022@gmail.com to ngoaingugialong.vn@gmail.com on 2026-10-08; do not duplicate via Zalo or other channels unless explicitly moved to follow-up ready."
+    },
+    {
+      "id": "vn_migii_eps_topik",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Migii TOPIK / Language Skills Studio",
+      "platform": "EPS-TOPIK app / WhatsApp / email",
+      "url": "https://play.google.com/store/apps/details?id=com.korean.migiitopik",
+      "adminContact": "WhatsApp +84 354 7373 64; email migiitopik@eupgroup.net",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock exams",
+        "score tracking"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "VN-A2",
+      "note": "Current Google Play listing shows an actively updated Migii TOPIK app with 500K+ installs and EPS-TOPIK preparation features. Developer support replies publish WhatsApp +84 354 7373 64. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify the WhatsApp account identity before sending."
     }
   ]
 }
