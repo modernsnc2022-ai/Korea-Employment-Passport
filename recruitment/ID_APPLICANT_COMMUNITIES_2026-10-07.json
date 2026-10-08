@@ -1103,9 +1103,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "A",
-      "note": "Current official site exposes public contact 085201224333 and documents the G-to-G Korea path through EPS-TOPIK, Skill Test, Sending Data/roster, SLC, OPP/Prelim, visa and departure. Both connected Gmail accounts and origin/main name/domain/phone checks returned no prior ZEA outreach."
+      "note": "User confirmed initial WhatsApp outreach was sent to +62 852-0122-4333. Do not duplicate initial outreach."
     }
   ]
 }
