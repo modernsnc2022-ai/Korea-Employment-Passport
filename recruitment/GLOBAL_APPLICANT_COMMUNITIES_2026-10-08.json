@@ -422,6 +422,24 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "VN-A4",
       "note": "Current site remains active with 2026 EPS notices, mock-test/study resources and departure updates. It advertises direct offline EPS-TOPIK classes in Bắc Ninh and public contact 0971 379 786. Both connected Gmail accounts and GitHub ledger returned no prior outreach. Check WhatsApp registration and account identity before sending. User received a WhatsApp reply on 2026-10-08 confirming the contact is the founder and administrator of epstopikvn.com and epstopikhub.com and lives in Bắc Ninh; identity verified for permission-first outreach. User confirmed the permission-first WhatsApp outreach was sent on 2026-10-08. Do not send another initial outreach through WhatsApp, email, phone or other linked channels unless explicitly moved to follow-up ready."
+    },
+    {
+      "id": "vn_quangtri_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ Việc làm Quảng Trị — EPS-TOPIK",
+      "platform": "Provincial employment service center / EPS-TOPIK training / hotline",
+      "url": "https://www.epstopikquangtri.io.vn/",
+      "adminContact": "Hotline 0856 401 246; email vieclamquangtri@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "round 2 interview/skill training",
+        "pre-departure preparation"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A5",
+      "note": "Current official EPS page advertises EPS-TOPIK classes in Quảng Trị, round-2 interview/skill training, 2023-2026 learner records and hotline 0856 401 246. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Check WhatsApp registration and account identity before sending."
     }
   ]
 }
