@@ -1,5 +1,5 @@
 {
-  "version": "3.44.0",
+  "version": "3.45.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -168,6 +168,7 @@
     "vn_gialong_eps_hadong",
     "vn_migii_eps_topik",
     "vn_pass_eps_topik_thesaem",
-    "vn_eps_topik_hub_bacninh"
+    "vn_eps_topik_hub_bacninh",
+    "vn_quangtri_eps_center"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "8.60.0",
+  "version": "8.61.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1507,6 +1507,16 @@
       "evidence": "User confirmed the two-part permission-first WhatsApp message was sent to the verified founder/administrator of epstopikvn.com and epstopikhub.com on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+84 971 379 786"
+    },
+    {
+      "sourceCode": "vn_quangtri_eps_center",
+      "operator": "Trung tâm Dịch vụ Việc làm Quảng Trị — EPS-TOPIK",
+      "channel": "whatsapp",
+      "contact": "+84 856 401 246",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A5",
+      "rule": "Check whether the public EPS training hotline is registered on WhatsApp and verify center identity before any outreach. Do not duplicate via email/phone unless WhatsApp is unavailable or another route is explicitly chosen.",
+      "evidence": "Current official center EPS page publishes hotline 0856 401 246 and active EPS-TOPIK/round-2 training. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
