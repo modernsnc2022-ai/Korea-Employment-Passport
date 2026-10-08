@@ -1259,6 +1259,16 @@
       "evidence": "User screenshot confirms Telegram message sent to @camkarona at 10:40 KST on 2026-10-08.",
       "sentChannel": "telegram_private_dm",
       "sentContact": "@camkarona"
+    },
+    {
+      "sourceCode": "kh_hun_makara_eps",
+      "operator": "HUN Makara / EPS TOPIK CAMBODIA",
+      "channel": "telegram",
+      "contact": "@makarahun168",
+      "status": "manual_send_pending",
+      "priority": "KH-A2",
+      "rule": "Send one private permission-first DM to HUN Makara. Treat @makarahun168, @makarahun22, @epscambodia2, and YouTube @Hunmakara2 as one operator ecosystem; no duplicate initial outreach.",
+      "evidence": "Public Telegram group @epscambodia2 links the Korean-learning channel @makarahun22; HUN Makara public profile links personal Telegram @makarahun168, the EPS group, Korean-learning channel, and YouTube @Hunmakara2."
     }
   ],
   "manualCommunityAdminPolicy": {
