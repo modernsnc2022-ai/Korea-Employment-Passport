@@ -1345,10 +1345,12 @@
       "operator": "Setsen Edu",
       "channel": "instagram",
       "contact": "@setsen_edu",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "MN-A2",
-      "rule": "Send one permission-first Instagram DM to the official handle. Do not duplicate by phone unless the operator asks for another channel.",
-      "evidence": "Official setsenedu.mn lists Korean/TOPIK and employment-contract exam preparation, Instagram @setsen_edu and Mongolia contact 7233-0623."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User screenshot confirms Instagram DM sent to @setsen_edu on 2026-10-08.",
+      "sentChannel": "instagram_dm",
+      "sentContact": "@setsen_edu"
     }
   ],
   "manualCommunityAdminPolicy": {
