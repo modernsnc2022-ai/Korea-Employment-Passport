@@ -1,5 +1,5 @@
 {
-  "version": "8.59.0",
+  "version": "8.60.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1495,6 +1495,16 @@
       "priority": "VN-A3",
       "rule": "Do not retry WhatsApp. Public hotline was checked by the user and is not registered on WhatsApp.",
       "evidence": "User confirmed WhatsApp lookup for +84 931 412 656 returned no account on 2026-10-08."
+    },
+    {
+      "sourceCode": "vn_eps_topik_hub_bacninh",
+      "operator": "EPS TOPIK HUB / Bắc Ninh offline class",
+      "channel": "whatsapp",
+      "contact": "+84 971 379 786",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A4",
+      "rule": "Check whether the public class contact is registered on WhatsApp and verify operator identity before initial outreach. Do not duplicate via another channel unless WhatsApp is unavailable or requested.",
+      "evidence": "Current epstopikvn.com site publishes active 2026 EPS content and a Bắc Ninh offline-class phone 0971 379 786. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
