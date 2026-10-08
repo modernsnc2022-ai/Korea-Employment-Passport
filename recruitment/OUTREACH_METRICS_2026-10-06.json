@@ -1405,10 +1405,12 @@
       "operator": "Woori Consultancy",
       "channel": "whatsapp",
       "contact": "+977 9803719505",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "NP-A1",
-      "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number. Do not duplicate via phone/social unless requested by the operator.",
-      "evidence": "2026 public Woori Consultancy posts show active EPS-TOPIK lessons/test updates and list WhatsApp +977 9803719505."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User screenshot confirms WhatsApp DM sent to +977 980-3719505 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+977 980-3719505"
     }
   ],
   "manualCommunityAdminPolicy": {
