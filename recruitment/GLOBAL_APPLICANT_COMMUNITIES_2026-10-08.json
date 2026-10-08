@@ -313,6 +313,24 @@
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "NP-A3",
       "note": "Current official site states Toddle offers EPS-TOPIK preparation with regular mock tests and publishes WhatsApp +977 9769741767. Dual Gmail and GitHub checks returned no prior outreach."
+    },
+    {
+      "id": "np_angel_bhasha_center",
+      "country": "NP",
+      "countryName": "Nepal",
+      "name": "Angel Bhasha Center, Chabahil",
+      "platform": "EPS-TOPIK academy / WhatsApp",
+      "url": "https://www.schoolandcollegelistings.com/NP/Kathmandu/304184112767762/Angel-Korean-Bhasha-Chabahil",
+      "adminContact": "WhatsApp +977 9761802102",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock exams",
+        "exam-pattern training"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "NP-A4",
+      "note": "2026 public posts show EPS-TOPIK preparation, weekly Friday mock exams, exam-pattern classes, and public WhatsApp +977 9761802102. Dual Gmail/GitHub duplicate checks returned no prior outreach."
     }
   ]
 }

@@ -1443,6 +1443,16 @@
       "priority": "NP-A3",
       "rule": "Send one permission-first WhatsApp message to the official public WhatsApp number after account identity check. Do not duplicate via email/social unless requested.",
       "evidence": "Current official Toddle site lists EPS-TOPIK preparation with regular mock tests and WhatsApp +977 9769741767."
+    },
+    {
+      "sourceCode": "np_angel_bhasha_center",
+      "operator": "Angel Bhasha Center, Chabahil",
+      "channel": "whatsapp",
+      "contact": "+977 9761802102",
+      "status": "manual_send_pending",
+      "priority": "NP-A4",
+      "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number after identity check. Do not duplicate via other channels unless requested.",
+      "evidence": "2026 public posts show active EPS-TOPIK prep, weekly mock exams and public WhatsApp +977 9761802102."
     }
   ],
   "manualCommunityAdminPolicy": {
