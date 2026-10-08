@@ -1271,6 +1271,16 @@
       "evidence": "User confirmed Telegram private DM sent to @makarahun168 on 2026-10-08.",
       "sentChannel": "telegram_private_dm",
       "sentContact": "@makarahun168"
+    },
+    {
+      "sourceCode": "uz_eps_uz_korean_sem",
+      "operator": "EPS UZBEKISTAN / KOREAN_SEM",
+      "channel": "telegram",
+      "contact": "@KOREAN_SEM",
+      "status": "manual_send_pending",
+      "priority": "UZ-A1",
+      "rule": "Send one private permission-first DM to @KOREAN_SEM. Treat EPS_UZ, Eps_topik_kanali, linked stage-specific groups and YouTube @korean_topik_channel as one operator ecosystem; no duplicate initial outreach.",
+      "evidence": "Public EPS UZBEKISTAN posts identify @KOREAN_SEM and link separate Skill Test, exam-passer, and contract-selection-waiting groups plus YouTube @korean_topik_channel."
     }
   ],
   "manualCommunityAdminPolicy": {

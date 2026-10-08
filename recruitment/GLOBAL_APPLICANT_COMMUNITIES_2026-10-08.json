@@ -36,6 +36,25 @@
       "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "KH-A2",
       "note": "User confirmed initial Telegram outreach to HUN Makara @makarahun168 on 2026-10-08. Treat @makarahun168, @makarahun22, @epscambodia2 and YouTube @Hunmakara2 as one operator ecosystem; do not duplicate initial outreach."
+    },
+    {
+      "id": "uz_eps_uz_korean_sem",
+      "country": "UZ",
+      "countryName": "Uzbekistan",
+      "name": "EPS UZBEKISTAN / KOREAN_SEM",
+      "platform": "Telegram channel + linked groups + YouTube",
+      "url": "https://t.me/Eps_Uz",
+      "adminContact": "Telegram @KOREAN_SEM",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Skill Test preparation",
+        "passed-exam community",
+        "waiting for employer/contract selection"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_telegram_ready_not_sent",
+      "priority": "UZ-A1",
+      "note": "Public EPS UZBEKISTAN posts link @KOREAN_SEM, @Eps_topik_kanali, YouTube @korean_topik_channel, and separate groups for Skill Test preparation, exam passers, and people waiting for contract/employer selection. Treat these as one operator ecosystem and contact @KOREAN_SEM only for initial outreach. Dual Gmail and GitHub checks returned no prior contact."
     }
   ]
 }
