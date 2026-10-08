@@ -1205,10 +1205,12 @@
       "operator": "LKP Rainbow College — Cianjur",
       "channel": "whatsapp",
       "contact": "+62 819-0658-6914",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "A37",
-      "rule": "Initial outreach prepared after dual-Gmail and origin/main name/domain/phone duplicate checks. Run send guard immediately before manual send.",
-      "evidence": "Official site currently documents G-to-G stages through EPS-TOPIK, Skill Test, MCU/Sending, roster, SLC and PAP/departure, and lists WhatsApp 0819-0658-6914."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed manual WhatsApp send to +62 819-0658-6914 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+62 819-0658-6914"
     }
   ],
   "manualCommunityAdminPolicy": {

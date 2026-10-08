@@ -1124,9 +1124,9 @@
         "departure"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "A",
-      "note": "Official site updated in 2026 documents the official G-to-G path through EPS-TOPIK, Skill Test, MCU/Sending, roster, SLC and PAP/departure. Public WhatsApp 0819-0658-6914. Both connected Gmail accounts and origin/main name/domain/phone checks returned no prior outreach."
+      "note": "User confirmed initial WhatsApp outreach was sent to +62 819-0658-6914 on 2026-10-08. Do not duplicate initial outreach."
     }
   ]
 }
