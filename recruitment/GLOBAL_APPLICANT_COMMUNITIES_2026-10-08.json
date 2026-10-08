@@ -219,9 +219,9 @@
         "document/visa support"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "TJ-A2",
-      "note": "User screenshot verifies WhatsApp Business account at +992 88 696 5555. Profile describes Korean vocational training for work in Korea, lists Rudaki 127 in Dushanbe and email job.koreatj@gmail.com. Public Telegram ecosystem uses @jobkoreatj. Dual Gmail/GitHub duplicate checks returned no prior outreach."
+      "note": "User confirmed initial WhatsApp outreach to Shodiyona/jobkoreatj at +992 88 696 5555 on 2026-10-08. Treat WhatsApp, job.koreatj@gmail.com and @jobkoreatj as one operator ecosystem; do not duplicate initial outreach."
     }
   ]
 }
