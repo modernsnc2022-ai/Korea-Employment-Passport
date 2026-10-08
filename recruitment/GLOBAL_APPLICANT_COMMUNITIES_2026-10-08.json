@@ -149,6 +149,24 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "MN-A1",
       "note": "User confirmed initial WhatsApp outreach to Global HRD Institute Mongolia at +976 8801 8529 on 2026-10-08. Do not duplicate via phone/email unless requested by the operator."
+    },
+    {
+      "id": "mn_setsen_edu",
+      "country": "MN",
+      "countryName": "Mongolia",
+      "name": "Setsen Edu",
+      "platform": "Korean-language training / Instagram",
+      "url": "https://www.setsenedu.mn/",
+      "adminContact": "Instagram @setsen_edu; Mongolia phone +976 7233-0623",
+      "applicantStages": [
+        "Korean language preparation",
+        "TOPIK preparation",
+        "Korea employment contract-exam preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_instagram_ready_not_sent",
+      "priority": "MN-A2",
+      "note": "Current official site lists TOPIK and Korean employment contract-exam preparation, 300+ learner experience, Instagram @setsen_edu and Mongolia contact 7233-0623. Exact-name/domain/phone/handle checks across both connected Gmail accounts and GitHub returned no prior outreach."
     }
   ]
 }
