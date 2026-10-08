@@ -1417,20 +1417,32 @@
       "operator": "K.P. Time Institute / Mero EPS Topik",
       "channel": "whatsapp",
       "contact": "+977 9843797769",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "NP-A2",
-      "rule": "Send one permission-first WhatsApp message to the public support/contact number. Do not duplicate via email/social unless requested by the operator.",
-      "evidence": "Official Mero EPS site shows a dedicated EPS-TOPIK platform, 10k+ passed-student claim, WhatsApp support and contact +977 9843797769."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed WhatsApp send to the verified K.P. Time Institute / Mero EPS Topik operator account on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+977 9843797769"
     },
     {
       "sourceCode": "np_yonsei_korean_academy",
       "operator": "Yonsei Korean Academy, Chabahil",
       "channel": "whatsapp",
       "contact": "+977 986-1677985",
+      "status": "closed_stale_non_eps_focus_2026-10-08",
+      "priority": "NP-A3",
+      "rule": "Do not send. Current WhatsApp profile is Japan study/work and Japanese-language focused; reverify Korea/EPS focus before any future outreach.",
+      "evidence": "User screenshot on 2026-10-08 shows Yonsei Academy Pvt. Ltd. current WhatsApp profile advertising Study & Work in Japan / Japanese Language Classes."
+    },
+    {
+      "sourceCode": "np_toddle_hetauda_eps",
+      "operator": "Toddle, Hetauda",
+      "channel": "whatsapp",
+      "contact": "+977 9769741767",
       "status": "manual_send_pending",
       "priority": "NP-A3",
-      "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number. Do not duplicate via phone/social unless requested by the operator.",
-      "evidence": "2026 public academy posts show active EPS-TOPIK application guidance and UBT mock practice; WhatsApp +977 986-1677985."
+      "rule": "Send one permission-first WhatsApp message to the official public WhatsApp number after account identity check. Do not duplicate via email/social unless requested.",
+      "evidence": "Current official Toddle site lists EPS-TOPIK preparation with regular mock tests and WhatsApp +977 9769741767."
     }
   ],
   "manualCommunityAdminPolicy": {

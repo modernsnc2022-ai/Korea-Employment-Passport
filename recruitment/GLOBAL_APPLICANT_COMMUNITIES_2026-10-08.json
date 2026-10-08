@@ -274,9 +274,9 @@
         "exam preparation"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "NP-A2",
-      "note": "Official site states K.P. Time Institute has taught Korean since 2008, reports 10k+ students passed, and operates a dedicated EPS-TOPIK testing platform with WhatsApp support. Dual Gmail/GitHub checks returned no prior outreach."
+      "note": "User confirmed WhatsApp outreach to K.P. Time Institute / Mero EPS Topik on 2026-10-08. Treat public WhatsApp and operator profile as one ecosystem; do not duplicate."
     },
     {
       "id": "np_yonsei_korean_academy",
@@ -292,9 +292,27 @@
         "2026 application guidance"
       ],
       "applicantDensity": "very high",
+      "outreachState": "closed_stale_non_eps_focus_2026-10-08_do_not_send",
+      "priority": "NP-A3",
+      "note": "User screenshot of the current WhatsApp Business profile shows Yonsei Academy Pvt. Ltd. is focused on Study & Work in Japan / Japanese language classes. Do not send KEP outreach to this contact unless Korea/EPS focus is reverified."
+    },
+    {
+      "id": "np_toddle_hetauda_eps",
+      "country": "NP",
+      "countryName": "Nepal",
+      "name": "Toddle, Hetauda",
+      "platform": "Education center / EPS-TOPIK / WhatsApp",
+      "url": "https://toddle.com.np/",
+      "adminContact": "WhatsApp +977 9769741767; email info@toddle.edu.np",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock tests",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
       "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "NP-A3",
-      "note": "Current 2026 public posts show EPS-TOPIK application guidance, new-pattern UBT sets, chapter practice and mobile/tablet mock testing. Public WhatsApp is +977 986-1677985. Dual Gmail/GitHub checks returned no prior outreach."
+      "note": "Current official site states Toddle offers EPS-TOPIK preparation with regular mock tests and publishes WhatsApp +977 9769741767. Dual Gmail and GitHub checks returned no prior outreach."
     }
   ]
 }
