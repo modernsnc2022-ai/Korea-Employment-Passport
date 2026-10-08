@@ -222,6 +222,25 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "TJ-A2",
       "note": "User confirmed initial WhatsApp outreach to Shodiyona/jobkoreatj at +992 88 696 5555 on 2026-10-08. Treat WhatsApp, job.koreatj@gmail.com and @jobkoreatj as one operator ecosystem; do not duplicate initial outreach."
+    },
+    {
+      "id": "tj_agency_employment_abroad_eps",
+      "country": "TJ",
+      "countryName": "Tajikistan",
+      "name": "Agency for Employment Abroad / EPS-TOPIK Korea in Tajikistan",
+      "platform": "Official government agency / WhatsApp / Telegram",
+      "url": "https://t.me/egencyemploymentabroad",
+      "adminContact": "WhatsApp/Telegram +992 930 934 994",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "EPS-TOPIK testing",
+        "Skill Test",
+        "SPAS/job seeker process"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_permission_ready_not_sent",
+      "priority": "TJ-A3",
+      "note": "Official Tajik Ministry/Agency sources publish +992 930 934 994 for WhatsApp/Telegram and link the EPS-TOPIK Korea in Tajikistan channel. This is a government operator: permission-first review request only, no affiliation implication, no direct promotional posting. Exact phone/channel Gmail and GitHub checks returned no prior outreach."
     }
   ]
 }
