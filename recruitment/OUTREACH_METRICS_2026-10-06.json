@@ -1411,6 +1411,16 @@
       "evidence": "User screenshot confirms WhatsApp DM sent to +977 980-3719505 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+977 980-3719505"
+    },
+    {
+      "sourceCode": "np_mero_eps_kptime",
+      "operator": "K.P. Time Institute / Mero EPS Topik",
+      "channel": "whatsapp",
+      "contact": "+977 9843797769",
+      "status": "manual_send_pending",
+      "priority": "NP-A2",
+      "rule": "Send one permission-first WhatsApp message to the public support/contact number. Do not duplicate via email/social unless requested by the operator.",
+      "evidence": "Official Mero EPS site shows a dedicated EPS-TOPIK platform, 10k+ passed-student claim, WhatsApp support and contact +977 9843797769."
     }
   ],
   "manualCommunityAdminPolicy": {
