@@ -1453,6 +1453,16 @@
       "priority": "NP-A4",
       "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number after identity check. Do not duplicate via other channels unless requested.",
       "evidence": "2026 public posts show active EPS-TOPIK prep, weekly mock exams and public WhatsApp +977 9761802102."
+    },
+    {
+      "sourceCode": "np_ichhi_hana_international",
+      "operator": "Ichhi Hana International Academy",
+      "channel": "whatsapp",
+      "contact": "+977 9861106379",
+      "status": "manual_send_pending",
+      "priority": "NP-A5",
+      "rule": "Send one permission-first WhatsApp message to one listed official number after identity check. Do not message both numbers as separate initial outreach.",
+      "evidence": "September 2026 public posts show weekly EPS-TOPIK mock exams and public WhatsApp numbers +977 9861106379 / +977 9841819667."
     }
   ],
   "manualCommunityAdminPolicy": {
