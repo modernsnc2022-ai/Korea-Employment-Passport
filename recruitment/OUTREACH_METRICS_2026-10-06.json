@@ -1363,6 +1363,16 @@
       "evidence": "Gmail send succeeded to setsoyu.mongolian@gmail.com from modernsnc2022@gmail.com on 2026-10-08.",
       "sentChannel": "email",
       "sentContact": "setsoyu.mongolian@gmail.com"
+    },
+    {
+      "sourceCode": "tj_titan_training_center",
+      "operator": "Titan Training Center",
+      "channel": "whatsapp",
+      "contact": "+992 55 219 2222",
+      "status": "manual_send_pending",
+      "priority": "TJ-A1",
+      "rule": "Send one permission-first WhatsApp message to the verified business account. Do not duplicate by email/social unless requested by the operator.",
+      "evidence": "User screenshot verifies the WhatsApp Business account, Dushanbe location, Korean-for-work training description, email titanschl@gmail.com and public taplink."
     }
   ],
   "manualCommunityAdminPolicy": {
