@@ -1478,12 +1478,12 @@
     {
       "sourceCode": "vn_migii_eps_topik",
       "operator": "Migii TOPIK / Language Skills Studio",
-      "channel": "whatsapp",
-      "contact": "+84 354 7373 64",
-      "status": "manual_send_pending",
+      "channel": "facebook",
+      "contact": "Migii TOPIK official fanpage (link supplied by former WhatsApp contact)",
+      "status": "manual_facebook_send_pending",
       "priority": "VN-A2",
-      "rule": "Send one permission-first WhatsApp message only after the user verifies the account identity. Do not duplicate via email or another channel unless requested.",
-      "evidence": "Current Google Play listing shows Migii TOPIK actively maintained with EPS-TOPIK prep and 500K+ installs; developer replies publish WhatsApp +84 354 7373 64. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+      "rule": "Former WhatsApp support contact said they no longer work on Migii and redirected outreach to the official fanpage. Send one permission-first message to that fanpage only; do not continue the full pitch in WhatsApp.",
+      "evidence": "User screenshot on 2026-10-08 shows the WhatsApp contact replying 'Dạ hiện tại mình ko' and 'Bạn liên hệ fanpage giúp mình nha', then sending the Migii TOPIK Facebook fanpage link."
     },
     {
       "sourceCode": "vn_pass_eps_topik_thesaem",

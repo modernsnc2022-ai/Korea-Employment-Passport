@@ -382,9 +382,9 @@
         "score tracking"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "facebook_fanpage_redirect_ready_not_sent",
       "priority": "VN-A2",
-      "note": "Current Google Play listing shows an actively updated Migii TOPIK app with 500K+ installs and EPS-TOPIK preparation features. Developer support replies publish WhatsApp +84 354 7373 64. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify the WhatsApp account identity before sending."
+      "note": "Current Google Play listing shows an actively updated Migii TOPIK app with 500K+ installs and EPS-TOPIK preparation features. Developer support replies publish WhatsApp +84 354 7373 64. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify the WhatsApp account identity before sending. On 2026-10-08 the WhatsApp contact said they no longer work on Migii and explicitly redirected outreach to the official Migii TOPIK Facebook fanpage, sending the fanpage link. Continue only via that fanpage; do not send the full outreach to this WhatsApp contact."
     },
     {
       "id": "vn_pass_eps_topik_thesaem",
