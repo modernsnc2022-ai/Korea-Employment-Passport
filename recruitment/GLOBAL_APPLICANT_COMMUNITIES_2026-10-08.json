@@ -419,9 +419,9 @@
         "departure updates"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "manual_whatsapp_ready_not_sent",
       "priority": "VN-A4",
-      "note": "Current site remains active with 2026 EPS notices, mock-test/study resources and departure updates. It advertises direct offline EPS-TOPIK classes in Bắc Ninh and public contact 0971 379 786. Both connected Gmail accounts and GitHub ledger returned no prior outreach. Check WhatsApp registration and account identity before sending."
+      "note": "Current site remains active with 2026 EPS notices, mock-test/study resources and departure updates. It advertises direct offline EPS-TOPIK classes in Bắc Ninh and public contact 0971 379 786. Both connected Gmail accounts and GitHub ledger returned no prior outreach. Check WhatsApp registration and account identity before sending. User received a WhatsApp reply on 2026-10-08 confirming the contact is the founder and administrator of epstopikvn.com and epstopikhub.com and lives in Bắc Ninh; identity verified for permission-first outreach."
     }
   ]
 }
