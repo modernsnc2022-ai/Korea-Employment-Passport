@@ -1253,10 +1253,12 @@
       "operator": "KLC Cambodia — Korean Language Center",
       "channel": "telegram",
       "contact": "@camkarona",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "KH-A1",
-      "rule": "Initial outreach prepared after dual-Gmail and GitHub duplicate checks. Contact one operator account only; do not duplicate via phone/email unless the operator requests another channel.",
-      "evidence": "Official KLC Cambodia site states it mainly prepares Khmer students for EPS-TOPIK/work in Korea and publicly lists Telegram camkarona, Facebook KLC Cambodia, TikTok camkarona and YouTube KLC Cambodia."
+      "rule": "Initial outreach already sent. Do not resend across operator channels unless explicitly moved to followup-ready.",
+      "evidence": "User screenshot confirms Telegram message sent to @camkarona at 10:40 KST on 2026-10-08.",
+      "sentChannel": "telegram_private_dm",
+      "sentContact": "@camkarona"
     }
   ],
   "manualCommunityAdminPolicy": {

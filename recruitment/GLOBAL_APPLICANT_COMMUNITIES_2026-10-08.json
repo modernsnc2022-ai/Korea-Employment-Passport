@@ -15,9 +15,9 @@
         "EPS-TOPIK preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_telegram_ready_not_sent",
+      "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "KH-A1",
-      "note": "Official site states KLC primarily operates EPS-TOPIK preparation for Cambodian students seeking work in Korea under EPS, with Telegram, Facebook, TikTok and YouTube channels. Dual Gmail and GitHub code-search checks found no prior KLC Cambodia outreach."
+      "note": "User confirmed initial Telegram outreach to @camkarona on 2026-10-08. Do not duplicate via Telegram/phone/email unless the operator requests another channel."
     }
   ]
 }
