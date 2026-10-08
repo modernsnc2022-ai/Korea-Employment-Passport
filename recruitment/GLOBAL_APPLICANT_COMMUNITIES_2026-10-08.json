@@ -131,6 +131,24 @@
       "outreachState": "manual_telegram_sent_2026-10-08_do_not_resend",
       "priority": "UZ-A5",
       "note": "User confirmed initial Telegram outreach to @korean_teacher07 on 2026-10-08. Treat @koreystili_markaz and linked operator channels as one ecosystem; do not duplicate initial outreach."
+    },
+    {
+      "id": "mn_global_hrd_eps",
+      "country": "MN",
+      "countryName": "Mongolia",
+      "name": "Global HRD Institute Mongolia",
+      "platform": "Training institute / WhatsApp",
+      "url": "https://www.come2korea.mn/HomePage/Curriculum/EpsTopik.aspx",
+      "adminContact": "WhatsApp +976 8801 8529",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "MN-A1",
+      "note": "Official Mongolia site offers EPS-TOPIK training for people preparing to work in Korea and lists customer-center phone +976 8801-8529. User confirmed the number is available on WhatsApp. Dual Gmail and GitHub checks found no prior outreach."
     }
   ]
 }
