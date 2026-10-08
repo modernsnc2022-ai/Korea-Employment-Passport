@@ -1501,10 +1501,12 @@
       "operator": "EPS TOPIK HUB / Bắc Ninh offline class",
       "channel": "whatsapp",
       "contact": "+84 971 379 786",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "VN-A4",
-      "rule": "Identity verified by direct WhatsApp reply from the founder/administrator of epstopikvn.com and epstopikhub.com. Send one permission-first outreach message; do not duplicate via other channels unless requested.",
-      "evidence": "User received direct WhatsApp reply on 2026-10-08: contact confirmed being the founder and administrator of epstopikvn.com and epstopikhub.com and residing in Bắc Ninh."
+      "rule": "Initial outreach already sent after direct operator identity verification. Do not resend across linked channels unless explicitly moved to follow-up ready.",
+      "evidence": "User confirmed the two-part permission-first WhatsApp message was sent to the verified founder/administrator of epstopikvn.com and epstopikhub.com on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+84 971 379 786"
     }
   ],
   "manualCommunityAdminPolicy": {
