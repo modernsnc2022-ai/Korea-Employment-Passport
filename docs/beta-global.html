@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071a36">
+  <title>Global beta interest — Korea Employment Passport</title>
+  <link rel="stylesheet" href="beta.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" aria-label="Korea Employment Passport">Korea Employment Passport</a>
+    <span class="status-pill open">INTEREST REGISTRATION OPEN</span>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">EPS E-9 · MULTI-COUNTRY VALIDATION</span>
+      <h1>Help validate your country's Korea employment route</h1>
+      <p>KEP is now accepting interest from active EPS / G-to-G Korea applicants in supported country packs outside Indonesia. Registration does not activate beta access automatically.</p>
+      <div class="benefit-card">
+        <strong>Up to 6 months free</strong>
+        <span>for approved beta participants, counted from activation.</span>
+      </div>
+    </section>
+
+    <section class="card no-guarantee">
+      <h2>Important</h2>
+      <p>KEP is independent. It is not HRD Korea, a sending agency, a placement agency, or a broker. KEP does not guarantee exam results, employer selection, SLC, visa, or departure.</p>
+      <p>Country packs outside Indonesia are still under research validation. Your application helps us compare KEP guidance with the real process in your country.</p>
+    </section>
+
+    <section class="card">
+      <span class="status-pill open">VALIDATOR INTEREST</span>
+      <h2>Register your interest</h2>
+      <p>Select your country and current broad process stage. We deliberately use broad stage categories here so KEP does not guess country-specific rules before they are verified.</p>
+      <form id="globalBetaForm">
+        <label>Sending country
+          <select id="countryCode" required>
+            <option value="">Loading supported countries…</option>
+          </select>
+        </label>
+
+        <label>Your current stage
+          <select id="stageCategory" required>
+            <option value="">Select your current stage</option>
+            <option value="preparation">Korean language / eligibility / registration preparation</option>
+            <option value="eps_topik">EPS-TOPIK registration / exam</option>
+            <option value="skills">Skill Test / competency / interview stage</option>
+            <option value="final_selection">Final result / selected candidate stage</option>
+            <option value="job_application">Medical / documents / job application or sending stage</option>
+            <option value="roster">Job seeker roster / waiting for employer selection</option>
+            <option value="employer_selection">Employer selection / labor contract stage</option>
+            <option value="slc">SLC / post-contract requirements</option>
+            <option value="visa_predeparture">Visa / pre-departure training / final medical</option>
+            <option value="departure_ready">Departure scheduled / waiting to depart</option>
+            <option value="in_korea">Already in Korea with E-9</option>
+          </select>
+        </label>
+
+        <label>EPS process cycle
+          <select id="processCycle" required>
+            <option value="">Select year</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="check">
+          <input id="officialProcess" type="checkbox" required>
+          <span>I am genuinely participating in, or have recently completed, the official EPS / G-to-G Korea process.</span>
+        </label>
+
+        <label class="check">
+          <input id="feedbackAgreement" type="checkbox" required>
+          <span>I agree to provide feedback based on my real process experience if approved.</span>
+        </label>
+
+        <div class="actions">
+          <button id="emailBtn" class="primary" type="submit">Send by email</button>
+          <button id="gmailBtn" class="secondary" type="button">Open Gmail</button>
+          <button id="copyBtn" class="secondary" type="button">Copy application</button>
+        </div>
+        <div id="result" class="result" hidden></div>
+      </form>
+    </section>
+
+    <section class="card privacy">
+      <h2>Privacy</h2>
+      <p>Do not send passport, national ID, ARC, identity numbers, home address, or document photos. The email address used to submit the application is used only for beta review and necessary beta communication.</p>
+    </section>
+
+    <section class="card">
+      <h2>Indonesia applicant?</h2>
+      <p>Indonesia has a separate, more detailed intake because its Country Pack is in the current beta validation track.</p>
+      <a class="primary" href="beta.html">Open Indonesia beta interest page</a>
+    </section>
+  </main>
+  <script src="beta-global.js" defer></script>
+</body>
+</html>
