@@ -203,6 +203,25 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "TJ-A1",
       "note": "User confirmed initial WhatsApp outreach to Titan Training Center at +992 55 219 2222 on 2026-10-08. Do not duplicate via email/social unless requested by the operator."
+    },
+    {
+      "id": "tj_jobkoreatj_shodiyona",
+      "country": "TJ",
+      "countryName": "Tajikistan",
+      "name": "Shodiyona Consulting / Korean vocational training center",
+      "platform": "WhatsApp Business + Telegram @jobkoreatj",
+      "url": "https://t.me/jobkoreatj",
+      "adminContact": "WhatsApp +992 88 696 5555; email job.koreatj@gmail.com",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK",
+        "Korea employment preparation",
+        "document/visa support"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "TJ-A2",
+      "note": "User screenshot verifies WhatsApp Business account at +992 88 696 5555. Profile describes Korean vocational training for work in Korea, lists Rudaki 127 in Dushanbe and email job.koreatj@gmail.com. Public Telegram ecosystem uses @jobkoreatj. Dual Gmail/GitHub duplicate checks returned no prior outreach."
     }
   ]
 }

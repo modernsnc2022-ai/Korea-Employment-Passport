@@ -1375,6 +1375,16 @@
       "evidence": "User screenshot confirms WhatsApp DM sent to +992 55 219 2222 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+992 55 219 2222"
+    },
+    {
+      "sourceCode": "tj_jobkoreatj_shodiyona",
+      "operator": "Shodiyona Consulting / Korean vocational training center",
+      "channel": "whatsapp",
+      "contact": "+992 88 696 5555",
+      "status": "manual_send_pending",
+      "priority": "TJ-A2",
+      "rule": "Send one permission-first WhatsApp message to the verified business account. Treat WhatsApp, job.koreatj@gmail.com and @jobkoreatj as one operator ecosystem; do not duplicate initial outreach.",
+      "evidence": "User screenshot verifies WhatsApp Business account, Dushanbe address, Korean-work training description and job.koreatj@gmail.com."
     }
   ],
   "manualCommunityAdminPolicy": {
