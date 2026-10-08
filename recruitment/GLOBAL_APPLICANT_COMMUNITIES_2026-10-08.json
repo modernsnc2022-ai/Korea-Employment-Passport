@@ -185,6 +185,24 @@
       "outreachState": "manual_email_sent_2026-10-08_do_not_resend",
       "priority": "MN-A3",
       "note": "Email sent from modernsnc2022@gmail.com to setsoyu.mongolian@gmail.com on 2026-10-08. Do not duplicate via phone/social unless requested by the operator."
+    },
+    {
+      "id": "tj_titan_training_center",
+      "country": "TJ",
+      "countryName": "Tajikistan",
+      "name": "Titan Training Center",
+      "platform": "Training center / WhatsApp business",
+      "url": "https://taplink.cc/titan_center",
+      "adminContact": "WhatsApp +992 55 219 2222; email titanschl@gmail.com",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "TJ-A1",
+      "note": "User screenshot confirms a WhatsApp Business account named Titan Training center at +992 55 219 2222. Profile states in Russian: Korean-language training for work in Korea, Dushanbe address, email titanschl@gmail.com, and taplink.cc/titan_center. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ]
 }
