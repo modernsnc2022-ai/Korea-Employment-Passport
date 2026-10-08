@@ -1106,6 +1106,27 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "A",
       "note": "User confirmed initial WhatsApp outreach was sent to +62 852-0122-4333. Do not duplicate initial outreach."
+    },
+    {
+      "id": "lkp_rainbow_college_cianjur",
+      "name": "LKP Rainbow College — Cianjur",
+      "platform": "LKP / official website + WhatsApp",
+      "url": "https://lkprainbowcollege.com/",
+      "adminContact": "WhatsApp +62 819-0658-6914",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK",
+        "Skill Test",
+        "MCU and document preparation",
+        "Sending Data / roster",
+        "SLC",
+        "PAP / pre-departure",
+        "departure"
+      ],
+      "applicantDensity": "very high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "A",
+      "note": "Official site updated in 2026 documents the official G-to-G path through EPS-TOPIK, Skill Test, MCU/Sending, roster, SLC and PAP/departure. Public WhatsApp 0819-0658-6914. Both connected Gmail accounts and origin/main name/domain/phone checks returned no prior outreach."
     }
   ]
 }
