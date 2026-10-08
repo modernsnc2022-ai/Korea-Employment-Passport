@@ -1315,6 +1315,16 @@
       "priority": "UZ-A4",
       "rule": "Do not send to @koreya24soat_bot. Reverify a genuine operator contact before any future outreach.",
       "evidence": "User screenshot shows @koreya24soat_bot is a 2-subscriber channel, not a usable contact bot."
+    },
+    {
+      "sourceCode": "uz_korean_center_teacher07",
+      "operator": "KOREAN CENTER",
+      "channel": "telegram",
+      "contact": "@korean_teacher07",
+      "status": "manual_send_pending",
+      "priority": "UZ-A5",
+      "rule": "Send one permission-first collaboration DM to the publicly listed collaboration contact. Do not post directly to the channel without approval. If a paid-message gate appears, close and skip without payment.",
+      "evidence": "Public @koreystili_markaz channel has about 18.7K subscribers, covers Korea work/EPS-TOPIK and employer-selection topics, and explicitly lists @korean_teacher07 for advertising/collaboration."
     }
   ],
   "manualCommunityAdminPolicy": {
