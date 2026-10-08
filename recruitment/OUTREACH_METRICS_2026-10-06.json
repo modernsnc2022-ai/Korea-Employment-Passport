@@ -1369,10 +1369,12 @@
       "operator": "Titan Training Center",
       "channel": "whatsapp",
       "contact": "+992 55 219 2222",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "TJ-A1",
-      "rule": "Send one permission-first WhatsApp message to the verified business account. Do not duplicate by email/social unless requested by the operator.",
-      "evidence": "User screenshot verifies the WhatsApp Business account, Dushanbe location, Korean-for-work training description, email titanschl@gmail.com and public taplink."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User screenshot confirms WhatsApp DM sent to +992 55 219 2222 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+992 55 219 2222"
     }
   ],
   "manualCommunityAdminPolicy": {

@@ -200,9 +200,9 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "TJ-A1",
-      "note": "User screenshot confirms a WhatsApp Business account named Titan Training center at +992 55 219 2222. Profile states in Russian: Korean-language training for work in Korea, Dushanbe address, email titanschl@gmail.com, and taplink.cc/titan_center. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+      "note": "User confirmed initial WhatsApp outreach to Titan Training Center at +992 55 219 2222 on 2026-10-08. Do not duplicate via email/social unless requested by the operator."
     }
   ]
 }
