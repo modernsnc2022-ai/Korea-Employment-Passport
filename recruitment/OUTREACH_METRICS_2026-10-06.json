@@ -1333,10 +1333,12 @@
       "operator": "Global HRD Institute Mongolia",
       "channel": "whatsapp",
       "contact": "+976 8801 8529",
-      "status": "manual_send_pending",
+      "status": "sent_2026-10-08",
       "priority": "MN-A1",
-      "rule": "Send one permission-first WhatsApp message to the public customer-center number. Do not duplicate via phone/email unless requested by the operator.",
-      "evidence": "Official Mongolia site offers EPS-TOPIK training for Korea-bound applicants and lists +976 8801-8529; user confirmed WhatsApp availability."
+      "rule": "Initial outreach already sent. Do not resend unless explicitly moved to followup-ready.",
+      "evidence": "User confirmed manual WhatsApp send to +976 8801 8529 on 2026-10-08.",
+      "sentChannel": "whatsapp",
+      "sentContact": "+976 8801 8529"
     }
   ],
   "manualCommunityAdminPolicy": {
