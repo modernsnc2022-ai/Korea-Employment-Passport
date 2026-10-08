@@ -1421,6 +1421,16 @@
       "priority": "NP-A2",
       "rule": "Send one permission-first WhatsApp message to the public support/contact number. Do not duplicate via email/social unless requested by the operator.",
       "evidence": "Official Mero EPS site shows a dedicated EPS-TOPIK platform, 10k+ passed-student claim, WhatsApp support and contact +977 9843797769."
+    },
+    {
+      "sourceCode": "np_yonsei_korean_academy",
+      "operator": "Yonsei Korean Academy, Chabahil",
+      "channel": "whatsapp",
+      "contact": "+977 986-1677985",
+      "status": "manual_send_pending",
+      "priority": "NP-A3",
+      "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number. Do not duplicate via phone/social unless requested by the operator.",
+      "evidence": "2026 public academy posts show active EPS-TOPIK application guidance and UBT mock practice; WhatsApp +977 986-1677985."
     }
   ],
   "manualCommunityAdminPolicy": {
