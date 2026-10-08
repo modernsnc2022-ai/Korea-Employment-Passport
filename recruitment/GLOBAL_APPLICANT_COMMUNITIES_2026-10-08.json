@@ -167,6 +167,24 @@
       "outreachState": "manual_instagram_sent_2026-10-08_do_not_resend",
       "priority": "MN-A2",
       "note": "User confirmed initial Instagram DM to @setsen_edu on 2026-10-08. Do not duplicate via phone or other channels unless requested by the operator."
+    },
+    {
+      "id": "mn_sets_oyu_academy",
+      "country": "MN",
+      "countryName": "Mongolia",
+      "name": "Sets Oyu Academy",
+      "platform": "Training center / official website / email",
+      "url": "https://www.setsoyu.mn/",
+      "adminContact": "Email setsoyu.mongolian@gmail.com; phone +976 7771-2121",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_email_ready_not_sent",
+      "priority": "MN-A3",
+      "note": "Current public profiles describe Sets Oyu Academy as an official training center offering EPS-TOPIK and Korean-language preparation. Official website lists setsoyu.mongolian@gmail.com and +976 7771-2121. Dual Gmail and GitHub checks returned no prior outreach."
     }
   ]
 }

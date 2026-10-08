@@ -1351,6 +1351,16 @@
       "evidence": "User screenshot confirms Instagram DM sent to @setsen_edu on 2026-10-08.",
       "sentChannel": "instagram_dm",
       "sentContact": "@setsen_edu"
+    },
+    {
+      "sourceCode": "mn_sets_oyu_academy",
+      "operator": "Sets Oyu Academy",
+      "channel": "email",
+      "contact": "setsoyu.mongolian@gmail.com",
+      "status": "manual_send_pending",
+      "priority": "MN-A3",
+      "rule": "Send one permission-first email to the official Mongolia contact address. Do not duplicate via phone/social unless requested by the operator.",
+      "evidence": "Official website and current public academy profiles list EPS-TOPIK/Korean training and setsoyu.mongolian@gmail.com as contact."
     }
   ],
   "manualCommunityAdminPolicy": {
