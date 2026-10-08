@@ -1399,6 +1399,16 @@
       "evidence": "User confirmed WhatsApp send to +992 93 093 4994 on 2026-10-08.",
       "sentChannel": "whatsapp",
       "sentContact": "+992 93 093 4994"
+    },
+    {
+      "sourceCode": "np_woori_consultancy_eps",
+      "operator": "Woori Consultancy",
+      "channel": "whatsapp",
+      "contact": "+977 9803719505",
+      "status": "manual_send_pending",
+      "priority": "NP-A1",
+      "rule": "Send one permission-first WhatsApp message to the publicly listed WhatsApp number. Do not duplicate via phone/social unless requested by the operator.",
+      "evidence": "2026 public Woori Consultancy posts show active EPS-TOPIK lessons/test updates and list WhatsApp +977 9803719505."
     }
   ],
   "manualCommunityAdminPolicy": {

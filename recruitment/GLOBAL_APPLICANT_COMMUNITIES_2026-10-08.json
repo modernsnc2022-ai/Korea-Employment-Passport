@@ -241,6 +241,24 @@
       "outreachState": "manual_whatsapp_sent_2026-10-08_do_not_resend",
       "priority": "TJ-A3",
       "note": "User confirmed permission-first WhatsApp outreach to the Tajik Agency for Employment Abroad at +992 93 093 4994 on 2026-10-08. Do not duplicate or imply affiliation."
+    },
+    {
+      "id": "np_woori_consultancy_eps",
+      "country": "NP",
+      "countryName": "Nepal",
+      "name": "Woori Consultancy",
+      "platform": "Korean language / EPS-TOPIK training / WhatsApp",
+      "url": "https://www.findglocal.com/XX/Unknown/161527837051297/Woori-Consultancy",
+      "adminContact": "WhatsApp +977 9803719505; phone 01-4951709",
+      "applicantStages": [
+        "Korean language preparation",
+        "EPS-TOPIK preparation",
+        "exam preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_ready_not_sent",
+      "priority": "NP-A1",
+      "note": "Current 2026 public posts promote EPS-TOPIK book-to-video lessons, exam preparation and current test-date updates. Public contact lists WhatsApp +977 9803719505 and phone 01-4951709. Dual Gmail/GitHub duplicate checks returned no prior outreach."
     }
   ]
 }
