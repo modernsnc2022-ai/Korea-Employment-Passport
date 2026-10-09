@@ -1514,10 +1514,10 @@
       "operator": "Trung tâm Dịch vụ Việc làm Quảng Trị — EPS-TOPIK",
       "channel": "whatsapp",
       "contact": "+84 856 401 246",
-      "status": "manual_identity_check_pending",
+      "status": "identity_check_sent_2026-10-09_waiting",
       "priority": "VN-A5",
-      "rule": "Check whether the public EPS training hotline is registered on WhatsApp and verify center identity before any outreach. Do not duplicate via email/phone unless WhatsApp is unavailable or another route is explicitly chosen.",
-      "evidence": "Current official center EPS page publishes hotline 0856 401 246 and active EPS-TOPIK/round-2 training. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+      "rule": "Identity-check message sent. Wait for confirmation before any initial outreach; do not send the full KEP pitch or retry while waiting.",
+      "evidence": "User screenshot on 2026-10-09 confirms WhatsApp identity-check message sent to +84 856 401 246; no reply visible yet."
     },
     {
       "sourceCode": "vn_monday_eps_topik_hcm",
