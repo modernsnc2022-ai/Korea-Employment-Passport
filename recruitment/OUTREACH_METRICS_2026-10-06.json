@@ -1,5 +1,5 @@
 {
-  "version": "8.62.0",
+  "version": "8.63.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1528,6 +1528,16 @@
       "priority": "VN-A6",
       "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Monday/EPS-TOPIK operator identity before any initial outreach. Do not duplicate via email or Zalo unless WhatsApp is unavailable or another channel is explicitly selected.",
       "evidence": "Monday's current 2026 class schedule lists active EPS-TOPIK/XKLĐ cohorts and publishes Hotline/Zalo 0901 879 877. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_hatinh_eps_center",
+      "operator": "Trung tâm Dịch vụ việc làm Hà Tĩnh — EPS-TOPIK",
+      "channel": "whatsapp",
+      "contact": "+84 888 127 668",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A7",
+      "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Hà Tĩnh EPS-TOPIK operator identity before initial outreach. Do not duplicate via Zalo/email unless another route is explicitly chosen.",
+      "evidence": "Official 2026 Hà Tĩnh EPS class notice publishes Hotline/Zalo 0888 127 668 and confirms active EPS-TOPIK training. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
