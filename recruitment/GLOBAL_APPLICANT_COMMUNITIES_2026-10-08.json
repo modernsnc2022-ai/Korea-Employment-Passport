@@ -491,9 +491,27 @@
         "active September 2026 class"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "whatsapp_unavailable_2026-10-09_do_not_retry",
       "priority": "VN-A8",
-      "note": "Bắc Ninh Department of Home Affairs public feed published a 2026-09-18 notice for an EPS Korean class starting 2026-09-22 at the provincial employment service center, explicitly for candidates preparing for EPS-TOPIK and Korea employment. Public Hotline/Zalo 0913 358 044. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending."
+      "note": "Bắc Ninh Department of Home Affairs public feed published a 2026-09-18 notice for an EPS Korean class starting 2026-09-22 at the provincial employment service center, explicitly for candidates preparing for EPS-TOPIK and Korea employment. Public Hotline/Zalo 0913 358 044. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending. User checked WhatsApp on 2026-10-09 and the published Hotline/Zalo number was not registered. Do not retry WhatsApp."
+    },
+    {
+      "id": "vn_pheps_topik_phuonghan",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "PHEPS-TOPIK / Trung tâm Ngoại ngữ Phương Hàn",
+      "platform": "EPS-TOPIK app / learning platform / phone support",
+      "url": "https://play.google.com/store/apps/details?id=com.pheps_topik",
+      "adminContact": "Google Play support phone +84 859 299 552; luyenthieps.vn",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "mock exams",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A9",
+      "note": "Google Play PHEPS-TOPIK listing identifies the app as supporting EPS-TOPIK and Korea employment preparation and publishes support phone +84 859 299 552. The linked Phương Hàn learning site remains active. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending."
     }
   ]
 }
