@@ -3121,8 +3121,9 @@ function betaTesterRole(testerId=betaTesterIdState()){
   const match=/^KEP-(\d{4})$/.exec(String(testerId||''));
   if(!match)return '';
   const number=Number(match[1]);
+  if(number>=9001&&number<=9099)return 'content_reviewer';
   if(number>=31&&number<=50)return 'e9_worker_validator';
-  if((number>=1&&number<=30)||number>=51)return 'active_applicant';
+  if((number>=1&&number<=30)||(number>=51&&number<9001)||number>=9100)return 'active_applicant';
   return '';
 }
 
@@ -3155,7 +3156,13 @@ function renderBetaModeBanner(){
   }
   banner.hidden=false;
   const role=betaTesterRole(testerId);
-  if(role==='e9_worker_validator'){
+  if(role==='content_reviewer'){
+    banner.innerHTML=
+      `<strong>Mode reviewer konten ${escapeHtml(testerId)}</strong>`+
+      '<span><b>1</b> Jelajahi alur KEP seperti calon pekerja Indonesia</span>'+
+      '<span><b>2</b> Catat bagian yang membingungkan, kurang, atau berpotensi disalahpahami</span>'+
+      '<span><b>3</b> Jangan masukkan nama, nomor identitas, telepon, email, atau data pribadi nyata</span>';
+  }else if(role==='e9_worker_validator'){
     const assignedStage=String(new URLSearchParams(location.search).get('stage')||'').trim();
     const assigned=route?.stages?.find(stage=>stage.id===assignedStage);
     banner.innerHTML=
@@ -3196,7 +3203,9 @@ function betaValidationStats(){
     ?String(read(KEYS.betaWorkerExperienceYear,'')||'')
     :'';
   const currentCycle=String(route?.cycle||'');
-  const currentRouteEligible=testerRole!=='e9_worker_validator'||workerExperienceYear===currentCycle;
+  const currentRouteEligible=testerRole==='content_reviewer'
+    ?false
+    :testerRole!=='e9_worker_validator'||workerExperienceYear===currentCycle;
   const checkpointComplete=Boolean(route?.stages?.length)&&evaluatedRows.length===route.stages.length&&failed===0;
   return {
     rows,
@@ -3212,6 +3221,7 @@ function betaValidationStats(){
     currentCycle,
     currentRouteEligible,
     retrospectiveOnly:testerRole==='e9_worker_validator'&&!currentRouteEligible,
+    contentReviewOnly:testerRole==='content_reviewer',
     checkpointComplete,
     routePass:checkpointComplete&&currentRouteEligible
   };
@@ -3249,9 +3259,11 @@ function renderBetaValidation(){
   }
   if(testerStatus){
     testerStatus.textContent=testerId
-      ?role==='e9_worker_validator'
-        ?`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`
-        :`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
+      ?role==='content_reviewer'
+        ?`ID reviewer konten tersimpan: ${testerId}. Gunakan untuk meninjau alur dan bahasa; hasil reviewer tidak dihitung sebagai bukti PASS rute.`
+        :role==='e9_worker_validator'
+          ?`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`
+          :`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
       :'Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.';
   }
   const previous=select.value;
@@ -3274,7 +3286,9 @@ function renderBetaValidation(){
   summary.className='result '+(stats.failed?'warn':stats.routePass?'safe':'');
   const retrospectiveNote=stats.retrospectiveOnly
     ?`<br><strong>Validasi retrospektif ${escapeHtml(stats.workerExperienceYear==='unknown'?'tahun tidak pasti':stats.workerExperienceYear)}:</strong> hasil ini dipakai untuk menemukan perbedaan/celah pengalaman, bukan sebagai bukti PASS rute ${escapeHtml(stats.currentCycle)}.`
-    :'';
+    :stats.contentReviewOnly
+      ?'<br><strong>Mode reviewer konten:</strong> catatan ini dipakai untuk perbaikan produk/bahasa dan tidak dihitung sebagai bukti PASS rute.'
+      :'';
   summary.innerHTML=`<strong>Checkpoint beta: ${stats.tested}/${stats.total} tahap benar-benar dinilai.</strong><br>`+
     `Tanpa bantuan swasta: ${stats.passed} · Masih butuh bantuan swasta: ${stats.failed} · Belum dijalani/tidak dapat dinilai: ${stats.notExperienced}. `+
     (stats.routePass
@@ -3415,7 +3429,7 @@ function buildBetaFeedbackBundle(){
   const sessionSummary=[
     'RINGKASAN SESI — PERIKSA & HAPUS IDENTITAS SEBELUM KIRIM',
     ...(testerId?['ID beta anonim: '+testerId]:[]),
-    ...(testerId?['Peran beta: '+(testerRole==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
+    ...(testerId?['Peran beta: '+(testerRole==='content_reviewer'?'reviewer konten':testerRole==='e9_worker_validator'?'validator E-9 retrospektif':'pelamar aktif')]:[]),
     ...(testerRole==='e9_worker_validator'?['Tahun pengalaman/proses EPS: '+(workerExperienceYear||'belum dicatat')]:[]),
     'Rute: '+routeLabel,
     'Tahap sekarang: '+(current?stageTitle(current):'semua tahap selesai'),

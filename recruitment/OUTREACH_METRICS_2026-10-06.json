@@ -1,5 +1,5 @@
 {
-  "version": "8.65.0",
+  "version": "8.67.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -692,7 +692,11 @@
       "channel": "email",
       "status": "sent_2026-10-07",
       "sentAt": "2026-10-07T09:54:57+09:00",
-      "gmailMessageId": "1a113db3b2f8ed1a"
+      "gmailMessageId": "1a113db3b2f8ed1a",
+      "communityPostConfirmed": "2026-10-10",
+      "contentReviewerAccess": "approved_private_id_issued_2026-10-10",
+      "followUpState": "video_asset_preparing",
+      "followUpRule": "Operator voluntarily published the KEP recruitment post. A separate private content-reviewer access ID is approved; reviewer identity/access ID must remain out of the public ledger. Next follow-up may thank them, request product feedback, and optionally provide an upload-ready short video."
     }
   ],
   "emailWave16ApplicantFirst": {

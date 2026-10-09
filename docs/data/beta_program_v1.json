@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.10.0",
   "status": "hold",
   "route": "Indonesia -> Korea E-9 Manufacturing 2026",
   "publicBeta": {
@@ -156,5 +156,18 @@
       "doesNotApproveBetaOpen": true,
       "manualOpenStillRequired": true
     }
+  },
+  "contentReviewerPanel": {
+    "status": "manual_invitation_only",
+    "idRange": "KEP-9001..KEP-9099",
+    "role": "trusted channel/content reviewer",
+    "countsTowardActiveApplicantTarget": false,
+    "routePassEvidenceEligible": false,
+    "purpose": [
+      "Review wording and product flow before wider promotion",
+      "Demonstrate the real KEP interface to relevant audiences",
+      "Report unclear, missing, or misleading guidance"
+    ],
+    "privacy": "Reviewer invitation/identity stays in private correspondence; do not store reviewer names or email addresses in the public repository."
   }
 }
