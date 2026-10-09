@@ -440,6 +440,24 @@
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A5",
       "note": "Current official EPS page advertises EPS-TOPIK classes in Quảng Trị, round-2 interview/skill training, 2023-2026 learner records and hotline 0856 401 246. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Check WhatsApp registration and account identity before sending."
+    },
+    {
+      "id": "vn_monday_eps_topik_hcm",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Monday Korean Center — EPS-TOPIK, Ho Chi Minh City",
+      "platform": "Korean language center / EPS-TOPIK class / Hotline-Zalo",
+      "url": "https://monday.edu.vn/lich-khai-giang-cac-khoa-hoc-tieng-han-tai-monday/",
+      "adminContact": "Hotline/Zalo 0901 879 877; email admin@monday.edu.vn",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "active 2026 classes",
+        "manufacturing EPS preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A6",
+      "note": "Current 2026 Monday schedule lists active EPS-TOPIK/XKLĐ classes, including an Oct 19 2026 class with seats available and a Nov 2 2026 class with seats available. Public contact remains Hotline/Zalo 0901 879 877. Both connected Gmail accounts and GitHub recruitment ledger returned no prior outreach. Verify WhatsApp registration and operator identity before sending."
     }
   ]
 }

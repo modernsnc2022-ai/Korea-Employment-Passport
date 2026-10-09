@@ -1,5 +1,5 @@
 {
-  "version": "8.61.0",
+  "version": "8.62.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1518,6 +1518,16 @@
       "priority": "VN-A5",
       "rule": "Check whether the public EPS training hotline is registered on WhatsApp and verify center identity before any outreach. Do not duplicate via email/phone unless WhatsApp is unavailable or another route is explicitly chosen.",
       "evidence": "Current official center EPS page publishes hotline 0856 401 246 and active EPS-TOPIK/round-2 training. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_monday_eps_topik_hcm",
+      "operator": "Monday Korean Center — EPS-TOPIK, Ho Chi Minh City",
+      "channel": "whatsapp",
+      "contact": "+84 901 879 877",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A6",
+      "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Monday/EPS-TOPIK operator identity before any initial outreach. Do not duplicate via email or Zalo unless WhatsApp is unavailable or another channel is explicitly selected.",
+      "evidence": "Monday's current 2026 class schedule lists active EPS-TOPIK/XKLĐ cohorts and publishes Hotline/Zalo 0901 879 877. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
