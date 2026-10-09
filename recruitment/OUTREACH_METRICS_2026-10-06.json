@@ -1,5 +1,5 @@
 {
-  "version": "8.65.0",
+  "version": "8.66.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1558,6 +1558,16 @@
       "priority": "VN-A9",
       "rule": "Check whether the Google Play support phone is registered on WhatsApp and verify PHEPS-TOPIK/Phương Hàn operator identity before initial outreach. Do not duplicate via Messenger/email unless another route is explicitly chosen.",
       "evidence": "Current Google Play listing for PHEPS-TOPIK publishes support phone +84 859 299 552 and describes EPS-TOPIK/Korea-employment preparation. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_viethan_eps_hrd",
+      "operator": "Công ty TNHH Phát triển Nhân lực Việt Hàn",
+      "channel": "whatsapp",
+      "contact": "+84 374 480 888",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A10",
+      "rule": "First published phone +84 969 299 311 is not on WhatsApp. Second public phone +84 374 480 888 is registered but profile identity is blank. Send only an identity-check question first; do not send the full KEP pitch until affiliation is confirmed.",
+      "evidence": "User WhatsApp lookup on 2026-10-09 showed +84 374 480 888 as an active account with no visible business name or profile details."
     }
   ],
   "manualCommunityAdminPolicy": {

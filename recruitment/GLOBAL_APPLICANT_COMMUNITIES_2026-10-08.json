@@ -512,6 +512,23 @@
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A9",
       "note": "Google Play PHEPS-TOPIK listing identifies the app as supporting EPS-TOPIK and Korea employment preparation and publishes support phone +84 859 299 552. The linked Phương Hàn learning site remains active. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending."
+    },
+    {
+      "id": "vn_viethan_eps_hrd",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Công ty TNHH Phát triển Nhân lực Việt Hàn",
+      "platform": "Korea employment/EPS preparation / public phone / WhatsApp",
+      "url": "https://viethan.edu.vn/",
+      "adminContact": "Public phones 0969 299 311 and 0374 480 888; WhatsApp exists on +84 374 480 888",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A10",
+      "note": "Public Việt Hàn contacts were checked on 2026-10-09. +84 969 299 311 was not registered on WhatsApp. +84 374 480 888 is registered but its profile shows no business name, so operator identity must be confirmed before sending the KEP outreach."
     }
   ]
 }
