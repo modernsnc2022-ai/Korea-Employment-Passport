@@ -1,5 +1,5 @@
 {
-  "version": "8.63.0",
+  "version": "8.64.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1538,6 +1538,16 @@
       "priority": "VN-A7",
       "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Hà Tĩnh EPS-TOPIK operator identity before initial outreach. Do not duplicate via Zalo/email unless another route is explicitly chosen.",
       "evidence": "Official 2026 Hà Tĩnh EPS class notice publishes Hotline/Zalo 0888 127 668 and confirms active EPS-TOPIK training. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_bacninh_eps_center",
+      "operator": "Trung tâm Dịch vụ việc làm Bắc Ninh — EPS-TOPIK",
+      "channel": "whatsapp",
+      "contact": "+84 913 358 044",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A8",
+      "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Bắc Ninh EPS-TOPIK operator identity before initial outreach. Do not duplicate via Zalo/phone unless another route is explicitly chosen.",
+      "evidence": "Public 2026-09-18 Bắc Ninh EPS class notice lists Hotline/Zalo 0913 358 044 and targets EPS-TOPIK candidates. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
