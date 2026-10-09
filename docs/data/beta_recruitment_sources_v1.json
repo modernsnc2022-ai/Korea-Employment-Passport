@@ -1,5 +1,5 @@
 {
-  "version": "3.48.0",
+  "version": "3.49.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -172,6 +172,7 @@
     "vn_quangtri_eps_center",
     "vn_monday_eps_topik_hcm",
     "vn_hatinh_eps_center",
-    "vn_bacninh_eps_center"
+    "vn_bacninh_eps_center",
+    "vn_pheps_topik_phuonghan"
   ]
 }

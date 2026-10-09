@@ -1,5 +1,5 @@
 {
-  "version": "8.64.0",
+  "version": "8.65.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1548,6 +1548,16 @@
       "priority": "VN-A8",
       "rule": "Check whether the public Hotline/Zalo number is registered on WhatsApp and verify Bắc Ninh EPS-TOPIK operator identity before initial outreach. Do not duplicate via Zalo/phone unless another route is explicitly chosen.",
       "evidence": "Public 2026-09-18 Bắc Ninh EPS class notice lists Hotline/Zalo 0913 358 044 and targets EPS-TOPIK candidates. Dual Gmail and GitHub duplicate checks returned no prior outreach."
+    },
+    {
+      "sourceCode": "vn_pheps_topik_phuonghan",
+      "operator": "PHEPS-TOPIK / Trung tâm Ngoại ngữ Phương Hàn",
+      "channel": "whatsapp",
+      "contact": "+84 859 299 552",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A9",
+      "rule": "Check whether the Google Play support phone is registered on WhatsApp and verify PHEPS-TOPIK/Phương Hàn operator identity before initial outreach. Do not duplicate via Messenger/email unless another route is explicitly chosen.",
+      "evidence": "Current Google Play listing for PHEPS-TOPIK publishes support phone +84 859 299 552 and describes EPS-TOPIK/Korea-employment preparation. Dual Gmail and GitHub duplicate checks returned no prior outreach."
     }
   ],
   "manualCommunityAdminPolicy": {
