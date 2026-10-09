@@ -1513,3 +1513,16 @@ test('company question reports evidence scarcity instead of inventing employer f
   await expect(page.locator('#companyQaResult')).toContainText('tidak akan menebak');
   expect(errors).toEqual([]);
 });
+
+test('content reviewer beta IDs show reviewer mode and do not count as route PASS evidence', async ({ page }) => {
+  await page.goto('/app.html?beta=KEP-9001', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#betaModeBanner')).toContainText('Mode reviewer konten KEP-9001');
+  const state = await page.evaluate(() => ({
+    role: betaTesterRole(),
+    contentReviewOnly: betaValidationStats().contentReviewOnly,
+    currentRouteEligible: betaValidationStats().currentRouteEligible,
+  }));
+  expect(state.role).toBe('content_reviewer');
+  expect(state.contentReviewOnly).toBe(true);
+  expect(state.currentRouteEligible).toBe(false);
+});

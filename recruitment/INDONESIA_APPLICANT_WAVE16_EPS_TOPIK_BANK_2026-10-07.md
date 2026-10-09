@@ -24,3 +24,11 @@
 - Immediate bounce observed: 0.
 - Confirmed beta-interest applications immediately after send: 0.
 - New initial outreach to this source code is now blocked by ledger state; follow-up requires an explicit follow-up-ready state.
+
+## 2026-10-10 follow-up state
+
+- The channel operator's YouTube Community post carrying the KEP beta invitation was visually confirmed.
+- A separate manual **content reviewer** lane is approved for the operator so the real KEP interface can be reviewed before/while explaining it to viewers.
+- Reviewer access does **not** consume the 30 active-applicant validation target and must not be counted as route-PASS evidence.
+- Reviewer identity and the privately issued reviewer ID remain in private correspondence, not this public file.
+- Next follow-up may thank the operator, ask for hands-on product feedback, and provide an upload-ready vertical short video if available.
