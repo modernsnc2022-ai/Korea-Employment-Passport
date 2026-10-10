@@ -735,9 +735,27 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_ready",
+      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A22",
-      "note": "User screenshot on 2026-10-10 confirms +84 932 908 739 is registered on WhatsApp. The profile appears personal and no organization name is visible. Send only an identity-check message before any KEP pitch."
+      "note": "User confirmed sending the identity-check message to +84 932 908 739 on 2026-10-10. Wait; do not resend or send the full KEP pitch."
+    },
+    {
+      "id": "vn_daklak_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm tỉnh Đắk Lắk",
+      "platform": "Provincial employment service / EPS 2026 recruitment / public mobile contacts",
+      "url": "https://hoamy.daklak.gov.vn/Detail_Information.aspx?cdctid=0&cdid=5064&cmid=5&id=12507",
+      "adminContact": "Public contacts +84 913 460 101 (WhatsApp unavailable) and +84 962 020 435 (next check)",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A23",
+      "note": "User checked first public contact +84 913 460 101 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is +84 962 020 435; verify identity before any KEP pitch."
     }
   ]
 }
