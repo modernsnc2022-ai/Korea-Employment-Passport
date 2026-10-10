@@ -1,5 +1,5 @@
 {
-  "version": "8.92.0",
+  "version": "8.95.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1658,10 +1658,10 @@
       "operator": "Phu Tho Employment Service Center - Vinh Phuc branch",
       "channel": "whatsapp",
       "contact": "+84 979 876 146",
-      "status": "manual_identity_check_sent_2026-10-10_waiting",
+      "status": "pitch_read_no_reply_2026-10-10_waiting",
       "priority": "VN-A19",
-      "rule": "Identity-check was sent to +84 979 876 146 on 2026-10-10. Wait for reply; do not resend or send the full KEP pitch until organization identity is confirmed.",
-      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+      "rule": "Identity confirmed and KEP beta-sharing request was sent and read. Do not send another message now; wait for a later follow-up window.",
+      "evidence": "User reported that the KEP beta-sharing message was read but no reply was received."
     },
     {
       "sourceCode": "vn_thainguyen_eps_center",
@@ -1712,6 +1712,16 @@
       "priority": "VN-A24",
       "rule": "Both public Quang Ngai hotlines were unavailable on WhatsApp. Do not retry these numbers.",
       "evidence": "User explicitly reported no WhatsApp account for both Quang Ngai public hotlines."
+    },
+    {
+      "sourceCode": "vn_quangninh_eps_center",
+      "operator": "Quang Ninh Employment Service Center",
+      "channel": "whatsapp",
+      "contact": "+84 934 350 752",
+      "status": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A25",
+      "rule": "Published contact was unavailable on WhatsApp. Do not retry this number.",
+      "evidence": "User explicitly reported no WhatsApp account for +84 934 350 752."
     }
   ],
   "manualCommunityAdminPolicy": {

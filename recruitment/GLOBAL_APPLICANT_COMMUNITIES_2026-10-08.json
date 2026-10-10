@@ -681,9 +681,9 @@
         "EPS skill-test preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-10_waiting",
+      "outreachState": "manual_pitch_read_no_reply_2026-10-10_waiting",
       "priority": "VN-A19",
-      "note": "User explicitly confirmed sending the identity-check message to +84 979 876 146 on 2026-10-10. Wait for operator identity confirmation; do not resend and do not send the full KEP pitch yet."
+      "note": "Operator identity was confirmed by inbound reply. User then sent the KEP beta-sharing request; the message was read on 2026-10-10 but no reply followed. Do not chase immediately; keep this thread in passive follow-up waiting state."
     },
     {
       "id": "vn_thainguyen_eps_center",
@@ -774,6 +774,24 @@
       "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A24",
       "note": "User checked both public Quang Ngai hotlines on WhatsApp on 2026-10-10 and neither account existed. Close WhatsApp route and do not retry these numbers."
+    },
+    {
+      "id": "vn_quangninh_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm tỉnh Quảng Ninh",
+      "platform": "Provincial employment service / EPS 2026 registration / public contact",
+      "url": "https://www.quangninh.gov.vn/So/sonoivu/Trang/ChiTietTinTuc.aspx?nid=3273",
+      "adminContact": "Public contact +84 934 350 752; WhatsApp unavailable",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A25",
+      "note": "User checked the published Quang Ninh contact +84 934 350 752 on WhatsApp on 2026-10-10 and no account was available. Do not retry this number."
     }
   ]
 }
