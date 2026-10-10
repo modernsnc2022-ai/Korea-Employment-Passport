@@ -1,5 +1,5 @@
 {
-  "version": "8.73.0",
+  "version": "8.74.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1598,10 +1598,20 @@
       "operator": "KoreaLink Korean Language Center — Nghe An",
       "channel": "whatsapp",
       "contact": "+84 888 725 988",
-      "status": "manual_identity_check_pending",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A13",
-      "rule": "Check whether the public hotline is registered on WhatsApp and verify that it belongs to KoreaLink before any KEP pitch. If absent, close WhatsApp route and do not duplicate through another initial channel without a newly verified route.",
-      "evidence": "KoreaLink official site lists October 2026 EPS-TOPIK classes and public hotline 0888 725 988. Dual Gmail and GitHub duplicate checks returned 0."
+      "rule": "User checked +84 888 725 988 on WhatsApp on 2026-10-10 and no account was available. Do not retry this number.",
+      "evidence": "User explicitly reported no WhatsApp account for the published KoreaLink hotline."
+    },
+    {
+      "sourceCode": "vn_nghean_eps_center",
+      "operator": "Trung tâm Dịch vụ việc làm Nghệ An — EPS",
+      "channel": "whatsapp",
+      "contact": "+84 965 065 929",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A14",
+      "rule": "Check whether the published phone/Zalo number is registered on WhatsApp and verify that the account belongs to Nghệ An Employment Service Center before any KEP pitch.",
+      "evidence": "Official employment-service portal announced a 2026 EPS Korean class and lists 0965 065 929 as phone/Zalo. Dual Gmail and GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
