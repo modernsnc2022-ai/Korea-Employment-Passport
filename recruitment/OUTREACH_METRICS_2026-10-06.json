@@ -1,5 +1,5 @@
 {
-  "version": "8.87.0",
+  "version": "8.89.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1688,10 +1688,20 @@
       "operator": "Dong Thap Employment Service Center",
       "channel": "whatsapp",
       "contact": "+84 932 908 739",
-      "status": "manual_identity_check_ready",
+      "status": "manual_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A22",
-      "rule": "WhatsApp is active on the first published EPS staff mobile but organization identity is not confirmed. Send identity-check only.",
-      "evidence": "User screenshot shows an active WhatsApp account for +84 932 908 739 with no visible organization name."
+      "rule": "Identity-check sent on 2026-10-10. Wait for reply; no resend or full KEP pitch until identity is confirmed.",
+      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+    },
+    {
+      "sourceCode": "vn_daklak_eps_center",
+      "operator": "Dak Lak Employment Service Center",
+      "channel": "whatsapp",
+      "contact": "+84 962 020 435",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A23",
+      "rule": "First public contact +84 913 460 101 was unavailable on WhatsApp. Check only +84 962 020 435 next; if registered but identity is unclear, send identity-check only.",
+      "evidence": "User confirmed no WhatsApp account for the first Dak Lak public contact."
     }
   ],
   "manualCommunityAdminPolicy": {
