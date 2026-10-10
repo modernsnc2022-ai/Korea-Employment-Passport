@@ -710,16 +710,16 @@
       "name": "Trung tâm Dịch vụ việc làm Hải Phòng - cơ sở Hải Dương",
       "platform": "Provincial employment service / EPS program support / public hotline",
       "url": "https://vieclamhaiduong.vn/",
-      "adminContact": "Public mobile +84 349 616 791; landline 0220 3858 499",
+      "adminContact": "Public mobile +84 349 616 791; WhatsApp account exists but no organization identity is visible",
       "applicantStages": [
         "EPS application preparation",
         "official EPS document guidance",
         "pre-departure orientation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "manual_whatsapp_identity_check_ready",
       "priority": "VN-A21",
-      "note": "The official employment-service site continues to publish EPS program guidance and lists public mobile 0349 616 791. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
+      "note": "User screenshot on 2026-10-10 confirms +84 349 616 791 is registered on WhatsApp. The profile appears personal and shows no visible organization name. Send only an identity-check message before any KEP pitch."
     }
   ]
 }
