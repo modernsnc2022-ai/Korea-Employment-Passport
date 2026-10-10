@@ -1,5 +1,5 @@
 {
-  "version": "8.78.0",
+  "version": "8.79.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1638,10 +1638,20 @@
       "operator": "Trung tam Ngoai ngu - Du hoc Nhat Tam",
       "channel": "whatsapp",
       "contact": "+84 939 628 028",
-      "status": "manual_identity_check_ready",
+      "status": "manual_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A17",
-      "rule": "WhatsApp account exists on +84 939 628 028 but profile identity is blank. Send only the identity-check question first; do not send the KEP pitch until organization identity is confirmed.",
-      "evidence": "User screenshot on 2026-10-10 shows an active WhatsApp account for +84 939 628 028 with no visible organization identity."
+      "rule": "Identity-check sent on 2026-10-10. Wait for reply; no resend or full pitch until identity is confirmed.",
+      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+    },
+    {
+      "sourceCode": "vn_bacninh_eps_center_2026",
+      "operator": "Bac Ninh Employment Service Center - EPS 2026",
+      "channel": "whatsapp",
+      "contact": "+84 913 358 044",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A18",
+      "rule": "Check the newly published Hotline/Zalo mobile on WhatsApp and verify operator identity before any pitch.",
+      "evidence": "Public notice dated 2026-09-18 lists an EPS class and Hotline/Zalo 0913 358 044. Dual Gmail/GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
