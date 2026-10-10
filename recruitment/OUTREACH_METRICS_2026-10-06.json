@@ -1,5 +1,5 @@
 {
-  "version": "8.70.0",
+  "version": "8.71.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1568,10 +1568,10 @@
       "operator": "Công ty TNHH Phát triển Nhân lực Việt Hàn",
       "channel": "whatsapp",
       "contact": "+84 374 480 888",
-      "status": "manual_identity_check_pending",
+      "status": "manual_identity_check_sent_2026-10-09_waiting",
       "priority": "VN-A10",
-      "rule": "First published phone +84 969 299 311 is not on WhatsApp. Second public phone +84 374 480 888 is registered but profile identity is blank. Send only an identity-check question first; do not mark sent until user explicitly confirms.",
-      "evidence": "User WhatsApp lookup showed an active account on +84 374 480 888 with no visible business identity."
+      "rule": "Identity-check was sent to +84 374 480 888 on 2026-10-09. No reply as of 2026-10-10. Do not resend, do not send the KEP pitch, and wait for operator identity confirmation.",
+      "evidence": "User screenshot shows the Vietnamese identity-check message sent at 22:45 on 2026-10-09 with no reply visible the next day."
     },
     {
       "sourceCode": "vn_cantho_eps_center",

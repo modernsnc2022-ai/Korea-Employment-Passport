@@ -526,9 +526,9 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-09_waiting",
       "priority": "VN-A10",
-      "note": "+84 969 299 311 was not registered on WhatsApp. +84 374 480 888 is registered but profile identity is blank. Identity-check message was prepared, but there is no explicit user confirmation that it was sent; do not mark sent."
+      "note": "User screenshot confirms the identity-check message was sent on WhatsApp to +84 374 480 888 on 2026-10-09 at 22:45 KST. No reply was visible on 2026-10-10. Wait; do not resend or send the full KEP pitch until identity is confirmed."
     },
     {
       "id": "vn_cantho_eps_center",
