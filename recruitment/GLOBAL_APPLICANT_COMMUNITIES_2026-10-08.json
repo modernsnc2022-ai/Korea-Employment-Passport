@@ -663,9 +663,27 @@
         "official EPS application preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A18",
-      "note": "Public notice dated 2026-09-18 advertises an EPS Korean class opening 2026-09-22 and lists Hotline/Zalo 0913 358 044. Dual Gmail and GitHub duplicate checks for this mobile returned 0. Verify WhatsApp identity before any KEP pitch."
+      "note": "User checked the published Hotline/Zalo +84 913 358 044 on WhatsApp on 2026-10-10 and no account was available. Close this WhatsApp route and do not retry this number."
+    },
+    {
+      "id": "vn_phutho_vinhphuc_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm Phú Thọ - cơ sở Vĩnh Phúc",
+      "platform": "Provincial employment service / EPS training / public mobile contact",
+      "url": "https://www.vieclamvinhphuc.gov.vn/",
+      "adminContact": "Public mobile +84 979 876 146; email vieclamphutho.cs1@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "official EPS application preparation",
+        "EPS skill-test preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A19",
+      "note": "Current center site lists a 2026 Korean-language course for workers preparing for Korea and 2026 EPS skill-test training, with public mobile 097 987 6146. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }

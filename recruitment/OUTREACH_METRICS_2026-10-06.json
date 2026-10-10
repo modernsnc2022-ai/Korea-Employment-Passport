@@ -1,5 +1,5 @@
 {
-  "version": "8.79.0",
+  "version": "8.80.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1648,10 +1648,20 @@
       "operator": "Bac Ninh Employment Service Center - EPS 2026",
       "channel": "whatsapp",
       "contact": "+84 913 358 044",
-      "status": "manual_identity_check_pending",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A18",
-      "rule": "Check the newly published Hotline/Zalo mobile on WhatsApp and verify operator identity before any pitch.",
-      "evidence": "Public notice dated 2026-09-18 lists an EPS class and Hotline/Zalo 0913 358 044. Dual Gmail/GitHub duplicate checks returned 0."
+      "rule": "User checked +84 913 358 044 on WhatsApp on 2026-10-10 and no account was available. Do not retry this number.",
+      "evidence": "User explicitly reported no WhatsApp account for the published Bắc Ninh Hotline/Zalo number."
+    },
+    {
+      "sourceCode": "vn_phutho_vinhphuc_eps_center",
+      "operator": "Phu Tho Employment Service Center - Vinh Phuc branch",
+      "channel": "whatsapp",
+      "contact": "+84 979 876 146",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A19",
+      "rule": "Check whether the center's public mobile is registered on WhatsApp and verify operator identity before any KEP pitch.",
+      "evidence": "Current center website lists 2026 Korean-language/EPS training and public mobile 097 987 6146. Dual Gmail/GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
