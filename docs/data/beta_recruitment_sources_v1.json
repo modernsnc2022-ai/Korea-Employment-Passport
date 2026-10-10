@@ -1,5 +1,5 @@
 {
-  "version": "3.60.0",
+  "version": "3.61.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -184,6 +184,7 @@
     "vn_nhattam_cantho_eps",
     "vn_bacninh_eps_center_2026",
     "vn_phutho_vinhphuc_eps_center",
-    "vn_thainguyen_eps_center"
+    "vn_thainguyen_eps_center",
+    "vn_haiduong_eps_center"
   ]
 }
