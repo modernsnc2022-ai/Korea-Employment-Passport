@@ -578,9 +578,26 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A13",
-      "note": "KoreaLink is actively advertising October 2026 Korean classes including EPS-TOPIK preparation. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before initial KEP outreach."
+      "note": "User checked public hotline +84 888 725 988 on WhatsApp on 2026-10-10 and no account was available. Close this WhatsApp route and do not retry the number."
+    },
+    {
+      "id": "vn_nghean_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm Nghệ An — EPS",
+      "platform": "Provincial employment service center / EPS-TOPIK training / phone-Zalo",
+      "url": "https://vieclamnghean.vn/tin-tuc/thong-bao-khai-giang-lop-hoc-tieng-han-quoc-eps-1311",
+      "adminContact": "Phone/Zalo +84 965 065 929; landline 02383 550 050; email sanvieclamnghean@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "official EPS application preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A14",
+      "note": "Official Nghệ An employment-service portal announced a 2026 EPS Korean class and lists +84 965 065 929 as phone/Zalo. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }
