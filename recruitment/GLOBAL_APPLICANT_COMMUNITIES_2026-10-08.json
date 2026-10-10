@@ -466,16 +466,16 @@
       "name": "Trung tâm Dịch vụ việc làm Hà Tĩnh — EPS-TOPIK",
       "platform": "Provincial employment service center / EPS-TOPIK class / Hotline-Zalo",
       "url": "https://tienghaneps.vn/vi/news/lich-khai-giang/thong-bao-khai-giang-lop-tieng-han-quoc-ngay-17-7-2026-174.html",
-      "adminContact": "Hotline/Zalo 0888 127 668",
+      "adminContact": "Old Hotline/Zalo +84 888 127 668 (WhatsApp unavailable 2026-10-09); newly published EPS staff contact Bui Van Giang +84 986 767 623 (next check)",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "official EPS process guidance",
         "mock tests"
       ],
       "applicantDensity": "very high",
-      "outreachState": "whatsapp_unavailable_2026-10-09_do_not_retry",
+      "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A7",
-      "note": "Official Hà Tĩnh employment-service-center notice dated 2026-07-13 says the center is the only unit in the province implementing EPS (E-9), runs EPS-TOPIK preparation classes for the late-2026 exam, and publishes Hotline/Zalo 0888 127 668. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending. User checked WhatsApp on 2026-10-09 and the published Hotline/Zalo number was not registered. Do not retry WhatsApp."
+      "note": "The old center Hotline/Zalo +84 888 127 668 was unavailable on WhatsApp on 2026-10-09. A newer Ha Tinh government EPS notice dated 2026-08-13 lists Bui Van Giang, an employment-service-center officer, at +84 986 767 623 for EPS registration guidance. Dual Gmail and GitHub duplicate checks for the new number returned 0. Check this new public contact on WhatsApp and verify identity before any KEP pitch."
     },
     {
       "id": "vn_bacninh_eps_center",
@@ -764,16 +764,16 @@
       "name": "Trung tâm Dịch vụ việc làm tỉnh Quảng Ngãi",
       "platform": "Provincial employment service / EPS 2026 intake / public hotlines",
       "url": "https://vieclamquangngai.com.vn/",
-      "adminContact": "Job-seeker support hotlines +84 911 260 739 (WhatsApp unavailable) and +84 905 059 944 (next check)",
+      "adminContact": "Job-seeker support hotlines +84 911 260 739 and +84 905 059 944; both unavailable on WhatsApp",
       "applicantStages": [
         "EPS-TOPIK registration",
         "official EPS application preparation",
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A24",
-      "note": "User checked first public hotline +84 911 260 739 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is +84 905 059 944; verify identity before any KEP pitch."
+      "note": "User checked both public Quang Ngai hotlines on WhatsApp on 2026-10-10 and neither account existed. Close WhatsApp route and do not retry these numbers."
     }
   ]
 }
