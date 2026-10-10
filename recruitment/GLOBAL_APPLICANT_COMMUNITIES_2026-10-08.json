@@ -699,9 +699,27 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_ready",
+      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A20",
-      "note": "User screenshot confirms the second public hotline is registered on WhatsApp, but no organization name is visible. Send only an identity-check message before any KEP pitch."
+      "note": "User explicitly confirmed sending the identity-check message to +84 979 585 155 on 2026-10-10. Wait for operator identity confirmation; do not resend or send the full KEP pitch."
+    },
+    {
+      "id": "vn_haiduong_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm Hải Phòng - cơ sở Hải Dương",
+      "platform": "Provincial employment service / EPS program support / public hotline",
+      "url": "https://vieclamhaiduong.vn/",
+      "adminContact": "Public mobile +84 349 616 791; landline 0220 3858 499",
+      "applicantStages": [
+        "EPS application preparation",
+        "official EPS document guidance",
+        "pre-departure orientation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A21",
+      "note": "The official employment-service site continues to publish EPS program guidance and lists public mobile 0349 616 791. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }

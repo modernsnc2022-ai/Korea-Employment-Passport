@@ -1,5 +1,5 @@
 {
-  "version": "8.84.0",
+  "version": "8.85.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1668,10 +1668,20 @@
       "operator": "Thai Nguyen Employment Service Center",
       "channel": "whatsapp",
       "contact": "+84 979 585 155",
-      "status": "manual_identity_check_ready",
+      "status": "manual_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A20",
-      "rule": "Second public hotline is active on WhatsApp but organization identity is not confirmed. Send identity-check only.",
-      "evidence": "User screenshot shows an active WhatsApp account for +84 979 585 155 with no visible organization name."
+      "rule": "Identity-check was sent to +84 979 585 155 on 2026-10-10. Wait for reply; do not resend or send the KEP pitch until identity is confirmed.",
+      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+    },
+    {
+      "sourceCode": "vn_haiduong_eps_center",
+      "operator": "Hai Phong Employment Service Center - Hai Duong branch",
+      "channel": "whatsapp",
+      "contact": "+84 349 616 791",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A21",
+      "rule": "Check the public mobile on WhatsApp and verify operator identity before any KEP pitch.",
+      "evidence": "Official employment-service site publishes EPS guidance and lists mobile 0349 616 791. Dual Gmail/GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
