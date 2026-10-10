@@ -764,7 +764,7 @@
       "name": "Trung tâm Dịch vụ việc làm tỉnh Quảng Ngãi",
       "platform": "Provincial employment service / EPS 2026 intake / public hotlines",
       "url": "https://vieclamquangngai.com.vn/",
-      "adminContact": "Job-seeker support hotlines +84 911 260 739 and +84 905 059 944",
+      "adminContact": "Job-seeker support hotlines +84 911 260 739 (WhatsApp unavailable) and +84 905 059 944 (next check)",
       "applicantStages": [
         "EPS-TOPIK registration",
         "official EPS application preparation",
@@ -773,7 +773,7 @@
       "applicantDensity": "high",
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A24",
-      "note": "Quang Ngai provincial notice confirms 2026 EPS intake through the provincial employment service center. The center website lists job-seeker support hotlines 0911 260 739 and 0905 059 944. Dual Gmail duplicate checks returned 0; GitHub checks returned 0 for these numbers/domain. Check WhatsApp registration and identity before any KEP pitch."
+      "note": "User checked first public hotline +84 911 260 739 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is +84 905 059 944; verify identity before any KEP pitch."
     }
   ]
 }
