@@ -1,5 +1,5 @@
 {
-  "version": "3.57.0",
+  "version": "3.58.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -181,6 +181,7 @@
     "vn_nghean_eps_center",
     "vn_phuongdong_eps",
     "vn_tomato_haiphong_eps",
-    "vn_nhattam_cantho_eps"
+    "vn_nhattam_cantho_eps",
+    "vn_bacninh_eps_center_2026"
   ]
 }
