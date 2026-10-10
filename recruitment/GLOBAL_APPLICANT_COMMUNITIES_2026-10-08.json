@@ -547,6 +547,40 @@
       "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A11",
       "note": "User checked both published contacts on WhatsApp on 2026-10-10: +84 767 938 399 unavailable; +84 888 095 855 unavailable. Close WhatsApp route and do not retry these numbers."
+    },
+    {
+      "id": "vn_gialai_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Gia Lai Employment Service Center — EPS",
+      "platform": "Provincial employment service / EPS-TOPIK training / public mobile contacts",
+      "url": "https://canhlien.gialai.gov.vn/",
+      "adminContact": "Public contacts +84 966 785 871 and +84 919 811 652; both unavailable on WhatsApp",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "official EPS application preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A12",
+      "note": "User checked both published contacts on WhatsApp on 2026-10-10 and neither account existed. Do not retry these two numbers."
+    },
+    {
+      "id": "vn_korealink_nghean",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "KoreaLink Korean Language Center — Nghe An",
+      "platform": "Korean language center / EPS-TOPIK training / public hotline",
+      "url": "https://korealink.edu.vn/",
+      "adminContact": "Public hotline +84 888 725 988; email korealink.vn@gmail.com",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A13",
+      "note": "KoreaLink is actively advertising October 2026 Korean classes including EPS-TOPIK preparation. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before initial KEP outreach."
     }
   ]
 }

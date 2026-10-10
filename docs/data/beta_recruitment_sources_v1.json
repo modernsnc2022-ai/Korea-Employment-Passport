@@ -1,5 +1,5 @@
 {
-  "version": "3.51.0",
+  "version": "3.53.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -175,6 +175,8 @@
     "vn_bacninh_eps_center",
     "vn_pheps_topik_phuonghan",
     "vn_viethan_eps_hrd",
-    "vn_cantho_eps_center"
+    "vn_cantho_eps_center",
+    "vn_gialai_eps_center",
+    "vn_korealink_nghean"
   ]
 }

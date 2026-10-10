@@ -1,5 +1,5 @@
 {
-  "version": "8.71.0",
+  "version": "8.73.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1582,6 +1582,26 @@
       "priority": "VN-A11",
       "rule": "Both published Can Tho contacts were checked by the user on WhatsApp on 2026-10-10 and neither had an account. Do not retry these numbers or duplicate via another initial route without a newly verified contact.",
       "evidence": "User confirmed no WhatsApp account for both +84 767 938 399 and +84 888 095 855."
+    },
+    {
+      "sourceCode": "vn_gialai_eps_center",
+      "operator": "Gia Lai Employment Service Center — EPS",
+      "channel": "whatsapp",
+      "contact": "+84 966 785 871 / +84 919 811 652",
+      "status": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A12",
+      "rule": "Both published Gia Lai contacts were checked by the user on WhatsApp on 2026-10-10 and neither had an account. Do not retry these numbers.",
+      "evidence": "User explicitly reported no WhatsApp account for +84 966 785 871 and then +84 919 811 652."
+    },
+    {
+      "sourceCode": "vn_korealink_nghean",
+      "operator": "KoreaLink Korean Language Center — Nghe An",
+      "channel": "whatsapp",
+      "contact": "+84 888 725 988",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A13",
+      "rule": "Check whether the public hotline is registered on WhatsApp and verify that it belongs to KoreaLink before any KEP pitch. If absent, close WhatsApp route and do not duplicate through another initial channel without a newly verified route.",
+      "evidence": "KoreaLink official site lists October 2026 EPS-TOPIK classes and public hotline 0888 725 988. Dual Gmail and GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
