@@ -606,15 +606,32 @@
       "name": "Trung tam Ngoai ngu Phuong Dong",
       "platform": "Korean language center / EPS-TOPIK preparation / public hotlines",
       "url": "https://trungtamtienghan.com.vn/",
-      "adminContact": "Public hotlines +84 988 787 186 and +84 964 913 575",
+      "adminContact": "Public hotlines +84 988 787 186 and +84 964 913 575; both unavailable on WhatsApp",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A15",
+      "note": "User checked both published hotlines on WhatsApp on 2026-10-10 and neither account existed. Close WhatsApp route and do not retry these numbers."
+    },
+    {
+      "id": "vn_tomato_haiphong_eps",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Ngoại ngữ Tomato — Hải Phòng",
+      "platform": "Korean language center / EPS-TOPIK preparation / hotline-Zalo",
+      "url": "https://ngoaingutomato.edu.vn/lop-tieng-han-cap-toc",
+      "adminContact": "Hotline/Zalo +84 934 222 620 and +84 964 299 222",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
       "outreachState": "manual_whatsapp_identity_check_pending",
-      "priority": "VN-A15",
-      "note": "User checked first public hotline +84 988 787 186 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is second public hotline +84 964 913 575. Dual Gmail and GitHub duplicate checks returned 0."
+      "priority": "VN-A16",
+      "note": "Website currently advertises 2026 EPS-TOPIK training and lists hotline/Zalo +84 934 222 620 and +84 964 299 222. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }

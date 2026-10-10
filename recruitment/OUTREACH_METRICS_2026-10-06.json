@@ -1,5 +1,5 @@
 {
-  "version": "8.75.0",
+  "version": "8.76.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1617,11 +1617,21 @@
       "sourceCode": "vn_phuongdong_eps",
       "operator": "Trung tam Ngoai ngu Phuong Dong",
       "channel": "whatsapp",
-      "contact": "+84 964 913 575",
-      "status": "manual_identity_check_pending",
+      "contact": "+84 988 787 186 / +84 964 913 575",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A15",
-      "rule": "First public hotline +84 988 787 186 was checked by the user and had no WhatsApp account. Check only the second public hotline +84 964 913 575 next. If registered but identity is unclear, send identity-check only.",
-      "evidence": "Dual Gmail/GitHub duplicate checks returned 0; user reported no WhatsApp account for first public hotline."
+      "rule": "Both published Phuong Dong hotlines were checked by the user on WhatsApp on 2026-10-10 and neither had an account. Do not retry these numbers.",
+      "evidence": "User explicitly reported no WhatsApp account for both public hotlines."
+    },
+    {
+      "sourceCode": "vn_tomato_haiphong_eps",
+      "operator": "Ngoai ngu Tomato — Hai Phong",
+      "channel": "whatsapp",
+      "contact": "+84 934 222 620",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A16",
+      "rule": "Check whether the first published hotline/Zalo number is registered on WhatsApp and verify operator identity before any KEP pitch. If unavailable, move once to the second published hotline +84 964 299 222; do not duplicate channels.",
+      "evidence": "Tomato website currently advertises 2026 EPS-TOPIK training and lists Hotline/Zalo 0934 222 620 / 0964 299 222. Dual Gmail and GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {

@@ -1,5 +1,5 @@
 {
-  "version": "3.55.0",
+  "version": "3.56.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -179,6 +179,7 @@
     "vn_gialai_eps_center",
     "vn_korealink_nghean",
     "vn_nghean_eps_center",
-    "vn_phuongdong_eps"
+    "vn_phuongdong_eps",
+    "vn_tomato_haiphong_eps"
   ]
 }
