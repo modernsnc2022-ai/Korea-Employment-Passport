@@ -512,6 +512,41 @@
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A9",
       "note": "Google Play PHEPS-TOPIK listing identifies the app as supporting EPS-TOPIK and Korea employment preparation and publishes support phone +84 859 299 552. The linked Phương Hàn learning site remains active. Dual Gmail and GitHub duplicate checks returned no prior outreach. Verify WhatsApp registration and operator identity before sending."
+    },
+    {
+      "id": "vn_viethan_eps_hrd",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Công ty TNHH Phát triển Nhân lực Việt Hàn",
+      "platform": "Korea employment/EPS preparation / public phone / WhatsApp",
+      "url": "https://viethan.edu.vn/",
+      "adminContact": "Public phones 0969 299 311 and 0374 480 888; WhatsApp exists on +84 374 480 888",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A10",
+      "note": "+84 969 299 311 was not registered on WhatsApp. +84 374 480 888 is registered but profile identity is blank. Identity-check message was prepared, but there is no explicit user confirmation that it was sent; do not mark sent."
+    },
+    {
+      "id": "vn_cantho_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ Việc làm Thành phố Cần Thơ — EPS",
+      "platform": "Provincial employment service center / EPS-TOPIK class / hotline-Zalo",
+      "url": "https://xkldcantho.vn/han-quoc/",
+      "adminContact": "Public contacts 0767 938 399 and 0888 095 855",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A11",
+      "note": "Official/public Cần Thơ overseas-employment portal lists a 2026 EPS-TOPIK class and EPS Korea program, with contacts 0767 938 399 / 0888 095 855. Dual Gmail and GitHub duplicate checks returned 0 prior outreach. Check WhatsApp registration and operator identity before initial outreach."
     }
   ]
 }
