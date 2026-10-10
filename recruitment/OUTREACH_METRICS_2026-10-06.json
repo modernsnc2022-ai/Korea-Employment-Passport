@@ -1,5 +1,5 @@
 {
-  "version": "8.82.0",
+  "version": "8.83.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1667,11 +1667,11 @@
       "sourceCode": "vn_thainguyen_eps_center",
       "operator": "Thai Nguyen Employment Service Center",
       "channel": "whatsapp",
-      "contact": "+84 989 146 333",
+      "contact": "+84 979 585 155",
       "status": "manual_identity_check_pending",
       "priority": "VN-A20",
-      "rule": "Check the first public hotline on WhatsApp and verify operator identity before any KEP pitch. If unavailable, move once to the second hotline +84 979 585 155.",
-      "evidence": "Official site provides a dedicated EPS registration page, a 2026 EPS recruitment notice, and public hotlines 0989 146 333 / 0979 585 155. Dual Gmail/GitHub duplicate checks returned 0."
+      "rule": "First public hotline +84 989 146 333 was unavailable on WhatsApp. Check only the second public hotline +84 979 585 155 next; if registered but identity is unclear, send identity-check only.",
+      "evidence": "User confirmed no WhatsApp account for the first Thai Nguyen public hotline."
     }
   ],
   "manualCommunityAdminPolicy": {
