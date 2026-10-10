@@ -1,5 +1,5 @@
 {
-  "version": "8.83.0",
+  "version": "8.84.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1668,10 +1668,10 @@
       "operator": "Thai Nguyen Employment Service Center",
       "channel": "whatsapp",
       "contact": "+84 979 585 155",
-      "status": "manual_identity_check_pending",
+      "status": "manual_identity_check_ready",
       "priority": "VN-A20",
-      "rule": "First public hotline +84 989 146 333 was unavailable on WhatsApp. Check only the second public hotline +84 979 585 155 next; if registered but identity is unclear, send identity-check only.",
-      "evidence": "User confirmed no WhatsApp account for the first Thai Nguyen public hotline."
+      "rule": "Second public hotline is active on WhatsApp but organization identity is not confirmed. Send identity-check only.",
+      "evidence": "User screenshot shows an active WhatsApp account for +84 979 585 155 with no visible organization name."
     }
   ],
   "manualCommunityAdminPolicy": {
