@@ -746,7 +746,25 @@
       "name": "Trung tâm Dịch vụ việc làm tỉnh Đắk Lắk",
       "platform": "Provincial employment service / EPS 2026 recruitment / public mobile contacts",
       "url": "https://hoamy.daklak.gov.vn/Detail_Information.aspx?cdctid=0&cdid=5064&cmid=5&id=12507",
-      "adminContact": "Public contacts +84 913 460 101 (WhatsApp unavailable) and +84 962 020 435 (next check)",
+      "adminContact": "Public contacts +84 913 460 101 and +84 962 020 435; both unavailable on WhatsApp",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
+      "priority": "VN-A23",
+      "note": "User checked both published Dak Lak contacts on WhatsApp on 2026-10-10 and neither account existed. Close WhatsApp route and do not retry these numbers."
+    },
+    {
+      "id": "vn_quangngai_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm tỉnh Quảng Ngãi",
+      "platform": "Provincial employment service / EPS 2026 intake / public hotlines",
+      "url": "https://vieclamquangngai.com.vn/",
+      "adminContact": "Job-seeker support hotlines +84 911 260 739 and +84 905 059 944",
       "applicantStages": [
         "EPS-TOPIK registration",
         "official EPS application preparation",
@@ -754,8 +772,8 @@
       ],
       "applicantDensity": "high",
       "outreachState": "manual_whatsapp_identity_check_pending",
-      "priority": "VN-A23",
-      "note": "User checked first public contact +84 913 460 101 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is +84 962 020 435; verify identity before any KEP pitch."
+      "priority": "VN-A24",
+      "note": "Quang Ngai provincial notice confirms 2026 EPS intake through the provincial employment service center. The center website lists job-seeker support hotlines 0911 260 739 and 0905 059 944. Dual Gmail duplicate checks returned 0; GitHub checks returned 0 for these numbers/domain. Check WhatsApp registration and identity before any KEP pitch."
     }
   ]
 }

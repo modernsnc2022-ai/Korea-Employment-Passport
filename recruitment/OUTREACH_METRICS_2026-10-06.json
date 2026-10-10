@@ -1,5 +1,5 @@
 {
-  "version": "8.89.0",
+  "version": "8.90.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1697,11 +1697,21 @@
       "sourceCode": "vn_daklak_eps_center",
       "operator": "Dak Lak Employment Service Center",
       "channel": "whatsapp",
-      "contact": "+84 962 020 435",
-      "status": "manual_identity_check_pending",
+      "contact": "+84 913 460 101 / +84 962 020 435",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A23",
-      "rule": "First public contact +84 913 460 101 was unavailable on WhatsApp. Check only +84 962 020 435 next; if registered but identity is unclear, send identity-check only.",
-      "evidence": "User confirmed no WhatsApp account for the first Dak Lak public contact."
+      "rule": "Both published Dak Lak contacts were unavailable on WhatsApp. Do not retry these numbers.",
+      "evidence": "User explicitly reported no WhatsApp account for both Dak Lak contacts."
+    },
+    {
+      "sourceCode": "vn_quangngai_eps_center",
+      "operator": "Quang Ngai Employment Service Center",
+      "channel": "whatsapp",
+      "contact": "+84 911 260 739",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A24",
+      "rule": "Check the first job-seeker support hotline on WhatsApp and verify operator identity before any KEP pitch. If unavailable, move once to +84 905 059 944.",
+      "evidence": "Official 2026 EPS notice routes applicants through the provincial employment service center; center site lists job-seeker support hotlines 0911 260 739 and 0905 059 944. Gmail/GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {

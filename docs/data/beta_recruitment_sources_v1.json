@@ -1,5 +1,5 @@
 {
-  "version": "3.63.0",
+  "version": "3.64.0",
   "defaultCode": "website",
   "codes": [
     "website",
@@ -187,6 +187,7 @@
     "vn_thainguyen_eps_center",
     "vn_haiduong_eps_center",
     "vn_dongthap_eps_center",
-    "vn_daklak_eps_center"
+    "vn_daklak_eps_center",
+    "vn_quangngai_eps_center"
   ]
 }
