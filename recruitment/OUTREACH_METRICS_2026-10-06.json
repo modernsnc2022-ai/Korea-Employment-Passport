@@ -1,5 +1,5 @@
 {
-  "version": "8.69.0",
+  "version": "8.70.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1577,11 +1577,11 @@
       "sourceCode": "vn_cantho_eps_center",
       "operator": "Trung tâm Dịch vụ Việc làm Thành phố Cần Thơ — EPS",
       "channel": "whatsapp",
-      "contact": "+84 888 095 855",
-      "status": "manual_identity_check_pending",
+      "contact": "+84 767 938 399 / +84 888 095 855",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A11",
-      "rule": "Primary published contact +84 767 938 399 was checked by the user on WhatsApp on 2026-10-10 and was unavailable. Check only the second published contact +84 888 095 855 next; if registered but identity is unclear, send identity-check only. Do not duplicate routes.",
-      "evidence": "Public Cần Thơ overseas-employment portal lists contacts 0767 938 399 and 0888 095 855. User confirmed the first number has no WhatsApp account."
+      "rule": "Both published Can Tho contacts were checked by the user on WhatsApp on 2026-10-10 and neither had an account. Do not retry these numbers or duplicate via another initial route without a newly verified contact.",
+      "evidence": "User confirmed no WhatsApp account for both +84 767 938 399 and +84 888 095 855."
     }
   ],
   "manualCommunityAdminPolicy": {
