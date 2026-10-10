@@ -717,9 +717,27 @@
         "pre-departure orientation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_ready",
+      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A21",
-      "note": "User screenshot on 2026-10-10 confirms +84 349 616 791 is registered on WhatsApp. The profile appears personal and shows no visible organization name. Send only an identity-check message before any KEP pitch."
+      "note": "User explicitly confirmed sending the identity-check message to +84 349 616 791 on 2026-10-10. Wait for operator identity confirmation; do not resend or send the full KEP pitch."
+    },
+    {
+      "id": "vn_dongthap_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm Đồng Tháp",
+      "platform": "Provincial employment service / EPS 2026 recruitment / public staff mobiles",
+      "url": "https://xuatkhaulaodongdongthap.com/vi/news/han-quoc/thong-bao-phoi-hop-to-chuc-tuyen-chon-nguoi-lao-dong-theo-chuong-trinh-eps-nam-2026-1922.html",
+      "adminContact": "Public staff mobile +84 932 908 739; WhatsApp active but organization identity not visible",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_ready",
+      "priority": "VN-A22",
+      "note": "User screenshot on 2026-10-10 confirms +84 932 908 739 is registered on WhatsApp. The profile appears personal and no organization name is visible. Send only an identity-check message before any KEP pitch."
     }
   ]
 }
