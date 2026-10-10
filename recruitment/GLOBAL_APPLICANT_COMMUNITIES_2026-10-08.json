@@ -674,16 +674,16 @@
       "name": "Trung tâm Dịch vụ việc làm Phú Thọ - cơ sở Vĩnh Phúc",
       "platform": "Provincial employment service / EPS training / public mobile contact",
       "url": "https://www.vieclamvinhphuc.gov.vn/",
-      "adminContact": "Public mobile +84 979 876 146; email vieclamphutho.cs1@gmail.com",
+      "adminContact": "Public mobile +84 979 876 146; WhatsApp account exists but no organization identity is visible",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "official EPS application preparation",
         "EPS skill-test preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "manual_whatsapp_identity_check_ready",
       "priority": "VN-A19",
-      "note": "Current center site lists a 2026 Korean-language course for workers preparing for Korea and 2026 EPS skill-test training, with public mobile 097 987 6146. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
+      "note": "User screenshot on 2026-10-10 confirms +84 979 876 146 is registered on WhatsApp, but profile shows no organization name/details. Send only an identity-check message; do not send the full KEP pitch until identity is confirmed."
     }
   ]
 }
