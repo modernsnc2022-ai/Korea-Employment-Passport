@@ -681,9 +681,27 @@
         "EPS skill-test preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_ready",
+      "outreachState": "manual_whatsapp_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A19",
-      "note": "User screenshot on 2026-10-10 confirms +84 979 876 146 is registered on WhatsApp, but profile shows no organization name/details. Send only an identity-check message; do not send the full KEP pitch until identity is confirmed."
+      "note": "User explicitly confirmed sending the identity-check message to +84 979 876 146 on 2026-10-10. Wait for operator identity confirmation; do not resend and do not send the full KEP pitch yet."
+    },
+    {
+      "id": "vn_thainguyen_eps_center",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Dịch vụ việc làm tỉnh Thái Nguyên",
+      "platform": "Provincial employment service / official EPS registration / public hotlines",
+      "url": "https://vieclam.thainguyen.gov.vn/",
+      "adminContact": "Hotlines +84 989 146 333 and +84 979 585 155",
+      "applicantStages": [
+        "EPS-TOPIK registration",
+        "official EPS application preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A20",
+      "note": "Official center site has a dedicated EPS registration page and a 2026 EPS recruitment notice. Public hotlines are 0989 146 333 and 0979 585 155. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }

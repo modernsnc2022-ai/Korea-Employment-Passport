@@ -1,5 +1,5 @@
 {
-  "version": "8.81.0",
+  "version": "8.82.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1658,10 +1658,20 @@
       "operator": "Phu Tho Employment Service Center - Vinh Phuc branch",
       "channel": "whatsapp",
       "contact": "+84 979 876 146",
-      "status": "manual_identity_check_ready",
+      "status": "manual_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A19",
-      "rule": "WhatsApp account exists on +84 979 876 146 but profile identity is blank. Send only the identity-check question first; do not send the KEP pitch until identity is confirmed.",
-      "evidence": "User screenshot on 2026-10-10 shows an active WhatsApp account for +84 979 876 146 with no visible organization identity."
+      "rule": "Identity-check was sent to +84 979 876 146 on 2026-10-10. Wait for reply; do not resend or send the full KEP pitch until organization identity is confirmed.",
+      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+    },
+    {
+      "sourceCode": "vn_thainguyen_eps_center",
+      "operator": "Thai Nguyen Employment Service Center",
+      "channel": "whatsapp",
+      "contact": "+84 989 146 333",
+      "status": "manual_identity_check_pending",
+      "priority": "VN-A20",
+      "rule": "Check the first public hotline on WhatsApp and verify operator identity before any KEP pitch. If unavailable, move once to the second hotline +84 979 585 155.",
+      "evidence": "Official site provides a dedicated EPS registration page, a 2026 EPS recruitment notice, and public hotlines 0989 146 333 / 0979 585 155. Dual Gmail/GitHub duplicate checks returned 0."
     }
   ],
   "manualCommunityAdminPolicy": {
