@@ -692,16 +692,16 @@
       "name": "Trung tâm Dịch vụ việc làm tỉnh Thái Nguyên",
       "platform": "Provincial employment service / official EPS registration / public hotlines",
       "url": "https://vieclam.thainguyen.gov.vn/",
-      "adminContact": "Hotlines +84 989 146 333 (WhatsApp unavailable) and +84 979 585 155 (next check)",
+      "adminContact": "Hotlines +84 989 146 333 (WhatsApp unavailable) and +84 979 585 155 (WhatsApp active; organization identity not confirmed)",
       "applicantStages": [
         "EPS-TOPIK registration",
         "official EPS application preparation",
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "manual_whatsapp_identity_check_ready",
       "priority": "VN-A20",
-      "note": "User checked first public hotline +84 989 146 333 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is second public hotline +84 979 585 155; verify identity before any KEP pitch."
+      "note": "User screenshot confirms the second public hotline is registered on WhatsApp, but no organization name is visible. Send only an identity-check message before any KEP pitch."
     }
   ]
 }
