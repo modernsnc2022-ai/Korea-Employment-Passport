@@ -1,5 +1,5 @@
 {
-  "version": "8.86.0",
+  "version": "8.87.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1678,10 +1678,20 @@
       "operator": "Hai Phong Employment Service Center - Hai Duong branch",
       "channel": "whatsapp",
       "contact": "+84 349 616 791",
-      "status": "manual_identity_check_ready",
+      "status": "manual_identity_check_sent_2026-10-10_waiting",
       "priority": "VN-A21",
-      "rule": "Public mobile +84 349 616 791 is active on WhatsApp, but organization identity is not confirmed. Send identity-check only.",
-      "evidence": "User screenshot shows an active WhatsApp account for +84 349 616 791 with no visible organization name."
+      "rule": "Identity-check was sent to +84 349 616 791 on 2026-10-10. Wait for reply; do not resend or send the full KEP pitch until identity is confirmed.",
+      "evidence": "User explicitly confirmed the WhatsApp identity-check message was sent."
+    },
+    {
+      "sourceCode": "vn_dongthap_eps_center",
+      "operator": "Dong Thap Employment Service Center",
+      "channel": "whatsapp",
+      "contact": "+84 932 908 739",
+      "status": "manual_identity_check_ready",
+      "priority": "VN-A22",
+      "rule": "WhatsApp is active on the first published EPS staff mobile but organization identity is not confirmed. Send identity-check only.",
+      "evidence": "User screenshot shows an active WhatsApp account for +84 932 908 739 with no visible organization name."
     }
   ],
   "manualCommunityAdminPolicy": {
