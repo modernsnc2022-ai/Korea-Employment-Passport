@@ -595,9 +595,26 @@
         "official EPS application preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A14",
-      "note": "Official Nghệ An employment-service portal announced a 2026 EPS Korean class and lists +84 965 065 929 as phone/Zalo. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
+      "note": "User checked +84 965 065 929 on WhatsApp on 2026-10-10 and no account was available. Close WhatsApp route and do not retry this number."
+    },
+    {
+      "id": "vn_phuongdong_eps",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tam Ngoai ngu Phuong Dong",
+      "platform": "Korean language center / EPS-TOPIK preparation / public hotlines",
+      "url": "https://trungtamtienghan.com.vn/",
+      "adminContact": "Public hotlines +84 988 787 186 and +84 964 913 575",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_pending",
+      "priority": "VN-A15",
+      "note": "User checked first public hotline +84 988 787 186 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is second public hotline +84 964 913 575. Dual Gmail and GitHub duplicate checks returned 0."
     }
   ]
 }
