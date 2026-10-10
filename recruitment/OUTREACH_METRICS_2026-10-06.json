@@ -1,5 +1,5 @@
 {
-  "version": "8.76.0",
+  "version": "8.77.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1627,11 +1627,11 @@
       "sourceCode": "vn_tomato_haiphong_eps",
       "operator": "Ngoai ngu Tomato — Hai Phong",
       "channel": "whatsapp",
-      "contact": "+84 934 222 620",
+      "contact": "+84 964 299 222",
       "status": "manual_identity_check_pending",
       "priority": "VN-A16",
-      "rule": "Check whether the first published hotline/Zalo number is registered on WhatsApp and verify operator identity before any KEP pitch. If unavailable, move once to the second published hotline +84 964 299 222; do not duplicate channels.",
-      "evidence": "Tomato website currently advertises 2026 EPS-TOPIK training and lists Hotline/Zalo 0934 222 620 / 0964 299 222. Dual Gmail and GitHub duplicate checks returned 0."
+      "rule": "First published hotline +84 934 222 620 was checked by the user on WhatsApp on 2026-10-10 and was unavailable. Check only the second published hotline +84 964 299 222 next; if registered but identity is unclear, send identity-check only.",
+      "evidence": "User confirmed no WhatsApp account for the first public Tomato hotline."
     }
   ],
   "manualCommunityAdminPolicy": {

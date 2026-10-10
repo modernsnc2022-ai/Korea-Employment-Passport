@@ -623,7 +623,7 @@
       "name": "Ngoại ngữ Tomato — Hải Phòng",
       "platform": "Korean language center / EPS-TOPIK preparation / hotline-Zalo",
       "url": "https://ngoaingutomato.edu.vn/lop-tieng-han-cap-toc",
-      "adminContact": "Hotline/Zalo +84 934 222 620 and +84 964 299 222",
+      "adminContact": "Hotline/Zalo +84 934 222 620 (WhatsApp unavailable) and +84 964 299 222 (next WhatsApp check)",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "Korea employment preparation"
@@ -631,7 +631,7 @@
       "applicantDensity": "high",
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A16",
-      "note": "Website currently advertises 2026 EPS-TOPIK training and lists hotline/Zalo +84 934 222 620 and +84 964 299 222. Dual Gmail and GitHub duplicate checks returned 0. Check WhatsApp registration and operator identity before any KEP pitch."
+      "note": "User checked first public hotline +84 934 222 620 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is second public hotline +84 964 299 222; verify identity before any KEP pitch."
     }
   ]
 }
