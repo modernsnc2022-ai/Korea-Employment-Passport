@@ -623,15 +623,32 @@
       "name": "Ngoại ngữ Tomato — Hải Phòng",
       "platform": "Korean language center / EPS-TOPIK preparation / hotline-Zalo",
       "url": "https://ngoaingutomato.edu.vn/lop-tieng-han-cap-toc",
-      "adminContact": "Hotline/Zalo +84 934 222 620 (WhatsApp unavailable) and +84 964 299 222 (next WhatsApp check)",
+      "adminContact": "Hotline/Zalo +84 934 222 620 and +84 964 299 222; both unavailable on WhatsApp",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_identity_check_pending",
+      "outreachState": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A16",
-      "note": "User checked first public hotline +84 934 222 620 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is second public hotline +84 964 299 222; verify identity before any KEP pitch."
+      "note": "User checked both published Tomato hotlines on WhatsApp on 2026-10-10 and neither account existed. Close WhatsApp route and do not retry these numbers."
+    },
+    {
+      "id": "vn_nhattam_cantho_eps",
+      "country": "VN",
+      "countryName": "Vietnam",
+      "name": "Trung tâm Ngoại ngữ - Du học Nhất Tâm",
+      "platform": "Korean language center / EPS-TOPIK training / hotline-Zalo",
+      "url": "https://congtynhattam.com/lop-xuat-khau-lao-dong-han-quoc/",
+      "adminContact": "Hotline/Zalo +84 939 628 028; WhatsApp registered but profile identity is blank. Alternate +84 909 161 759 not checked.",
+      "applicantStages": [
+        "EPS-TOPIK preparation",
+        "Korea employment preparation"
+      ],
+      "applicantDensity": "high",
+      "outreachState": "manual_whatsapp_identity_check_ready",
+      "priority": "VN-A17",
+      "note": "User screenshot on 2026-10-10 confirms +84 939 628 028 is registered on WhatsApp, but no organization name or identifying profile details are visible. Send only one identity-check message; do not send the full KEP pitch until identity is confirmed."
     }
   ]
 }

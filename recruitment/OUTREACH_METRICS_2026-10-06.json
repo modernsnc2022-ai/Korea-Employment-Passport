@@ -1,5 +1,5 @@
 {
-  "version": "8.77.0",
+  "version": "8.78.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1627,11 +1627,21 @@
       "sourceCode": "vn_tomato_haiphong_eps",
       "operator": "Ngoai ngu Tomato — Hai Phong",
       "channel": "whatsapp",
-      "contact": "+84 964 299 222",
-      "status": "manual_identity_check_pending",
+      "contact": "+84 934 222 620 / +84 964 299 222",
+      "status": "closed_no_whatsapp_2026-10-10",
       "priority": "VN-A16",
-      "rule": "First published hotline +84 934 222 620 was checked by the user on WhatsApp on 2026-10-10 and was unavailable. Check only the second published hotline +84 964 299 222 next; if registered but identity is unclear, send identity-check only.",
-      "evidence": "User confirmed no WhatsApp account for the first public Tomato hotline."
+      "rule": "Both published Tomato hotlines were checked by the user on WhatsApp on 2026-10-10 and neither had an account. Do not retry these numbers.",
+      "evidence": "User explicitly reported no WhatsApp account for both published Tomato hotlines."
+    },
+    {
+      "sourceCode": "vn_nhattam_cantho_eps",
+      "operator": "Trung tam Ngoai ngu - Du hoc Nhat Tam",
+      "channel": "whatsapp",
+      "contact": "+84 939 628 028",
+      "status": "manual_identity_check_ready",
+      "priority": "VN-A17",
+      "rule": "WhatsApp account exists on +84 939 628 028 but profile identity is blank. Send only the identity-check question first; do not send the KEP pitch until organization identity is confirmed.",
+      "evidence": "User screenshot on 2026-10-10 shows an active WhatsApp account for +84 939 628 028 with no visible organization identity."
     }
   ],
   "manualCommunityAdminPolicy": {
