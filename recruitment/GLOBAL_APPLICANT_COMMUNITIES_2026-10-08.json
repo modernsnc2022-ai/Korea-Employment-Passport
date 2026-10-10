@@ -537,7 +537,7 @@
       "name": "Trung tâm Dịch vụ Việc làm Thành phố Cần Thơ — EPS",
       "platform": "Provincial employment service center / EPS-TOPIK class / hotline-Zalo",
       "url": "https://xkldcantho.vn/han-quoc/",
-      "adminContact": "Public contacts 0767 938 399 and 0888 095 855",
+      "adminContact": "Public contacts 0767 938 399 (WhatsApp unavailable) and 0888 095 855 (next WhatsApp check)",
       "applicantStages": [
         "EPS-TOPIK preparation",
         "official EPS application preparation",
@@ -546,7 +546,7 @@
       "applicantDensity": "high",
       "outreachState": "manual_whatsapp_identity_check_pending",
       "priority": "VN-A11",
-      "note": "Official/public Cần Thơ overseas-employment portal lists a 2026 EPS-TOPIK class and EPS Korea program, with contacts 0767 938 399 / 0888 095 855. Dual Gmail and GitHub duplicate checks returned 0 prior outreach. Check WhatsApp registration and operator identity before initial outreach."
+      "note": "User checked +84 767 938 399 on WhatsApp on 2026-10-10 and no account was available. Next permitted route is the second published contact +84 888 095 855; verify WhatsApp registration and operator identity before any KEP pitch."
     }
   ]
 }
