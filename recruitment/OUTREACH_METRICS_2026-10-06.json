@@ -1,5 +1,5 @@
 {
-  "version": "8.95.0",
+  "version": "8.96.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -800,12 +800,12 @@
       "operator": "Kekorea / EPSTOPIK.ID",
       "channel": "whatsapp",
       "contact": "+62 898-1913-655",
-      "status": "sent_2026-10-07",
+      "status": "inbound_due_diligence_requested_2026-10-11_reply_ready",
       "priority": "A1",
-      "rule": "Initial outreach sent once across the Kekorea/EPSTOPIK.ID ecosystem. Do not send another initial to either brand; follow-up requires explicit follow-up-ready state.",
+      "rule": "Reply in the existing WhatsApp thread with factual transparency on team profile, available beta features, participant-data handling, and participant responsibilities. Do not repeat the initial recruitment pitch.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 898-1913-655",
-      "evidence": "User confirmed manual WhatsApp send in KEP chat on 2026-10-07."
+      "evidence": "Inbound EPSTOPIK.ID WhatsApp reply asked for these four items before deciding whether to publish the beta invitation."
     },
     {
       "sourceCode": "giwonhae_eps",
