@@ -1464,10 +1464,10 @@
       "operator": "Ichhi Hana International Academy",
       "channel": "whatsapp",
       "contact": "+977 9861106379",
-      "status": "manual_send_pending",
+      "status": "sent_prior_to_2026-10-12_do_not_resend",
       "priority": "NP-A5",
-      "rule": "Send one permission-first WhatsApp message to one listed official number after identity check. Do not message both numbers as separate initial outreach.",
-      "evidence": "September 2026 public posts show weekly EPS-TOPIK mock exams and public WhatsApp numbers +977 9861106379 / +977 9841819667."
+      "rule": "User already sent the two-part KEP recruitment WhatsApp message. Do not resend to +977 9861106379, the alternate +977 9841819667, or another contact in the same operator ecosystem; wait for an inbound reply.",
+      "evidence": "User handoff on 2026-10-12 confirms a two-part KEP beta WhatsApp recruitment message was previously sent to Ichhi Hana. Original send timestamp was not reverified."
     },
     {
       "sourceCode": "vn_gialong_eps_hadong",
