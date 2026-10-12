@@ -310,9 +310,9 @@
         "Korea employment preparation"
       ],
       "applicantDensity": "high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_prior_to_2026-10-12_do_not_resend",
       "priority": "NP-A3",
-      "note": "Current official site states Toddle offers EPS-TOPIK preparation with regular mock tests and publishes WhatsApp +977 9769741767. Dual Gmail and GitHub checks returned no prior outreach."
+      "note": "User screenshot on 2026-10-12 confirms a full KEP beta recruitment WhatsApp message with src=np_toddle_hetauda_eps had already been sent earlier. Original send timestamp was not reverified. Do not resend; continue only in the existing thread if Toddle replies."
     },
     {
       "id": "np_angel_bhasha_center",
