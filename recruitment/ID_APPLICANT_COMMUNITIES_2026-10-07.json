@@ -78,10 +78,10 @@
       "kepFit": "very high",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "inbound_due_diligence_requested_2026-10-11_reply_ready",
+      "outreachState": "due_diligence_reply_sent_2026-10-12_waiting",
       "evidenceUrl": "https://epstopik.id/",
       "identityGroup": "kekorea_epstopik_id_same_operator",
-      "note": "EPSTOPIK.ID replied positively in principle and requested more information before considering publication: developer-team profile, currently available features, participant-data handling, and beta participant roles/responsibilities. Prepare a transparent factual reply; do not resend the original pitch."
+      "note": "EPSTOPIK.ID requested developer profile, available beta features, participant-data handling, and participant responsibilities before considering publication. User sent the detailed transparency reply on 2026-10-12. Wait for their review; do not repeat the original pitch or send extra materials until requested."
     },
     {
       "id": "winaya_group_eps",
