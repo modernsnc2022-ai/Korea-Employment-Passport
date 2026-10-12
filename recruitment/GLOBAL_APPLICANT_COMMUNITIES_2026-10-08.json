@@ -346,9 +346,9 @@
         "exam preparation"
       ],
       "applicantDensity": "very high",
-      "outreachState": "manual_whatsapp_ready_not_sent",
+      "outreachState": "manual_whatsapp_sent_prior_to_2026-10-12_do_not_resend",
       "priority": "NP-A5",
-      "note": "Current September 2026 public posts advertise weekly paper-based EPS-TOPIK mock exams in Bagbazar and list WhatsApp +977 9861106379 / +977 9841819667. Dual Gmail/GitHub checks returned no prior outreach."
+      "note": "User confirmed that a two-part KEP beta recruitment WhatsApp message was previously sent to +977 9861106379. Original send date was not reverified. Treat alternate +977 9841819667 as the same operator ecosystem; do not resend on either number or another channel. Continue only if Ichhi Hana replies."
     },
     {
       "id": "vn_gialong_eps_hadong",
