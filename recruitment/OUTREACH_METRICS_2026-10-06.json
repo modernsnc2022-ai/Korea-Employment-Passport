@@ -1,5 +1,5 @@
 {
-  "version": "8.96.0",
+  "version": "8.97.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -800,12 +800,12 @@
       "operator": "Kekorea / EPSTOPIK.ID",
       "channel": "whatsapp",
       "contact": "+62 898-1913-655",
-      "status": "inbound_due_diligence_requested_2026-10-11_reply_ready",
+      "status": "due_diligence_reply_sent_2026-10-12_waiting",
       "priority": "A1",
-      "rule": "Reply in the existing WhatsApp thread with factual transparency on team profile, available beta features, participant-data handling, and participant responsibilities. Do not repeat the initial recruitment pitch.",
+      "rule": "Detailed due-diligence response was sent in the existing WhatsApp thread. Wait for EPSTOPIK.ID review; do not resend, and only send demo/privacy links if they ask or approve review.",
       "sentChannel": "whatsapp",
       "sentContact": "+62 898-1913-655",
-      "evidence": "Inbound EPSTOPIK.ID WhatsApp reply asked for these four items before deciding whether to publish the beta invitation."
+      "evidence": "User explicitly confirmed sending the detailed reply covering team profile, available features, participant-data handling, and participant responsibilities."
     },
     {
       "sourceCode": "giwonhae_eps",
