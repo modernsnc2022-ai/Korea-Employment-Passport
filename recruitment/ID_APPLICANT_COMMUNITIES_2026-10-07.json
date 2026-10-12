@@ -78,10 +78,10 @@
       "kepFit": "very high",
       "expectedReach": "very high",
       "priority": "A",
-      "outreachState": "manual_whatsapp_sent_2026-10-07_do_not_resend",
+      "outreachState": "inbound_due_diligence_requested_2026-10-11_reply_ready",
       "evidenceUrl": "https://epstopik.id/",
       "identityGroup": "kekorea_epstopik_id_same_operator",
-      "note": "EPSTOPIK.ID identifies itself as 'by Kekorea'; one ecosystem-wide initial outreach was manually sent by WhatsApp on 2026-10-07. Do not contact Kekorea separately."
+      "note": "EPSTOPIK.ID replied positively in principle and requested more information before considering publication: developer-team profile, currently available features, participant-data handling, and beta participant roles/responsibilities. Prepare a transparent factual reply; do not resend the original pitch."
     },
     {
       "id": "winaya_group_eps",
