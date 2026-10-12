@@ -1,5 +1,5 @@
 {
-  "version": "8.97.0",
+  "version": "8.98.0",
   "snapshotDate": "2026-10-07",
   "privacy": "Aggregate recruitment operations only. Do not store applicant or outreach-contact personal identity data in this file.",
   "emailWave1": {
@@ -1444,10 +1444,10 @@
       "operator": "Toddle, Hetauda",
       "channel": "whatsapp",
       "contact": "+977 9769741767",
-      "status": "manual_send_pending",
+      "status": "sent_prior_to_2026-10-12_do_not_resend",
       "priority": "NP-A3",
-      "rule": "Send one permission-first WhatsApp message to the official public WhatsApp number after account identity check. Do not duplicate via email/social unless requested.",
-      "evidence": "Current official Toddle site lists EPS-TOPIK preparation with regular mock tests and WhatsApp +977 9769741767."
+      "rule": "Toddle already received the full KEP beta recruitment WhatsApp message. Do not resend or duplicate via another channel; wait for inbound reply in the existing thread.",
+      "evidence": "User screenshot on 2026-10-12 shows the full KEP beta recruitment message and src=np_toddle_hetauda_eps link already sent in the WhatsApp conversation; exact original send timestamp not reverified."
     },
     {
       "sourceCode": "np_angel_bhasha_center",
