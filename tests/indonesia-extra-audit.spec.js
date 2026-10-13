@@ -120,6 +120,7 @@ test('Indonesia app, landing and privacy disclose in Indonesian without stale En
   await page.goto('/index.html');
   await expect(page.locator('body')).toContainText('Asisten Dokumen');
   await expect(page.locator('footer a[href="privacy.html"]')).toHaveText('Privasi');
+  await expect(page.locator('footer a[href="countries.html"]')).toHaveText('Negara');
   await page.goto('/privacy.html');
   await expect(page.locator('h2').first()).toHaveText('Pemberitahuan privasi beta');
   await expect(page).toHaveTitle(/Privasi/);
