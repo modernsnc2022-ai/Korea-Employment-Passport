@@ -1,7 +1,7 @@
 {
   "version": "1.3.0",
   "routeId": "np-e9-manufacturing-2026",
-  "verifiedAt": "2026-10-05",
+  "verifiedAt": "2026-10-13",
   "principle": "Answer exactly from the 2026 Nepal EPS-TOPIK first-phase official notice. If the notice does not determine an answer, do not infer it from Indonesia or an older Nepal cohort.",
   "primaryNotice": {
     "title": "2026 First-Phase Korean Language Test (EPS-TOPIK) application notice",
@@ -16,12 +16,13 @@
         "registration"
       ],
       "question": "When was the 2026 first-phase EPS-TOPIK application window?",
-      "answer": "July 27 through August 2, 2026.",
-      "writeExactly": "The verified 2026 first-phase application window was 2026-07-27 through 2026-08-02. That window is closed; do not pay a broker to submit a late application.",
-      "verificationStatus": "verified_official_pdf",
-      "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "verifiedAt": "2026-10-05",
-      "operationalQualification": "Official notices on 2026-07-28 show a temporary suspension and later resumption of the online application system. No deadline extension is currently verified."
+      "answer": "July 27 through August 5, 2026, after the July 30 official extension of the original August 2 deadline. This first-phase window is now closed.",
+      "writeExactly": "Nepal's 2026 first-phase primary registration window began 2026-07-27 and originally ended 2026-08-02. The verified Nepal EPS July 30 supplementary image explicitly extended the end date through 2026-08-05. That window is closed; do not pay a broker to submit a late application.",
+      "verificationStatus": "verified_official_primary_plus_supplement_image",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/143",
+      "verifiedAt": "2026-10-13",
+      "operationalQualification": "The original July 21 notice still records August 2 as the original deadline. The later July 30 official image directly confirms the August 5 extension. This is not a current or future cohort open window.",
+      "primarySourceUrl": "https://epsnepal.gov.np/postdetails/136"
     },
     {
       "id": "np_2026_application_portal",
@@ -30,11 +31,11 @@
       ],
       "question": "Where is the official Nepal EPS application submitted?",
       "answer": "https://eoers.epsnepal.gov.np/",
-      "writeExactly": "Submit only through the official EPS Nepal online application portal named in the notice: https://eoers.epsnepal.gov.np/.",
+      "writeExactly": "The 2026 first-phase applications were submitted only through the official EPS Nepal portal https://eoers.epsnepal.gov.np/ during the now-closed registration window. Do not use this as an open or future-cohort registration instruction.",
       "verificationStatus": "verified_official_pdf",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
       "verifiedAt": "2026-10-05",
-      "operationalQualification": "Official notices on 2026-07-28 show a temporary suspension and later resumption of the online application system. No deadline extension is currently verified."
+      "operationalQualification": "This was the official 2026 first-phase portal; the July 30 official notice extended its closed window through August 5. The historic link is not proof that new applications are open."
     },
     {
       "id": "np_2026_exam_fee",
@@ -181,10 +182,11 @@
       "question": "What passport image is required for online application?",
       "answer": "A scanned JPG image of the passport page containing the applicant photo; width 600 pixels and file size under 89 KB.",
       "writeExactly": "Upload the passport photo-page scan as JPG, width 600 px, under 89 KB.",
-      "verificationStatus": "verified_primary_notice_supplementary_review_pending",
+      "verificationStatus": "verified_primary_scan_specs_with_july30_official_passport_exception",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "verifiedAt": "2026-10-05",
-      "operationalQualification": "A later official notice dated 2026-07-30 concerns online application submission and passport. Its exact content must be reviewed before treating the primary notice as exhaustive on passport/submission exceptions."
+      "verifiedAt": "2026-10-13",
+      "operationalQualification": "The official July 30 image allows an expired original passport's details during initial 2026 first-phase online registration. A valid passport is required later at Job Application Form submission after passing language and skill exams. The upload format remains from the original July 21 primary notice.",
+      "supplementalSourceUrl": "https://epsnepal.gov.np/postdetails/143"
     },
     {
       "id": "np_2026_contact_required",
@@ -219,12 +221,13 @@
         "document_verify"
       ],
       "question": "Can name, date of birth, sex or photo differ from the passport and be corrected later?",
-      "answer": "No. The notice warns that differing personal details may exclude the applicant from the test and those details cannot be corrected after registration.",
-      "writeExactly": "Before submission, make name, date of birth, sex and photo match the passport. Do not assume these fields can be corrected after registration.",
-      "verificationStatus": "verified_primary_notice_supplementary_review_pending",
+      "answer": "Applicants were instructed to verify the accuracy of passport, date of birth, name and photograph. The July 26 urgent notice describes a limited correction request period with evidence, so do not assume either unrestricted post-submit edits or that all errors can never be corrected.",
+      "writeExactly": "Check all submitted identity details against official documents. The 2026-07-26 urgent EPS notice provides an official correction request process for important errors with supporting evidence during its specified historic window; it is not an open-ended ability to change identity data.",
+      "verificationStatus": "verified_primary_identity_rule_with_july26_official_correction_process",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "verifiedAt": "2026-10-05",
-      "operationalQualification": "A later official notice dated 2026-07-30 concerns online application submission and passport. Its exact content must be reviewed before treating the primary notice as exhaustive on passport/submission exceptions."
+      "verifiedAt": "2026-10-13",
+      "operationalQualification": "The July 26 official scanned notice, pages 1–3, describes an evidence-based correction procedure. Its historic correction window has expired, and exact categories of allowable changes should not be assumed.",
+      "supplementalSourceUrl": "https://epsnepal.gov.np/postdetails/137"
     },
     {
       "id": "np_2026_test_location",
@@ -480,15 +483,15 @@
         "registration"
       ],
       "question": "Why do Nepal local and HRD Korea sources show different registration end dates?",
-      "answer": "The Nepal local primary notice says 2026-08-02, while HRD Korea's current Manufacturing schedule row says 2026-08-05. KEP has not verified from reviewed Nepal supplementary content that the local deadline was extended.",
-      "writeExactly": "Applicant-facing exact local-primary window remains 2026-07-27 through 2026-08-02. Preserve HRD Korea's 2026-08-05 row as cross-source evidence; do not call it a verified Nepal deadline extension.",
-      "verificationStatus": "verified_cross_source_discrepancy_unresolved",
-      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
-      "verifiedAt": "2026-10-06"
+      "answer": "Resolved. The July 21 Nepal primary notice originally ended August 2, while HRD Korea listed August 5; the July 30 Nepal official supplemental image explicitly extended the local deadline through August 5.",
+      "writeExactly": "The applicant-facing final first-phase window was 2026-07-27 through 2026-08-05, now CLOSED. Nepal's July 30 official image, not the HRD row alone, verifies the local extension. Preserve the original August 2 date as history only.",
+      "verificationStatus": "verified_nepal_supplement_extension_resolved",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/143",
+      "verifiedAt": "2026-10-13"
     }
   ],
   "operationalNoticesFile": "data/np_registration_notices_2026.json",
-  "supplementaryNoticePolicy": "The primary notice is the exact-rule baseline. Later official notices are tracked separately and supersede a rule only after their content is reviewed; titles alone never create an extension or exception.",
+  "supplementaryNoticePolicy": "The primary July 21 2026 notice remains the original baseline. The visually reviewed Nepal official July 30 image explicitly extends that first-phase deadline to August 5 and permits initial online registration using expired original passport details (valid passport still required at later job application). The July 26 official urgent notice prevents duplicate accounts/payments and describes corrections. No other cohort or downstream rules are automatically changed.",
   "processBaselineFile": "data/np_eps_process_baseline_2026.json",
   "processBaselinePolicy": "The March 2026 official EPS process guide can define stable process structure, but current cohort dates, designated providers and volatile fees must be rechecked against later official notices.",
   "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json"
