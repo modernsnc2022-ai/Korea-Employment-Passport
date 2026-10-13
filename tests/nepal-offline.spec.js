@@ -204,7 +204,7 @@ test('Nepal Chromium offline: official study links appear for current and future
   await page.locator('#cohortSelect').selectOption('future');
   await expect(page.locator('#prepResources')).toBeVisible();
   await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(3);
-  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(0);
+  await expect(page.locator('#prepResourceList a[href*="sechduleDetail.do"]')).toHaveCount(0);
   await expect(page.locator('#stagePicker')).toBeHidden();
   await page.locator('#cohortSelect').selectOption('current');
   await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(4);
