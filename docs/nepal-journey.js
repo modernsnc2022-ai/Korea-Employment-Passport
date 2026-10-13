@@ -80,7 +80,13 @@
     target.append(element('p', actionText, 'action-text'));
 
     if (stage.warning && !unverified) target.append(element('p', 'सावधानी: ' + stage.warning, 'warning'));
-    if (classification.group?.note) target.append(element('p', classification.group.note, 'provenance'));
+    if (classification.group?.note) {
+      // Upstream evidence notes are authored in English, while the interface
+      // is Nepali. Set the actual source language for screen readers.
+      const note = element('p', classification.group.note, 'provenance');
+      note.lang = 'en';
+      target.append(note);
+    }
 
     const original = classification.group?.currentSource || stage.sourceUrl;
     addOfficialLink(target, original, classification.code === 'reference'
@@ -192,8 +198,12 @@
     for (const notice of ledger.notices) {
       const item = element('article', undefined, 'notice-item');
       item.append(element('p', NOTICE_TAGS[notice.applicability], 'state state-reference'));
-      item.append(element('h3', notice.date + ' · ' + notice.title));
-      item.append(element('p', notice.ruleImpact, 'provenance'));
+      const heading = element('h3', notice.date + ' · ' + notice.title);
+      heading.lang = 'en';
+      item.append(heading);
+      const evidence = element('p', notice.ruleImpact, 'provenance');
+      evidence.lang = 'en';
+      item.append(evidence);
       addOfficialLink(item, notice.url, 'यो आधिकारिक सूचना खोल्नुहोस् ↗');
       target.append(item);
     }
