@@ -125,3 +125,16 @@ test('Indonesia app, landing and privacy disclose in Indonesian without stale En
   await expect(page.locator('h2').first()).toHaveText('Pemberitahuan privasi beta');
   await expect(page).toHaveTitle(/Privasi/);
 });
+
+test('PWA icon file is a valid SVG and Indonesian pages explicitly link it', async ({ request, page }) => {
+  const response = await request.get('/icon.svg');
+  expect(response.status()).toBe(200);
+  const icon = await response.text();
+  expect(icon.trimStart()).toMatch(/^<svg\s/);
+  expect(icon).toContain('viewBox="0 0 64 64"');
+  expect(icon).toContain('</svg>');
+  for (const path of ['/app.html','/index.html','/beta.html','/privacy.html']) {
+    await page.goto(path, { waitUntil:'domcontentloaded' });
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href','icon.svg');
+  }
+});
