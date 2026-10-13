@@ -80,3 +80,18 @@ not a beta-launch permission. The extended offline suite passed 7/7 with the off
 - [EPS Nepal July 30 official inline passport/deadline image](https://epsnepal.gov.np/postdetails/143) — source image visually inspected and hash recorded in reviewer workspace; direct notice confirms registration extension through **2026-08-05** and allows original expired passport details at initial registration, with valid passport for later job application after language/skill passing.
 - Existing primary notice remains separately preserved as original baseline of 2026-08-02. The July 30 supplement changes that end date only; original first-phase recruitment is closed now. No unverified fees, exam dates, future application rounds, or job forms may be promoted.
 - Node fail-closed and real Chromium suites extended and executed successfully (12 + 16 + 7 = 35 PASS, 0 FAIL) on reviewed-code commit `5360a4fa`; repeat on any subsequent functional changes.
+
+## 2026-10-13 session-only mobile reading review (not an applicant progress database)
+
+- The Nepal research navigator now has a **temporary in-memory stage-reading checklist**. The applicant can mark/unmark a page as read, see a reading count/list, or reset it. This marks **KEP guidance read only**, never EPS completion, passing, placement, government registration or visa status.
+- All marks are scoped to the current first-phase Manufacturing guide and are cleared when switching to `future` or `other` cohorts; reload/close discards them. There is **no localStorage, sessionStorage, cookie, backend account, document upload, government submission or payment**.
+- The panel is inside the fail-closed preview body, hidden for other cohorts and for invalid official beta/notice gate data.
+- Mobile additions: reflow at 320px/375px, ≥44px touch targets, focus-visible outline, skip-to-content and explicit status/pressed semantics. These are **automated smoke checks**, not a professional accessibility, language or usability certification.
+- **Real execution on 2026-10-13 at code commit `64daf697de2321eeb203788c26a394cb7544a8f0`:** Node safety `12/12 PASS`; Playwright headless Chromium navigator `20/20 PASS`; offline Chromium `9/9 PASS`; **41/41 total, 0 FAIL**. The first offline attempt incorrectly read browser storage on an opaque-origin `page.setContent` document; the test was corrected to inspect checked-in JavaScript for storage writes and all suites passed on the cited commit.
+- A real persistent applicant progress dashboard is **not implemented**: it requires separate privacy, consent, authentication, retention/deletion, official verification and cross-device security design and authorization. This prototype must not be described as production-ready or advertised to students.
+
+### Remaining after this step
+
+- Independent Nepali language and accessibility review, mobile real-device exploration and assistive-technology testing.
+- More 2026-first-phase cohort-specific official notices for the individual EPS-TOPIK result, Skill & Competency, medical/employment application and downstream labor/visa/departure rules.
+- Continue Nepal `research_hold` / `preview_only` / `beta blocked`, PR as Draft, no merge/deploy, no new Nepal outreach until explicit approval.
