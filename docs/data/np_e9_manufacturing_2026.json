@@ -56,7 +56,7 @@
       "kind": "official_action",
       "action": "The verified 2026 first-phase primary notice opened applications on July 27 and set August 2 as the initial deadline. EPS Nepal's July 30 official supplemental image extended registration through August 5, 2026, consistent with HRD Korea. This period has CLOSED; it is not the next application window.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
-      "supportState": "verified_local_primary_cross_source_hrd_end_date_unresolved",
+      "supportState": "verified_local_primary_plus_2026_07_30_extension",
       "officialActionUrl": "https://eoers.epsnepal.gov.np/",
       "officialActionLabel": "Open official EPS Nepal application portal",
       "warning": "The official July 30 notice proves an extension for this 2026 first-phase registration only. Never reuse those dates for a future cohort or treat the website as open for new applications."
@@ -86,7 +86,7 @@
       "kind": "official_action",
       "action": "The 2026 July 30 EPS Nepal official passport notice allowed an applicant with an expired passport to use its existing details for the FIRST-PHASE online registration. A VALID passport is required later at the Job Application Form after passing language and skill tests. The July 26 urgent notice also warns against duplicate accounts, payments, multiple tabs and mis-entered personal details. Original first-phase upload specifications still come from the July 21 primary notice; do not apply these expired-passport rules to later or different cohorts.",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
-      "supportState": "verified_primary_notice_supplementary_review_pending"
+      "supportState": "verified_primary_plus_2026_07_30_passport_exception"
     },
     {
       "id": "exam_card",
