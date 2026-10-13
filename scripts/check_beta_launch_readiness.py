@@ -170,15 +170,24 @@ require(
     and any("HIMPSI" in str(x) for x in baseline.get("facts", [])),
     "Indonesia job-application baseline must preserve MCU/HIMPSI/Sisko process evidence",
 )
+# 2026-10-06 is the baseline provenance date, not a permanent launch date.
+# Release-day source checks must be recorded on the actual date and must not
+# be blocked by a stale hardcoded timestamp in the product integrity gate.
+checked_at = str(manufacturing_launch_check.get("checkedAt", ""))
+try:
+    check_date = datetime.strptime(checked_at, "%Y-%m-%d").date()
+except ValueError:
+    check_date = None
 require(
-    manufacturing_launch_check.get("checkedAt") == "2026-10-06",
-    "Manufacturing launch evidence must be refreshed on 2026-10-06",
+    check_date is not None and check_date.isoformat() >= "2026-10-06",
+    "Manufacturing launch evidence date must be valid and no older than the verified 2026-10-06 baseline",
 )
 same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
 require(
     same_day.get("status") == "completed_no_detailed_manufacturing_notice_found"
+    and same_day.get("checkedAt") == checked_at
     and same_day.get("repeatOnActualReleaseDay") is True,
-    "Manufacturing launch check must record the completed 2026-10-06 recheck and require another check on release day",
+    "Manufacturing current review must synchronize its official-check date and preserve the release-day repeat requirement",
 )
 verified_baseline = manufacturing_launch_check.get("verifiedBaseline", {})
 require(
