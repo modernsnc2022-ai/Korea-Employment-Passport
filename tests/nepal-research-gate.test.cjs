@@ -143,6 +143,21 @@ const safetyCases = [
         data.stages.find(x => x.id === 'document_verify').supportState =
           'verified_primary_notice_supplementary_review_pending';
     }
+  },
+  {
+    name: 'rejects invented 2026 manufacturing exam dates',
+    mutate(file, data) {
+      if (file === 'np_hrd_schedule_2026.json')
+        data.sources.find(x => x.id === 'np_2026_hrd_5th_manufacturing_5part').facts.testPeriod =
+          '2026-10-20 through 2026-11-05';
+    }
+  },
+  {
+    name: 'rejects false promotion of 2025 manufacturing results into 2026',
+    mutate(file, data) {
+      if (file === 'np_stage_readiness_2026.json')
+        data.lastCohortRecheck.manufacturing2026Results = 'confirmed_from_eps_topik_2025';
+    }
   }
 ];
 
