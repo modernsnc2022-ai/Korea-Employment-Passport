@@ -63,5 +63,13 @@
       "current 2026 first-phase result",
       "current Skill & Competency schedule/result"
     ]
+  },
+  "lastScheduleRecheck": {
+    "checkedAt": "2026-10-13",
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+    "officialTestAnnouncement": "undecided",
+    "officialTestPeriod": "undecided",
+    "decision": "hold_all_individual_exam_dates",
+    "note": "Live HRD Korea page for the 2026 Nepal Manufacturing(5부) General CBT 5th Point System row still shows both 시험공고일 and 시험기간 as 미확정. Registration 2026-07-27 to 2026-08-05 is a closed historical window. Do not predict a session/date from other Nepal sectors or 2025 cohort."
   }
 }
