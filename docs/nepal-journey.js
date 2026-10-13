@@ -86,6 +86,13 @@
     addOfficialLink(target, original, classification.code === 'reference'
       ? 'आधिकारिक प्रक्रियाको स्रोत खोल्नुहोस् ↗'
       : 'यो चरणसम्बन्धी आधिकारिक सूचना हेर्नुहोस् ↗');
+    if (classification.code === 'closed' && ['registration','document_verify'].includes(stage.id)) {
+      addOfficialLink(target, readiness.currentCohort?.recruitmentRegistration?.crossSourceSchedule?.extensionNoticeUrl,
+        '२०२६ को आवेदन म्याद थप तथा राहदानीको आधिकारिक पूरक सूचना ↗');
+    }
+    if (classification.code === 'closed' && ['registration','exam_fee','document_verify'].includes(stage.id)) {
+      addOfficialLink(target, 'https://epsnepal.gov.np/postdetails/137', '२०२६ को आवेदन/भुक्तानी सुरक्षा सूचना ↗');
+    }
     if (classification.code !== 'closed') {
       addOfficialLink(target, readiness.officialNoticeIndex, 'नेपाल EPS को पछिल्लो सूचना हेर्नुहोस् ↗');
     }
@@ -118,18 +125,26 @@
   }
   const NOTICE_TAGS = Object.freeze({
     verified_current_primary: '२०२६ पहिलो चरणको मुख्य सूचना',
+    verified_current_supplement: '२०२६ पहिलो चरणको प्रमाणित पूरक सूचना',
     supplementary_unreviewed: 'थप सूचना — पूरा सामग्री समीक्षा बाँकी',
     prior_2025_cohort: '२०२५ समूहको सूचना — २०२६ मा लागू हुँदैन',
     cohort_not_linked: 'प्रस्थान सूचना — हालको आवेदन समूहसँग सम्बन्ध अपुष्ट',
     other_2026_program: '२०२६ को अर्को कार्यक्रम — Manufacturing पहिलो चरणमा लागू हुँदैन'
   });
-  function assertSafeNoticeLedger(ledger) {
+  function assertSafeNoticeLedger(ledger, readiness) {
     if (ledger?.routeId !== ROUTE_ID || ledger.policy?.betaAccess !== 'blocked' ||
         ledger.policy?.allowDeadlineExtensionInference !== false ||
         ledger.policy?.allowDepartureToPromote2026ApplicationStages !== false ||
         ledger.policy?.allowCrossSectorPromotion !== false ||
         !Array.isArray(ledger.notices) || !ledger.notices.length) {
       throw new Error('Nepal notice provenance safety gate mismatch');
+    }
+    const ext = readiness?.currentCohort?.recruitmentRegistration?.crossSourceSchedule;
+    if (ext?.deadlineExtensionVerified !== true ||
+        ext?.finalVerifiedRegistrationPeriod !== '2026-07-27 through 2026-08-05' ||
+        ext?.extensionNoticeUrl !== 'https://epsnepal.gov.np/postdetails/143' ||
+        readiness?.currentCohort?.recruitmentRegistration?.status !== 'closed_verified') {
+      throw new Error('Unverified Nepal deadline promotion');
     }
     const ids = new Set();
     for (const notice of ledger.notices) {
@@ -140,6 +155,13 @@
           (notice.cohort !== '2026_first_phase_manufacturing' ||
            notice.reviewState !== 'full_primary_document_reviewed')) {
         throw new Error('Unverified current-cohort promotion');
+      }
+      if (notice.applicability === 'verified_current_supplement') {
+        const matches = notice.cohort === '2026_first_phase_manufacturing' && (
+          (notice.id === 'np_2026_passport_0730' && notice.url === 'https://epsnepal.gov.np/postdetails/143' && notice.reviewState === 'official_inline_image_reviewed') ||
+          (notice.id === 'np_2026_urgent_0726' && notice.url === 'https://epsnepal.gov.np/postdetails/137' && notice.reviewState === 'scanned_notice_pages_1_to_3_reviewed_appendix_guide_not_promoted')
+        );
+        if (!matches) throw new Error('Unverified supplemental cohort change');
       }
       if (notice.applicability === 'prior_2025_cohort' && notice.cohort !== '2025_manufacturing') {
         throw new Error('Prior cohort label invalid');
@@ -154,6 +176,10 @@
       }
       ids.add(notice.id);
     }
+    const passport = ledger.notices.find(n => n.id === 'np_2026_passport_0730');
+    const urgent = ledger.notices.find(n => n.id === 'np_2026_urgent_0726');
+    if (passport?.applicability !== 'verified_current_supplement' ||
+        urgent?.applicability !== 'verified_current_supplement') throw new Error('Required supplements not authenticated');
   }
   function renderNoticeLedger(ledger) {
     const target = $('noticeReview');
@@ -203,11 +229,11 @@
         pack.safety?.betaIntakeOpen !== false || readiness.routeId !== ROUTE_ID ||
         readiness.betaReadiness?.status !== 'blocked' || documents.routeId !== ROUTE_ID ||
         !Array.isArray(pack.stages)) throw new Error('Nepal beta safety gate mismatch');
-    assertSafeNoticeLedger(ledger);
+    assertSafeNoticeLedger(ledger, readiness);
 
     $('verifiedAt').textContent = readiness.checkedAt || 'अज्ञात';
     $('statusSummary').textContent =
-      'यो अनुसन्धान पूर्वावलोकन हो। २०२६ को पहिलो चरणको आवेदन अवधि बन्द छ। ' +
+      'यो अनुसन्धान पूर्वावलोकन हो। २०२६ पहिलो चरणको आवेदन म्याद ५ अगस्टसम्म थपिएको थियो र अहिले बन्द छ। ' +
       'हालको EPS-TOPIK परीक्षा मिति, Skill Test तथा पछिल्ला रोजगारी चरणका सबै नियम ' +
       'अझै पुष्टि भएका छैनन्। वास्तविक beta access उपलब्ध छैन।';
     addOfficialLink($('summaryLinks'), readiness.officialNoticeIndex, 'सरकारी EPS सूचनाहरू ↗');
