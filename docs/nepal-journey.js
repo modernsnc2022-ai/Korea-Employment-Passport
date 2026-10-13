@@ -251,15 +251,60 @@
     const requested = new URLSearchParams(window.location.search).get('stage');
     const selected = stages.some(s => s.id === requested) ? requested : 'registration';
     select.value = stages.some(s => s.id === selected) ? selected : stages[0].id;
+
+    // This Set is intentionally ONLY in this page's JS heap:
+    // no localStorage, cookies, server calls, URLs or applicant identity.
+    // It records reading of KEP guidance, NEVER official EPS completion.
+    const readStages = new Set();
+    const stageLabel = stage => translations[stage.id]?.title || stage.title;
+    const updateTracker = () => {
+      const currentId = select.value;
+      const marked = readStages.has(currentId);
+      const progress = $('reviewProgress');
+      progress.max = stages.length;
+      progress.value = readStages.size;
+      $('reviewStatus').textContent =
+        'यो सत्रमा ' + readStages.size + ' / ' + stages.length +
+        ' चरणको विवरण पढेको चिन्ह लगाइएको छ। सरकारी प्रक्रिया पूरा भएको गणना होइन।';
+      const button = $('stageReviewBtn');
+      button.textContent = marked ? 'यो चरणको पढेको चिन्ह हटाउनुहोस्' : 'यो चरणको जानकारी पढेँ';
+      button.setAttribute('aria-pressed', String(marked));
+      $('resetStageReviewBtn').hidden = readStages.size === 0;
+      const details = $('reviewedDetails');
+      details.hidden = readStages.size === 0;
+      if (!readStages.size) details.open = false;
+      const list = $('reviewedStageList');
+      list.replaceChildren();
+      for (const stage of stages) {
+        if (readStages.has(stage.id)) list.append(element('li', stageLabel(stage)));
+      }
+    };
     const update = () => {
       const stage = stages.find(s => s.id === select.value);
       if (stage) renderDetail(stage, translations[stage.id], readiness, documents);
+      updateTracker();
     };
     select.addEventListener('change', update);
-    update();
+    $('stageReviewBtn').addEventListener('click', () => {
+      if ($('cohortSelect').value !== 'current' || !stages.some(s => s.id === select.value)) return;
+      if (readStages.has(select.value)) readStages.delete(select.value);
+      else readStages.add(select.value);
+      updateTracker();
+    });
+    $('resetStageReviewBtn').addEventListener('click', () => {
+      readStages.clear();
+      updateTracker();
+    });
     const cohortSelect = $('cohortSelect');
-    const refreshCohort = () => renderApplicantCohort(cohortSelect.value, readiness);
+    const refreshCohort = () => {
+      const current = cohortSelect.value === 'current';
+      if (!current && readStages.size) readStages.clear();
+      renderApplicantCohort(cohortSelect.value, readiness);
+      $('reviewTracker').hidden = !current;
+      updateTracker();
+    };
     cohortSelect.addEventListener('change', refreshCohort);
+    update();
     refreshCohort();
     renderNoticeLedger(ledger);
     $('previewBody').hidden = false;
