@@ -127,6 +127,22 @@ const safetyCases = [
       if (file === 'np_exact_answer_rules_2026.json')
         data.answers.find(x => x.id === 'np_2026_application_window').sourceUrl = 'https://epsnepal.gov.np/postdetails/136';
     }
+  },
+  {
+    name: 'rejects rollback to obsolete registration unresolved marker',
+    mutate(file, data) {
+      if (file === 'np_e9_manufacturing_2026.json')
+        data.stages.find(x => x.id === 'registration').supportState =
+          'verified_local_primary_cross_source_hrd_end_date_unresolved';
+    }
+  },
+  {
+    name: 'rejects rollback to obsolete passport notice pending marker',
+    mutate(file, data) {
+      if (file === 'np_e9_manufacturing_2026.json')
+        data.stages.find(x => x.id === 'document_verify').supportState =
+          'verified_primary_notice_supplementary_review_pending';
+    }
   }
 ];
 
