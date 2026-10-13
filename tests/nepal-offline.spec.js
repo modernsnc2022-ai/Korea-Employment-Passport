@@ -10,7 +10,8 @@ const dataNames = [
   'np_e9_manufacturing_2026_ne.json',
   'np_stage_readiness_2026.json',
   'np_document_packs_2026.json',
-  'np_notice_provenance_2026.json'
+  'np_notice_provenance_2026.json',
+  'np_eps_topik_preparation_2026.json'
 ];
 
 function sourceAssets() {
@@ -191,4 +192,35 @@ test('Nepal Chromium offline: mixed Nepali and English evidence keeps explicit l
   await page.locator('#stageSelect').selectOption('eps_topik');
   await expect(page.locator('#stageDetail .provenance[lang="en"]')).toContainText('미확정');
   await expect(page.locator('#noticeReview .notice-item h3[lang="en"]')).toHaveCount(10);
+});
+
+test('Nepal Chromium offline: official study links appear for current and future cohorts only', async ({ page }) => {
+  await openOffline(page);
+  await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(4);
+  await expect(page.locator('#prepResourceList a')).toHaveCount(4);
+  await expect(page.locator('#prepResources')).toContainText('स्वअध्ययन');
+  await expect(page.locator('#prepResources')).toContainText('वास्तविक २०२६ परीक्षाको प्रश्नपत्र होइन');
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('other');
+  await expect(page.locator('#prepResources')).toBeHidden();
+});
+
+test('Nepal Chromium offline: forged prep source fails closed', async ({ page }) => {
+  await openOffline(page, data => {
+    data['data/np_eps_topik_preparation_2026.json'].resources[0].sourceUrl =
+      'https://lookalike.example.org/eps-topik';
+  });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
+
+test('Nepal Chromium offline: missing official study file fails closed', async ({ page }) => {
+  await openOffline(page, data => {
+    delete data['data/np_eps_topik_preparation_2026.json'];
+  });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
 });
