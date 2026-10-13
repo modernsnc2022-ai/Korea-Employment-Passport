@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "reviewedAt": "2026-10-13",
+  "reviewScope": "Public official Nepal EPS notice page/title and previously reviewed 2026 first-phase registration source; no assumption that title-only supplementary pages change exact rules",
+  "reviewLimitations": [
+    "Nepal EPS notice index can be cached or lag; this is a date-stamped review, not a live alert",
+    "July 26 supplementary PDF is large; content has not been reviewed",
+    "July 30 passport/application update has an embedded image and substantive content is not yet reviewed",
+    "2026 regular/committed-worker departure announcements are not evidence of the 2026 first-phase exam/applicant cohort reaching departure"
+  ],
+  "policy": {
+    "currentCohort": "2026_first_phase_manufacturing",
+    "onlyPromoteExactRulesIf": "verified_current_cohort_full_notice_content",
+    "allowDeadlineExtensionInference": false,
+    "allowDepartureToPromote2026ApplicationStages": false,
+    "betaAccess": "blocked"
+  },
+  "notices": [
+    {
+      "id": "np_2026_first_phase_primary",
+      "date": "2026-07-21",
+      "title": "2026 first-phase EPS-TOPIK registration announcement (Manufacturing included)",
+      "url": "https://epsnepal.gov.np/postdetails/136",
+      "cohort": "2026_first_phase_manufacturing",
+      "reviewState": "full_primary_document_reviewed",
+      "applicability": "verified_current_primary",
+      "ruleImpact": "2026-07-27 to 2026-08-02 registration under Nepal primary notice; now closed. HRD Korea cross-source deadline discrepancy remains unresolved."
+    },
+    {
+      "id": "np_2026_urgent_0726",
+      "date": "2026-07-26",
+      "title": "Urgent information for Korean-language exam applicants",
+      "url": "https://epsnepal.gov.np/postdetails/137",
+      "cohort": "2026_first_phase_possible",
+      "reviewState": "attachment_content_pending_review",
+      "applicability": "supplementary_unreviewed",
+      "ruleImpact": "Do not infer a registration extension or a changed passport/fee requirement from the title."
+    },
+    {
+      "id": "np_2026_suspension_0728",
+      "date": "2026-07-28",
+      "title": "Temporary suspension of online EPS registration",
+      "url": "https://epsnepal.gov.np/postdetails/138",
+      "cohort": "2026_registration_operation",
+      "reviewState": "title_verified",
+      "applicability": "supplementary_unreviewed",
+      "ruleImpact": "A temporary suspension was announced; no extension or restart date inferred from this alone."
+    },
+    {
+      "id": "np_2026_resumption_0728",
+      "date": "2026-07-28",
+      "title": "Resumption of EPS online application service",
+      "url": "https://epsnepal.gov.np/postdetails/139",
+      "cohort": "2026_registration_operation",
+      "reviewState": "title_verified",
+      "applicability": "supplementary_unreviewed",
+      "ruleImpact": "Online service resumed; no new application deadline inferred."
+    },
+    {
+      "id": "np_2026_passport_0730",
+      "date": "2026-07-30",
+      "title": "Online application submission / passport additional notice",
+      "url": "https://epsnepal.gov.np/postdetails/143",
+      "cohort": "2026_first_phase_possible",
+      "reviewState": "image_content_pending_review",
+      "applicability": "supplementary_unreviewed",
+      "ruleImpact": "Do not assert passport rules as exhaustive until the image content is reviewed."
+    },
+    {
+      "id": "np_2025_manu_job_notice",
+      "date": "2026-06-25",
+      "title": "Employment application notice for 2025 Manufacturing applicants",
+      "url": "https://epsnepal.gov.np/postdetails/127",
+      "cohort": "2025_manufacturing",
+      "reviewState": "official_title_cohort_explicit",
+      "applicability": "prior_2025_cohort",
+      "ruleImpact": "Never use this application period, medical or document requirement as the 2026 first-phase notice."
+    },
+    {
+      "id": "np_oct_2026_manu_departure",
+      "date": "2026-09-18",
+      "title": "Regular Manufacturing worker departure notice for 2026-10-05",
+      "url": "https://epsnepal.gov.np/postdetails/156",
+      "cohort": "departure_regular_workers_selection_cohort_unknown",
+      "reviewState": "official_post_title_verified",
+      "applicability": "cohort_not_linked",
+      "ruleImpact": "A departure notice exists; does not demonstrate 2026 first-phase Manufacturing language-test applicants are departing."
+    },
+    {
+      "id": "np_oct_2026_regular_departure",
+      "date": "2026-10-02",
+      "title": "Regular worker departure notice for 2026-10-12 and 2026-10-13",
+      "url": "https://epsnepal.gov.np/postdetails/157",
+      "cohort": "departure_regular_workers_selection_cohort_unknown",
+      "reviewState": "official_post_title_verified",
+      "applicability": "cohort_not_linked",
+      "ruleImpact": "Departure dates are for regular workers; do not infer any exam, Skill & Competency or job-application status of the 2026 first-phase cohort."
+    }
+  ]
+}
