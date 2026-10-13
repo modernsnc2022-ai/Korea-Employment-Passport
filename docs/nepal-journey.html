@@ -39,6 +39,11 @@
     .document-pack li{margin:9px 0;line-height:1.6}
     #loadError{color:#a32626;font-weight:700}
     .np-footer{font-size:.95rem;color:#607089;margin-top:26px}
+    .np-step-navigation{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 0}
+    .np-step-navigation button{font:inherit;font-weight:700;min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #164c7c;background:#fff;color:#164c7c;cursor:pointer}
+    .np-step-navigation button:disabled{opacity:.5;cursor:not-allowed}
+    .np-step-navigation button:focus-visible{outline:3px solid #a46d04;outline-offset:3px}
+    .np-step-position{flex:1;min-width:135px;text-align:center;font-weight:700;line-height:1.6}
     .np-skip{position:absolute;left:12px;top:-70px;background:#fff;color:#08274a;padding:12px;z-index:10}
     .np-skip:focus{top:12px}
     .np-review-controls{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
@@ -54,6 +59,9 @@
       .np-card{padding:16px;border-radius:12px;margin:12px 0}
       .np-shell h2{font-size:1.24rem}
       .np-review-controls{flex-direction:column;gap:9px}
+      .np-step-navigation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+      .np-step-navigation button{padding:10px 8px;min-width:0}
+      .np-step-position{grid-column:1/-1;grid-row:1;min-width:0}
       .np-review-controls button{width:100%}
       .action-text{font-size:1rem}
       #cohortSelect,#stageSelect{min-height:48px;font-size:16px}
@@ -73,7 +81,7 @@
     </div>
   </header>
   <main id="mainContent" class="np-shell">
-    <section class="np-card np-hold" aria-label="Nepal beta readiness">
+    <section class="np-card np-hold" aria-label="नेपाल बेटा सेवाको अवस्था">
       <h2>नेपाल beta सेवा अझै खुला छैन</h2>
       <p id="statusSummary" aria-live="polite">सरकारी स्रोत तथा सुरक्षा स्थिति लोड हुँदैछ…</p>
       <p id="loadError" hidden>कृपया आधिकारिक EPS सूचनामार्फत हालको अवस्था जाँच्नुहोस्।</p>
@@ -92,12 +100,17 @@
         <p id="cohortHelp" class="provenance">गलत समूहका मिति र कागजात लागू हुन नदिन समूह चयन गर्नुहोस्। कुनै व्यक्तिगत जानकारी सङ्कलन गरिँदैन।</p>
       </section>
       <section id="cohortGuidance" class="np-card cohort-guidance" hidden aria-live="polite"></section>
-      <section id="stagePicker" class="np-card">
-        <label for="stageSelect" class="np-label">आफ्नो चरण छान्नुहोस्</label>
+      <section id="stagePicker" class="np-card" aria-labelledby="stagePickerLabel">
+        <label for="stageSelect" class="np-label" id="stagePickerLabel">आफ्नो चरण छान्नुहोस्</label>
         <select id="stageSelect" aria-describedby="stageHelp">
           <option value="">चरणहरू लोड हुँदैछ…</option>
         </select>
         <p id="stageHelp" class="provenance">कुनै नाम, पासपोर्ट नम्बर, फोन, व्यक्तिगत कागजात वा पैसा यहाँ नदिनुहोस्। यो पृष्ठले आवेदन पठाउँदैन।</p>
+        <nav class="np-step-navigation" aria-label="चरणहरू अगाडि र पछाडि हेर्नुहोस्">
+          <button id="prevStageBtn" type="button" disabled>← अघिल्लो चरण</button>
+          <span id="stagePosition" class="np-step-position" role="status" aria-live="polite">चरणहरू लोड हुँदैछ…</span>
+          <button id="nextStageBtn" type="button" disabled>अर्को चरण →</button>
+        </nav>
       </section>
       <section id="reviewTracker" class="np-card" hidden aria-labelledby="reviewHeading">
         <h2 id="reviewHeading">यो सत्रमा पढेको जानकारी</h2>
@@ -115,7 +128,7 @@
         </details>
       </section>
       <article class="np-card" id="stageDetail" aria-live="polite"></article>
-      <section class="np-card" id="noticeReview" aria-label="Cohort-specific official notices"></section>
+      <section class="np-card" id="noticeReview" aria-label="आवेदन समूहअनुसारका आधिकारिक सूचनाहरू"></section>
     </div>
     <p class="np-footer">KEP Nepal | 2026 प्रथम चरण · 2025 समूहको सूचना 2026 को समयसीमा होइन · सबै सरकारी कार्य आधिकारिक साइटमै</p>
   </main>
