@@ -158,6 +158,35 @@ const safetyCases = [
       if (file === 'np_stage_readiness_2026.json')
         data.lastCohortRecheck.manufacturing2026Results = 'confirmed_from_eps_topik_2025';
     }
+  },
+  {
+    name: 'rejects forged prep material URL outside official EPS',
+    mutate(file, data) {
+      if (file === 'np_eps_topik_preparation_2026.json')
+        data.resources.find(x => x.id === 'hrd_standard_textbooks').sourceUrl =
+          'https://unofficial-example.net/collect-passport';
+    }
+  },
+  {
+    name: 'rejects false open registration on study guidance',
+    mutate(file, data) {
+      if (file === 'np_eps_topik_preparation_2026.json')
+        data.applicationStatus = 'open';
+    }
+  },
+  {
+    name: 'rejects applicant data collection in study guidance',
+    mutate(file, data) {
+      if (file === 'np_eps_topik_preparation_2026.json')
+        data.privacy.collectsPersonalData = true;
+    }
+  },
+  {
+    name: 'rejects prep material leak to other EPS cohorts',
+    mutate(file, data) {
+      if (file === 'np_eps_topik_preparation_2026.json')
+        data.cohortVisibility.push('other');
+    }
   }
 ];
 
