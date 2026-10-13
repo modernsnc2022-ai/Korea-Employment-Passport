@@ -40,6 +40,30 @@ npx playwright test tests/nepal-journey.spec.js
 
 The Playwright suite is **written but unexecuted** in a real Chromium session. Do not merge or advertise beta readiness on the basis of mocked DOM smoke tests alone. GitHub Actions are manual-dispatch only and should not be triggered for this verification unless budget approval is obtained.
 
+## Offline Chromium regression without localhost
+
+The browser's `page.goto('http://127.0.0.1:4173/...')` can fail in restricted execution hosts.
+An additional browser suite reads checked-in HTML, JavaScript and **the exact Nepal JSON
+assets** from the repository and injects them via `page.setContent`, mocks only the
+JSON fetch transport, and runs Chromium DOM assertions without serving any website:
+
+```sh
+npm ci
+npx playwright install chromium
+npm run test:nepal:offline
+```
+
+With a preinstalled system Chromium browser, use `CHROMIUM_PATH` to point at
+the executable before the command. The offline suite checks 2026 registration closure,
+future/different-cohort isolation, suppression of obsolete fees and checklists,
+and fail-closed handling for unsafe notice flags or missing mandatory data.
+
+**Limit:** Browser-tested offline injected assets do not prove hosted URLs, CSP, public
+GitHub Pages deployment, routing, or network availability. The full browser
+suite and manual product-review gates remain necessary; this is a faster intermediate test,
+not a beta-launch permission. The suite is **committed, but not yet reported as passed
+in an actual Chromium browser**.
+
 ## Promotion checklist
 
 - [ ] Review all current 2026 primary/supplementary Nepal official notice attachments in full, including July 26 and 30, documenting their actual effect.
