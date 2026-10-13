@@ -54,6 +54,17 @@ def updated_record(
     record["result"] = result
     record["primaryIndex"] = PRIMARY_INDEX
     record["heldQuestions"] = list(LOCKED_HOLDS)
+    # Keep the nested official-evidence timestamp in sync. A new release-day
+    # audit must never look current merely because the top-level date changed.
+    record["sameDayOfficialRecheck"] = {
+        "checkedAt": checked_at,
+        "status": (
+            "completed_no_detailed_manufacturing_notice_found"
+            if result == NO_NOTICE else "notice_found_review_required"
+        ),
+        "queryScope": "KP2MI G-to-G Korea official 2026 Manufacturing notice index",
+        "repeatOnActualReleaseDay": True,
+    }
 
     if result == NOTICE_FOUND:
         evidence = list(record.get("officialEvidence", []))
@@ -86,6 +97,10 @@ def self_test() -> None:
     assert clean["checkedAt"] == "2026-10-04"
     assert clean["result"] == NO_NOTICE
     assert clean["heldQuestions"] == LOCKED_HOLDS
+    assert clean["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-04"
+    assert clean["sameDayOfficialRecheck"]["status"] == (
+        "completed_no_detailed_manufacturing_notice_found"
+    )
 
     found = updated_record(
         base,
@@ -94,6 +109,8 @@ def self_test() -> None:
         notice_url="https://kp2mi.go.id/gtog-detail/korea/example-manufacturing-notice",
     )
     assert found["result"] == NOTICE_FOUND
+    assert found["sameDayOfficialRecheck"]["status"] == "notice_found_review_required"
+    assert found["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-04"
     assert found["officialEvidence"][-1]["url"].startswith("https://kp2mi.go.id/")
 
     try:
