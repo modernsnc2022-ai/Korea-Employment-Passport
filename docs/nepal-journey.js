@@ -107,12 +107,14 @@
     verified_current_primary: '२०२६ पहिलो चरणको मुख्य सूचना',
     supplementary_unreviewed: 'थप सूचना — पूरा सामग्री समीक्षा बाँकी',
     prior_2025_cohort: '२०२५ समूहको सूचना — २०२६ मा लागू हुँदैन',
-    cohort_not_linked: 'प्रस्थान सूचना — हालको आवेदन समूहसँग सम्बन्ध अपुष्ट'
+    cohort_not_linked: 'प्रस्थान सूचना — हालको आवेदन समूहसँग सम्बन्ध अपुष्ट',
+    other_2026_program: '२०२६ को अर्को कार्यक्रम — Manufacturing पहिलो चरणमा लागू हुँदैन'
   });
   function assertSafeNoticeLedger(ledger) {
     if (ledger?.routeId !== ROUTE_ID || ledger.policy?.betaAccess !== 'blocked' ||
         ledger.policy?.allowDeadlineExtensionInference !== false ||
         ledger.policy?.allowDepartureToPromote2026ApplicationStages !== false ||
+        ledger.policy?.allowCrossSectorPromotion !== false ||
         !Array.isArray(ledger.notices) || !ledger.notices.length) {
       throw new Error('Nepal notice provenance safety gate mismatch');
     }
@@ -128,6 +130,10 @@
       }
       if (notice.applicability === 'prior_2025_cohort' && notice.cohort !== '2025_manufacturing') {
         throw new Error('Prior cohort label invalid');
+      }
+      if (notice.applicability === 'other_2026_program' &&
+          notice.cohort !== '2026_root_industry_distinct_program') {
+        throw new Error('Other-program label invalid');
       }
       if (notice.applicability === 'cohort_not_linked' &&
           !notice.cohort.startsWith('departure_')) {
