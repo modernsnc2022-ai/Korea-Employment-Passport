@@ -372,7 +372,12 @@ test('Nepal official free Korean study hub covers current and future without bet
   await expect(page.locator('#prepResources')).toContainText('स्वअध्ययन');
   await page.locator('#cohortSelect').selectOption('future');
   await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(3);
+  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(0);
+  await expect(page.locator('#prepResources')).toContainText('अध्ययन सुझाव');
   await expect(page.locator('#stagePicker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(1);
   await page.locator('#cohortSelect').selectOption('other');
   await expect(page.locator('#prepResources')).toBeHidden();
   expect(await page.evaluate(() => document.documentElement.scrollWidth))
@@ -390,4 +395,16 @@ test('Nepal study data cannot request personal documents', async ({ page }) => {
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
   await expect(page.locator('#prepResources')).toBeHidden();
+});
+
+test('Nepal cannot promote historical 2026 CBT schedule into future preparation cohort', async ({ page }) => {
+  await page.route('**/data/np_eps_topik_preparation_2026.json', async route => {
+    const result = await route.fetch();
+    const payload = await result.json();
+    payload.resources.find(x => x.id === 'hrd_exam_schedule').cohortVisibility = ['current', 'future'];
+    await route.fulfill({ response: result, json: payload });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
 });
