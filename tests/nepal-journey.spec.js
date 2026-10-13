@@ -151,3 +151,29 @@ test('Prior-year and Root Industry applicants are isolated from general Manufact
   await expect(page.locator('#cohortGuidance')).toContainText('Root Industry');
   await expect(page.locator('#noticeReview')).toContainText('२०२६ को अर्को कार्यक्रम');
 });
+
+
+test('Nepal held 2026 employment stage never renders obsolete fee or exact prior-cohort checklist', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageSelect').selectOption('job_application');
+  await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
+  await expect(page.locator('#stageDetail')).not.toContainText('US$5');
+  await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
+  await expect(page.locator('#stageDetail .document-pack')).toContainText('विस्तृत सूची');
+  await expect(page.locator('#stageDetail a[href="https://epsnepal.gov.np/notices"]')).toHaveCount(2);
+});
+
+test('Nepal held visa stage suppresses obsolete cost while verified closed registration keeps sources', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageSelect').selectOption('visa_docs');
+  await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
+  await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
+  await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
+  await expect(page.locator('#stageDetail .warning')).toContainText('Visa/service fees changed');
+  await page.locator('#stageSelect').selectOption('registration');
+  await expect(page.locator('#stageDetail .state')).toContainText('२०२६ आवेदन अवधि बन्द');
+  await expect(page.locator('#stageDetail .document-pack li').first()).toBeVisible();
+  await expect(page.locator('#stageDetail a[href*="/postdetails/136"]').first()).toBeVisible();
+});
