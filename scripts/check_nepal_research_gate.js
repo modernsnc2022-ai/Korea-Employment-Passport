@@ -70,6 +70,12 @@ for (const stage of stages) {
   }
 }
 assert(stages.length >= 20, 'Unexpectedly incomplete Nepal route');
+assert(stages.find(x => x.id === 'registration')?.supportState === 'verified_local_primary_plus_2026_07_30_extension' &&
+  stages.find(x => x.id === 'document_verify')?.supportState === 'verified_primary_plus_2026_07_30_passport_exception',
+  'Reviewed first-phase registration/passport supportState labels cannot return to unresolved');
+assert(pack.currentApplicationWindow?.status === 'closed' &&
+  readiness.currentCohort?.recruitmentRegistration?.status === 'closed_verified',
+  'Stage browsing must not imply an open EPS application window');
 
 const current = readiness.currentCohort || {};
 assert(current.recruitmentRegistration?.status === 'closed_verified', 'Current Nepal application is not open');
