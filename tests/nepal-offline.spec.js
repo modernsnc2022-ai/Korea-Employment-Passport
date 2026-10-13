@@ -203,7 +203,11 @@ test('Nepal Chromium offline: official study links appear for current and future
   await expect(page.locator('#prepResources')).toContainText('वास्तविक २०२६ परीक्षाको प्रश्नपत्र होइन');
   await page.locator('#cohortSelect').selectOption('future');
   await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(3);
+  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(0);
   await expect(page.locator('#stagePicker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(4);
   await page.locator('#cohortSelect').selectOption('other');
   await expect(page.locator('#prepResources')).toBeHidden();
 });
@@ -220,6 +224,15 @@ test('Nepal Chromium offline: forged prep source fails closed', async ({ page })
 test('Nepal Chromium offline: missing official study file fails closed', async ({ page }) => {
   await openOffline(page, data => {
     delete data['data/np_eps_topik_preparation_2026.json'];
+  });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
+
+test('Nepal Chromium offline: forged future-cohort 2026 CBT link fails closed', async ({ page }) => {
+  await openOffline(page, data => {
+    data['data/np_eps_topik_preparation_2026.json'].resources
+      .find(x => x.id === 'hrd_exam_schedule').cohortVisibility.push('future');
   });
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
