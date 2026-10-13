@@ -1,20 +1,22 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
   "reviewedAt": "2026-10-13",
-  "reviewScope": "Public official Nepal EPS notice page/title and previously reviewed 2026 first-phase registration source; no assumption that title-only supplementary pages change exact rules",
+  "reviewScope": "Official Nepal EPS website notice pages/titles checked through 2026-10-13, cohort and sector isolation; no title-only rule promotion",
   "reviewLimitations": [
-    "Nepal EPS notice index can be cached or lag; this is a date-stamped review, not a live alert",
-    "July 26 supplementary PDF is large; content has not been reviewed",
-    "July 30 passport/application update has an embedded image and substantive content is not yet reviewed",
-    "2026 regular/committed-worker departure announcements are not evidence of the 2026 first-phase exam/applicant cohort reaching departure"
+    "The 2026-07-26 urgent applicant PDF is approximately 24.46 MB and its complete contents could not be obtained for text review; no exact rules were promoted.",
+    "The 2026-07-30 online-submission/passport notice is visible by official page title but the substantive scan/image content has not been reviewed.",
+    "Root Industry 2026 selection notices are a separate program; same-year notices must not be merged into first-phase general Manufacturing.",
+    "2026 regular/committed-worker departure announcements do not establish that 2026 first-phase EPS-TOPIK applicants have completed recruitment.",
+    "Nepal official notice index and search caches can lag; this is a dated review, not live regulatory monitoring."
   ],
   "policy": {
     "currentCohort": "2026_first_phase_manufacturing",
     "onlyPromoteExactRulesIf": "verified_current_cohort_full_notice_content",
     "allowDeadlineExtensionInference": false,
     "allowDepartureToPromote2026ApplicationStages": false,
-    "betaAccess": "blocked"
+    "betaAccess": "blocked",
+    "allowCrossSectorPromotion": false
   },
   "notices": [
     {
@@ -35,7 +37,8 @@
       "cohort": "2026_first_phase_possible",
       "reviewState": "attachment_content_pending_review",
       "applicability": "supplementary_unreviewed",
-      "ruleImpact": "Do not infer a registration extension or a changed passport/fee requirement from the title."
+      "ruleImpact": "Do not infer a registration extension or a changed passport/fee requirement from the title.",
+      "sourceAccess": "24.46 MB official PDF, retrieval too large for complete content review; status pending"
     },
     {
       "id": "np_2026_suspension_0728",
@@ -65,7 +68,8 @@
       "cohort": "2026_first_phase_possible",
       "reviewState": "image_content_pending_review",
       "applicability": "supplementary_unreviewed",
-      "ruleImpact": "Do not assert passport rules as exhaustive until the image content is reviewed."
+      "ruleImpact": "Do not assert passport rules as exhaustive until the image content is reviewed.",
+      "sourceAccess": "Official page accessible; text body/image not substantively parsed; status pending"
     },
     {
       "id": "np_2025_manu_job_notice",
@@ -96,6 +100,26 @@
       "reviewState": "official_post_title_verified",
       "applicability": "cohort_not_linked",
       "ruleImpact": "Departure dates are for regular workers; do not infer any exam, Skill & Competency or job-application status of the 2026 first-phase cohort."
+    },
+    {
+      "id": "np_2026_root_industry_alt_0701",
+      "date": "2026-07-01",
+      "title": "Root Industry 2026 alternative-candidate selection (serial number 52)",
+      "url": "https://epsnepal.gov.np/postdetails/131",
+      "cohort": "2026_root_industry_distinct_program",
+      "reviewState": "official_title_date_verified_content_pending",
+      "applicability": "other_2026_program",
+      "ruleImpact": "This concerns 2026 Root Industry alternative selection, not the 2026 first-phase general Manufacturing EPS-TOPIK examination or Skill & Competency schedule."
+    },
+    {
+      "id": "np_2026_root_industry_alt_0629",
+      "date": "2026-06-29",
+      "title": "Root Industry 2026 alternative-candidate selection",
+      "url": "https://epsnepal.gov.np/postdetails/130",
+      "cohort": "2026_root_industry_distinct_program",
+      "reviewState": "official_title_date_verified_content_pending",
+      "applicability": "other_2026_program",
+      "ruleImpact": "Same calendar year is not sufficient for cohort/sector identity. Do not promote this Root Industry selection notice as a Manufacturing registration or selection rule."
     }
   ]
 }
