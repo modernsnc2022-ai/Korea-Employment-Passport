@@ -1,7 +1,7 @@
 {
   "version": "1.1.0",
   "routeId": "np-e9-manufacturing-2026",
-  "verifiedAt": "2026-10-05",
+  "verifiedAt": "2026-10-13",
   "packs": [
     {
       "id": "np_2026_eps_topik_registration",
@@ -17,7 +17,7 @@
           "id": "np_passport_photo_page",
           "label": "Passport photo-page scan",
           "required": true,
-          "rule": "JPG; width 600 px; under 89 KB; scan the passport page containing the applicant photo."
+          "rule": "2026 primary image upload baseline: JPG passport photo-page scan, width 600 px, under 89 KB. The reviewed 2026-07-30 official supplement permitted using an expired original passport's details for first-phase online registration, but a valid passport was required for the later Job Application Form after passing language and skill tests. This is not a future-cohort rule."
         },
         {
           "id": "np_email",
@@ -37,7 +37,8 @@
           "required": true,
           "rule": "Color photo taken within 6 months; 3.5×4.5 cm; white background; no white clothing; both ears visible; JPG width 100–300 px; 8–14 KB."
         }
-      ]
+      ],
+      "supplementalSourceUrl": "https://epsnepal.gov.np/postdetails/143"
     },
     {
       "id": "np_2026_eps_topik_exam_day",

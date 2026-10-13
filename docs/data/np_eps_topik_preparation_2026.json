@@ -1,0 +1,75 @@
+{
+  "version": "1.0.0",
+  "routeId": "np-e9-manufacturing-2026",
+  "country": "NP",
+  "scope": "general_eps_topik_korean_learning_only",
+  "status": "reference_only",
+  "reviewedAt": "2026-10-13",
+  "cohortVisibility": [
+    "current",
+    "future"
+  ],
+  "examinationDates": "undecided",
+  "applicationStatus": "closed_2026_first_phase",
+  "betaStatus": "blocked",
+  "privacy": {
+    "requiresSignIn": false,
+    "collectsPersonalData": false,
+    "tracksOfficialMilestones": false,
+    "persistsStudyProgress": false
+  },
+  "headlineNe": "सरकारी स्रोतबाट निःशुल्क कोरियाली भाषा अध्ययन",
+  "descriptionNe": "यो केवल स्वअध्ययनका लागि आधिकारिक सामग्रीको लिंक हो। EPS-TOPIK परीक्षा मिति, प्रश्न, उत्तीर्ण परिणाम, नयाँ आवेदन वा रोजगारी सुनिश्चित गर्ने सेवा होइन।",
+  "resources": [
+    {
+      "id": "hrd_standard_textbooks",
+      "topic": "self_study",
+      "titleNe": "नयाँ कोरियाली भाषा मानक पाठ्यपुस्तक र सुन्ने सामग्री",
+      "descriptionNe": "HRD Korea ले उपलब्ध गराएको २०२४ संशोधित दैनिक जीवन तथा कार्यस्थल कोरियाली पाठ्यपुस्तक र सुन्ने फाइल हेर्नुहोस्। २०२६ जुनमा केही सामग्री सच्याइएको सूचना छ; पछिल्लो संस्करण आधिकारिक साइटमै जाँच्नुहोस्।",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/book/std/standardBookList.do?lang=en",
+      "sourceStatus": "verified_official_materials_2026_10_13",
+      "cohortVisibility": [
+        "current",
+        "future"
+      ]
+    },
+    {
+      "id": "hrd_public_questions",
+      "topic": "practice_only",
+      "titleNe": "पढाइ, सुनाइ र पुराना सार्वजनिक नमुना प्रश्न",
+      "descriptionNe": "HRD Korea को २०२५ सार्वजनिक प्रश्न, उत्तर, सुन्ने अडियो र लिपि अभ्यासका लागि मात्र हेर्नुहोस्। वास्तविक परीक्षामा उही प्रश्न आउँछन् भन्ने दाबी होइन।",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/book/pub/publicWorkBookList.do?lang=ko",
+      "sourceStatus": "verified_official_materials_2026_10_13",
+      "cohortVisibility": [
+        "current",
+        "future"
+      ]
+    },
+    {
+      "id": "hrd_exam_schedule",
+      "topic": "official_date_watch",
+      "titleNe": "आफ्नो २०२६ Manufacturing परीक्षा सूचना छुट्टै जाँच्नुहोस्",
+      "descriptionNe": "HRD Korea को नेपाल Manufacturing(५औँ Point System) को आधिकारिक विवरणमा परीक्षा घोषणा र परीक्षा अवधि हालसम्म अनिर्णीत छन्। आफ्नै प्रवेशपत्र वा समय तालिका अनुमान नगर्नुहोस्।",
+      "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "sourceStatus": "verified_direct_official_undecided_2026_10_13",
+      "cohortVisibility": [
+        "current"
+      ]
+    },
+    {
+      "id": "nepal_official_notices",
+      "topic": "official_notice_watch",
+      "titleNe": "नेपाल EPS को आधिकारिक नयाँ सूचना हेर्नुहोस्",
+      "descriptionNe": "नेपाल EPS को मूल सरकारी सूचना पृष्ठमा आफ्नो वर्ष, क्षेत्र र परीक्षा समूह मिल्ने नयाँ सूचना जाँच्नुहोस्। २०२५ का नतिजा वा २०२६ का अन्य क्षेत्र/कामदारका सूचनालाई आफ्नो पहिलो चरणको नतिजा नमान्नुहोस्।",
+      "sourceUrl": "https://epsnepal.gov.np/notices",
+      "sourceStatus": "verified_official_index_2026_10_13",
+      "cohortVisibility": [
+        "current",
+        "future"
+      ]
+    }
+  ],
+  "audienceRule": "A reader waiting for a FUTURE intake may use the generic textbooks/public practice and official EPS Nepal notice index; the expired 2026 first-phase 5th-Manufacturing HRD schedule link must be shown ONLY for applicants of that named historical intake, never as a future intake schedule.",
+  "studySequenceAdviceNe": "अध्ययन सुझाव (सरकारी अनिवार्य चरण होइन): पहिले आधिकारिक पाठ्यपुस्तकका शब्द, संवाद र उच्चारण पढ्नुहोस् र सुन्ने फाइलबाट अभ्यास गर्नुहोस्। त्यसपछि सार्वजनिक पढाइ/सुनाइ अभ्यास प्रश्न प्रयोग गर्नुहोस्। नयाँ आवेदन वा परीक्षा मितिका लागि सरकारी सूचनामात्र जाँच्नुहोस्।",
+  "sourcesReviewedAt": "2026-10-13"
+}

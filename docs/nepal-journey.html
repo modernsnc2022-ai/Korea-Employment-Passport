@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071a36">
+  <meta name="description" content="Nepal E-9 Manufacturing 2026 EPS stage navigator — research preview only, not a beta release.">
+  <title>नेपाल EPS चरणगत सहायक (अनुसन्धान पूर्वावलोकन) — KEP</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .np-shell{max-width:940px;margin:0 auto;padding:28px 20px 64px}
+    .np-shell h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.3}
+    .np-shell h2{font-size:1.45rem;line-height:1.4}
+    .np-shell h3{font-size:1.15rem}
+    .np-card{background:#fff;color:#12263b;border-radius:17px;padding:24px;margin:18px 0;box-shadow:0 5px 23px rgba(0,0,0,.10)}
+    .np-hold{border-left:6px solid #b97618;background:#fff5dc}
+    .cohort-guidance{border-left:5px solid #6688af;background:#edf5ff}
+    .np-label{display:block;font-weight:700;margin-bottom:10px}
+    #cohortSelect{width:100%;padding:13px;border:2px solid #5c7b98;border-radius:11px;background:white;color:#12263b;font:inherit}
+    #cohortSelect:focus{outline:3px solid #dfbd58;outline-offset:2px}
+    #stageSelect{width:100%;max-width:100%;font:inherit;padding:13px;border:2px solid #5c7b98;border-radius:11px;background:white;color:#12263b}
+    #stageSelect:focus{outline:3px solid #dfbd58;outline-offset:2px}
+    .state{display:inline-block;border:1px solid #b97618;border-radius:30px;padding:6px 12px;background:#fff2d5;color:#68450f;font-weight:700}
+    .state-waiting{background:#e7f1ff;color:#154c81;border-color:#abc9e8}
+    .state-reference{background:#edf0f4;color:#33445a;border-color:#b9c5cf}
+    .state-hold{background:#fff1dd;color:#7c4316}
+    .np-card a{color:#0759a3;text-decoration:underline;overflow-wrap:anywhere}
+    .official-link{display:block;margin:14px 0}
+    .caution{font-weight:600;color:#68450f}
+    .warning{background:#fff1eb;border-left:3px solid #b64924;padding:10px 12px;color:#5a2b20}
+    .provenance{font-size:.95rem;color:#3c5169}
+    .action-text{font-size:1.1rem;line-height:1.8}
+    .document-pack{border-top:1px solid #dae2ea;margin-top:20px;padding-top:18px}
+    .notice-item{border-top:1px solid #d4dee8;padding:14px 0;margin:9px 0}
+    .notice-item h3{font-size:1.04rem;line-height:1.5}
+    .notice-item .state{font-size:.83rem}
+    .notice-item p{margin:9px 0}
+    #noticeReview{scroll-margin-top:20px}
+    .document-pack li{margin:9px 0;line-height:1.6}
+    #loadError{color:#a32626;font-weight:700}
+    .np-footer{font-size:.95rem;color:#607089;margin-top:26px}
+    .np-prep-resource{border-top:1px solid #dae2ea;padding:15px 0}
+    .np-prep-resource h3{margin:0 0 8px;font-size:1.08rem;line-height:1.6}
+    .np-prep-resource p{margin:6px 0;line-height:1.7}
+    .np-prep-resource a{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box;overflow-wrap:anywhere}
+    .np-prep-disclaimer{background:#fff5dc;border-left:4px solid #b97618;padding:12px;color:#68450f;font-weight:600}
+    .np-step-navigation{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 0}
+    .np-step-navigation button{font:inherit;font-weight:700;min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #164c7c;background:#fff;color:#164c7c;cursor:pointer}
+    .np-step-navigation button:disabled{opacity:.5;cursor:not-allowed}
+    .np-step-navigation button:focus-visible{outline:3px solid #a46d04;outline-offset:3px}
+    .np-step-position{flex:1;min-width:135px;text-align:center;font-weight:700;line-height:1.6}
+    .np-skip{position:absolute;left:12px;top:-70px;background:#fff;color:#08274a;padding:12px;z-index:10}
+    .np-skip:focus{top:12px}
+    .np-review-controls{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
+    .np-review-controls button{font:inherit;font-weight:700;min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #164c7c;background:#fff;color:#164c7c;cursor:pointer}
+    .np-review-controls #stageReviewBtn{background:#164c7c;color:#fff}
+    .np-review-controls button:focus-visible,#reviewedDetails summary:focus-visible{outline:3px solid #a46d04;outline-offset:3px}
+    #reviewProgress{width:100%;height:15px;accent-color:#17644c;margin:9px 0}
+    #reviewedDetails summary{cursor:pointer;min-height:44px;padding:10px 2px;font-weight:700}
+    #reviewedStageList{padding-inline-start:22px;line-height:1.65}
+    #reviewedStageList li{padding:4px 0}
+    @media(max-width:600px){
+      .np-shell{padding:18px 12px 36px}
+      .np-card{padding:16px;border-radius:12px;margin:12px 0}
+      .np-shell h2{font-size:1.24rem}
+      .np-review-controls{flex-direction:column;gap:9px}
+      .np-step-navigation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+      .np-step-navigation button{padding:10px 8px;min-width:0}
+      .np-step-position{grid-column:1/-1;grid-row:1;min-width:0}
+      .np-review-controls button{width:100%}
+      .action-text{font-size:1rem}
+      #cohortSelect,#stageSelect{min-height:48px;font-size:16px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+  <script src="nepal-journey.js" defer></script>
+</head>
+<body>
+  <a class="np-skip" href="#mainContent">मुख्य सामग्रीमा जानुहोस्</a>
+  <header class="hero">
+    <div class="np-shell">
+      <a class="nav-link" href="np.html">← नेपाल EPS अनुसन्धान पृष्ठ</a>
+      <p class="eyebrow">NEPAL → KOREA · E-9 · MANUFACTURING · 2026</p>
+      <h1>तपाईं अहिले कुन EPS चरणमा हुनुहुन्छ?</h1>
+      <p class="lead">आधिकारिक स्रोतमा आधारित चरणगत जानकारी हेर्नुहोस्। यो परीक्षणका लागि अनुसन्धान पूर्वावलोकन मात्र हो।</p>
+    </div>
+  </header>
+  <main id="mainContent" class="np-shell">
+    <section class="np-card np-hold" aria-label="नेपाल बेटा सेवाको अवस्था">
+      <h2>नेपाल beta सेवा अझै खुला छैन</h2>
+      <p id="statusSummary" aria-live="polite">सरकारी स्रोत तथा सुरक्षा स्थिति लोड हुँदैछ…</p>
+      <p id="loadError" hidden>कृपया आधिकारिक EPS सूचनामार्फत हालको अवस्था जाँच्नुहोस्।</p>
+      <p>अन्तिम स्रोत समीक्षा: <time id="verifiedAt">—</time></p>
+      <div id="summaryLinks"></div>
+      <p>KEP सरकारी निकाय, रोजगार पठाउने एजेन्सी वा दलाल होइन। परीक्षा, रोजगार, श्रम सम्झौता वा भिसाको ग्यारेन्टी हुँदैन।</p>
+    </section>
+    <div id="previewBody" hidden>
+      <section class="np-card">
+        <label for="cohortSelect" class="np-label">तपाईं कुन EPS आवेदन समूहमा पर्नुहुन्छ?</label>
+        <select id="cohortSelect" aria-describedby="cohortHelp">
+          <option value="current">२०२६ प्रथम चरण Manufacturing मा आवेदन दिइसकेको</option>
+          <option value="future">अर्को आधिकारिक Manufacturing आवेदन खुल्ने प्रतीक्षामा</option>
+          <option value="other">२०२५ वा अन्य वर्ष/Root Industry को अलग आवेदन समूह</option>
+        </select>
+        <p id="cohortHelp" class="provenance">गलत समूहका मिति र कागजात लागू हुन नदिन समूह चयन गर्नुहोस्। कुनै व्यक्तिगत जानकारी सङ्कलन गरिँदैन।</p>
+      </section>
+      <section id="cohortGuidance" class="np-card cohort-guidance" hidden aria-live="polite"></section>
+      <section id="prepResources" class="np-card" hidden aria-labelledby="prepHeading">
+        <h2 id="prepHeading">निःशुल्क सरकारी EPS-TOPIK अध्ययन सामग्री</h2>
+        <p class="np-prep-disclaimer">यो अध्ययन सहयोग मात्र हो; सरकारी परीक्षा, आवेदन, नतिजा वा रोजगारी पूरा गरेको प्रमाण होइन।</p>
+        <div id="prepResourceList"></div>
+      </section>
+      <section id="stagePicker" class="np-card" aria-labelledby="stagePickerLabel">
+        <label for="stageSelect" class="np-label" id="stagePickerLabel">आफ्नो चरण छान्नुहोस्</label>
+        <select id="stageSelect" aria-describedby="stageHelp">
+          <option value="">चरणहरू लोड हुँदैछ…</option>
+        </select>
+        <p id="stageHelp" class="provenance">कुनै नाम, पासपोर्ट नम्बर, फोन, व्यक्तिगत कागजात वा पैसा यहाँ नदिनुहोस्। यो पृष्ठले आवेदन पठाउँदैन।</p>
+        <nav class="np-step-navigation" aria-label="चरणहरू अगाडि र पछाडि हेर्नुहोस्">
+          <button id="prevStageBtn" type="button" disabled>← अघिल्लो चरण</button>
+          <span id="stagePosition" class="np-step-position" role="status" aria-live="polite">चरणहरू लोड हुँदैछ…</span>
+          <button id="nextStageBtn" type="button" disabled>अर्को चरण →</button>
+        </nav>
+      </section>
+      <section id="reviewTracker" class="np-card" hidden aria-labelledby="reviewHeading">
+        <h2 id="reviewHeading">यो सत्रमा पढेको जानकारी</h2>
+        <p class="caution">यो तपाईंले KEP मा पढेका पृष्ठको निजी चिन्ह मात्र हो। परीक्षा, रोजगार, भिसा वा सरकारी चरण पूरा भएको प्रमाण होइन। नाम, राहदानी वा अन्य विवरण सङ्कलन र भण्डारण गरिँदैन। पृष्ठ बन्द वा रिफ्रेस गर्दा सबै चिन्ह हट्छन्।</p>
+        <label for="reviewProgress" class="np-label">पढेको जानकारीको गणना</label>
+        <progress id="reviewProgress" value="0" max="1"></progress>
+        <p id="reviewStatus" role="status" aria-live="polite"></p>
+        <div class="np-review-controls">
+          <button id="stageReviewBtn" type="button" aria-pressed="false">यो चरणको जानकारी पढेँ</button>
+          <button id="resetStageReviewBtn" type="button" hidden>पढेको चिन्ह सबै हटाउनुहोस्</button>
+        </div>
+        <details id="reviewedDetails" hidden>
+          <summary>यो सत्रमा पढेका चरणहरू हेर्नुहोस्</summary>
+          <ul id="reviewedStageList"></ul>
+        </details>
+      </section>
+      <article class="np-card" id="stageDetail" aria-live="polite"></article>
+      <section class="np-card" id="noticeReview" aria-label="आवेदन समूहअनुसारका आधिकारिक सूचनाहरू"></section>
+    </div>
+    <p class="np-footer">KEP Nepal | 2026 प्रथम चरण · 2025 समूहको सूचना 2026 को समयसीमा होइन · सबै सरकारी कार्य आधिकारिक साइटमै</p>
+  </main>
+</body>
+</html>

@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
   "routeId": "np-e9-manufacturing-2026",
-  "verifiedAt": "2026-10-06",
-  "scope": "current_2026_hrd_manufacturing_schedule_row_with_local_registration_window_conflict_unresolved",
+  "verifiedAt": "2026-10-13",
+  "scope": "2026_hrd_manufacturing_schedule_with_local_july_30_extension_verified",
   "sources": [
     {
       "id": "np_2026_hrd_5th_manufacturing_5part",
@@ -28,27 +28,48 @@
         "publishedAt": "2026-07-21",
         "registrationPeriod": "2026-07-27 through 2026-08-02"
       }
+    },
+    {
+      "id": "np_2026_local_deadline_extension_0730",
+      "sourceUrl": "https://epsnepal.gov.np/postdetails/143",
+      "status": "verified_official_inline_image_reviewed",
+      "facts": {
+        "publishedAt": "2026-07-30",
+        "registrationEndDate": "2026-08-05",
+        "passportRegistrationException": "original_expired_passport_details_accepted_for_first_phase_online_registration",
+        "validPassportRequiredAt": "later_job_application_after_language_and_skill_test_pass"
+      }
     }
   ],
   "reconciliation": {
-    "status": "unresolved_cross_source_registration_end_date",
+    "status": "resolved_by_local_nepal_2026_07_30_official_image",
     "localPrimaryEndDate": "2026-08-02",
     "hrdScheduleEndDate": "2026-08-05",
-    "deadlineExtensionVerifiedFromLocalSupplementaryContent": false,
-    "safeRule": "Keep the local primary notice's 2026-08-02 exact application window in applicant-facing exact rules until a later Nepal official notice is content-reviewed and shown to extend/modify it. Preserve the HRD Korea 2026-08-05 schedule-row end date as direct official cross-source evidence, not as automatic proof of a local deadline extension."
+    "deadlineExtensionVerifiedFromLocalSupplementaryContent": true,
+    "safeRule": "The Nepal official 2026-07-30 inline-image notice independently confirms extending the 2026 first-phase registration deadline to 2026-08-05; HRD Korea agrees. Do not treat this closed cohort period as new or future recruitment.",
+    "extendedEndDate": "2026-08-05",
+    "verificationSource": "https://epsnepal.gov.np/postdetails/143"
   },
   "promotionRules": {
     "mayPromote": [
       "a current HRD Korea Nepal Manufacturing 5th Point System row exists",
       "the current HRD row is General CBT / Point System",
       "the HRD row currently leaves test announcement and test period undecided",
-      "the HRD row lists the Gwarko UBT Hall reception contact"
+      "the HRD row lists the Gwarko UBT Hall reception contact",
+      "Nepal official July 30 first-phase registration extension to 2026-08-05, now closed, and the registration-only expired-passport exception"
     ],
     "mustRemainHold": [
-      "claim that the local application deadline was extended to 2026-08-05",
       "individual or bulk exam date/session",
       "current 2026 first-phase result",
       "current Skill & Competency schedule/result"
     ]
+  },
+  "lastScheduleRecheck": {
+    "checkedAt": "2026-10-13",
+    "sourceUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+    "officialTestAnnouncement": "undecided",
+    "officialTestPeriod": "undecided",
+    "decision": "hold_all_individual_exam_dates",
+    "note": "Live HRD Korea page for the 2026 Nepal Manufacturing(5부) General CBT 5th Point System row still shows both 시험공고일 and 시험기간 as 미확정. Registration 2026-07-27 to 2026-08-05 is a closed historical window. Do not predict a session/date from other Nepal sectors or 2025 cohort."
   }
 }

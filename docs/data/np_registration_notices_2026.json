@@ -2,12 +2,13 @@
   "version": "1.0.0",
   "routeId": "np-e9-manufacturing-2026",
   "cycle": 2026,
-  "reviewedAt": "2026-10-05",
+  "reviewedAt": "2026-10-13",
   "policy": {
-    "primaryNoticeRule": "The 2026-07-21 first-phase notice is the verified baseline for registration rules unless a later official notice is reviewed and shown to modify a specific rule.",
-    "supplementaryNoticeRule": "Later notices are tracked independently. Do not infer an extension, replacement rule, passport exception, payment exception or other operational detail from a title alone.",
-    "deadlineExtensionVerified": false,
-    "autoSupersedePrimaryRules": false
+    "primaryNoticeRule": "2026-07-21 primary notice is the baseline; the reviewed official Nepal 2026-07-30 supplementary image specifically extends registration to 2026-08-05 and permits expired passport details for initial online application. Do not infer any other modifications.",
+    "supplementaryNoticeRule": "Each reviewed supplement changes only the precise rules explicitly stated in its contents. Unreviewed titles never extend dates, authorize other fees, or alter other cohorts.",
+    "deadlineExtensionVerified": true,
+    "autoSupersedePrimaryRules": false,
+    "deadlineExtensionOfficialSource": "https://epsnepal.gov.np/postdetails/143"
   },
   "notices": [
     {
@@ -30,9 +31,9 @@
       "type": "supplementary_registration_notice",
       "pageUrl": "https://epsnepal.gov.np/postdetails/137",
       "attachmentUrl": "https://epsnepal.gov.np/uploads/files_video/files_1785066815.pdf",
-      "contentReviewStatus": "pending_large_pdf_review",
-      "effectStatus": "unknown_until_content_reviewed",
-      "safeEffect": "The existence and date of this supplementary notice are verified. Do not change any exact registration rule solely from the title."
+      "contentReviewStatus": "notice_pages_1_to_3_reviewed_user_manual_appendix_reference_only",
+      "effectStatus": "operational_duplicate_registration_payment_and_correction_guidance_verified",
+      "safeEffect": "Official July 26 notice warns applicants against multiple signups for one passport, changed email/repeated payment, repeated browser tabs and duplicate transactions. Maintain own contact details and saved login/application slip, verify entered data, and use the official query/correction procedure where applicable. The guide appendix has not been promoted as a live application flow; no deadline extension is claimed from this notice."
     },
     {
       "id": "np_2026_application_suspended_0728",
@@ -66,9 +67,11 @@
       "type": "supplementary_registration_notice",
       "pageUrl": "https://epsnepal.gov.np/postdetails/143",
       "attachmentUrl": null,
-      "contentReviewStatus": "title_and_date_verified_content_pending",
-      "effectStatus": "possible_registration_or_passport_rule_supplement",
-      "safeEffect": "A later official passport/application notice exists. Exact passport or submission guidance from the primary notice must not be presented as exhaustive until this notice's content is reviewed."
+      "contentReviewStatus": "official_inline_image_content_reviewed",
+      "effectStatus": "verified_deadline_extended_to_2026_08_05_and_expired_passport_exception",
+      "safeEffect": "Official EPS Nepal inline notice dated 2026-07-30 extends the first-phase online application end date through 2026-08-05. An applicant whose passport has expired may submit the online application using that passport's details, but must present a valid passport when later filing the Job Application Form after passing language and skill exams. This does not authorize new applications after the closed period.",
+      "verifiedExtendedEndDate": "2026-08-05",
+      "passportValidityStage": "valid_passport_required_at_later_job_application"
     }
   ]
 }
