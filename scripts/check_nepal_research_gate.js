@@ -20,12 +20,34 @@ const docs = load('np_document_packs_2026.json');
 const dashboard = load('country_readiness_dashboard_2026.json');
 const ledger = load('np_notice_provenance_2026.json');
 const supplements = load('np_registration_notices_2026.json');
+const exactAnswers = load('np_exact_answer_rules_2026.json');
+const hrdSchedule = load('np_hrd_schedule_2026.json');
 
 assert(pack.country === 'NP' && pack.visa === 'E-9' && pack.sector === 'manufacturing', 'Nepal route must be E-9 Manufacturing');
 assert(pack.cycle === 2026 && pack.lifecycle === 'research_hold', 'Nepal 2026 pack must stay research_hold');
 assert(pack.publicAvailability === 'preview_only' && pack.safety?.betaIntakeOpen === false, 'Nepal applicant beta and service availability must remain blocked');
+assert(pack.currentApplicationWindow?.status === 'closed' &&
+  pack.currentApplicationWindow?.initialClosesAt === '2026-08-02' &&
+  pack.currentApplicationWindow?.closesAt === '2026-08-05' &&
+  pack.currentApplicationWindow?.extensionNoticeUrl === 'https://epsnepal.gov.np/postdetails/143' &&
+  pack.currentApplicationWindow?.operationalHistory?.deadlineExtensionVerified === true,
+  'Closed Nepal applicant window must use official August 5 extension with initial date preserved');
 assert(readiness.routeId === ID && docs.routeId === ID && ledger.routeId === ID && supplements.routeId === ID, 'Nepal data routeId mismatch');
 assert(readiness.cycle === 2026 && readiness.betaReadiness?.status === 'blocked', 'Nepal stage readiness must remain blocked');
+const applicationAnswer = exactAnswers.answers?.find(a => a.id === 'np_2026_application_window');
+const reconciliationAnswer = exactAnswers.answers?.find(a => a.id === 'np_2026_registration_cross_source_end_date');
+const passportAnswer = exactAnswers.answers?.find(a => a.id === 'np_2026_passport_scan');
+assert(applicationAnswer?.sourceUrl === 'https://epsnepal.gov.np/postdetails/143' &&
+  applicationAnswer?.verificationStatus === 'verified_official_primary_plus_supplement_image' &&
+  applicationAnswer?.writeExactly?.includes('2026-08-05'), 'Exact answer catalog must show verified local extension');
+assert(reconciliationAnswer?.verificationStatus === 'verified_nepal_supplement_extension_resolved' &&
+  reconciliationAnswer?.writeExactly?.includes('2026-08-05') &&
+  passportAnswer?.supplementalSourceUrl === 'https://epsnepal.gov.np/postdetails/143',
+  'Exact answer cross-source and passport supplements must not be stale');
+assert(hrdSchedule.reconciliation?.status === 'resolved_by_local_nepal_2026_07_30_official_image' &&
+  hrdSchedule.reconciliation?.deadlineExtensionVerifiedFromLocalSupplementaryContent === true &&
+  hrdSchedule.reconciliation?.verificationSource === 'https://epsnepal.gov.np/postdetails/143',
+  'HRD cross-source reconciliation must remain source-verified');
 assert(ledger.policy?.betaAccess === 'blocked' && ledger.policy?.allowDeadlineExtensionInference === false &&
   ledger.policy?.allowDepartureToPromote2026ApplicationStages === false &&
   ledger.policy?.allowCrossSectorPromotion === false, 'Nepal notice provenance safety flags changed');
