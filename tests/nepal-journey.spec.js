@@ -123,3 +123,31 @@ test('Nepal refuses policy that allows same-year Root Industry to leak into Manu
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
 });
+
+
+test('Future Nepal applicants cannot see closed 2026 first-phase instructions as actionable steps', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await expect(page.locator('#stageDetail')).toBeHidden();
+  await expect(page.locator('#cohortGuidance')).toBeVisible();
+  await expect(page.locator('#cohortGuidance')).toContainText('अर्को Manufacturing आवेदनको आधिकारिक सूचना');
+  await expect(page.locator('#cohortGuidance a[href="https://epsnepal.gov.np/notices"]')).toHaveCount(1);
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#stagePicker')).toBeVisible();
+  await expect(page.locator('#stageDetail')).toBeVisible();
+  await expect(page.locator('#stageDetail .state')).toContainText('२०२६ आवेदन अवधि बन्द');
+});
+
+test('Prior-year and Root Industry applicants are isolated from general Manufacturing instructions', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#cohortSelect').selectOption('other');
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await expect(page.locator('#stageDetail')).toBeHidden();
+  await expect(page.locator('#cohortGuidance')).toBeVisible();
+  await expect(page.locator('#cohortGuidance')).toContainText('२०२५');
+  await expect(page.locator('#cohortGuidance')).toContainText('Root Industry');
+  await expect(page.locator('#noticeReview')).toContainText('२०२६ को अर्को कार्यक्रम');
+});
