@@ -38,7 +38,7 @@ npx playwright install chromium
 npx playwright test tests/nepal-journey.spec.js
 ```
 
-On 2026-10-13 earlier commit `861559be`, the real headless Chromium Playwright navigator suite passed 14/14 and the offline suite passed 5/5; Node tests passed 7/7. These results apply **only to that commit**. After the July 26/30 evidence updates, run all tests afresh before reporting a new PASS or merging. GitHub Actions are manual-dispatch only and should not be triggered for this verification unless budget approval is obtained.
+On 2026-10-13 reviewed-data commit `5360a4fa56d2af5d9a830344c976e9e12df89660`, the actual Node research gate passed **12/12**, headless Microsoft Edge Chromium browser navigator **16/16**, and offline Chromium **7/7** (total **35/35**, exit code 0 for all suites). A subsequent documentation/provenance-only commit should rerun the gate and regression suite before any launch or merge. GitHub Actions are manual-dispatch only and should not be triggered for this verification unless budget approval is obtained.
 
 ## Offline Chromium regression without localhost
 
@@ -61,7 +61,7 @@ and fail-closed handling for unsafe notice flags or missing mandatory data.
 **Limit:** Browser-tested offline injected assets do not prove hosted URLs, CSP, public
 GitHub Pages deployment, routing, or network availability. The full browser
 suite and manual product-review gates remain necessary; this is a faster intermediate test,
-not a beta-launch permission. The original offline suite was run and passed 5/5 on commit `861559be`; new July 26/30 rules require a separate complete rerun.
+not a beta-launch permission. The extended offline suite passed 7/7 with the official July 26/30 review data on commit `5360a4fa`.
 
 ## Promotion checklist
 
@@ -70,7 +70,7 @@ not a beta-launch permission. The original offline suite was run and passed 5/5 
 - [ ] Assess attached July 26 user guide pages 4–15 individually before treating details as operating instructions; continue scanning for later cohort-specific notices.
 - [ ] Confirm same-cohort announcement/result dates for the specific 2026 first-phase E-9 Manufacturing route.
 - [ ] Verify current-cohort documents, medical providers, job application, CCVI/visa service-fee location and PDOT/departure rules; leave volatile values unknown otherwise.
-- [ ] Re-run current-branch local-data gate and both actual Chromium suites after 2026-07-26/30 promotion (old commit `861559be` had 26/26 PASS).
+- [x] Re-run current-branch gate and both actual Chromium suites after 2026-07-26/30 rule promotion: 12+16+7 = 35/35 PASS on commit `5360a4fa`.
 - [ ] Obtain independent Nepali language/accessibility review by consenting educators who were already contacted (no new Nepal outreach).
 - [ ] Reassess feature-by-feature beta readiness with a clear scope, then obtain explicit approval before opening Nepal beta or resuming recruitment.
 
@@ -79,4 +79,4 @@ not a beta-launch permission. The original offline suite was run and passed 5/5 
 - [EPS Nepal July 26 first-phase urgent notice](https://epsnepal.gov.np/postdetails/137) — original 24,459,715-byte, 15-page attachment downloaded. Its scanned first three pages are reviewed. Registration site guide pages 4–15 remain reference-only and must not be advertised as live instructions.
 - [EPS Nepal July 30 official inline passport/deadline image](https://epsnepal.gov.np/postdetails/143) — source image visually inspected and hash recorded in reviewer workspace; direct notice confirms registration extension through **2026-08-05** and allows original expired passport details at initial registration, with valid passport for later job application after language/skill passing.
 - Existing primary notice remains separately preserved as original baseline of 2026-08-02. The July 30 supplement changes that end date only; original first-phase recruitment is closed now. No unverified fees, exam dates, future application rounds, or job forms may be promoted.
-- Node fail-closed and real Chromium regression suites have been extended; rerun required after this change.
+- Node fail-closed and real Chromium suites extended and executed successfully (12 + 16 + 7 = 35 PASS, 0 FAIL) on reviewed-code commit `5360a4fa`; repeat on any subsequent functional changes.
