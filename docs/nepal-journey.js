@@ -79,7 +79,7 @@
       : (localized?.action || stage.action);
     target.append(element('p', actionText, 'action-text'));
 
-    if (stage.warning) target.append(element('p', 'सावधानी: ' + stage.warning, 'warning'));
+    if (stage.warning && !unverified) target.append(element('p', 'सावधानी: ' + stage.warning, 'warning'));
     if (classification.group?.note) target.append(element('p', classification.group.note, 'provenance'));
 
     const original = classification.group?.currentSource || stage.sourceUrl;
