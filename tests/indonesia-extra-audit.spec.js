@@ -138,3 +138,27 @@ test('PWA icon file is a valid SVG and Indonesian pages explicitly link it', asy
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href','icon.svg');
   }
 });
+
+test('2026 October departure notice fee does not overwrite August or any other cohort', async ({ request }) => {
+  const response = await request.get('/data/id_e9_manufacturing_2026_rules.json');
+  expect(response.status()).toBe(200);
+  const data = await response.json();
+  const august = data.fees.find(f => f.id === 'departureFacility2026');
+  const october = data.fees.find(f => f.id === 'departureFacilityOct2026');
+  expect(august.amountIdr).toBe(8500000);
+  expect(august.conditional).toBe(true);
+  expect(august.scope).toContain('10 Agustus 2026');
+  expect(august.scope).toContain('tidak otomatis');
+  expect(october.amountIdr).toBe(8450000);
+  expect(october.kind).toBe('fee');
+  expect(october.payeeCategory).toBe('official');
+  expect(october.conditional).toBe(true);
+  expect(october.periodStart).toBe('2026-10-01');
+  expect(october.periodEnd).toBe('2026-10-31');
+  expect(october.scope).toContain('Hanya periode keberangkatan Oktober 2026');
+  expect(october.scope).toContain('bukan biaya pendaftaran EPS');
+  expect(october.noticeNumber).toBe('PENG.2649/04.04/PP.02.06/X/2026');
+  expect(october.sourceUrl).toBe(
+    'https://kp2mi.go.id/gtog-detail/korea/pemberitahuan-penyesuaian-harga-tiket-pada-layanan-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-pada-periode-bulan-oktober-2026'
+  );
+});
