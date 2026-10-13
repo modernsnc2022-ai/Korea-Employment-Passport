@@ -280,10 +280,28 @@
       }
     };
     const update = () => {
-      const stage = stages.find(s => s.id === select.value);
+      const position = stages.findIndex(s => s.id === select.value);
+      const stage = stages[position];
       if (stage) renderDetail(stage, translations[stage.id], readiness, documents);
+      $('stagePosition').textContent =
+        'हेर्दै गरेको चरण ' + (position + 1) + ' / ' + stages.length +
+        ' — सरकारी प्रक्रिया पूरा भएको सङ्केत होइन।';
+      $('prevStageBtn').disabled = position <= 0;
+      $('nextStageBtn').disabled = position === -1 || position >= stages.length - 1;
       updateTracker();
     };
+    // Navigation changes only the locally displayed guidance, never actual EPS
+    // progress, eligibility, government registration or applicant records.
+    const stepBy = delta => {
+      if ($('cohortSelect').value !== 'current') return;
+      const index = stages.findIndex(s => s.id === select.value);
+      const destination = index + delta;
+      if (index < 0 || destination < 0 || destination >= stages.length) return;
+      select.value = stages[destination].id;
+      update();
+    };
+    $('prevStageBtn').addEventListener('click', () => stepBy(-1));
+    $('nextStageBtn').addEventListener('click', () => stepBy(1));
     select.addEventListener('change', update);
     $('stageReviewBtn').addEventListener('click', () => {
       if ($('cohortSelect').value !== 'current' || !stages.some(s => s.id === select.value)) return;
