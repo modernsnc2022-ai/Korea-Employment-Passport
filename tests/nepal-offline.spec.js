@@ -104,3 +104,23 @@ test('Nepal Chromium offline: stale payment warning cannot be rendered for held 
   await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
   await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
 });
+
+test('Nepal Chromium offline: authenticated August 5 extension and passport exception', async ({ page }) => {
+  await openOffline(page);
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await expect(page.locator('#statusSummary')).toContainText('५ अगस्टसम्म');
+  await page.locator('#stageSelect').selectOption('registration');
+  await expect(page.locator('#stageDetail .action-text')).toContainText('५ अगस्ट २०२६');
+  await expect(page.locator('#stageDetail a[href="https://epsnepal.gov.np/postdetails/143"]')).toHaveCount(1);
+  await page.locator('#stageSelect').selectOption('document_verify');
+  await expect(page.locator('#stageDetail .action-text')).toContainText('मान्य राहदानी');
+});
+
+test('Nepal Chromium offline: forged verified extension is rejected', async ({ page }) => {
+  await openOffline(page, data => {
+    data['data/np_stage_readiness_2026.json'].currentCohort.recruitmentRegistration.crossSourceSchedule.extensionNoticeUrl =
+      'https://epsnepal.gov.np/postdetails/136';
+  });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
