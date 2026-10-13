@@ -174,3 +174,27 @@ test('KDCA Q-CODE follows official travelhealth redirect and is not mandatory fo
   expect(record.answer).toContain('7 hari');
   expect(record.doNotDo.join(' ')).toContain('Jangan menyatakan Q-CODE wajib untuk semua orang');
 });
+
+
+test('Official source warnings remain visible until review signoff and do not auto-authorize applicant', async ({ page, request }) => {
+  const res = await request.get('/data/source_review_status.json');
+  expect(res.status()).toBe(200);
+  const data = await res.json();
+  const changed = [
+    'labor_standards_wage_statement', 'kdca_qcode_input', 'moel_1350_contact',
+    'np_eps_notice_index', 'vn_colab_eps_notices', 'lk_slbfe_home',
+    'kg_migrant_home', 'mm_mol_dol_index'
+  ];
+  expect(data.state).toBe('review_required');
+  expect(data.checked).toBe(84);
+  expect(data.configured).toBe(84);
+  expect(data.autoPublishRules).toBe(false);
+  expect(data.reviewRequiredSourceIds).toEqual(changed);
+  expect(data.reviewRequiredUrls).toHaveLength(changed.length);
+  expect(data.fetchFailureUrls).toEqual([]);
+  await page.goto('/app.html', { waitUntil:'domcontentloaded' });
+  await expect(page.locator('#freshnessStatus')).toBeVisible();
+  await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau');
+  await expect(page.locator('#freshnessStatus')).toContainText('tidak diubah otomatis');
+  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
+});
