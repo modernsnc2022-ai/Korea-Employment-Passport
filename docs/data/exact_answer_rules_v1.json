@@ -2814,20 +2814,21 @@
         "departure"
       ],
       "question": "Q-Code diisi kapan dan dengan data apa?",
-      "answer": "Jika panggilan keberangkatan Anda mengarahkan pengisian Q-Code, sistem KDCA dapat menerbitkannya mulai 7 hari sebelum tanggal tiba di Korea.",
+      "answer": "Jika pengumuman panggilan keberangkatan Anda meminta Q-CODE, periksa ketentuan masuk terbaru di situs KDCA. Q-CODE berlaku untuk pengunjung wilayah karantina berisiko tertentu dan pengunjung wilayah karantina dengan gejala sesuai kriteria KDCA; tidak boleh dinyatakan wajib bagi setiap pendatang. Jika perlu mengisi, informasi dapat dimasukkan sejak 7 hari sebelum kedatangan di Korea.",
       "writeExactly": "Siapkan negara keberangkatan terakhir (tidak termasuk negara transit), tanggal tiba di Korea, nama Inggris dan nomor paspor persis seperti paspor, tanggal lahir, alamat tempat Anda akan tinggal di Korea, nomor kontak yang dapat dihubungi di Korea, riwayat negara yang dikunjungi 21 hari terakhir, dan kondisi/gejala kesehatan. Isi hanya lewat situs Q-Code resmi KDCA.",
-      "why": "Panggilan keberangkatan KP2MI 2026 memasukkan panduan pengisian Q-Code ke persiapan keberangkatan. Sistem resmi KDCA menyatakan Q-Code dapat diterbitkan mulai 7 hari sebelum tiba dan menampilkan field-field tersebut.",
+      "why": "Tautan lama qcode.kdca.go.kr dialihkan secara resmi ke situs KDCA Travel Health. Kelayakan/kewajiban Q-CODE tergantung wilayah yang dikunjungi dan gejala menurut kriteria KDCA, bukan kewajiban umum semua pelamar E-9. Panggilan keberangkatan pribadi tetap menjadi sumber instruksi perjalanan.",
       "doNotDo": [
         "Jangan menganggap negara transit sebagai negara keberangkatan terakhir",
         "Jangan menulis alamat kantor perusahaan jika itu bukan tempat Anda akan tinggal",
         "Jangan memberikan data kesehatan palsu",
-        "Jangan membayar pihak lain hanya untuk mengisi situs resmi"
+        "Jangan membayar pihak lain hanya untuk mengisi situs resmi",
+        "Jangan menyatakan Q-CODE wajib untuk semua orang tanpa memeriksa kriteria wilayah/gejala KDCA"
       ],
-      "sourceUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "sourceUrl": "https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do",
       "supportingSourceUrls": [
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-tanggal-24-dan-25-agustus-2026"
       ],
-      "verifiedAt": "2026-10-03",
+      "verifiedAt": "2026-10-13",
       "verificationStatus": "verified_current_official_system",
       "scopeType": "current_rule"
     },
