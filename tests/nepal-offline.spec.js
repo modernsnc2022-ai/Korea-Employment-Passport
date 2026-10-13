@@ -124,3 +124,35 @@ test('Nepal Chromium offline: forged verified extension is rejected', async ({ p
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
 });
+
+test('Nepal Chromium offline: reading marks stay in RAM, reset, and disappear on cohort change', async ({ page }) => {
+  await openOffline(page);
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  await page.locator('#stageReviewBtn').click();
+  await page.locator('#stageSelect').selectOption('job_application');
+  await page.locator('#stageReviewBtn').click();
+  await expect(page.locator('#reviewStatus')).toContainText('2 /');
+  await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
+  await expect(page.locator('#stageDetail')).not.toContainText('US$5');
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#reviewTracker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
+  expect(await page.evaluate(() => Object.keys(sessionStorage))).toEqual([]);
+});
+
+test('Nepal Chromium offline: compact 320px mobile layout has no horizontal overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await openOffline(page);
+  await expect(page.locator('#reviewTracker')).toBeVisible();
+  const layout = await page.evaluate(() => ({
+    visibleWidth: document.documentElement.clientWidth,
+    contentWidth: document.documentElement.scrollWidth,
+    buttonHeight: document.getElementById('stageReviewBtn').getBoundingClientRect().height
+  }));
+  expect(layout.contentWidth).toBeLessThanOrEqual(layout.visibleWidth);
+  expect(layout.buttonHeight).toBeGreaterThanOrEqual(44);
+  await page.locator('#stageReviewBtn').click();
+  await expect(page.locator('#reviewStatus')).toContainText('1 /');
+});
