@@ -291,3 +291,53 @@ test('Nepal beta fail-closed never exposes reading controls', async ({ page }) =
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#reviewTracker')).toBeHidden();
 });
+
+test('Nepal stage previous-next navigation uses real 2026 stage list and stops at boundaries', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  const options = page.locator('#stageSelect option');
+  const count = await options.count();
+  expect(count).toBeGreaterThan(20);
+  await expect(page.locator('#stagePosition')).toContainText('1 / ' + count);
+  await expect(page.locator('#prevStageBtn')).toBeDisabled();
+  await expect(page.locator('#nextStageBtn')).toBeEnabled();
+  await page.locator('#stageReviewBtn').click();
+  await page.locator('#nextStageBtn').click();
+  await expect(page.locator('#stageSelect')).toHaveValue(await options.nth(1).getAttribute('value'));
+  await expect(page.locator('#stagePosition')).toContainText('2 / ' + count);
+  await expect(page.locator('#reviewStatus')).toContainText('1 / ' + count);
+  await page.locator('#prevStageBtn').click();
+  await expect(page.locator('#stageSelect')).toHaveValue(await options.first().getAttribute('value'));
+  await expect(page.locator('#prevStageBtn')).toBeDisabled();
+  await expect(page.locator('#stageReviewBtn')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#stageSelect').selectOption(await options.last().getAttribute('value'));
+  await expect(page.locator('#nextStageBtn')).toBeDisabled();
+  await expect(page.locator('#stagePosition')).toContainText(count + ' / ' + count);
+  await page.locator('#prevStageBtn').click();
+  await expect(page.locator('#nextStageBtn')).toBeEnabled();
+});
+
+test('Nepal stage navigation is keyboard operable and unavailable for other cohorts', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 650 });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#prevStageBtn')).toBeDisabled();
+  await page.locator('#nextStageBtn').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#stagePosition')).toContainText('2 / ');
+  const dims = await page.evaluate(() => ({
+    width: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+    height: document.getElementById('nextStageBtn').getBoundingClientRect().height
+  }));
+  expect(dims.scroll).toBeLessThanOrEqual(dims.width);
+  expect(dims.height).toBeGreaterThanOrEqual(44);
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await expect(page.locator('#stageDetail')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('other');
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#stagePicker')).toBeVisible();
+  await expect(page.locator('#statusSummary')).toContainText('बन्द');
+  await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
+});
