@@ -158,3 +158,24 @@ test('Nepal Chromium offline: compact 320px mobile layout has no horizontal over
   await page.locator('#stageReviewBtn').click();
   await expect(page.locator('#reviewStatus')).toContainText('1 /');
 });
+
+test('Nepal Chromium offline: keyboard next/previous guides, never changes official completion', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 650 });
+  await openOffline(page);
+  await expect(page.locator('#previewBody')).toBeVisible();
+  const count = await page.locator('#stageSelect option').count();
+  expect(count).toBeGreaterThan(20);
+  await expect(page.locator('#stagePosition')).toContainText('1 / ' + count);
+  await expect(page.locator('#prevStageBtn')).toBeDisabled();
+  await page.locator('#nextStageBtn').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#stagePosition')).toContainText('2 / ' + count);
+  await expect(page.locator('#reviewStatus')).toContainText('0 / ' + count);
+  await page.locator('#prevStageBtn').click();
+  await expect(page.locator('#stagePosition')).toContainText('1 / ' + count);
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await expect(page.locator('#reviewTracker')).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth))
+    .toBeLessThanOrEqual(320);
+});
