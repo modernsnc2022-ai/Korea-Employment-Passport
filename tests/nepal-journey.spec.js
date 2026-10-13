@@ -36,7 +36,7 @@ test('Nepal document baseline cannot be shown as current payment guidance', asyn
   await expect(page.locator('#previewBody')).toBeVisible();
   await page.locator('#stageSelect').selectOption('visa_docs');
   await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
-  await expect(page.locator('#stageDetail .warning')).toContainText('Visa/service fees changed');
+  await expect(page.locator('#stageDetail .warning')).toContainText('विस्तृत सूची');
   await expect(page.locator('#stageDetail .document-pack')).toContainText('पुरानो/सामान्य प्रक्रिया मात्र');
   await expect(page.locator('#stageDetail button')).toHaveCount(0);
 });
@@ -171,9 +171,25 @@ test('Nepal held visa stage suppresses obsolete cost while verified closed regis
   await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
   await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
   await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
-  await expect(page.locator('#stageDetail .warning')).toContainText('Visa/service fees changed');
+  await expect(page.locator('#stageDetail .warning')).toContainText('विस्तृत सूची');
   await page.locator('#stageSelect').selectOption('registration');
   await expect(page.locator('#stageDetail .state')).toContainText('२०२६ आवेदन अवधि बन्द');
   await expect(page.locator('#stageDetail .document-pack li').first()).toBeVisible();
   await expect(page.locator('#stageDetail a[href*="/postdetails/136"]').first()).toBeVisible();
+});
+
+
+test('Nepal held visa stage ignores an injected obsolete payment warning', async ({ page }) => {
+  await page.route('**/data/np_e9_manufacturing_2026.json', async route => {
+    const original = await route.fetch();
+    const pack = await original.json();
+    pack.stages.find(stage => stage.id === 'visa_docs').warning = 'Pay NPR 10,700 now';
+    await route.fulfill({ response: original, json: pack });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageSelect').selectOption('visa_docs');
+  await expect(page.locator('#stageDetail .state')).toContainText('प्रमाणीकरण');
+  await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
+  await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
 });
