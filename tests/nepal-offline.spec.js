@@ -76,7 +76,7 @@ test('Nepal Chromium offline: unverified 2026 fees and old document lists are ne
   await page.locator('#stageSelect').selectOption('visa_docs');
   await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
   await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
-  await expect(page.locator('#stageDetail .warning')).toContainText('Visa/service fees changed');
+  await expect(page.locator('#stageDetail .warning')).toContainText('विस्तृत सूची');
 });
 
 test('Nepal Chromium offline: policy changes cause fail-closed view', async ({ page }) => {
@@ -92,4 +92,15 @@ test('Nepal Chromium offline: missing official-data file causes fail-closed view
   await openOffline(page, data => { delete data['data/np_stage_readiness_2026.json']; });
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
+});
+
+
+test('Nepal Chromium offline: stale payment warning cannot be rendered for held visa stage', async ({ page }) => {
+  await openOffline(page, data => {
+    data['data/np_e9_manufacturing_2026.json'].stages.find(s => s.id === 'visa_docs').warning = 'Pay NPR 10,700 now';
+  });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageSelect').selectOption('visa_docs');
+  await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
+  await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
 });
