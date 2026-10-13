@@ -107,3 +107,20 @@ test('Indonesian document comparison never persists typed identity strings', asy
   expect(stored).not.toContain('PRIVATE_TEST_PASSPORT_NAME_7171');
   expect(stored).not.toContain('PRIVATE_TEST_SLC_NAME_8282');
 });
+
+
+test('Indonesia app, landing and privacy disclose in Indonesian without stale English placeholders', async ({ page }) => {
+  await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('.summary .eyebrow')).toHaveText('JALUR TANPA CALO');
+  await expect(page.locator('#routeMeta')).not.toContainText('Loading verified route');
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await page.locator('.utility-tab[data-view="documents"]').click();
+  await expect(page.locator('#documents h2').first()).toHaveText('Asisten Dokumen');
+  await expect(page.locator('.field-copilot .eyebrow')).toHaveText('BANTUAN ISI KOLOM');
+  await page.goto('/index.html');
+  await expect(page.locator('body')).toContainText('Asisten Dokumen');
+  await expect(page.locator('footer a[href="privacy.html"]')).toHaveText('Privasi');
+  await page.goto('/privacy.html');
+  await expect(page.locator('h2').first()).toHaveText('Pemberitahuan privasi beta');
+  await expect(page).toHaveTitle(/Privasi/);
+});
