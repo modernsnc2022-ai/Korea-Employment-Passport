@@ -98,7 +98,7 @@ test('Indonesian document comparison never persists typed identity strings', asy
   await page.locator('[data-quick-stage="eligibility"]').click();
   await page.locator('.utility-tab[data-view="documents"]').click();
   await expect(page.locator('#documents')).toBeVisible();
-  await page.locator('details.consistency-check > summary').click();
+  await page.getByText('Cek apakah data sama di semua dokumen (opsional)', { exact: true }).click();
   await page.locator('#consNamePassport').fill('PRIVATE_TEST_PASSPORT_NAME_7171');
   await page.locator('#consNameSlc').fill('PRIVATE_TEST_SLC_NAME_8282');
   await page.locator('#checkConsistencyBtn').click();
