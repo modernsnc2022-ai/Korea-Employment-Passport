@@ -39,7 +39,7 @@
         "eps_topik"
       ],
       "currentSource": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
-      "note": "HRD Korea lists the 5th Nepal Manufacturing(5부) General CBT/Point System route with registration ending 2026-08-05; the Nepal July 30 official supplement independently verifies that extended registration deadline. The exam announcement and test period remain undecided."
+      "note": "On 2026-10-13, the direct HRD Korea 2026 Nepal Manufacturing(5부) General CBT / Point System record still says 시험공고일=미확정 and 시험기간=미확정. The 2026-08-05 registration deadline was verified by Nepal's July 30 notice and has CLOSED. No candidate/session exam date is known; do not reuse 2025 or other-sector schedules."
     },
     "epsTopikResult": {
       "status": "awaiting_current_cohort_notice",
@@ -47,7 +47,7 @@
         "final_selection"
       ],
       "currentSource": "https://epsnepal.gov.np/notices",
-      "note": "No 2026 first-phase result notice has been promoted into KEP exact rules as of this check."
+      "note": "The official EPS Nepal notice index was rechecked on 2026-10-13. No separately cohort-identified 2026 first-phase Manufacturing EPS-TOPIK exam result notice was verified in the visible notice index; the March 2026 published Manufacturing result explicitly belongs to EPS-TOPIK 2025. Absence from the reviewed index does not prove no other notice exists. Keep exact results on HOLD."
     },
     "skillCompetency": {
       "status": "awaiting_current_cohort_notice",
@@ -128,5 +128,17 @@
     "currentCohortPromotionRule": "A stable process-baseline fact may explain workflow shape, but exact current-cohort dates, providers, fees or submission requirements stay blocked until a current official cohort notice is reviewed.",
     "feeRule": "Historical baseline amounts may be retained for lineage only; they must not be displayed as current payable amounts when later official fee notices exist."
   },
-  "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json"
+  "hrdScheduleEvidenceFile": "data/np_hrd_schedule_2026.json",
+  "lastCohortRecheck": {
+    "checkedAt": "2026-10-13",
+    "sources": [
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001",
+      "https://epsnepal.gov.np/notices"
+    ],
+    "manufacturing2026ExamAnnouncement": "undecided",
+    "manufacturing2026ExamPeriod": "undecided",
+    "manufacturing2026Results": "not_verified_in_reviewed_official_index",
+    "classification": "research_hold_no_new_cohort_rule_promotion",
+    "rule": "Do not derive 2026 first-phase testing or employment stages from EPS TOPIK 2025 manufacturing results, 2025 Skill & Competency notices, current-worker departures or other sector/program listings."
+  }
 }
