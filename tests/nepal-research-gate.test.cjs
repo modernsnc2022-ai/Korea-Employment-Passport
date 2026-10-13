@@ -113,6 +113,20 @@ const safetyCases = [
       if (file === 'np_notice_provenance_2026.json')
         data.notices.find(x => x.id === 'np_2026_passport_0730').cohort = '2026_root_industry_distinct_program';
     }
+  },
+  {
+    name: 'rejects old August 2 date as final registration deadline',
+    mutate(file, data) {
+      if (file === 'np_e9_manufacturing_2026.json')
+        data.currentApplicationWindow.closesAt = '2026-08-02';
+    }
+  },
+  {
+    name: 'rejects stale exact-answer catalog after official extension',
+    mutate(file, data) {
+      if (file === 'np_exact_answer_rules_2026.json')
+        data.answers.find(x => x.id === 'np_2026_application_window').sourceUrl = 'https://epsnepal.gov.np/postdetails/136';
+    }
   }
 ];
 
