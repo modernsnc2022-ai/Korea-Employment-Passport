@@ -73,10 +73,10 @@ const safetyCases = [
     }
   },
   {
-    name: 'blocks unverified deadline extension',
+    name: 'blocks removal of verified official deadline extension',
     mutate(file, data) {
       if (file === 'np_stage_readiness_2026.json')
-        data.currentCohort.recruitmentRegistration.crossSourceSchedule.deadlineExtensionVerified = true;
+        data.currentCohort.recruitmentRegistration.crossSourceSchedule.deadlineExtensionVerified = false;
     }
   },
   {
@@ -91,6 +91,27 @@ const safetyCases = [
     mutate(file, data) {
       if (file === 'np_document_packs_2026.json')
         data.packs.find(x => x.id === 'np_ccvi_visa_baseline').warning = '';
+    }
+  },
+  {
+    name: 'rejects a forged extension notice URL',
+    mutate(file, data) {
+      if (file === 'np_stage_readiness_2026.json')
+        data.currentCohort.recruitmentRegistration.crossSourceSchedule.extensionNoticeUrl = 'https://epsnepal.gov.np/postdetails/136';
+    }
+  },
+  {
+    name: 'rejects an extension date unsupported by the reviewed image',
+    mutate(file, data) {
+      if (file === 'np_stage_readiness_2026.json')
+        data.currentCohort.recruitmentRegistration.crossSourceSchedule.finalVerifiedRegistrationPeriod = '2026-07-27 through 2026-08-06';
+    }
+  },
+  {
+    name: 'rejects a reviewed supplement reassigned to Root Industry',
+    mutate(file, data) {
+      if (file === 'np_notice_provenance_2026.json')
+        data.notices.find(x => x.id === 'np_2026_passport_0730').cohort = '2026_root_industry_distinct_program';
     }
   }
 ];
