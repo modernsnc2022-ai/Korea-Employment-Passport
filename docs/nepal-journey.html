@@ -39,10 +39,31 @@
     .document-pack li{margin:9px 0;line-height:1.6}
     #loadError{color:#a32626;font-weight:700}
     .np-footer{font-size:.95rem;color:#607089;margin-top:26px}
+    .np-skip{position:absolute;left:12px;top:-70px;background:#fff;color:#08274a;padding:12px;z-index:10}
+    .np-skip:focus{top:12px}
+    .np-review-controls{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
+    .np-review-controls button{font:inherit;font-weight:700;min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #164c7c;background:#fff;color:#164c7c;cursor:pointer}
+    .np-review-controls #stageReviewBtn{background:#164c7c;color:#fff}
+    .np-review-controls button:focus-visible,#reviewedDetails summary:focus-visible{outline:3px solid #a46d04;outline-offset:3px}
+    #reviewProgress{width:100%;height:15px;accent-color:#17644c;margin:9px 0}
+    #reviewedDetails summary{cursor:pointer;min-height:44px;padding:10px 2px;font-weight:700}
+    #reviewedStageList{padding-inline-start:22px;line-height:1.65}
+    #reviewedStageList li{padding:4px 0}
+    @media(max-width:600px){
+      .np-shell{padding:18px 12px 36px}
+      .np-card{padding:16px;border-radius:12px;margin:12px 0}
+      .np-shell h2{font-size:1.24rem}
+      .np-review-controls{flex-direction:column;gap:9px}
+      .np-review-controls button{width:100%}
+      .action-text{font-size:1rem}
+      #cohortSelect,#stageSelect{min-height:48px;font-size:16px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
   <script src="nepal-journey.js" defer></script>
 </head>
 <body>
+  <a class="np-skip" href="#mainContent">मुख्य सामग्रीमा जानुहोस्</a>
   <header class="hero">
     <div class="np-shell">
       <a class="nav-link" href="np.html">← नेपाल EPS अनुसन्धान पृष्ठ</a>
@@ -51,7 +72,7 @@
       <p class="lead">आधिकारिक स्रोतमा आधारित चरणगत जानकारी हेर्नुहोस्। यो परीक्षणका लागि अनुसन्धान पूर्वावलोकन मात्र हो।</p>
     </div>
   </header>
-  <main class="np-shell">
+  <main id="mainContent" class="np-shell">
     <section class="np-card np-hold" aria-label="Nepal beta readiness">
       <h2>नेपाल beta सेवा अझै खुला छैन</h2>
       <p id="statusSummary" aria-live="polite">सरकारी स्रोत तथा सुरक्षा स्थिति लोड हुँदैछ…</p>
@@ -77,6 +98,21 @@
           <option value="">चरणहरू लोड हुँदैछ…</option>
         </select>
         <p id="stageHelp" class="provenance">कुनै नाम, पासपोर्ट नम्बर, फोन, व्यक्तिगत कागजात वा पैसा यहाँ नदिनुहोस्। यो पृष्ठले आवेदन पठाउँदैन।</p>
+      </section>
+      <section id="reviewTracker" class="np-card" hidden aria-labelledby="reviewHeading">
+        <h2 id="reviewHeading">यो सत्रमा पढेको जानकारी</h2>
+        <p class="caution">यो तपाईंले KEP मा पढेका पृष्ठको निजी चिन्ह मात्र हो। परीक्षा, रोजगार, भिसा वा सरकारी चरण पूरा भएको प्रमाण होइन। नाम, राहदानी वा अन्य विवरण सङ्कलन र भण्डारण गरिँदैन। पृष्ठ बन्द वा रिफ्रेस गर्दा सबै चिन्ह हट्छन्।</p>
+        <label for="reviewProgress" class="np-label">पढेको जानकारीको गणना</label>
+        <progress id="reviewProgress" value="0" max="1"></progress>
+        <p id="reviewStatus" role="status" aria-live="polite"></p>
+        <div class="np-review-controls">
+          <button id="stageReviewBtn" type="button" aria-pressed="false">यो चरणको जानकारी पढेँ</button>
+          <button id="resetStageReviewBtn" type="button" hidden>पढेको चिन्ह सबै हटाउनुहोस्</button>
+        </div>
+        <details id="reviewedDetails" hidden>
+          <summary>यो सत्रमा पढेका चरणहरू हेर्नुहोस्</summary>
+          <ul id="reviewedStageList"></ul>
+        </details>
       </section>
       <article class="np-card" id="stageDetail" aria-live="polite"></article>
       <section class="np-card" id="noticeReview" aria-label="Cohort-specific official notices"></section>
