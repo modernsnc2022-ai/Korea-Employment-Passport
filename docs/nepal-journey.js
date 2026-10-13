@@ -160,6 +160,30 @@
     }
     addOfficialLink(target, 'https://epsnepal.gov.np/notices', 'सरकारी सूचना सूचीमा नयाँ सूचना जाँच्नुहोस् ↗');
   }
+  function renderApplicantCohort(choice, readiness) {
+    const current = choice === 'current';
+    $('stagePicker').hidden = !current;
+    $('stageDetail').hidden = !current;
+    const guide = $('cohortGuidance');
+    guide.hidden = current;
+    guide.replaceChildren();
+    if (current) return;
+    if (choice === 'future') {
+      guide.append(element('h2', 'अर्को Manufacturing आवेदनको आधिकारिक सूचना पर्खनुहोस्'));
+      guide.append(element('p',
+        '२०२६ प्रथम चरणको आवेदन बन्द छ। भविष्यको कुनै नयाँ आवेदन मिति, शुल्क, योग्यता वा कागजात ' +
+        'अहिले KEP ले पुष्टि गरेको छैन। पुरानो आवेदन फाराम/सामग्री प्रयोग नगर्नुहोस्।'));
+      guide.append(element('p', 'आधिकारिक EPS नेपाल पृष्ठमा नयाँ आवेदन घोषणा आएपछि मात्र नयाँ समूहको निर्देशन लागू गर्न सकिन्छ।', 'caution'));
+    } else {
+      guide.append(element('h2', 'तपाईंको अलग EPS आवेदन समूहका लागि यो २०२६ पहिलो चरणको मार्गदर्शन लागू हुँदैन'));
+      guide.append(element('p',
+        '२०२५ का आवेदक, पुनःभर्ना/Root Industry का उम्मेदवार वा अन्य क्षेत्रको प्रक्रियाका लागि ' +
+        'आफ्नो परीक्षा र आवेदन समूह उल्लेख गरिएको सरकारी सूचना मात्र पालना गर्नुहोस्।'));
+      guide.append(element('p', '२०२६ पहिलो चरण Manufacturing का मिति वा कागजात तपाईंको समूहका लागि स्वतः लागू हुँदैनन्।', 'caution'));
+    }
+    addOfficialLink(guide, readiness.officialNoticeIndex, 'EPS नेपालका आधिकारिक सूचना हेर्नुहोस् ↗');
+    guide.append(element('p', 'KEP ले यहाँ नयाँ आवेदन, beta access वा विद्यार्थीको व्यक्तिगत विवरण सङ्कलन गर्दैन।', 'provenance'));
+  }
   async function start() {
     const [pack, translations, readiness, documents, ledger] = await Promise.all(DATA_PATHS.map(json));
     if (pack.country !== 'NP' || pack.cycle !== 2026 || pack.lifecycle !== 'research_hold' ||
@@ -194,6 +218,10 @@
     };
     select.addEventListener('change', update);
     update();
+    const cohortSelect = $('cohortSelect');
+    const refreshCohort = () => renderApplicantCohort(cohortSelect.value, readiness);
+    cohortSelect.addEventListener('change', refreshCohort);
+    refreshCohort();
     renderNoticeLedger(ledger);
     $('previewBody').hidden = false;
   }
