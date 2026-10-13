@@ -4,8 +4,8 @@
   "reviewedAt": "2026-10-13",
   "reviewScope": "Official Nepal EPS website notice pages/titles checked through 2026-10-13, cohort and sector isolation; no title-only rule promotion",
   "reviewLimitations": [
-    "The 2026-07-26 urgent applicant PDF is approximately 24.46 MB and its complete contents could not be obtained for text review; no exact rules were promoted.",
-    "The 2026-07-30 online-submission/passport notice is visible by official page title but the substantive scan/image content has not been reviewed.",
+    "The original July 26 official 24,459,715-byte PDF has been obtained. Scanned notice pages 1–3 were visually reviewed for signup/payment/correction guidance; attached user-guide pages 4–15 are not promoted into live instructions.",
+    "The July 30 official inline passport/application image has been visually reviewed and explicitly verifies the August 5 extension and the initial-registration expired-passport exception with valid passport required at the later Job Application Form.",
     "Root Industry 2026 selection notices are a separate program; same-year notices must not be merged into first-phase general Manufacturing.",
     "2026 regular/committed-worker departure announcements do not establish that 2026 first-phase EPS-TOPIK applicants have completed recruitment.",
     "Nepal official notice index and search caches can lag; this is a dated review, not live regulatory monitoring."
@@ -27,7 +27,7 @@
       "cohort": "2026_first_phase_manufacturing",
       "reviewState": "full_primary_document_reviewed",
       "applicability": "verified_current_primary",
-      "ruleImpact": "2026-07-27 to 2026-08-02 registration under Nepal primary notice; now closed. HRD Korea cross-source deadline discrepancy remains unresolved."
+      "ruleImpact": "The July 21 primary notice originally set 2026-07-27 to 2026-08-02. Its first-phase end date was later expressly extended to 2026-08-05 by the July 30 reviewed official image. Both periods are now closed; keep primary vs supplement evidence separate."
     },
     {
       "id": "np_2026_urgent_0726",
