@@ -2073,15 +2073,15 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "Siapa yang wajib/berhak ikut Skill Test + Competency Test manufaktur 2026?",
-      "answer": "Hanya peserta yang lulus Ujian Tahap Pertama EPS-TOPIK yang dapat mengikuti Ujian Tahap Kedua Skill Test + Competency Test.",
-      "writeExactly": "Jangan menyiapkan diri sebagai peserta Skill Test hanya karena sudah ikut EPS-TOPIK. Pastikan nama Anda benar-benar dinyatakan lulus tahap pertama pada pengumuman resmi.",
-      "why": "Pengumuman pendaftaran sistem poin manufaktur 2026 menyatakan hanya pendaftar yang lulus Ujian Tahap Pertama yang dapat mengikuti Ujian Tahap Kedua.",
+      "question": "Siapa yang wajib ikut Skill Test dan siapa yang boleh mengikuti Job Capacity Assessment Manufaktur 2026?",
+      "answer": "Peserta yang lulus EPS-TOPIK tahap pertama Manufaktur 2026 WAJIB mengikuti Skill Test (kekuatan fisik, wawancara, kemampuan dasar). Jika tidak ikut, peserta dianggap gugur. Job Capacity Assessment BERSIFAT OPSIONAL dan hanya untuk peserta yang memiliki dokumen kompetensi manufaktur sesuai pengumuman resmi; tidak wajib untuk semua peserta.",
+      "writeExactly": "Cek kelulusan tahap pertama pada pengumuman resmi. Jika lulus, wajib mengikuti Skill Test menurut jadwal resmi saat diumumkan; hanya siapkan Job Capacity Assessment bila memiliki bukti kompetensi yang memenuhi syarat.",
+      "why": "Pengumuman hasil KP2MI 10 September 2026 Nomor PENG.2465/04.04/PP.02.04/IX/2026 dengan jelas mewajibkan Skill Test bagi peserta lulus tahap pertama, sedangkan Job Capacity Assessment bersifat opsional bila memiliki bukti kompetensi.",
       "doNotDo": [
         "Jangan membeli 'slot Skill Test' dari pihak swasta.",
         "Jangan memakai hasil perkiraan skor sebagai pengganti pengumuman kelulusan resmi."
       ],
-      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "verifiedAt": "2026-10-03",
       "verificationStatus": "verified_2026_official_notice",
       "scopeType": "route_2026"
@@ -2220,15 +2220,15 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "Siapa yang dapat mengikuti Ujian Tahap Kedua Skill Test + Competency Test 2026?",
-      "answer": "Hanya pendaftar yang lulus Ujian Tahap Pertama EPS-TOPIK yang dapat mengikuti Ujian Tahap Kedua.",
+      "question": "Siapa yang boleh ikut tahap kedua Skill Test Manufaktur 2026 dan apakah penilaian kompetensi wajib?",
+      "answer": "Hanya peserta yang resmi lulus EPS-TOPIK tahap pertama yang berhak mengikuti Skill Test Manufaktur 2026 dan Skill Test bersifat WAJIB; penilaian Job Capacity Assessment hanya OPSIONAL untuk peserta yang memiliki bukti kompetensi manufaktur.",
       "writeExactly": "Tunggu hasil resmi EPS-TOPIK. Jika Anda dinyatakan lulus tahap pertama, pantau pengumuman khusus Skill Test manufaktur 2026 untuk jadwal, lokasi, dokumen, dan aturan hadir.",
-      "why": "Pengumuman pendaftaran Sistem Poin 2026 menetapkan bahwa hanya pendaftar yang lulus tahap pertama yang dapat mengikuti tahap kedua.",
+      "why": "Pengumuman hasil EPS-TOPIK Manufaktur KP2MI tanggal 10 September 2026 menegaskan Skill Test wajib dan Job Capacity Assessment opsional.",
       "doNotDo": [
         "Jangan memakai jadwal Skill Test perikanan 2026 untuk manufaktur.",
         "Jangan memakai aturan manufaktur 2025 sebagai aturan detail 2026."
       ],
-      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "verifiedAt": "2026-10-03",
       "verificationStatus": "verified_2026_official_notice",
       "scopeType": "route_2026"
@@ -3176,14 +3176,14 @@
         "skill_competency"
       ],
       "question": "Dokumen/bukti kompetensi apa yang dibawa untuk Skill Test manufaktur 2026?",
-      "answer": "Daftar final dokumen yang harus dibawa untuk Skill Test manufaktur 2026 belum boleh disimpulkan dari pengumuman pendaftaran awal. Tunggu pengumuman Skill Test/Competency Test manufaktur 2026 yang spesifik.",
+      "answer": "Dokumen yang benar-benar wajib dibawa saat Skill Test Manufaktur 2026 harus mengikuti pengumuman Skill Test Manufaktur 2026 yang spesifik. Dalam pengumuman 10 September 2026, Job Capacity Assessment bersifat opsional bagi pemilik dokumen kompetensi manufaktur; bukan syarat umum semua peserta. Jangan memakai checklist tahun 2025 atau sektor Perikanan 2026.",
       "writeExactly": "Jangan memakai daftar Skill Test manufaktur 2025 sebagai aturan 2026. Simpan dokumen asli kompetensi yang memang Anda miliki, lalu ikuti daftar resmi ketika pengumuman 2026 terbit.",
-      "why": "Pengumuman pendaftaran manufaktur 2026 hanya menetapkan bahwa tahap kedua berisi Skill Test + Competency Test dan menyatakan informasi/ketentuan lebih lengkap akan diumumkan kemudian.",
+      "why": "Pengumuman hasil EPS-TOPIK Manufaktur 10 September 2026 mengatur evaluasi kapasitas kerja yang opsional, tetapi menyatakan jadwal pelaksanaan Skill Test/Job Capacity Assessment akan diumumkan lebih lanjut.",
       "doNotDo": [
         "Jangan membawa atau mengubah dokumen hanya berdasarkan grup/LPK.",
         "Jangan menganggap daftar 2025 otomatis berlaku pada 2026."
       ],
-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "verifiedAt": "2026-10-03",
       "verificationStatus": "waiting_official_notice",
       "scopeType": "route_2026"
