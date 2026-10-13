@@ -46,10 +46,23 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
             "Manufacturing launch check found/requires review of a notice; "
             "do not OPEN until route rules and launch checks are updated"
         )
-    if manufacturing_check.get("heldQuestions") != [
-        "job_docs", "job_scan", "job_name", "job_edit", "job_submit"
-    ]:
-        fail("Manufacturing launch check must preserve the locked five HOLD questions")
+    if manufacturing_check.get("heldQuestions") != ["job_docs"]:
+        fail("Manufacturing launch check must preserve the one unresolved exact HOLD: job_docs")
+    expected_baselines = {"job_scan", "job_name", "job_edit", "job_submit"}
+    baselines = manufacturing_check.get("safePlatformBaselines", [])
+    if (
+        not isinstance(baselines, list)
+        or len(baselines) != 4
+        or {x.get("questionId") for x in baselines if isinstance(x, dict)}
+        != expected_baselines
+    ):
+        fail("Four separately verified safe platform baselines must remain present")
+    same_day = manufacturing_check.get("sameDayOfficialRecheck", {})
+    if (
+        same_day.get("checkedAt") != approved_dt.date().isoformat()
+        or same_day.get("status") != "completed_no_detailed_manufacturing_notice_found"
+    ):
+        fail("Manufacturing same-day official recheck record must match OPEN approval")
 
     updated = json.loads(json.dumps(program))
     updated["status"] = "open"
@@ -88,7 +101,14 @@ def self_test() -> None:
     manufacturing_check = {
         "checkedAt": "2026-10-04",
         "result": "no_current_manufacturing_job_application_notice",
-        "heldQuestions": ["job_docs", "job_scan", "job_name", "job_edit", "job_submit"],
+        "heldQuestions": ["job_docs"],
+        "safePlatformBaselines": [
+            {"questionId": x} for x in ["job_scan", "job_name", "job_edit", "job_submit"]
+        ],
+        "sameDayOfficialRecheck": {
+            "status": "completed_no_detailed_manufacturing_notice_found",
+            "checkedAt": "2026-10-04",
+        },
     }
     approved_at = "2026-10-04T18:30:00+09:00"
     opened = prepare_open(program, source, manufacturing_check, approved_at)
@@ -129,6 +149,35 @@ def self_test() -> None:
         assert "requires review" in str(exc)
     else:
         raise AssertionError("OPEN was allowed after a Manufacturing notice was found")
+
+    stale_recheck = json.loads(json.dumps(manufacturing_check))
+    stale_recheck["sameDayOfficialRecheck"]["checkedAt"] = "2026-10-03"
+    try:
+        prepare_open(program, source, stale_recheck, approved_at)
+    except ValueError as exc:
+        assert "same-day official recheck" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed with stale nested same-day evidence")
+
+    obsolete_holds = dict(manufacturing_check)
+    obsolete_holds["heldQuestions"] = [
+        "job_docs", "job_scan", "job_name", "job_edit", "job_submit"
+    ]
+    try:
+        prepare_open(program, source, obsolete_holds, approved_at)
+    except ValueError as exc:
+        assert "one unresolved exact HOLD" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed with obsolete five-HOLD logic")
+
+    missing_baseline = dict(manufacturing_check)
+    missing_baseline["safePlatformBaselines"] = []
+    try:
+        prepare_open(program, source, missing_baseline, approved_at)
+    except ValueError as exc:
+        assert "Four separately verified" in str(exc)
+    else:
+        raise AssertionError("OPEN was allowed without four safe baselines")
 
     changed = outreach_open_text(
         "Application intake status: **OPEN**\n"
