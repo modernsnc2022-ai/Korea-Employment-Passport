@@ -42,10 +42,19 @@ assert(study.routeId === ID && study.country === 'NP' &&
   'Official Nepal study resources must not open registration, change cohort, or collect applicant data');
 assert(Array.isArray(study.resources) && study.resources.length === 4,
   'Official Nepal prep resources incomplete');
+const STUDY_AUDIENCES = Object.freeze({
+  hrd_standard_textbooks: ['current','future'],
+  hrd_public_questions: ['current','future'],
+  hrd_exam_schedule: ['current'],
+  nepal_official_notices: ['current','future']
+});
+assert(study.studySequenceAdviceNe?.length > 40 && study.audienceRule?.includes('FUTURE'),
+  'Nepal self-study guidance must separate historical 2026 exam schedules from future cohorts');
 const seenStudy = new Set();
 for (const entry of study.resources || []) {
   assert(Object.hasOwn(STUDY_LINKS, entry.id) && STUDY_LINKS[entry.id] === entry.sourceUrl &&
     !seenStudy.has(entry.id) && entry.sourceStatus?.startsWith('verified_') &&
+    JSON.stringify(entry.cohortVisibility) === JSON.stringify(STUDY_AUDIENCES[entry.id]) &&
     entry.titleNe && entry.descriptionNe,
     'Unsafe or unverified Nepal prep resource: ' + entry.id);
   seenStudy.add(entry.id);
