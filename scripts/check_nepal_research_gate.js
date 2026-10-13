@@ -29,8 +29,9 @@ assert(readiness.cycle === 2026 && readiness.betaReadiness?.status === 'blocked'
 assert(ledger.policy?.betaAccess === 'blocked' && ledger.policy?.allowDeadlineExtensionInference === false &&
   ledger.policy?.allowDepartureToPromote2026ApplicationStages === false &&
   ledger.policy?.allowCrossSectorPromotion === false, 'Nepal notice provenance safety flags changed');
-assert(supplements.policy?.deadlineExtensionVerified === false &&
-  supplements.policy?.autoSupersedePrimaryRules === false, 'Unreviewed 2026 registration supplements cannot supersede primary notice');
+assert(supplements.policy?.deadlineExtensionVerified === true &&
+  supplements.policy?.deadlineExtensionOfficialSource === 'https://epsnepal.gov.np/postdetails/143' &&
+  supplements.policy?.autoSupersedePrimaryRules === false, 'Verified July 30 extension must be source-bound; other primary rules cannot auto-supersede');
 const dashboardNP = dashboard.rows?.find(x => x.country === 'NP');
 assert(dashboardNP?.routeId === ID && dashboardNP.packState === 'research_hold' &&
   dashboardNP.betaState === 'blocked', 'Public Nepal dashboard must stay blocked');
@@ -50,7 +51,14 @@ assert(stages.length >= 20, 'Unexpectedly incomplete Nepal route');
 
 const current = readiness.currentCohort || {};
 assert(current.recruitmentRegistration?.status === 'closed_verified', 'Current Nepal application is not open');
-assert(current.recruitmentRegistration?.crossSourceSchedule?.deadlineExtensionVerified === false, 'HRD vs Nepal deadline extension must remain unresolved');
+assert(current.recruitmentRegistration?.crossSourceSchedule?.deadlineExtensionVerified === true &&
+  current.recruitmentRegistration?.crossSourceSchedule?.status === 'resolved_by_nepal_official_2026_07_30_supplement' &&
+  current.recruitmentRegistration?.crossSourceSchedule?.finalVerifiedRegistrationPeriod === '2026-07-27 through 2026-08-05' &&
+  current.recruitmentRegistration?.crossSourceSchedule?.extensionNoticeUrl === 'https://epsnepal.gov.np/postdetails/143',
+  'Official Nepal July 30 extension requires the verified source, dates and closed-cohort scope');
+assert(current.recruitmentRegistration?.passportSupplement?.sourceUrl === 'https://epsnepal.gov.np/postdetails/143' &&
+  current.recruitmentRegistration?.passportSupplement?.status === 'verified_current_cohort_registration_exception',
+  '2026 passport exception requires reviewed official source and scope');
 assert(current.recruitmentRegistration?.crossSourceSchedule?.localPrimaryRegistrationPeriod === '2026-07-27 through 2026-08-02', 'Nepal local-primary dates changed without review');
 assert(current.recruitmentRegistration?.crossSourceSchedule?.hrdRegistrationPeriod === '2026-07-27 through 2026-08-05', 'HRD cross-source dates need separate provenance');
 for (const key of ['epsTopikResult','skillCompetency','medicalAndJobApplication']) {
@@ -59,7 +67,7 @@ for (const key of ['epsTopikResult','skillCompetency','medicalAndJobApplication'
 assert(current.postSelectionVisaDeparture?.status === 'research_pending_current_cohort_scope', 'Downstream Nepal scope cannot be assumed current');
 
 const noticeIDs = new Set();
-const VALID = new Set(['verified_current_primary','supplementary_unreviewed','prior_2025_cohort','cohort_not_linked','other_2026_program']);
+const VALID = new Set(['verified_current_primary','verified_current_supplement','supplementary_unreviewed','prior_2025_cohort','cohort_not_linked','other_2026_program']);
 for (const n of ledger.notices || []) {
   assert(!noticeIDs.has(n.id), 'Duplicate Nepal government notice: ' + n.id);
   noticeIDs.add(n.id);
@@ -70,6 +78,13 @@ for (const n of ledger.notices || []) {
     assert(n.id === 'np_2026_first_phase_primary' &&
       n.cohort === '2026_first_phase_manufacturing' &&
       n.reviewState === 'full_primary_document_reviewed', 'Unreviewed notice promoted to 2026 current cohort');
+  }
+  if (n.applicability === 'verified_current_supplement') {
+    const reviewed = n.cohort === '2026_first_phase_manufacturing' && (
+      (n.id === 'np_2026_urgent_0726' && n.reviewState === 'scanned_notice_pages_1_to_3_reviewed_appendix_guide_not_promoted' && n.url === 'https://epsnepal.gov.np/postdetails/137') ||
+      (n.id === 'np_2026_passport_0730' && n.reviewState === 'official_inline_image_reviewed' && n.url === 'https://epsnepal.gov.np/postdetails/143')
+    );
+    assert(reviewed, 'Only reviewed and cohort-bound Nepal supplementary notices may change current rules');
   }
   if (n.applicability === 'prior_2025_cohort') {
     assert(n.cohort === '2025_manufacturing', 'Previous cohort must not become current');
@@ -84,10 +99,15 @@ for (const n of ledger.notices || []) {
 for (const id of ['np_2026_first_phase_primary','np_2026_urgent_0726','np_2026_passport_0730',
   'np_2025_manu_job_notice','np_oct_2026_regular_departure',
   'np_2026_root_industry_alt_0701']) assert(noticeIDs.has(id), 'Missing essential safety notice ' + id);
-for (const id of ['np_2026_urgent_0726','np_2026_passport_0730']) {
+for (const [id, state] of [['np_2026_urgent_0726','notice_pages_1_to_3_reviewed_user_manual_appendix_reference_only'],
+  ['np_2026_passport_0730','official_inline_image_content_reviewed']]) {
   const n = ledger.notices.find(x => x.id === id);
-  assert(n?.applicability === 'supplementary_unreviewed', 'Critical unreviewed 2026 supplemental notice falsely promoted ' + id);
+  const s = supplements.notices.find(x => x.id === (id === 'np_2026_urgent_0726' ? 'np_2026_application_urgent_0726' : 'np_2026_application_passport_0730'));
+  assert(n?.applicability === 'verified_current_supplement' && s?.contentReviewStatus === state,
+    'Verified Nepal supplementary notice status or evidence changed: ' + id);
 }
+assert(supplements.notices.find(x => x.id === 'np_2026_application_passport_0730')?.verifiedExtendedEndDate === '2026-08-05',
+  'Passport supplement must explicitly confirm the exact extended end date');
 assert((ledger.notices || []).length >= 10, 'Nepal official notice ledger unexpectedly truncated');
 
 const unsafeDocs = (docs.packs || []).filter(p=>p.status !== 'verified_official_pdf');
