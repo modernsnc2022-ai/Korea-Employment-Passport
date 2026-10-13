@@ -198,3 +198,32 @@ test('Official source warnings remain visible until review signoff and do not au
   await expect(page.locator('#freshnessStatus')).toContainText('tidak diubah otomatis');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
+
+test('2026 Manufacturing Skill Test mandatory with optional Job Capacity Assessment on 320px screen', async ({page, request}) => {
+  const official = 'https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026';
+  const route = await (await request.get('/data/id_e9_manufacturing_2026.json')).json();
+  const copy = await (await request.get('/data/id_e9_manufacturing_2026_id.json')).json();
+  const rules = await (await request.get('/data/exact_answer_rules_v1.json')).json();
+  const stage = route.stages.find(s => s.id === 'skill_competency');
+  expect(stage).toBeDefined();
+  expect(stage.sourceUrl).toBe(official);
+  expect(stage.action).toMatch(/mandatory Skill Test/);
+  expect(stage.action).toMatch(/optional/);
+  expect(copy.skill_competency.action).toMatch(/WAJIB mengikuti Skill Test/);
+  expect(copy.skill_competency.action).toMatch(/OPSIONAL/);
+  expect(copy.skill_competency.warning).toMatch(/Tidak mengikuti Skill Test menyebabkan gugur/);
+  for (const id of ['skill_target_eps_pass_only_2026','skill_stage2_eligibility_2026']) {
+    const rule = rules.answers.find(a => a.id === id);
+    expect(rule).toBeDefined();
+    expect(rule.sourceUrl).toBe(official);
+    expect(rule.answer).toContain('OPSIONAL');
+    expect(rule.answer).toMatch(/WAJIB/);
+  }
+  await page.setViewportSize({width:320,height:700});
+  await page.goto('/app.html');
+  await expect(page.locator('#quickStart')).toBeVisible();
+  await page.locator('[data-quick-stage="skill_competency"]').click();
+  await expect(page.locator('#nextAction')).toContainText('WAJIB mengikuti Skill Test');
+  await expect(page.locator('#nextAction')).toContainText('OPSIONAL');
+  await expect(page.locator('#progressText')).toContainText('/ 27');
+});
