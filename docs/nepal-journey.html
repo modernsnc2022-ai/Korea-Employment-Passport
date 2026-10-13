@@ -14,7 +14,10 @@
     .np-shell h3{font-size:1.15rem}
     .np-card{background:#fff;color:#12263b;border-radius:17px;padding:24px;margin:18px 0;box-shadow:0 5px 23px rgba(0,0,0,.10)}
     .np-hold{border-left:6px solid #b97618;background:#fff5dc}
+    .cohort-guidance{border-left:5px solid #6688af;background:#edf5ff}
     .np-label{display:block;font-weight:700;margin-bottom:10px}
+    #cohortSelect{width:100%;padding:13px;border:2px solid #5c7b98;border-radius:11px;background:white;color:#12263b;font:inherit}
+    #cohortSelect:focus{outline:3px solid #dfbd58;outline-offset:2px}
     #stageSelect{width:100%;max-width:100%;font:inherit;padding:13px;border:2px solid #5c7b98;border-radius:11px;background:white;color:#12263b}
     #stageSelect:focus{outline:3px solid #dfbd58;outline-offset:2px}
     .state{display:inline-block;border:1px solid #b97618;border-radius:30px;padding:6px 12px;background:#fff2d5;color:#68450f;font-weight:700}
@@ -59,6 +62,16 @@
     </section>
     <div id="previewBody" hidden>
       <section class="np-card">
+        <label for="cohortSelect" class="np-label">तपाईं कुन EPS आवेदन समूहमा पर्नुहुन्छ?</label>
+        <select id="cohortSelect" aria-describedby="cohortHelp">
+          <option value="current">२०२६ प्रथम चरण Manufacturing मा आवेदन दिइसकेको</option>
+          <option value="future">अर्को आधिकारिक Manufacturing आवेदन खुल्ने प्रतीक्षामा</option>
+          <option value="other">२०२५ वा अन्य वर्ष/Root Industry को अलग आवेदन समूह</option>
+        </select>
+        <p id="cohortHelp" class="provenance">गलत समूहका मिति र कागजात लागू हुन नदिन समूह चयन गर्नुहोस्। कुनै व्यक्तिगत जानकारी सङ्कलन गरिँदैन।</p>
+      </section>
+      <section id="cohortGuidance" class="np-card cohort-guidance" hidden aria-live="polite"></section>
+      <section id="stagePicker" class="np-card">
         <label for="stageSelect" class="np-label">आफ्नो चरण छान्नुहोस्</label>
         <select id="stageSelect" aria-describedby="stageHelp">
           <option value="">चरणहरू लोड हुँदैछ…</option>
