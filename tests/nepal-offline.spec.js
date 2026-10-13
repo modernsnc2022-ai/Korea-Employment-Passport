@@ -165,6 +165,10 @@ test('Nepal Chromium offline: keyboard next/previous guides, never changes offic
   await expect(page.locator('#previewBody')).toBeVisible();
   const count = await page.locator('#stageSelect option').count();
   expect(count).toBeGreaterThan(20);
+  // The applicant guide defaults to "registration" (second item), not index 0.
+  await page.locator('#stageSelect').selectOption(
+    await page.locator('#stageSelect option').first().getAttribute('value')
+  );
   await expect(page.locator('#stagePosition')).toContainText('1 / ' + count);
   await expect(page.locator('#prevStageBtn')).toBeDisabled();
   await page.locator('#nextStageBtn').focus();
