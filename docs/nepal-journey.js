@@ -20,6 +20,12 @@
     hrd_exam_schedule: 'https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001',
     nepal_official_notices: 'https://epsnepal.gov.np/notices'
   });
+  const PREP_AUDIENCES = Object.freeze({
+    hrd_standard_textbooks: ['current', 'future'],
+    hrd_public_questions: ['current', 'future'],
+    hrd_exam_schedule: ['current'],
+    nepal_official_notices: ['current', 'future']
+  });
   const LABELS = Object.freeze({
     closed: { title: '२०२६ आवेदन अवधि बन्द', detail: 'यो पहिलो चरणको पुरानो आवेदन अवधि हो। नयाँ आवेदन खुलेको मान्न मिल्दैन।' },
     waiting: { title: 'नयाँ आधिकारिक सूचना पर्खनुहोस्', detail: 'हालको २०२६ समूहका लागि मिति वा नतिजा KEP मा पुष्टि गरिएको छैन। अनुमान नगर्नुहोस्।' },
@@ -231,7 +237,7 @@
         prep.privacy?.persistsStudyProgress !== false ||
         readiness?.currentCohort?.epsTopikSchedule?.status !==
           'verified_hrd_current_row_test_dates_undecided' ||
-        !Array.isArray(prep.resources) || prep.resources.length !== 4) {
+        !prep.studySequenceAdviceNe || !Array.isArray(prep.resources) || prep.resources.length !== 4) {
       throw new Error('Nepal study resources must remain reference-only and beta-blocked');
     }
     const seen = new Set();
@@ -240,6 +246,7 @@
           seen.has(item.id) || PREP_SOURCES[item.id] !== item.sourceUrl ||
           !safeOfficialLink(item.sourceUrl) ||
           item.sourceStatus?.startsWith('verified_') !== true ||
+          JSON.stringify(item.cohortVisibility) !== JSON.stringify(PREP_AUDIENCES[item.id]) ||
           !item.titleNe || !item.descriptionNe) {
         throw new Error('Invalid Nepal official study material provenance');
       }
@@ -253,7 +260,9 @@
     list.replaceChildren();
     if (choice === 'other') return;
     list.append(element('p', prep.descriptionNe, 'caution'));
+    list.append(element('p', prep.studySequenceAdviceNe, 'np-prep-advice'));
     for (const entry of prep.resources) {
+      if (!entry.cohortVisibility.includes(choice)) continue;
       const section = element('article', undefined, 'np-prep-resource');
       section.append(element('h3', entry.titleNe));
       section.append(element('p', entry.descriptionNe));
