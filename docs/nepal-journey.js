@@ -257,7 +257,7 @@
       const section = element('article', undefined, 'np-prep-resource');
       section.append(element('h3', entry.titleNe));
       section.append(element('p', entry.descriptionNe));
-      addOfficialLink(section, entry.sourceUrl, 'आधिकारिक HRD/EPS स्रोत खोल्नुहोस् ↗');
+      addOfficialLink(section, entry.sourceUrl, entry.titleNe + ' — आधिकारिक स्रोत ↗');
       list.append(section);
     }
     list.append(element('p',
