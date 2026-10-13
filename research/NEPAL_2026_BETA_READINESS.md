@@ -35,12 +35,6 @@ For actual browser testing, once an isolated remote runner with working Chromium
 ```sh
 npm ci
 npx playwright install chromium
-npx playwright test tests/nepal-journey.spec.js --project=chromium
-```
-
-The Playwright configuration currently uses one configured Chromium browser with no named project; if the named-project invocation fails, simply omit `--project=chromium`:
-
-```sh
 npx playwright test tests/nepal-journey.spec.js
 ```
 
