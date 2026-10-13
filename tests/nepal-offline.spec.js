@@ -183,3 +183,12 @@ test('Nepal Chromium offline: keyboard next/previous guides, never changes offic
   expect(await page.evaluate(() => document.documentElement.scrollWidth))
     .toBeLessThanOrEqual(320);
 });
+
+test('Nepal Chromium offline: mixed Nepali and English evidence keeps explicit language semantics', async ({ page }) => {
+  await openOffline(page);
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ne');
+  await page.locator('#stageSelect').selectOption('eps_topik');
+  await expect(page.locator('#stageDetail .provenance[lang="en"]')).toContainText('미확정');
+  await expect(page.locator('#noticeReview .notice-item h3[lang="en"]')).toHaveCount(10);
+});
