@@ -22,6 +22,35 @@ const ledger = load('np_notice_provenance_2026.json');
 const supplements = load('np_registration_notices_2026.json');
 const exactAnswers = load('np_exact_answer_rules_2026.json');
 const hrdSchedule = load('np_hrd_schedule_2026.json');
+const study = load('np_eps_topik_preparation_2026.json');
+const STUDY_LINKS = Object.freeze({
+  hrd_standard_textbooks: 'https://epstopik.hrdkorea.or.kr/epstopik/book/std/standardBookList.do?lang=en',
+  hrd_public_questions: 'https://epstopik.hrdkorea.or.kr/epstopik/book/pub/publicWorkBookList.do?lang=ko',
+  hrd_exam_schedule: 'https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001',
+  nepal_official_notices: 'https://epsnepal.gov.np/notices'
+});
+assert(study.routeId === ID && study.country === 'NP' &&
+  study.status === 'reference_only' &&
+  study.scope === 'general_eps_topik_korean_learning_only' &&
+  study.betaStatus === 'blocked' && study.examinationDates === 'undecided' &&
+  study.applicationStatus === 'closed_2026_first_phase' &&
+  JSON.stringify(study.cohortVisibility) === JSON.stringify(['current', 'future']) &&
+  study.privacy?.requiresSignIn === false &&
+  study.privacy?.collectsPersonalData === false &&
+  study.privacy?.tracksOfficialMilestones === false &&
+  study.privacy?.persistsStudyProgress === false,
+  'Official Nepal study resources must not open registration, change cohort, or collect applicant data');
+assert(Array.isArray(study.resources) && study.resources.length === 4,
+  'Official Nepal prep resources incomplete');
+const seenStudy = new Set();
+for (const entry of study.resources || []) {
+  assert(Object.hasOwn(STUDY_LINKS, entry.id) && STUDY_LINKS[entry.id] === entry.sourceUrl &&
+    !seenStudy.has(entry.id) && entry.sourceStatus?.startsWith('verified_') &&
+    entry.titleNe && entry.descriptionNe,
+    'Unsafe or unverified Nepal prep resource: ' + entry.id);
+  seenStudy.add(entry.id);
+}
+
 
 assert(pack.country === 'NP' && pack.visa === 'E-9' && pack.sector === 'manufacturing', 'Nepal route must be E-9 Manufacturing');
 assert(pack.cycle === 2026 && pack.lifecycle === 'research_hold', 'Nepal 2026 pack must stay research_hold');
