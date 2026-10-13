@@ -7,7 +7,8 @@
     'data/np_e9_manufacturing_2026.json',
     'data/np_e9_manufacturing_2026_ne.json',
     'data/np_stage_readiness_2026.json',
-    'data/np_document_packs_2026.json'
+    'data/np_document_packs_2026.json',
+    'data/np_notice_provenance_2026.json'
   ];
   const LABELS = Object.freeze({
     closed: { title: '२०२६ आवेदन अवधि बन्द', detail: 'यो पहिलो चरणको पुरानो आवेदन अवधि हो। नयाँ आवेदन खुलेको मान्न मिल्दैन।' },
@@ -102,12 +103,64 @@
     }
     target.append(element('p', 'यहाँबाट कुनै सरकारी आवेदन पठाइँदैन। वास्तविक आवेदन आधिकारिक पोर्टलमा मात्र गर्नुपर्छ।', 'provenance'));
   }
+  const NOTICE_TAGS = Object.freeze({
+    verified_current_primary: '२०२६ पहिलो चरणको मुख्य सूचना',
+    supplementary_unreviewed: 'थप सूचना — पूरा सामग्री समीक्षा बाँकी',
+    prior_2025_cohort: '२०२५ समूहको सूचना — २०२६ मा लागू हुँदैन',
+    cohort_not_linked: 'प्रस्थान सूचना — हालको आवेदन समूहसँग सम्बन्ध अपुष्ट'
+  });
+  function assertSafeNoticeLedger(ledger) {
+    if (ledger?.routeId !== ROUTE_ID || ledger.policy?.betaAccess !== 'blocked' ||
+        ledger.policy?.allowDeadlineExtensionInference !== false ||
+        ledger.policy?.allowDepartureToPromote2026ApplicationStages !== false ||
+        !Array.isArray(ledger.notices) || !ledger.notices.length) {
+      throw new Error('Nepal notice provenance safety gate mismatch');
+    }
+    const ids = new Set();
+    for (const notice of ledger.notices) {
+      if (ids.has(notice.id) || !NOTICE_TAGS[notice.applicability] ||
+          !safeOfficialLink(notice.url) || !/^2026-\\d{2}-\\d{2}$/.test(notice.date) ||
+          !notice.title || !notice.ruleImpact) throw new Error('Invalid Nepal notice provenance');
+      if (notice.applicability === 'verified_current_primary' &&
+          (notice.cohort !== '2026_first_phase_manufacturing' ||
+           notice.reviewState !== 'full_primary_document_reviewed')) {
+        throw new Error('Unverified current-cohort promotion');
+      }
+      if (notice.applicability === 'prior_2025_cohort' && notice.cohort !== '2025_manufacturing') {
+        throw new Error('Prior cohort label invalid');
+      }
+      if (notice.applicability === 'cohort_not_linked' &&
+          !notice.cohort.startsWith('departure_')) {
+        throw new Error('Departure cohort label invalid');
+      }
+      ids.add(notice.id);
+    }
+  }
+  function renderNoticeLedger(ledger) {
+    const target = $('noticeReview');
+    target.replaceChildren();
+    target.append(element('h2', 'हालसम्म जाँचिएका आधिकारिक सूचनाहरू'));
+    target.append(element('p',
+      'सूचनाको मिति नयाँ हुनु मात्रले त्यो २०२६ पहिलो चरणका नयाँ परीक्षार्थीलाई लागू हुन्छ भन्ने हुँदैन। ' +
+      'यहाँको समीक्षा ' + ledger.reviewedAt + ' मा गरिएको थियो; पछिल्लो सूचना सरकारी साइटबाट जाँच्नुहोस्।',
+      'caution'));
+    for (const notice of ledger.notices) {
+      const item = element('article', undefined, 'notice-item');
+      item.append(element('p', NOTICE_TAGS[notice.applicability], 'state state-reference'));
+      item.append(element('h3', notice.date + ' · ' + notice.title));
+      item.append(element('p', notice.ruleImpact, 'provenance'));
+      addOfficialLink(item, notice.url, 'यो आधिकारिक सूचना खोल्नुहोस् ↗');
+      target.append(item);
+    }
+    addOfficialLink(target, 'https://epsnepal.gov.np/notices', 'सरकारी सूचना सूचीमा नयाँ सूचना जाँच्नुहोस् ↗');
+  }
   async function start() {
-    const [pack, translations, readiness, documents] = await Promise.all(DATA_PATHS.map(json));
+    const [pack, translations, readiness, documents, ledger] = await Promise.all(DATA_PATHS.map(json));
     if (pack.country !== 'NP' || pack.cycle !== 2026 || pack.lifecycle !== 'research_hold' ||
         pack.safety?.betaIntakeOpen !== false || readiness.routeId !== ROUTE_ID ||
         readiness.betaReadiness?.status !== 'blocked' || documents.routeId !== ROUTE_ID ||
         !Array.isArray(pack.stages)) throw new Error('Nepal beta safety gate mismatch');
+    assertSafeNoticeLedger(ledger);
 
     $('verifiedAt').textContent = readiness.checkedAt || 'अज्ञात';
     $('statusSummary').textContent =
@@ -118,6 +171,7 @@
 
     const stages = pack.stages.filter(s => !String(s.supportState).startsWith('no_separate_step_verified'));
     const select = $('stageSelect');
+    select.replaceChildren();
     for (const stage of stages) {
       const title = translations[stage.id]?.title || stage.title;
       const option = element('option', title);
@@ -134,6 +188,7 @@
     };
     select.addEventListener('change', update);
     update();
+    renderNoticeLedger(ledger);
     $('previewBody').hidden = false;
   }
 
