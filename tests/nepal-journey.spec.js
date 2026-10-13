@@ -193,3 +193,29 @@ test('Nepal held visa stage ignores an injected obsolete payment warning', async
   await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
   await expect(page.locator('#stageDetail .document-pack li')).toHaveCount(0);
 });
+
+test('Nepal official July 30 extension resolves the HRD discrepancy but stays closed', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await expect(page.locator('#statusSummary')).toContainText('५ अगस्टसम्म');
+  await page.locator('#stageSelect').selectOption('registration');
+  await expect(page.locator('#stageDetail .state')).toContainText('२०२६ आवेदन अवधि बन्द');
+  await expect(page.locator('#stageDetail .action-text')).toContainText('५ अगस्ट २०२६');
+  await expect(page.locator('#stageDetail a[href="https://epsnepal.gov.np/postdetails/143"]')).toHaveCount(1);
+  await expect(page.locator('#noticeReview')).toContainText('२०२६ पहिलो चरणको प्रमाणित पूरक सूचना');
+  await page.locator('#stageSelect').selectOption('document_verify');
+  await expect(page.locator('#stageDetail .action-text')).toContainText('म्याद सकिएको');
+  await expect(page.locator('#stageDetail .action-text')).toContainText('मान्य राहदानी');
+});
+
+test('Nepal extension safety gate fails closed if official review evidence is removed', async ({ page }) => {
+  await page.route('**/data/np_notice_provenance_2026.json', async route => {
+    const original = await route.fetch();
+    const ledger = await original.json();
+    ledger.notices.find(n => n.id === 'np_2026_passport_0730').reviewState = 'image_content_pending_review';
+    await route.fulfill({ response: original, json: ledger });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
