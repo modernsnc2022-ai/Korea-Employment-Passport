@@ -298,6 +298,9 @@ test('Nepal stage previous-next navigation uses real 2026 stage list and stops a
   const options = page.locator('#stageSelect option');
   const count = await options.count();
   expect(count).toBeGreaterThan(20);
+  // Default registration stage follows eligibility, so select the first
+  // option explicitly before asserting the previous-button boundary.
+  await page.locator('#stageSelect').selectOption(await options.first().getAttribute('value'));
   await expect(page.locator('#stagePosition')).toContainText('1 / ' + count);
   await expect(page.locator('#prevStageBtn')).toBeDisabled();
   await expect(page.locator('#nextStageBtn')).toBeEnabled();
@@ -320,6 +323,10 @@ test('Nepal stage previous-next navigation uses real 2026 stage list and stops a
 test('Nepal stage navigation is keyboard operable and unavailable for other cohorts', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 650 });
   await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageSelect').selectOption(
+    await page.locator('#stageSelect option').first().getAttribute('value')
+  );
   await expect(page.locator('#prevStageBtn')).toBeDisabled();
   await page.locator('#nextStageBtn').focus();
   await page.keyboard.press('Enter');
