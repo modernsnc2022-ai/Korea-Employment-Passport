@@ -69,8 +69,15 @@
     target.append(element('p', label.title, 'state state-' + classification.code));
     target.append(element('h2', localized?.title || stage.title));
     target.append(element('p', label.detail, 'caution'));
-    const lead = element('p', localized?.action || stage.action, 'action-text');
-    target.append(lead);
+    // Never publish baseline fees or exhaustive checklists as instructions for
+    // a cohort whose exact current rules have not been authenticated.
+    const unverified = classification.code === 'hold' || classification.code === 'reference';
+    const actionText = unverified
+      ? 'यो चरणको प्रक्रिया रहेको पुष्टि भए पनि, हालको २०२६ पहिलो चरणका लागि ठ्याक्कै शुल्क, ' +
+        'आवश्यक कागजात, परीक्षण केन्द्र, समयसीमा तथा पेश गर्ने स्थान KEP ले पुष्टि गरेको छैन। ' +
+        'आफ्नो समूहको नयाँ आधिकारिक सूचना प्राप्त नभएसम्म कुनै शुल्क नतिर्नुहोस् र पुरानो सूचीका आधारमा कागजात नबुझाउनुहोस्।'
+      : (localized?.action || stage.action);
+    target.append(element('p', actionText, 'action-text'));
 
     if (stage.warning) target.append(element('p', 'सावधानी: ' + stage.warning, 'warning'));
     if (classification.group?.note) target.append(element('p', classification.group.note, 'provenance'));
@@ -93,11 +100,17 @@
         section.append(element('p', isCurrent
           ? 'मुख्य आधिकारिक सूचनाबाट पुष्टि भएको सूची; पछि आएका पूरक सूचनाले नियम परिवर्तन गरेको हुन सक्छ।'
           : 'पुरानो/सामान्य प्रक्रिया मात्र। हालको २०२६ आवेदनका लागि अन्तिम आवश्यक कागजातको सूची होइन।', 'caution'));
-        if (pack.warning) section.append(element('p', pack.warning, 'warning'));
-        const ul = element('ul');
-        for (const item of pack.items || []) ul.append(element('li', item.label + ' — ' + item.rule));
-        section.append(ul);
-        addOfficialLink(section, pack.sourceUrl, 'यो कागजात सूचीको आधिकारिक स्रोत ↗');
+        if (pack.warning && !unverified) section.append(element('p', pack.warning, 'warning'));
+        if (!unverified && isCurrent) {
+          const ul = element('ul');
+          for (const item of pack.items || []) ul.append(element('li', item.label + ' — ' + item.rule));
+          section.append(ul);
+          addOfficialLink(section, pack.sourceUrl, 'यो कागजात सूचीको आधिकारिक स्रोत ↗');
+        } else {
+          section.append(element('p',
+            'हालको २०२६ पहिलो चरणका लागि कागजात वा शुल्कको विस्तृत सूची आधिकारिक रूपमा प्रमाणीकरण नभएकाले यहाँ देखाइएको छैन।',
+            'warning'));
+        }
       }
       target.append(section);
     }
