@@ -35,10 +35,25 @@ for (const width of [320, 360, 390, 1280]) {
     const frame = await page.evaluate(() => {
       const active = [...document.querySelectorAll('button:not([hidden])')]
         .filter(x => x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
-      const outliers = active.map(x => {
+      const outliers = active.filter(x => {
+        // Closed details are not operable, and horizontal carousels are
+        // intentionally swipeable on small screens.
+        if (x.closest('details:not([open])')) return false;
+        let ancestor = x.parentElement;
+        while (ancestor && ancestor !== document.body) {
+          const style = getComputedStyle(ancestor);
+          const r = ancestor.getBoundingClientRect();
+          if (/auto|scroll/.test(style.overflowX) &&
+              ancestor.scrollWidth > ancestor.clientWidth + 1 &&
+              r.left >= -2 && r.right <= innerWidth + 2) return false;
+          ancestor = ancestor.parentElement;
+        }
+        const r = x.getBoundingClientRect();
+        return r.left < -2 || r.right > innerWidth + 2;
+      }).map(x => {
         const r = x.getBoundingClientRect();
         return { text:x.textContent.trim().slice(0,32), left:r.left, right:r.right };
-      }).filter(x => x.left < -2 || x.right > innerWidth + 2);
+      });
       return { scrollWidth:document.documentElement.scrollWidth, innerWidth, outliers:outliers.slice(0,12) };
     });
     expect(frame.scrollWidth).toBeLessThanOrEqual(frame.innerWidth + 1);
@@ -83,7 +98,7 @@ test('Indonesian document comparison never persists typed identity strings', asy
   await page.locator('[data-quick-stage="eligibility"]').click();
   await page.locator('.utility-tab[data-view="documents"]').click();
   await expect(page.locator('#documents')).toBeVisible();
-  await page.locator('details.consistency-check summary').click();
+  await page.locator('details.consistency-check > summary').click();
   await page.locator('#consNamePassport').fill('PRIVATE_TEST_PASSPORT_NAME_7171');
   await page.locator('#consNameSlc').fill('PRIVATE_TEST_SLC_NAME_8282');
   await page.locator('#checkConsistencyBtn').click();
