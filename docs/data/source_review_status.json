@@ -1,14 +1,34 @@
 {
-  "version": "1.1.0",
-  "state": "clean",
+  "version": "1.2.0",
+  "state": "review_required",
   "autoPublishRules": false,
   "configured": 84,
   "checked": 84,
-  "reviewRequiredUrls": [],
-  "reviewRequiredSourceIds": [],
+  "reviewRequiredUrls": [
+    "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+    "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+    "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+    "https://epsnepal.gov.np/notices",
+    "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+    "https://www.slbfe.lk/",
+    "https://migrant.kg/",
+    "https://www.mol.gov.mm/mol-department-of-labour/"
+  ],
+  "reviewRequiredSourceIds": [
+    "labor_standards_wage_statement",
+    "kdca_qcode_input",
+    "moel_1350_contact",
+    "np_eps_notice_index",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
   "pendingBaselineUrls": [],
   "pendingBaselineSourceIds": [],
   "fetchFailureUrls": [],
   "fetchFailureSourceIds": [],
-  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
+  "message": "Perubahan terdeteksi pada 8 sumber resmi. Panduan terkait sumber yang berubah harus ditinjau secara manual sebelum dianggap jawaban pasti; perubahan aturan tidak diterbitkan otomatis.",
+  "detectedAt": "2026-10-13",
+  "reviewStatus": "8 changed from 2026-10-06 accepted baseline; 3 Korea-common content-reviewed, 5 country-specific scoped-review pending; official hashes not accepted"
 }
