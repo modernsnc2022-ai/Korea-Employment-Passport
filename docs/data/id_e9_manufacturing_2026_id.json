@@ -30,8 +30,9 @@
     "warning": "Lulus tahap pertama bukan kelulusan akhir dan tidak menjamin penempatan kerja."
   },
   "skill_competency": {
-    "title": "Skill Test + Competency Test",
-    "action": "Persiapkan kekuatan fisik, wawancara, kemampuan dasar, dan bukti kompetensi yang diakui."
+    "title": "Skill Test wajib + Penilaian Kapasitas Kerja opsional",
+    "action": "Jika nama Anda dinyatakan lulus EPS-TOPIK tahap pertama, Anda WAJIB mengikuti Skill Test: kekuatan fisik, wawancara, dan kemampuan dasar. Job Capacity Assessment (penilaian kapasitas kerja) bersifat OPSIONAL bagi peserta yang memiliki bukti kompetensi manufaktur sesuai pengumuman resmi. Cek pengumuman khusus Skill Test Manufaktur 2026 untuk jadwal, lokasi, dan dokumen yang berlaku.",
+    "warning": "Lulus EPS-TOPIK belum berarti lulus akhir atau mendapatkan pekerjaan. Tidak mengikuti Skill Test menyebabkan gugur; Job Capacity Assessment tidak wajib bagi peserta tanpa bukti kompetensi. Jangan gunakan jadwal atau daftar dokumen Manufaktur 2025 maupun Perikanan 2026."
   },
   "final_selection": {
     "title": "Seleksi akhir sistem poin",
