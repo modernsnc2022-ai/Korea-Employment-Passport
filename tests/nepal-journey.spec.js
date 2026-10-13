@@ -348,3 +348,14 @@ test('Nepal stage navigation is keyboard operable and unavailable for other coho
   await expect(page.locator('#statusSummary')).toContainText('बन्द');
   await expect(page.locator('#stageDetail')).not.toContainText('NPR 10,700');
 });
+
+test('Nepal mixed-language official notes declare English for screen-reader pronunciation', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ne');
+  await page.locator('#stageSelect').selectOption('eps_topik');
+  await expect(page.locator('#stageDetail .provenance[lang="en"]')).toContainText('미확정');
+  await expect(page.locator('#noticeReview .notice-item h3[lang="en"]')).toHaveCount(10);
+  await expect(page.locator('#noticeReview .notice-item .provenance[lang="en"]')).toHaveCount(10);
+  await expect(page.locator('#stageDetail')).not.toContainText('2025 Manufacturing second-round');
+});
