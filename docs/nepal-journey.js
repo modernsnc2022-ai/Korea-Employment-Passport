@@ -8,8 +8,18 @@
     'data/np_e9_manufacturing_2026_ne.json',
     'data/np_stage_readiness_2026.json',
     'data/np_document_packs_2026.json',
-    'data/np_notice_provenance_2026.json'
+    'data/np_notice_provenance_2026.json',
+    'data/np_eps_topik_preparation_2026.json'
   ];
+
+  // URL-to-purpose binding: an unexpected, forged or wrong-cohort source
+  // fails closed rather than silently replacing a study link.
+  const PREP_SOURCES = Object.freeze({
+    hrd_standard_textbooks: 'https://epstopik.hrdkorea.or.kr/epstopik/book/std/standardBookList.do?lang=en',
+    hrd_public_questions: 'https://epstopik.hrdkorea.or.kr/epstopik/book/pub/publicWorkBookList.do?lang=ko',
+    hrd_exam_schedule: 'https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=006&examNot=90&examYear=2026&lang=ko&lcnsId=001',
+    nepal_official_notices: 'https://epsnepal.gov.np/notices'
+  });
   const LABELS = Object.freeze({
     closed: { title: '२०२६ आवेदन अवधि बन्द', detail: 'यो पहिलो चरणको पुरानो आवेदन अवधि हो। नयाँ आवेदन खुलेको मान्न मिल्दैन।' },
     waiting: { title: 'नयाँ आधिकारिक सूचना पर्खनुहोस्', detail: 'हालको २०२६ समूहका लागि मिति वा नतिजा KEP मा पुष्टि गरिएको छैन। अनुमान नगर्नुहोस्।' },
@@ -209,6 +219,52 @@
     }
     addOfficialLink(target, 'https://epsnepal.gov.np/notices', 'सरकारी सूचना सूचीमा नयाँ सूचना जाँच्नुहोस् ↗');
   }
+  function assertSafePreparation(prep, readiness) {
+    if (prep?.routeId !== ROUTE_ID || prep.country !== 'NP' ||
+        prep.scope !== 'general_eps_topik_korean_learning_only' ||
+        prep.status !== 'reference_only' || prep.betaStatus !== 'blocked' ||
+        prep.applicationStatus !== 'closed_2026_first_phase' ||
+        prep.examinationDates !== 'undecided' ||
+        JSON.stringify(prep.cohortVisibility) !== JSON.stringify(['current', 'future']) ||
+        prep.privacy?.requiresSignIn !== false || prep.privacy?.collectsPersonalData !== false ||
+        prep.privacy?.tracksOfficialMilestones !== false ||
+        prep.privacy?.persistsStudyProgress !== false ||
+        readiness?.currentCohort?.epsTopikSchedule?.status !==
+          'verified_hrd_current_row_test_dates_undecided' ||
+        !Array.isArray(prep.resources) || prep.resources.length !== 4) {
+      throw new Error('Nepal study resources must remain reference-only and beta-blocked');
+    }
+    const seen = new Set();
+    for (const item of prep.resources) {
+      if (!Object.prototype.hasOwnProperty.call(PREP_SOURCES, item.id) ||
+          seen.has(item.id) || PREP_SOURCES[item.id] !== item.sourceUrl ||
+          !safeOfficialLink(item.sourceUrl) ||
+          item.sourceStatus?.startsWith('verified_') !== true ||
+          !item.titleNe || !item.descriptionNe) {
+        throw new Error('Invalid Nepal official study material provenance');
+      }
+      seen.add(item.id);
+    }
+  }
+  function renderPreparation(prep, choice) {
+    const target = $('prepResources');
+    target.hidden = choice === 'other';
+    const list = $('prepResourceList');
+    list.replaceChildren();
+    if (choice === 'other') return;
+    list.append(element('p', prep.descriptionNe, 'caution'));
+    for (const entry of prep.resources) {
+      const section = element('article', undefined, 'np-prep-resource');
+      section.append(element('h3', entry.titleNe));
+      section.append(element('p', entry.descriptionNe));
+      addOfficialLink(section, entry.sourceUrl, 'आधिकारिक HRD/EPS स्रोत खोल्नुहोस् ↗');
+      list.append(section);
+    }
+    list.append(element('p',
+      'प्रश्न अभ्यास सामग्री वास्तविक २०२६ परीक्षाको प्रश्नपत्र होइन। ' +
+      'कुनै व्यक्तिगत कागजात, फोन नम्बर वा भुक्तानी यहाँ नदिनुहोस्।',
+      'np-prep-disclaimer'));
+  }
   function renderApplicantCohort(choice, readiness) {
     const current = choice === 'current';
     $('stagePicker').hidden = !current;
@@ -234,12 +290,13 @@
     guide.append(element('p', 'KEP ले यहाँ नयाँ आवेदन, beta access वा विद्यार्थीको व्यक्तिगत विवरण सङ्कलन गर्दैन।', 'provenance'));
   }
   async function start() {
-    const [pack, translations, readiness, documents, ledger] = await Promise.all(DATA_PATHS.map(json));
+    const [pack, translations, readiness, documents, ledger, preparation] = await Promise.all(DATA_PATHS.map(json));
     if (pack.country !== 'NP' || pack.cycle !== 2026 || pack.lifecycle !== 'research_hold' ||
         pack.safety?.betaIntakeOpen !== false || readiness.routeId !== ROUTE_ID ||
         readiness.betaReadiness?.status !== 'blocked' || documents.routeId !== ROUTE_ID ||
         !Array.isArray(pack.stages)) throw new Error('Nepal beta safety gate mismatch');
     assertSafeNoticeLedger(ledger, readiness);
+    assertSafePreparation(preparation, readiness);
 
     $('verifiedAt').textContent = readiness.checkedAt || 'अज्ञात';
     $('statusSummary').textContent =
@@ -328,6 +385,7 @@
       const current = cohortSelect.value === 'current';
       if (!current && readStages.size) readStages.clear();
       renderApplicantCohort(cohortSelect.value, readiness);
+      renderPreparation(preparation, cohortSelect.value);
       $('reviewTracker').hidden = !current;
       updateTracker();
     };
