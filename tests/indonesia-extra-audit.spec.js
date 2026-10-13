@@ -162,3 +162,15 @@ test('2026 October departure notice fee does not overwrite August or any other c
     'https://kp2mi.go.id/gtog-detail/korea/pemberitahuan-penyesuaian-harga-tiket-pada-layanan-pemberangkatan-pekerja-migran-indonesia-program-g-to-g-korea-selatan-pada-periode-bulan-oktober-2026'
   );
 });
+
+test('KDCA Q-CODE follows official travelhealth redirect and is not mandatory for everyone', async ({ request }) => {
+  const r = await request.get('/data/exact_answer_rules_v1.json');
+  expect(r.status()).toBe(200);
+  const d = await r.json();
+  const record = d.answers.find(x => x.id === 'departure_qcode_current_official');
+  expect(record.sourceUrl).toBe('https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do');
+  expect(record.verifiedAt).toBe('2026-10-13');
+  expect(record.answer).toContain('tidak boleh dinyatakan wajib bagi setiap pendatang');
+  expect(record.answer).toContain('7 hari');
+  expect(record.doNotDo.join(' ')).toContain('Jangan menyatakan Q-CODE wajib untuk semua orang');
+});
