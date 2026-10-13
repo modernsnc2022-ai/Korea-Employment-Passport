@@ -95,3 +95,14 @@ not a beta-launch permission. The extended offline suite passed 7/7 with the off
 - Independent Nepali language and accessibility review, mobile real-device exploration and assistive-technology testing.
 - More 2026-first-phase cohort-specific official notices for the individual EPS-TOPIK result, Skill & Competency, medical/employment application and downstream labor/visa/departure rules.
 - Continue Nepal `research_hold` / `preview_only` / `beta blocked`, PR as Draft, no merge/deploy, no new Nepal outreach until explicit approval.
+
+## 2026-10-13 mobile stage browsing navigation
+
+- Added Nepali previous/next stage buttons, position display (2/25 at default registration), first/last boundary guards and keyboard Enter support. A 320px mobile layout and visible focus were tested.
+- Initial default is registration (second stage), not eligibility (first stage); initial boundary assumptions in the newly written tests were corrected after a failing first run.
+- Navigation moves between informational pages only. It does not represent passing EPS-TOPIK, submitting a government application, obtaining a job, or completing any official process. It stores no applicant data.
+- Navigation controls remain inside the pre-existing cohort and beta/notice safety gates; hidden for future/other applicant cohorts and when source validation fails.
+- Removed obsolete registration and passport metadata marked unresolved or review-pending after the verified Nepal July 30 official notice. Added two negative Node tests to guard these official evidence labels.
+- At code HEAD c63642df40b11276c21a065bc61bb9105388fc83, actual Node gate 14/14 PASS, offline headless Chromium 10/10 PASS, and localhost-served headless Chromium 22/22 PASS: 46/46, failure 0. JavaScript syntax PASS. No GitHub Actions or foreground desktop browser was used.
+- Native Nepali language review, real mobile assistive technology exploration, and cohort-specific exam, employment, medical/visa document review are still pending. Beta stays research_hold/blocked and PR remains Draft.
+
