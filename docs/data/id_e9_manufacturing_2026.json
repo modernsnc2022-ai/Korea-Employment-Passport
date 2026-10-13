@@ -84,14 +84,15 @@
     },
     {
       "id": "skill_competency",
-      "title": "Skill + competency test",
+      "title": "Mandatory Skill Test + optional Job Capacity Assessment",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "Prepare for physical fitness, interview, basic skills and documented competency points.",
+      "action": "After an official EPS-TOPIK stage-one pass, attend the mandatory Skill Test (physical strength, interview and basic skills). Job Capacity Assessment is optional and applies only when you have qualifying Manufacturing documents. Watch the official 2026 Manufacturing Skill Test notice for individual dates and required items.",
       "brokerReplacement": "prep_complete",
-      "sourceUrl": "https://www.hrdkorea.or.kr/1/3/3/2/2",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
-      "officialActionLabel": "Buka Skill Test resmi"
+      "officialActionLabel": "Buka Skill Test resmi",
+      "warning": "The 10 September 2026 Manufacturing language-test pass is not final selection. Missing the mandatory Skill Test disqualifies the applicant; Job Capacity Assessment is optional, and a later official notice controls schedule and documents."
     },
     {
       "id": "final_selection",
