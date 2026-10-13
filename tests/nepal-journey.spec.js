@@ -359,3 +359,35 @@ test('Nepal mixed-language official notes declare English for screen-reader pron
   await expect(page.locator('#noticeReview .notice-item .provenance[lang="en"]')).toHaveCount(10);
   await expect(page.locator('#stageDetail')).not.toContainText('2025 Manufacturing second-round');
 });
+
+test('Nepal official free Korean study hub covers current and future without beta opening', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(4);
+  await expect(page.locator('#prepResourceList a')).toHaveCount(4);
+  await expect(page.locator('#prepResourceList a').first()).toHaveAttribute('href',
+    'https://epstopik.hrdkorea.or.kr/epstopik/book/std/standardBookList.do?lang=en');
+  await expect(page.locator('#prepResources')).toContainText('स्वअध्ययन');
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#prepResources')).toBeVisible();
+  await expect(page.locator('#stagePicker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('other');
+  await expect(page.locator('#prepResources')).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth))
+    .toBeLessThanOrEqual(320);
+});
+
+test('Nepal study data cannot request personal documents', async ({ page }) => {
+  await page.route('**/data/np_eps_topik_preparation_2026.json', async route => {
+    const original = await route.fetch();
+    const data = await original.json();
+    data.privacy.collectsPersonalData = true;
+    await route.fulfill({ response: original, json: data });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+  await expect(page.locator('#prepResources')).toBeHidden();
+});
