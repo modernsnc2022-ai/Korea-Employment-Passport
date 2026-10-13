@@ -59,9 +59,12 @@ test('Nepal provenance separates 2025 job notices from 2026 application and Octo
   await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#previewBody')).toBeVisible();
   const audit = page.locator('#noticeReview');
-  await expect(audit.locator('.notice-item')).toHaveCount(8);
+  await expect(audit.locator('.notice-item')).toHaveCount(10);
   await expect(audit).toContainText('२०२५ समूहको सूचना');
   await expect(audit).toContainText('प्रस्थान सूचना');
+  await expect(audit).toContainText('२०२६ को अर्को कार्यक्रम');
+  const root = audit.locator('.notice-item', { has: page.locator('a[href*="/postdetails/131"]') });
+  await expect(root).toContainText('Manufacturing पहिलो चरणमा लागू हुँदैन');
   await expect(audit).toContainText('2026-10-02');
   await expect(audit).toContainText('2026-07-30');
   const prior = audit.locator('.notice-item', { has: page.locator('a[href*="/postdetails/127"]') });
@@ -89,6 +92,31 @@ test('Nepal notice provenance fails closed when approval flags are loosened', as
     const original = await route.fetch();
     const ledger = await original.json();
     ledger.policy.allowDepartureToPromote2026ApplicationStages = true;
+    await route.fulfill({ response: original, json: ledger });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
+
+test('Nepal Root Industry notice cannot become current Manufacturing primary notice', async ({ page }) => {
+  await page.route('**/data/np_notice_provenance_2026.json', async route => {
+    const original = await route.fetch();
+    const ledger = await original.json();
+    const root = ledger.notices.find(n => n.id === 'np_2026_root_industry_alt_0701');
+    root.applicability = 'verified_current_primary';
+    await route.fulfill({ response: original, json: ledger });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#previewBody')).toBeHidden();
+});
+
+test('Nepal refuses policy that allows same-year Root Industry to leak into Manufacturing', async ({ page }) => {
+  await page.route('**/data/np_notice_provenance_2026.json', async route => {
+    const original = await route.fetch();
+    const ledger = await original.json();
+    ledger.policy.allowCrossSectorPromotion = true;
     await route.fulfill({ response: original, json: ledger });
   });
   await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
