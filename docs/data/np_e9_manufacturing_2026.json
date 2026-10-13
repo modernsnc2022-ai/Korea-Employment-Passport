@@ -52,19 +52,19 @@
       "title": "Official EPS application / registration",
       "authority": "EPS Korea Section Nepal",
       "kind": "official_action",
-      "action": "The Nepal primary 2026 first-phase notice set 2026-07-27 through 2026-08-02. HRD Korea's current 5th Nepal Manufacturing(5부) schedule row lists 2026-07-27 through 2026-08-05. KEP keeps 2026-08-02 as the applicant-facing exact local-primary deadline until a later Nepal notice is content-reviewed and proven to extend/modify it.",
+      "action": "The verified 2026 first-phase primary notice opened applications on July 27 and set August 2 as the initial deadline. EPS Nepal's July 30 official supplemental image extended registration through August 5, 2026, consistent with HRD Korea. This period has CLOSED; it is not the next application window.",
       "sourceUrl": "https://epsnepal.gov.np/postdetails/136",
       "supportState": "verified_local_primary_cross_source_hrd_end_date_unresolved",
       "officialActionUrl": "https://eoers.epsnepal.gov.np/",
       "officialActionLabel": "Open official EPS Nepal application portal",
-      "warning": "Do not treat HRD Korea's 2026-08-05 schedule-row end date as automatic proof that Nepal locally extended the application deadline."
+      "warning": "The official July 30 notice proves an extension for this 2026 first-phase registration only. Never reuse those dates for a future cohort or treat the website as open for new applications."
     },
     {
       "id": "exam_fee",
       "title": "EPS-TOPIK fee payment",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_payment",
-      "action": "Official fee under the 2026 first-phase notice: US$28 equivalent in NPR, converted using the Nepal Rastra Bank exchange rate on the application date and paid online through the official application flow.",
+      "action": "The July 21 primary first-phase fee was US$28 equivalent in NPR at the official online registration exchange rate. The July 26 urgent EPS Nepal notice warns against repeated payment while a payment is processing, duplicate account creation, or multiple tabs; use the official help/correction process instead. This is historical closed first-phase guidance, not a current payable fee.",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
       "supportState": "verified_current"
     },
@@ -82,7 +82,7 @@
       "title": "Application document verification",
       "authority": "EPS Korea Section Nepal / HRD Korea",
       "kind": "official_action",
-      "action": "Use the 2026 primary notice as the verified baseline for passport/photo uploads. A later 2026-07-30 official notice specifically concerns online submission and passport; its exact content remains under review, so do not present the primary passport rule as exhaustive.",
+      "action": "The 2026 July 30 EPS Nepal official passport notice allowed an applicant with an expired passport to use its existing details for the FIRST-PHASE online registration. A VALID passport is required later at the Job Application Form after passing language and skill tests. The July 26 urgent notice also warns against duplicate accounts, payments, multiple tabs and mis-entered personal details. Original first-phase upload specifications still come from the July 21 primary notice; do not apply these expired-passport rules to later or different cohorts.",
       "sourceUrl": "https://epsnepal.gov.np/uploads/files_video/files_1784602958.pdf",
       "supportState": "verified_primary_notice_supplementary_review_pending"
     },
