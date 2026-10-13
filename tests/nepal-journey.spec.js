@@ -373,11 +373,11 @@ test('Nepal official free Korean study hub covers current and future without bet
   await page.locator('#cohortSelect').selectOption('future');
   await expect(page.locator('#prepResources')).toBeVisible();
   await expect(page.locator('#prepResourceList .np-prep-resource')).toHaveCount(3);
-  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(0);
+  await expect(page.locator('#prepResourceList a[href*="sechduleDetail.do"]')).toHaveCount(0);
   await expect(page.locator('#prepResources')).toContainText('अध्ययन सुझाव');
   await expect(page.locator('#stagePicker')).toBeHidden();
   await page.locator('#cohortSelect').selectOption('current');
-  await expect(page.locator('#prepResourceList a[href*="scheduleDetail.do"]')).toHaveCount(1);
+  await expect(page.locator('#prepResourceList a[href*="sechduleDetail.do"]')).toHaveCount(1);
   await page.locator('#cohortSelect').selectOption('other');
   await expect(page.locator('#prepResources')).toBeHidden();
   expect(await page.evaluate(() => document.documentElement.scrollWidth))
