@@ -119,7 +119,7 @@
     const ids = new Set();
     for (const notice of ledger.notices) {
       if (ids.has(notice.id) || !NOTICE_TAGS[notice.applicability] ||
-          !safeOfficialLink(notice.url) || !/^2026-\\d{2}-\\d{2}$/.test(notice.date) ||
+          !safeOfficialLink(notice.url) || !/^2026-[0-9]{2}-[0-9]{2}$/.test(notice.date) ||
           !notice.title || !notice.ruleImpact) throw new Error('Invalid Nepal notice provenance');
       if (notice.applicability === 'verified_current_primary' &&
           (notice.cohort !== '2026_first_phase_manufacturing' ||
