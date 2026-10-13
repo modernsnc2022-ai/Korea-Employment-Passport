@@ -39,6 +39,11 @@
     .document-pack li{margin:9px 0;line-height:1.6}
     #loadError{color:#a32626;font-weight:700}
     .np-footer{font-size:.95rem;color:#607089;margin-top:26px}
+    .np-prep-resource{border-top:1px solid #dae2ea;padding:15px 0}
+    .np-prep-resource h3{margin:0 0 8px;font-size:1.08rem;line-height:1.6}
+    .np-prep-resource p{margin:6px 0;line-height:1.7}
+    .np-prep-resource a{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box;overflow-wrap:anywhere}
+    .np-prep-disclaimer{background:#fff5dc;border-left:4px solid #b97618;padding:12px;color:#68450f;font-weight:600}
     .np-step-navigation{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 0}
     .np-step-navigation button{font:inherit;font-weight:700;min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #164c7c;background:#fff;color:#164c7c;cursor:pointer}
     .np-step-navigation button:disabled{opacity:.5;cursor:not-allowed}
@@ -100,6 +105,11 @@
         <p id="cohortHelp" class="provenance">गलत समूहका मिति र कागजात लागू हुन नदिन समूह चयन गर्नुहोस्। कुनै व्यक्तिगत जानकारी सङ्कलन गरिँदैन।</p>
       </section>
       <section id="cohortGuidance" class="np-card cohort-guidance" hidden aria-live="polite"></section>
+      <section id="prepResources" class="np-card" hidden aria-labelledby="prepHeading">
+        <h2 id="prepHeading">निःशुल्क सरकारी EPS-TOPIK अध्ययन सामग्री</h2>
+        <p class="np-prep-disclaimer">यो अध्ययन सहयोग मात्र हो; सरकारी परीक्षा, आवेदन, नतिजा वा रोजगारी पूरा गरेको प्रमाण होइन।</p>
+        <div id="prepResourceList"></div>
+      </section>
       <section id="stagePicker" class="np-card" aria-labelledby="stagePickerLabel">
         <label for="stageSelect" class="np-label" id="stagePickerLabel">आफ्नो चरण छान्नुहोस्</label>
         <select id="stageSelect" aria-describedby="stageHelp">
