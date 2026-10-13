@@ -187,6 +187,14 @@ const safetyCases = [
       if (file === 'np_eps_topik_preparation_2026.json')
         data.cohortVisibility.push('other');
     }
+  },
+  {
+    name: 'rejects a previous-year CBT schedule pushed to future applicants',
+    mutate(file, data) {
+      if (file === 'np_eps_topik_preparation_2026.json')
+        data.resources.find(x => x.id === 'hrd_exam_schedule')
+          .cohortVisibility.push('future');
+    }
   }
 ];
 
