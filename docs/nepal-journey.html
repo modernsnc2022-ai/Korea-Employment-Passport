@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071a36">
+  <meta name="description" content="Nepal E-9 Manufacturing 2026 EPS stage navigator — research preview only, not a beta release.">
+  <title>नेपाल EPS चरणगत सहायक (अनुसन्धान पूर्वावलोकन) — KEP</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .np-shell{max-width:940px;margin:0 auto;padding:28px 20px 64px}
+    .np-shell h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.3}
+    .np-shell h2{font-size:1.45rem;line-height:1.4}
+    .np-shell h3{font-size:1.15rem}
+    .np-card{background:#fff;color:#12263b;border-radius:17px;padding:24px;margin:18px 0;box-shadow:0 5px 23px rgba(0,0,0,.10)}
+    .np-hold{border-left:6px solid #b97618;background:#fff5dc}
+    .np-label{display:block;font-weight:700;margin-bottom:10px}
+    #stageSelect{width:100%;max-width:100%;font:inherit;padding:13px;border:2px solid #5c7b98;border-radius:11px;background:white;color:#12263b}
+    #stageSelect:focus{outline:3px solid #dfbd58;outline-offset:2px}
+    .state{display:inline-block;border:1px solid #b97618;border-radius:30px;padding:6px 12px;background:#fff2d5;color:#68450f;font-weight:700}
+    .state-waiting{background:#e7f1ff;color:#154c81;border-color:#abc9e8}
+    .state-reference{background:#edf0f4;color:#33445a;border-color:#b9c5cf}
+    .state-hold{background:#fff1dd;color:#7c4316}
+    .np-card a{color:#0759a3;text-decoration:underline;overflow-wrap:anywhere}
+    .official-link{display:block;margin:14px 0}
+    .caution{font-weight:600;color:#68450f}
+    .warning{background:#fff1eb;border-left:3px solid #b64924;padding:10px 12px;color:#5a2b20}
+    .provenance{font-size:.95rem;color:#3c5169}
+    .action-text{font-size:1.1rem;line-height:1.8}
+    .document-pack{border-top:1px solid #dae2ea;margin-top:20px;padding-top:18px}
+    .document-pack li{margin:9px 0;line-height:1.6}
+    #loadError{color:#a32626;font-weight:700}
+    .np-footer{font-size:.95rem;color:#607089;margin-top:26px}
+  </style>
+  <script src="nepal-journey.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="np-shell">
+      <a class="nav-link" href="np.html">← नेपाल EPS अनुसन्धान पृष्ठ</a>
+      <p class="eyebrow">NEPAL → KOREA · E-9 · MANUFACTURING · 2026</p>
+      <h1>तपाईं अहिले कुन EPS चरणमा हुनुहुन्छ?</h1>
+      <p class="lead">आधिकारिक स्रोतमा आधारित चरणगत जानकारी हेर्नुहोस्। यो परीक्षणका लागि अनुसन्धान पूर्वावलोकन मात्र हो।</p>
+    </div>
+  </header>
+  <main class="np-shell">
+    <section class="np-card np-hold" aria-label="Nepal beta readiness">
+      <h2>नेपाल beta सेवा अझै खुला छैन</h2>
+      <p id="statusSummary" aria-live="polite">सरकारी स्रोत तथा सुरक्षा स्थिति लोड हुँदैछ…</p>
+      <p id="loadError" hidden>कृपया आधिकारिक EPS सूचनामार्फत हालको अवस्था जाँच्नुहोस्।</p>
+      <p>अन्तिम स्रोत समीक्षा: <time id="verifiedAt">—</time></p>
+      <div id="summaryLinks"></div>
+      <p>KEP सरकारी निकाय, रोजगार पठाउने एजेन्सी वा दलाल होइन। परीक्षा, रोजगार, श्रम सम्झौता वा भिसाको ग्यारेन्टी हुँदैन।</p>
+    </section>
+    <div id="previewBody" hidden>
+      <section class="np-card">
+        <label for="stageSelect" class="np-label">आफ्नो चरण छान्नुहोस्</label>
+        <select id="stageSelect" aria-describedby="stageHelp">
+          <option value="">चरणहरू लोड हुँदैछ…</option>
+        </select>
+        <p id="stageHelp" class="provenance">कुनै नाम, पासपोर्ट नम्बर, फोन, व्यक्तिगत कागजात वा पैसा यहाँ नदिनुहोस्। यो पृष्ठले आवेदन पठाउँदैन।</p>
+      </section>
+      <article class="np-card" id="stageDetail" aria-live="polite"></article>
+    </div>
+    <p class="np-footer">KEP Nepal | 2026 प्रथम चरण · 2025 समूहको सूचना 2026 को समयसीमा होइन · सबै सरकारी कार्य आधिकारिक साइटमै</p>
+  </main>
+</body>
+</html>
