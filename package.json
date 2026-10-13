@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test:ui": "playwright test",
-    "test:nepal-gate": "node scripts/check_nepal_research_gate.js && node --test tests/nepal-research-gate.test.cjs"
+    "test:nepal-gate": "node scripts/check_nepal_research_gate.js && node --test tests/nepal-research-gate.test.cjs",
+    "test:nepal:offline": "playwright test -c playwright.offline.config.js"
   },
   "devDependencies": {
     "@playwright/test": "1.55.0"
