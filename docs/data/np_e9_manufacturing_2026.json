@@ -10,7 +10,7 @@
   "packVersion": "0.6.0",
   "lifecycle": "research_hold",
   "publicAvailability": "preview_only",
-  "lastVerified": "2026-10-05",
+  "lastVerified": "2026-10-13",
   "officialSendingAgency": {
     "name": "Department of Foreign Employment / EPS Korea Section",
     "url": "https://epsnepal.gov.np/",
@@ -22,10 +22,12 @@
     "EPS Korea Section Nepal published the 2026 first-phase Korean-language examination application notice on 2026-07-21. The notice uses the Point Based Selection System and includes Manufacturing among the listed sectors/subsectors.",
     "The verified Nepal site also shows 2025 Manufacturing selection processing continuing through 2026, including skill/competency results and employment-application processing.",
     "Nepal remains KEP research HOLD because country-specific document, medical, visa, training and departure requirements are not yet fully mapped into exact-answer rules.",
-    "During the 2026 first-phase application window, EPS Korea Section published a temporary-suspension notice and a later resumption notice on 2026-07-28. KEP does not infer any deadline extension from those titles; supplementary content is tracked separately.",
+    "Nepal EPS documented temporary suspension and later resumption of its online application service on July 28; a separate, visually reviewed July 30 source explicitly proves the August 5 extension. Suspension/resumption titles alone do not prove new exact deadlines.",
     "As of 2026-10-05, KEP has not promoted a current-2026 first-phase EPS-TOPIK result, Skill & Competency schedule/result, or Manufacturing medical/job-application notice from the official Nepal notice index; 2025-cohort notices remain prior-cycle evidence only.",
     "A March 2026 official EPS Nepal process guide was reviewed for stable post-selection flow, including biometric registration, medical/police checks, employment application, roster, automated job matching, Labor Contract, PDOT, CCVI/visa and final departure. This is process-shape evidence; current-cohort dates, providers and volatile fees remain gated by current official notices.",
-    "HRD Korea directly lists the current 5th Nepal Manufacturing(5부) Point System row with registration 2026-07-27 through 2026-08-05, while test announcement/test period remain undecided. Nepal's local primary first-phase notice states 2026-07-27 through 2026-08-02; KEP preserves this cross-source end-date discrepancy without inferring a deadline extension."
+    "HRD Korea shows 2026-07-27 through 2026-08-05. Nepal's original July 21 first-phase deadline was August 2, but the Nepal official July 30 inline image explicitly extended it through August 5, resolving the discrepancy. Test announcement and test period remain undecided.",
+    "On 2026-10-13 the July 26 official urgent 15-page PDF was downloaded; scanned notice pages 1–3 reviewed for one-passport registration, duplicate payment prevention and corrections. The user-guide annex remains reference-only.",
+    "The July 30 official original inline image specifically allows using expired original passport details for initial online EPS registration, while requiring a valid passport at the later Job Application Form after passing language and skills; this exception is not transferable to other years."
   ],
   "safety": {
     "noGovernmentImpersonation": true,
@@ -295,7 +297,7 @@
   "currentApplicationWindow": {
     "noticePublishedAt": "2026-07-21",
     "opensAt": "2026-07-27",
-    "closesAt": "2026-08-02",
+    "closesAt": "2026-08-05",
     "status": "closed",
     "officialPortal": "https://eoers.epsnepal.gov.np/",
     "examFeeUsd": 28,
@@ -310,9 +312,13 @@
       "supplementaryNoticeCount": 4,
       "temporarySuspensionObserved": true,
       "resumptionObserved": true,
-      "deadlineExtensionVerified": false,
-      "exactSupplementaryContentReviewComplete": false
-    }
+      "deadlineExtensionVerified": true,
+      "exactSupplementaryContentReviewComplete": false,
+      "urgentFirstThreePagesReviewed": true,
+      "july30OfficialImageReviewed": true
+    },
+    "initialClosesAt": "2026-08-02",
+    "extensionNoticeUrl": "https://epsnepal.gov.np/postdetails/143"
   },
   "registrationNoticesFile": "data/np_registration_notices_2026.json",
   "stageReadinessFile": "data/np_stage_readiness_2026.json",
