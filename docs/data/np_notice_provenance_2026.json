@@ -34,11 +34,11 @@
       "date": "2026-07-26",
       "title": "Urgent information for Korean-language exam applicants",
       "url": "https://epsnepal.gov.np/postdetails/137",
-      "cohort": "2026_first_phase_possible",
-      "reviewState": "attachment_content_pending_review",
-      "applicability": "supplementary_unreviewed",
-      "ruleImpact": "Do not infer a registration extension or a changed passport/fee requirement from the title.",
-      "sourceAccess": "24.46 MB official PDF, retrieval too large for complete content review; status pending"
+      "cohort": "2026_first_phase_manufacturing",
+      "reviewState": "scanned_notice_pages_1_to_3_reviewed_appendix_guide_not_promoted",
+      "applicability": "verified_current_supplement",
+      "ruleImpact": "The three-page notice sets operational safeguards for one-passport registration, duplicate-payment prevention, correction process, and applicant identity checks. The following user-guide pages are reference only. This notice alone does not establish an extension.",
+      "sourceAccess": "Full 15-page, 24,459,715-byte official PDF downloaded; scanned notice pages 1–3 visually reviewed; pages 4–15 are an attached application guide not promoted into current applicant actions."
     },
     {
       "id": "np_2026_suspension_0728",
@@ -65,11 +65,11 @@
       "date": "2026-07-30",
       "title": "Online application submission / passport additional notice",
       "url": "https://epsnepal.gov.np/postdetails/143",
-      "cohort": "2026_first_phase_possible",
-      "reviewState": "image_content_pending_review",
-      "applicability": "supplementary_unreviewed",
-      "ruleImpact": "Do not assert passport rules as exhaustive until the image content is reviewed.",
-      "sourceAccess": "Official page accessible; text body/image not substantively parsed; status pending"
+      "cohort": "2026_first_phase_manufacturing",
+      "reviewState": "official_inline_image_reviewed",
+      "applicability": "verified_current_supplement",
+      "ruleImpact": "This July 30 official EPS Nepal image explicitly extends the initial 2026 registration deadline through August 5, 2026. Expired original passport details could be entered for online registration, with a valid passport required by later Job Application Form after language and skill tests. Window remains closed now.",
+      "sourceAccess": "Original image embedded as base64 JPEG in EPS Nepal official post HTML, visually reviewed 2026-10-13; not inferred from title."
     },
     {
       "id": "np_2025_manu_job_notice",
