@@ -219,3 +219,75 @@ test('Nepal extension safety gate fails closed if official review evidence is re
   await expect(page.locator('#loadError')).toBeVisible();
   await expect(page.locator('#previewBody')).toBeHidden();
 });
+
+test('Nepal reading tracker counts guidance views but not government milestones', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#reviewTracker')).toBeVisible();
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  await expect(page.locator('#reviewTracker')).toContainText('सरकारी चरण पूरा भएको प्रमाण होइन');
+  await page.locator('#stageReviewBtn').click();
+  await expect(page.locator('#stageReviewBtn')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#reviewStatus')).toContainText('1 /');
+  await page.locator('#stageSelect').selectOption('eps_topik');
+  await expect(page.locator('#stageReviewBtn')).toHaveAttribute('aria-pressed', 'false');
+  await page.locator('#stageReviewBtn').click();
+  await expect(page.locator('#reviewStatus')).toContainText('2 /');
+  await page.locator('#reviewedDetails summary').click();
+  await expect(page.locator('#reviewedStageList li')).toHaveCount(2);
+  await page.locator('#resetStageReviewBtn').click();
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  await expect(page.locator('#reviewedDetails')).toBeHidden();
+});
+
+test('Nepal guidance reading is erased on reload and cohort switch without stored applicant data', async ({ page }) => {
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#previewBody')).toBeVisible();
+  await page.locator('#stageReviewBtn').click();
+  await page.locator('#cohortSelect').selectOption('future');
+  await expect(page.locator('#reviewTracker')).toBeHidden();
+  await expect(page.locator('#stageDetail')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('other');
+  await expect(page.locator('#reviewTracker')).toBeHidden();
+  await page.locator('#cohortSelect').selectOption('current');
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  await page.locator('#stageReviewBtn').click();
+  await page.reload();
+  await expect(page.locator('#reviewStatus')).toContainText('0 /');
+  await expect(page.locator('input[type="text"], input[type="file"], input[type="email"]')).toHaveCount(0);
+  expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
+  expect(await page.evaluate(() => Object.keys(sessionStorage))).toEqual([]);
+});
+
+test('Nepal mobile reading controls remain within 375px viewport and keyboard accessible', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#reviewTracker')).toBeVisible();
+  const details = await page.evaluate(() => {
+    const button = document.getElementById('stageReviewBtn');
+    return {
+      viewportWidth: document.documentElement.clientWidth,
+      pageWidth: document.documentElement.scrollWidth,
+      buttonHeight: button.getBoundingClientRect().height,
+      trackerWidth: document.getElementById('reviewTracker').getBoundingClientRect().width
+    };
+  });
+  expect(details.pageWidth).toBeLessThanOrEqual(details.viewportWidth);
+  expect(details.buttonHeight).toBeGreaterThanOrEqual(44);
+  expect(details.trackerWidth).toBeLessThanOrEqual(375);
+  await page.locator('#stageReviewBtn').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#reviewStatus')).toContainText('1 /');
+  await expect(page.locator('.np-skip')).toHaveAttribute('href', '#mainContent');
+});
+
+test('Nepal beta fail-closed never exposes reading controls', async ({ page }) => {
+  await page.route('**/data/np_stage_readiness_2026.json', async route => {
+    const response = await route.fetch();
+    const data = await response.json();
+    data.betaReadiness.status = 'open';
+    await route.fulfill({ response, json: data });
+  });
+  await page.goto('/nepal-journey.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#loadError')).toBeVisible();
+  await expect(page.locator('#reviewTracker')).toBeHidden();
+});
