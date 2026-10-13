@@ -1,4 +1,7 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('node:fs');
+const path = require('node:path');
+const sourceReviewFixturePath = path.join(__dirname, '..', 'docs', 'data', 'source_review_status.json');
 
 async function freshPage(page, options = {}) {
   const errors = [];
@@ -6,8 +9,10 @@ async function freshPage(page, options = {}) {
 
   const sourceState = options.sourceState || 'clean';
   await page.route('**/data/source_review_status.json', async route => {
-    const response = await route.fetch();
-    const status = await response.json();
+    // Use this commit's official-source fixture directly, rather than making
+    // a second localhost HTTP request during the server's first-start window.
+    // The app still fetches the guarded URL, intercepted and fulfilled here.
+    const status = JSON.parse(fs.readFileSync(sourceReviewFixturePath, 'utf8'));
     if (sourceState === 'clean') {
       status.state = 'clean';
       status.reviewRequiredUrls = [];
@@ -25,7 +30,7 @@ async function freshPage(page, options = {}) {
       status.fetchFailureSourceIds = [];
       status.message = 'Test fixture: official source review required.';
     }
-    await route.fulfill({ response, json: status });
+    await route.fulfill({ status: 200, contentType: 'application/json', json: status });
   });
 
   await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
