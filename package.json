@@ -2,7 +2,8 @@
   "name": "korea-employment-passport-web",
   "private": true,
   "scripts": {
-    "test:ui": "playwright test"
+    "test:ui": "playwright test",
+    "test:nepal-gate": "node scripts/check_nepal_research_gate.js && node --test tests/nepal-research-gate.test.cjs"
   },
   "devDependencies": {
     "@playwright/test": "1.55.0"
