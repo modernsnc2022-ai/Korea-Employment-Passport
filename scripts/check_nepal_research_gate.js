@@ -48,6 +48,23 @@ assert(hrdSchedule.reconciliation?.status === 'resolved_by_local_nepal_2026_07_3
   hrdSchedule.reconciliation?.deadlineExtensionVerifiedFromLocalSupplementaryContent === true &&
   hrdSchedule.reconciliation?.verificationSource === 'https://epsnepal.gov.np/postdetails/143',
   'HRD cross-source reconciliation must remain source-verified');
+const hrdOfficial = hrdSchedule.sources?.find(s => s.id === 'np_2026_hrd_5th_manufacturing_5part');
+assert(hrdOfficial?.status === 'verified_direct_official_current' &&
+  hrdOfficial?.facts?.title === 'The 5th recruitment of the Point system in Nepal_Manufacturing(5부)' &&
+  hrdOfficial?.facts?.dateState === 'undecided' &&
+  hrdOfficial?.facts?.testAnnouncementDate === null &&
+  hrdOfficial?.facts?.testPeriod === null,
+  '2026 Nepal Manufacturing 5th HRD exam announcement/period must remain undecided until directly verified');
+assert(hrdSchedule.lastScheduleRecheck?.checkedAt === '2026-10-13' &&
+  hrdSchedule.lastScheduleRecheck?.sourceUrl === hrdOfficial?.sourceUrl &&
+  hrdSchedule.lastScheduleRecheck?.officialTestPeriod === 'undecided' &&
+  hrdSchedule.lastScheduleRecheck?.officialTestAnnouncement === 'undecided',
+  'Direct official HRD follow-up snapshot cannot be replaced with inferred exam dates');
+assert(readiness.currentCohort?.epsTopikSchedule?.status === 'verified_hrd_current_row_test_dates_undecided' &&
+  readiness.lastCohortRecheck?.manufacturing2026ExamPeriod === 'undecided' &&
+  readiness.lastCohortRecheck?.manufacturing2026Results === 'not_verified_in_reviewed_official_index' &&
+  readiness.lastCohortRecheck?.classification === 'research_hold_no_new_cohort_rule_promotion',
+  '2026 first-phase HRD dates and result notices cannot be promoted from 2025 or unlinked worker notices');
 assert(ledger.policy?.betaAccess === 'blocked' && ledger.policy?.allowDeadlineExtensionInference === false &&
   ledger.policy?.allowDepartureToPromote2026ApplicationStages === false &&
   ledger.policy?.allowCrossSectorPromotion === false, 'Nepal notice provenance safety flags changed');
