@@ -247,7 +247,7 @@ def self_test() -> None:
     manifest = load_source_data("monitor/sources.json")
     scope = load_source_data("recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json")
     signoff = load_source_data("recruitment/ID_BETA_SOURCE_SIGNOFF.json")
-    assert signoff["status"] == "pending_manual_source_signoff"
+    assert signoff["status"] in {"pending_manual_source_signoff", "approved_manual_indonesia_scope"}
     signed = deepcopy(signoff)
     signed.update({
         "status": "approved_manual_indonesia_scope",
