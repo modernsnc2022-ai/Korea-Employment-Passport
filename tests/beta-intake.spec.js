@@ -51,3 +51,75 @@ test('beta applicant intake can submit directly without opening an email client'
   expect(submitted.activeProcess).toBe(true);
   expect(submitted.feedbackAgreement).toBe(true);
 });
+
+async function fillApplicant(page) {
+  await page.locator('#applicantStage').selectOption({ index: 1 });
+  await page.locator('#applicantCycle').selectOption({ index: 1 });
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+  await page.locator('#applicantContactEmail').fill('tester@example.com');
+}
+
+for (const scenario of [
+  {
+    label: 'HTTP 200 with negative application acknowledgement',
+    status: 200, body: {ok:false, submissionId:'KEP-I-TEST1234'}
+  },
+  {
+    label: 'HTTP 200 with no submission reference',
+    status: 200, body: {ok:true}
+  },
+  {
+    label: 'HTTP 201 with untrusted submission reference',
+    status: 201, body: {ok:true, submissionId:'<script>alert(1)</script>'}
+  },
+  {
+    label: 'HTTP 503 intake server error',
+    status: 503, body: {ok:false, error:'Unavailable'}
+  }
+]) {
+  test('beta intake never displays a false receipt: '+scenario.label, async ({page}) => {
+    let calls=0;
+    await page.route('https://intake.example.test/v1/beta/applicant', async route=>{
+      calls++;
+      await route.fulfill({
+        status:scenario.status,
+        contentType:'application/json',
+        headers:{'Access-Control-Allow-Origin':new URL(page.url()).origin},
+        body:JSON.stringify(scenario.body)
+      });
+    });
+    await betaPage(page,'https://intake.example.test/v1/beta/applicant');
+    await fillApplicant(page);
+    await page.locator('#betaApplicationSubmitBtn').click();
+    await expect(page.locator('#applicationResult')).toContainText('Data belum dianggap terkirim');
+    await expect(page.locator('#applicationResult')).not.toContainText('Pendaftaran diterima langsung');
+    await expect(page.locator('#applicantContactEmail')).toHaveValue('tester@example.com');
+    await expect(page.locator('#applicantStage')).not.toHaveValue('');
+    await expect(page.locator('#betaApplicationSubmitBtn')).toBeEnabled();
+    expect(calls).toBe(1);
+  });
+}
+
+test('beta email-only fallback identifies mailto composer as NOT a sent application',async({page})=>{
+  await betaPage(page,'');
+  await page.locator('#applicantStage').selectOption({index:1});
+  await page.locator('#applicantCycle').selectOption({index:1});
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+  await page.locator('#betaApplicationSubmitBtn').click({noWaitAfter:true});
+  await expect(page.locator('#applicationResult')).toContainText('BELUM terkirim');
+  await expect(page.locator('#applicationResult')).toContainText('folder Terkirim');
+});
+
+test('beta Gmail compose is NOT reported as successful application submission',async({page})=>{
+  await betaPage(page,'');
+  await page.locator('#applicantStage').selectOption({index:1});
+  await page.locator('#applicantCycle').selectOption({index:1});
+  await page.locator('#activeProcess').check();
+  await page.locator('#feedbackAgreement').check();
+  await page.evaluate(()=>{window.open=()=>({closed:false});});
+  await page.locator('#gmailApplicationBtn').click();
+  await expect(page.locator('#applicationResult')).toContainText('BELUM terkirim');
+  await expect(page.locator('#applicationResult')).toContainText('Tekan Kirim');
+});
