@@ -13,7 +13,6 @@
     "checkedAt": "2026-10-14",
     "comment": "On 2026-10-14 official G-to-G Korea Pengumuman listing returned HTTP 200; its DataTables JSON served 2,876 historic records. Latest 225 rows were read through 2025-11-01, covering the listed 2026 period. Exact 2026-09-17 optional Skill Test competency upload notice was read at official detail page. This does not substitute for 2026 job-application exact documents or for operator-signed release-day notice review.",
     "observedHttpStatus": 200,
-    "observedTitle": "Preliminary Training dan Info",
     "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
     "currentCategory": "Pengumuman",
     "previouslyMistakenUrl": "https://kp2mi.go.id/gtog-korea/info",
@@ -33,7 +32,8 @@
       "optional": true,
       "closed": true,
       "notJobApplicationDocuments": true
-    }
+    },
+    "historicalMistakenPageTitle": "Preliminary Training dan Info"
   },
   "manufacturingOnlineJobDocuments": "job_docs_hold",
   "betaAccess": "hold",
