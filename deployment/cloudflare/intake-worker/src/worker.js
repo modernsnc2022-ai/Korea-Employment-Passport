@@ -11,6 +11,7 @@ const CONTENT_HEADERS={
   'X-Robots-Tag':'noindex, nofollow'
 };
 const ROUTE='/v1/beta/applicant';
+const VERIFY_REQUEST_ROUTE=ROUTE+'/verify-request';
 const RETENTION_MS=90*24*60*60*1000;
 const MAX_BYTES=4096;
 const STAGES=new Set([
@@ -23,7 +24,7 @@ const STAGES=new Set([
 ]);
 const ALLOWED_KEYS=new Set([
   'kind','contactEmail','stageId','stageTitle','cycle','sourceCode',
-  'activeProcess','feedbackAgreement','website','turnstileToken'
+  'activeProcess','feedbackAgreement','website','turnstileToken','verificationCode'
 ]);
 const HEX='0123456789abcdef';
 
@@ -55,7 +56,7 @@ function isEmail(email){
 function allowedSource(value){
   return typeof value==='string'&&/^[a-z0-9_]{2,96}$/.test(value);
 }
-function validate(input){
+function validate(input,{requestCode=false}={}){
   if(!input||typeof input!=='object'||Array.isArray(input))return null;
   if(Object.keys(input).some(k=>!ALLOWED_KEYS.has(k)))return null;
   if(input.kind!=='active_applicant'||input.activeProcess!==true||input.feedbackAgreement!==true)return null;
@@ -72,9 +73,14 @@ function validate(input){
   if(!allowedSource(input.sourceCode))return null;
   if(typeof input.turnstileToken!=='string'||input.turnstileToken.length<10
     ||input.turnstileToken.length>2048)return null;
+  if(requestCode){
+    if('verificationCode' in input)return null;
+  }else if(typeof input.verificationCode!=='string'
+    ||!/^\d{8}$/.test(input.verificationCode))return null;
   return {
     email,stageId:input.stageId,cycle:input.cycle,sourceCode:input.sourceCode,
-    token:input.turnstileToken
+    token:input.turnstileToken,
+    verificationCode:requestCode?null:input.verificationCode
   };
 }
 function ready(env){
