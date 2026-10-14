@@ -502,9 +502,24 @@ function renderFreshnessStatus(){
     box.classList.add('review-required');
     if(trustPanel)trustPanel.open=true;
     const count=(sourceReviewStatus.reviewRequiredUrls||[]).length;
+    // Only these five known, country-exclusive indexes can be separated
+    // from Indonesia. Unknown new IDs are always counted with the
+    // Indonesia-relevant alerts (fail closed); never suppress global warnings.
+    const foreignOnly=new Set([
+      'np_eps_notice_index','vn_colab_eps_notices','lk_slbfe_home',
+      'kg_migrant_home','mm_mol_dol_index'
+    ]);
+    const changedIds=Array.isArray(sourceReviewStatus.reviewRequiredSourceIds)
+      ?sourceReviewStatus.reviewRequiredSourceIds:[];
+    const foreignCount=changedIds.slice(0,count).filter(id=>foreignOnly.has(id)).length;
+    const relevantCount=count-foreignCount;
+    const scopeText=changedIds.length===count
+      ?`<span><strong>${relevantCount} sumber terkait Indonesia/Korea, ${foreignCount} sumber negara lain.</strong> Sumber negara lain tetap menunggu review untuk rute masing-masing.</span>`
+      :'<span>Rincian sumber belum dapat dicocokkan; perlakukan semua perubahan sebagai belum diverifikasi.</span>';
     box.innerHTML=`
       <span class="freshness-pill">PERUBAHAN SUMBER RESMI TERDETEKSI</span>
       <span><strong>${count} sumber perlu ditinjau.</strong> Jawaban/formulir yang bergantung pada sumber tersebut sementara tidak dianggap “jawaban pasti”.</span>
+      ${scopeText}
       <span>Aturan tidak diubah otomatis sampai review selesai.</span>`;
     return;
   }
