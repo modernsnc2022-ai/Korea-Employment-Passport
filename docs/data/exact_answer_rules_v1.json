@@ -3175,16 +3175,18 @@
       "stages": [
         "skill_competency"
       ],
-      "question": "Dokumen/bukti kompetensi apa yang dibawa untuk Skill Test manufaktur 2026?",
-      "answer": "Dokumen yang benar-benar wajib dibawa saat Skill Test Manufaktur 2026 harus mengikuti pengumuman Skill Test Manufaktur 2026 yang spesifik. Dalam pengumuman 10 September 2026, Job Capacity Assessment bersifat opsional bagi pemilik dokumen kompetensi manufaktur; bukan syarat umum semua peserta. Jangan memakai checklist tahun 2025 atau sektor Perikanan 2026.",
-      "writeExactly": "Jangan memakai daftar Skill Test manufaktur 2025 sebagai aturan 2026. Simpan dokumen asli kompetensi yang memang Anda miliki, lalu ikuti daftar resmi ketika pengumuman 2026 terbit.",
-      "why": "Pengumuman hasil EPS-TOPIK Manufaktur 10 September 2026 mengatur evaluasi kapasitas kerja yang opsional, tetapi menyatakan jadwal pelaksanaan Skill Test/Job Capacity Assessment akan diumumkan lebih lanjut.",
+      "question": "Apakah semua peserta Skill Test Manufaktur 2026 harus unggah dokumen kompetensi? Apakah periodenya masih buka?",
+      "answer": "TIDAK WAJIB: pengunggahan bukti kompetensi hanya opsional bagi pemilik pengalaman kerja manufaktur minimal 1 tahun, ijazah manufaktur minimal Diploma I, sertifikat pelatihan manufaktur minimal 120 jam, atau sertifikat nasional kompetensi manufaktur yang masih berlaku. Pengumuman KP2MI 17 September 2026 menetapkan unggah melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 sampai 23 September 2026 pukul 13.00 WIB; periode itu sudah BERAKHIR. Bukti tersebut BUKAN daftar dokumen wajib untuk pengajuan lamaran kerja manufaktur atau dokumen wajib yang dibawa semua peserta Skill Test. Daftar dokumen wajib ke lokasi dan jadwal Skill Test harus merujuk pada pengumuman Skill Test yang khusus bila terbit.",
+      "writeExactly": "Jangan unggah bukti kompetensi secara terlambat atau melalui LPK/perantara; hanya SiskoP2MI untuk periode resmi. Jangan menyebut unggah bukti opsional ini sebagai syarat semua peserta. Cek pengumuman resmi untuk jadwal dan dokumen wajib Skill Test.",
+      "why": "Pengumuman resmi KP2MI PENG.2522/04.04/PP.02.04/IX/2026 tanggal 17 September 2026 secara eksplisit menyatakan tidak wajib/opsional, periode 21–23 September 2026 WIB, dan kanal SiskoP2MI. Pengumuman tersebut masih menyatakan jadwal Skill Test menyusul.",
       "doNotDo": [
         "Jangan membawa atau mengubah dokumen hanya berdasarkan grup/LPK.",
-        "Jangan menganggap daftar 2025 otomatis berlaku pada 2026."
+        "Jangan menganggap daftar 2025 otomatis berlaku pada 2026.",
+        "Jangan mengubah tenggat 21–23 September 2026 menjadi periode pendaftaran yang masih buka.",
+        "Jangan menyalin bukti kompetensi opsional ke checklist wajib pengajuan lamaran kerja (job_docs)."
       ],
-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
-      "verifiedAt": "2026-10-03",
+      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "verifiedAt": "2026-10-14",
       "verificationStatus": "waiting_official_notice",
       "scopeType": "route_2026"
     },
