@@ -1,12 +1,23 @@
 const { test, expect } = require('@playwright/test');
 
-async function betaPage(page, directEndpoint='') {
+async function betaPage(page, directEndpoint='', captchaReady=true) {
+  // No third-party network or real Turnstile token in browser QA.
+  await page.addInitScript((ready)=>{
+    window.turnstile={
+      render:(_mount,options)=>{
+        if(ready)Promise.resolve().then(()=>options.callback('synthetic-cloudflare-token'));
+        return 'mock-widget';
+      },
+      reset:()=>{}
+    };
+  },captchaReady);
   await page.route('**/data/beta_program_v1.json', async route => {
     const response = await route.fetch();
     const program = await response.json();
     program.application.directIntake = {
       ...(program.application.directIntake || {}),
-      endpoint: directEndpoint
+      endpoint: directEndpoint,
+      turnstileSiteKey: directEndpoint ? 'test-site-key' : ''
     };
     await route.fulfill({ response, json: program });
   });
@@ -122,4 +133,28 @@ test('beta Gmail compose is NOT reported as successful application submission',a
   await page.locator('#gmailApplicationBtn').click();
   await expect(page.locator('#applicationResult')).toContainText('BELUM terkirim');
   await expect(page.locator('#applicationResult')).toContainText('Tekan Kirim');
+});
+
+test('direct intake is gated by a real Turnstile challenge before POST', async({page})=>{
+  let calls=0;
+  await page.route('https://intake.example.test/v1/beta/applicant', async route=>{
+    calls++;await route.fulfill({status:201,contentType:'application/json',
+      headers:{'Access-Control-Allow-Origin':new URL(page.url()).origin},
+      body:JSON.stringify({ok:true,submissionId:'KEP-I-TEST-DIRECT'})});
+  });
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant',false);
+  await expect(page.locator('#directIntakeChallenge')).toBeVisible();
+  await fillApplicant(page);
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicationResult')).toContainText('Selesaikan verifikasi keamanan');
+  expect(calls).toBe(0);
+});
+
+test('unconfigured HTTPS endpoint remains email-only fallback and never loads Turnstile',async({page})=>{
+  await page.addInitScript(()=>{window.__turnstileRequests=0;});
+  await betaPage(page,'');
+  await expect(page.locator('#directIntakeChallenge')).toBeHidden();
+  await expect(page.locator('#directIntakeFields')).toBeHidden();
+  await expect(page.locator('#betaApplicationSubmitBtn')).toContainText('aplikasi email');
+  expect(await page.evaluate(()=>document.querySelectorAll('script[src*="turnstile"]').length)).toBe(0);
 });
