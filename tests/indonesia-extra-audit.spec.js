@@ -238,7 +238,7 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v133'");
+  expect(script).toContain("const CACHE='kep-v134'");
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
