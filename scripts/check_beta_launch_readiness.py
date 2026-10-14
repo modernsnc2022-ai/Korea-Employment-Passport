@@ -182,6 +182,33 @@ require(
     check_date is not None and check_date.isoformat() >= "2026-10-06",
     "Manufacturing launch evidence date must be valid and no older than the verified 2026-10-06 baseline",
 )
+coverage = manufacturing_launch_check.get("noticeIndexCoverage", {})
+require(
+    coverage.get("previouslyAssumedIndex") == "https://kp2mi.go.id/gtog-korea/info"
+    and coverage.get("actualCategory") == "Preliminary Training dan Info"
+    and coverage.get("status") in {
+        "unverified_preliminary_training_category_only",
+        "verified_complete_general_manufacturing_index_review",
+    },
+    "Manufacturing source inventory must disclose the historical mis-scoped Preliminary Training index",
+)
+if not args.allow_source_review_pending:
+    from urllib.parse import urlparse
+
+    official_index = str(coverage.get("officialManufacturingInventoryUrl") or "")
+    parts = urlparse(official_index)
+    require(
+        coverage.get("status") == "verified_complete_general_manufacturing_index_review"
+        and coverage.get("checkedAt") == checked_at
+        and coverage.get("completeGeneralManufacturingInventory") is True
+        and coverage.get("operatorConfirmedCompleteReview") is True
+        and parts.scheme == "https"
+        and parts.hostname in {"kp2mi.go.id", "www.kp2mi.go.id"}
+        and (parts.path.startswith("/gtog-korea/") or parts.path.startswith("/gtog-data/korea/"))
+        and parts.path.lower().rstrip("/") != "/gtog-korea/info"
+        and "preliminary" not in official_index.lower(),
+        "Beta release requires current official General Manufacturing notice inventory, not the Preliminary Training category",
+    )
 same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
 require(
     same_day.get("status") == "completed_no_detailed_manufacturing_notice_found"
