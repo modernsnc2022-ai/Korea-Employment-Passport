@@ -238,7 +238,7 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v135'");
+  expect(script).toContain("const CACHE='kep-v136'");
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
@@ -394,4 +394,29 @@ test('Jan 2026 initial EPS registration annex safeguards are exact while final M
   await page.locator('#currentStageSelect').selectOption(String(route.stages.findIndex(s=>s.id==='document_verify')));
   await page.locator('#setCurrentStageBtn').click();
   await expect(page.locator('#nextAction')).toContainText('SKL tidak menggantikan ijazah');
+});
+
+test('critical official source warnings recover after one transient network error', async({page})=>{
+  let attempts=0;
+  await page.route('**/data/source_review_status.json',async route=>{
+    attempts++;
+    if(attempts===1)await route.abort('failed');
+    else await route.continue();
+  });
+  await page.goto('/app.html');
+  await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau',{timeout:12000});
+  await expect(page.locator('#freshnessStatus')).toContainText('3 sumber terkait Indonesia/Korea, 5 sumber negara lain');
+  expect(attempts).toBeGreaterThanOrEqual(2);
+});
+
+test('official source warning fails closed after persistent data connection failures',async({page})=>{
+  let attempts=0;
+  await page.route('**/data/source_review_status.json',async route=>{
+    attempts++;await route.abort('failed');
+  });
+  await page.goto('/app.html');
+  await expect(page.locator('#freshnessStatus')).toContainText('PEMERIKSAAN SUMBER BELUM LENGKAP',{timeout:12000});
+  await expect(page.locator('#freshnessStatus')).toContainText('Aturan tidak diubah otomatis');
+  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
+  expect(attempts).toBe(3);
 });
