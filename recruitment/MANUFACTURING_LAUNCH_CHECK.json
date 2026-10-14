@@ -4,7 +4,7 @@
   "scope": "2026 Manufacturing online job-application detailed notice",
   "checkedAt": "2026-10-06",
   "result": "no_current_manufacturing_job_application_notice",
-  "primaryIndex": "https://kp2mi.go.id/gtog-korea/info",
+  "primaryIndex": "https://kp2mi.go.id/gtog-korea/pengumuman",
   "officialEvidence": [
     {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
@@ -95,14 +95,43 @@
     }
   ],
   "noticeIndexCoverage": {
-    "status": "unverified_preliminary_training_category_only",
+    "status": "correct_pengumuman_2026_inventory_read_pending_operator_signoff",
     "checkedAt": "2026-10-14",
     "previouslyAssumedIndex": "https://kp2mi.go.id/gtog-korea/info",
     "actualCategory": "Preliminary Training dan Info",
     "serverSideAjax": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
-    "completeGeneralManufacturingInventory": false,
-    "officialManufacturingInventoryUrl": null,
+    "completeGeneralManufacturingInventory": true,
+    "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
     "operatorConfirmedCompleteReview": false,
-    "notes": "The primaryIndex URL is a Preliminary Training dan Info DataTables category, not an exhaustive General Manufacturing 2026 announcements list. This retrospective source-scope finding invalidates treating past result=no_current_manufacturing_job_application_notice as a launch-day full index verification. Preserve historical evidence, but fail closed until a verified relevant official notice inventory is checked on launch day."
-  }
+    "notes": "Read-only 2026-10-14 official Pengumuman DataTables rows 0-224 in latest-first order, reaching November 2025; this establishes a 2026 title inventory, not final human release signoff nor verification of each underlying attachment. Newly identified 2026-09-17 OPTIONAL Manufacturing Skill Test competency-upload announcement is separate from post-exam job application documents. Release-day operator confirmation remains false.",
+    "currentCategory": "Pengumuman",
+    "currentListingUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "serverSideAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+    "recordsTotal": 2876,
+    "inspectedOffsets": [
+      0,
+      75,
+      150
+    ],
+    "inspectedRows": 225,
+    "latestListedNoticeDate": "2026-10-09",
+    "reachedPreviousYear": "2025-11-01"
+  },
+  "historicalIndexBefore20261014": "https://kp2mi.go.id/gtog-korea/info",
+  "historicalNegativeResultNotReleaseEvidence": true,
+  "foundOfficial2026Notices": [
+    {
+      "date": "2026-09-17",
+      "scope": "2026_general_manufacturing_optional_skill_competency_document_upload_closed",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "noticeNumber": "PENG.2522/04.04/PP.02.04/IX/2026",
+      "notJobApplicationDocuments": true
+    },
+    {
+      "date": "2026-09-10",
+      "scope": "2026_general_manufacturing_eps_topik_first_stage_results",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "notJobApplicationDocuments": true
+    }
+  ]
 }
