@@ -1,4 +1,6 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Additional launch-readiness audit, separate from the normal Indonesian UI smoke tests.
 // No real user data, enrollment, external endpoints or publication actions are used.
@@ -242,11 +244,12 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
 
 test('Unrecognized new official source is never wrongly excluded from Indonesian warnings', async ({page}) => {
   await page.route('**/data/source_review_status.json', async route => {
-    const response=await route.fetch();
-    const data=await response.json();
+    const data=JSON.parse(fs.readFileSync(
+      path.join(__dirname,'..','docs','data','source_review_status.json'),'utf8'
+    ));
     data.reviewRequiredSourceIds.push('unexpected_new_source_no_scope_approval');
     data.reviewRequiredUrls.push('https://official.example/new-notice');
-    await route.fulfill({response,json:data});
+    await route.fulfill({status:200,contentType:'application/json',json:data});
   });
   await page.goto('/app.html', {waitUntil:'domcontentloaded'});
   await expect(page.locator('#freshnessStatus')).toBeVisible();
