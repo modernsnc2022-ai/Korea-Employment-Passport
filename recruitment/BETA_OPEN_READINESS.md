@@ -1,68 +1,54 @@
-# Beta OPEN readiness — Indonesia → Korea E-9 Manufacturing 2026
+# Beta OPEN readiness — Indonesia → Korea E-9 General Manufacturing 2026
 
-Status: **SUPPORTED-ROUTE DEVELOPMENT COMPLETE — tester-interest intake OPEN; beta access HOLD pending explicit release decision**
+**Snapshot reviewed:** 2026-10-14 KST. **This is a development-and-release evidence snapshot, NOT a release approval.** Update and independently retest on the actual beta release day.
 
-Reviewed: 2026-10-04 KST
+**Product development:** supported route and primary user workflows implemented and independently tested. **Tester interest intake: OPEN; actual public beta access: HOLD; E-9 worker validation-panel access: HOLD; PR #324: Draft/unmerged.** Product-code test success does not imply approved official evidence, or that the latest Draft code is already live on GitHub Pages.
 
-## Development-completion boundary
+## Machine-checked snapshot (must match current tracked JSON)
 
-For the supported first route (Indonesia → E-9 → Manufacturing → 2026), product development is considered complete when there is no known product-code defect, the full supported workflow is implemented, and the same-HEAD static/UI/Pages/launch-gate suite is green. This is intentionally separate from **route validation**: field evidence from real applicants/workers and the external Manufacturing 2026 official-evidence HOLD can still remain after development completion.
+- Indonesia Manufacturing supported stages: **27**
+- Indonesia exact-answer records: **308**
+- Broker question catalog: **256**
+- Form wizards: **8**
+- Form fields: **113**
+- Monitored official sources: **83/84 fetched**
+- Official source state: **review_required**
+- Current exact Manufacturing job-application HOLD count: **1**
+- Exact held Manufacturing item: `job_docs`
+- Beta applicant-interest intake: **open**
+- Actual public beta access: **hold**
+- Worker validation-panel access: **hold**
 
-The five Manufacturing job-application HOLD questions are an external evidence dependency, not unfinished guessed UI. The app must continue to block unsupported submission detail and route the user to official help instead of inventing an answer.
+Those counts are checked against the current GitHub source data by `scripts/check_beta_open_readiness_doc.py`, which is also invoked from the standard `check_beta_launch_readiness.py` product integrity gate. The snapshot is not a certification that all 84 official sources are fresh or reviewed for an arbitrary future date.
 
-## Automated readiness
+## Implementation evidence — development only
 
-- Locked 27-stage route: PASS
-- Broker-question catalog: 256 questions, no unresolved HIGH blocker outside the five explicit Manufacturing 2026 evidence HOLDs
-- Form guidance: 8 forms / 113 fields / 113 validators
-- Official-source monitor: 72/72 checked, clean, no review-required source, no fetch failure
-- Static product integrity: PASS
-- Strict beta-launch gate: PASS
-- Known product-code defects: 0 open issues; GitHub issue #2 is classified as an external official-evidence dependency
-- Mobile/desktop UI smoke: PASS on the current product code line
-- GitHub Pages deployment: PASS on the current product code line
-- Public beta slots: 30 pseudonymous KEP IDs prepared
-- E-9 worker validator slots: 20 separate pseudonymous KEP IDs prepared
-- Public-beta slot helper and E-9 worker-panel slot helper: self-tested in CI
-- Workplace worker-evidence registry: privacy validation enabled
-- Progress/feedback reporting: privacy-safe aggregate reporting enabled
+- Supported route: **Indonesia → E-9 → General Manufacturing → 2026**, 27 stages; separate Country Pack contracts exist for 16 sending countries, with the other countries still in `research_hold`/not promoted.
+- Indonesian applicant content: **308** exact-answer rules; **256** structured broker questions; 13 document packs; 8 form wizards / 113 fields and 113 validators; 2026 optional Skill Test annex upload closed, with safeguards preventing its evidence from becoming the later job-application checklist.
+- The 2026 initial EPS-TOPIK registration guide and sample PDF annexes are documented and narrowly reflected in Indonesian registration help; source-dated facts are not copied across Fisheries/Root Industry/special exams or 2025 cohorts.
+- The current last independently executed **real Windows Edge full browser regression** was **79/79 PASS**, on applicant app/test code SHA `1c3ea182a75bbe1081472645657463f6f8f61c00`. Subsequent Draft commits changed release tooling, official evidence metadata and documents, not the applicant JS/PWA route behavior. Static/source-safety tests have separately passed on the later HEAD. Do not claim a successful production Pages build or live-HEAD parity from those results.
+- Local/isolated Windows checks replace discretionary GitHub Actions spending where possible. Do not consume limited Actions budget merely to restate product-code tests.
 
-## Explicit official-evidence HOLD
+## Release-day gates — NOT YET SATISFIED
 
-A 2026 Manufacturing-specific detailed e-certificate / online job-application notice has still not been verified.
+1. **Fresh official source monitoring and named Indonesia review.** Last configured source scan fetched **83 of 84** (one Nepal fetch HTTP 500). There are **three changed Korea-common source alerts** needing named Indonesia-scope review: wage statements under Labor Standards Act Article 48, KDCA Travel Health Q-CODE categories and MOEL 1350 contact. Keep the five other-country warnings visible and pending. The local machine fetched all three official HTTPS pages and documented their contents, but this does **not** fill the manual signoff. Recheck the official monitor on the actual release day; October 14 evidence cannot be silently reused tomorrow.
+2. **Same-day KP2MI 2026 General Manufacturing notice-body and attachments human review.** The correct official category is [KP2MI Pengumuman](https://kp2mi.go.id/gtog-korea/pengumuman), **not** `/gtog-korea/info` Preliminary Training. A read-only 2026 title survey of 320 recent records found seven General Manufacturing-related items and three *other-cohort* online job-application notices. The known notice titles do not yet establish the precise 2026 General Manufacturing **post-Skill Test** online application documents. Six September optional competency PDF annexes and four January/February initial examination registration PDF annexes have separate, dated limited-visual evidence. They are **not** final job-application forms. `job_docs` remains deliberately withheld pending applicable official notice, so no private-broker workaround or guessed upload checklist is permissible.
+3. **HTTPS entrypoint and same-reviewed-HEAD deployment proof.** The owner approved GitHub Pages HTTPS enforcement on both shared site and KEP project. On **2026-10-14 at 14:22 KST**, **all 6/6** previously sent `github.io` entrypoint patterns redirected directly to matching **HTTPS `www.gdglobal.kr`** paths with attribution query intact. Recheck at release time. The live HTTPS production site's nine critical assets were independently matched **9/9 to existing `main`** SHA `29fde41e697814154e4ebfba2a53ef3a56dbf8b7`, **only 1/9 to the unmerged Indonesia Draft**. This mismatch is expected before a reviewed merge/deployment and is **not** a main production outage. After approved deployment, verify **9/9** real served assets against that exact release commit SHA and confirm actual Pages deployment evidence.
+4. **A separate, explicit OPEN decision.** The read-only `scripts/report_indonesia_beta_release_preflight.py --live --json` reports whether all official/technical preconditions are ready for an operator decision, but **cannot authorize release**. Its READY indicator is distinct from manual OPEN. `scripts/set_beta_release.py` must independently require dated human signoffs, clean checked-out `main` matching the live remote commit, six secure first hops, nine exact live assets and an explicit approval time. Its local `--write` does **not** deploy the new OPEN state; a newly approved release commit must be published and rechecked after deployment. Do not merge, activate testers or change the beta switch without explicit authorization.
 
-These five questions remain intentionally held rather than guessed:
-- `job_docs`
-- `job_scan`
-- `job_name`
-- `job_edit`
-- `job_submit`
+## Why one exact question is still HELD
 
-This is tracked in GitHub issue #2 and is an external official-evidence dependency, not a known product-code defect.
+The unresolved item is **only `job_docs`**: the precise list of files the 2026 General Manufacturing applicant must upload for the final online job application *after* the mandatory Skill Test. Four adjacent questions (`job_scan`, `job_name`, `job_edit`, `job_submit`) have separately reviewed conservative official-platform/identity safety baselines and **must not** be counted as four additional current HOLDs. The one genuine external official-evidence HOLD blocks declaring **Broker Replacement Rate 100% PASS**, but does not by itself forbid a restricted beta if all technical/official/manual release gates pass and guidance continues refusing unsupported details.
 
-## Before changing beta access from HOLD to OPEN
+## After OPEN — user validation, not a prelaunch product-code prerequisite
 
-1. Re-check the KP2MI Korea information index and official search **on the day of the OPEN decision** for a new 2026 Manufacturing-specific online job-application notice.
-2. If a new notice exists, review it before changing any held rules.
-3. Make an explicit release decision for either or both:
-   - 30-person active-applicant public beta
-   - 20-person E-9 worker retrospective validation panel
-4. Change only the intended status switch; do not silently open the other panel.
-5. Re-run strict beta-launch gate, UI smoke, and Pages after the switch.
+- Recruit at least **30 current-cycle active Indonesia applicants**, and separately **20 Indonesian E-9 workers already in Korea** for retrospective worker validation. The 30-person count is a soft recruitment target, not a hard signup cap; applicant overflow IDs begin at KEP-0051.
+- Approved beta users receive six free months starting **from their individual beta activation date**, conditional on useful feedback.
+- Capture later-stage coverage (roster, employer selection, SLC, visa, medical/departure), prove private-broker replacement or official-only alternatives, and close exact `job_docs` on genuinely applicable current-cycle evidence before claiming full validated route PASS.
+- Never put personal emails, identity documents, addresses, bank or health details in GitHub or public Google Sheets. Worker evidence requires separate consent and review.
 
-## After OPEN — evidence collection, not a launch prerequisite
+## Actual current switch state
 
-The following are required before declaring the supported route a Broker Replacement Rate 100% PASS:
-- 30 active Indonesian G-to-G applicants
-- 20 Indonesian E-9 workers in Korea
-- at least one active tester in each late-stage bucket: roster/employer selection, SLC/post-SLC, visa/OPP/final medical, departure
-- every reported Broker Gap resolved or documented as an official/licensed-only dependency
+**Intake OPEN; beta access HOLD; worker panel access HOLD.** No participant KEP ID is activated solely from interest registration. A failed or missing official/manual/deployment gate cannot be papered over by a successful browser test. Continue development in the Draft PR without accidentally deploying or activating any of the other sending countries.
 
-See `docs/MVP_VALIDATION.md`.
-
-## Current switch state
-
-- Tester-interest application intake: **OPEN**
-- Public beta access: **HOLD**
-- E-9 worker validator panel: **HOLD**
-- No participant slot has been activated or enrolled yet.
+References: `recruitment/ID_BETA_OPERATOR_SIGNOFF_PACKET_20261014.md`, `recruitment/BETA_LAUNCH_GATE.md`, `research/INDONESIA_BETA_PAGES_HTTPS_LIVE_PARITY_AUDIT_20261014.md`, and `docs/MVP_VALIDATION.md`.
