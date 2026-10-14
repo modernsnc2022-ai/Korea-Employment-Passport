@@ -61,10 +61,15 @@ def validate(status: dict, manifest: dict, scope: dict) -> tuple[int, int]:
     ensure(set(ids) == CRITICAL | OTHER_COUNTRY,
            "new or missing changed sources must fail closed pending manual scope review")
     ensure(scope.get("kp2miManufacturingNoticeIndex", {}).get("status")
-           == "not_verified_official_index_unavailable",
+           == "not_verified_wrong_category_incomplete_inventory",
            "do not claim full current Manufacturing index review without verified evidence")
     ensure(scope.get("kp2miManufacturingNoticeIndex", {}).get("checkedAt")
            == scope.get("checkedAt"), "index attempt date must match triage date")
+    index = scope.get("kp2miManufacturingNoticeIndex", {})
+    ensure(index.get("observedTitle") == "Preliminary Training dan Info"
+           and index.get("dataEndpoint") ==
+           "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
+           "index-page category and AJAX scope must remain explicitly non-exhaustive")
     for id_, url in zip(ids, urls):
         ensure(by_id.get(id_) == url, f"{id_}: official source URL changed or is mismatched")
     for row in records:
@@ -106,7 +111,9 @@ def self_test() -> None:
         "sourceWatchConfigured": len(ids), "sourceWatchChecked": len(ids),
         "checkedAt": "2026-10-14",
         "kp2miManufacturingNoticeIndex": {
-            "status": "not_verified_official_index_unavailable", "checkedAt": "2026-10-14"
+            "status": "not_verified_wrong_category_incomplete_inventory", "checkedAt": "2026-10-14",
+            "observedTitle": "Preliminary Training dan Info",
+            "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
         },
         "records": [
             {
