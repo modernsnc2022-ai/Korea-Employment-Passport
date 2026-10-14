@@ -51,6 +51,21 @@ def errors(worker: str, config: str, schema: str, program: dict, frontend: str,
                   'crons = ["0 3 * * *"]'):
         if token not in config:
             issues.append("safe Worker deployment template missing "+token)
+    # A CAPTCHA protects the form from some bots, not the identity behind an
+    # email address. Without an authenticated private verifier binding, no
+    # existing receipt may be returned for a guessed email.
+    for invariant in ("EMAIL_VERIFIER?.fetch", "VERIFIER_CALL_SECRET",
+                      "privateEmailProof",
+                      "email_verification_required", "verificationCode",
+                      "verify-request"):
+        # The literal route constant is distinct from the UI URL.
+        search = "VERIFY_REQUEST_ROUTE" if invariant=="verify-request" else invariant
+        if search not in worker:
+            issues.append("direct receipt must require private email proof: "+invariant)
+    if "    && Boolean(env.EMAIL_VERIFIER?.fetch)" not in worker:
+        issues.append("private email proof must fail closed before request acceptance")
+    if "body.verificationCode" not in frontend or "applicantEmailCodeFields" not in html:
+        issues.append("browser lacks explicit confirmation code before a direct receipt")
     if "email_hmac TEXT NOT NULL PRIMARY KEY" not in schema or "submission_id TEXT NOT NULL UNIQUE" not in schema:
         issues.append("D1 must enforce real dedup and receipt uniqueness")
     if "WHERE expires_at_ms<=?" not in worker:
