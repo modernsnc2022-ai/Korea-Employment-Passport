@@ -238,7 +238,7 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v130'");
+  expect(script).toContain("const CACHE='kep-v131'");
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
@@ -298,3 +298,40 @@ test('Manufacturing September 2026 competency upload stays optional and closed, 
   await expect(page.locator('#stageWarning')).toContainText('bukan persyaratan wajib');
 });
 
+
+test('2026 Manufacturing voluntary competency upload required annexes are conditional and the window remains CLOSED', async ({page,request}) => {
+  const route = await (await request.get('/data/id_e9_manufacturing_2026.json')).json();
+  const copy = await (await request.get('/data/id_e9_manufacturing_2026_id.json')).json();
+  const rules = await (await request.get('/data/exact_answer_rules_v1.json')).json();
+  const stage = route.stages.find(s => s.id === 'skill_competency');
+  const opt = stage.competencyUploadNotice;
+  const details = opt.conditionalSubmission;
+  expect(opt.optional).toBe(true);
+  expect(opt.status).toBe('closed');
+  expect(details.appliesOnlyIfApplicantChoosesOptionalCompetencyEvidence).toBe(true);
+  expect(details.competencyFormRequiredWithAnyUploadedEvidence).toBe(true);
+  expect(details.requiredCompetencyFormUrl).toBe('https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf');
+  expect(details.officialUploadInstructionsUrl).toContain('JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf');
+  expect(details.workExperienceFallbackOnlyIfEmployerCannotIssueCertificate).toBe(true);
+  expect(details.workExperienceFallbackFormUrl).toContain('FORMULIR_SURAT_KONFIRMASI_DASAR_FAKTUAL_PENGALAMAN_KERJA.pdf');
+  expect(details.workExperienceFallbackRequiresTwoNonRelativeSureties).toBe(true);
+  expect(details.workExperienceFallbackRequiresEachSuretyIdCopyAndContact).toBe(true);
+  expect(details.workExperienceFallbackRequiresWorkContractOrVisaImmigrationEvidence).toBe(true);
+  expect(details.closedPeriodMustNotBeReopenedByApp).toBe(true);
+  expect(details.notGeneralSkillTestRequirement).toBe(true);
+  expect(details.notFinalManufacturingJobApplicationChecklist).toBe(true);
+  expect(copy.skill_competency.action).toContain('Formulir Uji Kompetensi');
+  expect(copy.skill_competency.action).toContain('dua penjamin');
+  expect(copy.skill_competency.action).toContain('SUDAH BERAKHIR');
+  const exact=rules.answers.find(x=>x.id==='skill_docs_wait_official_2026');
+  expect(exact.answer).toContain('DUA penjamin');
+  expect(exact.answer).toContain('BERSYARAT');
+  expect(exact.answer).toContain('BERAKHIR');
+  expect(route.stages.find(x=>x.id==='job_application').brokerReplacement).toBe('held_official_notice');
+  await page.setViewportSize({width:320,height:760});
+  await page.goto('/app.html');
+  await page.locator('[data-quick-stage="skill_competency"]').click();
+  await expect(page.locator('#nextAction')).toContainText('Formulir Uji Kompetensi');
+  await expect(page.locator('#nextAction')).toContainText('dua penjamin');
+  await expect(page.locator('#nextAction')).toContainText('SUDAH BERAKHIR');
+});
