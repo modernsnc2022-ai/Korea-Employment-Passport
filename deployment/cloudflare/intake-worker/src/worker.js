@@ -119,7 +119,19 @@ async function confirmTurnstile(token,origin,secret,fetcher){
   return data?.success===true&&typeof data.hostname==='string'
     &&data.hostname.toLowerCase()===host;
 }
-async function application(request,env,origin,fetcher){
+async function privateEmailProof(env,mode,email,code){
+  // Cloudflare service binding: no public verification URL or tokens in logs.
+  const response=await env.EMAIL_VERIFIER.fetch(
+    new Request('https://kep-email-verify.internal/action',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode,email,...(code?{code}:{})})
+    })
+  );
+  if(!response.ok)return false;
+  const body=await response.json();
+  return body?.ok===true;
+}
+async function application(request,env,origin,fetcher,requestCode=false){
   const c=cors(origin,env);
   if(!ready(env))return result({ok:false,error:'intake_unavailable'},503,c);
   if(!request.headers.get('Content-Type')?.toLowerCase().startsWith('application/json')){
@@ -133,13 +145,23 @@ async function application(request,env,origin,fetcher){
   if(new TextEncoder().encode(raw).length>MAX_BYTES)return result({ok:false,error:'too_large'},413,c);
   let body;
   try{body=JSON.parse(raw);}catch{return result({ok:false,error:'bad_json'},400,c);}
-  const data=validate(body);
+  const data=validate(body,{requestCode});
   if(!data)return result({ok:false,error:'invalid_application'},400,c);
   if(data.bot)return result({ok:false,error:'submission_not_confirmed'},202,c);
   let verified=false;
   try{verified=await confirmTurnstile(data.token,origin,env.TURNSTILE_SECRET,fetcher);}
   catch{verified=false;}
   if(!verified)return result({ok:false,error:'challenge_required'},403,c);
+  // Turnstile is not proof of email control. Challenge request sends the OTP
+  // through a PRIVATE service binding. The final POST demands OTP validation.
+  let emailConfirmed=false;
+  try{
+    emailConfirmed=await privateEmailProof(
+      env,requestCode?'request':'confirm',data.email,data.verificationCode
+    );
+  }catch{emailConfirmed=false;}
+  if(!emailConfirmed)return result({ok:false,error:'email_verification_required'},403,c);
+  if(requestCode)return result({ok:true,verificationRequired:true,expiresMinutes:10},202,c);
 
   const now=Date.now(),expiry=now+RETENTION_MS;
   const hash=await emailKey(data.email,env.INTAKE_HMAC_SECRET);
@@ -193,18 +215,18 @@ const worker={
     if(request.method==='GET'&&url.pathname==='/health'){
       return result({ok:true,service:'kep-beta-intake',acceptingApplications:ready(env)},200);
     }
-    if(request.method==='OPTIONS'&&url.pathname===ROUTE){
+    if(request.method==='OPTIONS'&&[ROUTE,VERIFY_REQUEST_ROUTE].includes(url.pathname)){
       return Object.keys(c).length
         ?new Response(null,{status:204,headers:c})
         :result({ok:false,error:'origin_not_allowed'},403);
     }
-    if(request.method!=='POST'||url.pathname!==ROUTE){
+    if(request.method!=='POST'||![ROUTE,VERIFY_REQUEST_ROUTE].includes(url.pathname)){
       return result({ok:false,error:'not_found'},404,c);
     }
     if(!origin||!Object.keys(c).length){
       return result({ok:false,error:'origin_not_allowed'},403);
     }
-    return application(request,env,origin,fetch);
+    return application(request,env,origin,fetch,url.pathname===VERIFY_REQUEST_ROUTE);
   },
   async scheduled(_event,env){
     await cleanup(env);
