@@ -513,6 +513,12 @@ function renderFreshnessStatus(){
       ?sourceReviewStatus.reviewRequiredSourceIds:[];
     const foreignCount=changedIds.slice(0,count).filter(id=>foreignOnly.has(id)).length;
     const relevantCount=count-foreignCount;
+    const failedIds=Array.isArray(sourceReviewStatus.fetchFailureSourceIds)
+      ?sourceReviewStatus.fetchFailureSourceIds:[];
+    const failedCount=failedIds.length;
+    const fetchWarningText=failedCount
+      ?`<span><strong>${failedCount} sumber negara lain gagal diakses.</strong> Kegagalan akses tidak berarti data telah disetujui; sumber tetap dalam daftar review.</span>`
+      :'';
     const scopeText=changedIds.length===count
       ?`<span><strong>${relevantCount} sumber terkait Indonesia/Korea, ${foreignCount} sumber negara lain.</strong> Sumber negara lain tetap menunggu review untuk rute masing-masing.</span>`
       :'<span>Rincian sumber belum dapat dicocokkan; perlakukan semua perubahan sebagai belum diverifikasi.</span>';
@@ -520,6 +526,7 @@ function renderFreshnessStatus(){
       <span class="freshness-pill">PERUBAHAN SUMBER RESMI TERDETEKSI</span>
       <span><strong>${count} sumber perlu ditinjau.</strong> Jawaban/formulir yang bergantung pada sumber tersebut sementara tidak dianggap “jawaban pasti”.</span>
       ${scopeText}
+      ${fetchWarningText}
       <span>Aturan tidak diubah otomatis sampai review selesai.</span>`;
     return;
   }
