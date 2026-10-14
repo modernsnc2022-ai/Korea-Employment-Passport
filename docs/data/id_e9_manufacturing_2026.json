@@ -87,12 +87,24 @@
       "title": "Mandatory Skill Test + optional Job Capacity Assessment",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "After an official EPS-TOPIK stage-one pass, attend the mandatory Skill Test (physical strength, interview and basic skills). Job Capacity Assessment is optional and applies only when you have qualifying Manufacturing documents. Watch the official 2026 Manufacturing Skill Test notice for individual dates and required items.",
+      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, the Skill Test remains mandatory. Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. Follow a new official notice for any later schedule; do not reuse this closed window.",
       "brokerReplacement": "prep_complete",
       "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
       "officialActionLabel": "Buka Skill Test resmi",
-      "warning": "The 10 September 2026 Manufacturing language-test pass is not final selection. Missing the mandatory Skill Test disqualifies the applicant; Job Capacity Assessment is optional, and a later official notice controls schedule and documents."
+      "warning": "The optional 21–23 September 2026 Manufacturing competency upload is closed, not required for every candidate and not the Manufacturing online job-application document checklist. EPS-TOPIK stage-one pass is not final selection; the Skill Test remains mandatory.",
+      "competencyUploadNotice": {
+        "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+        "issuedAt": "2026-09-17",
+        "noticeNumber": "PENG.2522/04.04/PP.02.04/IX/2026",
+        "optional": true,
+        "uploadVia": "SiskoP2MI official applicant account only",
+        "periodStart": "2026-09-21T09:00:00",
+        "periodEnd": "2026-09-23T13:00:00",
+        "timeZone": "Asia/Jakarta",
+        "status": "closed",
+        "notJobApplicationDocuments": true
+      }
     },
     {
       "id": "final_selection",
