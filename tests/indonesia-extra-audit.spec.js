@@ -258,3 +258,37 @@ test('Unrecognized new official source is never wrongly excluded from Indonesian
   await expect(page.locator('#freshnessStatus')).toContainText('Aturan tidak diubah otomatis');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
+
+
+test('Manufacturing September 2026 competency upload stays optional and closed, not job_docs', async ({page,request}) => {
+  const route = await (await request.get('/data/id_e9_manufacturing_2026.json')).json();
+  const copy = await (await request.get('/data/id_e9_manufacturing_2026_id.json')).json();
+  const rules = await (await request.get('/data/exact_answer_rules_v1.json')).json();
+  const stage=route.stages.find(s=>s.id==='skill_competency');
+  const optional=stage.competencyUploadNotice;
+  const notice='https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026';
+  expect(optional.url).toBe(notice);
+  expect(optional.optional).toBe(true);
+  expect(optional.notJobApplicationDocuments).toBe(true);
+  expect(optional.status).toBe('closed');
+  expect(optional.periodStart).toBe('2026-09-21T09:00:00');
+  expect(optional.periodEnd).toBe('2026-09-23T13:00:00');
+  expect(optional.timeZone).toBe('Asia/Jakarta');
+  expect(copy.skill_competency.action).toContain('OPSIONAL');
+  expect(copy.skill_competency.action).toContain('SUDAH BERAKHIR');
+  const exact=rules.answers.find(a=>a.id==='skill_docs_wait_official_2026');
+  expect(exact.sourceUrl).toBe(notice);
+  expect(exact.answer).toContain('BERAKHIR');
+  expect(exact.answer).toContain('BUKAN daftar dokumen wajib');
+  const application=route.stages.find(s=>s.id==='job_application');
+  expect(application.brokerReplacement).toBe('held_official_notice');
+  await page.setViewportSize({width:320,height:760});
+  await page.goto('/app.html');
+  await expect(page.locator('#stageCompetencyNotice')).toBeHidden();
+  await page.locator('[data-quick-stage="skill_competency"]').click();
+  await expect(page.locator('#stageCompetencyNotice')).toBeVisible();
+  await expect(page.locator('#stageCompetencyNotice')).toHaveAttribute('href',notice);
+  await expect(page.locator('#stageAction')).toContainText('SUDAH BERAKHIR');
+  await expect(page.locator('#stageWarning')).toContainText('bukan persyaratan wajib');
+});
+
