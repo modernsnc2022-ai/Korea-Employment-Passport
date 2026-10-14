@@ -49,3 +49,23 @@ At audit time, public `sw.js` was `kep-v124`; the improved Draft includes `kep-v
 4. On the intended release HEAD, repeat strict app static checks and 320px/full browser QA; obtain same-HEAD Pages build/deployment evidence, independently run nine-asset audit, **then** record the explicit authorized beta OPEN. Do not activate tester IDs early.
 
 **Current release state:** beta interest intake OPEN; actual access HOLD; Draft PR #324 unmerged; no owner settings changed and no GitHub Actions usage. This evidence is specific to 2026-10-14 and must be refreshed if live Pages configuration changes.
+
+## HTTPS enforcement actually applied after owner authorization — 2026-10-14 13:45 KST
+
+**Owner action:** on 2026-10-14 the owner explicitly approved enabling GitHub Pages HTTPS enforcement on both the organization Pages site and the KEP Pages project. The authorized operator ran authenticated GitHub REST `PUT /repos/modernsnc2022-ai/modernsnc2022-ai.github.io/pages` and `PUT /repos/modernsnc2022-ai/Korea-Employment-Passport/pages` with only `https_enforced=true`. Both calls completed exit 0.
+
+**Verified state with fresh read-only GETs (not inferred from PUT results):**
+- Organization site: `cname=www.gdglobal.kr`, `https_certificate.state=approved`, `https_enforced=true`, `status=built`, `html_url=https://www.gdglobal.kr/`.
+- KEP site: `cname=null`, `https_certificate.state=approved`, `https_enforced=true`, `status=built`, `html_url=https://www.gdglobal.kr/Korea-Employment-Passport/`.
+
+**Actual HTTP first-hop checks at 2026-10-14 04:45 UTC (~13:45 KST):**
+- `http://www.gdglobal.kr/` now **301 → `https://www.gdglobal.kr/`**.
+- `http://www.gdglobal.kr/Korea-Employment-Passport/app.html` now **301 → `https://www.gdglobal.kr/Korea-Employment-Passport/app.html`**.
+- `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/` **301 → HTTPS** `www.gdglobal.kr/Korea-Employment-Passport/`, observed `X-Cache: HIT; Age: 113`.
+- **Still unresolved cached old HTTPS-to-HTTP first hop:** `https://modernsnc2022-ai.github.io/` **301 → HTTP** `www.gdglobal.kr/` (`X-Cache: HIT; Age: 1679`) and `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html` **301 → HTTP** `www.gdglobal.kr/Korea-Employment-Passport/app.html` (`X-Cache: HIT; Age: 1739`). Even with new cache-busting query and no-cache request headers, GitHub/Fastly `Varnish` retained these older path-specific 301 responses. This is **consistent with stale CDN cache**, not a verified permanent origin fault; do not assert it will definitely expire at a particular time or claim all first hops are now HTTPS. A stale URL still triggers an initial insecure HTTP request even though HTTP `www.gdglobal.kr` redirects back to HTTPS afterward.
+- Direct `https://www.gdglobal.kr/` and direct KEP `/app.html`, `/countries.html`, `/beta.html` all returned **200 on HTTPS**. The corporate homepage's **seven internal navigation/privacy links** were tested and stayed on HTTPS with HTTP 200. This does not exhaustively verify unrelated apps/projects on separate hostnames.
+- Existing `main` served content remains unchanged: previous same-day 9/9 exact production asset parity to `29fde41e697814154e4ebfba2a53ef3a56dbf8b7`. No new application deployment, main merge, source hash acceptance or beta status change was performed.
+
+**Next verification gate:** repeat read-only HTTP first-hop checks of older `github.io` **root and deep app links** and, only after all first hops resolve to HTTPS and direct content is correct, mark the HTTPS redirect issue cleared. Until then keep the overall Pages launch safety gate **BLOCKED/PENDING** despite both API `https_enforced=true`. Do not force a Pages rebuild or a production merge purely to hide stale edge-cache results; prior GitHub Actions budget constraints apply. The operator may consider escalating persistent stale 301 behavior to GitHub Pages support if it does not converge.
+
+**Beta:** interest intake `open`, actual beta access `hold`; `job_docs` exact final 2026 Manufacturing checklist remains HOLD; independent current-day official source/Manufacturing human signatures, same-HEAD deployment verification and explicit beta OPEN are still required.
