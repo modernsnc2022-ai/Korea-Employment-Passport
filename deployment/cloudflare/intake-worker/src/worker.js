@@ -84,9 +84,9 @@ function ready(env){
     && env.INTAKE_HMAC_SECRET.length>=32
     && typeof env.TURNSTILE_SECRET==='string'
     && env.TURNSTILE_SECRET.length>=16
-    // No email ownership proof exists in this Worker yet. Keep actual
-    // applicant PII ingestion disabled even if an operator sets ENABLED.
-    && env.VERIFIED_EMAIL_FLOW_IMPLEMENTED === 'true'
+    // A reviewed private email verification service is REQUIRED; an arbitrary
+    // public boolean cannot grant ownership of someone else's address.
+    && Boolean(env.EMAIL_VERIFIER?.fetch)
     && origins(env).length>0;
 }
 async function emailKey(email,secret){
