@@ -100,6 +100,12 @@
           <span>Saya bersedia menggunakan layanan dan memberi feedback sesuai pengalaman nyata.</span>
         </label>
 
+        <div id="applicantEmailCodeFields" hidden>
+          <label>Kode verifikasi email (8 digit)
+            <input id="applicantEmailCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" pattern="[0-9]{8}" placeholder="12345678">
+          </label>
+          <small>Kode hanya berlaku 10 menit dan akan dikirim ke email yang Anda isi. Meminta kode bukan berarti pendaftaran sudah diterima. Jangan bagikan kode kepada perantara.</small>
+        </div>
         <div id="directIntakeChallenge" hidden>
           <p>Verifikasi keamanan sebelum mengirim langsung. Tidak perlu nomor identitas atau foto dokumen.</p>
           <div id="intakeTurnstileMount" aria-label="Verifikasi keamanan"></div>
