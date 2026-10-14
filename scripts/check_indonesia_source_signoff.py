@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
@@ -40,6 +41,12 @@ def validate_scoped_signoff(
             "country-scoped signoff cannot invent a clean global monitor")
     require(source.get("autoPublishRules") is False and not source.get("fetchFailureUrls"),
             "source publishing and fetch failures are not permitted")
+    source_pairs = sorted((row.get("id"), row.get("url")) for row in manifest.get("sources", []))
+    official_map_sha = hashlib.sha256(
+        json.dumps(source_pairs, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+    require(signed.get("monitoredSourceMapSha256") == official_map_sha,
+            "all 84 monitored official source IDs and URLs must match signed inventory")
     require(signed.get("route") == ROUTE, "the signoff is not for Indonesia 2026 Manufacturing")
     require(signed.get("status") == "approved_manual_indonesia_scope",
             "the Indonesia source signoff has not been manually approved")
