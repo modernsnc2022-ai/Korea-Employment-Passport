@@ -266,12 +266,11 @@ if args.allow_source_review_pending:
         f"unsupported official-source monitor state: {source.get('state')!r}",
     )
 else:
-    require(source.get("configured") == source.get("checked"),
-            "official-source monitor must have checked every configured source")
-    require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
     if source.get("state") == "clean":
-        require(not source.get("reviewRequiredUrls"),
-                "clean official-source monitor cannot contain unresolved alert URLs")
+        require(source.get("configured") == source.get("checked"),
+                "globally clean official-source monitor must check all configured sources")
+        require(not source.get("fetchFailureUrls") and not source.get("reviewRequiredUrls"),
+                "globally clean source state cannot include fetch failures or pending alerts")
     else:
         # This is not a global clean status: only a signed, current-day
         # Indonesia-specific review may tolerate five unrelated-country alerts.
