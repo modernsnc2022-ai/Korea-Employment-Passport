@@ -18,6 +18,15 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = "https://modernsnc2022-ai.github.io/Korea-Employment-Passport/"
 CUSTOM = "https://www.gdglobal.kr/Korea-Employment-Passport/"
+LEGACY_ENTRYPOINTS = (
+    ("org_root", "https://modernsnc2022-ai.github.io/", "https://www.gdglobal.kr/"),
+    ("kep_root", PUBLIC, CUSTOM),
+    ("kep_home", PUBLIC + "index.html", CUSTOM + "index.html"),
+    ("kep_app", PUBLIC + "app.html", CUSTOM + "app.html"),
+    ("kep_beta", PUBLIC + "beta.html", CUSTOM + "beta.html"),
+    ("old_campaign", PUBLIC + "?src=epstopik_indonesia",
+     CUSTOM + "?src=epstopik_indonesia"),
+)
 ASSETS = (
     "index.html", "app.html", "app-runtime.js", "sw.js",
     "data/id_e9_manufacturing_2026.json",
@@ -48,6 +57,8 @@ def http_first_hop(url: str, *, max_bytes: int = 2_000_000) -> dict:
             return {
                 "status": response.status, "location": response.headers.get("Location"),
                 "finalUrl": response.url, "body": raw,
+                "cacheAge": response.headers.get("Age"),
+                "cacheState": response.headers.get("X-Cache"),
             }
     except HTTPError as error:
         # urllib represents blocked redirects as HTTPError; the first hop is
@@ -55,6 +66,8 @@ def http_first_hop(url: str, *, max_bytes: int = 2_000_000) -> dict:
         return {
             "status": error.code, "location": error.headers.get("Location"),
             "finalUrl": url, "body": b"",
+            "cacheAge": error.headers.get("Age"),
+            "cacheState": error.headers.get("X-Cache"),
         }
 
 
@@ -63,32 +76,51 @@ def scheme_safe(target: str) -> bool:
 
 
 def audit(fetch, docs: Path, revision: str, *, asset_loader=None) -> dict:
-    first_url = PUBLIC + "app.html?kep_audit=20261014"
     report = {
-        "version": "1.0.0", "mode": "read_only",
+        "version": "1.1.0", "mode": "read_only",
         "checkedRef": revision, "authorizesRelease": False,
-        "canonical": PUBLIC, "directHttps": CUSTOM, "assets": [],
+        "canonical": PUBLIC, "directHttps": CUSTOM,
+        "entrypoints": [], "assets": [],
     }
-    try:
-        first = fetch(first_url)
-        location = first.get("location")
-        final_target = urljoin(first_url, location) if location else first.get("finalUrl", first_url)
-        final_parts = urlsplit(final_target)
-        redirect_ok = (
-            first.get("status") == 200 and scheme_safe(final_target)
-            and final_parts.hostname == "modernsnc2022-ai.github.io"
-        ) or (
-            first.get("status") in (301, 302, 307, 308)
-            and bool(location) and scheme_safe(final_target)
-            and final_parts.hostname == "www.gdglobal.kr"
-        )
-        report["entrypoint"] = {
-            "httpStatus": first.get("status"),
-            "redirectTarget": final_target if location else None,
-            "httpsOnly": bool(redirect_ok),
-        }
-    except (OSError, ValueError, URLError) as exc:
-        report["entrypoint"] = {"httpsOnly": False, "error": type(exc).__name__ + ": " + str(exc)[:200]}
+    for label, url, expected_url in LEGACY_ENTRYPOINTS:
+        try:
+            first = fetch(url)
+            location = first.get("location")
+            target = urljoin(url, location) if location else first.get("finalUrl", url)
+            got = urlsplit(target)
+            expected = urlsplit(expected_url)
+            # Check *the first hop*, not merely that a later HTTP->HTTPS hop
+            # eventually reaches HTTPS. Also protect path + campaign source
+            # code: dropping ?src causes user acquisition misattribution.
+            correct_destination = (
+                got.scheme == "https"
+                and got.hostname == expected.hostname
+                and got.path == expected.path
+                and got.query == expected.query
+            )
+            safe = (
+                first.get("status") in (301, 302, 307, 308)
+                and bool(location) and correct_destination
+            )
+            report["entrypoints"].append({
+                "id": label, "url": url,
+                "status": first.get("status"),
+                "target": target if location else None,
+                "httpsOnly": bool(safe),
+                "cacheAge": first.get("cacheAge"),
+                "cacheState": first.get("cacheState"),
+            })
+        except (OSError, ValueError, URLError) as exc:
+            report["entrypoints"].append({
+                "id": label, "url": url, "httpsOnly": False,
+                "error": type(exc).__name__ + ": " + str(exc)[:200],
+            })
+    # Historical singular field preserved for existing audit clients, but
+    # now safely means *all* known legacy entrypoints must be secure.
+    report["entrypoint"] = {
+        "httpsOnly": all(row["httpsOnly"] for row in report["entrypoints"]),
+        "verified": len(report["entrypoints"]),
+    }
 
     for name in ASSETS:
         local = docs / name
@@ -155,11 +187,16 @@ def self_test() -> None:
             else:
                 p.write_text("safe file: " + name, encoding="utf-8")
 
-        def build_fake(*, downgrade: bool = False, stale: bool = False):
+        def build_fake(*, downgrade: bool = False, stale: bool = False,
+                       insecure_entry: str | None = None, strip_campaign: bool = False):
             def get(url: str) -> dict:
                 if "github.io" in url:
+                    expected = next(dest for _, old, dest in LEGACY_ENTRYPOINTS if url == old)
+                    use_http = downgrade or (insecure_entry is not None and insecure_entry in url)
+                    if strip_campaign and "?src=" in expected:
+                        expected = expected.split("?", 1)[0]
                     return {"status": 301, "location": (
-                        ("http://" if downgrade else "https://") + "www.gdglobal.kr/Korea-Employment-Passport/app.html"
+                        ("http://" if use_http else "https://") + expected.split("://", 1)[1]
                     ), "finalUrl": url, "body": b""}
                 path = url.split("/Korea-Employment-Passport/", 1)[1].split("?", 1)[0]
                 body = (docs / path).read_bytes()
@@ -173,6 +210,13 @@ def self_test() -> None:
         insecure = audit(build_fake(downgrade=True), docs, "self-test-sha")
         assert insecure["httpsEntrypointSafe"] is False
         assert insecure["readyForSeparateOperatorDeployReview"] is False
+        # Real-world bug: the campaign root is updated, but an *old app
+        # deep link* still hits a 301 with Location: http://...
+        deep_only = audit(build_fake(insecure_entry="/app.html"), docs, "self-test-sha")
+        assert deep_only["httpsEntrypointSafe"] is False
+        assert any(row["id"] == "kep_app" and not row["httpsOnly"] for row in deep_only["entrypoints"])
+        missing_src = audit(build_fake(strip_campaign=True), docs, "self-test-sha")
+        assert missing_src["httpsEntrypointSafe"] is False
         redirected_to_other_site = audit(
             lambda url: (
                 {"status": 301, "location": "https://unrelated.example/app.html", "finalUrl": url, "body": b""}
@@ -185,7 +229,9 @@ def self_test() -> None:
         assert old_assets["matchingAssets"] == len(ASSETS) - 1
         assert old_assets["readyForSeparateOperatorDeployReview"] is False
         assert all(not x["authorizesRelease"] for x in (passing, insecure, old_assets))
-        print("ID_PAGES_LIVE_PARITY_SELF_TEST_PASS https_downgrade_unknown_host_and_stale_assets_fail_closed")
+        assert len(passing["entrypoints"]) == len(LEGACY_ENTRYPOINTS)
+        assert all(row["httpsOnly"] for row in passing["entrypoints"])
+        print("ID_PAGES_LIVE_PARITY_SELF_TEST_PASS 6_legacy_entrypoints deep_link_downgrade campaign_code_and_stale_assets_fail_closed")
 
 
 def main() -> None:
@@ -211,9 +257,14 @@ def main() -> None:
         print(
             f"ID_PAGES_LIVE_AUDIT sha={revision[:12]} "
             f"httpsSafe={result['httpsEntrypointSafe']} "
+            f"legacyEntrySafe={sum(r['httpsOnly'] for r in result['entrypoints'])}/{len(result['entrypoints'])} "
             f"fileParity={result['matchingAssets']}/{result['totalAssets']} "
             f"readyForSeparateOperatorDeployReview={result['readyForSeparateOperatorDeployReview']}"
         )
+        for entry in result["entrypoints"]:
+            print(f"REDIRECT {entry['id']} status={entry.get('status', 'ERROR')} "
+                  f"httpsOnly={entry['httpsOnly']} age={entry.get('cacheAge')} "
+                  f"cache={entry.get('cacheState')} target={entry.get('target', '')}")
         for item in result["assets"]:
             print(
                 f"{item['path']} status={item.get('status', 'ERROR')} "
