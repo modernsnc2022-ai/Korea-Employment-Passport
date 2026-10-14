@@ -12,6 +12,10 @@ database_name = "kep-beta-applications"
 database_id = "REPLACE_WITH_PRIVATE_D1_DATABASE_ID"
 migrations_dir = "migrations"
 
+[[services]]
+binding = "EMAIL_VERIFIER"
+service = "kep-beta-email-verifier"
+
 [vars]
 ALLOWED_ORIGINS = "https://www.gdglobal.kr,https://modernsnc2022-ai.github.io"
 INTAKE_ENABLED = "false"
@@ -19,6 +23,8 @@ INTAKE_ENABLED = "false"
 # REQUIRED private Worker secrets before any real beta intake activation:
 #   npx wrangler secret put INTAKE_HMAC_SECRET  (random >=32 chars; do NOT rotate casually)
 #   npx wrangler secret put TURNSTILE_SECRET    (real Cloudflare Turnstile siteverify secret)
+# Required: wrangler secret put VERIFIER_CALL_SECRET (identical to verifier Worker secret).
+# The private EMAIL_VERIFIER service must exist before enabling direct intake.
 # The public Turnstile SITE key belongs in an explicitly reviewed front-end
 # configuration, not this server-side secret.
 # No default fallback on either secret: endpoint fail-closes to HTTP 503.
