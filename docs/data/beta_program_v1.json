@@ -63,7 +63,7 @@
       "phone number",
       "home address"
     ],
-    "note": "Until direct intake is activated, applications are sent by email. When direct intake is activated, only the minimum application fields and contact email are stored in private intake storage with automatic expiry; never store them in the public repository.",
+    "note": "Applicant interest is sent by email until a separately approved HTTPS Cloudflare D1 intake endpoint and Turnstile site key are configured. The private intake must use 90-day expiry and never write PII to the public repository.",
     "emailHandling": "Application sender email is visible in the private email system and used only for application review, approval/KEP-ID reply, and necessary beta communication; never store it in the public repository.",
     "directIntakeRetentionDays": 90,
     "directIntakeNoIpStorage": true
@@ -73,14 +73,14 @@
     "opensOnlyWhenStatus": null,
     "intakeStatus": "open",
     "directIntake": {
-      "mode": "email_fallback_until_endpoint_configured",
+      "mode": "email_fallback_until_d1_and_turnstile_configured",
       "endpoint": "",
-      "provider": "cloudflare_workers_kv",
+      "provider": "cloudflare_workers_d1",
       "retentionDays": 90,
       "contactEmailRequired": true,
       "storedFields": [
+        "current official stage ID",
         "contact email",
-        "current official stage ID/title",
         "EPS process cycle",
         "recruitment source code",
         "participation confirmations",
@@ -94,7 +94,9 @@
         "health information",
         "bank information",
         "client IP"
-      ]
+      ],
+      "turnstileSiteKey": "",
+      "emailVerificationRequiredBeforeBetaInvite": true
     }
   },
   "releaseDecision": {
