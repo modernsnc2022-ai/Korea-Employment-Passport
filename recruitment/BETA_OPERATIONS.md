@@ -18,6 +18,14 @@ This file covers operational handling only.
 - The sender email address is visible in the private email system and may be used only for application review, the approval/KEP-ID reply, and necessary beta communication. Never put it in this public repository.
 - Do not put names, phone numbers, passport/KTP/ARC numbers, exact home/dorm addresses, identity-document images, or other private contact details in this repository.
 
+## Applicant intake receipt and actual sending (2026-10-14)
+
+The beta JSON currently has `application.directIntake.endpoint=""`, so **the publicly configured applicant-intake method is the email-composer fallback**. The browser's `mailto:` or `Buka Gmail` action **only creates a draft**; the user must press **Kirim / Send** in the email client and verify the message is in the Sent folder. Do not count a rendered composer, clicked button, or copied text as a received application, and do not invent an application count from link clicks. The receiving private mailbox/thread is the authoritative evidence after operator review.
+
+When a separately approved HTTPS private endpoint is configured, the front end will only display `Pendaftaran diterima langsung` after a **successful HTTP status** *and* a parseable application receipt containing `{"ok":true,"submissionId":"KEP-I-..."}`; `submissionId` must be an ASCII reference code in the `KEP-I-[A-Za-z0-9-]{6,48}` pattern, not a name, identity number, phone, address, or applicant email. A bare 200/201, `ok:false`, a missing/malformed reference or a server error must be shown as **not confirmed received** while retaining the form values for safe Gmail/copy fallback. Client acknowledgement is not a replacement for the private server's persistence, validation, deduplication, retention (90 days), abuse controls and no-client-IP-storage obligations. Do not put contact emails, payloads, receipt-to-person mappings or raw application requests in GitHub.
+
+No backend activation, domain connection, external submission or beta access OPEN is authorized by this wording. End-to-end receipt tests use **synthetic data and intercepted HTTP responses only**.
+
 ## Private application review helper
 
 Keep the original tester-interest email in Gmail/private communication only. If an operator needs to transfer its structured values into the approval workflow, copy only the email body to a temporary private text file outside the repository and run:
