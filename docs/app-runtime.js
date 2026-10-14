@@ -862,7 +862,7 @@ function departureRegistryFallback(stageId){
   if(!['mcu3_departure','departure'].includes(stageId))return null;
   if(departureCalls?.coverageStatus!=='partial_verified')return null;
   return {
-    url:departureCalls.indexUrl||'https://kp2mi.go.id/gtog-korea/info',
+    url:departureCalls.indexUrl||'https://kp2mi.go.id/gtog-korea/pengumuman',
     message:'Daftar panggilan keberangkatan 2026 di aplikasi belum lengkap. Jika tanggal Anda tidak ada, jangan memakai aturan tanggal lain — cari panggilan nama Anda di indeks resmi KP2MI.'
   };
 }
