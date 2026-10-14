@@ -20,6 +20,8 @@ For the Indonesia scope, the operator must inspect and either accept the current
 
 The other-country alerts `np_eps_notice_index` (HTTP 500), `vn_colab_eps_notices`, `lk_slbfe_home`, `kg_migrant_home`, and `mm_mol_dol_index` **must remain pending** and cannot be silently relabeled clean. A Nepal-only unavailable source does not justify approving Nepal or copying a rule into Indonesia.
 
+**Fresh machine-only cross-check (2026-10-14 14:08 KST):** all three original URLs returned official final HTTPS HTTP 200 pages. The law.gov page states the October 8 effective Article 48(2), KDCA's final Travel Health page explicitly lists both conditional Q-CODE traveller categories and the seven-day pre-arrival entry window, and the MOEL 1350 page confirms weekday 09:00–18:00 and paid telephone service. Individual live-page content digests and narrow findings: [`research/ID_KOREA_SHARED_3_OFFICIAL_SOURCE_RECHECK_20261014.md`](../research/ID_KOREA_SHARED_3_OFFICIAL_SOURCE_RECHECK_20261014.md). This does **not** fill the human signoff fields or change source baselines.
+
 After **genuine same-day human review**, the named operator may fill `recruitment/ID_BETA_SOURCE_SIGNOFF.json` *only* with a real `reviewer`, timezone-aware `approvedAt`, matching `sourceSnapshotDate`/`sourceScopeDate`, the exact three reviewed critical IDs and five still-pending foreign IDs. Preserve the monitored-map fingerprint and all changed-source warnings. Test with `python scripts/check_indonesia_source_signoff.py` and `python scripts/report_indonesia_beta_release_preflight.py --json`. **Never** sign on behalf of the operator or automatically promote official hashes.
 
 ## B. KP2MI General Manufacturing release-day review
