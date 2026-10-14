@@ -266,11 +266,27 @@ if args.allow_source_review_pending:
         f"unsupported official-source monitor state: {source.get('state')!r}",
     )
 else:
-    require(source.get("state") == "clean", f"official-source monitor state is {source.get('state')!r}, expected 'clean'")
     require(source.get("configured") == source.get("checked"),
             "official-source monitor must have checked every configured source")
-    require(not source.get("reviewRequiredUrls"), "official-source reviewRequiredUrls is not empty")
     require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
+    if source.get("state") == "clean":
+        require(not source.get("reviewRequiredUrls"),
+                "clean official-source monitor cannot contain unresolved alert URLs")
+    else:
+        # This is not a global clean status: only a signed, current-day
+        # Indonesia-specific review may tolerate five unrelated-country alerts.
+        # Unknown/new alerts and all unsigned release attempts fail closed.
+        from check_indonesia_source_signoff import validate_scoped_signoff
+        try:
+            validate_scoped_signoff(
+                source,
+                load_json("monitor/sources.json"),
+                load_json("recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json"),
+                load_json("recruitment/ID_BETA_SOURCE_SIGNOFF.json"),
+                checked_at,
+            )
+        except (ValueError, TypeError) as exc:
+            require(False, f"Indonesia scoped official-source release review incomplete: {exc}")
 
 document_packs = load_json("docs/data/document_packs_2026.json")
 document_items = [
