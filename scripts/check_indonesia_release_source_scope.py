@@ -86,6 +86,8 @@ def validate(status: dict, manifest: dict, scope: dict) -> tuple[int, int]:
     ensure(index.get("url") == "https://kp2mi.go.id/gtog-korea/pengumuman"
            and index.get("currentCategory") == "Pengumuman"
            and index.get("previouslyMistakenUrl") == "https://kp2mi.go.id/gtog-korea/info"
+           and index.get("historicalMistakenPageTitle") == "Preliminary Training dan Info"
+           and "observedTitle" not in index
            and index.get("dataEndpoint") == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
            and index.get("complete2026IndexRead") is True
            and index.get("operatorConfirmedCompleteReview") is False
@@ -152,6 +154,7 @@ def self_test() -> None:
             "url": "https://kp2mi.go.id/gtog-korea/pengumuman",
             "currentCategory": "Pengumuman",
             "previouslyMistakenUrl": "https://kp2mi.go.id/gtog-korea/info",
+            "historicalMistakenPageTitle": "Preliminary Training dan Info",
             "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
             "complete2026IndexRead": True, "operatorConfirmedCompleteReview": False,
             "inspectedOffsets": [0,75,150], "inspectedRows": 225,
@@ -180,6 +183,7 @@ def self_test() -> None:
         lambda a, b, c: c.update(monitorBaselineAccepted=True),
         lambda a, b, c: c.update(betaAccess="open"),
         lambda a, b, c: c["kp2miManufacturingNoticeIndex"].update(status="verified"),
+        lambda a, b, c: c["kp2miManufacturingNoticeIndex"].update(observedTitle="Preliminary Training dan Info"),
         lambda a, b, c: b["sources"][0].update(url="https://tampered.example"),
         lambda a, b, c: a["reviewRequiredSourceIds"].append("new_notice"),
         lambda a, b, c: a.update(fetchFailureSourceIds=["kdca_qcode_input"]),
@@ -194,7 +198,7 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("Unsafe mutation was accepted by source-scope triage")
-    print("ID_SOURCE_SCOPE_SELF_TEST_PASS 10 fail-closed mutations")
+    print("ID_SOURCE_SCOPE_SELF_TEST_PASS 11 fail-closed mutations")
 
 
 def main() -> None:
