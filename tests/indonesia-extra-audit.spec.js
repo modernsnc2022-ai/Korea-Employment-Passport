@@ -286,6 +286,8 @@ test('Manufacturing September 2026 competency upload stays optional and closed, 
   await page.goto('/app.html');
   await expect(page.locator('#stageCompetencyNotice')).toBeHidden();
   await page.locator('[data-quick-stage="skill_competency"]').click();
+  // The full 27-stage journey is intentionally collapsed until requested.
+  await page.locator('#allJourneyDetails > summary').click();
   await page.locator('#stageList .stage.current').click();
   await expect(page.locator('#stageCompetencyNotice')).toBeVisible();
   await expect(page.locator('#stageCompetencyNotice')).toHaveAttribute('href',notice);
