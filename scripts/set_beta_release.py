@@ -236,6 +236,54 @@ def self_test() -> None:
     else:
         raise AssertionError("OPEN was allowed without four safe baselines")
 
+    # Integration-only: simulate a future explicit Indonesia-only source
+    # signoff in memory. This MUST NOT update the actual PENDING signoff,
+    # Manufacturing launch check, official hashes or beta status.
+    from check_indonesia_source_signoff import data as load_source_data
+    from copy import deepcopy
+    day = "2026-10-14"
+    global_source = load_source_data("docs/data/source_review_status.json")
+    global_source["detectedAt"] = day  # simulated same-day watcher only
+    manifest = load_source_data("monitor/sources.json")
+    scope = load_source_data("recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json")
+    signoff = load_source_data("recruitment/ID_BETA_SOURCE_SIGNOFF.json")
+    assert signoff["status"] == "pending_manual_source_signoff"
+    signed = deepcopy(signoff)
+    signed.update({
+        "status": "approved_manual_indonesia_scope",
+        "reviewer": "Synthetic release operator",
+        "approvedAt": day + "T17:30:00+09:00",
+        "sourceSnapshotDate": day,
+        "sourceScopeDate": day,
+    })
+    same_day_check = deepcopy(manufacturing_check)
+    same_day_check["checkedAt"] = day
+    same_day_check["noticeIndexCoverage"]["checkedAt"] = day
+    same_day_check["sameDayOfficialRecheck"]["checkedAt"] = day
+    fake_timestamp = day + "T18:00:00+09:00"
+    scoped_open = prepare_open(
+        program, global_source, same_day_check, fake_timestamp,
+        source_manifest=manifest, source_scope=scope, source_signoff=signed,
+    )
+    assert scoped_open["status"] == "open"
+    for field, wrong in [
+        ("status", "pending_manual_source_signoff"),
+        ("sourceSnapshotDate", "2026-10-13"),
+    ]:
+        bad_signed = deepcopy(signed)
+        bad_signed[field] = wrong
+        try:
+            prepare_open(
+                program, global_source, same_day_check, fake_timestamp,
+                source_manifest=manifest, source_scope=scope,
+                source_signoff=bad_signed,
+            )
+        except ValueError as exc:
+            assert "ID_SOURCE_RELEASE_BLOCKED" in str(exc)
+        else:
+            raise AssertionError("invalid country-scoped signoff permitted beta OPEN")
+    print("BETA_SCOPED_SOURCE_SYNTHETIC_INTEGRATION_TEST_PASS")
+
     changed = outreach_open_text(
         "Application intake status: **OPEN**\n"
         "Beta access status: **HOLD until gate passes.**"
