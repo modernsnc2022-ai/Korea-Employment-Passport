@@ -286,6 +286,7 @@ test('Manufacturing September 2026 competency upload stays optional and closed, 
   await page.goto('/app.html');
   await expect(page.locator('#stageCompetencyNotice')).toBeHidden();
   await page.locator('[data-quick-stage="skill_competency"]').click();
+  await page.locator('#stageList .stage.current').click();
   await expect(page.locator('#stageCompetencyNotice')).toBeVisible();
   await expect(page.locator('#stageCompetencyNotice')).toHaveAttribute('href',notice);
   await expect(page.locator('#stageAction')).toContainText('SUDAH BERAKHIR');
