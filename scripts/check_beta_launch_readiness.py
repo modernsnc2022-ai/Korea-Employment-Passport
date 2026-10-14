@@ -136,8 +136,8 @@ require(
     "Manufacturing launch-check record indicates a notice was found or still needs review",
 )
 require(
-    manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/info",
-    "Manufacturing launch check must preserve the historical KP2MI Preliminary Training index pointer for audit",
+    manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "Manufacturing launch check must use the actual KP2MI Pengumuman notice index",
 )
 baseline = route.get("jobApplicationBaselineEvidence", {})
 require(
@@ -186,11 +186,15 @@ coverage = manufacturing_launch_check.get("noticeIndexCoverage", {})
 require(
     coverage.get("previouslyAssumedIndex") == "https://kp2mi.go.id/gtog-korea/info"
     and coverage.get("actualCategory") == "Preliminary Training dan Info"
+    and coverage.get("currentCategory") == "Pengumuman"
+    and coverage.get("currentListingUrl") == "https://kp2mi.go.id/gtog-korea/pengumuman"
+    and coverage.get("serverSideAjaxUrl") == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
     and coverage.get("status") in {
         "unverified_preliminary_training_category_only",
+        "correct_pengumuman_2026_inventory_read_pending_operator_signoff",
         "verified_complete_general_manufacturing_index_review",
     },
-    "Manufacturing source inventory must disclose the historical mis-scoped Preliminary Training index",
+    "Manufacturing source inventory must preserve the historical Preliminary Training mismatch and reviewed Pengumuman category",
 )
 if not args.allow_source_review_pending:
     from urllib.parse import urlparse
@@ -204,9 +208,9 @@ if not args.allow_source_review_pending:
         and coverage.get("operatorConfirmedCompleteReview") is True
         and parts.scheme == "https"
         and parts.hostname in {"kp2mi.go.id", "www.kp2mi.go.id"}
-        and (parts.path.startswith("/gtog-korea/") or parts.path.startswith("/gtog-data/korea/"))
-        and parts.path.lower().rstrip("/") != "/gtog-korea/info"
-        and "preliminary" not in official_index.lower(),
+        and parts.path.lower().rstrip("/") == "/gtog-korea/pengumuman"
+        and not parts.query and not parts.fragment
+        and coverage.get("currentCategory") == "Pengumuman",
         "Beta release requires current official General Manufacturing notice inventory, not the Preliminary Training category",
     )
 same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
