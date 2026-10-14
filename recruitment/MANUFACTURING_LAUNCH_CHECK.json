@@ -98,8 +98,6 @@
     "status": "correct_pengumuman_2026_inventory_read_pending_operator_signoff",
     "checkedAt": "2026-10-14",
     "previouslyAssumedIndex": "https://kp2mi.go.id/gtog-korea/info",
-    "actualCategory": "Preliminary Training dan Info",
-    "serverSideAjax": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
     "completeGeneralManufacturingInventory": true,
     "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
     "operatorConfirmedCompleteReview": false,
@@ -146,7 +144,9 @@
         "exactFinalJobDocumentsVerified": false,
         "evidenceDocument": "research/ID_MANUFACTURING_2026_OPTIONAL_COMPETENCY_PDF_ANNEX_AUDIT_20261014.md"
       }
-    }
+    },
+    "historicalMistakenPageTitle": "Preliminary Training dan Info",
+    "historicalMistakenAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
   },
   "historicalIndexBefore20261014": "https://kp2mi.go.id/gtog-korea/info",
   "historicalNegativeResultNotReleaseEvidence": true,
