@@ -62,7 +62,7 @@ def scheme_safe(target: str) -> bool:
     return urlsplit(target).scheme == "https"
 
 
-def audit(fetch, docs: Path, revision: str) -> dict:
+def audit(fetch, docs: Path, revision: str, *, asset_loader=None) -> dict:
     first_url = PUBLIC + "app.html?kep_audit=20261014"
     report = {
         "version": "1.0.0", "mode": "read_only",
@@ -73,9 +73,14 @@ def audit(fetch, docs: Path, revision: str) -> dict:
         first = fetch(first_url)
         location = first.get("location")
         final_target = urljoin(first_url, location) if location else first.get("finalUrl", first_url)
-        redirect_ok = (first.get("status") == 200 and scheme_safe(first.get("finalUrl", first_url))) or (
+        final_parts = urlsplit(final_target)
+        redirect_ok = (
+            first.get("status") == 200 and scheme_safe(final_target)
+            and final_parts.hostname == "modernsnc2022-ai.github.io"
+        ) or (
             first.get("status") in (301, 302, 307, 308)
             and bool(location) and scheme_safe(final_target)
+            and final_parts.hostname == "www.gdglobal.kr"
         )
         report["entrypoint"] = {
             "httpStatus": first.get("status"),
@@ -90,7 +95,9 @@ def audit(fetch, docs: Path, revision: str) -> dict:
         if not local.is_file():
             report["assets"].append({"path": name, "sameAsCheckedRef": False, "error": "missing local asset"})
             continue
-        expected = local.read_bytes()
+        # Use the exact committed Git blob, not Windows checkout bytes:
+        # core.autocrlf may rewrite LF to CRLF without changing HEAD.
+        expected = asset_loader(name) if asset_loader is not None else local.read_bytes()
         if len(expected) > 2_000_000:
             report["assets"].append({"path": name, "sameAsCheckedRef": False, "error": "local asset oversized"})
             continue
@@ -166,12 +173,19 @@ def self_test() -> None:
         insecure = audit(build_fake(downgrade=True), docs, "self-test-sha")
         assert insecure["httpsEntrypointSafe"] is False
         assert insecure["readyForSeparateOperatorDeployReview"] is False
+        redirected_to_other_site = audit(
+            lambda url: (
+                {"status": 301, "location": "https://unrelated.example/app.html", "finalUrl": url, "body": b""}
+                if "github.io" in url else build_fake()(url)
+            ), docs, "self-test-sha"
+        )
+        assert redirected_to_other_site["httpsEntrypointSafe"] is False
         old_assets = audit(build_fake(stale=True), docs, "self-test-sha")
         assert old_assets["criticalAssetsSameRef"] is False
         assert old_assets["matchingAssets"] == len(ASSETS) - 1
         assert old_assets["readyForSeparateOperatorDeployReview"] is False
         assert all(not x["authorizesRelease"] for x in (passing, insecure, old_assets))
-        print("ID_PAGES_LIVE_PARITY_SELF_TEST_PASS https_downgrade_and_stale_assets_fail_closed")
+        print("ID_PAGES_LIVE_PARITY_SELF_TEST_PASS https_downgrade_unknown_host_and_stale_assets_fail_closed")
 
 
 def main() -> None:
@@ -185,7 +199,12 @@ def main() -> None:
     revision = subprocess.check_output(
         ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
     ).strip()
-    result = audit(http_first_hop, ROOT / "docs", revision)
+    def read_committed_asset(name: str) -> bytes:
+        return subprocess.check_output(
+            ["git", "-C", str(ROOT), "show", "HEAD:docs/" + name]
+        )
+
+    result = audit(http_first_hop, ROOT / "docs", revision, asset_loader=read_committed_asset)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
