@@ -3,14 +3,25 @@ const { test, expect } = require('@playwright/test');
 async function betaPage(page, directEndpoint='', captchaReady=true) {
   // No third-party network or real Turnstile token in browser QA.
   await page.addInitScript((ready)=>{
+    let options=null;
     window.turnstile={
-      render:(_mount,options)=>{
-        if(ready)Promise.resolve().then(()=>options.callback('synthetic-cloudflare-token'));
+      render:(_mount,config)=>{
+        options=config;
+        if(ready)Promise.resolve().then(()=>config.callback('synthetic-cloudflare-token'));
         return 'mock-widget';
       },
-      reset:()=>{}
+      reset:()=>{
+        if(ready&&options)Promise.resolve().then(()=>options.callback('synthetic-cloudflare-token'));
+      }
     };
   },captchaReady);
+  await page.route('https://intake.example.test/v1/beta/applicant/verify-request',async route=>{
+    await route.fulfill({
+      status:202,contentType:'application/json',
+      headers:{'Access-Control-Allow-Origin':new URL(page.url()).origin},
+      body:JSON.stringify({ok:true,verificationRequired:true,expiresMinutes:10})
+    });
+  });
   await page.route('**/data/beta_program_v1.json', async route => {
     const response = await route.fetch();
     const program = await response.json();
@@ -52,7 +63,7 @@ test('beta applicant intake can submit directly without opening an email client'
   await page.locator('#activeProcess').check();
   await page.locator('#feedbackAgreement').check();
   await page.locator('#applicantContactEmail').fill('tester@example.com');
-  await page.locator('#betaApplicationSubmitBtn').click();
+  await requestAndFillCode(page);
 
   await expect(page.locator('#applicationResult')).toContainText('KEP-I-TEST1234');
   expect(submitted).not.toBeNull();
@@ -62,6 +73,14 @@ test('beta applicant intake can submit directly without opening an email client'
   expect(submitted.activeProcess).toBe(true);
   expect(submitted.feedbackAgreement).toBe(true);
 });
+
+async function requestAndFillCode(page){
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicantEmailCodeFields')).toBeVisible();
+  await expect(page.locator('#applicationResult')).toContainText('Belum ada pendaftaran yang diterima');
+  await page.locator('#applicantEmailCode').fill('12345678');
+  await page.locator('#betaApplicationSubmitBtn').click();
+}
 
 async function fillApplicant(page) {
   await page.locator('#applicantStage').selectOption({ index: 1 });
@@ -102,7 +121,7 @@ for (const scenario of [
     });
     await betaPage(page,'https://intake.example.test/v1/beta/applicant');
     await fillApplicant(page);
-    await page.locator('#betaApplicationSubmitBtn').click();
+    await requestAndFillCode(page);
     await expect(page.locator('#applicationResult')).toContainText('Data belum dianggap terkirim');
     await expect(page.locator('#applicationResult')).not.toContainText('Pendaftaran diterima langsung');
     await expect(page.locator('#applicantContactEmail')).toHaveValue('tester@example.com');
@@ -157,4 +176,35 @@ test('unconfigured HTTPS endpoint remains email-only fallback and never loads Tu
   await expect(page.locator('#directIntakeFields')).toBeHidden();
   await expect(page.locator('#betaApplicationSubmitBtn')).toContainText('aplikasi email');
   expect(await page.evaluate(()=>document.querySelectorAll('script[src*="turnstile"]').length)).toBe(0);
+});
+
+test('direct applicant cannot receive a receipt with no email ownership code',async({page})=>{
+  let finalCalls=0;
+  await page.route('https://intake.example.test/v1/beta/applicant',async route=>{
+    finalCalls++;
+    await route.fulfill({status:403,contentType:'application/json',
+      body:JSON.stringify({ok:false,error:'email_verification_required'})});
+  });
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant');
+  await fillApplicant(page);
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicantEmailCodeFields')).toBeVisible();
+  expect(finalCalls).toBe(0);
+  await page.locator('#applicantEmailCode').fill('00000000');
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicationResult')).toContainText('Data belum dianggap terkirim');
+  await expect(page.locator('#applicationResult')).not.toContainText('Pendaftaran diterima langsung');
+  expect(finalCalls).toBe(1);
+});
+
+test('changing the applicant email address invalidates pending verification code',async({page})=>{
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant');
+  await fillApplicant(page);
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicantEmailCodeFields')).toBeVisible();
+  await page.locator('#applicantEmailCode').fill('12345678');
+  await page.locator('#applicantContactEmail').fill('second@example.com');
+  await expect(page.locator('#applicantEmailCodeFields')).toBeHidden();
+  await expect(page.locator('#applicantEmailCode')).toHaveValue('');
+  await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim pendaftaran');
 });
