@@ -211,7 +211,7 @@ if not args.allow_source_review_pending:
         and parts.path.lower().rstrip("/") == "/gtog-korea/pengumuman"
         and not parts.query and not parts.fragment
         and coverage.get("currentCategory") == "Pengumuman",
-        "Beta release requires current official General Manufacturing notice inventory, not the Preliminary Training category",
+        "Beta OPEN requires operator-signed same-day KP2MI Pengumuman Manufacturing notice inventory; 2026 title scan alone is not approval",
     )
 same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
 require(
