@@ -7,6 +7,12 @@ from datetime import datetime
 from pathlib import Path
 
 from check_beta_open_readiness_doc import problems as release_doc_problems
+from check_beta_intake_backend import (
+    input_files as beta_intake_inputs,
+    errors as beta_intake_errors,
+    sql_upsert_from_worker,
+    sqlite_test,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -798,6 +804,17 @@ for problem in release_doc_problems(
     broker=bqc, forms=forms, manufacturing=manufacturing_launch_check,
 ):
     require(False, "stale beta OPEN readiness document: " + problem)
+
+# Private Cloudflare D1 intake stays safely disabled until an operator
+# configures real D1/Turnstile secrets and an approved HTTPS endpoint.
+backend_evidence = beta_intake_inputs(ROOT)
+for issue in beta_intake_errors(*backend_evidence):
+    require(False, "Cloudflare D1 direct-intake safety: " + issue)
+if not beta_intake_errors(*backend_evidence):
+    try:
+        sqlite_test(backend_evidence[2], sql_upsert_from_worker(backend_evidence[0]))
+    except (AssertionError, ValueError, IndexError) as exc:
+        require(False, "D1 atomic duplicate/retention SQL verification failed: " + str(exc))
 
 if failures:
     print("BETA_PRELAUNCH_STATIC_FAIL")
