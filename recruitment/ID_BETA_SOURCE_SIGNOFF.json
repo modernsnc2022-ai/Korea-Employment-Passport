@@ -20,5 +20,7 @@
   ],
   "allChangedSourceAlertsRemainVisible": true,
   "noOfficialHashAutopromotion": true,
-  "reason": "Indonesia-only conditional approval cannot be inferred from a global clean hash. Reviewer must explicitly review three Korea-shared changes, validate the current-day 84-source monitor snapshot and 5 non-Indonesia alerts, then sign separately; this approval never replaces the Manufacturing announcement or deployment gates."
+  "reason": "Indonesia-only conditional approval cannot be inferred from a global clean hash. Reviewer must explicitly review three Korea-shared changes, validate the current-day 84-source monitor snapshot and 5 non-Indonesia alerts, then sign separately; this approval never replaces the Manufacturing announcement or deployment gates.",
+  "monitoredSourceMapSha256": "f5c196587921f07d41dabbe40d89a123425bdaf9b8544ac3c9bd491c21f27ded",
+  "sourceMapFingerprintMethod": "sha256(UTF8(JSON.dumps(sorted((id,url) pairs), separators=(',', ':'), ensure_ascii=False)))"
 }
