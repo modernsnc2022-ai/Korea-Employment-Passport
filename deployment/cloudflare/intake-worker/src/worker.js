@@ -93,6 +93,8 @@ function ready(env){
     // A reviewed private email verification service is REQUIRED; an arbitrary
     // public boolean cannot grant ownership of someone else's address.
     && Boolean(env.EMAIL_VERIFIER?.fetch)
+    && typeof env.VERIFIER_CALL_SECRET==='string'
+    && env.VERIFIER_CALL_SECRET.length>=32
     && origins(env).length>0;
 }
 async function emailKey(email,secret){
@@ -123,7 +125,10 @@ async function privateEmailProof(env,mode,email,code){
   // Cloudflare service binding: no public verification URL or tokens in logs.
   const response=await env.EMAIL_VERIFIER.fetch(
     new Request('https://kep-email-verify.internal/action',{
-      method:'POST',headers:{'Content-Type':'application/json'},
+      method:'POST',headers:{
+        'Content-Type':'application/json',
+        'X-KEP-Internal-Token':env.VERIFIER_CALL_SECRET
+      },
       body:JSON.stringify({mode,email,...(code?{code}:{})})
     })
   );
