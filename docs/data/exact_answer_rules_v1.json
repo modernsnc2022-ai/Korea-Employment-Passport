@@ -6466,6 +6466,86 @@
       "verificationStatus": "verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map",
       "scopeType": "route_2026",
       "blocksSubmission": false
+    },
+    {
+      "id": "registration_one_sector_no_transfer_juknis_2026",
+      "stages": [
+        "registration"
+      ],
+      "question": "Bolehkah pindah sektor setelah memilih UBT Umum Manufaktur atau Perikanan 2026?",
+      "answer": "Tidak. Petunjuk pendaftaran UBT Umum 2026 hanya mengizinkan memilih SATU sektor; kesalahan pemilihan sektor tidak dapat diubah atau dipindahkan.",
+      "writeExactly": "Pada pendaftaran UBT Umum 2026, pilih dengan teliti antara Manufaktur ATAU Perikanan, bukan keduanya. JUKNIS melarang pergantian sektor setelah dipilih. Periode pendaftaran tersebut sudah berakhir; ikuti pengumuman resmi untuk periode baru.",
+      "why": "JUKNIS resmi Januari 2026 halaman 5 dan 8 mencantumkan ketentuan satu sektor dan larangan perpindahan/perubahan sektor.",
+      "doNotDo": [
+        "Jangan menganggap bisa mengubah Manufaktur menjadi Perikanan setelah menyimpan.",
+        "Jangan membayar perantara untuk menjanjikan perpindahan sektor.",
+        "Jangan menganggap pendaftaran umum Februari 2026 masih dibuka."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "verifiedAt": "2026-10-14",
+      "verificationStatus": "verified_2026_official_pdf",
+      "scopeType": "route_2026"
+    },
+    {
+      "id": "registration_bankbook_missing_mobile_screenshot_2026",
+      "stages": [
+        "registration",
+        "document_verify"
+      ],
+      "question": "Jika tidak punya buku tabungan fisik, bolehkah memakai screenshot mobile banking saat pendaftaran awal EPS-TOPIK 2026?",
+      "answer": "Contoh scan resmi pendaftaran umum 2026 memperbolehkan screenshot mobile/internet banking jika tidak ada buku rekening fisik. Rekening tetap harus atas nama peserta sendiri dan nomor rekening harus terlihat jelas.",
+      "writeExactly": "Untuk dokumen rekening saat pendaftaran UBT Umum 2026, gunakan scan buku tabungan pribadi. Jika tidak mempunyai buku tabungan fisik, lampiran contoh resmi memperbolehkan screenshot mobile/internet banking dengan nomor rekening terlihat jelas. Periksa ulang permintaan Sisko P2MI pada pendaftaran berikutnya; contoh ini bukan pengecualian otomatis untuk berkas visa atau tahap lain.",
+      "why": "Lampiran resmi Contoh Scan Persyaratan Dokumen Pendaftaran 2026 halaman 7 mengizinkan screenshot mobile/internet banking ketika tidak ada buku tabungan.",
+      "doNotDo": [
+        "Jangan memakai rekening atas nama orang lain, LPK atau broker.",
+        "Jangan mengunggah informasi login, PIN, OTP atau riwayat transaksi yang tidak diminta.",
+        "Jangan menganggap alternatif pendaftaran awal berlaku otomatis pada berkas visa."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "verifiedAt": "2026-10-14",
+      "verificationStatus": "verified_2026_official_pdf",
+      "scopeType": "route_2026"
+    },
+    {
+      "id": "registration_manufacturing_skl_not_diploma_2026",
+      "stages": [
+        "eligibility",
+        "registration",
+        "document_verify"
+      ],
+      "question": "Untuk Manufaktur 2026, apakah Surat Keterangan Lulus (SKL) bisa menggantikan ijazah SLTP?",
+      "answer": "Tidak. Contoh resmi 2026 untuk sektor Manufaktur mensyaratkan ijazah minimal SLTP atau sederajat dan menyebut SKL tidak diperbolehkan. Jika ijazah hilang, gunakan surat keterangan pengganti ijazah resmi dari sekolah/dinas Pendidikan setempat.",
+      "writeExactly": "Siapkan ijazah minimal SLTP/SMP atau setara. Jangan unggah SKL sebagai pengganti ijazah pada pendaftaran UBT Umum Manufaktur 2026. Jika ijazah hilang, mintalah surat pengganti ijazah resmi dari sekolah/dinas pendidikan yang berwenang.",
+      "why": "Lampiran resmi contoh dokumen pendaftaran 2026 halaman 8 mencantumkan persyaratan khusus sektor Manufaktur, larangan SKL, dan surat resmi pengganti ijazah yang hilang.",
+      "doNotDo": [
+        "Jangan menyamakan SKL dengan surat keterangan pengganti ijazah resmi.",
+        "Jangan memakai ketentuan ijazah sektor Perikanan sebagai persyaratan Manufaktur.",
+        "Jangan mengubah dokumen pendidikan sendiri atau membeli ijazah."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "verifiedAt": "2026-10-14",
+      "verificationStatus": "verified_2026_official_pdf",
+      "scopeType": "route_2026"
+    },
+    {
+      "id": "registration_fingerprint_location_job_field_final_save_2026",
+      "stages": [
+        "registration",
+        "biometric"
+      ],
+      "question": "Saat menyelesaikan pendaftaran UBT Umum 2026, lokasi fingerprint dan rincian pekerjaan bisa diganti setelah menekan Simpan?",
+      "answer": "Tidak. JUKNIS pendaftaran umum 2026 menyebut lokasi perekaman fingerprint dan rincian bidang pekerjaan TIDAK BISA DIGANTI setelah tombol Simpan ditekan.",
+      "writeExactly": "Sebelum menekan Simpan pada pendaftaran EPS-TOPIK UBT Umum 2026, periksa lokasi perekaman sidik jari, masa tinggal yang dipilih, serta sektor/rincian pekerjaan. Setelah disimpan, lokasi fingerprint dan rincian bidang pekerjaan tidak dapat diubah menurut JUKNIS. Jangan menebak opsi yang tidak dipahami.",
+      "why": "JUKNIS resmi 2026 halaman 13 menyorot tiga pilihan yang harus diperiksa, lalu melarang perubahan lokasi perekaman fingerprint dan rincian bidang pekerjaan setelah Simpan. Dokumen tidak menyebut larangan perubahan masa tinggal sebagai aturan terpisah.",
+      "doNotDo": [
+        "Jangan menekan Simpan sebelum memeriksa ketentuan lokasi dan rincian pekerjaan.",
+        "Jangan menganggap orang luar/LPK dapat mengubah pilihan yang sudah dikunci.",
+        "Jangan menganggap dokumen ini membuktikan field pasca-Skill Test job application."
+      ],
+      "sourceUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "verifiedAt": "2026-10-14",
+      "verificationStatus": "verified_2026_official_pdf",
+      "scopeType": "route_2026"
     }
   ]
 }
