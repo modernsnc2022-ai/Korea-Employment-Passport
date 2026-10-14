@@ -50,17 +50,18 @@ SPF and DMARC, plus the **actual Resend 2026-10-14 dashboard** records for
 | Type | Cloudflare zone name | Contents |
 |---|---|---|
 | TXT | `resend._domainkey.mail` | Full DKIM `p=...` copied from Resend |
-| CNAME | `rsend.mail` | Full displayed Resend `...mta.net` target; **DNS only** |
-| CNAME | `send.mail` | Full displayed Resend `...mta.net` target; **DNS only** |
+| CNAME | `rsend.mail` | Resend screenshot: `rsend-apne1.forge.rmta.net`; **DNS only** |
+| CNAME | `send.mail` | Full displayed Resend target (do not infer from `rsend`); **DNS only** |
 
-The actual provider-specified target strings were truncated in the owner
-screenshot; **do not guess or embed them**. This new sending configuration
+The `rsend.mail` target is now visible in the owner's Cloudflare entry
+screenshot; the `send.mail` target and the complete DKIM value are still not
+independently visible for exact comparison. **Do not guess either value**. This new sending configuration
 uses two CNAMEs, **not** the older `send.mail` MX + TXT model.
 `Enable Sending` is ON and `Enable Receiving` is OFF; never add the
 receiving MX records unnecessarily.
 
 The checker performs a **public DNS shape check only** (both CNAME targets
-end in `.mta.net`; DKIM key present), not an exact target-value comparison.
+end in `.rmta.net` or `.mta.net`; DKIM key present), not an exact target-value comparison.
 It never adds or removes records, reads private keys or sends mail. Missing
 prerequisites cause exit **2** and HOLD; DNS errors cause exit 1.
 If Resend configures a custom Return-Path name instead of `send`, pass

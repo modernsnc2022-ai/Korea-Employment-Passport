@@ -14,9 +14,9 @@ def fixtures():
         ("_dmarc.gdglobal.kr", "TXT"): (
             '"v=DMARC1; p=none; rua=mailto:ops@example.test"',),
         ("rsend.mail.gdglobal.kr", "CNAME"): (
-            "rsend-ap-synthetic-region.mta.net.",),
+            "rsend-apne1.forge.rmta.net.",),
         ("send.mail.gdglobal.kr", "CNAME"): (
-            "send.synthetic-routing.mta.net.",),
+            "send.synthetic-routing.rmta.net.",),
         ("resend._domainkey.mail.gdglobal.kr", "TXT"): (
             '"p=" "' + "A" * 120 + '"',),
     }
@@ -56,6 +56,10 @@ class DnsAssessmentTests(unittest.TestCase):
         records[("send.mail.gdglobal.kr", "TXT")] = (
             '"v=spf1 include:amazonses.com ~all"',)
         self.assertFalse(self.assess(records)["dns_prerequisites_present"])
+
+    def test_actual_resend_rsend_target_matches_new_format(self):
+        self.assertTrue(resend_mta_target(("rsend-apne1.forge.rmta.net.",)))
+        self.assertTrue(self.assess(fixtures())["resend_rsend_cname_present"])
 
     def test_bad_cname_destination_is_blocker(self):
         records = fixtures()

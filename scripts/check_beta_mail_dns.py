@@ -55,7 +55,7 @@ def mx_hosts(records: tuple[str, ...]) -> frozenset[str]:
 
 def resend_mta_target(records: tuple[str, ...]) -> bool:
     """Match displayed Resend CNAME infrastructure suffix; not proof of ownership."""
-    return any(v.lower().rstrip(".").endswith(".mta.net") for v in records)
+    return any(v.lower().rstrip(".").endswith((".rmta.net", ".mta.net")) for v in records)
 
 
 def assess(resolve: Callable[[str, str], tuple[str, ...]], return_path: str = "send") -> dict:
