@@ -957,7 +957,7 @@ test('partial departure registry never suggests another call when date is missin
   await expect(page.locator('#scopePickerSection small')).toContainText('belum lengkap');
   await expect(page.locator('#scopePickerSection small')).toContainText('jangan memakai aturan tanggal lain');
   const href=await page.locator('#scopePickerSource').getAttribute('href');
-  expect(href).toContain('kp2mi.go.id/gtog-korea/info');
+  expect(href).toContain('kp2mi.go.id/gtog-korea/pengumuman');
   expect(errors).toEqual([]);
 });
 
