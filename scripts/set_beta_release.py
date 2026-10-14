@@ -7,6 +7,8 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
+from check_indonesia_source_signoff import validate_scoped_signoff
+
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
 SOURCE = ROOT / "docs" / "data" / "source_review_status.json"
@@ -18,7 +20,11 @@ def fail(message: str) -> None:
     raise ValueError(message)
 
 
-def prepare_open(program: dict, source: dict, manufacturing_check: dict, approved_at: str) -> dict:
+def prepare_open(
+    program: dict, source: dict, manufacturing_check: dict, approved_at: str,
+    *, source_manifest: dict | None = None, source_scope: dict | None = None,
+    source_signoff: dict | None = None,
+) -> dict:
     if program.get("status") != "hold":
         fail("public beta can be opened only from HOLD")
     release = program.get("releaseDecision", {})
@@ -31,14 +37,23 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
     if approved_dt.tzinfo is None:
         fail("approved-at must include timezone")
 
-    if source.get("state") != "clean":
-        fail(f"official source state must be clean, got {source.get('state')!r}")
     if source.get("configured") != source.get("checked"):
         fail("all configured official sources must be checked before OPEN")
-    if source.get("reviewRequiredUrls"):
-        fail("official source reviewRequiredUrls must be empty before OPEN")
     if source.get("fetchFailureUrls"):
         fail("official source fetchFailureUrls must be empty before OPEN")
+    if source.get("state") == "clean":
+        if source.get("reviewRequiredUrls"):
+            fail("clean official source state cannot contain pending source alerts")
+    else:
+        if not (source_manifest and source_scope and source_signoff):
+            fail("official source state must be clean or have signed Indonesia-scope approval")
+        try:
+            validate_scoped_signoff(
+                source, source_manifest, source_scope, source_signoff,
+                approved_dt.date().isoformat(),
+            )
+        except ValueError as exc:
+            fail(str(exc))
 
     coverage = manufacturing_check.get("noticeIndexCoverage", {})
     inventory_url = str(coverage.get("officialManufacturingInventoryUrl") or "")
@@ -259,11 +274,16 @@ def main() -> int:
     program = json.loads(PROGRAM.read_text(encoding="utf-8-sig"))
     source = json.loads(SOURCE.read_text(encoding="utf-8-sig"))
     manufacturing_check = json.loads(MANUFACTURING_CHECK.read_text(encoding="utf-8-sig"))
+    source_manifest = json.loads((ROOT / "monitor/sources.json").read_text(encoding="utf-8-sig"))
+    source_scope = json.loads((ROOT / "recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json").read_text(encoding="utf-8-sig"))
+    source_signoff = json.loads((ROOT / "recruitment/ID_BETA_SOURCE_SIGNOFF.json").read_text(encoding="utf-8-sig"))
     outreach = OUTREACH.read_text(encoding="utf-8")
 
     try:
         updated_program = prepare_open(
-            program, source, manufacturing_check, str(args.approved_at)
+            program, source, manufacturing_check, str(args.approved_at),
+            source_manifest=source_manifest, source_scope=source_scope,
+            source_signoff=source_signoff,
         )
         updated_outreach = outreach_open_text(outreach)
     except ValueError as exc:
