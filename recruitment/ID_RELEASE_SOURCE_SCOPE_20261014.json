@@ -9,9 +9,12 @@
   "scopeReviewDoesNotApproveRelease": true,
   "kp2miManufacturingNoticeIndex": {
     "url": "https://kp2mi.go.id/gtog-korea/info",
-    "status": "not_verified_official_index_unavailable",
+    "status": "not_verified_wrong_category_incomplete_inventory",
     "checkedAt": "2026-10-14",
-    "comment": "Primary and alternative official index URL timed out or returned gateway error; direct historic notice and indexed search results cannot prove no later relevant notice."
+    "comment": "On 2026-10-14 remote authorized HTTP inspection, /gtog-korea/info returned HTTP 200 and contained a server-side DataTables category labeled Preliminary Training dan Info, using the exact /gtog-data/korea/Preliminary%20Training%20dan%20Info AJAX endpoint. This URL is not a comprehensive 2026 General Manufacturing announcement index. Web fetches intermittently returned 502. No complete current cohort notice inventory or exact online application document list has been verified.",
+    "observedHttpStatus": 200,
+    "observedTitle": "Preliminary Training dan Info",
+    "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
   },
   "manufacturingOnlineJobDocuments": "job_docs_hold",
   "betaAccess": "hold",
