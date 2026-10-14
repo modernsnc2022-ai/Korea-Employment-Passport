@@ -377,14 +377,60 @@ def main() -> int:
     source_signoff = json.loads((ROOT / "recruitment/ID_BETA_SOURCE_SIGNOFF.json").read_text(encoding="utf-8-sig"))
     outreach = OUTREACH.read_text(encoding="utf-8")
 
+    # First validate cheap approval guards. A deliberate missing deployment
+    # proof is the only expected error at this point; any other issue blocks.
     try:
-        updated_program = prepare_open(
+        prepare_open(
             program, source, manufacturing_check, str(args.approved_at),
             source_manifest=source_manifest, source_scope=source_scope,
             source_signoff=source_signoff,
         )
-        updated_outreach = outreach_open_text(outreach)
     except ValueError as exc:
+        if "same-HEAD live Pages proof is required" not in str(exc):
+            raise SystemExit("BETA_RELEASE_BLOCKED " + str(exc)) from exc
+
+    # A Draft, dirty checkout or out-of-date local main is never valid for
+    # final beta OPEN even when the underlying tests were previously green.
+    branch_name = subprocess.check_output(
+        ["git", "-C", str(ROOT), "branch", "--show-current"], text=True
+    ).strip()
+    if branch_name != "main":
+        raise SystemExit("BETA_RELEASE_BLOCKED state write requires checked-out main")
+    if subprocess.check_output(
+        ["git", "-C", str(ROOT), "status", "--porcelain"], text=True
+    ).strip():
+        raise SystemExit("BETA_RELEASE_BLOCKED release checkout must be clean")
+    release_head = subprocess.check_output(
+        ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
+    ).strip()
+    remote_line = subprocess.check_output(
+        ["git", "-C", str(ROOT), "ls-remote", "--heads", "origin", "main"],
+        text=True, timeout=25
+    ).split()
+    if len(remote_line) != 2 or remote_line[0] != release_head:
+        raise SystemExit("BETA_RELEASE_BLOCKED HEAD differs from remote origin/main")
+
+    # Read-only live proof is never loaded from a forgeable JSON file.
+    from audit_indonesia_beta_pages_live import audit, http_first_hop
+
+    def committed_blob(name: str) -> bytes:
+        return subprocess.check_output(
+            ["git", "-C", str(ROOT), "show", "HEAD:docs/" + name]
+        )
+
+    try:
+        live_proof = audit(
+            http_first_hop, ROOT / "docs", release_head,
+            asset_loader=committed_blob
+        )
+        updated_program = prepare_open(
+            program, source, manufacturing_check, str(args.approved_at),
+            source_manifest=source_manifest, source_scope=source_scope,
+            source_signoff=source_signoff,
+            deployment=live_proof, release_head=release_head,
+        )
+        updated_outreach = outreach_open_text(outreach)
+    except (OSError, ValueError) as exc:
         raise SystemExit("BETA_RELEASE_BLOCKED " + str(exc)) from exc
 
     print(
@@ -393,7 +439,9 @@ def main() -> int:
         f"decision={updated_program['releaseDecision']['publicBeta']} "
         f"approved_at={updated_program['releaseDecision']['approvedAt']}"
     )
-    print("MANUAL_GATE_REMAINS same-day Manufacturing 2026 notice re-check and same-HEAD CI review")
+    print("SAME_HEAD_LIVE_PROOF VERIFIED six HTTPS redirects and nine exact live assets")
+    print("FILE_STAGE_ONLY: OPEN commit must be separately deployed and reverified; "
+          "this command does not deploy or grant remote applicant access")
 
     if not args.write:
         print("DRY_RUN_ONLY no release files were changed")
@@ -404,7 +452,8 @@ def main() -> int:
         encoding="utf-8",
     )
     OUTREACH.write_text(updated_outreach, encoding="utf-8")
-    print("BETA_RELEASE_WRITTEN public_beta_access=open application_intake=open")
+    print("BETA_RELEASE_FILES_STAGED_NOT_DEPLOYED public_beta_access=open "
+          "application_intake=open POST_WRITE_DEPLOYMENT_RECHECK_REQUIRED")
     return 0
 
 
