@@ -11,7 +11,7 @@ Public tester-interest intake may be **OPEN before launch**. Actual beta access,
 ## 2. Zero-broker coverage
 - [ ] No unresolved HIGH broker-replacement blocker exists for the supported route.
 - [ ] Known broker-like micro questions have an exact answer, official help route, or explicit HOLD.
-- [ ] The five Manufacturing 2026 job-application questions remain blocked from guessed answers until official evidence is sufficient.
+- [ ] The four Manufacturing 2026 safe-platform/identity questions use conservative verified non-exact baselines; only the precise final job-application checklist (`job_docs`) remains on explicit HOLD. That HOLD blocks final Broker Replacement Rate PASS, not a safely restricted beta OPEN.
 - [ ] Broker Replacement Rate measurement can be captured from beta feedback.
 
 ## 3. Forms and document guidance
@@ -20,9 +20,9 @@ Public tester-interest intake may be **OPEN before launch**. Actual beta access,
 - [ ] Users are warned not to submit when an official requirement is not confirmed.
 
 ## 4. Official-source freshness
-- [ ] Official-source monitor is green at launch review.
+- [ ] The official-source watch is refreshed on launch day, and either **all monitored sources are manually reviewed and clean** or the strict **Indonesia-only manual source-scope signoff** passes. Three Korea-shared alerts must be checked; five unrelated-country alerts, including an acknowledged country-only fetch failure, remain visible and must never be auto-accepted.
 - [ ] No unresolved source failure affects a current user action.
-- [ ] Manufacturing 2026 notices are checked again immediately before launch.
+- [ ] The actual KP2MI G-to-G Korea **Pengumuman** index (not the historical `/gtog-korea/info` Preliminary Training page) and relevant 2026 General Manufacturing notice bodies/attachments are checked again on the real launch day with an explicit named operator signoff. A title-only scan or previously closed optional Skill Test upload does not certify exact `job_docs`.
 
 ## 5. Beta UX and privacy
 - [ ] Beta ID accepts the reserved base IDs plus contiguous overflow active-applicant IDs KEP-0051 and upward.
@@ -43,7 +43,11 @@ Public tester-interest intake may be **OPEN before launch**. Actual beta access,
 - [ ] UI smoke tests PASS on release HEAD.
 - [ ] GitHub Pages deployment PASS on release HEAD.
 - [ ] Mobile-width smoke review PASS.
-- [ ] No known critical or high-severity product defect remains open.
+- [ ] No known critical or high-severity product defect remains open. Confirm the 2026 optional Job Capacity Assessment supporting documents are **conditional**, their September 21–23 window is **closed**, and `Formulir Uji Kompetensi` is required only when an applicant elects to upload eligible competency evidence in a valid official window.
+
+## Read-only release preflight (does not approve anything)
+
+On the intended beta release day, run `python scripts/report_indonesia_beta_release_preflight.py` (or `--json` for a local machine-readable report). This shows a dated snapshot of the 27-stage route, eight official-source alerts (three Korea-shared / five other-country), current-day monitor freshness, two separate manual signoffs, optional annex safeguards, the still-unverified Pages deployment parity, and the explicit beta HOLD/OPEN switch. The command is **strictly read-only** and never writes official hash baselines or approval files. Its PASS on an older day is **not** launch authorization; rerun and verify the actual date and real deployed site. `--self-test` exercises four fail-closed cases.
 
 ## Automated gate behavior
 
@@ -73,4 +77,4 @@ When sections 1–7 all PASS:
 6. grant every approved beta tester 6 months free from their actual beta activation date.
 
 ## Launch principle
-The beta should start only when the product is complete enough that testers are primarily finding **real-world process gaps**, not obvious unfinished-product defects.
+The beta should start only when the product is complete enough that testers are primarily finding **real-world process gaps**, not obvious unfinished-product defects. Do not claim same-HEAD production verification using historical draft-branch tests, and do not treat an unapproved source scan as an operator signature.
