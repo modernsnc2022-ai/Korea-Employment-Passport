@@ -148,6 +148,13 @@ async function submitDirectApplicant(){
   let payload={};
   try{payload=await response.json()}catch{}
   if(!response.ok)throw new Error(String(payload?.error||'HTTP '+response.status));
+  // Only an explicit acknowledgement with a bounded reference can mean
+  // the private intake actually stored this registration. A bare HTTP 200,
+  // empty JSON, or {ok:false} must NOT produce a false success message.
+  if(payload?.ok!==true||typeof payload.submissionId!=='string'
+    ||!/^KEP-I-[A-Za-z0-9-]{6,48}$/.test(payload.submissionId)){
+    throw new Error('Missing verified intake receipt');
+  }
   return payload;
 }
 
@@ -291,7 +298,7 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
     try{
       const result=await submitDirectApplicant();
       out.hidden=false;out.className='result';
-      out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+String(result.submissionId||'diterima')+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
+      out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+result.submissionId+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
       $('betaApplicationForm').reset();
     }catch{
       out.hidden=false;out.className='result warn';
@@ -305,6 +312,9 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
   const body=encodeURIComponent(applicationText());
+  // mailto: opens a composer; it does not prove anything was sent.
+  out.hidden=false;out.className='result warn';
+  out.textContent='Aplikasi email akan dibuka. Pendaftaran BELUM terkirim sampai Anda menekan Kirim di aplikasi email dan memastikan pesan ada di folder Terkirim. Jika tidak terbuka, pilih Buka Gmail atau Salin teks pendaftaran.';
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
 
@@ -319,10 +329,10 @@ $('gmailApplicationBtn').addEventListener('click',()=>{
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const url=gmailComposeUrl(email,'[KEP Beta Interest] Active EPS applicant',applicationText());
   const opened=window.open(url,'_blank','noopener,noreferrer');
-  if(!opened){
-    out.hidden=false;out.className='result warn';
-    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
-  }
+  out.hidden=false;out.className='result warn';
+  out.textContent=opened
+    ?'Draf Gmail dibuka, tetapi pendaftaran BELUM terkirim. Tekan Kirim di Gmail dan pastikan pesan berada di folder Terkirim.'
+    :'Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
 });
 
 $('shareCommunityApplicantInviteBtn').addEventListener('click',async()=>{
@@ -383,6 +393,8 @@ $('workerValidatorForm').addEventListener('submit',(event)=>{
   const email=betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent(betaProgram.retrospectivePanel?.application?.interestSubject||'[KEP E-9 Worker Validator Interest] Retrospective panel');
   const body=encodeURIComponent(workerValidatorText());
+  out.hidden=false;out.className='result warn';
+  out.textContent='Aplikasi email akan dibuka. Minat panel BELUM terkirim sampai Anda menekan Kirim dan memastikan pesan ada di folder Terkirim.';
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
 
@@ -398,10 +410,10 @@ $('gmailWorkerValidatorBtn').addEventListener('click',()=>{
   const subject=betaProgram.retrospectivePanel?.application?.interestSubject||'[KEP E-9 Worker Validator Interest] Retrospective panel';
   const url=gmailComposeUrl(email,subject,workerValidatorText());
   const opened=window.open(url,'_blank','noopener,noreferrer');
-  if(!opened){
-    out.hidden=false;out.className='result warn';
-    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
-  }
+  out.hidden=false;out.className='result warn';
+  out.textContent=opened
+    ?'Draf Gmail dibuka, tetapi minat panel BELUM terkirim. Tekan Kirim di Gmail dan periksa folder Terkirim.'
+    :'Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
 });
 
 $('copyWorkerValidatorBtn').addEventListener('click',async()=>{
