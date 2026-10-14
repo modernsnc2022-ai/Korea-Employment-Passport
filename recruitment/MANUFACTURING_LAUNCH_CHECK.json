@@ -161,6 +161,24 @@
         "exactFinalJobDocumentsVerified": false,
         "mustNotPromoteJobDocs": true,
         "evidenceDocument": "research/ID_MANUFACTURING_2026_JANUARY_EPS_REGISTRATION_4_PDF_ANNEX_20261014.md"
+      },
+      "followupIndexTitleScreen": {
+        "checkedAt": "2026-10-14",
+        "sourceCategory": "Pengumuman",
+        "sourceApi": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+        "http": 200,
+        "rowsInspected": 320,
+        "recordsTotal": 2876,
+        "oldestDateInspected": "2025-07-15",
+        "generalManufacturing2026TitleCount": 7,
+        "other2026CohortOnlineApplicationTitleCount": 3,
+        "generalManufacturing2026FinalJobOnlineApplicationTitleCandidates": 0,
+        "digestSha256": "5fe9918d95c2676222265a3169d3dfb626d65b4bfe2f076dfe6b4241c7ce3d04",
+        "sourceBaselineAccepted": false,
+        "humanOperatorSignedOff": false,
+        "exactFinalJobDocumentsVerified": false,
+        "notContentOrAllAttachmentsReviewed": true,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_LATEST_PENGUMUMAN_TITLE_SCREEN_20261014.md"
       }
     },
     "historicalMistakenPageTitle": "Preliminary Training dan Info",
