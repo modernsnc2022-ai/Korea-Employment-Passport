@@ -137,7 +137,7 @@ require(
 )
 require(
     manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/info",
-    "Manufacturing launch check must use the official KP2MI G-to-G Korea index",
+    "Manufacturing launch check must preserve the historical KP2MI Preliminary Training index pointer for audit",
 )
 baseline = route.get("jobApplicationBaselineEvidence", {})
 require(
