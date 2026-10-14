@@ -130,7 +130,22 @@
       "operatorReviewedAndApproved": false,
       "postSkillManufacturingJobDocsVerified": false,
       "evidenceDocument": "research/ID_MANUFACTURING_2026_7_NOTICE_DETAIL_AUDIT_20261014.md",
-      "evidenceScope": "Read-only official HTML and attachment links only. 2026 final Manufacturing job-application checklist still HOLD; release-day human approval needed."
+      "evidenceScope": "Read-only official HTML and attachment links only. 2026 final Manufacturing job-application checklist still HOLD; release-day human approval needed.",
+      "optionalCompetencyPdfAnnexReview": {
+        "noticeDate": "2026-09-17",
+        "officialPdfLinksFetched": 6,
+        "totalPdfPages": 21,
+        "allFilesVerifiedPdf": true,
+        "pdfTextAndSelectedPageImagesReviewed": true,
+        "exampleScanVisualVerificationComplete": false,
+        "humanOperatorSignedOff": false,
+        "conditionalCompetencyFormRequiredWhenAnyOptionalEvidenceSubmitted": true,
+        "employerUnavailableFallbackTwoNonRelativeSureties": true,
+        "validSubmissionPeriod": "2026-09-21 09:00 to 2026-09-23 13:00 WIB",
+        "submissionStatus": "closed",
+        "exactFinalJobDocumentsVerified": false,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_OPTIONAL_COMPETENCY_PDF_ANNEX_AUDIT_20261014.md"
+      }
     }
   },
   "historicalIndexBefore20261014": "https://kp2mi.go.id/gtog-korea/info",
