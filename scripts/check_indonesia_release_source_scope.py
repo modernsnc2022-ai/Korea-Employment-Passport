@@ -61,15 +61,29 @@ def validate(status: dict, manifest: dict, scope: dict) -> tuple[int, int]:
     ensure(set(ids) == CRITICAL | OTHER_COUNTRY,
            "new or missing changed sources must fail closed pending manual scope review")
     ensure(scope.get("kp2miManufacturingNoticeIndex", {}).get("status")
-           == "not_verified_wrong_category_incomplete_inventory",
-           "do not claim full current Manufacturing index review without verified evidence")
+           == "correct_pengumuman_2026_inventory_read_pending_release_signoff",
+           "2026 Pengumuman index review may not be represented as release approval")
     ensure(scope.get("kp2miManufacturingNoticeIndex", {}).get("checkedAt")
            == scope.get("checkedAt"), "index attempt date must match triage date")
     index = scope.get("kp2miManufacturingNoticeIndex", {})
-    ensure(index.get("observedTitle") == "Preliminary Training dan Info"
-           and index.get("dataEndpoint") ==
-           "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
-           "index-page category and AJAX scope must remain explicitly non-exhaustive")
+    ensure(index.get("url") == "https://kp2mi.go.id/gtog-korea/pengumuman"
+           and index.get("currentCategory") == "Pengumuman"
+           and index.get("previouslyMistakenUrl") == "https://kp2mi.go.id/gtog-korea/info"
+           and index.get("dataEndpoint") == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
+           and index.get("complete2026IndexRead") is True
+           and index.get("operatorConfirmedCompleteReview") is False
+           and index.get("inspectedOffsets") == [0, 75, 150]
+           and index.get("inspectedRows") == 225
+           and index.get("reachedPreviousYear") is True,
+           "index review evidence must match the real official 2026 list and remain unsigned")
+    notice = index.get("competencyUploadNotice", {})
+    ensure(notice.get("date") == "2026-09-17"
+           and notice.get("optional") is True
+           and notice.get("closed") is True
+           and notice.get("notJobApplicationDocuments") is True
+           and notice.get("url", "").startswith(
+               "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi"),
+           "2026 Manufacturing optional competency notice cannot be presented as job application documents")
     for id_, url in zip(ids, urls):
         ensure(by_id.get(id_) == url, f"{id_}: official source URL changed or is mismatched")
     for row in records:
@@ -111,9 +125,19 @@ def self_test() -> None:
         "sourceWatchConfigured": len(ids), "sourceWatchChecked": len(ids),
         "checkedAt": "2026-10-14",
         "kp2miManufacturingNoticeIndex": {
-            "status": "not_verified_wrong_category_incomplete_inventory", "checkedAt": "2026-10-14",
-            "observedTitle": "Preliminary Training dan Info",
-            "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
+            "status": "correct_pengumuman_2026_inventory_read_pending_release_signoff", "checkedAt": "2026-10-14",
+            "url": "https://kp2mi.go.id/gtog-korea/pengumuman",
+            "currentCategory": "Pengumuman",
+            "previouslyMistakenUrl": "https://kp2mi.go.id/gtog-korea/info",
+            "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+            "complete2026IndexRead": True, "operatorConfirmedCompleteReview": False,
+            "inspectedOffsets": [0,75,150], "inspectedRows": 225,
+            "reachedPreviousYear": True,
+            "competencyUploadNotice": {
+                "date": "2026-09-17", "optional": True, "closed": True,
+                "notJobApplicationDocuments": True,
+                "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026"
+            }
         },
         "records": [
             {
