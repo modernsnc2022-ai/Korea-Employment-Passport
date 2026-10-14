@@ -143,6 +143,24 @@
         "submissionStatus": "closed",
         "exactFinalJobDocumentsVerified": false,
         "evidenceDocument": "research/ID_MANUFACTURING_2026_OPTIONAL_COMPETENCY_PDF_ANNEX_AUDIT_20261014.md"
+      },
+      "januaryEpsRegistrationPdfAnnexReview": {
+        "noticeDate": "2026-01-27",
+        "filesRetrievedDate": "2026-10-14",
+        "officialPdfLinksFetched": 4,
+        "totalPdfPages": 27,
+        "allFilesVerifiedPdf": true,
+        "fullTextExtracted": true,
+        "allVisualPagesReviewed": false,
+        "operatorReviewedAndApproved": false,
+        "sectorScope": "2026 UBT General Manufacturing and Fisheries initial EPS-TOPIK registration only",
+        "registrationWindowStatus": "closed",
+        "manufacturingMinimumSchool": "SLTP_or_equivalent",
+        "temporarySklAccepted": false,
+        "bankScreenshotFallback": "only_if_physical_bankbook_absent_at_registration",
+        "exactFinalJobDocumentsVerified": false,
+        "mustNotPromoteJobDocs": true,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_JANUARY_EPS_REGISTRATION_4_PDF_ANNEX_20261014.md"
       }
     },
     "historicalMistakenPageTitle": "Preliminary Training dan Info",
