@@ -5,7 +5,7 @@
   },
   "registration": {
     "title": "Pendaftaran online Sisko P2MI",
-    "action": "Siapkan data dan lakukan pendaftaran melalui Sisko P2MI sesuai petunjuk resmi yang berlaku."
+    "action": "Siapkan data pribadi pada Sisko P2MI sesuai petunjuk resmi. Dalam UBT Umum 2026, pilih hanya satu sektor (Manufaktur atau Perikanan) dengan cermat karena tidak dapat pindah sektor. Pendaftaran umum 2026 SUDAH BERAKHIR; pantau pengumuman baru."
   },
   "exam_fee": {
     "title": "Pembayaran biaya EPS-TOPIK",
@@ -18,7 +18,7 @@
   },
   "document_verify": {
     "title": "Verifikasi dokumen pendaftaran",
-    "action": "Periksa kualitas scan dan kecocokan data sebelum verifikasi resmi."
+    "action": "Periksa kualitas scan dan kecocokan identitas pada dokumen resmi. Untuk Manufaktur UBT Umum 2026, SKL tidak menggantikan ijazah; jika ijazah hilang, gunakan surat pengganti ijazah resmi. Alternatif screenshot mobile banking hanya contoh dokumen rekening pada pendaftaran awal."
   },
   "exam_card": {
     "title": "Cetak kartu ujian",
