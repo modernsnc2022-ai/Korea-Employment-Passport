@@ -37,13 +37,11 @@ def prepare_open(
     if approved_dt.tzinfo is None:
         fail("approved-at must include timezone")
 
-    if source.get("configured") != source.get("checked"):
-        fail("all configured official sources must be checked before OPEN")
-    if source.get("fetchFailureUrls"):
-        fail("official source fetchFailureUrls must be empty before OPEN")
     if source.get("state") == "clean":
-        if source.get("reviewRequiredUrls"):
-            fail("clean official source state cannot contain pending source alerts")
+        if source.get("configured") != source.get("checked"):
+            fail("globally clean official sources require every configured source fetched")
+        if source.get("fetchFailureUrls") or source.get("reviewRequiredUrls"):
+            fail("globally clean official sources cannot contain pending alerts or failures")
     else:
         if not (source_manifest and source_scope and source_signoff):
             fail("official source state must be clean or have signed Indonesia-scope approval")
