@@ -39,8 +39,12 @@ def validate_scoped_signoff(
             "expected three reviewed Korea-shared and five pending other-country sources")
     require(source.get("state") == "review_required",
             "country-scoped signoff cannot invent a clean global monitor")
-    require(source.get("autoPublishRules") is False and not source.get("fetchFailureUrls"),
-            "source publishing and fetch failures are not permitted")
+    require(source.get("autoPublishRules") is False, "source auto-publication is prohibited")
+    require(signed.get("otherCountryFetchFailureIds", []) ==
+            source.get("fetchFailureSourceIds", []),
+            "foreign-country fetch failures must be explicitly acknowledged in signoff")
+    # validate_scope() above has already proved that every failed source is
+    # a known non-Indonesia country URL; any Korea/ID or new-unknown failure fails.
     source_pairs = sorted((row.get("id"), row.get("url")) for row in manifest.get("sources", []))
     official_map_sha = hashlib.sha256(
         json.dumps(source_pairs, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
@@ -107,6 +111,8 @@ def self_test() -> None:
         lambda a,b,c,d: a["reviewRequiredSourceIds"].append("new_unknown_alert"),
         lambda a,b,c,d: a.update(autoPublishRules=True),
         lambda a,b,c,d: d.update(reviewer=None),
+        lambda a,b,c,d: d.update(otherCountryFetchFailureIds=[]),
+        lambda a,b,c,d: a.update(fetchFailureSourceIds=["labor_standards_wage_statement"]),
     ]:
         a,b,c,d = (copy.deepcopy(x) for x in (clean_copy,manifest,scope,signed))
         mutant(a,b,c,d)
@@ -116,7 +122,7 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("unsafe Indonesia beta source signoff mutation passed")
-    print("ID_BETA_SOURCE_SIGNOFF_SELF_TEST_PASS 9 forbidden mutations")
+    print("ID_BETA_SOURCE_SIGNOFF_SELF_TEST_PASS 11 forbidden mutations")
 
 
 def main() -> None:
