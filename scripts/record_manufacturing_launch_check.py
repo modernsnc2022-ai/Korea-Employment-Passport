@@ -9,7 +9,8 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "recruitment" / "MANUFACTURING_LAUNCH_CHECK.json"
-PRIMARY_INDEX = "https://kp2mi.go.id/gtog-korea/info"
+PRIMARY_INDEX = "https://kp2mi.go.id/gtog-korea/pengumuman"
+HISTORICAL_WRONG_INDEX = "https://kp2mi.go.id/gtog-korea/info"
 NO_NOTICE = "no_current_manufacturing_job_application_notice"
 NOTICE_FOUND = "notice_found_review_required"
 ALLOWED_RESULTS = {NO_NOTICE, NOTICE_FOUND}
@@ -57,12 +58,8 @@ def updated_record(
         validate_official_url(full_inventory_url)
         target = urlparse(full_inventory_url)
         path = target.path.lower()
-        if (
-            not (path.startswith("/gtog-korea/") or path.startswith("/gtog-data/korea/"))
-            or path.rstrip("/") == "/gtog-korea/info"
-            or "preliminary" in full_inventory_url.lower()
-        ):
-            fail("full inventory URL must be the correct official Korea announcement listing, not Preliminary Training or a single detail page")
+        if path.rstrip("/") != "/gtog-korea/pengumuman" or target.query or target.fragment:
+            fail("full inventory URL must be the verified official KP2MI Pengumuman listing, not Preliminary Training or an invented index")
 
     record = json.loads(json.dumps(current))
     record["checkedAt"] = checked_at
@@ -73,10 +70,13 @@ def updated_record(
     record["noticeIndexCoverage"] = {
         "status": (
             "verified_complete_general_manufacturing_index_review"
-            if confirm_full_inventory else "unverified_preliminary_training_category_only"
+            if confirm_full_inventory else "correct_pengumuman_index_review_not_operator_confirmed"
         ),
         "checkedAt": checked_at,
-        "previouslyAssumedIndex": PRIMARY_INDEX,
+        "previouslyAssumedIndex": HISTORICAL_WRONG_INDEX,
+        "currentCategory": "Pengumuman",
+        "currentListingUrl": PRIMARY_INDEX,
+        "serverSideAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
         "actualCategory": "Preliminary Training dan Info",
         "completeGeneralManufacturingInventory": bool(confirm_full_inventory),
         "officialManufacturingInventoryUrl": full_inventory_url,
@@ -84,7 +84,7 @@ def updated_record(
         "notes": (
             "Operator explicitly reviewed official General Manufacturing announcement listing and confirmed the complete cohort inventory."
             if confirm_full_inventory else
-            "The old /gtog-korea/info list covers Preliminary Training dan Info only. An exhaustive General Manufacturing notice index has not been verified."
+            "The right Pengumuman category is identified, but a release-day full 2026 Manufacturing notice review and manual signoff are still required."
         ),
     }
     # Keep the nested official-evidence timestamp in sync. A new release-day
@@ -147,15 +147,15 @@ def self_test() -> None:
     assert found["sameDayOfficialRecheck"]["status"] == "notice_found_review_required"
     assert found["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-04"
     assert found["officialEvidence"][-1]["url"].startswith("https://kp2mi.go.id/")
-    # Self-test uses a synthetic official-host index-shaped URL, NOT a claim
-    # that such an endpoint currently exists or is a verified official list.
-    example = "https://kp2mi.go.id/gtog-korea/verified-index-example"
+    # Structural self-test never fetches or attests current content.
+    example = PRIMARY_INDEX
     signed = updated_record(base, checked_at="2026-10-04", result=NO_NOTICE,
                             full_inventory_url=example, confirm_full_inventory=True)
     assert signed["noticeIndexCoverage"]["completeGeneralManufacturingInventory"] is True
     assert signed["noticeIndexCoverage"]["officialManufacturingInventoryUrl"] == example
-    for bad_url in [PRIMARY_INDEX, "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
-                    "https://kp2mi.go.id/gtog-detail/korea/single-notice"]:
+    for bad_url in [HISTORICAL_WRONG_INDEX, "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
+                    "https://kp2mi.go.id/gtog-detail/korea/single-notice",
+                    "https://kp2mi.go.id/gtog-korea/verified-index-example"]:
         try:
             updated_record(base, checked_at="2026-10-04", result=NO_NOTICE,
                            full_inventory_url=bad_url, confirm_full_inventory=True)
