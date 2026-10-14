@@ -359,15 +359,22 @@ async function fetchJsonRequired(url,attempts=3){
   throw new Error('required data unavailable: '+url+' — '+String(lastError?.message||lastError||'unknown error'));
 }
 
-async function fetchJsonOptional(url,fallback,label){
-  try{
-    const response=await fetch(url,{cache:'no-store'});
-    if(!response.ok)throw new Error('HTTP '+response.status);
-    return await response.json();
-  }catch(err){
-    console.warn('Optional data unavailable:',label||url,err);
-    return fallback;
+async function fetchJsonOptional(url,fallback,label,attempts=1){
+  let lastError=null;
+  for(let attempt=1;attempt<=attempts;attempt+=1){
+    try{
+      const response=await fetch(url,{cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      return await response.json();
+    }catch(err){
+      lastError=err;
+      if(attempt<attempts)await new Promise(resolve=>setTimeout(resolve,200*attempt));
+    }
   }
+  console.warn('Optional data unavailable:',label||url,lastError);
+  // Crucial: a real failed source review status remains a visible warning;
+  // retries never convert an unknown official source state to clean.
+  return fallback;
 }
 
 async function boot(){
@@ -422,7 +429,8 @@ async function boot(){
           fetchFailureUrls:['source_review_status'],
           fetchFailureSourceIds:['source_review_status']
         },
-        'official source review status'
+        'official source review status',
+        3
       ),
       fetchJsonOptional(
         OFFICIAL_HELP_URL,
