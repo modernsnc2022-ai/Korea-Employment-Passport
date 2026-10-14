@@ -32,7 +32,7 @@ Both templates deliberately use `workers_dev = false` and
 the one configured on the intake Worker; the OTP HMAC secret must differ from
 the intake HMAC key. Never put either value in Git or a public page.
 
-## Read-only DNS preflight — current state: HOLD
+## Read-only DNS preflight — DNS + Resend Verified; application rollout HOLD
 
 From repository root:
 
@@ -51,12 +51,13 @@ SPF and DMARC, plus the **actual Resend 2026-10-14 dashboard** records for
 |---|---|---|
 | TXT | `resend._domainkey.mail` | Full DKIM `p=...` copied from Resend |
 | CNAME | `rsend.mail` | Resend screenshot: `rsend-apne1.forge.rmta.net`; **DNS only** |
-| CNAME | `send.mail` | Full displayed Resend target (do not infer from `rsend`); **DNS only** |
+| CNAME | `send.mail` | Resend / Cloudflare DNS: `send.forge.rmta.net`; **DNS only** |
 
-The `rsend.mail` target is now visible in the owner's Cloudflare entry
-screenshot; the `send.mail` target and the complete DKIM value are still not
-independently visible for exact comparison. **Do not guess either value**. This new sending configuration
-uses two CNAMEs, **not** the older `send.mail` MX + TXT model.
+Both CNAME targets have now been independently observed in the operator's
+Cloudflare entry and public DNS. The full DKIM TXT is not reproduced in
+this repository; rely on Resend's actual verified-domain status, not an
+inferred key. This configuration uses two CNAMEs, **not** the older
+`send.mail` MX + TXT model.
 `Enable Sending` is ON and `Enable Receiving` is OFF; never add the
 receiving MX records unnecessarily.
 
@@ -67,14 +68,19 @@ prerequisites cause exit **2** and HOLD; DNS errors cause exit 1.
 If Resend configures a custom Return-Path name instead of `send`, pass
 `--return-path <approved-label>`.
 
-The live public DNS audit on 2026-10-14 found the original Zoho MX/SPF and
-DMARC present, but Resend records not yet configured: **HOLD**.
+2026-10-14 verified update: the owner's authenticated Resend dashboard
+for `mail.gdglobal.kr` now shows **Status: Verified**, Tokyo
+(ap-northeast-1), and **'Domain verified: Your domain is ready to send
+emails'**. The separate public DNS audit also finds DKIM and both CNAME
+records, while the root Zoho MX/SPF/DMARC remain intact. The CLI still
+reports `resend_provider_verified=false` by design: public DNS cannot
+read a provider's authenticated account state. Treat the dashboard
+screenshot as the separate provider verification evidence.
 Do **not** change `gdglobal.kr` root Zoho MX or append a second root SPF.
-Public DNS presence alone is not verification: compare **all three exact**
-record values with the operator's Resend dashboard, require Resend's
-`verified` sending status, and separately require a synthetic recipient's
-actual inbox receipt and account/API binding approval. The release gate
-never auto-opens. Resend requests use a HMAC-based `Idempotency-Key`
+**Provider DNS Verified does not authorize production sending or beta OPEN**:
+restricted API key and Worker secret placement, synthetic recipient inbox
+receipt, privacy/processor approvals and deployment checks remain pending.
+The release gate never auto-opens. Resend requests use a HMAC-based `Idempotency-Key`
 to avoid duplicate delivery; never log the key.
 
 Provider references:
