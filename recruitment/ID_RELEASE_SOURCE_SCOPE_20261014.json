@@ -4,7 +4,7 @@
   "releaseRoute": "Indonesia > Korea > E-9 > General Manufacturing 2026",
   "sourceWatchState": "review_required",
   "sourceWatchConfigured": 84,
-  "sourceWatchChecked": 84,
+  "sourceWatchChecked": 83,
   "monitorBaselineAccepted": false,
   "scopeReviewDoesNotApproveRelease": true,
   "kp2miManufacturingNoticeIndex": {
@@ -68,7 +68,7 @@
       "routeScope": "other_country",
       "reviewStatus": "country_specific_review_pending",
       "reviewedAt": null,
-      "notes": "Nepal EPS cohort-specific notice content not signed off; Nepal beta remains blocked."
+      "notes": "Nepal EPS cohort-specific notice content not signed off; Nepal beta remains blocked. Recheck on 2026-10-14 returned HTTP 500; do not treat this unavailable site as approved or as an Indonesian Manufacturing rule."
     },
     {
       "id": "vn_colab_eps_notices",
@@ -102,5 +102,19 @@
       "reviewedAt": null,
       "notes": "Myanmar MOL page alone does not establish 2026 EPS Manufacturing availability."
     }
-  ]
+  ],
+  "sourceWatchFailedSourceIds": [
+    "np_eps_notice_index"
+  ],
+  "sourceWatchChangedSourceIds": [
+    "labor_standards_wage_statement",
+    "kdca_qcode_input",
+    "moel_1350_contact",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
+  "sourceWatchDate": "2026-10-14",
+  "sourceWatchFailureContext": "Nepal official EPS notice index returned HTTP 500 on 2026-10-14; unrelated country remains HOLD. No Korea-common or Indonesia-relevant official source failed."
 }
