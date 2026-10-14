@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "checkedAt": "2026-10-14",
+  "releaseRoute": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "sourceWatchState": "review_required",
+  "sourceWatchConfigured": 84,
+  "sourceWatchChecked": 84,
+  "monitorBaselineAccepted": false,
+  "scopeReviewDoesNotApproveRelease": true,
+  "kp2miManufacturingNoticeIndex": {
+    "url": "https://kp2mi.go.id/gtog-korea/info",
+    "status": "not_verified_official_index_unavailable",
+    "checkedAt": "2026-10-14",
+    "comment": "Primary and alternative official index URL timed out or returned gateway error; direct historic notice and indexed search results cannot prove no later relevant notice."
+  },
+  "manufacturingOnlineJobDocuments": "job_docs_hold",
+  "betaAccess": "hold",
+  "records": [
+    {
+      "id": "labor_standards_wage_statement",
+      "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "routeScope": "indonesia_korea_shared",
+      "reviewStatus": "content_rechecked_scope_only",
+      "reviewedAt": "2026-10-14",
+      "notes": "2026-10-08 amended Labor Standards Act Art.48(2) still requires payslip delivery."
+    },
+    {
+      "id": "kdca_qcode_input",
+      "sourceUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "routeScope": "indonesia_korea_shared",
+      "reviewStatus": "content_rechecked_scope_only",
+      "reviewedAt": "2026-10-14",
+      "notes": "Legacy Q-CODE site redirects to KDCA Travel Health; eligibility is based on designated regions/symptoms, not every entrant."
+    },
+    {
+      "id": "moel_1350_contact",
+      "sourceUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "routeScope": "indonesia_korea_shared",
+      "reviewStatus": "content_rechecked_scope_only",
+      "reviewedAt": "2026-10-14",
+      "notes": "MOEL 1350 official labor advice remains open weekdays 09:00-18:00."
+    },
+    {
+      "id": "np_eps_notice_index",
+      "sourceUrl": "https://epsnepal.gov.np/notices",
+      "routeScope": "other_country",
+      "reviewStatus": "country_specific_review_pending",
+      "reviewedAt": null,
+      "notes": "Nepal EPS cohort-specific notice content not signed off; Nepal beta remains blocked."
+    },
+    {
+      "id": "vn_colab_eps_notices",
+      "sourceUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "routeScope": "other_country",
+      "reviewStatus": "country_specific_review_pending",
+      "reviewedAt": null,
+      "notes": "Vietnam COLAB changing notices cannot be imported into Indonesia 2026 Manufacturing."
+    },
+    {
+      "id": "lk_slbfe_home",
+      "sourceUrl": "https://www.slbfe.lk/",
+      "routeScope": "other_country",
+      "reviewStatus": "country_specific_review_pending",
+      "reviewedAt": null,
+      "notes": "Sri Lanka homepage changes require Sri Lanka country-pack review."
+    },
+    {
+      "id": "kg_migrant_home",
+      "sourceUrl": "https://migrant.kg/",
+      "routeScope": "other_country",
+      "reviewStatus": "country_specific_review_pending",
+      "reviewedAt": null,
+      "notes": "Kyrgyzstan government home-page redirect requires Kyrgyz country-pack review."
+    },
+    {
+      "id": "mm_mol_dol_index",
+      "sourceUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "routeScope": "other_country",
+      "reviewStatus": "country_specific_review_pending",
+      "reviewedAt": null,
+      "notes": "Myanmar MOL page alone does not establish 2026 EPS Manufacturing availability."
+    }
+  ]
+}
