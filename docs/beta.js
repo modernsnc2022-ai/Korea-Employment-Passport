@@ -5,6 +5,9 @@ const RECRUITMENT_SOURCES_URL='data/beta_recruitment_sources_v1.json';
 let betaProgram=null,betaRoute=null,betaI18n={};
 let betaRecruitmentSourceCodes=new Set(['website']);
 let betaRecruitmentDefaultCode='website';
+let intakeTurnstileToken='';
+let intakeTurnstileWidgetId=null;
+let intakeTurnstileInit=false;
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -107,10 +110,49 @@ function directIntakeEndpoint(){
   return String(betaProgram?.application?.directIntake?.endpoint||'').trim();
 }
 
+function turnstileSiteKey(){
+  return String(betaProgram?.application?.directIntake?.turnstileSiteKey||'').trim();
+}
 function directIntakeEnabled(){
-  const endpoint=directIntakeEndpoint();
-  if(!endpoint)return false;
-  try{return new URL(endpoint).protocol==='https:'}catch{return false}
+  const endpoint=directIntakeEndpoint(),siteKey=turnstileSiteKey();
+  if(!endpoint||!/^[A-Za-z0-9_-]{6,128}$/.test(siteKey))return false;
+  try{
+    const u=new URL(endpoint);
+    return u.protocol==='https:'&&u.username===''&&u.password==='';
+  }catch{return false;}
+}
+function setupTurnstile(){
+  if(intakeTurnstileInit||!directIntakeEnabled())return;
+  intakeTurnstileInit=true;
+  const mount=$('intakeTurnstileMount');
+  const render=()=>{
+    if(!window.turnstile?.render)return;
+    intakeTurnstileWidgetId=window.turnstile.render(mount,{
+      sitekey:turnstileSiteKey(),
+      callback:(token)=>{intakeTurnstileToken=String(token||'');},
+      'expired-callback':()=>{intakeTurnstileToken='';},
+      'error-callback':()=>{intakeTurnstileToken='';}
+    });
+  };
+  if(window.turnstile?.render){render();return;}
+  const script=document.createElement('script');
+  script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  script.async=true;
+  script.defer=true;
+  script.onload=render;
+  script.onerror=()=>{
+    intakeTurnstileToken='';
+    const out=$('applicationResult');
+    out.hidden=false;out.className='result warn';
+    out.textContent='Verifikasi keamanan belum tersedia. Gunakan Buka Gmail atau Salin teks pendaftaran.';
+  };
+  document.head.appendChild(script);
+}
+function resetTurnstile(){
+  intakeTurnstileToken='';
+  if(window.turnstile?.reset&&intakeTurnstileWidgetId!==null){
+    try{window.turnstile.reset(intakeTurnstileWidgetId);}catch{}
+  }
 }
 
 function applicantFormComplete(){
@@ -132,7 +174,8 @@ function directApplicantPayload(){
     sourceCode:recruitmentSourceCode(),
     activeProcess:$('activeProcess').checked===true,
     feedbackAgreement:$('feedbackAgreement').checked===true,
-    website:String($('intakeWebsite').value||'')
+    website:String($('intakeWebsite').value||''),
+    turnstileToken:intakeTurnstileToken
   };
 }
 
@@ -264,6 +307,8 @@ function renderProgram(program){
   $('communityShareSource').textContent=shareSource;
   const direct=directIntakeEnabled();
   $('directIntakeFields').hidden=!direct;
+  $('directIntakeChallenge').hidden=!direct;
+  if(direct)setupTurnstile();
   $('applicantContactEmail').required=direct;
   $('betaApplicationSubmitBtn').textContent=direct?'Kirim pendaftaran':'Kirim lewat aplikasi email';
   $('applicationSendHelp').textContent=direct
@@ -291,6 +336,11 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
     if(!validContactEmail($('applicantContactEmail').value)){
       out.hidden=false;out.className='result warn';out.textContent='Masukkan alamat email yang valid untuk menerima keputusan beta.';return;
     }
+    if(!intakeTurnstileToken){
+      out.hidden=false;out.className='result warn';
+      out.textContent='Selesaikan verifikasi keamanan sebelum kirim langsung, atau gunakan Buka Gmail / Salin teks pendaftaran.';
+      return;
+    }
     const button=$('betaApplicationSubmitBtn');
     button.disabled=true;
     const previous=button.textContent;
@@ -300,9 +350,11 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
       out.hidden=false;out.className='result';
       out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+result.submissionId+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
       $('betaApplicationForm').reset();
+      resetTurnstile();
     }catch{
       out.hidden=false;out.className='result warn';
       out.textContent='Pengiriman langsung belum berhasil. Data belum dianggap terkirim. Gunakan “Buka Gmail” atau “Salin teks pendaftaran” sebagai cadangan.';
+      resetTurnstile();
     }finally{
       button.disabled=false;
       button.textContent=previous;
