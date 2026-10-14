@@ -8,6 +8,7 @@ let betaRecruitmentDefaultCode='website';
 let intakeTurnstileToken='';
 let intakeTurnstileWidgetId=null;
 let intakeTurnstileInit=false;
+let intakeEmailCodeRequested=false;
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -179,18 +180,27 @@ function directApplicantPayload(){
   };
 }
 
-async function submitDirectApplicant(){
-  const response=await fetch(directIntakeEndpoint(),{
+async function submitDirectApplicant(requestCode=false){
+  const body=directApplicantPayload();
+  if(!requestCode)body.verificationCode=String($('applicantEmailCode').value||'').trim();
+  const endpoint=directIntakeEndpoint()+(requestCode?'/verify-request':'');
+  const response=await fetch(endpoint,{
     method:'POST',
     mode:'cors',
     credentials:'omit',
     cache:'no-store',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(directApplicantPayload())
+    body:JSON.stringify(body)
   });
   let payload={};
   try{payload=await response.json()}catch{}
   if(!response.ok)throw new Error(String(payload?.error||'HTTP '+response.status));
+  if(requestCode){
+    if(response.status!==202||payload?.ok!==true||payload.verificationRequired!==true){
+      throw new Error('No email verification challenge confirmed');
+    }
+    return payload;
+  }
   // Only an explicit acknowledgement with a bounded reference can mean
   // the private intake actually stored this registration. A bare HTTP 200,
   // empty JSON, or {ok:false} must NOT produce a false success message.
@@ -341,23 +351,43 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
       out.textContent='Selesaikan verifikasi keamanan sebelum kirim langsung, atau gunakan Buka Gmail / Salin teks pendaftaran.';
       return;
     }
+    const requestCode=!intakeEmailCodeRequested;
+    if(!requestCode&&!/^\d{8}$/.test(String($('applicantEmailCode').value||'').trim())){
+      out.hidden=false;out.className='result warn';
+      out.textContent='Masukkan kode verifikasi 8 digit dari email Anda sebelum mengirim pendaftaran.';
+      return;
+    }
     const button=$('betaApplicationSubmitBtn');
     button.disabled=true;
     const previous=button.textContent;
     button.textContent='Mengirim…';
     try{
-      const result=await submitDirectApplicant();
-      out.hidden=false;out.className='result';
-      out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+result.submissionId+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
-      $('betaApplicationForm').reset();
-      resetTurnstile();
+      const result=await submitDirectApplicant(requestCode);
+      out.hidden=false;
+      if(requestCode){
+        intakeEmailCodeRequested=true;
+        $('applicantEmailCodeFields').hidden=false;
+        $('applicantEmailCode').required=true;
+        button.textContent='Konfirmasi email dan kirim';
+        out.className='result warn';
+        out.textContent='Kode verifikasi email diminta. Periksa kotak masuk dan masukkan 8 digit dalam 10 menit. Belum ada pendaftaran yang diterima.';
+        resetTurnstile();
+      }else{
+        out.className='result';
+        out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+result.submissionId+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
+        $('betaApplicationForm').reset();
+        intakeEmailCodeRequested=false;
+        $('applicantEmailCodeFields').hidden=true;
+        $('applicantEmailCode').required=false;
+        resetTurnstile();
+      }
     }catch{
       out.hidden=false;out.className='result warn';
       out.textContent='Pengiriman langsung belum berhasil. Data belum dianggap terkirim. Gunakan “Buka Gmail” atau “Salin teks pendaftaran” sebagai cadangan.';
       resetTurnstile();
     }finally{
       button.disabled=false;
-      button.textContent=previous;
+      button.textContent=intakeEmailCodeRequested?'Konfirmasi email dan kirim':previous;
     }
     return;
   }
@@ -368,6 +398,15 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
   out.hidden=false;out.className='result warn';
   out.textContent='Aplikasi email akan dibuka. Pendaftaran BELUM terkirim sampai Anda menekan Kirim di aplikasi email dan memastikan pesan ada di folder Terkirim. Jika tidak terbuka, pilih Buka Gmail atau Salin teks pendaftaran.';
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('applicantContactEmail').addEventListener('input',()=>{
+  // Changing the email invalidates any pending code from a previous address.
+  intakeEmailCodeRequested=false;
+  $('applicantEmailCodeFields').hidden=true;
+  $('applicantEmailCode').required=false;
+  $('applicantEmailCode').value='';
+  if(directIntakeEnabled())$('betaApplicationSubmitBtn').textContent='Kirim pendaftaran';
 });
 
 $('gmailApplicationBtn').addEventListener('click',()=>{
