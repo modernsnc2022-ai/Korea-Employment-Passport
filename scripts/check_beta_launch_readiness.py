@@ -185,7 +185,10 @@ require(
 coverage = manufacturing_launch_check.get("noticeIndexCoverage", {})
 require(
     coverage.get("previouslyAssumedIndex") == "https://kp2mi.go.id/gtog-korea/info"
-    and coverage.get("actualCategory") == "Preliminary Training dan Info"
+    and coverage.get("historicalMistakenPageTitle") == "Preliminary Training dan Info"
+    and coverage.get("historicalMistakenAjaxUrl") == "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
+    and "actualCategory" not in coverage
+    and "serverSideAjax" not in coverage
     and coverage.get("currentCategory") == "Pengumuman"
     and coverage.get("currentListingUrl") == "https://kp2mi.go.id/gtog-korea/pengumuman"
     and coverage.get("serverSideAjaxUrl") == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
