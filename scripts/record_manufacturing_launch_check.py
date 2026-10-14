@@ -70,7 +70,7 @@ def updated_record(
     record["noticeIndexCoverage"] = {
         "status": (
             "verified_complete_general_manufacturing_index_review"
-            if confirm_full_inventory else "correct_pengumuman_index_review_not_operator_confirmed"
+            if confirm_full_inventory else "correct_pengumuman_2026_inventory_read_pending_operator_signoff"
         ),
         "checkedAt": checked_at,
         "previouslyAssumedIndex": HISTORICAL_WRONG_INDEX,
