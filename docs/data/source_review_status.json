@@ -1,9 +1,9 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "state": "review_required",
   "autoPublishRules": false,
   "configured": 84,
-  "checked": 84,
+  "checked": 83,
   "reviewRequiredUrls": [
     "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
     "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
@@ -26,9 +26,30 @@
   ],
   "pendingBaselineUrls": [],
   "pendingBaselineSourceIds": [],
-  "fetchFailureUrls": [],
-  "fetchFailureSourceIds": [],
-  "message": "Perubahan terdeteksi pada 8 sumber resmi. Panduan terkait sumber yang berubah harus ditinjau secara manual sebelum dianggap jawaban pasti; perubahan aturan tidak diterbitkan otomatis.",
-  "detectedAt": "2026-10-13",
-  "reviewStatus": "8 changed from 2026-10-06 accepted baseline; 3 Korea-common content-reviewed, 5 country-specific scoped-review pending; official hashes not accepted"
+  "fetchFailureUrls": [
+    "https://epsnepal.gov.np/notices"
+  ],
+  "fetchFailureSourceIds": [
+    "np_eps_notice_index"
+  ],
+  "message": "Pemeriksaan 14 Oktober 2026: 7 sumber resmi berubah dan 1 sumber Nepal gagal diakses (HTTP 500). Delapan sumber memerlukan perhatian; 3 terkait Indonesia/Korea dan 5 terkait negara lain. Panduan tidak diperbarui atau disetujui otomatis.",
+  "detectedAt": "2026-10-14",
+  "reviewStatus": "2026-10-14 read-only scan 83/84 fetched, 7 changed vs prior baseline, 1 Nepal EPS notice-index fetch failed (HTTP 500). All eight prior source alerts remain visible: 3 Korea-common content-reviewed, 5 other-country pending. Hash baseline unchanged.",
+  "currentScan": {
+    "checkedAt": "2026-10-14",
+    "changedSourceIds": [
+      "labor_standards_wage_statement",
+      "kdca_qcode_input",
+      "moel_1350_contact",
+      "vn_colab_eps_notices",
+      "lk_slbfe_home",
+      "kg_migrant_home",
+      "mm_mol_dol_index"
+    ],
+    "failedSourceIds": [
+      "np_eps_notice_index"
+    ],
+    "failedHttpStatus": 500,
+    "acceptedCurrent": false
+  }
 }
