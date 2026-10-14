@@ -3157,15 +3157,15 @@
       "question": "Detail exact Manufaktur 2026 apa yang masih harus menunggu pengumuman resmi?",
       "answer": "Satu detail exact masih HOLD: daftar dokumen lamaran online Manufaktur 2026.",
       "writeExactly": "Jangan submit sampai daftar dokumen Manufaktur 2026 tersedia dari pengumuman sektor yang sesuai. Baseline aman Sisko untuk scan, identitas, non-editability setelah kirim, dan konfirmasi status terkirim dapat dipakai untuk keselamatan operasional, tetapi bukan pengganti checklist Manufaktur 2026.",
-      "why": "Pengumuman resmi sudah cukup untuk menetapkan baseline aman lintas tahap/platform: lampiran di-scan, identitas yang terdaftar harus konsisten dengan dokumen resmi, final send diperlakukan sebagai tidak dapat diedit, dan status terkirim/progress harus dipantau. Namun daftar dokumen lamaran online khusus Manufaktur 2026 belum dipublikasikan secara rinci.",
+      "why": "Pengumuman resmi cukup untuk menetapkan baseline keselamatan Sisko lintas tahap/platform (scan, identitas, langkah kirim, dan pemantauan status). Tetapi judul-judul pengumuman resmi G-to-G Korea yang terbaca untuk periode 2026 hingga 14 Oktober 2026 belum memastikan daftar dokumen pengajuan lamaran online khusus UBT Umum Manufaktur 2026. Bukti unggah kompetensi opsional tanggal 17 September 2026 juga BUKAN checklist lamaran online.",
       "doNotDo": [
         "Jangan menyalin daftar dokumen Perikanan 2026 sebagai checklist Manufaktur.",
         "Jangan memakai daftar dokumen Manufaktur 2025 sebagai aturan 2026.",
         "Jangan menebak dokumen tambahan yang belum disebut dalam pengumuman Manufaktur 2026."
       ],
-      "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
+      "sourceUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
       "secondarySourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
-      "verifiedAt": "2026-10-06",
+      "verifiedAt": "2026-10-14",
       "verificationStatus": "hold_for_official_manufacturing_notice",
       "scopeType": "route_2026",
       "blocksSubmission": true
