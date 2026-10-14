@@ -203,6 +203,7 @@ test('Resend free-provider adapter accepts only acknowledged API sends',async()=
   globalThis.fetch=async(url,init)=>{
     assert.equal(url,'https://api.resend.com/emails');
     assert.equal(init.headers.Authorization,'Bearer '+token);
+    assert.match(init.headers['Idempotency-Key'],/^kep-otp-[0-9a-f]{64}$/);
     outbound=JSON.parse(init.body);
     return new Response(JSON.stringify({id:'test-provider-id'}),{
       status:200,headers:{'Content-Type':'application/json'}

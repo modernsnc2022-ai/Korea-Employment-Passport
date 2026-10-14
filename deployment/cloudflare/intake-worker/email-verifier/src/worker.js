@@ -53,7 +53,7 @@ function newCode(){
   do{crypto.getRandomValues(bytes);}while(bytes[0]>=limit);
   return String(bytes[0]%100000000).padStart(8,'0');
 }
-async function deliverOtp(env,email,code){
+async function deliverOtp(env,email,code,codeHash){
   const message={
     to:email,from:env.EMAIL_FROM,
     subject:'KEP - Kode verifikasi email',
@@ -66,7 +66,8 @@ async function deliverOtp(env,email,code){
     const response=await fetch('https://api.resend.com/emails',{
       method:'POST',
       headers:{Authorization:'Bearer '+env.RESEND_API_KEY,
-        'Content-Type':'application/json'},
+        'Content-Type':'application/json',
+        'Idempotency-Key':'kep-otp-'+codeHash},
       body:JSON.stringify(message)
     });
     if(!response.ok)throw new Error('email_provider_rejected');
@@ -100,7 +101,7 @@ async function requestCode(email,env,now){
   ).bind(key,codeHash,now,now+CODE_TTL_MS,now).first();
   if(!row)return answer(false,429);
   try{
-    await deliverOtp(env,email,code);
+    await deliverOtp(env,email,code,codeHash);
     const confirmed=await env.OTP_DB.prepare(
       "UPDATE otp_verifications SET delivery_state='sent' "+
       "WHERE email_hmac=? AND code_hmac=? AND delivery_state='pending' RETURNING email_hmac"

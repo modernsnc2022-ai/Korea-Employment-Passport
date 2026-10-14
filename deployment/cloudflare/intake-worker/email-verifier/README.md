@@ -25,6 +25,44 @@ Both templates deliberately use `workers_dev = false` and
 the one configured on the intake Worker; the OTP HMAC secret must differ from
 the intake HMAC key. Never put either value in Git or a public page.
 
+## Read-only DNS preflight — current state: HOLD
+
+From repository root:
+
+```shell
+python scripts/check_beta_mail_dns.py
+python scripts/check_beta_mail_dns.py --json
+python scripts/test_beta_mail_dns.py
+```
+
+The audit uses **public Google DNS-over-HTTPS only**, never a Cloudflare
+account token. It checks the three original Zoho MX servers, the root Zoho
+SPF and DMARC, plus Resend-specific *subdomain* DKIM, SPF and bounce MX
+records. It never adds or removes DNS records, reads private keys or sends
+mail. Missing prerequisites cause **exit 2** and HOLD; DNS/network errors
+cause exit 1. If Resend configures a custom Return-Path label instead of the
+default `send`, pass `--return-path <approved-label>`.
+
+On 2026-10-14 the live public DNS audit found **PASS** for
+`gdglobal.kr` Zoho MX/SPF and DMARC, but the new
+`send.mail.gdglobal.kr` return-path and
+`resend._domainkey.mail.gdglobal.kr` were unconfigured: **HOLD**.
+
+The exact SPF/MX/DKIM records must be copied from the new verified-domain
+page in the **operator-owned Resend account**, not fabricated from these
+examples. Do **not** replace `gdglobal.kr` root Zoho MX or append a
+second root SPF. DNS presence alone is not verification: require Resend's
+`verified` domain status, account/API binding approval and a synthetic
+recipient's actual inbox receipt **separately**. The release gate never
+auto-opens. Resend's request is protected by a deterministic HMAC-based
+`Idempotency-Key` for the individual challenge, avoiding duplicate
+delivery if the provider internally retries the same request. Do not log it.
+
+Provider references:
+- https://resend.com/docs/dashboard/domains/introduction
+- https://resend.com/docs/api-reference/emails/send-email
+- https://developers.cloudflare.com/email-service/api/send-emails/workers-api/
+
 ## Approved deployment checklist (not performed)
 
 1. Have the operator approve processor, data locality, data retention,
