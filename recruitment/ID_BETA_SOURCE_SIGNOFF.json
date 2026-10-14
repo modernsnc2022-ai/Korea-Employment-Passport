@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "route": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "status": "pending_manual_source_signoff",
+  "reviewer": null,
+  "approvedAt": null,
+  "sourceSnapshotDate": null,
+  "sourceScopeDate": null,
+  "contentReviewedSourceIds": [
+    "labor_standards_wage_statement",
+    "kdca_qcode_input",
+    "moel_1350_contact"
+  ],
+  "otherCountryPendingSourceIds": [
+    "np_eps_notice_index",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
+  "allChangedSourceAlertsRemainVisible": true,
+  "noOfficialHashAutopromotion": true,
+  "reason": "Indonesia-only conditional approval cannot be inferred from a global clean hash. Reviewer must explicitly review three Korea-shared changes, validate the current-day 84-source monitor snapshot and 5 non-Indonesia alerts, then sign separately; this approval never replaces the Manufacturing announcement or deployment gates."
+}
