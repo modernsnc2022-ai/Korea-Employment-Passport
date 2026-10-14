@@ -52,9 +52,26 @@ def validate(status: dict, manifest: dict, scope: dict) -> tuple[int, int]:
            "beta access and Manufacturing exact job documents must remain HOLD")
     ensure(scope.get("sourceWatchConfigured") == status.get("configured") == len(all_sources),
            "triage must match exact number of configured monitored sources")
-    ensure(scope.get("sourceWatchChecked") == status.get("checked") == len(all_sources),
-           "triage must match exact number of checked monitored sources")
-    ensure(not status.get("fetchFailureUrls"), "source watch fetch failures require review")
+    failed_ids = status.get("fetchFailureSourceIds", [])
+    failed_urls = status.get("fetchFailureUrls", [])
+    ensure(len(failed_ids) == len(failed_urls) == len(set(failed_ids)),
+           "all fetch failures must be unique and have matching source URLs")
+    ensure(set(failed_ids).issubset(OTHER_COUNTRY),
+           "fetch failure on any Indonesia/Korea source or unknown source must block release")
+    ensure(all(by_id.get(id_) == url for id_, url in zip(failed_ids, failed_urls)),
+           "failed source ID and URL must match configured official monitor")
+    ensure(scope.get("sourceWatchFailedSourceIds", []) == failed_ids,
+           "triage must preserve exact failing other-country source IDs")
+    ensure(scope.get("sourceWatchChecked") == status.get("checked") ==
+           len(all_sources) - len(failed_ids),
+           "only explicitly pending other-country fetch failures may reduce checked count")
+    ensure(scope.get("sourceWatchDate") == status.get("detectedAt") == scope.get("checkedAt"),
+           "country-scope review must use the same official monitor day")
+    changed_ids = status.get("currentScan", {}).get("changedSourceIds", [])
+    ensure(len(changed_ids) == len(set(changed_ids))
+           and set(changed_ids) == set(ids) - set(failed_ids)
+           and set(scope.get("sourceWatchChangedSourceIds", [])) == set(changed_ids),
+           "changed and unavailable official sources must be accurately distinguished")
     ensure(len(ids) == len(urls) == len(records), "all changed sources must be classified")
     ensure(len(ids) == len(set(ids)), "changed source IDs must be unique")
     ensure(set(ids) == {row.get("id") for row in records}, "changed sources must match triage records")
@@ -113,16 +130,22 @@ def self_test() -> None:
     ids = list(sorted(CRITICAL | OTHER_COUNTRY))
     status = {
         "state": "review_required", "autoPublishRules": False,
-        "configured": len(ids), "checked": len(ids),
+        "configured": len(ids), "checked": len(ids)-1,
+        "detectedAt": "2026-10-14",
         "reviewRequiredSourceIds": ids,
         "reviewRequiredUrls": [f"https://gov.example/{x}" for x in ids],
-        "fetchFailureUrls": [],
+        "fetchFailureSourceIds": ["np_eps_notice_index"],
+        "fetchFailureUrls": ["https://gov.example/np_eps_notice_index"],
+        "currentScan": {"changedSourceIds": sorted(set(ids) - {"np_eps_notice_index"})},
     }
     scope = {
         "sourceWatchState": "review_required", "monitorBaselineAccepted": False,
         "scopeReviewDoesNotApproveRelease": True, "betaAccess": "hold",
         "manufacturingOnlineJobDocuments": "job_docs_hold",
-        "sourceWatchConfigured": len(ids), "sourceWatchChecked": len(ids),
+        "sourceWatchConfigured": len(ids), "sourceWatchChecked": len(ids)-1,
+        "sourceWatchFailedSourceIds": ["np_eps_notice_index"],
+        "sourceWatchChangedSourceIds": sorted(set(ids) - {"np_eps_notice_index"}),
+        "sourceWatchDate": "2026-10-14",
         "checkedAt": "2026-10-14",
         "kp2miManufacturingNoticeIndex": {
             "status": "correct_pengumuman_2026_inventory_read_pending_release_signoff", "checkedAt": "2026-10-14",
@@ -159,6 +182,9 @@ def self_test() -> None:
         lambda a, b, c: c["kp2miManufacturingNoticeIndex"].update(status="verified"),
         lambda a, b, c: b["sources"][0].update(url="https://tampered.example"),
         lambda a, b, c: a["reviewRequiredSourceIds"].append("new_notice"),
+        lambda a, b, c: a.update(fetchFailureSourceIds=["kdca_qcode_input"]),
+        lambda a, b, c: a.update(checked=len(ids)),
+        lambda a, b, c: c.update(sourceWatchFailedSourceIds=[]),
     ]:
         a, b, c = copy.deepcopy(status), copy.deepcopy(manifest), copy.deepcopy(scope)
         mutant(a, b, c)
@@ -168,7 +194,7 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("Unsafe mutation was accepted by source-scope triage")
-    print("ID_SOURCE_SCOPE_SELF_TEST_PASS 7 fail-closed mutations")
+    print("ID_SOURCE_SCOPE_SELF_TEST_PASS 10 fail-closed mutations")
 
 
 def main() -> None:
