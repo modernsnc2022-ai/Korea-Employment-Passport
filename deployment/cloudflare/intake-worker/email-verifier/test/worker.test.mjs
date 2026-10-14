@@ -57,7 +57,8 @@ function setup(patch={}){
   const db=new MemoryD1(),mail=[];
   const env={VERIFIER_ENABLED:'true',OTP_DB:db,
     VERIFIER_CALL_SECRET:CALL_SECRET,OTP_HMAC_SECRET:HMAC_SECRET,
-    EMAIL_FROM:'noreply@gdglobal.kr',
+    EMAIL_FROM:patch.EMAIL_DELIVERY_PROVIDER==='resend'
+      ?'noreply@mail.gdglobal.kr':'noreply@gdglobal.kr',
     EMAIL:{send:async message=>{mail.push(message);return {messageId:'synthetic'};}},
     ...patch};
   return {db,mail,env};
@@ -239,4 +240,26 @@ test('Resend HTTP 200 without message ID does not unlock verification',async()=>
     assert.equal((await call(env,'request')).status,503);
     assert.equal([...db.rows.values()][0].state,'failed');
   }finally{clock.restore();globalThis.fetch=old;}
+});
+
+test('sender domain is locked to the selected provider and blocks accidental Zoho spoofing',async()=>{
+  const {env}=setup();
+  const resendEnv={
+    ...env,EMAIL_DELIVERY_PROVIDER:'resend',
+    RESEND_API_KEY:'re_synthetic_test_api_key_more_than_20',EMAIL:null,
+    EMAIL_FROM:'noreply@mail.gdglobal.kr'
+  };
+  assert.equal(configured(env),true);
+  assert.equal(configured(resendEnv),true);
+  for(const invalid of [
+    {...resendEnv,EMAIL_FROM:'noreply@gdglobal.kr'},
+    {...resendEnv,EMAIL_FROM:'noreply@other.gdglobal.kr'},
+    {...resendEnv,EMAIL_FROM:'ops@mail.gdglobal.kr'},
+    {...env,EMAIL_FROM:'noreply@mail.gdglobal.kr'},
+    {...env,EMAIL_DELIVERY_PROVIDER:'cloudflare',EMAIL_FROM:'noreply@mail.gdglobal.kr'},
+    {...env,EMAIL_DELIVERY_PROVIDER:'unexpected'}
+  ]){
+    assert.equal(configured(invalid),false);
+    assert.equal((await call(invalid,'request')).status,503);
+  }
 });

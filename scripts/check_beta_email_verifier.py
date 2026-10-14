@@ -40,6 +40,8 @@ def check() -> None:
         assert item in resend, f"missing free-sender fail-closed config: {item}"
     assert 'https://api.resend.com/emails' in source
     assert 'RESEND_API_KEY' in source
+    assert "env.EMAIL_FROM==='noreply@mail.gdglobal.kr'" in source
+    assert "env.EMAIL_FROM==='noreply@gdglobal.kr'" in source
     for item in ('binding = "EMAIL_VERIFIER"', 'service = "kep-beta-email-verifier"',
                  'INTAKE_ENABLED = "false"'):
         assert item in intake, f"missing intake binding: {item}"

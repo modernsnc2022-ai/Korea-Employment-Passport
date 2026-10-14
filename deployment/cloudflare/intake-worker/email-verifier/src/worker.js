@@ -23,14 +23,14 @@ function configured(env){
     &&env.VERIFIER_CALL_SECRET.length>=SECRET_MIN
     &&typeof env.OTP_HMAC_SECRET==='string'
     &&env.OTP_HMAC_SECRET.length>=SECRET_MIN
-    &&typeof env.EMAIL_FROM==='string'
-    &&/^[^\s@]+@(?:gdglobal\.kr|mail\.gdglobal\.kr)$/i.test(env.EMAIL_FROM)
     &&(env.EMAIL_DELIVERY_PROVIDER==='resend'
-      ?typeof env.RESEND_API_KEY==='string'
+      ?env.EMAIL_FROM==='noreply@mail.gdglobal.kr'
+        &&typeof env.RESEND_API_KEY==='string'
         &&env.RESEND_API_KEY.startsWith('re_')
         &&env.RESEND_API_KEY.length>=20
       :(env.EMAIL_DELIVERY_PROVIDER===undefined
         ||env.EMAIL_DELIVERY_PROVIDER==='cloudflare')
+        &&env.EMAIL_FROM==='noreply@gdglobal.kr'
         &&typeof env.EMAIL?.send==='function');
 }
 function secretEqual(a,b){

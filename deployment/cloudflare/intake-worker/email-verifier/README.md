@@ -18,6 +18,12 @@ service binding. Never expose `/action` on a public route.
   The sending domain must be onboarded separately. Neither option is activated
   by this repository commit.
 
+The private Worker also locks the sender per transport: Resend uses only
+`noreply@mail.gdglobal.kr`; Cloudflare Email Sending uses only
+`noreply@gdglobal.kr`. A mismatched sender/provider configuration **fails closed**
+with no OTP or applicant receipt. These addresses are policy choices, not
+claims that either provider is authorized or live.
+
 Both templates deliberately use `workers_dev = false` and
 `VERIFIER_ENABLED = "false"`. Email verification requires separate private
 `OTP_DB` (migration `0001_email_verification.sql`) and secrets
