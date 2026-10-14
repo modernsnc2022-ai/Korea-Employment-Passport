@@ -12,6 +12,7 @@ import verifier from '../email-verifier/src/worker.js';
 const ROOT=new URL('..',import.meta.url);
 const INTAKE_SQL=new URL('../migrations/0001_private_beta_applications.sql',import.meta.url);
 const OTP_SQL=new URL('../email-verifier/migrations/0001_email_verification.sql',import.meta.url);
+const QUOTA_SQL=new URL('../email-verifier/migrations/0002_resend_daily_quota.sql',import.meta.url);
 const ORIGIN='https://www.gdglobal.kr';
 const ENDPOINT='https://kep-beta-intake.internal/v1/beta/applicant';
 const INTERNAL_SECRET='synthetic-internal-call-secret-at-least-32';
@@ -19,9 +20,9 @@ const SYNTHETIC_EMAIL='applicant@example.test';
 const OTHER_EMAIL='other@example.test';
 const TEST_NOW=1_790_000_000_000;
 
-function sqliteD1(schema){
+function sqliteD1(schemas){
   const db=new DatabaseSync(':memory:');
-  db.exec(readFileSync(schema,'utf8'));
+  for(const schema of [].concat(schemas))db.exec(readFileSync(schema,'utf8'));
   return {
     db,
     prepare(sql){
@@ -38,7 +39,7 @@ async function withSetup(fn,{mailFails=false,intakeFails=false}={}){
   const origFetch=globalThis.fetch,origDate=Date.now;
   const inbox=new Map(),seen=new Set();
   const storage=sqliteD1(INTAKE_SQL);
-  const otp=sqliteD1(OTP_SQL);
+  const otp=sqliteD1([OTP_SQL,QUOTA_SQL]);
   let now=TEST_NOW,serial=0;
   const envVerification={
     VERIFIER_ENABLED:'true',
@@ -99,8 +100,16 @@ async function withSetup(fn,{mailFails=false,intakeFails=false}={}){
     return {status:response.status,body:await response.json()};
   };
   const count=()=>storage.db.prepare('SELECT count(*) AS n FROM beta_applications').get().n;
+  const otpRequest=async(email)=>{
+    const response=await verifier.fetch(new Request('https://kep-email-verify.internal/action',{
+      method:'POST',headers:{'Content-Type':'application/json',
+      'X-KEP-Internal-Token':INTERNAL_SECRET},
+      body:JSON.stringify({mode:'request',email})
+    }),envVerification);
+    return response.status;
+  };
   const codeFor=(email=SYNTHETIC_EMAIL)=>inbox.get(email)?.at(-1);
-  try{await fn({payload,submit,codeFor,count,storage,otp,envIntake,envVerification,
+  try{await fn({payload,submit,codeFor,count,otpRequest,storage,otp,envIntake,envVerification,
     addTime(ms){now+=ms;}});}
   finally{
     globalThis.fetch=origFetch;
@@ -212,4 +221,35 @@ test('expired email code fails even with fresh Turnstile, and resending recovers
     assert.equal((await h.submit(h.payload(),true)).status,202);
     assert.equal((await h.submit(h.payload(SYNTHETIC_EMAIL,h.codeFor()))).status,201);
   });
+});
+
+test('Resend Free global 90/day enforced by ACTUAL production SQLite under concurrency',async()=>{
+  await withSetup(async h=>{
+    const day=Math.floor(TEST_NOW/86400000);
+    const results=await Promise.all(Array.from({length:100},(_,i)=>
+      h.otpRequest('realquota'+i+'@example.test')));
+    assert.equal(results.filter(x=>x===200).length,90);
+    assert.equal(results.filter(x=>x===429).length,10);
+    const quota=h.otp.db.prepare(
+      'SELECT requested_count FROM otp_resend_daily_quota WHERE day_utc=?'
+    ).get(day);
+    assert.equal(quota.requested_count,90);
+    assert.equal(h.count(),0);
+    h.addTime(86400000);
+    assert.equal(await h.otpRequest('realquota-nextday@example.test'),200);
+    assert.equal(h.otp.db.prepare(
+      'SELECT requested_count FROM otp_resend_daily_quota WHERE day_utc=?'
+    ).get(day+1).requested_count,1);
+  });
+});
+
+test('Resend provider rejection conservatively consumes real SQLite daily quota',async()=>{
+  await withSetup(async h=>{
+    const day=Math.floor(TEST_NOW/86400000);
+    assert.equal(await h.otpRequest('provider-failed@example.test'),503);
+    assert.equal(h.otp.db.prepare(
+      'SELECT requested_count FROM otp_resend_daily_quota WHERE day_utc=?'
+    ).get(day).requested_count,1);
+    assert.equal(h.count(),0);
+  },{mailFails:true});
 });

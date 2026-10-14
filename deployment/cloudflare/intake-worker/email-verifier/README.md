@@ -26,7 +26,8 @@ claims that either provider is authorized or live.
 
 Both templates deliberately use `workers_dev = false` and
 `VERIFIER_ENABLED = "false"`. Email verification requires separate private
-`OTP_DB` (migration `0001_email_verification.sql`) and secrets
+`OTP_DB` (migrations `0001_email_verification.sql` **and**
+`0002_resend_daily_quota.sql`) and secrets
 `VERIFIER_CALL_SECRET` and `OTP_HMAC_SECRET`. The call secret must equal
 the one configured on the intake Worker; the OTP HMAC secret must differ from
 the intake HMAC key. Never put either value in Git or a public page.
@@ -87,6 +88,17 @@ Provider references:
    Configure public intake endpoint and Turnstile site key only after approval.
 7. Recheck all beta product/official-source release gates, six HTTPS links,
    nine deployed files and obtain distinct owner authorization for beta OPEN.
+
+Resend Free-tier delivery additionally has a shared **90 email requests per UTC day**
+quota (maximum 2,790 in any 31-day calendar month), enforced by atomic D1
+SQL before contacting Resend. The daily quota includes provider failures and
+uncertain attempts, so retries never bypass the cap. A missing quota table
+causes a fail-closed error, not unmetered sending. The global counters contain
+no identifiers and are purged after seven days by the private cron. This
+assumes the Resend Free account is dedicated to KEP; other apps sending from
+the same Resend account count toward the provider's shared 100/day limit and
+must be accounted for separately. The owner must authorize both D1 migrations
+and verify the daily cap before any test sending or deployment.
 
 The OTP expires after 10 minutes; there are five total guesses per challenge,
 a 60-second resend gap, at most three requests per email per hour, and exactly

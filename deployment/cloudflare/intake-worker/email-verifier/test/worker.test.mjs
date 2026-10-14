@@ -9,11 +9,22 @@ const EMAIL='candidate@example.test';
 const NOW=1_790_000_000_000;
 
 class MemoryD1{
-  constructor(){this.rows=new Map();}
+  constructor(){this.rows=new Map();this.quotas=new Map();}
   prepare(sql){
     const db=this;
     return {bind(...args){
       const operation=async()=>{
+        if(sql.startsWith('INSERT INTO otp_resend_daily_quota')){
+          const [day]=args,used=db.quotas.get(day)||0;
+          if(used>=90)return null;
+          db.quotas.set(day,used+1);
+          return {requested_count:used+1};
+        }
+        if(sql.startsWith('DELETE FROM otp_resend_daily_quota')){
+          const [before]=args;
+          for(const day of db.quotas.keys())if(day<before)db.quotas.delete(day);
+          return null;
+        }
         if(sql.startsWith('INSERT INTO otp_verifications')){
           const [k,d,at,expiry,window]=args,old=db.rows.get(k);
           if(old&&(at-old.requestedAt<60000||
@@ -262,4 +273,49 @@ test('sender domain is locked to the selected provider and blocks accidental Zoh
     assert.equal(configured(invalid),false);
     assert.equal((await call(invalid,'request')).status,503);
   }
+});
+
+test('Resend Free quota is global: 90 per UTC day, UTC rollover and failed sends count',async()=>{
+  const previousFetch=globalThis.fetch,clock=fakeClock();
+  const {env,db}=setup({EMAIL_DELIVERY_PROVIDER:'resend',EMAIL:null,
+    RESEND_API_KEY:'re_synthetic_test_api_key_more_than_20'});
+  let sent=0;
+  globalThis.fetch=async()=>{
+    sent++;
+    return Response.json({id:'synthetic-mail-id-'+sent});
+  };
+  try{
+    const day=Math.floor(NOW/86400000);
+    for(let i=0;i<90;i++)
+      assert.equal((await call(env,'request','quota'+i+'@example.test')).status,200);
+    assert.equal(db.quotas.get(day),90);
+    assert.equal(sent,90);
+    assert.equal((await call(env,'request','quota-over@example.test')).status,429);
+    assert.equal(sent,90);
+    assert.equal(db.quotas.get(day),90);
+    assert.equal([...db.rows.values()].at(-1).state,'failed');
+    clock.add(86400000);
+    assert.equal((await call(env,'request','quota-newday@example.test')).status,200);
+    assert.equal(sent,91);
+    assert.equal(db.quotas.get(day+1),1);
+  }finally{clock.restore();globalThis.fetch=previousFetch;}
+});
+
+test('Resend fail-closed quota D1 migration missing blocks delivery',async()=>{
+  const previousFetch=globalThis.fetch,clock=fakeClock();
+  const {env,db}=setup({EMAIL_DELIVERY_PROVIDER:'resend',EMAIL:null,
+    RESEND_API_KEY:'re_synthetic_test_api_key_more_than_20'});
+  const originalPrepare=db.prepare.bind(db);
+  db.prepare=sql=>{
+    if(sql.startsWith('INSERT INTO otp_resend_daily_quota'))
+      throw new Error('quota_table_not_migrated');
+    return originalPrepare(sql);
+  };
+  let deliveries=0;
+  globalThis.fetch=async()=>{deliveries++;return Response.json({id:'unexpected'});};
+  try{
+    assert.equal((await call(env,'request')).status,503);
+    assert.equal(deliveries,0);
+    assert.equal([...db.rows.values()][0].state,'failed');
+  }finally{clock.restore();globalThis.fetch=previousFetch;}
 });

@@ -13,7 +13,7 @@ VERIFIER = BASE / "email-verifier"
 
 
 def extract_sql(source: str, start: str) -> str:
-    part = source.split(start, 1)[1].split("\n  ).bind(", 1)[0]
+    part = re.split(r"\n\s*\)\.bind\(", source.split(start, 1)[1], maxsplit=1)[0]
     chunks = re.findall(r"'(?:\\.|[^'\\])*'|\"(?:\\.|[^\"\\])*\"", part)
     return "".join(ast.literal_eval(chunk) for chunk in chunks)
 
@@ -21,6 +21,7 @@ def extract_sql(source: str, start: str) -> str:
 def check() -> None:
     source = (VERIFIER / "src/worker.js").read_text(encoding="utf-8")
     migration = (VERIFIER / "migrations/0001_email_verification.sql").read_text(encoding="utf-8")
+    quota_migration = (VERIFIER / "migrations/0002_resend_daily_quota.sql").read_text(encoding="utf-8")
     config = (VERIFIER / "wrangler.toml.example").read_text(encoding="utf-8")
     resend = (VERIFIER / "wrangler.resend.toml.example").read_text(encoding="utf-8")
     intake = (BASE / "wrangler.toml.example").read_text(encoding="utf-8")
@@ -48,8 +49,10 @@ def check() -> None:
 
     insert = extract_sql(source, "const row=await env.OTP_DB.prepare(")
     consume = extract_sql(source, "const used=await env.OTP_DB.prepare(")
+    reserve_global = extract_sql(source, "const permitted=await env.OTP_DB.prepare(")
     db = sqlite3.connect(":memory:")
     db.executescript(migration)
+    db.executescript(quota_migration)
     t = 1_790_000_000_000
     digest = "a" * 64
 
@@ -68,8 +71,16 @@ def check() -> None:
     assert db.execute(consume, (t + 3_600_001, digest, "0" * 64, t + 3_600_001)).fetchone() is None
     assert db.execute(consume, (t + 3_600_001, digest, "4" * 64, t + 3_600_001)).fetchone() == (digest,)
     assert db.execute(consume, (t + 3_600_002, digest, "4" * 64, t + 3_600_002)).fetchone() is None
+    day = t // 86_400_000
+    for n in range(90):
+        assert db.execute(reserve_global, (day,)).fetchone() == (n + 1,)
+    for _ in range(10):
+        assert db.execute(reserve_global, (day,)).fetchone() is None
+    assert db.execute("SELECT requested_count FROM otp_resend_daily_quota WHERE day_utc=?",
+                      (day,)).fetchone() == (90,)
+    assert db.execute(reserve_global, (day+1,)).fetchone() == (1,)
     db.close()
-    print("KEP_OTP_REAL_SQLITE_PASS atomic_hourly_limit_one_time_consume_private_disabled")
+    print("KEP_OTP_REAL_SQLITE_PASS atomic_hourly_limit_one_time_consume_resend_daily_90_private_disabled")
 
 
 if __name__ == "__main__":

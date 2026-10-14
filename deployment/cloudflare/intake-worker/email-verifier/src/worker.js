@@ -7,6 +7,8 @@ const JSON_HEADERS={'Content-Type':'application/json; charset=utf-8',
   'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 const CODE_TTL_MS=10*60*1000, RESEND_MS=60*1000, HOUR_MS=60*60*1000;
 const SECRET_MIN=32, MAX_BYTES=512;
+// Conservative Free-plan ceiling: 90/day, at most 2790 in any 31-day month.
+const RESEND_DAY_MS=24*HOUR_MS;
 const encoder=new TextEncoder();
 
 function answer(ok,status=200){return new Response(JSON.stringify({ok}),{
@@ -100,7 +102,19 @@ async function requestCode(email,env,now){
     'OR otp_verifications.requests_in_window<3) RETURNING email_hmac'
   ).bind(key,codeHash,now,now+CODE_TTL_MS,now).first();
   if(!row)return answer(false,429);
+  let dailyLimitReached=false;
   try{
+    // Atomic, shared quota across all applicant emails and Worker instances.
+    // Failed/uncertain sends consume capacity to avoid Free-plan overruns.
+    if(env.EMAIL_DELIVERY_PROVIDER==='resend'){
+      const permitted=await env.OTP_DB.prepare(
+        'INSERT INTO otp_resend_daily_quota (day_utc,requested_count) VALUES (?,1) '+
+        'ON CONFLICT(day_utc) DO UPDATE SET requested_count=requested_count+1 '+
+        'WHERE requested_count<90 RETURNING requested_count'
+      ).bind(Math.floor(now/RESEND_DAY_MS)).first();
+      dailyLimitReached=!permitted;
+    }
+    if(dailyLimitReached)throw new Error('daily_email_quota_exhausted');
     await deliverOtp(env,email,code,codeHash);
     const confirmed=await env.OTP_DB.prepare(
       "UPDATE otp_verifications SET delivery_state='sent' "+
@@ -112,7 +126,7 @@ async function requestCode(email,env,now){
       "UPDATE otp_verifications SET delivery_state='failed' "+
       "WHERE email_hmac=? AND code_hmac=? AND delivery_state='pending'"
     ).bind(key,codeHash).run().catch(()=>{});
-    return answer(false,503);
+    return answer(false,dailyLimitReached?429:503);
   }
 }
 async function confirmCode(email,code,env,now){
@@ -164,6 +178,10 @@ const worker={
     if(!env.OTP_DB?.prepare)return;
     await env.OTP_DB.prepare('DELETE FROM otp_verifications WHERE requested_at_ms<?')
       .bind(Date.now()-24*HOUR_MS).run();
+    // Keep pseudonymous global quota rows only for seven days.
+    if(env.EMAIL_DELIVERY_PROVIDER==='resend')
+      await env.OTP_DB.prepare('DELETE FROM otp_resend_daily_quota WHERE day_utc<?')
+        .bind(Math.floor(Date.now()/RESEND_DAY_MS)-7).run();
   }
 };
 export {newCode,digest,validEmail,configured,requestCode,confirmCode};
