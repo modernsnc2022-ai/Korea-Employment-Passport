@@ -193,3 +193,49 @@ test('secure RNG returns 8 digits and HMAC separates inputs',async()=>{
   assert.notEqual(await digest(['x','y'],HMAC_SECRET),
     await digest(['x','z'],HMAC_SECRET));
 });
+
+test('Resend free-provider adapter accepts only acknowledged API sends',async()=>{
+  const old=globalThis.fetch,clock=fakeClock();
+  const token='re_synthetic_test_api_key_more_than_20';
+  const {env,db}=setup({EMAIL_DELIVERY_PROVIDER:'resend',EMAIL:null,
+    RESEND_API_KEY:token,EMAIL_FROM:'noreply@mail.gdglobal.kr'});
+  let outbound;
+  globalThis.fetch=async(url,init)=>{
+    assert.equal(url,'https://api.resend.com/emails');
+    assert.equal(init.headers.Authorization,'Bearer '+token);
+    outbound=JSON.parse(init.body);
+    return new Response(JSON.stringify({id:'test-provider-id'}),{
+      status:200,headers:{'Content-Type':'application/json'}
+    });
+  };
+  try{
+    assert.equal(configured(env),true);
+    assert.equal((await call(env,'request')).status,200);
+    assert.equal(outbound.to,EMAIL);
+    assert.equal(outbound.from,'noreply@mail.gdglobal.kr');
+    assert.match(outbound.text,/\d{8}/);
+    assert.equal([...db.rows.values()][0].state,'sent');
+  }finally{clock.restore();globalThis.fetch=old;}
+});
+test('Resend missing secret and rejected delivery fail closed',async()=>{
+  const old=globalThis.fetch,clock=fakeClock();
+  const {env,db}=setup({EMAIL_DELIVERY_PROVIDER:'resend',EMAIL:null,
+    RESEND_API_KEY:'re_synthetic_test_api_key_more_than_20'});
+  try{
+    assert.equal(configured({...env,RESEND_API_KEY:''}),false);
+    assert.equal((await call({...env,RESEND_API_KEY:''},'request')).status,503);
+    globalThis.fetch=async()=>new Response(JSON.stringify({error:'rate_limited'}),{status:429});
+    assert.equal((await call(env,'request')).status,503);
+    assert.equal([...db.rows.values()][0].state,'failed');
+  }finally{clock.restore();globalThis.fetch=old;}
+});
+test('Resend HTTP 200 without message ID does not unlock verification',async()=>{
+  const old=globalThis.fetch,clock=fakeClock();
+  const {env,db}=setup({EMAIL_DELIVERY_PROVIDER:'resend',EMAIL:null,
+    RESEND_API_KEY:'re_synthetic_test_api_key_more_than_20'});
+  try{
+    globalThis.fetch=async()=>Response.json({});
+    assert.equal((await call(env,'request')).status,503);
+    assert.equal([...db.rows.values()][0].state,'failed');
+  }finally{clock.restore();globalThis.fetch=old;}
+});

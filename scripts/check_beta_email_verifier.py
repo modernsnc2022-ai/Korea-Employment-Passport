@@ -22,6 +22,7 @@ def check() -> None:
     source = (VERIFIER / "src/worker.js").read_text(encoding="utf-8")
     migration = (VERIFIER / "migrations/0001_email_verification.sql").read_text(encoding="utf-8")
     config = (VERIFIER / "wrangler.toml.example").read_text(encoding="utf-8")
+    resend = (VERIFIER / "wrangler.resend.toml.example").read_text(encoding="utf-8")
     intake = (BASE / "wrangler.toml.example").read_text(encoding="utf-8")
     required_source = (
         "VERIFIER_CALL_SECRET", "OTP_HMAC_SECRET", "env.EMAIL.send(",
@@ -34,6 +35,11 @@ def check() -> None:
     for item in ('workers_dev = false', 'VERIFIER_ENABLED = "false"',
                  'name = "EMAIL"', 'binding = "OTP_DB"'):
         assert item in config, f"missing private deployment invariant: {item}"
+    for item in ('workers_dev = false', 'VERIFIER_ENABLED = "false"',
+                 'EMAIL_DELIVERY_PROVIDER = "resend"', 'binding = "OTP_DB"'):
+        assert item in resend, f"missing free-sender fail-closed config: {item}"
+    assert 'https://api.resend.com/emails' in source
+    assert 'RESEND_API_KEY' in source
     for item in ('binding = "EMAIL_VERIFIER"', 'service = "kep-beta-email-verifier"',
                  'INTAKE_ENABLED = "false"'):
         assert item in intake, f"missing intake binding: {item}"

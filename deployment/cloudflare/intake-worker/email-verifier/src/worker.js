@@ -24,8 +24,14 @@ function configured(env){
     &&typeof env.OTP_HMAC_SECRET==='string'
     &&env.OTP_HMAC_SECRET.length>=SECRET_MIN
     &&typeof env.EMAIL_FROM==='string'
-    &&/^[^\s@]+@gdglobal\.kr$/i.test(env.EMAIL_FROM)
-    &&typeof env.EMAIL?.send==='function';
+    &&/^[^\s@]+@(?:gdglobal\.kr|mail\.gdglobal\.kr)$/i.test(env.EMAIL_FROM)
+    &&(env.EMAIL_DELIVERY_PROVIDER==='resend'
+      ?typeof env.RESEND_API_KEY==='string'
+        &&env.RESEND_API_KEY.startsWith('re_')
+        &&env.RESEND_API_KEY.length>=20
+      :(env.EMAIL_DELIVERY_PROVIDER===undefined
+        ||env.EMAIL_DELIVERY_PROVIDER==='cloudflare')
+        &&typeof env.EMAIL?.send==='function');
 }
 function secretEqual(a,b){
   const left=encoder.encode(String(a||'')),right=encoder.encode(String(b||''));
@@ -46,6 +52,30 @@ function newCode(){
   const bytes=new Uint32Array(1);
   do{crypto.getRandomValues(bytes);}while(bytes[0]>=limit);
   return String(bytes[0]%100000000).padStart(8,'0');
+}
+async function deliverOtp(env,email,code){
+  const message={
+    to:email,from:env.EMAIL_FROM,
+    subject:'KEP - Kode verifikasi email',
+    text:'Kode verifikasi Korea Employment Passport Anda: '+code+
+      '\nBerlaku selama 10 menit. Jangan bagikan kode ini.\n'+
+      'Jika Anda tidak meminta kode, abaikan pesan ini.'
+  };
+  if(env.EMAIL_DELIVERY_PROVIDER==='resend'){
+    // Free-capable transactional provider. Never expose the API key or OTP in logs.
+    const response=await fetch('https://api.resend.com/emails',{
+      method:'POST',
+      headers:{Authorization:'Bearer '+env.RESEND_API_KEY,
+        'Content-Type':'application/json'},
+      body:JSON.stringify(message)
+    });
+    if(!response.ok)throw new Error('email_provider_rejected');
+    const accepted=await response.json();
+    if(typeof accepted?.id!=='string'||accepted.id.length<1)
+      throw new Error('email_provider_unconfirmed');
+    return;
+  }
+  await env.EMAIL.send(message);
 }
 async function requestCode(email,env,now){
   const key=await digest(['kep','email','v1',email],env.OTP_HMAC_SECRET);
@@ -70,13 +100,7 @@ async function requestCode(email,env,now){
   ).bind(key,codeHash,now,now+CODE_TTL_MS,now).first();
   if(!row)return answer(false,429);
   try{
-    await env.EMAIL.send({
-      to:email,from:env.EMAIL_FROM,
-      subject:'KEP - Kode verifikasi email',
-      text:'Kode verifikasi Korea Employment Passport Anda: '+code+
-        '\nBerlaku selama 10 menit. Jangan bagikan kode ini.\n'+
-        'Jika Anda tidak meminta kode, abaikan pesan ini.',
-    });
+    await deliverOtp(env,email,code);
     const confirmed=await env.OTP_DB.prepare(
       "UPDATE otp_verifications SET delivery_state='sent' "+
       "WHERE email_hmac=? AND code_hmac=? AND delivery_state='pending' RETURNING email_hmac"
