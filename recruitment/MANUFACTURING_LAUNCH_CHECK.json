@@ -115,7 +115,23 @@
     ],
     "inspectedRows": 225,
     "latestListedNoticeDate": "2026-10-09",
-    "reachedPreviousYear": "2025-11-01"
+    "reachedPreviousYear": "2025-11-01",
+    "latestIndependentEvidence": {
+      "retrievedAtUtc": "2026-10-14T03:14:24.438802+00:00",
+      "indexRetrievedAtUtc": "2026-10-14T03:12:33.455039+00:00",
+      "index2026TitleCount": 184,
+      "manufacturingNoticeTitleCount": 7,
+      "manufacturingDetailHtmlFetched": 7,
+      "manufacturingDetailHtmlHttp200": 7,
+      "metadataSha256": "18c377871ba987be7fb5afd05a85cce141f6a0ee62edd417c550c09ae42130a5",
+      "january27OnlineApplicationReferencesAreMcuPsychologyBaselineNotFinalChecklist": true,
+      "htmlBodiesReviewedByAutomation": true,
+      "attachmentContentsReviewed": false,
+      "operatorReviewedAndApproved": false,
+      "postSkillManufacturingJobDocsVerified": false,
+      "evidenceDocument": "research/ID_MANUFACTURING_2026_7_NOTICE_DETAIL_AUDIT_20261014.md",
+      "evidenceScope": "Read-only official HTML and attachment links only. 2026 final Manufacturing job-application checklist still HOLD; release-day human approval needed."
+    }
   },
   "historicalIndexBefore20261014": "https://kp2mi.go.id/gtog-korea/info",
   "historicalNegativeResultNotReleaseEvidence": true,
