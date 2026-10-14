@@ -59,6 +59,8 @@ def classify(row: dict) -> dict:
         posting_year == 2026
         and mentions_manufacturing
         and "UBT UMUM" in normalized
+        and "2026" in normalized
+        and "2025" not in normalized
         and not re.search(r"ROOT INDUSTRY|UBT KHUSUS", normalized)
     )
     other_cohort = posting_year == 2026 and (
