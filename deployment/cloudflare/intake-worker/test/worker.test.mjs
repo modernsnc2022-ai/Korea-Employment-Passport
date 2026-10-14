@@ -47,6 +47,15 @@ function env(db=new FakeD1(),patch={}){
     INTAKE_HMAC_SECRET:secret,
     TURNSTILE_SECRET:'unit-test-turnstile-secret',
     KEP_BETA_DB:db,
+    // Synthetic Cloudflare service binding. Real ownership is confirmed by a
+    // separate not-yet-connected private email sender/verification service.
+    EMAIL_VERIFIER:{fetch:async request=>{
+      const {mode,code}=await request.json();
+      const ok=mode==='request'||(mode==='confirm'&&code==='12345678');
+      return new Response(JSON.stringify({ok}),{
+        status:ok?200:403,headers:{'Content-Type':'application/json'}
+      });
+    }},
     ...patch
   };
 }
@@ -67,8 +76,18 @@ function req(p=payload(),{origin=ORIGIN,url=URL,method='POST'}={}){
   });
 }
 async function response(p=payload(),configuration=env(),options={}){
-  const r=await worker.fetch(req(p,options),configuration);
-  return {status:r.status,data:await r.json(),headers:r.headers};
+  // Public browser direct intake now needs a Turnstile-cleared OTP request,
+  // followed by possession of a mocked 8-digit email code.
+  const first=await worker.fetch(req(p,{
+    ...options,url:URL+'/verify-request'
+  }),configuration);
+  const challenge=await first.json();
+  if(first.status!==202||challenge.verificationRequired!==true){
+    return {status:first.status,data:challenge,headers:first.headers};
+  }
+  const body=typeof p==='string'?p:{...p,verificationCode:'12345678'};
+  const final=await worker.fetch(req(body,options),configuration);
+  return {status:final.status,data:await final.json(),headers:final.headers};
 }
 function siteverify({success=true,hostname='www.gdglobal.kr',status=200}={}){
   const calls=[];
@@ -136,7 +155,7 @@ test('no Turnstile remote IP sent and no user IP persisted',async()=>{
   const db=new FakeD1(),calls=siteverify();
   const r=await response(payload(),env(db));
   assert.equal(r.status,201);
-  assert.equal(calls.length,1);
+  assert.equal(calls.length,2);
   assert.equal(calls[0].body.has('remoteip'),false);
   assert.equal(calls[0].body.has('secret'),true);
   const row=[...db.rows.values()][0];
@@ -196,6 +215,31 @@ test('server signing does not leak raw email; distinct HMAC keys for distinct em
 test('missing required private secrets or database binding always disables intake',async()=>{
   for(const patch of [
     {INTAKE_HMAC_SECRET:''},{TURNSTILE_SECRET:''},{KEP_BETA_DB:null},
-    {ALLOWED_ORIGINS:''},{INTAKE_ENABLED:'false'}
+    {ALLOWED_ORIGINS:''},{INTAKE_ENABLED:'false'},{EMAIL_VERIFIER:null}
   ])assert.equal(ready(env(new FakeD1(),patch)),false);
+});
+
+test('an unverified address can never retrieve or issue an applicant receipt',async()=>{
+  siteverify();
+  const db=new FakeD1(),e=env(db);
+  const direct=await worker.fetch(req({...payload(),verificationCode:'00000000'}),e);
+  assert.equal(direct.status,403);
+  assert.deepEqual(await direct.json(),{ok:false,error:'email_verification_required'});
+  assert.equal(db.rows.size,0);
+  const first=await worker.fetch(req(payload(),{url:URL+'/verify-request'}),e);
+  assert.equal(first.status,202);
+  const challenge=await first.json();
+  assert.equal(challenge.verificationRequired,true);
+  assert.equal('submissionId' in challenge,false);
+  const bogus=await worker.fetch(req({...payload(),verificationCode:'00000000'}),e);
+  assert.equal(bogus.status,403);
+  assert.equal(db.rows.size,0);
+});
+
+test('missing private mail-verification binding blocks both request and receipt',async()=>{
+  siteverify();
+  const e=env(new FakeD1(),{EMAIL_VERIFIER:null});
+  const r=await worker.fetch(req(payload(),{url:URL+'/verify-request'}),e);
+  assert.equal(r.status,503);
+  assert.equal((await r.json()).ok,false);
 });
