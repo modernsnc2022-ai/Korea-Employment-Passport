@@ -44,26 +44,37 @@ python scripts/test_beta_mail_dns.py
 
 The audit uses **public Google DNS-over-HTTPS only**, never a Cloudflare
 account token. It checks the three original Zoho MX servers, the root Zoho
-SPF and DMARC, plus Resend-specific *subdomain* DKIM, SPF and bounce MX
-records. It never adds or removes DNS records, reads private keys or sends
-mail. Missing prerequisites cause **exit 2** and HOLD; DNS/network errors
-cause exit 1. If Resend configures a custom Return-Path label instead of the
-default `send`, pass `--return-path <approved-label>`.
+SPF and DMARC, plus the **actual Resend 2026-10-14 dashboard** records for
+`mail.gdglobal.kr`:
 
-On 2026-10-14 the live public DNS audit found **PASS** for
-`gdglobal.kr` Zoho MX/SPF and DMARC, but the new
-`send.mail.gdglobal.kr` return-path and
-`resend._domainkey.mail.gdglobal.kr` were unconfigured: **HOLD**.
+| Type | Cloudflare zone name | Contents |
+|---|---|---|
+| TXT | `resend._domainkey.mail` | Full DKIM `p=...` copied from Resend |
+| CNAME | `rsend.mail` | Full displayed Resend `...mta.net` target; **DNS only** |
+| CNAME | `send.mail` | Full displayed Resend `...mta.net` target; **DNS only** |
 
-The exact SPF/MX/DKIM records must be copied from the new verified-domain
-page in the **operator-owned Resend account**, not fabricated from these
-examples. Do **not** replace `gdglobal.kr` root Zoho MX or append a
-second root SPF. DNS presence alone is not verification: require Resend's
-`verified` domain status, account/API binding approval and a synthetic
-recipient's actual inbox receipt **separately**. The release gate never
-auto-opens. Resend's request is protected by a deterministic HMAC-based
-`Idempotency-Key` for the individual challenge, avoiding duplicate
-delivery if the provider internally retries the same request. Do not log it.
+The actual provider-specified target strings were truncated in the owner
+screenshot; **do not guess or embed them**. This new sending configuration
+uses two CNAMEs, **not** the older `send.mail` MX + TXT model.
+`Enable Sending` is ON and `Enable Receiving` is OFF; never add the
+receiving MX records unnecessarily.
+
+The checker performs a **public DNS shape check only** (both CNAME targets
+end in `.mta.net`; DKIM key present), not an exact target-value comparison.
+It never adds or removes records, reads private keys or sends mail. Missing
+prerequisites cause exit **2** and HOLD; DNS errors cause exit 1.
+If Resend configures a custom Return-Path name instead of `send`, pass
+`--return-path <approved-label>`.
+
+The live public DNS audit on 2026-10-14 found the original Zoho MX/SPF and
+DMARC present, but Resend records not yet configured: **HOLD**.
+Do **not** change `gdglobal.kr` root Zoho MX or append a second root SPF.
+Public DNS presence alone is not verification: compare **all three exact**
+record values with the operator's Resend dashboard, require Resend's
+`verified` sending status, and separately require a synthetic recipient's
+actual inbox receipt and account/API binding approval. The release gate
+never auto-opens. Resend requests use a HMAC-based `Idempotency-Key`
+to avoid duplicate delivery; never log the key.
 
 Provider references:
 - https://resend.com/docs/dashboard/domains/introduction

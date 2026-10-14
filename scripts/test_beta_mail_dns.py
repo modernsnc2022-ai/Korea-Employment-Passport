@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Offline regression for the read-only KEP mail-DNS release audit."""
+"""Offline regression of 2026 Resend TXT DKIM + CNAME sending records."""
 import unittest
 
-from check_beta_mail_dns import assess, decode_txt, mx_hosts
+from check_beta_mail_dns import assess, decode_txt, mx_hosts, resend_mta_target
 
 
 def fixtures():
@@ -13,67 +13,80 @@ def fixtures():
             '"v=spf1 include:zohomail.com ~all"', '"zoho-verification=safe"'),
         ("_dmarc.gdglobal.kr", "TXT"): (
             '"v=DMARC1; p=none; rua=mailto:ops@example.test"',),
-        ("send.mail.gdglobal.kr", "MX"): (
-            "10 feedback-smtp.us-east-1.amazonses.com.",),
-        ("send.mail.gdglobal.kr", "TXT"): (
-            '"v=spf1 include:amazonses.com ~all"',),
+        ("rsend.mail.gdglobal.kr", "CNAME"): (
+            "rsend-ap-synthetic-region.mta.net.",),
+        ("send.mail.gdglobal.kr", "CNAME"): (
+            "send.synthetic-routing.mta.net.",),
         ("resend._domainkey.mail.gdglobal.kr", "TXT"): (
             '"p=" "' + "A" * 120 + '"',),
     }
 
 
 class DnsAssessmentTests(unittest.TestCase):
-    def assess(self, records):
-        return assess(lambda name, typ: records.get((name, typ), ()))
+    def assess(self, records, return_path="send"):
+        return assess(lambda name, typ: records.get((name, typ), ()), return_path)
 
-    def test_valid_dns_never_claims_provider_or_beta_open(self):
+    def test_shape_only_never_claims_resend_verification_or_beta_open(self):
         result = self.assess(fixtures())
         self.assertTrue(result["dns_prerequisites_present"])
-        self.assertEqual(result["status"], "DNS_PREREQUISITES_PRESENT_MANUAL_GATES_HOLD")
+        self.assertEqual(result["status"], "DNS_SHAPE_PRESENT_MANUAL_GATES_HOLD")
+        self.assertFalse(result["resend_exact_record_values_verified"])
         self.assertFalse(result["resend_provider_verified"])
         self.assertFalse(result["synthetic_mail_received"])
         self.assertFalse(result["beta_release_authorized"])
 
-    def test_unconfigured_sending_subdomain_fails_readiness(self):
+    def test_empty_or_missing_sending_records_fail(self):
         records = fixtures()
-        for name in ("send.mail.gdglobal.kr", "resend._domainkey.mail.gdglobal.kr"):
-            records.pop((name, "MX"), None)
-            records.pop((name, "TXT"), None)
+        for name in ("send.mail.gdglobal.kr", "rsend.mail.gdglobal.kr",
+                     "resend._domainkey.mail.gdglobal.kr"):
+            for typ in ("CNAME", "TXT"):
+                records.pop((name, typ), None)
         result = self.assess(records)
         self.assertFalse(result["dns_prerequisites_present"])
         self.assertFalse(result["resend_dkim_present"])
-        self.assertFalse(result["resend_return_path_spf_exists"])
+        self.assertFalse(result["resend_rsend_cname_present"])
+        self.assertFalse(result["resend_return_path_cname_present"])
+
+    def test_old_legacy_mx_spf_does_not_count_as_new_cname(self):
+        records = fixtures()
+        records.pop(("rsend.mail.gdglobal.kr", "CNAME"))
+        records.pop(("send.mail.gdglobal.kr", "CNAME"))
+        records[("send.mail.gdglobal.kr", "MX")] = (
+            "10 feedback-smtp.us-east-1.amazonses.com.",)
+        records[("send.mail.gdglobal.kr", "TXT")] = (
+            '"v=spf1 include:amazonses.com ~all"',)
+        self.assertFalse(self.assess(records)["dns_prerequisites_present"])
+
+    def test_bad_cname_destination_is_blocker(self):
+        records = fixtures()
+        records[("send.mail.gdglobal.kr", "CNAME")] = ("attacker.invalid.",)
+        self.assertFalse(self.assess(records)["resend_return_path_cname_present"])
+        self.assertFalse(resend_mta_target(("other.invalid.",)))
 
     def test_accidental_root_mx_replacement_is_blocker(self):
         records = fixtures()
         records[("gdglobal.kr", "MX")] = ("10 alternative.example.org.",)
-        result = self.assess(records)
-        self.assertFalse(result["zoho_mx_preserved"])
-        self.assertFalse(result["dns_prerequisites_present"])
+        self.assertFalse(self.assess(records)["zoho_mx_preserved"])
+        self.assertFalse(self.assess(records)["dns_prerequisites_present"])
 
-    def test_accidental_root_spf_second_record_is_blocker(self):
+    def test_second_root_spf_record_is_blocker(self):
         records = fixtures()
         records[("gdglobal.kr", "TXT")] += ('"v=spf1 include:amazonses.com ~all"',)
-        result = self.assess(records)
-        self.assertFalse(result["zoho_spf_preserved"])
-        self.assertFalse(result["dns_prerequisites_present"])
+        self.assertFalse(self.assess(records)["zoho_spf_preserved"])
+        self.assertFalse(self.assess(records)["dns_prerequisites_present"])
 
-    def test_custom_return_path_must_match_resend_records(self):
+    def test_custom_return_path_checks_right_cname(self):
         records = fixtures()
-        self.assertFalse(assess(lambda n, t: records.get((n, t), ()), "outbound")[
-            "dns_prerequisites_present"])
-        records[("outbound.mail.gdglobal.kr", "MX")] = records[
-            ("send.mail.gdglobal.kr", "MX")]
-        records[("outbound.mail.gdglobal.kr", "TXT")] = records[
-            ("send.mail.gdglobal.kr", "TXT")]
-        self.assertTrue(assess(lambda n, t: records.get((n, t), ()), "outbound")[
-            "dns_prerequisites_present"])
+        self.assertFalse(self.assess(records, "outbound")["dns_prerequisites_present"])
+        records[("outbound.mail.gdglobal.kr", "CNAME")] = records[
+            ("send.mail.gdglobal.kr", "CNAME")]
+        self.assertTrue(self.assess(records, "outbound")["dns_prerequisites_present"])
 
-    def test_invalid_return_path_not_accepted(self):
+    def test_invalid_return_path_rejected(self):
         with self.assertRaises(ValueError):
             assess(lambda n, t: (), "../danger")
 
-    def test_dns_decoding_and_host_parsing(self):
+    def test_dns_txt_and_mx_decoding(self):
         self.assertEqual(decode_txt('"v=spf1 " "include:zohomail.com ~all"'),
                          "v=spf1 include:zohomail.com ~all")
         self.assertEqual(mx_hosts(("10 mx.zoho.com.", "20 mx2.zoho.com.")),
