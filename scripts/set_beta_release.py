@@ -51,9 +51,8 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
         and coverage.get("checkedAt") == approved_dt.date().isoformat()
         and parsed.scheme == "https"
         and parsed.hostname in {"kp2mi.go.id", "www.kp2mi.go.id"}
-        and (index_path.startswith("/gtog-korea/") or index_path.startswith("/gtog-data/korea/"))
-        and index_path.rstrip("/") != "/gtog-korea/info"
-        and "preliminary" not in inventory_url.lower()
+        and index_path.rstrip("/") == "/gtog-korea/pengumuman"
+        and not parsed.query and not parsed.fragment
     ):
         fail("complete current KP2MI Manufacturing announcement inventory requires same-day official source review and explicit coverage signoff; Preliminary Training is not sufficient")
     if manufacturing_check.get("checkedAt") != approved_dt.date().isoformat():
@@ -120,7 +119,7 @@ def self_test() -> None:
         "noticeIndexCoverage": {
             "status": "verified_complete_general_manufacturing_index_review",
             "checkedAt": "2026-10-04",
-            "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/synthetic-index-for-tests",
+            "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
             "completeGeneralManufacturingInventory": True,
             "operatorConfirmedCompleteReview": True,
         },
