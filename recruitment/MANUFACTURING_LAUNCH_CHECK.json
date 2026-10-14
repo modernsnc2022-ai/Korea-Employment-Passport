@@ -93,5 +93,16 @@
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
       ]
     }
-  ]
+  ],
+  "noticeIndexCoverage": {
+    "status": "unverified_preliminary_training_category_only",
+    "checkedAt": "2026-10-14",
+    "previouslyAssumedIndex": "https://kp2mi.go.id/gtog-korea/info",
+    "actualCategory": "Preliminary Training dan Info",
+    "serverSideAjax": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
+    "completeGeneralManufacturingInventory": false,
+    "officialManufacturingInventoryUrl": null,
+    "operatorConfirmedCompleteReview": false,
+    "notes": "The primaryIndex URL is a Preliminary Training dan Info DataTables category, not an exhaustive General Manufacturing 2026 announcements list. This retrospective source-scope finding invalidates treating past result=no_current_manufacturing_job_application_notice as a launch-day full index verification. Preserve historical evidence, but fail closed until a verified relevant official notice inventory is checked on launch day."
+  }
 }
