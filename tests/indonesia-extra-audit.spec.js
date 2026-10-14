@@ -195,6 +195,7 @@ test('Official source warnings remain visible until review signoff and do not au
   await page.goto('/app.html', { waitUntil:'domcontentloaded' });
   await expect(page.locator('#freshnessStatus')).toBeVisible();
   await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau');
+  await expect(page.locator('#freshnessStatus')).toContainText('3 sumber terkait Indonesia/Korea, 5 sumber negara lain');
   await expect(page.locator('#freshnessStatus')).toContainText('tidak diubah otomatis');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
@@ -237,4 +238,20 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
     expect(script).toContain("./data/" + name);
   }
   expect(script).toContain('caches.delete');
+});
+
+test('Unrecognized new official source is never wrongly excluded from Indonesian warnings', async ({page}) => {
+  await page.route('**/data/source_review_status.json', async route => {
+    const response=await route.fetch();
+    const data=await response.json();
+    data.reviewRequiredSourceIds.push('unexpected_new_source_no_scope_approval');
+    data.reviewRequiredUrls.push('https://official.example/new-notice');
+    await route.fulfill({response,json:data});
+  });
+  await page.goto('/app.html', {waitUntil:'domcontentloaded'});
+  await expect(page.locator('#freshnessStatus')).toBeVisible();
+  await expect(page.locator('#freshnessStatus')).toContainText('9 sumber perlu ditinjau');
+  await expect(page.locator('#freshnessStatus')).toContainText('4 sumber terkait Indonesia/Korea, 5 sumber negara lain');
+  await expect(page.locator('#freshnessStatus')).toContainText('Aturan tidak diubah otomatis');
+  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
