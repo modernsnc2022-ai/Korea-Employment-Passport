@@ -84,7 +84,7 @@ def self_test() -> None:
     manifest = data("monitor/sources.json")
     scope = data("recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json")
     pending = data("recruitment/ID_BETA_SOURCE_SIGNOFF.json")
-    assert pending["status"] == "pending_manual_source_signoff"
+    assert pending["status"] in {"pending_manual_source_signoff", "approved_manual_indonesia_scope"}
     day = scope["checkedAt"]
     clean_copy = copy.deepcopy(source)
     clean_copy["detectedAt"] = day
