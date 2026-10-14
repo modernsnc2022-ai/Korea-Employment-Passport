@@ -5,6 +5,7 @@ import argparse
 import json
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
@@ -39,6 +40,22 @@ def prepare_open(program: dict, source: dict, manufacturing_check: dict, approve
     if source.get("fetchFailureUrls"):
         fail("official source fetchFailureUrls must be empty before OPEN")
 
+    coverage = manufacturing_check.get("noticeIndexCoverage", {})
+    inventory_url = str(coverage.get("officialManufacturingInventoryUrl") or "")
+    parsed = urlparse(inventory_url)
+    index_path = parsed.path.lower()
+    if not (
+        coverage.get("status") == "verified_complete_general_manufacturing_index_review"
+        and coverage.get("completeGeneralManufacturingInventory") is True
+        and coverage.get("operatorConfirmedCompleteReview") is True
+        and coverage.get("checkedAt") == approved_dt.date().isoformat()
+        and parsed.scheme == "https"
+        and parsed.hostname in {"kp2mi.go.id", "www.kp2mi.go.id"}
+        and (index_path.startswith("/gtog-korea/") or index_path.startswith("/gtog-data/korea/"))
+        and index_path.rstrip("/") != "/gtog-korea/info"
+        and "preliminary" not in inventory_url.lower()
+    ):
+        fail("complete current KP2MI Manufacturing announcement inventory requires same-day official source review and explicit coverage signoff; Preliminary Training is not sufficient")
     if manufacturing_check.get("checkedAt") != approved_dt.date().isoformat():
         fail("Manufacturing launch check must be recorded on the same date as OPEN approval")
     if manufacturing_check.get("result") != "no_current_manufacturing_job_application_notice":
@@ -100,6 +117,13 @@ def self_test() -> None:
     }
     manufacturing_check = {
         "checkedAt": "2026-10-04",
+        "noticeIndexCoverage": {
+            "status": "verified_complete_general_manufacturing_index_review",
+            "checkedAt": "2026-10-04",
+            "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/synthetic-index-for-tests",
+            "completeGeneralManufacturingInventory": True,
+            "operatorConfirmedCompleteReview": True,
+        },
         "result": "no_current_manufacturing_job_application_notice",
         "heldQuestions": ["job_docs"],
         "safePlatformBaselines": [
@@ -116,6 +140,25 @@ def self_test() -> None:
     assert opened["releaseDecision"]["publicBeta"] == "approved_manual"
     assert opened["releaseDecision"]["approvedAt"] == approved_at
 
+    incomplete_index = json.loads(json.dumps(manufacturing_check))
+    incomplete_index["noticeIndexCoverage"]["status"] = "unverified_preliminary_training_category_only"
+    incomplete_index["noticeIndexCoverage"]["completeGeneralManufacturingInventory"] = False
+    try:
+        prepare_open(program, source, incomplete_index, approved_at)
+    except ValueError as exc:
+        assert "complete current KP2MI" in str(exc)
+    else:
+        raise AssertionError("OPEN permitted with unverified Preliminary Training index")
+    bad_index_url = json.loads(json.dumps(manufacturing_check))
+    bad_index_url["noticeIndexCoverage"]["officialManufacturingInventoryUrl"] = (
+        "https://kp2mi.go.id/gtog-korea/info"
+    )
+    try:
+        prepare_open(program, source, bad_index_url, approved_at)
+    except ValueError as exc:
+        assert "Preliminary Training" in str(exc)
+    else:
+        raise AssertionError("OPEN permitted when the only index is Preliminary Training")
     bad_source = dict(source)
     bad_source["state"] = "review_required"
     try:
