@@ -77,7 +77,8 @@ def updated_record(
         "currentCategory": "Pengumuman",
         "currentListingUrl": PRIMARY_INDEX,
         "serverSideAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
-        "actualCategory": "Preliminary Training dan Info",
+        "historicalMistakenPageTitle": "Preliminary Training dan Info",
+        "historicalMistakenAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
         "completeGeneralManufacturingInventory": bool(confirm_full_inventory),
         "officialManufacturingInventoryUrl": full_inventory_url,
         "operatorConfirmedCompleteReview": bool(confirm_full_inventory),
@@ -153,6 +154,10 @@ def self_test() -> None:
                             full_inventory_url=example, confirm_full_inventory=True)
     assert signed["noticeIndexCoverage"]["completeGeneralManufacturingInventory"] is True
     assert signed["noticeIndexCoverage"]["officialManufacturingInventoryUrl"] == example
+    assert signed["noticeIndexCoverage"]["historicalMistakenPageTitle"] == "Preliminary Training dan Info"
+    assert signed["noticeIndexCoverage"]["serverSideAjaxUrl"] == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
+    assert "actualCategory" not in signed["noticeIndexCoverage"]
+    assert "serverSideAjax" not in signed["noticeIndexCoverage"]
     for bad_url in [HISTORICAL_WRONG_INDEX, "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
                     "https://kp2mi.go.id/gtog-detail/korea/single-notice",
                     "https://kp2mi.go.id/gtog-korea/verified-index-example"]:
