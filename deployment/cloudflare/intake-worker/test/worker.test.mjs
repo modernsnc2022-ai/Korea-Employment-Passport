@@ -49,7 +49,11 @@ function env(db=new FakeD1(),patch={}){
     KEP_BETA_DB:db,
     // Synthetic Cloudflare service binding. Real ownership is confirmed by a
     // separate not-yet-connected private email sender/verification service.
+    VERIFIER_CALL_SECRET:'unit-test-private-verifier-call-secret-32',
     EMAIL_VERIFIER:{fetch:async request=>{
+      if(request.headers.get('X-KEP-Internal-Token')!=='unit-test-private-verifier-call-secret-32'){
+        return new Response(JSON.stringify({ok:false}),{status:403});
+      }
       const {mode,code}=await request.json();
       const ok=mode==='request'||(mode==='confirm'&&code==='12345678');
       return new Response(JSON.stringify({ok}),{
@@ -215,7 +219,7 @@ test('server signing does not leak raw email; distinct HMAC keys for distinct em
 test('missing required private secrets or database binding always disables intake',async()=>{
   for(const patch of [
     {INTAKE_HMAC_SECRET:''},{TURNSTILE_SECRET:''},{KEP_BETA_DB:null},
-    {ALLOWED_ORIGINS:''},{INTAKE_ENABLED:'false'},{EMAIL_VERIFIER:null}
+    {ALLOWED_ORIGINS:''},{INTAKE_ENABLED:'false'},{EMAIL_VERIFIER:null},{VERIFIER_CALL_SECRET:''}
   ])assert.equal(ready(env(new FakeD1(),patch)),false);
 });
 
