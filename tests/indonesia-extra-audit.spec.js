@@ -188,16 +188,19 @@ test('Official source warnings remain visible until review signoff and do not au
     'kg_migrant_home', 'mm_mol_dol_index'
   ];
   expect(data.state).toBe('review_required');
-  expect(data.checked).toBe(84);
+  expect(data.checked).toBe(83);
   expect(data.configured).toBe(84);
   expect(data.autoPublishRules).toBe(false);
   expect(data.reviewRequiredSourceIds).toEqual(changed);
   expect(data.reviewRequiredUrls).toHaveLength(changed.length);
-  expect(data.fetchFailureUrls).toEqual([]);
+  expect(data.fetchFailureSourceIds).toEqual(['np_eps_notice_index']);
+  expect(data.fetchFailureUrls).toEqual(['https://epsnepal.gov.np/notices']);
+  expect(data.currentScan.changedSourceIds).toHaveLength(7);
   await page.goto('/app.html', { waitUntil:'domcontentloaded' });
   await expect(page.locator('#freshnessStatus')).toBeVisible();
   await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau');
   await expect(page.locator('#freshnessStatus')).toContainText('3 sumber terkait Indonesia/Korea, 5 sumber negara lain');
+  await expect(page.locator('#freshnessStatus')).toContainText('1 sumber negara lain gagal diakses');
   await expect(page.locator('#freshnessStatus')).toContainText('tidak diubah otomatis');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
