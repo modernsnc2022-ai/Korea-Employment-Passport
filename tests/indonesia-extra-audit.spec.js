@@ -384,6 +384,9 @@ test('Jan 2026 initial EPS registration annex safeguards are exact while final M
   expect(route.stages.find(x=>x.id==='skill_competency').competencyUploadNotice.status).toBe('closed');
   await page.setViewportSize({width:320,height:720});
   await page.goto('/app.html');
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await page.locator('#allJourneyDetails > summary').click();
+  await page.locator('#allJourneyDetails details.jump-stage > summary').click();
   await page.locator('#currentStageSelect').selectOption(String(route.stages.findIndex(s=>s.id==='registration')));
   await page.locator('#setCurrentStageBtn').click();
   await expect(page.locator('#nextAction')).toContainText('SUDAH BERAKHIR');
