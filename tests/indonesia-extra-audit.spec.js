@@ -238,7 +238,7 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v132'");
+  expect(script).toContain("const CACHE='kep-v133'");
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
@@ -342,4 +342,51 @@ test('Indonesia campaign shares the directly verified HTTPS custom origin withou
     'content', 'https://www.gdglobal.kr/Korea-Employment-Passport/'
   );
   await expect(page.locator('a[href="beta.html"]').first()).toBeVisible();
+});
+
+test('Jan 2026 initial EPS registration annex safeguards are exact while final Manufacturing job_docs remains HELD', async ({page, request}) => {
+  const officialGuide='https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf';
+  const officialScans='https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf';
+  const [rules, documentPacks, copy, route] = await Promise.all([
+    request.get('/data/exact_answer_rules_v1.json').then(r=>r.json()),
+    request.get('/data/document_packs_2026.json').then(r=>r.json()),
+    request.get('/data/id_e9_manufacturing_2026_id.json').then(r=>r.json()),
+    request.get('/data/id_e9_manufacturing_2026.json').then(r=>r.json()),
+  ]);
+  const expected={
+    registration_one_sector_no_transfer_juknis_2026:officialGuide,
+    registration_bankbook_missing_mobile_screenshot_2026:officialScans,
+    registration_manufacturing_skl_not_diploma_2026:officialScans,
+    registration_fingerprint_location_job_field_final_save_2026:officialGuide,
+  };
+  for (const [id, url] of Object.entries(expected)) {
+    const answer=rules.answers.find(a=>a.id===id);
+    expect(answer).toBeDefined();
+    expect(answer.sourceUrl).toBe(url);
+    expect(answer.scopeType).toBe('route_2026');
+    expect(answer.verificationStatus).toBe('verified_2026_official_pdf');
+    expect(answer.stages).not.toContain('job_application');
+  }
+  const scanned=rules.answers.find(a=>a.id==='registration_bankbook_missing_mobile_screenshot_2026');
+  expect(scanned.answer).toMatch(/mobile\/internet banking/);
+  expect(scanned.answer).toMatch(/atas nama peserta sendiri/);
+  const diploma=rules.answers.find(a=>a.id==='registration_manufacturing_skl_not_diploma_2026');
+  expect(diploma.answer).toMatch(/SKL tidak diperbolehkan/);
+  const sector=rules.answers.find(a=>a.id==='registration_one_sector_no_transfer_juknis_2026');
+  expect(sector.answer).toMatch(/tidak dapat diubah/);
+  const pack=documentPacks.packs.find(x=>x.id==='registration');
+  expect(pack.message).toMatch(/bukan daftar dokumen final/);
+  expect(pack.items.find(x=>x.id==='reg_diploma').note).toMatch(/SKL tidak diterima/);
+  expect(pack.items.find(x=>x.id==='reg_bankbook').note).toMatch(/screenshot mobile\/internet banking/);
+  expect(copy.registration.action).toContain('SUDAH BERAKHIR');
+  expect(copy.registration.action).toContain('tidak dapat pindah sektor');
+  expect(route.stages.find(x=>x.id==='job_application').brokerReplacement).toBe('held_official_notice');
+  expect(route.stages.find(x=>x.id==='skill_competency').competencyUploadNotice.status).toBe('closed');
+  await page.setViewportSize({width:320,height:720});
+  await page.goto('/app.html');
+  await page.locator('[data-quick-stage="registration"]').click();
+  await expect(page.locator('#nextAction')).toContainText('SUDAH BERAKHIR');
+  await expect(page.locator('#nextAction')).toContainText('tidak dapat pindah sektor');
+  await page.locator('[data-quick-stage="document_verify"]').click();
+  await expect(page.locator('#nextAction')).toContainText('SKL tidak menggantikan ijazah');
 });
