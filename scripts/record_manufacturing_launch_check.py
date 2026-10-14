@@ -66,6 +66,16 @@ def updated_record(
     record["result"] = result
     record["primaryIndex"] = PRIMARY_INDEX
     record["heldQuestions"] = list(LOCKED_HOLDS)
+    # New human approval is never inherited. Preserve the independently
+    # collected *historical evidence and its original timestamps*, though:
+    # overwriting the entire coverage object used to silently delete seven
+    # official HTML + six official PDF annex provenance records.
+    previous_coverage = record.get("noticeIndexCoverage") or {}
+    if not isinstance(previous_coverage, dict):
+        fail("existing noticeIndexCoverage must be an object")
+    prior_independent_evidence = previous_coverage.get("latestIndependentEvidence")
+    if prior_independent_evidence is not None and not isinstance(prior_independent_evidence, dict):
+        fail("latestIndependentEvidence must be an object with original dates")
     # A new daily manual check must never inherit an old index-coverage signoff.
     record["noticeIndexCoverage"] = {
         "status": (
@@ -88,6 +98,8 @@ def updated_record(
             "The right Pengumuman category is identified, but a release-day full 2026 Manufacturing notice review and manual signoff are still required."
         ),
     }
+    if prior_independent_evidence is not None:
+        record["noticeIndexCoverage"]["latestIndependentEvidence"] = prior_independent_evidence
     # Keep the nested official-evidence timestamp in sync. A new release-day
     # audit must never look current merely because the top-level date changed.
     record["sameDayOfficialRecheck"] = {
@@ -158,6 +170,48 @@ def self_test() -> None:
     assert signed["noticeIndexCoverage"]["serverSideAjaxUrl"] == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
     assert "actualCategory" not in signed["noticeIndexCoverage"]
     assert "serverSideAjax" not in signed["noticeIndexCoverage"]
+    # Review evidence survives a *new* review, but prior operator approval
+    # and prior independent-fetch timestamps must never be promoted.
+    evidence_base = json.loads(json.dumps(base))
+    preserved = {
+        "retrievedAtUtc": "2026-10-14T03:14:24+00:00",
+        "index2026TitleCount": 184,
+        "metadataSha256": "example-public-hash",
+        "operatorReviewedAndApproved": False,
+        "optionalCompetencyPdfAnnexReview": {
+            "officialPdfLinksFetched": 6, "humanOperatorSignedOff": False,
+        },
+    }
+    evidence_base["noticeIndexCoverage"] = {
+        "operatorConfirmedCompleteReview": True,
+        "status": "verified_complete_general_manufacturing_index_review",
+        "latestIndependentEvidence": preserved,
+    }
+    next_day = updated_record(
+        evidence_base, checked_at="2026-10-15", result=NO_NOTICE,
+    )
+    coverage = next_day["noticeIndexCoverage"]
+    assert coverage["latestIndependentEvidence"] == preserved
+    assert coverage["latestIndependentEvidence"]["retrievedAtUtc"] == "2026-10-14T03:14:24+00:00"
+    assert coverage["checkedAt"] == "2026-10-15"
+    assert coverage["operatorConfirmedCompleteReview"] is False
+    assert coverage["latestIndependentEvidence"]["operatorReviewedAndApproved"] is False
+    assert coverage["latestIndependentEvidence"]["optionalCompetencyPdfAnnexReview"]["humanOperatorSignedOff"] is False
+    assert next_day["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-15"
+    next_day_signed = updated_record(
+        evidence_base, checked_at="2026-10-15", result=NO_NOTICE,
+        full_inventory_url=PRIMARY_INDEX, confirm_full_inventory=True,
+    )
+    assert next_day_signed["noticeIndexCoverage"]["latestIndependentEvidence"] == preserved
+    try:
+        updated_record(
+            {"noticeIndexCoverage": {"latestIndependentEvidence": "untrusted"}},
+            checked_at="2026-10-15", result=NO_NOTICE,
+        )
+    except ValueError as exc:
+        assert "latestIndependentEvidence" in str(exc)
+    else:
+        raise AssertionError("Malformed public evidence accepted")
     for bad_url in [HISTORICAL_WRONG_INDEX, "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
                     "https://kp2mi.go.id/gtog-detail/korea/single-notice",
                     "https://kp2mi.go.id/gtog-korea/verified-index-example"]:
