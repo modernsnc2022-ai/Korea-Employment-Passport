@@ -6,6 +6,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+from check_beta_open_readiness_doc import problems as release_doc_problems
+
 ROOT = Path(__file__).resolve().parents[1]
 
 parser = argparse.ArgumentParser()
@@ -778,6 +780,16 @@ for row in call_rows:
     require("departure" in row.get("stages", []), f"{row.get('key')}: departure stage mapping missing")
 mcu_verified = [row for row in call_rows if row.get("mcuRuleVerified")]
 require(len(mcu_verified) >= 5, "expected at least five departure calls with verified final-MCU rules")
+
+# The operator snapshot must NEVER silently drift back to obsolete five-HOLD,
+# 72/72 clean-source or unverified current Pages-deployed assertions.
+for problem in release_doc_problems(
+    (ROOT / "recruitment/BETA_OPEN_READINESS.md").read_text(encoding="utf-8"),
+    program=beta_program, source=source, route=route,
+    answers=load_json("docs/data/exact_answer_rules_v1.json"),
+    broker=bqc, forms=forms, manufacturing=manufacturing_launch_check,
+):
+    require(False, "stale beta OPEN readiness document: " + problem)
 
 if failures:
     print("BETA_PRELAUNCH_STATIC_FAIL")
