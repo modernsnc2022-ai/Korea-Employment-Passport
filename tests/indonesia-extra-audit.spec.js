@@ -238,7 +238,7 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v131'");
+  expect(script).toContain("const CACHE='kep-v132'");
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
@@ -334,4 +334,12 @@ test('2026 Manufacturing voluntary competency upload required annexes are condit
   await expect(page.locator('#nextAction')).toContainText('Formulir Uji Kompetensi');
   await expect(page.locator('#nextAction')).toContainText('dua penjamin');
   await expect(page.locator('#nextAction')).toContainText('SUDAH BERAKHIR');
+});
+
+test('Indonesia campaign shares the directly verified HTTPS custom origin without an HTTP downgrade', async ({page}) => {
+  await page.goto('/');
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content', 'https://www.gdglobal.kr/Korea-Employment-Passport/'
+  );
+  await expect(page.locator('a[href="beta.html"]').first()).toBeVisible();
 });
