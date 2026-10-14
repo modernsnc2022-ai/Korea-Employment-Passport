@@ -3,11 +3,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
 from check_indonesia_source_signoff import validate_scoped_signoff
+from report_indonesia_beta_release_preflight import deployment_verified
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM = ROOT / "docs" / "data" / "beta_program_v1.json"
@@ -23,7 +25,8 @@ def fail(message: str) -> None:
 def prepare_open(
     program: dict, source: dict, manufacturing_check: dict, approved_at: str,
     *, source_manifest: dict | None = None, source_scope: dict | None = None,
-    source_signoff: dict | None = None,
+    source_signoff: dict | None = None, deployment: dict | None = None,
+    release_head: str | None = None,
 ) -> dict:
     if program.get("status") != "hold":
         fail("public beta can be opened only from HOLD")
@@ -93,6 +96,13 @@ def prepare_open(
     ):
         fail("Manufacturing same-day official recheck record must match OPEN approval")
 
+    # Official/manual source signoff alone must never bypass live deployment
+    # parity. Only the CLI's live six-redirect/nine-asset HTTPS audit supplies
+    # actual evidence, not a user-editable JSON flag.
+    if not deployment_verified(deployment, release_head):
+        fail("same-HEAD live Pages proof is required: 6/6 secure HTTPS entrypoints "
+             "and 9/9 public assets must match the reviewed Git HEAD")
+
     updated = json.loads(json.dumps(program))
     updated["status"] = "open"
     updated.setdefault("releaseDecision", {})["publicBeta"] = "approved_manual"
@@ -147,10 +157,51 @@ def self_test() -> None:
         },
     }
     approved_at = "2026-10-04T18:30:00+09:00"
-    opened = prepare_open(program, source, manufacturing_check, approved_at)
+    from audit_indonesia_beta_pages_live import ASSETS, LEGACY_ENTRYPOINTS
+    release_head = "a" * 40
+    fake_deployment = {
+        "mode": "read_only", "authorizesRelease": False,
+        "checkedRef": release_head, "httpsEntrypointSafe": True,
+        "criticalAssetsSameRef": True,
+        "matchingAssets": len(ASSETS), "totalAssets": len(ASSETS),
+        "entrypoints": [{"id": name, "httpsOnly": True}
+                        for name, _, _ in LEGACY_ENTRYPOINTS],
+        "assets": [
+            {"path": name, "httpsOnly": True, "status": 200,
+             "sameAsCheckedRef": True, "liveSha256": "0" * 64,
+             "expectedSha256": "0" * 64}
+            for name in ASSETS
+        ],
+    }
+    opened = prepare_open(program, source, manufacturing_check, approved_at,
+                          deployment=fake_deployment, release_head=release_head)
     assert opened["status"] == "open"
     assert opened["releaseDecision"]["publicBeta"] == "approved_manual"
     assert opened["releaseDecision"]["approvedAt"] == approved_at
+    # Missing, wrong-HEAD, stale or insecure live results must block even if
+    # official human approvals have been synthetically fulfilled in memory.
+    try:
+        prepare_open(program, source, manufacturing_check, approved_at)
+    except ValueError as exc:
+        assert "same-HEAD live Pages" in str(exc)
+    else:
+        raise AssertionError("beta OPEN permitted without live deployed-HEAD proof")
+    from copy import deepcopy
+    for mutation in (
+        lambda a: a.update(checkedRef="b" * 40),
+        lambda a: a["entrypoints"][1].update(httpsOnly=False),
+        lambda a: a["assets"][0].update(liveSha256="1" * 64),
+        lambda a: a.update(matchingAssets=8),
+    ):
+        bad_proof = deepcopy(fake_deployment)
+        mutation(bad_proof)
+        try:
+            prepare_open(program, source, manufacturing_check, approved_at,
+                         deployment=bad_proof, release_head=release_head)
+        except ValueError as exc:
+            assert "same-HEAD live Pages" in str(exc)
+        else:
+            raise AssertionError("beta OPEN permitted with invalid deployed-HEAD proof")
 
     incomplete_index = json.loads(json.dumps(manufacturing_check))
     incomplete_index["noticeIndexCoverage"]["status"] = "unverified_preliminary_training_category_only"
@@ -262,6 +313,7 @@ def self_test() -> None:
     scoped_open = prepare_open(
         program, global_source, same_day_check, fake_timestamp,
         source_manifest=manifest, source_scope=scope, source_signoff=signed,
+        deployment=fake_deployment, release_head=release_head,
     )
     assert scoped_open["status"] == "open"
     for field, wrong in [
@@ -288,7 +340,7 @@ def self_test() -> None:
     )
     assert "Application intake status: **OPEN**" in changed
     assert "Beta access status: **OPEN" in changed
-    print("BETA_RELEASE_STATE_SELF_TEST_PASS")
+    print("BETA_RELEASE_STATE_SELF_TEST_PASS deployed_head_proof_mutations_fail_closed")
 
 
 def main() -> int:
