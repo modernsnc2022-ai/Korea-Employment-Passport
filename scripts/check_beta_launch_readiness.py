@@ -722,6 +722,14 @@ require("betaWorkerExperienceWrap" in app_page,
         "worker validator UI must capture experience-year context")
 require("Tahun pengalaman/proses EPS:" in runtime,
         "worker validator feedback must preserve experience-year context")
+require("payload?.ok!==true" in beta_js
+        and "typeof payload.submissionId!=='string'" in beta_js
+        and "Missing verified intake receipt" in beta_js
+        and "String(result.submissionId||'diterima')" not in beta_js,
+        "beta direct applicant intake must only show success on explicit validated server receipt")
+require("Pendaftaran BELUM terkirim sampai Anda menekan Kirim" in beta_js
+        and "Draf Gmail dibuka, tetapi pendaftaran BELUM terkirim" in beta_js,
+        "beta must not mislabel opening an email composer as a received application")
 require("Current route stage ID:" in beta_js,
         "beta application must send an exact supported route stage ID")
 require('id="applicantCycle"' in beta_page and "EPS process cycle:" in beta_js,
