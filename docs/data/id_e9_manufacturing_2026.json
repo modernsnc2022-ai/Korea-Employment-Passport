@@ -87,12 +87,12 @@
       "title": "Mandatory Skill Test + optional Job Capacity Assessment",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, attend the mandatory Skill Test (physical strength, interview, basic skills). Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. Follow a new official notice for any later schedule; do not reuse this closed window.",
+      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, attend the mandatory Skill Test (physical strength, interview, basic skills). Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. If a participant chose optional evidence during that closed window, the official annex also required a completed Formulir Uji Kompetensi with any of the four evidence types; when an employer could not issue experience proof, the alternative factual confirmation required two non-relative sureties, identity copies and supporting contract/visa/immigration records. These are conditional documents, NOT requirements for every Skill Test candidate or the later job application. Follow a new official notice for any later schedule; do not reuse this closed window.",
       "brokerReplacement": "prep_complete",
       "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
       "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
       "officialActionLabel": "Buka Skill Test resmi",
-      "warning": "The optional 21–23 September 2026 Manufacturing competency upload is closed, not required for every candidate and not the Manufacturing online job-application document checklist. EPS-TOPIK stage-one pass is not final selection; the Skill Test remains mandatory.",
+      "warning": "The optional 21–23 September 2026 Manufacturing competency upload is closed, not required for every candidate and not the Manufacturing online job-application document checklist. EPS-TOPIK stage-one pass is not final selection; the Skill Test remains mandatory. The optional upload form and employer-evidence fallback are only conditionally mandatory within that already closed procedure.",
       "competencyUploadNotice": {
         "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
         "issuedAt": "2026-09-17",
@@ -103,7 +103,23 @@
         "periodEnd": "2026-09-23T13:00:00",
         "timeZone": "Asia/Jakarta",
         "status": "closed",
-        "notJobApplicationDocuments": true
+        "notJobApplicationDocuments": true,
+        "conditionalSubmission": {
+          "appliesOnlyIfApplicantChoosesOptionalCompetencyEvidence": true,
+          "competencyFormRequiredWithAnyUploadedEvidence": true,
+          "requiredCompetencyFormUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+          "officialUploadInstructionsUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+          "uploadOnlyInPublishedPeriod": true,
+          "closedPeriodMustNotBeReopenedByApp": true,
+          "workExperienceFallbackOnlyIfEmployerCannotIssueCertificate": true,
+          "workExperienceFallbackFormUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_SURAT_KONFIRMASI_DASAR_FAKTUAL_PENGALAMAN_KERJA.pdf",
+          "workExperienceFallbackRequiresTwoNonRelativeSureties": true,
+          "workExperienceFallbackRequiresEachSuretyIdCopyAndContact": true,
+          "workExperienceFallbackRequiresWorkContractOrVisaImmigrationEvidence": true,
+          "applicantSectorMustMatchEPSExamCard": true,
+          "notGeneralSkillTestRequirement": true,
+          "notFinalManufacturingJobApplicationChecklist": true
+        }
       }
     },
     {
