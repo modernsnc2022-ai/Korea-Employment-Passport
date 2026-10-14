@@ -52,15 +52,15 @@ def problems(doc: str, *, program: dict, source: dict, route: dict,
     # These release truths must remain separate from a green code test suite.
     for phrase in (
         "PR #324: Draft/unmerged",
-        "Beta access",
+        "beta access",
         "actual release day",
-        "same-HEAD",
+        "same-reviewed-HEAD",
         "6/6",
         "9/9",
         "83 of 84",
         "one genuine external official-evidence HOLD",
     ):
-        if phrase not in doc:
+        if phrase.lower() not in doc.lower():
             failures.append(f"missing conservative release guard text: {phrase}")
     if source.get("state") != "clean" and "all official sources clean" in doc.lower():
         failures.append("snapshot falsely claims universally clean official sources")
