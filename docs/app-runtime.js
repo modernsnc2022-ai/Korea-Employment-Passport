@@ -1143,6 +1143,17 @@ function openStage(stage){
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
+  // Sector/cycle-specific optional notice is only exposed when its official
+  // metadata and closed timeframe are present. Never imply an active upload.
+  const competencyLink=$('stageCompetencyNotice');
+  const competencyNotice=stage.id==='skill_competency'?stage.competencyUploadNotice:null;
+  const canShowCompetency=competencyNotice?.url===
+    'https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026' &&
+    competencyNotice.optional===true &&
+    competencyNotice.status==='closed' &&
+    competencyNotice.notJobApplicationDocuments===true;
+  competencyLink.hidden=!canShowCompetency;
+  competencyLink.href=canShowCompetency?competencyNotice.url:'#';
   renderSharedKoreaCore(stage);
   const officialAction=$('stageOfficialAction');
   if(stage.officialActionUrl){
