@@ -384,9 +384,11 @@ test('Jan 2026 initial EPS registration annex safeguards are exact while final M
   expect(route.stages.find(x=>x.id==='skill_competency').competencyUploadNotice.status).toBe('closed');
   await page.setViewportSize({width:320,height:720});
   await page.goto('/app.html');
-  await page.locator('[data-quick-stage="registration"]').click();
+  await page.locator('#currentStageSelect').selectOption(String(route.stages.findIndex(s=>s.id==='registration')));
+  await page.locator('#setCurrentStageBtn').click();
   await expect(page.locator('#nextAction')).toContainText('SUDAH BERAKHIR');
   await expect(page.locator('#nextAction')).toContainText('tidak dapat pindah sektor');
-  await page.locator('[data-quick-stage="document_verify"]').click();
+  await page.locator('#currentStageSelect').selectOption(String(route.stages.findIndex(s=>s.id==='document_verify')));
+  await page.locator('#setCurrentStageBtn').click();
   await expect(page.locator('#nextAction')).toContainText('SKL tidak menggantikan ijazah');
 });
