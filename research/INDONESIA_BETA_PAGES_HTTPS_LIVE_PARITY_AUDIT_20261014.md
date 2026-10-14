@@ -69,3 +69,21 @@ At audit time, public `sw.js` was `kep-v124`; the improved Draft includes `kep-v
 **Next verification gate:** repeat read-only HTTP first-hop checks of older `github.io` **root and deep app links** and, only after all first hops resolve to HTTPS and direct content is correct, mark the HTTPS redirect issue cleared. Until then keep the overall Pages launch safety gate **BLOCKED/PENDING** despite both API `https_enforced=true`. Do not force a Pages rebuild or a production merge purely to hide stale edge-cache results; prior GitHub Actions budget constraints apply. The operator may consider escalating persistent stale 301 behavior to GitHub Pages support if it does not converge.
 
 **Beta:** interest intake `open`, actual beta access `hold`; `job_docs` exact final 2026 Manufacturing checklist remains HOLD; independent current-day official source/Manufacturing human signatures, same-HEAD deployment verification and explicit beta OPEN are still required.
+
+## Six legacy first hops converged — 2026-10-14 14:22 KST (05:22:40 UTC)
+
+**Direct, read-only GitHub Pages HTTP first-hop test from the authorized Windows device:** all **6/6 historic HTTPS `github.io` entrypoints** now return HTTP **301 directly to an HTTPS** `www.gdglobal.kr` URL with the exact expected path and (when present) attribution query. No HTTP intermediate hop observed in the tested six endpoints:
+
+| Existing inbound URL | Actual first-hop destination | Result |
+|---|---|---|
+| `https://modernsnc2022-ai.github.io/` | `https://www.gdglobal.kr/` | PASS, `X-Cache: HIT; Age: 64` |
+| `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/` | `https://www.gdglobal.kr/Korea-Employment-Passport/` | PASS, `HIT; Age: 2349` |
+| `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/index.html` | same path on HTTPS custom domain | PASS, `MISS; Age: 0` |
+| `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/app.html` | same path on HTTPS custom domain | PASS, `HIT; Age: 64` |
+| `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/beta.html` | same path on HTTPS custom domain | PASS, `HIT; Age: 1422` |
+| `https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=epstopik_indonesia` | same path and **unchanged `src` value** on HTTPS custom domain | PASS, `HIT; Age: 2350` |
+
+Compared with the earlier 04:49–04:56 UTC probes showing three path-specific stale HTTP redirects, this evidence demonstrates the observed CDN cache/redirect behavior **has now converged at this vantage point**. Owner-authorized `https_enforced=true` on both GitHub Pages sites remains the intended configuration. **HTTPS legacy-first-hop technical subgate: verified 6/6 PASS on 2026-10-14 05:22:40 UTC.** Recheck before the actual public beta activation; cache state/edge PoPs are not globally guaranteed by a single client's observations.
+
+**Non-implication:** this is *not* Pages release-HEAD deployment parity or a beta-opening approval. As of the last exact-byte public audit, production `main` still matches its own nine assets 9/9, while the current *unmerged Draft PR* does not yet match the live site. Separate official same-day human source/cohort reviews, approved deployment, nine-asset same-HEAD check, and explicit beta OPEN remain pending. Never reuse this result as a 100%-complete overall launch decision.
+
