@@ -208,3 +208,60 @@ test('changing the applicant email address invalidates pending verification code
   await expect(page.locator('#applicantEmailCode')).toHaveValue('');
   await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim pendaftaran');
 });
+
+test('email OTP resend is gated 60 seconds, clears old code, and never displays a receipt',async({page})=>{
+  await page.clock.install({time:new Date('2026-10-14T12:00:00Z')});
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant');
+  await page.unroute('https://intake.example.test/v1/beta/applicant/verify-request');
+  let requests=0;
+  await page.route('https://intake.example.test/v1/beta/applicant/verify-request',async route=>{
+    requests++;
+    await route.fulfill({status:202,contentType:'application/json',
+      headers:{'Access-Control-Allow-Origin':new URL(page.url()).origin},
+      body:JSON.stringify({ok:true,verificationRequired:true,expiresMinutes:10})});
+  });
+  await fillApplicant(page);
+  const resend=page.locator('#applicantEmailResendBtn');
+  await expect(resend).toBeHidden();
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(resend).toBeVisible();
+  await expect(resend).toBeDisabled();
+  await expect(page.locator('#applicantEmailCodeFields')).toBeVisible();
+  expect(requests).toBe(1);
+  await page.clock.fastForward(61000);
+  await expect(resend).toBeEnabled();
+  await page.locator('#applicantEmailCode').fill('12345678');
+  await resend.click();
+  await expect(page.locator('#applicationResult')).toContainText('Kode sebelumnya tidak berlaku');
+  await expect(page.locator('#applicationResult')).toContainText('Pendaftaran BELUM diterima');
+  await expect(page.locator('#applicantEmailCode')).toHaveValue('');
+  await expect(resend).toBeDisabled();
+  await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Konfirmasi email dan kirim');
+  expect(requests).toBe(2);
+});
+
+test('failed OTP resend retains potentially valid code and does not claim a new email was sent',async({page})=>{
+  await page.clock.install({time:new Date('2026-10-14T12:00:00Z')});
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant');
+  await page.unroute('https://intake.example.test/v1/beta/applicant/verify-request');
+  let requests=0;
+  await page.route('https://intake.example.test/v1/beta/applicant/verify-request',async route=>{
+    requests++;
+    await route.fulfill({status:requests===1?202:503,contentType:'application/json',
+      headers:{'Access-Control-Allow-Origin':new URL(page.url()).origin},
+      body:JSON.stringify(requests===1
+        ?{ok:true,verificationRequired:true,expiresMinutes:10}
+        :{ok:false,error:'email_verification_required'})});
+  });
+  await fillApplicant(page);
+  await page.locator('#betaApplicationSubmitBtn').click();
+  await expect(page.locator('#applicantEmailResendBtn')).toBeDisabled();
+  await page.clock.fastForward(61000);
+  await page.locator('#applicantEmailCode').fill('12345678');
+  await page.locator('#applicantEmailResendBtn').click();
+  await expect(page.locator('#applicationResult')).toContainText('Permintaan kode baru gagal');
+  await expect(page.locator('#applicationResult')).toContainText('Data belum dianggap terkirim');
+  await expect(page.locator('#applicantEmailCode')).toHaveValue('12345678');
+  await expect(page.locator('#applicantEmailResendBtn')).toBeEnabled();
+  expect(requests).toBe(2);
+});

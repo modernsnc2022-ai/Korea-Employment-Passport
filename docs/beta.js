@@ -9,6 +9,7 @@ let intakeTurnstileToken='';
 let intakeTurnstileWidgetId=null;
 let intakeTurnstileInit=false;
 let intakeEmailCodeRequested=false;
+let intakeEmailResendTimer=null;
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -154,6 +155,31 @@ function resetTurnstile(){
   if(window.turnstile?.reset&&intakeTurnstileWidgetId!==null){
     try{window.turnstile.reset(intakeTurnstileWidgetId);}catch{}
   }
+}
+
+function clearEmailCodeResend(){
+  if(intakeEmailResendTimer!==null){
+    clearTimeout(intakeEmailResendTimer);
+    intakeEmailResendTimer=null;
+  }
+  const button=$('applicantEmailResendBtn');
+  button.hidden=true;
+  button.disabled=true;
+  button.textContent='Kirim ulang kode';
+}
+function startEmailCodeResendCooldown(){
+  clearEmailCodeResend();
+  const button=$('applicantEmailResendBtn');
+  button.hidden=false;
+  button.disabled=true;
+  button.textContent='Kirim ulang kode (60 detik)';
+  intakeEmailResendTimer=setTimeout(()=>{
+    intakeEmailResendTimer=null;
+    if(intakeEmailCodeRequested){
+      button.disabled=false;
+      button.textContent='Kirim ulang kode';
+    }
+  },60000);
 }
 
 function applicantFormComplete(){
@@ -368,6 +394,7 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
         intakeEmailCodeRequested=true;
         $('applicantEmailCodeFields').hidden=false;
         $('applicantEmailCode').required=true;
+        startEmailCodeResendCooldown();
         button.textContent='Konfirmasi email dan kirim';
         out.className='result warn';
         out.textContent='Kode verifikasi email diminta. Periksa kotak masuk dan masukkan 8 digit dalam 10 menit. Belum ada pendaftaran yang diterima.';
@@ -379,6 +406,7 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
         intakeEmailCodeRequested=false;
         $('applicantEmailCodeFields').hidden=true;
         $('applicantEmailCode').required=false;
+        clearEmailCodeResend();
         resetTurnstile();
       }
     }catch{
@@ -406,7 +434,43 @@ $('applicantContactEmail').addEventListener('input',()=>{
   $('applicantEmailCodeFields').hidden=true;
   $('applicantEmailCode').required=false;
   $('applicantEmailCode').value='';
+  clearEmailCodeResend();
   if(directIntakeEnabled())$('betaApplicationSubmitBtn').textContent='Kirim pendaftaran';
+});
+
+$('applicantEmailResendBtn').addEventListener('click',async()=>{
+  const resend=$('applicantEmailResendBtn');
+  if(resend.disabled||!intakeEmailCodeRequested||!directIntakeEnabled())return;
+  const out=$('applicationResult');
+  if(!applicantFormComplete()||!validContactEmail($('applicantContactEmail').value)){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Periksa kembali tahap, tahun proses, persetujuan, dan alamat email.';
+    return;
+  }
+  if(!intakeTurnstileToken){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Selesaikan verifikasi keamanan baru sebelum meminta ulang kode.';
+    return;
+  }
+  const submit=$('betaApplicationSubmitBtn');
+  resend.disabled=true;
+  submit.disabled=true;
+  try{
+    await submitDirectApplicant(true);
+    $('applicantEmailCode').value='';
+    startEmailCodeResendCooldown();
+    out.hidden=false;out.className='result warn';
+    out.textContent='Kode baru diminta. Periksa email Anda. Kode sebelumnya tidak berlaku lagi. Pendaftaran BELUM diterima.';
+  }catch{
+    // Provider rejection does not prove the old code was invalidated.
+    // Preserve user input instead of silently losing a possibly valid code.
+    resend.disabled=false;
+    out.hidden=false;out.className='result warn';
+    out.textContent='Permintaan kode baru gagal. Periksa jeda pengiriman atau gunakan kode sebelumnya jika masih berlaku. Data belum dianggap terkirim.';
+  }finally{
+    submit.disabled=false;
+    resetTurnstile();
+  }
 });
 
 $('gmailApplicationBtn').addEventListener('click',()=>{

@@ -174,6 +174,7 @@ async function application(request,env,origin,fetcher,requestCode=false){
   // SQLite UNIQUE constraint makes duplicates safe even under concurrent
   // requests; old unexpired submissions retain their original receipt.
   // Expired records may be replaced on next submission without waiting for Cron.
+  try{
   const statement=env.KEP_BETA_DB.prepare(
     'INSERT INTO beta_applications '+
     '(email_hmac,submission_id,contact_email,stage_id,route_cycle,source_code,received_at_ms,expires_at_ms) '+
@@ -186,7 +187,6 @@ async function application(request,env,origin,fetcher,requestCode=false){
     'WHERE beta_applications.expires_at_ms<=excluded.received_at_ms '+
     'RETURNING submission_id'
   );
-  try{
     const inserted=await statement.bind(hash,receipt,data.email,data.stageId,
       data.cycle,data.sourceCode,now,expiry).first();
     if(inserted?.submission_id){
