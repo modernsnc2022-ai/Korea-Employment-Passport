@@ -8,13 +8,32 @@
   "monitorBaselineAccepted": false,
   "scopeReviewDoesNotApproveRelease": true,
   "kp2miManufacturingNoticeIndex": {
-    "url": "https://kp2mi.go.id/gtog-korea/info",
-    "status": "not_verified_wrong_category_incomplete_inventory",
+    "url": "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "status": "correct_pengumuman_2026_inventory_read_pending_release_signoff",
     "checkedAt": "2026-10-14",
-    "comment": "On 2026-10-14 remote authorized HTTP inspection, /gtog-korea/info returned HTTP 200 and contained a server-side DataTables category labeled Preliminary Training dan Info, using the exact /gtog-data/korea/Preliminary%20Training%20dan%20Info AJAX endpoint. This URL is not a comprehensive 2026 General Manufacturing announcement index. Web fetches intermittently returned 502. No complete current cohort notice inventory or exact online application document list has been verified.",
+    "comment": "On 2026-10-14 official G-to-G Korea Pengumuman listing returned HTTP 200; its DataTables JSON served 2,876 historic records. Latest 225 rows were read through 2025-11-01, covering the listed 2026 period. Exact 2026-09-17 optional Skill Test competency upload notice was read at official detail page. This does not substitute for 2026 job-application exact documents or for operator-signed release-day notice review.",
     "observedHttpStatus": 200,
     "observedTitle": "Preliminary Training dan Info",
-    "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
+    "dataEndpoint": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+    "currentCategory": "Pengumuman",
+    "previouslyMistakenUrl": "https://kp2mi.go.id/gtog-korea/info",
+    "recordsTotal": 2876,
+    "inspectedOffsets": [
+      0,
+      75,
+      150
+    ],
+    "inspectedRows": 225,
+    "reachedPreviousYear": true,
+    "complete2026IndexRead": true,
+    "operatorConfirmedCompleteReview": false,
+    "competencyUploadNotice": {
+      "date": "2026-09-17",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "optional": true,
+      "closed": true,
+      "notJobApplicationDocuments": true
+    }
   },
   "manufacturingOnlineJobDocuments": "job_docs_hold",
   "betaAccess": "hold",
