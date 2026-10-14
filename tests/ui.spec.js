@@ -1007,8 +1007,11 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   await expect(page.locator('#closedPanel')).toBeHidden();
   await expect(page.locator('#applicationPanel')).toBeVisible();
 
+  // Email OTP is a temporary proof field, not an identity-number input.
+  // It stays hidden while direct intake is not configured.
+  await expect(page.locator('#applicantEmailCodeFields')).toBeHidden();
   const identityInputs = await page.locator(
-    '#betaApplicationForm input[type="text"], ' +
+    '#betaApplicationForm input[type="text"]:not(#applicantEmailCode), ' +
     '#betaApplicationForm input[type="email"], ' +
     '#betaApplicationForm input[type="tel"], ' +
     '#betaApplicationForm input[type="file"], ' +
