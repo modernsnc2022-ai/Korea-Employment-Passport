@@ -278,3 +278,23 @@ test('scheduled cleanup purges only expired rows even while both Workers are dis
     assert.equal(h.count(),0,'expired applicant data must be purged after 90 days');
   });
 });
+
+test('shared call-secret rotation must match on both Workers and fails closed otherwise',async()=>{
+  await withSetup(async h=>{
+    const shared=h.envVerification.VERIFIER_CALL_SECRET;
+    h.envIntake.VERIFIER_CALL_SECRET='synthetic-mismatched-intake-secret-over-32';
+    assert.equal((await h.submit(h.payload(),true)).status,403);
+    assert.equal(h.codeFor(),undefined,'mismatch must never dispatch live delivery');
+    assert.equal(h.count(),0,'mismatch must never create applicant record');
+    h.envIntake.VERIFIER_CALL_SECRET=shared;
+    assert.equal((await h.submit(h.payload(),true)).status,202);
+    const code=h.codeFor();
+    assert.match(code,/^\d{8}$/);
+    h.envVerification.VERIFIER_CALL_SECRET='synthetic-mismatched-verifier-secret-over-32';
+    assert.equal((await h.submit(h.payload(SYNTHETIC_EMAIL,code))).status,403);
+    assert.equal(h.count(),0,'mismatch must not redeem OTP to create applicant record');
+    h.envVerification.VERIFIER_CALL_SECRET=shared;
+    assert.equal((await h.submit(h.payload(SYNTHETIC_EMAIL,code))).status,201);
+    assert.equal(h.count(),1,'equal rotated values permit one approved receipt');
+  });
+});
