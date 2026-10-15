@@ -1,7 +1,11 @@
 name = "kep-beta-intake"
 main = "src/worker.js"
 compatibility_date = "2026-10-14"
-workers_dev = true
+# Explicitly preserve the owner's prelaunch security gate:
+# NEVER expose this Worker merely by deploying/redeploying from Git.
+workers_dev = false
+preview_urls = false
+keep_vars = true
 
 # PRIVATE D1, NOT KV. Use unique(email_hmac) for atomic dedup.
 # First run: npx wrangler d1 create kep-beta-applications

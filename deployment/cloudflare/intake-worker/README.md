@@ -1,6 +1,6 @@
 # KEP beta applicant-interest private intake (Cloudflare Workers + D1)
 
-**2026-10-14 development code — NOT DEPLOYED, NOT ENABLED.** The public `docs/data/beta_program_v1.json` has `application.directIntake.endpoint=""`, `turnstileSiteKey=""`, public beta access `status="hold"`; the current approved interest-registration path remains email fallback.
+**2026-10-15 owner dashboard setup — Cloudflare `kep-beta-intake` shell exists, but the actual applicant-intake code has NOT been deployed or enabled.** The owner has created a separate private D1 `kep-beta-applications` table and bound `KEP_BETA_DB`; the `EMAIL_VERIFIER` service binding points at the separately deployed private `kep-beta-email-verifier` with default entrypoint. Owner confirmed `INTAKE_ENABLED=false`, the encrypted `INTAKE_HMAC_SECRET` and matching-call-secret name (equality to the verifier cannot be read back from Cloudflare), and allowlisted origins. Both Workers' public production/preview URLs are OFF. **A completed binding or passing offline test is not evidence of a live integration test.** The public `docs/data/beta_program_v1.json` retains `application.directIntake.endpoint=""`, `turnstileSiteKey=""`, beta access `status="hold"`; the approved interest path remains email fallback. Turnstile creation, intake code deployment, authorized synthetic-only QA and explicit intake/beta OPEN remain separate future gates.
 
 ## Why D1 instead of the earlier KV draft
 
