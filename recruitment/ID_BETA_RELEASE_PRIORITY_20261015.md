@@ -31,9 +31,17 @@ No real applicant submission, invitations, six-month benefit activation, source 
 - **Separate direct HTTPS applicant application form and private D1/OTP integration:** optional for initial email-interest-based beta. The owner-confirmed private Worker deployment and one real OTP confirmation/replay test do not prove a production cross-Worker D1 insertion. Both private worker enable flags and direct-intake release decision must stay OFF until separate approval; do not delay email-fallback beta just to enable direct application intake.
 - **Other country packs:** retain research HOLD while Indonesia limited beta is prepared. Their separate 2026 official notifications should never change Indonesia route rules.
 
+## P0-1 implementation status — 2026-10-15 observed watch adapter
+
+**Implemented in Draft only (not released):** `scripts/report_indonesia_beta_release_preflight.py` selects the exact 2026-10-15 read-only 84/84, ten-alert watch and validates its 4 Korea-common + 1 multi-country + 5 other-country categorization; it distinguishes that verified **machine observation** from signed human approval. It retains historical 2026-10-14 tests without upgrading the historical 83/84, eight-alert public baseline. `scripts/check_20261015_source_signoff.py` checks a separate, real named, dated, fully mapped 4+1+5 approval and rejects 14 unsafe changes. `scripts/set_beta_release.py` now also refuses legacy eight-alert signoff for the current day; a synthetic valid ten-alert source signature must still clear the independent KP2MI and six-redirect/nine-asset live deployment checks. No real signature, hash promotion or OPEN was produced.
+
+**Important date boundary:** the adapter and pending current-signoff template are intentionally tied to the observed **2026-10-15** audit. On any subsequent launch day, a fresh official watch, corresponding strict complete ID/scope triage and genuine operator signature must be produced and code reviewed again; stale 10/15 evidence must fail closed rather than automatically pass a future date. This is not a standing approval for future days.
+
+Files: `research/source_reviews/shared_source_watch_readonly_2026-10-15.json`, `recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json` (real status **pending**), and the two release-check scripts above. P0-2/P0-3/P0-4/P0-5/P0-6 remain separate work.
+
 ## Guardrails and next development action
 
-1. Fix **P0-1 first**: the older source-scope/signoff validator's hard-coded 3+5 alert model does not describe today's 4+1+5 observation. This is a genuine adapter/developer task; do **not** copy today's unapproved hash into `monitor/source_hashes.json` or mark the public `source_review_status.json` clean just to make the old gate green.
+1. **P0-1 completed for the observed 2026-10-15 snapshot, Draft only.** Validate the new 4+1+5 machine-source adapter and separate unsigned human-signoff template; never promote an unreviewed hash into `monitor/source_hashes.json` or mark `source_review_status.json` clean. For an OPEN decision on a later calendar date, refresh and separately re-review the entire official watch and approval structure.
 2. Continue P0-3 official notice checking in parallel with P0-1 and P0-4 isolated QA. Any unresolved exact `job_docs` answer remains a transparent HOLD, not a fabricated applicant instruction.
 3. Owner/operator steps P0-2/P0-3/P0-5/P0-6 are **not done** and must not be checked off by a code commit or this file. No new external outreach, applicant intake, open beta or GitHub Actions spending without separate authorization.
 

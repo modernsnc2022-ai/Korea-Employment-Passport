@@ -16,6 +16,8 @@ from zoneinfo import ZoneInfo
 
 from check_indonesia_release_source_scope import validate as validate_scope
 from check_indonesia_source_signoff import validate_scoped_signoff
+from check_20261015_source_triage_snapshot import validate as validate_current_watch
+from check_20261015_source_signoff import validate_signoff as validate_current_signoff
 from audit_indonesia_beta_pages_live import ASSETS, LEGACY_ENTRYPOINTS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,7 +74,9 @@ def deployment_verified(deployed: dict | None, expected_sha: str | None) -> bool
 
 def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
                  scope: dict, signed: dict, manufacturing: dict, route: dict,
-                 deployed: dict | None = None, release_head: str | None = None) -> dict:
+                 deployed: dict | None = None, release_head: str | None = None,
+                 current_watch: dict | None = None,
+                 current_signed: dict | None = None) -> dict:
     # The report must never use a baseline recorded before the requested day
     # to claim that release-day official evidence has been reviewed.
     from datetime import date
@@ -103,38 +107,79 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
               "Retain official-only fallback for final Manufacturing documents." if safe
               else "Stop: restore current-cycle route and optional-document protections."))
 
-    try:
-        n_shared, n_foreign = validate_scope(source, manifest, scope)
-        scope_ok = (n_shared, n_foreign) == (3, 5)
-        scope_message = (f"{source.get('checked')}/{source.get('configured')} official sources fetched; "
-                         f"{n_shared} Korea-common + {n_foreign} other-country alerts; "
-                         f"failures={','.join(source.get('fetchFailureSourceIds', [])) or 'none'}")
-    except (ValueError, TypeError, KeyError) as exc:
-        scope_ok = False
-        scope_message = "Invalid source scope: " + str(exc)
+    # Today's observed source-watch can supersede the *displayed* historical
+    # 3+5 scope, but NOT yesterday's human signature or official SHA baseline.
+    # A dated, validated 4+1+5 snapshot is distinct from operator authorization.
+    use_current = current_watch is not None and current_watch.get("observedAtDate") == as_of
+    if use_current:
+        try:
+            validate_current_watch(current_watch, manifest)
+            scope_ok = True
+            scope_message = (
+                f"{current_watch['checked']}/{current_watch['configured']} official sources fetched; "
+                "4 Korea-common + 1 multi-country HRD Korea schedule + 5 other-country alerts; "
+                "10 unaccepted drift records; fetch failures=none"
+            )
+        except (ValueError, TypeError, KeyError) as exc:
+            scope_ok = False
+            scope_message = "Invalid current dated source-watch: " + str(exc)
+        source_fresh = scope_ok
+        stamp = f"read-only observed={current_watch.get('observedAtDate')}, asOf={as_of}"
+    else:
+        try:
+            n_shared, n_foreign = validate_scope(source, manifest, scope)
+            scope_ok = (n_shared, n_foreign) == (3, 5)
+            scope_message = (
+                f"{source.get('checked')}/{source.get('configured')} official sources fetched; "
+                f"{n_shared} Korea-common + {n_foreign} other-country alerts; "
+                f"failures={','.join(source.get('fetchFailureSourceIds', [])) or 'none'}"
+            )
+        except (ValueError, TypeError, KeyError) as exc:
+            scope_ok = False
+            scope_message = "Invalid historical source scope: " + str(exc)
+        source_fresh = (
+            scope_ok and source.get("detectedAt") == as_of and scope.get("checkedAt") == as_of
+            # Never reuse the historical 3+5 listing after the newer 10-drift
+            # snapshot has appeared, even if someone changes old dates.
+            and (current_watch is None or current_watch.get("observedAtDate", "") < as_of)
+        )
+        stamp = f"snapshot={source.get('detectedAt')}, countryScope={scope.get('checkedAt')}, asOf={as_of}"
     emit(gate("country_source_classification", "PASS" if scope_ok else "BLOCKED",
               scope_message,
-              "Do not silently accept source hashes or hide foreign-country notices."))
-
-    source_fresh = source.get("detectedAt") == as_of and scope.get("checkedAt") == as_of
+              "All current source alerts must remain visible; never accept changed hashes automatically."))
     emit(gate("official_monitor_today",
-              "PASS" if scope_ok and source_fresh else "BLOCKED",
-              f"snapshot={source.get('detectedAt')}, countryScope={scope.get('checkedAt')}, asOf={as_of}",
-              "Re-run read-only 84-source monitor and classify any changed/unavailable notices on actual release day."
-              if not source_fresh else "Snapshot available; source signoff is still separate."))
+              "PASS" if source_fresh else "BLOCKED",
+              stamp,
+              "A real same-day 84-source watch and scoped review are required; no past snapshot reuse."
+              if not source_fresh else "Current read-only watch classified; separate named approval still required."))
 
     try:
-        validate_scoped_signoff(source, manifest, scope, signed, as_of)
-        source_approved = True
-        source_reason = "Valid named, same-day manual Indonesia-only scope signature."
+        if use_current:
+            if current_signed is None:
+                raise ValueError("Current 4+1+5 signoff record is not supplied")
+            validate_current_signoff(current_watch, manifest, current_signed, as_of)
+        else:
+            validate_scoped_signoff(source, manifest, scope, signed, as_of)
+            # When a newer monitored set is present, a historical 3+5
+            # signature is never sufficient for the present or later day.
+            if current_watch and current_watch.get("observedAtDate", "") >= as_of:
+                raise ValueError("Historical source signoff superseded by current alerts")
+        source_approved = scope_ok and source_fresh
+        source_reason = (
+            "Current dated, named, manual Indonesia-only source-scope signoff."
+            if source_approved else "Official watch is not ready for a signed release day."
+        )
     except (ValueError, TypeError, KeyError) as exc:
         source_approved = False
         source_reason = str(exc)
+    pending_signed = current_signed if use_current else signed
     emit(gate("indonesia_source_manual_signoff",
-              "PASS" if source_approved else ("PENDING" if signed.get("status") == "pending_manual_source_signoff" else "BLOCKED"),
+              "PASS" if source_approved else
+              ("PENDING" if pending_signed and pending_signed.get("status") == "pending_manual_source_signoff"
+               else "BLOCKED"),
               source_reason,
-              "Operator must review three Korea-common items, acknowledge five foreign alerts, then sign dated official scope."
-              if not source_approved else "Preserve signed evidence for deploy review."))
+              "Operator must review 4 Korea-common, acknowledge multi-country HRD Korea and 5 foreign alerts, then actually sign the current day."
+              if not source_approved else "Keep authentic human approval evidence; separate KP2MI and deployment gates remain."))
 
     index = manufacturing.get("noticeIndexCoverage", {})
     index_today = index.get("checkedAt") == as_of
@@ -234,6 +279,60 @@ def self_test() -> None:
     next_day = build_report("2026-10-15", **args)
     assert next(g for g in next_day["gates"] if g["id"] == "official_monitor_today")["status"] == "BLOCKED"
     import copy
+    # The new watch is valid MACHINE observation, not a substitute for dated
+    # manual signoff. Its 4+1+5 sources must never pass the old 3+5 signature.
+    fresh_watch = read_json("research/source_reviews/shared_source_watch_readonly_2026-10-15.json")
+    fresh_pending = read_json("recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json")
+    fresh_args = args | {"current_watch": fresh_watch, "current_signed": fresh_pending}
+    observed = build_report("2026-10-15", **fresh_args)
+    fresh_gates = {g["id"]: g["status"] for g in observed["gates"]}
+    assert fresh_gates["country_source_classification"] == "PASS"
+    assert fresh_gates["official_monitor_today"] == "PASS"
+    assert fresh_gates["indonesia_source_manual_signoff"] == "PENDING"
+    assert observed["readyForManualLaunchDecision"] is False
+    assert observed["authorizesRelease"] is False
+    assert "4 Korea-common + 1 multi-country" in next(
+        g["evidence"] for g in observed["gates"] if g["id"] == "country_source_classification"
+    )
+    tomorrow = build_report("2026-10-16", **fresh_args)
+    assert next(g for g in tomorrow["gates"]
+                if g["id"] == "official_monitor_today")["status"] == "BLOCKED"
+    assert tomorrow["readyForManualLaunchDecision"] is False
+    for mutate in (
+        lambda w: w["records"][4].update(routeScope="other_country"),
+        lambda w: w["records"][0].update(url="https://example.invalid/tampered"),
+        lambda w: w.update(betaAccess="open"),
+        lambda w: w.update(checked=83),
+    ):
+        unsafe = copy.deepcopy(fresh_watch)
+        mutate(unsafe)
+        found = build_report("2026-10-15", **(fresh_args | {"current_watch": unsafe}))
+        assert next(g for g in found["gates"]
+                    if g["id"] == "country_source_classification")["status"] == "BLOCKED"
+        assert found["readyForManualLaunchDecision"] is False
+    # Legacy signature with a synthetic approved timestamp is *insufficient*
+    # without a fresh 4+1+5 named source review.
+    wrong_sign = copy.deepcopy(signed)
+    wrong_sign.update(status="approved_manual_indonesia_scope", reviewer="Legacy Operator QA",
+                      approvedAt="2026-10-15T13:00:00+07:00",
+                      sourceSnapshotDate="2026-10-15", sourceScopeDate="2026-10-15")
+    blocked = build_report("2026-10-15", **(fresh_args | {"signed": wrong_sign}))
+    assert next(g for g in blocked["gates"]
+                if g["id"] == "indonesia_source_manual_signoff")["status"] == "PENDING"
+    # A synthetic valid 4+1+5 signature proves signoff logic can reach PASS
+    # without changing any actual approvals, deploys or release-state files.
+    synthetic_fresh_signed = copy.deepcopy(fresh_pending)
+    synthetic_fresh_signed.update(
+        status="approved_manual_indonesia_scope", reviewer="Synthetic Operator QA",
+        approvedAt="2026-10-15T13:00:00+07:00",
+        sourceSnapshotDate="2026-10-15", sourceScopeDate="2026-10-15",
+    )
+    simulated = build_report("2026-10-15",
+        **(fresh_args | {"current_signed": synthetic_fresh_signed}))
+    assert next(g for g in simulated["gates"]
+                if g["id"] == "indonesia_source_manual_signoff")["status"] == "PASS"
+    assert simulated["readyForManualLaunchDecision"] is False
+    assert simulated["authorizesRelease"] is False
     test_sha = "a" * 40
     fake_deploy = {
         "mode": "read_only",
@@ -358,8 +457,15 @@ def main() -> None:
 
         deployed = audit(http_first_hop, ROOT / "docs", release_head,
                          asset_loader=committed_blob)
+    # Selection is date-exact. This filed 2026-10-15 snapshot is NEVER
+    # sufficient for 2026-10-16 or any future beta release day.
+    latest_watch = (read_json("research/source_reviews/shared_source_watch_readonly_2026-10-15.json")
+                    if as_of == "2026-10-15" else None)
+    latest_signed = (read_json("recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json")
+                     if latest_watch is not None else None)
     report = build_report(
         as_of,
+        current_watch=latest_watch, current_signed=latest_signed,
         program=read_json("docs/data/beta_program_v1.json"),
         source=read_json("docs/data/source_review_status.json"),
         manifest=read_json("monitor/sources.json"),

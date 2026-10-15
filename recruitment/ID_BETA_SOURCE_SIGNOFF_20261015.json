@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "route": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "status": "pending_manual_source_signoff",
+  "reviewer": null,
+  "approvedAt": null,
+  "sourceSnapshotDate": null,
+  "sourceScopeDate": null,
+  "contentReviewedSourceIds": [
+    "labor_standards_wage_statement",
+    "moel_wage_arrears_2026",
+    "kdca_qcode_input",
+    "moel_1350_contact"
+  ],
+  "multiCountryPendingSourceIds": [
+    "mm_hrdk_schedule_index"
+  ],
+  "otherCountryPendingSourceIds": [
+    "np_eps_notice_index",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
+  "sourceWatchConfigured": 84,
+  "sourceWatchChecked": 84,
+  "sourceWatchChanged": 10,
+  "sourceWatchFetchFailures": 0,
+  "allChangedSourceAlertsRemainVisible": true,
+  "noOfficialHashAutopromotion": true,
+  "manualReviewNotImplicit": true,
+  "exactManufacturingJobDocumentsHeld": true,
+  "betaAccess": "hold",
+  "monitoredSourceMapSha256": "f5c196587921f07d41dabbe40d89a123425bdaf9b8544ac3c9bd491c21f27ded",
+  "reason": "2026-10-15 observed official source changes are classified 4 Korea-common + 1 multi-country EPS schedule + 5 country-specific. All ten fingerprint changes remain unaccepted; a genuine named operator must review Korea-applicable content and acknowledge 6 separate alerts. This pending record is NOT an approval and does not replace KP2MI notice signoff, deployment verification, or final beta OPEN."
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from check_indonesia_source_signoff import validate_scoped_signoff
+from check_20261015_source_signoff import validate_signoff as validate_current_signoff
 from report_indonesia_beta_release_preflight import deployment_verified
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +27,8 @@ def prepare_open(
     program: dict, source: dict, manufacturing_check: dict, approved_at: str,
     *, source_manifest: dict | None = None, source_scope: dict | None = None,
     source_signoff: dict | None = None, deployment: dict | None = None,
-    release_head: str | None = None,
+    release_head: str | None = None, current_watch: dict | None = None,
+    current_signed: dict | None = None,
 ) -> dict:
     if program.get("status") != "hold":
         fail("public beta can be opened only from HOLD")
@@ -46,13 +48,27 @@ def prepare_open(
         if source.get("fetchFailureUrls") or source.get("reviewRequiredUrls"):
             fail("globally clean official sources cannot contain pending alerts or failures")
     else:
-        if not (source_manifest and source_scope and source_signoff):
-            fail("official source state must be clean or have signed Indonesia-scope approval")
+        if source_manifest is None:
+            fail("official source state must be clean or have signed Indonesia-scope approval and current inventory")
         try:
-            validate_scoped_signoff(
-                source, source_manifest, source_scope, source_signoff,
-                approved_dt.date().isoformat(),
-            )
+            if current_watch is not None:
+                # A recorded 2026-10-15 4+1+5 watch MUST have its own signed
+                # operator approval, not the superseded 3+5 dated signature.
+                if current_signed is None:
+                    fail("current official source signature is missing")
+                validate_current_signoff(
+                    current_watch, source_manifest, current_signed,
+                    approved_dt.date().isoformat(),
+                )
+            else:
+                if approved_dt.date().isoformat() >= "2026-10-15":
+                    fail("legacy eight-alert source scope is superseded; current dated signoff required")
+                if not (source_scope and source_signoff):
+                    fail("official source state must be clean or have signed Indonesia-scope approval")
+                validate_scoped_signoff(
+                    source, source_manifest, source_scope, source_signoff,
+                    approved_dt.date().isoformat(),
+                )
         except ValueError as exc:
             fail(str(exc))
 
@@ -332,6 +348,55 @@ def self_test() -> None:
             assert "ID_SOURCE_RELEASE_BLOCKED" in str(exc)
         else:
             raise AssertionError("invalid country-scoped signoff permitted beta OPEN")
+    # Additional current 2026-10-15 signed-source path. These synthetic
+    # approvals live ONLY inside this test and never alter real approval JSON.
+    current_watch = load_source_data("research/source_reviews/shared_source_watch_readonly_2026-10-15.json")
+    pending_current = load_source_data("recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json")
+    new_day = "2026-10-15"
+    current_check = deepcopy(manufacturing_check)
+    current_check["checkedAt"] = new_day
+    current_check["noticeIndexCoverage"]["checkedAt"] = new_day
+    current_check["sameDayOfficialRecheck"]["checkedAt"] = new_day
+    new_stamp = new_day + "T15:00:00+07:00"
+    valid_current = deepcopy(pending_current)
+    valid_current.update(
+        status="approved_manual_indonesia_scope",
+        reviewer="Synthetic Operator QA", approvedAt=new_day + "T14:00:00+07:00",
+        sourceSnapshotDate=new_day, sourceScopeDate=new_day,
+    )
+    validated = prepare_open(
+        program, global_source, current_check, new_stamp,
+        source_manifest=manifest, current_watch=current_watch,
+        current_signed=valid_current, deployment=fake_deployment,
+        release_head=release_head,
+    )
+    assert validated["status"] == "open"
+    for invalid_current in (pending_current, {**valid_current, "contentReviewedSourceIds": [
+        "labor_standards_wage_statement", "kdca_qcode_input", "moel_1350_contact"
+    ]}):
+        try:
+            prepare_open(
+                program, global_source, current_check, new_stamp,
+                source_manifest=manifest, current_watch=current_watch,
+                current_signed=invalid_current, deployment=fake_deployment,
+                release_head=release_head,
+            )
+        except ValueError as exc:
+            assert "ID_CURRENT_SOURCE_SIGNOFF_BLOCKED" in str(exc)
+        else:
+            raise AssertionError("new ten-alert source approval was bypassed")
+    try:
+        prepare_open(
+            program, global_source, current_check, new_stamp,
+            source_manifest=manifest, source_scope=scope,
+            source_signoff=signed, deployment=fake_deployment,
+            release_head=release_head,
+        )
+    except ValueError as exc:
+        assert "legacy eight-alert source scope is superseded" in str(exc)
+    else:
+        raise AssertionError("legacy eight-alert signature permitted current beta OPEN")
+    print("BETA_CURRENT_TEN_ALERT_SIGNOFF_GUARD_SELF_TEST_PASS")
     print("BETA_SCOPED_SOURCE_SYNTHETIC_INTEGRATION_TEST_PASS")
 
     changed = outreach_open_text(
@@ -375,6 +440,11 @@ def main() -> int:
     source_manifest = json.loads((ROOT / "monitor/sources.json").read_text(encoding="utf-8-sig"))
     source_scope = json.loads((ROOT / "recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json").read_text(encoding="utf-8-sig"))
     source_signoff = json.loads((ROOT / "recruitment/ID_BETA_SOURCE_SIGNOFF.json").read_text(encoding="utf-8-sig"))
+    approval_day = datetime.fromisoformat(str(args.approved_at).replace("Z", "+00:00")).date().isoformat()
+    current_watch = (json.loads((ROOT / "research/source_reviews/shared_source_watch_readonly_2026-10-15.json").read_text(encoding="utf-8-sig"))
+                     if approval_day == "2026-10-15" else None)
+    current_signed = (json.loads((ROOT / "recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json").read_text(encoding="utf-8-sig"))
+                      if current_watch is not None else None)
     outreach = OUTREACH.read_text(encoding="utf-8")
 
     # First validate cheap approval guards. A deliberate missing deployment
@@ -384,6 +454,7 @@ def main() -> int:
             program, source, manufacturing_check, str(args.approved_at),
             source_manifest=source_manifest, source_scope=source_scope,
             source_signoff=source_signoff,
+            current_watch=current_watch, current_signed=current_signed,
         )
     except ValueError as exc:
         if "same-HEAD live Pages proof is required" not in str(exc):
@@ -427,6 +498,7 @@ def main() -> int:
             program, source, manufacturing_check, str(args.approved_at),
             source_manifest=source_manifest, source_scope=source_scope,
             source_signoff=source_signoff,
+            current_watch=current_watch, current_signed=current_signed,
             deployment=live_proof, release_head=release_head,
         )
         updated_outreach = outreach_open_text(outreach)
