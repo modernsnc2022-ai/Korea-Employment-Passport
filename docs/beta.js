@@ -116,11 +116,18 @@ function turnstileSiteKey(){
   return String(betaProgram?.application?.directIntake?.turnstileSiteKey||'').trim();
 }
 function directIntakeEnabled(){
+  const direct=betaProgram?.application?.directIntake||{};
+  // Configuring an endpoint and public site key must NEVER open a private
+  // application form without a separate, dated manual direct-intake approval.
+  if(direct.releaseDecision!=='approved_manual'||typeof direct.approvedAt!=='string'
+    ||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(direct.approvedAt)
+    ||Number.isNaN(Date.parse(direct.approvedAt)))return false;
   const endpoint=directIntakeEndpoint(),siteKey=turnstileSiteKey();
   if(!endpoint||!/^[A-Za-z0-9_-]{6,128}$/.test(siteKey))return false;
   try{
     const u=new URL(endpoint);
-    return u.protocol==='https:'&&u.username===''&&u.password==='';
+    return u.protocol==='https:'&&u.username===''&&u.password===''
+      &&u.pathname==='/v1/beta/applicant'&&!u.search&&!u.hash;
   }catch{return false;}
 }
 function setupTurnstile(){

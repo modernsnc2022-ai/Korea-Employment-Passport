@@ -37,6 +37,12 @@ def errors(worker: str, config: str, schema: str, program: dict, frontend: str,
         issues.append("applicant private intake retention must be exactly 90 days")
     if direct.get("endpoint") and not direct.get("turnstileSiteKey"):
         issues.append("HTTPS endpoint cannot be enabled without public Turnstile site key")
+    if direct.get("releaseDecision") not in ("hold", "approved_manual"):
+        issues.append("direct HTTPS intake requires an explicit HOLD or approved_manual decision")
+    if direct.get("releaseDecision") == "approved_manual" and (
+        not direct.get("approvedAt") or not direct.get("endpoint") or not direct.get("turnstileSiteKey")
+    ):
+        issues.append("manual direct intake requires a dated approval and configured HTTPS challenge")
     if program["status"] != "hold" or program["application"]["intakeStatus"] != "open":
         issues.append("pre-release beta HOLD / interest intake OPEN mismatch")
     for token in ("KEP_BETA_DB","email_hmac","TURNSTILE_SECRET","INTAKE_HMAC_SECRET",
@@ -72,6 +78,8 @@ def errors(worker: str, config: str, schema: str, program: dict, frontend: str,
         issues.append("scheduled deletion must use bounded 90-day expiry")
     if "function directIntakeEnabled()" not in frontend or "turnstileSiteKey()" not in frontend:
         issues.append("frontend must fail closed without approved Turnstile site key")
+    if "direct.releaseDecision!=='approved_manual'" not in frontend or "direct.approvedAt" not in frontend:
+        issues.append("frontend must fail closed without dated, manual direct-intake authorization")
     if "turnstileToken:intakeTurnstileToken" not in frontend:
         issues.append("frontend must include server-verified challenge token")
     if "id=\"directIntakeChallenge\"" not in html:
@@ -152,10 +160,17 @@ def main() -> None:
                                  "endpoint": "https://intake.example.test"}}}, frontend, html),
             (worker, config, schema, program,
              frontend.replace("turnstileToken:intakeTurnstileToken", "turnstileToken:''"), html),
+            (worker, config, schema,
+             {**program, "application": {**program["application"],
+                "directIntake": {**program["application"]["directIntake"],
+                                 "releaseDecision": "approved_manual"}}}, frontend, html),
+            (worker, config, schema, program,
+             frontend.replace("direct.releaseDecision!=='approved_manual'",
+                              "direct.releaseDecision!=='hold'"), html),
         ]
         for case in copies:
             assert errors(*case), "intake security invariant mutation not rejected"
-        print("KEP_INTAKE_D1_SELF_TEST_PASS real_SQLite_UPSERT_5_fail_closed_mutations")
+        print("KEP_INTAKE_D1_SELF_TEST_PASS real_SQLite_UPSERT_7_fail_closed_mutations")
     else:
         print("KEP_INTAKE_D1_STATIC_PASS atomic_dedup_90day_retention_disabled_until_approved")
 

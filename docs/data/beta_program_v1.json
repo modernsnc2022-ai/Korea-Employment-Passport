@@ -73,6 +73,8 @@
     "opensOnlyWhenStatus": null,
     "intakeStatus": "open",
     "directIntake": {
+      "releaseDecision": "hold",
+      "approvedAt": null,
       "mode": "email_fallback_until_d1_and_turnstile_configured",
       "endpoint": "",
       "provider": "cloudflare_workers_d1",

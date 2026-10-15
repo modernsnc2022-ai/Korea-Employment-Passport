@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-async function betaPage(page, directEndpoint='', captchaReady=true) {
+async function betaPage(page, directEndpoint='', captchaReady=true, manualApproval=true, approvalTime='2026-10-15T00:00:00Z') {
   // No third-party network or real Turnstile token in browser QA.
   await page.addInitScript((ready)=>{
     let options=null;
@@ -27,6 +27,8 @@ async function betaPage(page, directEndpoint='', captchaReady=true) {
     const program = await response.json();
     program.application.directIntake = {
       ...(program.application.directIntake || {}),
+      releaseDecision: directEndpoint && manualApproval ? 'approved_manual' : 'hold',
+      approvedAt: directEndpoint && manualApproval ? approvalTime : null,
       endpoint: directEndpoint,
       turnstileSiteKey: directEndpoint ? 'test-site-key' : ''
     };
@@ -38,6 +40,26 @@ async function betaPage(page, directEndpoint='', captchaReady=true) {
 
 test('beta applicant intake keeps email fallback while direct endpoint is unconfigured', async ({ page }) => {
   await betaPage(page, '');
+  await expect(page.locator('#directIntakeFields')).toBeHidden();
+  await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim lewat aplikasi email');
+});
+
+test('staged endpoint and Turnstile site key do not open direct intake without manual approval',async({page})=>{
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant',true,false);
+  await expect(page.locator('#directIntakeFields')).toBeHidden();
+  await expect(page.locator('#directIntakeChallenge')).toBeHidden();
+  await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim lewat aplikasi email');
+  expect(await page.evaluate(()=>document.querySelectorAll('script[src*="turnstile"]').length)).toBe(0);
+});
+
+test('manual approval without timestamp still holds direct intake',async({page})=>{
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant',true,true,'');
+  await expect(page.locator('#directIntakeFields')).toBeHidden();
+  await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim lewat aplikasi email');
+});
+
+test('approved direct intake rejects malformed endpoint with query parameters',async({page})=>{
+  await betaPage(page,'https://intake.example.test/v1/beta/applicant?unsafe=1');
   await expect(page.locator('#directIntakeFields')).toBeHidden();
   await expect(page.locator('#betaApplicationSubmitBtn')).toHaveText('Kirim lewat aplikasi email');
 });
