@@ -68,6 +68,17 @@ def classify(row: dict) -> dict:
         or "UBT KHUSUS" in normalized
     )
     final_submission = bool(re.search(r"PENGAJUAN LAMARAN ONLINE|LAMARAN ONLINE|BERKAS LAMARAN", normalized))
+    # Broad title-only sentinel: a generic job-application/document notice may
+    # apply to Manufacturing even when the title omits "UBT UMUM"/"MANUFAKTUR".
+    # These are manual review candidates, NEVER verified document requirements.
+    possible_job_application = bool(
+        posting_year == 2026 and re.search(
+            r"LAMARAN ONLINE|BERKAS LAMARAN|DOKUMEN LAMARAN|"
+            r"PEMENUHAN DOKUMEN|PENGIRIMAN BERKAS LAMARAN|"
+            r"E.SERTIFIKAT.*LAMARAN|LAMARAN.*E.SERTIFIKAT",
+            normalized,
+        )
+    )
     return {
         "date": str(row.get("tanggal") or ""),
         "title": title,
@@ -76,6 +87,7 @@ def classify(row: dict) -> dict:
         "generalManufacturing2026": bool(general),
         "generalManufacturingFinalApplicationCandidate": bool(general and final_submission),
         "otherCohortApplicationNotice": bool(posting_year == 2026 and other_cohort and final_submission),
+        "possibleJobApplicationTitle": bool(possible_job_application),
     }
 
 
@@ -92,6 +104,14 @@ def validate_snapshot(rows: list[dict], total: int, *, checked_at: str) -> dict:
     manufacturer = [x for x in classified if x["generalManufacturing2026"]]
     other = [x for x in classified if x["otherCohortApplicationNotice"]]
     hits = [x for x in manufacturer if x["generalManufacturingFinalApplicationCandidate"]]
+    broad = [x for x in classified if x["possibleJobApplicationTitle"]]
+    # Review generic titles even when "Manufaktur" and "UBT Umum" are absent.
+    # Explicit Fisheries/Root/Special applications remain isolated.
+    ambiguous = [
+        x for x in broad
+        if not x["generalManufacturingFinalApplicationCandidate"]
+        and not x["otherCohortApplicationNotice"]
+    ]
     summary = {
         "checkedAtUtc": checked_at,
         "correctOfficialIndex": INDEX,
@@ -103,6 +123,9 @@ def validate_snapshot(rows: list[dict], total: int, *, checked_at: str) -> dict:
         "generalManufacturing2026Notices": manufacturer,
         "otherCohortFinalOnlineApplicationNotices": other,
         "generalManufacturingFinalApplicationCandidates": hits,
+        "broadJobApplicationTitleCandidates": broad,
+        "ambiguousGenericJobApplicationTitleCandidates": ambiguous,
+        "genericCandidateReviewRequired": bool(ambiguous),
         "titleOnlyIndex": True,
         "humanOperatorSignedOff": False,
         "exactFinalJobDocumentsVerified": False,
@@ -142,6 +165,20 @@ def self_test() -> None:
     found = validate_snapshot([fresh] + base, 31, checked_at="2026-10-14T06:01:00+00:00")
     assert len(found["generalManufacturingFinalApplicationCandidates"]) == 1
     assert found["exactFinalJobDocumentsVerified"] is False
+    # A generic notice without sector/cohort keywords must still be surfaced
+    # for a human review; neither it nor a specialized notice may approve rules.
+    generic = row(8, "PENGUMUMAN PENGAJUAN LAMARAN ONLINE G TO G KOREA 2026")
+    generic_report = validate_snapshot(
+        [generic] + base, 31, checked_at="2026-10-15T06:01:00+00:00"
+    )
+    assert len(generic_report["ambiguousGenericJobApplicationTitleCandidates"]) == 1
+    assert generic_report["ambiguousGenericJobApplicationTitleCandidates"][0]["id"] == 8
+    assert not generic_report["generalManufacturingFinalApplicationCandidates"]
+    assert generic_report["genericCandidateReviewRequired"] is True
+    assert generic_report["exactFinalJobDocumentsVerified"] is False
+    assert generic_report["betaReleaseAuthorized"] is False
+    assert len(report["broadJobApplicationTitleCandidates"]) == 3
+    assert not report["ambiguousGenericJobApplicationTitleCandidates"]
     # A 2026 post discussing the 2025 cohort is not a 2026 final notice.
     mislabeled = row(7, "UBT UMUM SEKTOR MANUFAKTUR 2025 LAMARAN ONLINE")
     assert not classify(mislabeled)["generalManufacturingFinalApplicationCandidate"]
@@ -195,6 +232,8 @@ def main() -> None:
             f"ID_MANUFACTURING_INDEX_READONLY 2026_general={len(report['generalManufacturing2026Notices'])} "
             f"other_cohort_online={len(report['otherCohortFinalOnlineApplicationNotices'])} "
             f"general_manufacturing_final_candidate={len(report['generalManufacturingFinalApplicationCandidates'])} "
+            f"broad_job_application_titles={len(report['broadJobApplicationTitleCandidates'])} "
+            f"ambiguous_generic_titles={len(report['ambiguousGenericJobApplicationTitleCandidates'])} "
             f"rows={report['rowsInspected']} oldest={report['oldestPostedDate']} "
             f"sha256={report['titleUrlDigestSha256']}"
         )
@@ -202,6 +241,8 @@ def main() -> None:
             print("GENERAL", row["date"], row["title"], row["url"])
         for row in report["otherCohortFinalOnlineApplicationNotices"]:
             print("OTHER_COHORT", row["date"], row["title"])
+        for row in report["ambiguousGenericJobApplicationTitleCandidates"]:
+            print("GENERIC_REVIEW_REQUIRED", row["date"], row["title"], row["url"])
         print("READ_ONLY_NO_SIGNOFF_NO_DOCUMENT_PROMOTION_NO_BETA_RELEASE")
 
 
