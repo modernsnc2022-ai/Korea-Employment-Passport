@@ -253,3 +253,28 @@ test('Resend provider rejection conservatively consumes real SQLite daily quota'
     assert.equal(h.count(),0);
   },{mailFails:true});
 });
+
+test('scheduled cleanup purges only expired rows even while both Workers are disabled',async()=>{
+  await withSetup(async h=>{
+    assert.equal((await h.submit(h.payload(),true)).status,202);
+    assert.equal((await h.submit(h.payload(SYNTHETIC_EMAIL,h.codeFor()))).status,201);
+    assert.equal(h.count(),1);
+    assert.equal(h.otp.db.prepare('SELECT count(*) AS n FROM otp_verifications').get().n,1);
+    assert.equal(h.otp.db.prepare('SELECT count(*) AS n FROM otp_resend_daily_quota').get().n,1);
+    // Cleanup must be independent of the public application/verification switches.
+    h.envIntake.INTAKE_ENABLED='false';
+    h.envVerification.VERIFIER_ENABLED='false';
+    h.addTime(25*60*60*1000);
+    await verifier.scheduled({},h.envVerification);
+    await intake.scheduled({},h.envIntake);
+    assert.equal(h.otp.db.prepare('SELECT count(*) AS n FROM otp_verifications').get().n,0);
+    assert.equal(h.count(),1,'90-day applicant record must not be purged after 25h');
+    h.addTime(8*24*60*60*1000);
+    await verifier.scheduled({},h.envVerification);
+    assert.equal(h.otp.db.prepare('SELECT count(*) AS n FROM otp_resend_daily_quota').get().n,0);
+    assert.equal(h.count(),1,'90-day applicant record must persist after 9 days');
+    h.addTime(83*24*60*60*1000);
+    await intake.scheduled({},h.envIntake);
+    assert.equal(h.count(),0,'expired applicant data must be purged after 90 days');
+  });
+});
