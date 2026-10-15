@@ -231,6 +231,10 @@ def live() -> dict:
     params = urlencode({"draw": 1, "start": 0, "length": 320, "search[value]": "",
                         "search[regex]": "false"})
     kp2mi = canonical_kp2mi(json.loads(fetch(KP2MI_DATA + "?" + params)))
+    # With thousands of official historical rows, a shorter result than the
+    # requested full 320-item window is a partial observation, not success.
+    if len(kp2mi) != 320:
+        raise ValueError("Incomplete KP2MI announcement window")
     first = fetch(HRD_LIST + "?lang=en").decode("utf-8", errors="replace")
     pages, count = parse_hrd_page(first, 1)
     all_hrd = pages[:]
@@ -323,25 +327,62 @@ def main():
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--previous", type=Path, help="Read a previous observation JSON (no acceptance)")
     parser.add_argument("--output", type=Path, help="Write observation JSON outside repository explicitly")
+    parser.add_argument("--state-db", type=Path, help="External SQLite observation checkpoint, never an approval store")
+    parser.add_argument("--list-pending", action="store_true", help="Inspect persistent review queue without sending alerts")
+    parser.add_argument("--health", action="store_true", help="Fail on stale/failed checkpoint, useful for watchdog")
+    parser.add_argument("--stale-hours", type=int, default=4)
     args = parser.parse_args()
+
     if args.self_test:
         self_test()
         return 0
+    if args.state_db:
+        from official_discovery_state import safe_external_path
+        args.state_db = safe_external_path(args.state_db, ROOT)
+    if args.list_pending or args.health:
+        if not args.state_db or args.live or args.previous or args.output:
+            parser.error("--list-pending/--health require --state-db alone")
+        from official_discovery_state import pending_events, health
+        if args.list_pending:
+            for event in pending_events(args.state_db):
+                print(json.dumps(event, ensure_ascii=False))
+        if args.health:
+            result = health(args.state_db, stale_hours=args.stale_hours)
+            print("KEP_MONITOR_HEALTH " + json.dumps(result, ensure_ascii=False))
+            if not result["healthy"]:
+                return 2
+        return 0
     if not args.live:
         parser.error("Use --live or --self-test; no automatic network polling")
+    if args.previous and args.state_db:
+        parser.error("--previous and --state-db represent distinct observation storage modes")
     previous = json.loads(args.previous.read_text(encoding="utf-8")) if args.previous else None
-    current = live()  # fetch exceptions do NOT mutate any last-good observation
-    report = diff(previous, current)
+    try:
+        current = live()  # fetch exceptions do NOT mutate any last-good observation
+    except Exception as exc:
+        if args.state_db:
+            from official_discovery_state import record_failure
+            failures = record_failure(args.state_db, exc)
+            print(f"KEP_DISCOVERY_FETCH_FAILURE count={failures} checkpoint_preserved=TRUE", file=sys.stderr)
+        raise
+    if args.state_db:
+        from official_discovery_state import record_success
+        report = record_success(args.state_db, current, diff)
+        print("KEP_DURABLE_REVIEW_QUEUE " + json.dumps(report, ensure_ascii=False))
+    else:
+        report = diff(previous, current)
     if args.output:
         target = args.output.resolve()
         if ROOT.resolve() == target or ROOT.resolve() in target.parents or target.suffix.lower() != ".json":
             raise ValueError("Observation output must be an external JSON file, never repository approval data")
         target.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    events = report.get("events", [])
     print(f"KEP_DISCOVERY_READONLY kp2mi={sum(x['provider']=='kp2mi' for x in current['records'])} "
           f"hrdk={sum(x['provider']=='hrdk' for x in current['records'])} "
           f"id_general={sum(x.get('generalManufacturing2026', False) for x in current['records'])} "
-          f"events={len(report['events'])} initial={report['initial']}")
-    for event in report["events"]:
+          f"events={len(events) if events else report.get('eventsDetected', 0)} "
+          f"initial={report.get('initial', report.get('firstRun', False))}")
+    for event in events:
         print(json.dumps(event, ensure_ascii=False))
     print("NO_AUTO_APPROVAL_NO_NOTIFICATIONS_NO_BETA_RELEASE")
     return 0
