@@ -13,8 +13,10 @@
                                     "kdca_qcode_input",
                                     "moel_1350_contact"
                                 ],
+    "candidateMultiCountryScheduleIds":  [
+                                               "mm_hrdk_schedule_index"
+                                           ],
     "candidateOtherCountryIds":  [
-                                     "mm_hrdk_schedule_index",
                                      "np_eps_notice_index",
                                      "vn_colab_eps_notices",
                                      "lk_slbfe_home",
@@ -28,7 +30,7 @@
     "directHttpsIntake":  "hold",
     "exactManufacturingJobDocuments":  "hold",
     "doesNotAuthorizeLaunch":  true,
-    "note":  "This is a contemporaneous audit snapshot only. All changed pages need semantic review. Do not replace the reviewed official source baseline or country-scope signoff from this file.",
+    "note":  "Read-only audit snapshot; the HRD Korea EPS-TOPIK schedule covers multiple countries, and its ambiguous mm_ ID must NOT be treated as Myanmar-only. All changed sources remain pending review. Do not replace official source baseline, signoff, product rules, or beta HOLD.",
     "records":  [
                     {
                         "id":  "labor_standards_wage_statement",
@@ -69,7 +71,7 @@
                     {
                         "id":  "mm_hrdk_schedule_index",
                         "reason":  "content_changed",
-                        "routeScope":  "other_country",
+                        "routeScope":  "multi_country_eps_schedule",
                         "reviewStatus":  "pending_semantic_review",
                         "url":  "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
                         "baselineSha256":  "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
