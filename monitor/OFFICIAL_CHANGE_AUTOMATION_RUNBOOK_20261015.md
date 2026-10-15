@@ -46,3 +46,16 @@ Initial rollout may use daily fast discovery instead of hourly if rate limits de
 - M6: after separate owner approval, deploy monitor only (not the beta app), verify actual timed schedule, change notifications, deduplication, freshness and failure escalation. Record observations to the integrated ledger.
 
 **Current actual state: code can perform manual checks; automatic schedule NOT deployed; all beta and official-approval HOLD gates preserved.**
+## Implementation checkpoint: 2026-10-15 (Draft PR, no scheduler)
+
+- Added `scripts/watch_id_official_discovery.py` as a **read-only on-demand** KP2MI official announcement index / HRD Korea EPS-TOPIK listing-detail comparison tool.
+- Fetches **actual official KP2MI DataTables JSON**, not the misleading `/info` page or an empty HTML shell. Keeps only notice metadata and normalized body digest; never saves the raw body or applicant example personal data. Uses existing 2026 Manufacturing title/other-cohort classifier as a separate route guard.
+- Paginates six published HRD Korea schedule pages and independently pins currently discoverable 2026 Indonesia General Manufacturing Jakarta (`examNot=14`) and Semarang (`examNot=15`) **official detail pages** because these older schedules are not reliably listed among recent pages. Does not turn Root Industry/Mold or other sending-country exams into General Manufacturing instructions.
+- Produces a canonical `observation`, not an accepted official-source baseline. On first run no mass alerts; on later runs only new/modified notice IDs or schedule keys are review events. A notice missing from a bounded listing window is **not called deleted**. Wrong official hosts, bad pagination, missing data and failed detail fetches fail closed.
+- The first authorized-Windows live execution returned **KP2MI 320 rows + HRD Korea 59 schedule records + 9 relevant Indonesia General Manufacturing items**, in an **external local temp JSON observation**. No backend writes, notifications, prod deployment or SHA approvals. Offline dedicated regression **9/9 PASS**, plus built-in structural self-test PASS. `node_modules` or GitHub Actions are not needed for the watcher test.
+- Running the script manually:
+  - `python scripts/watch_id_official_discovery.py --self-test`
+  - `python tests/test_official_discovery.py`
+  - `python scripts/watch_id_official_discovery.py --live --output <external-temp-file.json>`
+  - Subsequent difference check: `python scripts/watch_id_official_discovery.py --live --previous <previous-external-temp-file.json> --output <new-external-temp-file.json>`. Keep previous and new paths distinct; never write the accepted manifest.
+- **Not complete:** scheduled Cloudflare worker, persistent independent D1/KV checkpoint, retry/recovery watchdog, human-review notifications, admin approval control, full 84-source unified operations, and approved production deployment. Present source-scope and beta release HOLD gates remain unchanged. A future annual cohort rollover must receive separate review/coverage updates.
