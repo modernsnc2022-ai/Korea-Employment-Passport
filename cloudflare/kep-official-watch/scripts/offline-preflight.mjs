@@ -14,7 +14,7 @@ const roles=[
  {name:"watchdog",template:"wrangler.watchdog.example.jsonc",entry:"src/watchdog.mjs",flag:"MONITOR_WATCHDOG_ENABLED"},
  {name:"operator",template:"wrangler.operator-alerts.example.jsonc",entry:"src/operator-alerts.mjs",flag:"ALERT_DELIVERY_ENABLED"}
 ];
-const migrations=["0001_init.sql","0002_source_isolation.sql","0003_watchdog.sql","0004_operator_alert_outbox.sql","0005_monotonic_snapshot.sql"];
+const migrations=["0001_init.sql","0002_source_isolation.sql","0003_watchdog.sql","0004_operator_alert_outbox.sql","0005_monotonic_snapshot.sql","0006_watchdog_no_rewind.sql"];
 const load=path=>JSON.parse(readFileSync(path,"utf8").replace(/^\s*\/\/.*$/gm,""));
 export function checkOne(obj,role){
  if(obj.main!==role.entry||obj.workers_dev!==false||obj.preview_urls!==false)

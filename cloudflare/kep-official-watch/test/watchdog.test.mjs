@@ -27,6 +27,10 @@ class WatchdogD1 {
       }else if(item.sql.includes("INSERT INTO monitor_watchdog_state")){
         const [id,status,reason_code,last_checked_utc,last_changed_utc]=item.values;
         const former=state.get(id);
+        // Model the M14 D1 BEFORE UPDATE trigger in the transactional scratch state.
+        // The local event array is only committed after the entire batch succeeds.
+        if(former && last_checked_utc<=former.last_checked_utc)
+          throw Error("STALE_MONITOR_WATCHDOG");
         state.set(id,{status,reason_code,last_checked_utc,
           last_changed_utc:former?.status===status && former?.reason_code===reason_code
             ? former.last_changed_utc:last_changed_utc});
@@ -140,4 +144,35 @@ test("malformed D1 results and failed transaction never silently report healthy"
   await assert.rejects(runWatchdog(enabled(db),{now:when("2026-10-16T01:30:00Z")}),/D1_BATCH_TRANSACTION_FAILED/);
   assert.equal(db.states.size,0);
   assert.equal(db.events.length,0);
+});
+
+test("M14 older watchdog run cannot emit false recovery or rewind state within clock-skew window",async()=>{
+  const db=new WatchdogD1();
+  const original=await runWatchdog(enabled(db),{now:when("2026-10-16T05:00:00Z")});
+  assert.equal(original.status,"degraded");
+  assert.equal(db.events.length,2);
+  // A new origin success can arrive while an older watchdog execution is still running.
+  db.setHealthy("kp2mi","2026-10-16T04:58:00Z");
+  db.setHealthy("hrdk","2026-10-16T04:58:00Z");
+  const eventsBefore=structuredClone(db.events),statesBefore=new Map(db.states);
+  // One-minute delay is inside the existing two-minute clock-skew tolerance,
+  // therefore the DB trigger (not the JS precheck) must reject it atomically.
+  await assert.rejects(runWatchdog(enabled(db),{now:when("2026-10-16T04:59:00Z")}),
+    /STALE_MONITOR_WATCHDOG/);
+  assert.deepEqual(db.events,eventsBefore);
+  assert.deepEqual(db.states,statesBefore);
+  assert.ok(db.events.every(e=>e.event_kind==="opened"));
+  assert.ok([...db.states.values()].every(e=>e.last_checked_utc==="2026-10-16T05:00:00.000Z"));
+  // A future legitimate watchdog run still closes both incidents.
+  const recovered=await runWatchdog(enabled(db),{now:when("2026-10-16T05:01:00Z")});
+  assert.equal(recovered.status,"healthy");
+  assert.deepEqual(recovered.transitions.map(x=>x.kind),["recovered","recovered"]);
+});
+test("M14 equal-time watchdog replay cannot duplicate alert transitions",async()=>{
+  const db=new WatchdogD1();
+  await runWatchdog(enabled(db),{now:when("2026-10-16T05:00:00Z")});
+  await assert.rejects(runWatchdog(enabled(db),{now:when("2026-10-16T05:00:00Z")}),
+    /STALE_MONITOR_WATCHDOG/);
+  assert.equal(db.events.length,2);
+  assert.equal(db.states.get("kp2mi").last_checked_utc,"2026-10-16T05:00:00.000Z");
 });

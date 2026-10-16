@@ -8,7 +8,7 @@ import {checkOne,inspect,bundle} from "../scripts/offline-preflight.mjs";
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const read=name=>JSON.parse(readFileSync(join(root,name),"utf8").replace(/^\s*\/\/.*$/gm,""));
 const role={name:"source",entry:"src/index.mjs",flag:"MONITOR_ENABLED"};
-test("all three examples static-off with all five reviewed append-only migrations",()=>{
+test("all three examples static-off with all six reviewed append-only migrations",()=>{
  const status=inspect();
  assert.equal(status.state,"SAFE_TO_BUILD_OFFLINE_NOT_TO_DEPLOY");
  assert.equal(status.roles.length,3);
