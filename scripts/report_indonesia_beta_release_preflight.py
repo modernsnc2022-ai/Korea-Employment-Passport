@@ -96,7 +96,8 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
                  scope: dict, signed: dict, manufacturing: dict, route: dict,
                  deployed: dict | None = None, release_head: str | None = None,
                  current_watch: dict | None = None,
-                 current_signed: dict | None = None) -> dict:
+                 current_signed: dict | None = None,
+                 pages_source: dict | None = None) -> dict:
     # The report must never use a baseline recorded before the requested day
     # to claim that release-day official evidence has been reviewed.
     from datetime import date
@@ -237,7 +238,40 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
               if evidence_ready else "Official optional evidence attachments not adequately documented",
               "Do not promote the optional annexes into final job-application requirements."))
 
-    deployment_pass = deployment_verified(deployed, release_head)
+    # The published source itself must be independently verified. A clean
+    # main/docs publication is not proof that the unmerged candidate is live.
+    published_main_ok = (
+        isinstance(pages_source, dict)
+        and pages_source.get("mode") == "read_only"
+        and pages_source.get("sourceVerified") is True
+        and pages_source.get("sourceBranch") == "main"
+        and pages_source.get("sourceFolder") == "/docs"
+        and pages_source.get("deployedMainFilesMatched") == len(ASSETS)
+        and pages_source.get("totalAssets") == len(ASSETS)
+        and pages_source.get("status") in {
+            "DEPLOYED_MAIN_DRAFT_HEAD_NOT_PUBLISHED",
+            "DEPLOYED_MAIN_EQUALS_HEAD_ASSETS",
+        }
+        and pages_source.get("approvesBetaOpen") is False
+        and pages_source.get("sourceHashAccepted") is False
+        and pages_source.get("remoteChangesMade") is False
+    )
+    emit(gate(
+        "published_main_source_integrity",
+        "PASS" if published_main_ok else ("PENDING" if pages_source is None else "BLOCKED"),
+        ("Configured GitHub Pages main/docs matches 9/9 published assets; "
+         "this does not imply Draft candidate publication."
+         if published_main_ok else "Trusted live main/docs source and 9/9 asset match not established."),
+        "Use authenticated read-only Pages source diagnostics; never change Pages branch to bypass review.",
+    ))
+    same_ref_published = (
+        published_main_ok
+        and pages_source.get("status") == "DEPLOYED_MAIN_EQUALS_HEAD_ASSETS"
+        and pages_source.get("sameRefDeploymentConfirmed") is True
+        and pages_source.get("mainRef") == release_head
+        and pages_source.get("candidateRef") == release_head
+    )
+    deployment_pass = same_ref_published and deployment_verified(deployed, release_head)
     emit(gate("same_head_pages_deployment", "PASS" if deployment_pass else "PENDING",
               (f"Live checked HEAD={release_head}; exact HTTPS assets=9/9; "
                f"legacy redirects=6/6, all same committed SHA"
@@ -259,7 +293,8 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
 
     required_ids = {"route_safety", "country_source_classification", "official_monitor_today",
                     "indonesia_source_manual_signoff", "kp2mi_manufacturing_release_day_signoff",
-                    "optional_skill_annex_evidence", "same_head_pages_deployment"}
+                    "optional_skill_annex_evidence", "published_main_source_integrity",
+                    "same_head_pages_deployment"}
     ready = (manual_still_pending and all(
         item["status"] == "PASS" for item in result if item["id"] in required_ids
     ))
@@ -272,6 +307,8 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
         "readyForManualLaunchDecision": ready,
         "manualOpenDecisionStillRequired": manual_still_pending,
         "liveDeploymentEvidenceChecked": deployment_pass,
+        "publishedMainSourceIntegrityVerified": published_main_ok,
+        "candidateHeadPublished": same_ref_published,
         "exactManufacturingJobDocumentsHeld": job.get("brokerReplacement") == "held_official_notice",
         "gates": result,
     }
@@ -399,6 +436,32 @@ def self_test() -> None:
         ],
     }
     assert deployment_verified(fake_deploy, test_sha) is True
+    fake_pages = {
+        "mode": "read_only",
+        "sourceVerified": True,
+        "sourceBranch": "main",
+        "sourceFolder": "/docs",
+        "deployedMainFilesMatched": len(ASSETS),
+        "totalAssets": len(ASSETS),
+        "status": "DEPLOYED_MAIN_DRAFT_HEAD_NOT_PUBLISHED",
+        "mainRef": "b" * 40,
+        "candidateRef": test_sha,
+        "sameRefDeploymentConfirmed": False,
+        "approvesBetaOpen": False,
+        "sourceHashAccepted": False,
+        "remoteChangesMade": False,
+    }
+    unpublished = build_report("2026-10-14", **args,
+                               pages_source=fake_pages, deployed=fake_deploy,
+                               release_head=test_sha)
+    unpublished_gates = {g["id"]: g["status"] for g in unpublished["gates"]}
+    assert unpublished_gates["published_main_source_integrity"] == "PASS"
+    assert unpublished_gates["same_head_pages_deployment"] == "PENDING"
+    assert unpublished["publishedMainSourceIntegrityVerified"] is True
+    assert unpublished["candidateHeadPublished"] is False
+    fake_pages = copy.deepcopy(fake_pages)
+    fake_pages.update(status="DEPLOYED_MAIN_EQUALS_HEAD_ASSETS",
+                      mainRef=test_sha, sameRefDeploymentConfirmed=True)
     for mutation in (
         lambda d: d.update(checkedRef="b" * 40),
         lambda d: d["entrypoints"][3].update(httpsOnly=False),
@@ -438,7 +501,7 @@ def self_test() -> None:
         "2026-10-14",
         **(args | {"source": synthetic_source, "scope": synthetic_scope,
                    "signed": synthetic_signed, "manufacturing": synthetic_manufacturing}),
-        deployed=fake_deploy, release_head=test_sha,
+        deployed=fake_deploy, release_head=test_sha, pages_source=fake_pages,
     )
     assert hypothetical["readyForManualLaunchDecision"] is True
     assert hypothetical["manualOpenDecisionStillRequired"] is True
@@ -456,7 +519,7 @@ def self_test() -> None:
         **(args | {"source": synthetic_source, "scope": synthetic_scope,
                    "signed": synthetic_signed, "manufacturing": synthetic_manufacturing,
                    "program": already_open}),
-        deployed=fake_deploy, release_head=test_sha,
+        deployed=fake_deploy, release_head=test_sha, pages_source=fake_pages,
     )["readyForManualLaunchDecision"] is False
     bad_route = copy.deepcopy(route)
     bad_route["stages"][7]["competencyUploadNotice"]["status"] = "open"
@@ -488,6 +551,7 @@ def main() -> None:
     # No user-editable --deployment-proof flag: the only trusted audit report
     # comes from an actual fresh live read-only request in this same process.
     deployed = None
+    pages_source = None
     release_head = None
     if args.live:
         from audit_indonesia_beta_pages_live import audit, http_first_hop
@@ -502,6 +566,19 @@ def main() -> None:
 
         deployed = audit(http_first_hop, ROOT / "docs", release_head,
                          asset_loader=committed_blob)
+        from diagnose_indonesia_beta_pages_source import inspect_live
+        try:
+            pages_source = inspect_live()
+        except (OSError, ValueError, KeyError, subprocess.SubprocessError,
+                json.JSONDecodeError) as exc:
+            # Fail closed. An unavailable authenticated Pages source is not
+            # grounds to claim that matching static files prove deployment.
+            pages_source = {
+                "mode": "read_only",
+                "status": "BLOCKED_PAGES_SOURCE_CHECK_ERROR",
+                "sourceVerified": False,
+                "error": type(exc).__name__ + ": " + str(exc)[:160],
+            }
     # Selection is date-exact. This filed 2026-10-15 snapshot is NEVER
     # sufficient for 2026-10-16 or any future beta release day.
     dated_evidence = {
@@ -524,6 +601,7 @@ def main() -> None:
         manufacturing=read_json("recruitment/MANUFACTURING_LAUNCH_CHECK.json"),
         route=read_json("docs/data/id_e9_manufacturing_2026.json"),
         deployed=deployed, release_head=release_head,
+        pages_source=pages_source,
     )
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
