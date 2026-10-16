@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { KP, HR, HD, officialUrl, kpRecords, hrdRows, collect, changes, processSchedule } from "../src/index.mjs";
+import { sourceUrls, officialUrl, kpRecords, hrdRows, collect, changes, processSchedule } from "../src/index.mjs";
+const { KP, HR, HD } = sourceUrls();
 import worker from "../src/index.mjs";
 
 const kp = (suffix="") => Array.from({ length: 50 }, (_, i) => ({
@@ -154,4 +155,19 @@ test("incomplete or invalid KP2MI JSON never creates a publishable snapshot", as
   await assert.rejects(kpRecords({data:bad,recordsTotal:2300}),/INCOMPLETE/);
   const malicious=kp(); malicious[0].judul='<a href="https://evil.invalid/fake">MANUFACTURING</a>';
   await assert.rejects(kpRecords({data:malicious,recordsTotal:2300}),/NON_OFFICIAL/);
+});
+
+test("Worker fetch uses supported manual redirects and refuses 302 without following", async()=>{
+  let seen=false;
+  await assert.rejects(
+    collect(async (_url,opts) => {
+      seen=true;
+      assert.equal(opts.redirect,"manual");
+      return new Response("redirect denied",{
+        status:302,headers:{location:"https://evil.invalid/malicious"}
+      });
+    }),
+    /OFFICIAL_REDIRECT_BLOCKED/
+  );
+  assert.equal(seen,true);
 });

@@ -1,10 +1,12 @@
 // KEP independent official source change watcher. Disabled until separately approved.
 // Never opens beta, sends messages, accepts official source hashes or reads applicant D1.
-export const KP = "https://kp2mi.go.id/gtog-data/korea/Pengumuman";
-export const HR = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do";
-export const HD = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do";
+const KP = "https://kp2mi.go.id/gtog-data/korea/Pengumuman";
+const HR = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do";
+const HD = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do";
 const ALLOWED = new Set(["kp2mi.go.id", "epstopik.hrdkorea.or.kr"]);
 const WINDOW = 50, HR_PAGES = 6, VERSION = "kep-cloudflare-watch-v1";
+// Named exports must be callable handlers in workerd; do not export raw strings.
+export function sourceUrls() { return { KP, HR, HD }; }
 
 export function officialUrl(value) {
   const u = new URL(value);
@@ -26,9 +28,10 @@ async function digest(value) {
 }
 async function officialText(url, fetcher) {
   const expected = officialUrl(url);
-  const r = await fetcher(expected, { redirect: "error", method: "GET",
+  const r = await fetcher(expected, { redirect: "manual", method: "GET",
     headers: { "Accept-Language": "en,id;q=0.9,ko;q=0.8" },
     signal: AbortSignal.timeout(12000) });
+  if (r.status >= 300 && r.status < 400) throw new Error("OFFICIAL_REDIRECT_BLOCKED");
   if (!r.ok) throw new Error("OFFICIAL_HTTP_FAILURE");
   if (r.url && officialUrl(r.url) !== expected) throw new Error("OFFICIAL_REDIRECT");
   const txt = await r.text();
