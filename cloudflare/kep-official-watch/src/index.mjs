@@ -5,6 +5,16 @@ const HR = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDes
 const HD = "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do";
 const ALLOWED = new Set(["kp2mi.go.id", "epstopik.hrdkorea.or.kr"]);
 const WINDOW = 50, HR_PAGES = 6, VERSION = "kep-cloudflare-watch-v1";
+// Reserve headroom for both source checkpoints and health writes within 50 D1
+// queries per Free Worker invocation. A larger burst must NOT promote a partial baseline.
+export const MAX_REVIEW_EVENTS_PER_SOURCE = 16;
+class ReviewBudgetExceededError extends Error {
+  constructor() {
+    super("Source changes exceed this scan's D1 review budget; keep last good snapshot");
+    this.name = "ReviewBudgetExceededError";
+  }
+}
+
 // Discovery-only scope across future cohorts. Never automatically updates beta rules.
 export function includesSupportedCohort(title) {
   const years = String(title).match(/\b20\d{2}\b/g) || [];
@@ -209,6 +219,8 @@ export async function processSchedulePartitioned(env, deps = {}) {
         for (const item of fresh) {
           const former = before.get(item.key);
           if (former && JSON.stringify(former) === JSON.stringify(item)) continue;
+          // Check BEFORE hashing or writing. No truncated queue + snapshot promotion.
+          if (events.length >= MAX_REVIEW_EVENTS_PER_SOURCE) throw new ReviewBudgetExceededError();
           events.push({ ...item, kind: former ? "changed" : "new",
             revision: await digest(JSON.stringify(item)) });
         }

@@ -2,7 +2,7 @@
 // Calls the same production source-isolated scheduling logic.
 import { processSchedulePartitioned, sourceUrls } from "../src/index.mjs";
 const { KP, HR, HD } = sourceUrls();
-let kpDown = false, hrdRevision = 0;
+let kpDown = false, hrdRevision = 0, kpRevisedCount = 0;
 function fakeText(u) {
   const url = new URL(u);
   if (u.startsWith(KP)) {
@@ -10,7 +10,7 @@ function fakeText(u) {
       id:50000-i,
       tanggal:"16 October 2026",
       judul:'<a href="/gtog-detail/korea/fixture-'+i+'">SYNTHETIC GENERAL MANUFACTURING 2026 NOTICE '+i+'</a>',
-      gtgkorea:"<p>SYNTHETIC BODY index "+i+"</p>"
+      gtgkorea:"<p>SYNTHETIC BODY index "+i+(i<kpRevisedCount?" REVISED":"")+"</p>"
     }));
     return JSON.stringify({draw:1,recordsTotal:5000,recordsFiltered:5000,data});
   }
@@ -46,6 +46,11 @@ export default {
       kpDown = true;
       hrdRevision++;
       return Response.json({testOnly:true,kpDown,hrdRevision});
+    }
+    if (path === "/test/force-kp-17-changes") {
+      kpRevisedCount = 17;
+      kpDown = false;
+      return Response.json({testOnly:true,kpRevisedCount});
     }
     if (path === "/test/recover-kp") {
       kpDown = false;

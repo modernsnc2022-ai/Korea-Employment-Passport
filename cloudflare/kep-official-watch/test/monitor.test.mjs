@@ -333,3 +333,47 @@ test("HRD outage cannot overwrite the last good schedule or halt KP2MI notice re
   assert.equal(db.review.size,1);
   assert.equal(outcome.autopublished,false);
 });
+
+test("Free-D1 burst over 16 KP2MI changes fails closed without replacing last-good evidence",async()=>{
+  const db=new SplitMonitorD1(),env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const fresh=officialMock().fn;
+  const previous=await processSchedulePartitioned(env,{fetcher:fresh,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  assert.equal(previous.status,"ok");
+  const snapshot=db.sourceSnapshots.get("kp2mi").payload;
+  const changed=async(url,opts)=>{
+    const res=await fresh(url,opts);
+    if(!url.startsWith(KP))return res;
+    const obj=JSON.parse(await res.text());
+    for(const item of obj.data.slice(0,17))item.gtgkorea+=" (revised synthetic text)";
+    return {...res,text:async()=>JSON.stringify(obj)};
+  };
+  const attempt=await processSchedulePartitioned(env,{fetcher:changed,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(attempt.status,"degraded");
+  assert.deepEqual(attempt.failed,[{provider:"kp2mi",errorKind:"ReviewBudgetExceededError"}]);
+  assert.deepEqual(attempt.checked.map(x=>x.provider),["hrdk"]);
+  assert.equal(db.sourceSnapshots.get("kp2mi").payload,snapshot);
+  assert.equal(db.review.size,0);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,1);
+  assert.equal(attempt.autopublished,false);
+});
+test("Free-D1 exactly 16 revised official notices queue atomically within reserved budget",async()=>{
+  const db=new SplitMonitorD1(),env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const fresh=officialMock().fn;
+  await processSchedulePartitioned(env,{fetcher:fresh,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  const changed=async(url,opts)=>{
+    const res=await fresh(url,opts);
+    if(!url.startsWith(KP))return res;
+    const obj=JSON.parse(await res.text());
+    for(const item of obj.data.slice(0,16))item.gtgkorea+=" (approved-fixture revised)";
+    return {...res,text:async()=>JSON.stringify(obj)};
+  };
+  const result=await processSchedulePartitioned(env,{fetcher:changed,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(result.status,"ok");
+  assert.equal(result.candidateChanges,16);
+  assert.equal(db.review.size,16);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
+});

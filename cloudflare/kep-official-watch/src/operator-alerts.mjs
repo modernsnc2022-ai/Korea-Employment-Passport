@@ -3,6 +3,10 @@
 const REPO="modernsnc2022-ai/Korea-Employment-Passport";
 const APPROVED_OPERATOR_ISSUE=325; // Dedicated repo issue created 2026-10-16; does NOT activate sending.
 const SOURCES=new Set(["kp2mi","hrdk"]);
+// Even a 100-item historical change burst must stay well under the D1 Free
+// per-invocation query limit. Already staged keys are skipped in later runs.
+export const MAX_OUTBOX_NEW_PER_INVOCATION = 12;
+
 function iso(s) {
   if(typeof s!=="string" || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(s) ||
       !Number.isFinite(Date.parse(s))) throw Error("INVALID_UTC");
@@ -100,12 +104,29 @@ export async function dispatchAlerts(env,deps={}){
   if(!(now instanceof Date)||Number.isNaN(now.getTime()))throw Error("INVALID_DISPATCH_TIME");
   const {issue,cutoff}=settings(env,now),db=env.MONITOR_DB;
   const found=await readEligibleEvents(db,cutoff);
-  // Bounded per invocation; D1 UNIQUE event_key prevents repeated inserts.
-  for(let i=0;i<found.length;i+=20){
-    const slice=found.slice(i,i+20);
-    await db.batch(slice.map(e=>db.prepare(
-      "INSERT OR IGNORE INTO monitor_alert_outbox(event_key,channel,body,status,attempts,first_seen_utc) VALUES(?,'github-issue-comment',?,'queued',0,?)"
-    ).bind(e.key,e.body,now.toISOString())));
+  // One indexed D1 query checks the bounded event keys first. Repeated invocations
+  // advance through unqueued items instead of starving newer items forever.
+  let newEvents = found;
+  if(found.length){
+    const placeholders=found.map(()=>"?").join(",");
+    const existing=await db.prepare(
+      "SELECT event_key FROM monitor_alert_outbox WHERE event_key IN ("+placeholders+")"
+    ).bind(...found.map(e=>e.key)).all();
+    if(!Array.isArray(existing?.results)||existing.results.length>found.length)
+      throw Error("OUTBOX_EXISTING_KEYS_INCOMPLETE");
+    const keys=new Set();
+    for(const row of existing.results){
+      if(typeof row.event_key!=="string" || keys.has(row.event_key) ||
+         !found.some(event=>event.key===row.event_key))
+        throw Error("OUTBOX_EXISTING_KEYS_INVALID");
+      keys.add(row.event_key);
+    }
+    newEvents=found.filter(e=>!keys.has(e.key)).slice(0,MAX_OUTBOX_NEW_PER_INVOCATION);
+    if(newEvents.length){
+      await db.batch(newEvents.map(e=>db.prepare(
+        "INSERT OR IGNORE INTO monitor_alert_outbox(event_key,channel,body,status,attempts,first_seen_utc) VALUES(?,'github-issue-comment',?,'queued',0,?)"
+      ).bind(e.key,e.body,now.toISOString())));
+    }
   }
   const waiting=await db.prepare(
     "SELECT event_key FROM monitor_alert_outbox WHERE status='queued' ORDER BY first_seen_utc,event_key LIMIT 2"
@@ -135,7 +156,7 @@ export async function dispatchAlerts(env,deps={}){
     if(!receipt)throw Error("GITHUB_POST_ACK_UNPERSISTED");
     sent++;
   }
-  return {status:"ok",eligible:found.length,attempted,sent,
+  return {status:"ok",eligible:found.length,queuedThisRun:newEvents.length,attempted,sent,
     reconcileRequired:attempted-sent,officialRulesApproved:0,betaOpened:false};
 }
 export default {

@@ -38,6 +38,9 @@ class Db {
     if(sql.includes("FROM monitor_review")){
       return {results:this.reviews.filter(x=>x.first_seen_utc>params[0] && x.scope_relevant===1)};
     }
+    if(sql.includes("FROM monitor_alert_outbox") && sql.includes("WHERE event_key IN (")){
+      return {results:params.filter(key=>this.outbox.has(key)).map(event_key=>({event_key}))};
+    }
     if(sql.includes("FROM monitor_alert_outbox")){
       return {results:[...this.outbox.values()].filter(x=>x.status==="queued")
         .sort((a,b)=>a.first_seen_utc.localeCompare(b.first_seen_utc)||a.event_key.localeCompare(b.event_key))
@@ -166,4 +169,26 @@ test("GitHub API response errors or wrong ack never count as delivered",async()=
   const wrong=await postComment({issue:325,token:"test_token_only",body:"fixture"},
     async()=>({status:201,json:async()=>({id:22,html_url:"https://evil.test/a"})}));
   assert.equal(wrong.reason,"ACK_INVALID");
+});
+
+test("30-event backlog advances across separate free-tier cycles, max 12 new D1 inserts each",async()=>{
+  const db=new Db(),f=posted();
+  db.events=Array.from({length:30},(_,i)=>({...health,id:i+1}));
+  db.reviews=[];
+  const first=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  assert.equal(first.eligible,30);
+  assert.equal(first.queuedThisRun,12);
+  assert.equal(db.outbox.size,12);
+  const second=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  assert.equal(second.queuedThisRun,12);
+  assert.equal(db.outbox.size,24);
+  const third=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  assert.equal(third.queuedThisRun,6);
+  assert.equal(db.outbox.size,30);
+  const fourth=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  assert.equal(fourth.queuedThisRun,0);
+  assert.equal(db.outbox.size,30);
+  assert.equal(f.calls.length,8);
+  assert.equal([...db.outbox.values()].filter(x=>x.status==="sent").length,8);
+  assert.equal([...db.outbox.values()].filter(x=>x.attempts>1).length,0);
 });
