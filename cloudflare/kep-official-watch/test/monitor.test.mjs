@@ -377,3 +377,42 @@ test("Free-D1 exactly 16 revised official notices queue atomically within reserv
   assert.equal(db.review.size,16);
   assert.equal(db.sourceHealth.get("kp2mi").failures,0);
 });
+
+test("M11 local max-burst D1 budget is counted: 16 KP and 16 HRD revisions = 38 SQL statements",async()=>{
+  const db=new SplitMonitorD1(),stats={prepared:0,batches:0,statementCount:0};
+  const metered={
+    prepare(sql){stats.prepared++;return db.prepare(sql);},
+    batch(work){stats.batches++;stats.statementCount+=work.length;return db.batch(work);}
+  };
+  const env={MONITOR_ENABLED:"true",MONITOR_DB:metered};
+  const base=officialMock().fn;
+  const initial=await processSchedulePartitioned(env,{fetcher:base,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  assert.equal(initial.status,"ok");
+  stats.prepared=0;stats.batches=0;stats.statementCount=0;
+  const revised=async(url,opts)=>{
+    const response=await base(url,opts);
+    if(url.startsWith(KP)){
+      const data=JSON.parse(await response.text());
+      for(const row of data.data.slice(0,16))row.gtgkorea+=" Revised for performance test";
+      return {...response,text:async()=>JSON.stringify(data)};
+    }
+    if(url.startsWith(HR)){
+      const n=Number(new URL(url).searchParams.get("pageIndex"));
+      if(n<=2)return {...response,
+        text:async()=>(await response.text()).replaceAll("2026-02-10 ~ 2026-02-12",
+          "2026-02-11 ~ 2026-02-12")};
+    }
+    return response;
+  };
+  const outcome=await processSchedulePartitioned(env,{fetcher:revised,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(outcome.status,"ok");
+  assert.equal(outcome.candidateChanges,32);
+  assert.equal(db.review.size,32);
+  assert.equal(stats.prepared,38);
+  assert.equal(stats.statementCount,36);
+  assert.equal(stats.batches,2);
+  assert.ok(stats.prepared<=50);
+  assert.equal(outcome.autopublished,false);
+});
