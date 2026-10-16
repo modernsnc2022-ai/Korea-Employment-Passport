@@ -11,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from datetime import datetime, timezone
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -122,6 +123,9 @@ def audit(fetch, docs: Path, revision: str, *, asset_loader=None) -> dict:
         "verified": len(report["entrypoints"]),
     }
 
+    # Every live audit must use a fresh cache key. The former fixed
+    # 20261014 query string could repeat a cached October 14 response.
+    audit_token = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")
     for name in ASSETS:
         local = docs / name
         if not local.is_file():
@@ -133,7 +137,7 @@ def audit(fetch, docs: Path, revision: str, *, asset_loader=None) -> dict:
         if len(expected) > 2_000_000:
             report["assets"].append({"path": name, "sameAsCheckedRef": False, "error": "local asset oversized"})
             continue
-        url = CUSTOM + name + "?kep_audit=20261014"
+        url = CUSTOM + name + "?kep_audit=" + audit_token
         try:
             got = fetch(url)
             status = got.get("status")
@@ -205,8 +209,17 @@ def self_test() -> None:
                 return {"status": 200, "location": None, "finalUrl": url, "body": body}
             return get
 
-        passing = audit(build_fake(), docs, "self-test-sha")
+        captured_urls = []
+        def fresh_probe(url):
+            if "?kep_audit=" in url:
+                captured_urls.append(url)
+            return build_fake()(url)
+        passing = audit(fresh_probe, docs, "self-test-sha")
         assert passing["readyForSeparateOperatorDeployReview"] is True
+        assert len(captured_urls) == len(ASSETS)
+        assert all("?kep_audit=" in url and "?kep_audit=20261014" not in url
+                   for url in captured_urls)
+        assert len({url.split("?kep_audit=",1)[1] for url in captured_urls}) == 1
         insecure = audit(build_fake(downgrade=True), docs, "self-test-sha")
         assert insecure["httpsEntrypointSafe"] is False
         assert insecure["readyForSeparateOperatorDeployReview"] is False
