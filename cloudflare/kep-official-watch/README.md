@@ -123,3 +123,17 @@ Why: GitHub issue-comment \`POST\` has no transactional idempotency key across G
 - Test coverage: new \`test/alert-reconciliation.test.mjs\` 12 cases for receipt match, ambiguous failures, duplicate/malformed marker, wrong issue, orphan comments, queue overflow, GitHub GET pagination and explicit opt-in. Full offline suite **44/44 PASS** at authoring.
 - *Local-only* \`test/workerd-reconcile-local-fixture.mjs\` exercises the same reconciliation code with injected fake GitHub GET responses and temporary synthetic D1. It is not a production handler, no actual repo comment is created, and no real token is used. A successful local scheduled endpoint by itself is not evidence that any live admin alert system runs.
 - Existing separate 2-hour ChatGPT official-source condition watch remains independent. Cloudflare D1/Worker/Cron, secret provisioning, real alert delivery and full KP2MI origin TLS remediation still require separate approvals and verification. Country-pack signoff, \`job_docs\` and public beta remain HOLD.
+
+## 2026-10-16 M9 — Cloudflare deployment preflight and offline bundles (NOT deployed)
+
+This checkpoint confirms only that three **disabled** Workers compile with Wrangler; it is NOT production approval.
+
+- Added scripts/offline-preflight.mjs and test/offline-preflight.test.mjs. The static gate inspects all three templates for empty Cron triggers, disabled runtime switches, private-only Workers, placeholder monitor-only D1, no GitHub token or active Wrangler configuration, four reviewed append-only D1 migrations, and strictly pinned operator Issue #325. Dangerous changes fail closed.
+- npm run preflight is a safe static check. npm run preflight:bundle additionally requires an explicit local KEP_WRANGLER_JS path and uses Wrangler deploy **--dry-run** with temporary configs and output under Windows Temp. No Cloudflare account authentication, remote resource creation, actual Cron, or real GitHub API call is performed.
+- Execution on authorized Windows PC, Node 24.18.0 and Wrangler 4.151.0: full Node regression **49/49 PASS**, static preflight PASS, three **offline** Wrangler deploy --dry-run bundles PASS:
+  - source: 15,263 bytes, SHA256 a829ee1ec20de42ccc3dc1e87d233e77c75ba6aa09bc4183f2277ca6ac3845ea
+  - watchdog: 5,997 bytes, SHA256 ad30c301b71b2f1c51f8422434813c20824fc1b91f115fa0b9e68fbc87a976a6
+  - operator: 8,915 bytes, SHA256 a5f1a5c14559a54295ca85de24880194591be1e8e5bb05d86dd0aadaf237e670
+- These hashes are local compiled bundle fingerprints, **NOT approved official policy source hashes** and not deployed Worker identifiers.
+- Cloudflare official Free limits reviewed 2026-10-16: 5 Cron triggers/account, 10ms CPU/invocation, 50 subrequests/invocation. Three proposed Workers would require three Cron slots if the current account has them available. This account's slots and actual CPU/subrequests were **NOT measured**. Source scope includes up to nine public official fetches; D1 operations and event bursts may consume more resources.
+- Hard HOLD remaining: distinct owner authorization for remote monitor-only Cloudflare resources, KP2MI missing HTTPS intermediate chain, live Worker egress, D1 staging and Cron verification, quotas, watchdog-of-watchdog, encrypted minimal GitHub token and first authorized Issue #325 comment, independently signed-off KEP official source facts and beta release gates. No existing KEP applicant, email OTP or beta settings changed.

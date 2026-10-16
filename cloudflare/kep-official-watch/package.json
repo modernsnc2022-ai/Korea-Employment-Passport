@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "check": "node --check src/index.mjs"
+    "check": "node --check src/index.mjs && node --check src/watchdog.mjs && node --check src/operator-alerts.mjs",
+    "preflight": "node scripts/offline-preflight.mjs --check",
+    "preflight:bundle": "node scripts/offline-preflight.mjs --bundle"
   }
 }
