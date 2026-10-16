@@ -14,7 +14,7 @@ const roles=[
  {name:"watchdog",template:"wrangler.watchdog.example.jsonc",entry:"src/watchdog.mjs",flag:"MONITOR_WATCHDOG_ENABLED"},
  {name:"operator",template:"wrangler.operator-alerts.example.jsonc",entry:"src/operator-alerts.mjs",flag:"ALERT_DELIVERY_ENABLED"}
 ];
-const migrations=["0001_init.sql","0002_source_isolation.sql","0003_watchdog.sql","0004_operator_alert_outbox.sql"];
+const migrations=["0001_init.sql","0002_source_isolation.sql","0003_watchdog.sql","0004_operator_alert_outbox.sql","0005_monotonic_snapshot.sql"];
 const load=path=>JSON.parse(readFileSync(path,"utf8").replace(/^\s*\/\/.*$/gm,""));
 export function checkOne(obj,role){
  if(obj.main!==role.entry||obj.workers_dev!==false||obj.preview_urls!==false)
@@ -46,7 +46,7 @@ export function inspect(base=root){
  if(JSON.stringify(files)!==JSON.stringify(migrations))throw Error("UNREVIEWED_MIGRATION");
  for(const n of files){
    const sql=readFileSync(join(base,"migrations",n),"utf8");
-   if(!/CREATE TABLE IF NOT EXISTS/.test(sql)||
+   if(!/CREATE (?:TABLE|TRIGGER) IF NOT EXISTS/.test(sql)||
       /\b(?:DROP TABLE|TRUNCATE|DELETE FROM)\b/i.test(sql))throw Error("UNSAFE_MIGRATION:"+n);
  }
  return {state:"SAFE_TO_BUILD_OFFLINE_NOT_TO_DEPLOY",

@@ -198,7 +198,7 @@ export async function processSchedulePartitioned(env, deps = {}) {
   const db = env.MONITOR_DB;
   const stamp = (deps.now || (() => new Date()))().toISOString();
   const fetcher = deps.fetcher || fetch;
-  const checked = [], failed = [];
+  const checked = [], failed = [], staleSkipped = [];
   let newQueued = 0, count = 0;
   for (const provider of ["kp2mi", "hrdk"]) {
     try {
@@ -230,7 +230,7 @@ export async function processSchedulePartitioned(env, deps = {}) {
       ).bind(event.revision, event.key, event.kind, event.title.slice(0,320),
         event.url, event.routeRelevant ? 1 : 0, event.possibleApplication ? 1 : 0, stamp, "pending"));
       work.push(db.prepare(
-        "INSERT INTO monitor_source_snapshot(source_id,payload,checked_at_utc) VALUES(?,?,?) ON CONFLICT(source_id) DO UPDATE SET payload=excluded.payload,checked_at_utc=excluded.checked_at_utc WHERE excluded.checked_at_utc>monitor_source_snapshot.checked_at_utc"
+        "INSERT INTO monitor_source_snapshot(source_id,payload,checked_at_utc) VALUES(?,?,?) ON CONFLICT(source_id) DO UPDATE SET payload=excluded.payload,checked_at_utc=excluded.checked_at_utc"
       ).bind(provider, JSON.stringify(fresh), stamp));
       work.push(db.prepare(
         "INSERT INTO monitor_source_health(source_id,last_success_utc,consecutive_failures,error_kind) VALUES(?,?,0,NULL) ON CONFLICT(source_id) DO UPDATE SET last_success_utc=excluded.last_success_utc,consecutive_failures=0,error_kind=NULL"
@@ -241,16 +241,23 @@ export async function processSchedulePartitioned(env, deps = {}) {
       count += fresh.length;
       newQueued += events.length;
     } catch (error) {
+      // A superseded run must neither enqueue stale source observations nor
+      // increment the error counter belonging to a newer successful run.
+      if (String(error?.message || "").includes("STALE_MONITOR_SNAPSHOT")) {
+        staleSkipped.push(provider);
+        continue;
+      }
       const type = error instanceof Error ? error.name : "Unknown";
       try {
         await db.prepare(
-          "INSERT INTO monitor_source_health(source_id,last_failure_utc,consecutive_failures,error_kind) VALUES(?,?,1,?) ON CONFLICT(source_id) DO UPDATE SET last_failure_utc=excluded.last_failure_utc,consecutive_failures=monitor_source_health.consecutive_failures+1,error_kind=excluded.error_kind"
+          "INSERT INTO monitor_source_health(source_id,last_failure_utc,consecutive_failures,error_kind) VALUES(?,?,1,?) ON CONFLICT(source_id) DO UPDATE SET last_failure_utc=excluded.last_failure_utc,consecutive_failures=monitor_source_health.consecutive_failures+1,error_kind=excluded.error_kind WHERE (monitor_source_health.last_success_utc IS NULL OR excluded.last_failure_utc>monitor_source_health.last_success_utc) AND (monitor_source_health.last_failure_utc IS NULL OR excluded.last_failure_utc>monitor_source_health.last_failure_utc)"
         ).bind(provider, stamp, type).run();
       } catch { /* Preserve original scan error; never accept source as healthy. */ }
       failed.push({ provider, errorKind: type });
     }
   }
-  return { status: failed.length ? "degraded" : "ok", checked, failed,
+  return { status: (failed.length || staleSkipped.length) ? "degraded" : "ok",
+    checked, failed, staleSkipped,
     records: count, candidateChanges: newQueued, notified: 0, autopublished: false };
 }
 export default {

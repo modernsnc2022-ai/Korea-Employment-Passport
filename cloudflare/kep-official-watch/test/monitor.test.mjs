@@ -220,21 +220,33 @@ class SplitMonitorD1 {
     } else if (sql.includes("INSERT INTO monitor_source_snapshot")) {
       const [id,payload,at]=params;
       const old=this.sourceSnapshots.get(id);
-      if (!old || at>old.at) this.sourceSnapshots.set(id,{payload,at});
-    } else if (sql.includes("INSERT INTO monitor_source_health") &&
-               sql.includes("last_success_utc")) {
+      if (old && at<=old.at) throw Error("D1_ERROR: STALE_MONITOR_SNAPSHOT");
+      this.sourceSnapshots.set(id,{payload,at});
+    } else if (sql.includes("INSERT INTO monitor_source_health(source_id,last_success_utc")) {
       const [id,at]=params, old=this.sourceHealth.get(id);
       this.sourceHealth.set(id,{...old,lastSuccess:at,failures:0,error:null});
-    } else if (sql.includes("INSERT INTO monitor_source_health") &&
-               sql.includes("last_failure_utc")) {
+    } else if (sql.includes("INSERT INTO monitor_source_health(source_id,last_failure_utc")) {
       const [id,at,type]=params, old=this.sourceHealth.get(id);
-      this.sourceHealth.set(id,{...old,lastFailure:at,
-        failures:(old?.failures||0)+1,error:type});
+      if ((!old?.lastSuccess || at>old.lastSuccess) &&
+          (!old?.lastFailure || at>old.lastFailure)) {
+        this.sourceHealth.set(id,{...old,lastFailure:at,
+          failures:(old?.failures||0)+1,error:type});
+      }
     } else throw new Error("UNKNOWN_SQL");
   }
   async batch(stmts) {
-    for(const stmt of stmts) this.apply(stmt);
-    return stmts.map(()=>({success:true}));
+    const snapshots=new Map(this.sourceSnapshots);
+    const reviews=new Map(this.review);
+    const health=new Map(this.sourceHealth);
+    try {
+      for(const stmt of stmts) this.apply(stmt);
+      return stmts.map(()=>({success:true}));
+    } catch(error) {
+      this.sourceSnapshots=snapshots;
+      this.review=reviews;
+      this.sourceHealth=health;
+      throw error;
+    }
   }
 }
 
@@ -415,4 +427,58 @@ test("M11 local max-burst D1 budget is counted: 16 KP and 16 HRD revisions = 38 
   assert.equal(stats.batches,2);
   assert.ok(stats.prepared<=50);
   assert.equal(outcome.autopublished,false);
+});
+
+test("M13 stale overlapping run cannot overwrite newer source snapshots, reviews or health",async()=>{
+  const db=new SplitMonitorD1(), env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const base=officialMock().fn;
+  await processSchedulePartitioned(env,{fetcher:base,now:()=>new Date("2026-10-16T01:00:00Z")});
+  const newest=officialMock({suffix:" NEWER REVISION"}).fn;
+  const newResult=await processSchedulePartitioned(env,{fetcher:newest,
+    now:()=>new Date("2026-10-16T05:00:00Z")});
+  assert.equal(newResult.status,"ok");
+  const lastGood=new Map(db.sourceSnapshots);
+  const reviews=new Map(db.review);
+  const old=officialMock({suffix:" OLD DELAYED REVISION"}).fn;
+  const stale=await processSchedulePartitioned(env,{fetcher:old,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(stale.status,"degraded");
+  assert.deepEqual(stale.staleSkipped,["kp2mi","hrdk"]);
+  assert.deepEqual(stale.failed,[]);
+  assert.deepEqual(db.sourceSnapshots,lastGood);
+  assert.deepEqual(db.review,reviews);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
+  assert.equal(db.sourceHealth.get("hrdk").failures,0);
+  assert.equal(stale.autopublished,false);
+});
+test("M13 stale failed origin fetch cannot erase or degrade newer successful health",async()=>{
+  const db=new SplitMonitorD1(),env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  await processSchedulePartitioned(env,{fetcher:officialMock().fn,
+    now:()=>new Date("2026-10-16T05:00:00Z")});
+  const lastGood=new Map(db.sourceSnapshots);
+  const fn=officialMock().fn;
+  const laterFinishedOld=async(url,opts)=>url.startsWith(KP)?
+    {ok:false,status:503,url,text:async()=>"<h1>failed stale source</h1>"}:
+    fn(url,opts);
+  const r=await processSchedulePartitioned(env,{fetcher:laterFinishedOld,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(r.status,"degraded");
+  assert.deepEqual(r.failed,[{provider:"kp2mi",errorKind:"Error"}]);
+  assert.deepEqual(r.staleSkipped,["hrdk"]);
+  assert.deepEqual(db.sourceSnapshots,lastGood);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
+  assert.equal(db.sourceHealth.get("hrdk").failures,0);
+});
+test("M13 equal-timestamp duplicate invocation is excluded without a false review or failure",async()=>{
+  const db=new SplitMonitorD1(),env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const fn=officialMock().fn;
+  const first=await processSchedulePartitioned(env,{fetcher:fn,
+    now:()=>new Date("2026-10-16T05:00:00Z")});
+  assert.equal(first.status,"ok");
+  const replay=await processSchedulePartitioned(env,{fetcher:fn,
+    now:()=>new Date("2026-10-16T05:00:00Z")});
+  assert.deepEqual(replay.staleSkipped,["kp2mi","hrdk"]);
+  assert.equal(replay.status,"degraded");
+  assert.equal(db.review.size,0);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
 });
