@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sourceUrls, officialUrl, kpRecords, hrdRows, collect, changes, processSchedule } from "../src/index.mjs";
+import { sourceUrls, officialUrl, includesSupportedCohort, kpRecords, hrdRows, collect, changes, processSchedule, processSchedulePartitioned } from "../src/index.mjs";
 const { KP, HR, HD } = sourceUrls();
 import worker from "../src/index.mjs";
 
@@ -170,4 +170,166 @@ test("Worker fetch uses supported manual redirects and refuses 302 without follo
     /OFFICIAL_REDIRECT_BLOCKED/
   );
   assert.equal(seen,true);
+});
+
+test("future Indonesia manufacturing cycles are review-relevant but not auto-promoted", async()=>{
+  assert.equal(includesSupportedCohort("Manufacturing 2025"),false);
+  assert.equal(includesSupportedCohort("Manufaktur 2027"),true);
+  assert.equal(includesSupportedCohort("Manufaktur without year"),false);
+  const upcoming=kp();
+  upcoming[0].judul='<a href="/gtog-detail/korea/new-2027">PENGUMUMAN UBT UMUM SEKTOR MANUFAKTUR TAHUN 2027</a>';
+  const notices=await kpRecords({recordsTotal:2300,data:upcoming});
+  assert.equal(notices[0].routeRelevant,true);
+  const past=kp();
+  past[0].judul='<a href="/gtog-detail/korea/closed-2025">PENGUMUMAN UBT UMUM SEKTOR MANUFAKTUR TAHUN 2025</a>';
+  const old=await kpRecords({recordsTotal:2300,data:past});
+  assert.equal(old[0].routeRelevant,false);
+  const futureHtml=page(1).replaceAll('examYear="2026"','examYear="2027"')
+    .replaceAll('Philippines Manufacturing','Indonesia(Manufacturing)_Jakarta');
+  // A changed country-name alone is insufficient: source nation code remains 011.
+  assert.ok(hrdRows(futureHtml,1).every(x=>!x.routeRelevant));
+  const correctNation=futureHtml.replaceAll('examNation="011"','examNation="012"');
+  assert.ok(hrdRows(correctNation,1).some(x=>x.routeRelevant));
+});
+
+class SplitMonitorD1 {
+  constructor() {
+    this.sourceSnapshots = new Map();
+    this.sourceHealth = new Map();
+    this.review = new Map();
+  }
+  prepare(sql) {
+    const db=this;
+    return {
+      bind(...params) {
+        return {
+          sql,params,
+          async first() {
+            if (!sql.includes("SELECT payload FROM monitor_source_snapshot")) throw Error("UNKNOWN_READ");
+            const row=db.sourceSnapshots.get(params[0]);
+            return row ? {payload:row.payload} : null;
+          },
+          async run() { db.apply({sql,params}); return {success:true}; }
+        };
+      }
+    };
+  }
+  apply({sql,params}) {
+    if (sql.includes("INSERT OR IGNORE INTO monitor_review")) {
+      if (!this.review.has(params[0])) this.review.set(params[0],params);
+    } else if (sql.includes("INSERT INTO monitor_source_snapshot")) {
+      const [id,payload,at]=params;
+      const old=this.sourceSnapshots.get(id);
+      if (!old || at>old.at) this.sourceSnapshots.set(id,{payload,at});
+    } else if (sql.includes("INSERT INTO monitor_source_health") &&
+               sql.includes("last_success_utc")) {
+      const [id,at]=params, old=this.sourceHealth.get(id);
+      this.sourceHealth.set(id,{...old,lastSuccess:at,failures:0,error:null});
+    } else if (sql.includes("INSERT INTO monitor_source_health") &&
+               sql.includes("last_failure_utc")) {
+      const [id,at,type]=params, old=this.sourceHealth.get(id);
+      this.sourceHealth.set(id,{...old,lastFailure:at,
+        failures:(old?.failures||0)+1,error:type});
+    } else throw new Error("UNKNOWN_SQL");
+  }
+  async batch(stmts) {
+    for(const stmt of stmts) this.apply(stmt);
+    return stmts.map(()=>({success:true}));
+  }
+}
+
+test("independent official-source checkpoints: initial seed and repeated no-alert scan", async()=>{
+  const db=new SplitMonitorD1(), env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const first=await processSchedulePartitioned(env,{fetcher:officialMock().fn,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  assert.equal(first.status,"ok");
+  assert.equal(first.checked.length,2);
+  assert.equal(db.sourceSnapshots.size,2);
+  assert.equal(db.review.size,0);
+  assert.equal(first.notified,0);
+  const second=await processSchedulePartitioned(env,{fetcher:officialMock().fn,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(second.status,"ok");
+  assert.equal(second.candidateChanges,0);
+  assert.equal(db.review.size,0);
+});
+
+test("KP2MI HTTPS failure cannot suppress independently verified HRD exam edits", async()=>{
+  const db=new SplitMonitorD1(), env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  await processSchedulePartitioned(env,{fetcher:officialMock().fn,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  const originalKp=db.sourceSnapshots.get("kp2mi").payload;
+  const hrdChanged=officialMock().fn;
+  const mixed=async (url,opts)=>{
+    if(url.startsWith(KP)) return {ok:false,status:503,url,text:async()=>"<h1>failure</h1>"};
+    const r=await hrdChanged(url,opts);
+    if(url.startsWith(HD)) {
+      return {...r,text:async()=> (await r.text()).replace("2026-09-10","2026-09-11")};
+    }
+    return r;
+  };
+  const degraded=await processSchedulePartitioned(env,{fetcher:mixed,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(degraded.status,"degraded");
+  assert.deepEqual(degraded.failed.map(x=>x.provider),["kp2mi"]);
+  assert.deepEqual(degraded.checked.map(x=>x.provider),["hrdk"]);
+  assert.equal(db.sourceSnapshots.get("kp2mi").payload,originalKp);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,1);
+  assert.equal(db.sourceHealth.get("hrdk").failures,0);
+  assert.equal(db.review.size,2);
+  assert.ok([...db.review.values()].every(row=>row[5]===1));
+  const again=await processSchedulePartitioned(env,{fetcher:mixed,
+    now:()=>new Date("2026-10-16T05:00:00Z")});
+  assert.equal(again.status,"degraded");
+  assert.equal(again.candidateChanges,0);
+  assert.equal(db.review.size,2);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,2);
+  assert.equal(again.autopublished,false);
+});
+
+test("KP2MI missing on initial seed: healthy HRD seeds independently, recovery does not flood", async()=>{
+  const db=new SplitMonitorD1(), env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  const fn=officialMock().fn;
+  const broken=async (url,opts)=>url.startsWith(KP)
+    ? {ok:false,status:503,url,text:async()=>"<h1>error</h1>"}:fn(url,opts);
+  const initial=await processSchedulePartitioned(env,{fetcher:broken,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  assert.equal(initial.status,"degraded");
+  assert.deepEqual([...db.sourceSnapshots.keys()],["hrdk"]);
+  assert.equal(db.review.size,0);
+  const recovered=await processSchedulePartitioned(env,{fetcher:fn,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(recovered.status,"ok");
+  assert.equal(db.sourceSnapshots.size,2);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
+  assert.equal(db.review.size,0);
+});
+
+test("source-isolated watcher disabled guard makes no upstream requests", async()=>{
+  const r=await processSchedulePartitioned({MONITOR_ENABLED:"false"},{fetcher:()=>{
+    throw Error("NO_FETCH_ALLOWED");
+  }});
+  assert.deepEqual(r,{status:"disabled"});
+});
+
+test("HRD outage cannot overwrite the last good schedule or halt KP2MI notice review", async()=>{
+  const db=new SplitMonitorD1(), env={MONITOR_ENABLED:"true",MONITOR_DB:db};
+  await processSchedulePartitioned(env,{fetcher:officialMock().fn,
+    now:()=>new Date("2026-10-16T01:00:00Z")});
+  const oldHrd=db.sourceSnapshots.get("hrdk").payload;
+  const changedKP=officialMock({suffix:" amended official body"}).fn;
+  const brokenHrd=async (url, opts)=>{
+    if(url.startsWith(HR)) return {ok:false,status:503,url,text:async()=>"<h1>failure</h1>"};
+    return changedKP(url,opts);
+  };
+  const outcome=await processSchedulePartitioned(env,{fetcher:brokenHrd,
+    now:()=>new Date("2026-10-16T03:00:00Z")});
+  assert.equal(outcome.status,"degraded");
+  assert.deepEqual(outcome.checked.map(x=>x.provider),["kp2mi"]);
+  assert.deepEqual(outcome.failed.map(x=>x.provider),["hrdk"]);
+  assert.equal(db.sourceSnapshots.get("hrdk").payload,oldHrd);
+  assert.equal(db.sourceHealth.get("hrdk").failures,1);
+  assert.equal(db.sourceHealth.get("kp2mi").failures,0);
+  assert.equal(db.review.size,1);
+  assert.equal(outcome.autopublished,false);
 });
