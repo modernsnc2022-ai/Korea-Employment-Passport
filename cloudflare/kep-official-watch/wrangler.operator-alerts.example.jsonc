@@ -1,0 +1,22 @@
+{
+  // Example only. No live GitHub notification is active until separate owner approval.
+  "name": "kep-official-operator-alert-dispatch",
+  "main": "src/operator-alerts.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "triggers": { "crons": [] },
+  "vars": {
+    "ALERT_DELIVERY_ENABLED": "false",
+    "GITHUB_ALERT_REPO": "modernsnc2022-ai/Korea-Employment-Passport",
+    "GITHUB_ALERT_ISSUE": "0",
+    "GITHUB_ALERT_START_UTC": "REPLACE_WITH_OWNER_APPROVED_UTC"
+  },
+  "d1_databases": [{
+    "binding": "MONITOR_DB",
+    "database_name": "kep-official-watch-metadata",
+    "database_id": "REPLACE_WITH_NEW_ISOLATED_MONITOR_D1_ID",
+    "migrations_dir": "migrations"
+  }]
+  // GITHUB_ALERT_TOKEN must be an encrypted Worker secret, never a vars value.
+}
