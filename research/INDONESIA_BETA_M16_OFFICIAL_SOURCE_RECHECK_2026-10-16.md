@@ -54,7 +54,24 @@ Seven official Manufacturing-related title/URL/date records are listed in `resea
 
 **READY_FOR_MANUAL_DECISION=False. LIVE_DEPLOYMENT_VERIFIED=False.**
 
-## 4. Required operator actions
+## 4. Live Pages HTTPS and public-beta safety inspection (NO DEPLOY)
+
+Read-only independent site audit against GitHub candidate `c997f0f5ea1645214bda955e0ad2ee806710406e`:
+
+| Evidence | Result |
+|---|---|
+| Six old entrypoint redirects remain HTTPS-only | **6/6 PASS** |
+| Public canonical website critical assets equal committed HEAD | **0/9 MISMATCH** |
+| Independent same-HEAD Pages release parity | **NOT VERIFIED / PENDING** |
+| Public `beta_program_v1.json` `status` | `hold` |
+| Public `releaseDecision.publicBeta` | `pending_manual_approval` |
+| Public direct applicant endpoint configured | **False** |
+| Actual public beta OPEN declared | **False** |
+
+All nine audited asset requests returned HTTP 200, but none matched the current reviewed code. The live site therefore must not be presented as the code version that passed 96/96 Edge QA. The observed public `intakeStatus=open` concerns pre-beta interest intake, NOT beta OPEN.
+
+No Cloudflare Pages deployment, source acceptance, or access-state change was performed. Deployment must be separately owner-authorized.
+## 5. Required operator actions
 
 1. The responsible reviewer personally examines the five Korea-common sources and acknowledges the two multi-country HRD sources; five foreign-country records remain independently pending. Only a genuine signed release-day review can clear source signoff.
 2. A reviewer opens the seven current-cycle Manufacturing official notice pages and any source attachments. Keep final `job_docs` HOLD unless a specifically applicable current 2026 official announcement documents that stage.
