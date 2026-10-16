@@ -1,6 +1,7 @@
 // KEP opt-in GitHub issue comments; no external sends by default.
 // No applicant records, approval rules, or auto-retries of ambiguous HTTP outcomes.
 const REPO="modernsnc2022-ai/Korea-Employment-Passport";
+const APPROVED_OPERATOR_ISSUE=325; // Dedicated repo issue created 2026-10-16; does NOT activate sending.
 const SOURCES=new Set(["kp2mi","hrdk"]);
 function iso(s) {
   if(typeof s!=="string" || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(s) ||
@@ -52,7 +53,7 @@ export function formatReview(row) {
 function settings(env,now){
   if(env.GITHUB_ALERT_REPO!==REPO)throw Error("GITHUB_DESTINATION_NOT_APPROVED");
   const issue=Number(env.GITHUB_ALERT_ISSUE);
-  if(!Number.isSafeInteger(issue)||issue<1)throw Error("GITHUB_ISSUE_NOT_APPROVED");
+  if(!Number.isSafeInteger(issue)||issue!==APPROVED_OPERATOR_ISSUE)throw Error("GITHUB_ISSUE_NOT_APPROVED");
   if(typeof env.GITHUB_ALERT_TOKEN!=="string"||!env.GITHUB_ALERT_TOKEN.trim())
     throw Error("GITHUB_SECRET_NOT_BOUND");
   const cutoff=iso(env.GITHUB_ALERT_START_UTC);
@@ -71,6 +72,7 @@ export async function readEligibleEvents(db,cutoff){
   return [...a.results.map(formatHealth),...b.results.map(formatReview)].sort((x,y)=>x.at-y.at);
 }
 export async function postComment({issue,body,token},fetcher=fetch){
+  if (issue!==APPROVED_OPERATOR_ISSUE) throw Error("GITHUB_ISSUE_NOT_APPROVED");
   const url="https://api.github.com/repos/"+REPO+"/issues/"+issue+"/comments";
   let res;
   try {

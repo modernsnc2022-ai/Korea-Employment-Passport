@@ -3,13 +3,13 @@
 import {dispatchAlerts} from "../src/operator-alerts.mjs";
 let replies=0;
 const fakeGithub=async(url,opts)=>{
-  if(!url.startsWith("https://api.github.com/repos/modernsnc2022-ai/Korea-Employment-Passport/issues/999/comments"))
+  if(!url.startsWith("https://api.github.com/repos/modernsnc2022-ai/Korea-Employment-Passport/issues/325/comments"))
     throw Error("UNAPPROVED_TEST_URL");
   if(opts.method!=="POST"||!opts.headers["Authorization"].startsWith("Bearer local_fixture_"))
     throw Error("UNAPPROVED_TEST_AUTH");
   const commentId=810000+(++replies);
   return Response.json({id:commentId,
-    html_url:"https://github.com/modernsnc2022-ai/Korea-Employment-Passport/issues/999#issuecomment-"+commentId
+    html_url:"https://github.com/modernsnc2022-ai/Korea-Employment-Passport/issues/325#issuecomment-"+commentId
   },{status:201});
 };
 export default {

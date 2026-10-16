@@ -13,7 +13,7 @@ const review={revision_id:REV,source_key:"hrdk:012:2026:14:001",kind:"changed",
 function env(db,extra={}){
   return {ALERT_DELIVERY_ENABLED:"true",MONITOR_DB:db,
     GITHUB_ALERT_REPO:"modernsnc2022-ai/Korea-Employment-Passport",
-    GITHUB_ALERT_ISSUE:"999",GITHUB_ALERT_TOKEN:"test_token_only",
+    GITHUB_ALERT_ISSUE:"325",GITHUB_ALERT_TOKEN:"test_token_only",
     GITHUB_ALERT_START_UTC:"2026-10-15T00:00:00Z",...extra};
 }
 const now=()=>new Date("2026-10-16T02:00:00Z");
@@ -89,7 +89,7 @@ function posted() {
     assert.equal(new URL(url).hostname,"api.github.com");
     const id=111+calls.length;
     return {status:201,json:async()=>({
-      id,html_url:"https://github.com/modernsnc2022-ai/Korea-Employment-Passport/issues/999#issuecomment-"+id
+      id,html_url:"https://github.com/modernsnc2022-ai/Korea-Employment-Passport/issues/325#issuecomment-"+id
     })};
   };
   return {calls,fetcher};
@@ -105,6 +105,7 @@ test("default-disabled transport never queries DB, sends no network and public f
 test("approved destination and UTC cutoff required before any reads or network",async()=>{
   const db=new Db(), f=posted();
   await assert.rejects(dispatchAlerts(env(db,{GITHUB_ALERT_ISSUE:"0"}),{now,fetcher:f.fetcher}),/NOT_APPROVED/);
+  await assert.rejects(dispatchAlerts(env(db,{GITHUB_ALERT_ISSUE:"999"}),{now,fetcher:f.fetcher}),/NOT_APPROVED/);
   await assert.rejects(dispatchAlerts(env(db,{GITHUB_ALERT_TOKEN:""}),{now,fetcher:f.fetcher}),/SECRET_NOT_BOUND/);
   await assert.rejects(dispatchAlerts(env(db,{GITHUB_ALERT_REPO:"different/repo"}),{now,fetcher:f.fetcher}),/DESTINATION/);
   await assert.rejects(dispatchAlerts(env(db,{GITHUB_ALERT_START_UTC:"2023-01-01T00:00:00Z"}),{now,fetcher:f.fetcher}),/CUTOFF_OUT_OF_BOUNDS/);
@@ -152,11 +153,17 @@ test("post success but local D1 ack failure stays claimed, no duplicate repost",
   assert.equal(f.calls.length,2);
   assert.equal([...db.outbox.values()].filter(x=>x.status==="sending").length,1);
 });
+test("low-level GitHub sender rejects any destination other than Issue 325",async()=>{
+  let called=false;
+  await assert.rejects(postComment({issue:999,token:"test_token_only",body:"sample"},
+    async()=>{called=true;return {status:201};}),/GITHUB_ISSUE_NOT_APPROVED/);
+  assert.equal(called,false);
+});
 test("GitHub API response errors or wrong ack never count as delivered",async()=>{
-  const bad=await postComment({issue:999,token:"test_token_only",body:"fixture"},
+  const bad=await postComment({issue:325,token:"test_token_only",body:"fixture"},
     async()=>({status:403}));
   assert.deepEqual(bad,{delivered:false,reason:"NON_201_403"});
-  const wrong=await postComment({issue:999,token:"test_token_only",body:"fixture"},
+  const wrong=await postComment({issue:325,token:"test_token_only",body:"fixture"},
     async()=>({status:201,json:async()=>({id:22,html_url:"https://evil.test/a"})}));
   assert.equal(wrong.reason,"ACK_INVALID");
 });

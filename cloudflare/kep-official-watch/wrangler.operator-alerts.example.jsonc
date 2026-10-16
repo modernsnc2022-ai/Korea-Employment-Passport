@@ -1,5 +1,6 @@
 {
-  // Example only. No live GitHub notification is active until separate owner approval.
+  // Example only. Issue #325 exists; referencing it does NOT authorize message delivery.
+  // No live GitHub notification is active until separate owner approval.
   "name": "kep-official-operator-alert-dispatch",
   "main": "src/operator-alerts.mjs",
   "compatibility_date": "2026-10-01",
@@ -9,7 +10,7 @@
   "vars": {
     "ALERT_DELIVERY_ENABLED": "false",
     "GITHUB_ALERT_REPO": "modernsnc2022-ai/Korea-Employment-Passport",
-    "GITHUB_ALERT_ISSUE": "0",
+    "GITHUB_ALERT_ISSUE": "325",
     "GITHUB_ALERT_START_UTC": "REPLACE_WITH_OWNER_APPROVED_UTC"
   },
   "d1_databases": [{
