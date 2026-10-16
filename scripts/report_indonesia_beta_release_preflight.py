@@ -18,6 +18,26 @@ from check_indonesia_release_source_scope import validate as validate_scope
 from check_indonesia_source_signoff import validate_scoped_signoff
 from check_20261015_source_triage_snapshot import validate as validate_current_watch
 from check_20261015_source_signoff import validate_signoff as validate_current_signoff
+from check_20261016_source_triage_snapshot import validate as validate_oct16_watch
+from check_20261016_source_signoff import validate_signoff as validate_oct16_signoff
+
+def validate_dated_watch(watch: dict, manifest: dict) -> None:
+    day = watch.get("observedAtDate")
+    if day == "2026-10-15":
+        validate_current_watch(watch, manifest)
+    elif day == "2026-10-16":
+        validate_oct16_watch(watch, manifest)
+    else:
+        raise ValueError("No dated reviewed source-scope validator for this day")
+
+def validate_dated_signoff(watch: dict, manifest: dict, signed: dict, day: str) -> None:
+    if day == "2026-10-15":
+        validate_current_signoff(watch, manifest, signed, day)
+    elif day == "2026-10-16":
+        validate_oct16_signoff(watch, manifest, signed, day)
+    else:
+        raise ValueError("No dated source-scope signoff validator for release day")
+
 from audit_indonesia_beta_pages_live import ASSETS, LEGACY_ENTRYPOINTS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -113,12 +133,14 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
     use_current = current_watch is not None and current_watch.get("observedAtDate") == as_of
     if use_current:
         try:
-            validate_current_watch(current_watch, manifest)
+            validate_dated_watch(current_watch, manifest)
             scope_ok = True
             scope_message = (
                 f"{current_watch['checked']}/{current_watch['configured']} official sources fetched; "
-                "4 Korea-common + 1 multi-country HRD Korea schedule + 5 other-country alerts; "
-                "10 unaccepted drift records; fetch failures=none"
+                f"{len(current_watch['candidateKoreaSharedIds'])} Korea-common + "
+                f"{len(current_watch['candidateMultiCountryScheduleIds'])} multi-country HRD Korea EPS + "
+                f"{len(current_watch['candidateOtherCountryIds'])} other-country alerts; "
+                f"{current_watch['changed']} unaccepted baseline drifts; fetch failures=none"
             )
         except (ValueError, TypeError, KeyError) as exc:
             scope_ok = False
@@ -156,8 +178,8 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
     try:
         if use_current:
             if current_signed is None:
-                raise ValueError("Current 4+1+5 signoff record is not supplied")
-            validate_current_signoff(current_watch, manifest, current_signed, as_of)
+                raise ValueError("Current dated source signoff record is not supplied")
+            validate_dated_signoff(current_watch, manifest, current_signed, as_of)
         else:
             validate_scoped_signoff(source, manifest, scope, signed, as_of)
             # When a newer monitored set is present, a historical 3+5
@@ -178,7 +200,7 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
               ("PENDING" if pending_signed and pending_signed.get("status") == "pending_manual_source_signoff"
                else "BLOCKED"),
               source_reason,
-              "Operator must review 4 Korea-common, acknowledge multi-country HRD Korea and 5 foreign alerts, then actually sign the current day."
+              f"Operator must review {len(current_watch.get('candidateKoreaSharedIds', [])) if use_current else 3} Korea-common, acknowledge multi-country HRD Korea and foreign-country alerts, then sign the actual date."
               if not source_approved else "Keep authentic human approval evidence; separate KP2MI and deployment gates remain."))
 
     index = manufacturing.get("noticeIndexCoverage", {})
@@ -298,6 +320,29 @@ def self_test() -> None:
     assert next(g for g in tomorrow["gates"]
                 if g["id"] == "official_monitor_today")["status"] == "BLOCKED"
     assert tomorrow["readyForManualLaunchDecision"] is False
+    # M16: A genuinely fresh read-only 84/84 source observation improves ONLY
+    # the monitor gate; none of the 12 SHA differences is accepted automatically.
+    day16 = read_json("research/source_reviews/shared_source_watch_readonly_2026-10-16.json")
+    signed16 = read_json("recruitment/ID_BETA_SOURCE_SIGNOFF_20261016.json")
+    actual16 = build_report("2026-10-16",
+        **(args | {"current_watch": day16, "current_signed": signed16}))
+    g16={g["id"]:g["status"] for g in actual16["gates"]}
+    assert g16["country_source_classification"]=="PASS"
+    assert g16["official_monitor_today"]=="PASS"
+    assert g16["indonesia_source_manual_signoff"]=="PENDING"
+    assert g16["kp2mi_manufacturing_release_day_signoff"]=="PENDING"
+    assert g16["same_head_pages_deployment"]=="PENDING"
+    assert actual16["readyForManualLaunchDecision"] is False
+    assert actual16["authorizesRelease"] is False
+    forged16=copy.deepcopy(day16)
+    forged16["candidateKoreaSharedIds"].remove("minimum_wage")
+    corrupt16=build_report("2026-10-16",
+       **(args | {"current_watch":forged16, "current_signed":signed16}))
+    assert next(g for g in corrupt16["gates"] if g["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    previous_day=build_report("2026-10-17",
+       **(args | {"current_watch":day16,"current_signed":signed16}))
+    assert next(g for g in previous_day["gates"] if g["id"]=="official_monitor_today")["status"]=="BLOCKED"
+
     for mutate in (
         lambda w: w["records"][4].update(routeScope="other_country"),
         lambda w: w["records"][0].update(url="https://example.invalid/tampered"),
@@ -459,10 +504,15 @@ def main() -> None:
                          asset_loader=committed_blob)
     # Selection is date-exact. This filed 2026-10-15 snapshot is NEVER
     # sufficient for 2026-10-16 or any future beta release day.
-    latest_watch = (read_json("research/source_reviews/shared_source_watch_readonly_2026-10-15.json")
-                    if as_of == "2026-10-15" else None)
-    latest_signed = (read_json("recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json")
-                     if latest_watch is not None else None)
+    dated_evidence = {
+        "2026-10-15": ("research/source_reviews/shared_source_watch_readonly_2026-10-15.json",
+                       "recruitment/ID_BETA_SOURCE_SIGNOFF_20261015.json"),
+        "2026-10-16": ("research/source_reviews/shared_source_watch_readonly_2026-10-16.json",
+                       "recruitment/ID_BETA_SOURCE_SIGNOFF_20261016.json"),
+    }
+    selected = dated_evidence.get(as_of)
+    latest_watch = read_json(selected[0]) if selected else None
+    latest_signed = read_json(selected[1]) if selected else None
     report = build_report(
         as_of,
         current_watch=latest_watch, current_signed=latest_signed,
