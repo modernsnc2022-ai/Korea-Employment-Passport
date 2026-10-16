@@ -65,15 +65,24 @@ function settings(env,now){
     throw Error("GITHUB_ALERT_CUTOFF_OUT_OF_BOUNDS");
   return {issue,cutoff};
 }
+// Only read *unstaged* events: a fixed latest-50 window would permanently starve
+// older unqueued revisions when it contains already-staged items. Read oldest first.
 export async function readEligibleEvents(db,cutoff){
   const date=new Date(cutoff).toISOString();
   const [a,b]=await Promise.all([
-    db.prepare("SELECT id,source_id,event_kind,reason_code,observed_utc FROM monitor_watchdog_events WHERE observed_utc>? ORDER BY id DESC LIMIT 50").bind(date).all(),
-    db.prepare("SELECT revision_id,source_key,kind,title,url,scope_relevant,first_seen_utc FROM monitor_review WHERE scope_relevant=1 AND first_seen_utc>? ORDER BY first_seen_utc DESC LIMIT 50").bind(date).all()
+    db.prepare("SELECT h.id,h.source_id,h.event_kind,h.reason_code,h.observed_utc FROM monitor_watchdog_events h LEFT JOIN monitor_alert_outbox o ON o.event_key=('health:' || h.id) WHERE h.observed_utc>? AND o.event_key IS NULL ORDER BY h.id ASC LIMIT 50").bind(date).all(),
+    db.prepare("SELECT r.revision_id,r.source_key,r.kind,r.title,r.url,r.scope_relevant,r.first_seen_utc FROM monitor_review r LEFT JOIN monitor_alert_outbox o ON o.event_key=('review:' || r.revision_id) WHERE r.scope_relevant=1 AND r.first_seen_utc>? AND o.event_key IS NULL ORDER BY r.first_seen_utc ASC,r.revision_id ASC LIMIT 50").bind(date).all()
   ]);
   if(!Array.isArray(a?.results)||!Array.isArray(b?.results)||
       a.results.length>50||b.results.length>50)throw Error("INVALID_ALERT_EVENT_QUERY");
-  return [...a.results.map(formatHealth),...b.results.map(formatReview)].sort((x,y)=>x.at-y.at);
+  const seen=new Set();
+  const all=[...a.results.map(formatHealth),...b.results.map(formatReview)]
+    .sort((x,y)=>x.at-y.at||x.key.localeCompare(y.key));
+  for(const e of all){
+    if(seen.has(e.key))throw Error("DUPLICATE_UNSTAGED_EVENT");
+    seen.add(e.key);
+  }
+  return all;
 }
 export async function postComment({issue,body,token},fetcher=fetch){
   if (issue!==APPROVED_OPERATOR_ISSUE) throw Error("GITHUB_ISSUE_NOT_APPROVED");
@@ -104,29 +113,13 @@ export async function dispatchAlerts(env,deps={}){
   if(!(now instanceof Date)||Number.isNaN(now.getTime()))throw Error("INVALID_DISPATCH_TIME");
   const {issue,cutoff}=settings(env,now),db=env.MONITOR_DB;
   const found=await readEligibleEvents(db,cutoff);
-  // One indexed D1 query checks the bounded event keys first. Repeated invocations
-  // advance through unqueued items instead of starving newer items forever.
-  let newEvents = found;
-  if(found.length){
-    const placeholders=found.map(()=>"?").join(",");
-    const existing=await db.prepare(
-      "SELECT event_key FROM monitor_alert_outbox WHERE event_key IN ("+placeholders+")"
-    ).bind(...found.map(e=>e.key)).all();
-    if(!Array.isArray(existing?.results)||existing.results.length>found.length)
-      throw Error("OUTBOX_EXISTING_KEYS_INCOMPLETE");
-    const keys=new Set();
-    for(const row of existing.results){
-      if(typeof row.event_key!=="string" || keys.has(row.event_key) ||
-         !found.some(event=>event.key===row.event_key))
-        throw Error("OUTBOX_EXISTING_KEYS_INVALID");
-      keys.add(row.event_key);
-    }
-    newEvents=found.filter(e=>!keys.has(e.key)).slice(0,MAX_OUTBOX_NEW_PER_INVOCATION);
-    if(newEvents.length){
-      await db.batch(newEvents.map(e=>db.prepare(
-        "INSERT OR IGNORE INTO monitor_alert_outbox(event_key,channel,body,status,attempts,first_seen_utc) VALUES(?,'github-issue-comment',?,'queued',0,?)"
-      ).bind(e.key,e.body,now.toISOString())));
-    }
+  // The anti-join at the source prevents starvation by already-staged keys.
+  // Per-invocation insert batch is bounded by the free-tier D1 query budget.
+  const newEvents=found.slice(0,MAX_OUTBOX_NEW_PER_INVOCATION);
+  if(newEvents.length){
+    await db.batch(newEvents.map(e=>db.prepare(
+      "INSERT OR IGNORE INTO monitor_alert_outbox(event_key,channel,body,status,attempts,first_seen_utc) VALUES(?,'github-issue-comment',?,'queued',0,?)"
+    ).bind(e.key,e.body,now.toISOString())));
   }
   const waiting=await db.prepare(
     "SELECT event_key FROM monitor_alert_outbox WHERE status='queued' ORDER BY first_seen_utc,event_key LIMIT 2"

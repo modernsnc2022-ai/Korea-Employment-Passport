@@ -33,10 +33,14 @@ class Db {
   async read(sql,params){
     this.queries++;
     if(sql.includes("FROM monitor_watchdog_events")){
-      return {results:this.events.filter(x=>x.observed_utc>params[0])};
+      return {results:this.events.filter(x=>x.observed_utc>params[0] &&
+        !this.outbox.has("health:"+x.id)).sort((a,b)=>a.id-b.id).slice(0,50)};
     }
     if(sql.includes("FROM monitor_review")){
-      return {results:this.reviews.filter(x=>x.first_seen_utc>params[0] && x.scope_relevant===1)};
+      return {results:this.reviews.filter(x=>x.first_seen_utc>params[0] &&
+        x.scope_relevant===1 && !this.outbox.has("review:"+x.revision_id))
+        .sort((a,b)=>a.first_seen_utc.localeCompare(b.first_seen_utc)||
+          a.revision_id.localeCompare(b.revision_id)).slice(0,50)};
     }
     if(sql.includes("FROM monitor_alert_outbox") && sql.includes("WHERE event_key IN (")){
       return {results:params.filter(key=>this.outbox.has(key)).map(event_key=>({event_key}))};
@@ -191,4 +195,42 @@ test("30-event backlog advances across separate free-tier cycles, max 12 new D1 
   assert.equal(f.calls.length,8);
   assert.equal([...db.outbox.values()].filter(x=>x.status==="sent").length,8);
   assert.equal([...db.outbox.values()].filter(x=>x.attempts>1).length,0);
+});
+
+test("M12 130 event backlog never starves beyond the original newest-50 window",async()=>{
+  const db=new Db(),f=posted();
+  db.reviews=[];
+  db.events=Array.from({length:130},(_,i)=>({...health,id:i+1,
+    observed_utc:"2026-10-16T01:00:00Z"}));
+  const scheduled=[];
+  for(let i=0;i<11;i++){
+    const result=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+    assert.equal(result.status,"ok");
+    assert.ok(result.eligible<=50);
+    assert.ok(result.queuedThisRun<=12);
+    scheduled.push(result.queuedThisRun);
+  }
+  assert.deepEqual(scheduled,[12,12,12,12,12,12,12,12,12,12,10]);
+  assert.equal(db.outbox.size,130);
+  assert.ok(db.outbox.has("health:1"));
+  assert.ok(db.outbox.has("health:130"));
+  assert.equal([...db.outbox.values()].filter(x=>x.attempts>1).length,0);
+  assert.equal([...db.outbox.values()].filter(x=>x.status==="sent").length,22);
+  assert.equal(f.calls.length,22);
+});
+test("M12 previously staged items do not displace new relevant reviews",async()=>{
+  const db=new Db(),f=posted();
+  db.events=Array.from({length:52},(_,i)=>({...health,id:i+1}));
+  db.reviews=[];
+  for(let i=0;i<5;i++){
+    await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  }
+  assert.equal(db.outbox.size,52);
+  db.events.push({...health,id:53});
+  db.reviews.push(review);
+  const next=await dispatchAlerts(env(db),{now,fetcher:f.fetcher});
+  assert.equal(next.eligible,2);
+  assert.equal(next.queuedThisRun,2);
+  assert.ok(db.outbox.has("health:53"));
+  assert.ok(db.outbox.has("review:"+REV));
 });
