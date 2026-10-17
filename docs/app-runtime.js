@@ -612,7 +612,11 @@ function normalizeSourceUrl(url){
     .trim()
     .replace(/^http:/i,'https:')
     .replace('://www.','://')
-    .replace(/\/$/,'');
+    .replace(/\/$/,'')
+    // KDCA officially redirects the old Q-CODE input URL to Travel Health.
+    // Keep both aliases in the SAME pending-source review group.
+    .replace(/^https:\/\/qcode\.kdca\.go\.kr\/qco\/cd\/codeInput2\.do$/i,
+             'https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do');
 }
 
 function sourceNeedsReview(url){
