@@ -25,7 +25,7 @@ def validate(d):
     need(counts=={'2026-09-17':4,'2026-01-27':3,'2026-03-27':7},'PDF scopes')
     for x in tasks:
         url=urlparse(x['officialUrl'])
-        need(url.scheme=='https' and url.hostname=='kp2mi.go.id' and url.path.startswith('/uploads/gtogkorea/') and url.path.lower().endswith('.pdf'),'official PDF URL')
+        need(url.scheme=='https' and url.hostname=='kp2mi.go.id' and url.path.startswith('/uploads/gtgkorea/') and url.path.lower().endswith('.pdf'),'official PDF URL')
         need(x['lastHeadResult']=='inconclusive_remote_connection_reset_WinError10054' and x['bodyReviewedOnM22'] is False and x['humanDecision']=='pending' and x['humanReviewer'] is None and x['qualifiesAsFinalManufacturingJobDocs'] is False,'PDF no signoff')
     g=d.get('gates',{})
     need(g.get('officialSignoff')=='pending' and g.get('reviewer') is None and g.get('reviewedAt') is None and g.get('sourceHashesAccepted') is False and g.get('finalManufacturingJobDocs')=='hold' and g.get('publicBetaAccess')=='hold' and g.get('productionDeployAuthorized') is False and g.get('releaseAuthorized') is False,'release guards')
