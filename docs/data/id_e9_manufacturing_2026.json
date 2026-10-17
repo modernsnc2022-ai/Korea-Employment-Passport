@@ -159,9 +159,9 @@
       "action": "Current-cycle pre-job baseline is verified. Cross-notice/current-cycle safety baselines now cover scan-vs-photo, identity consistency and non-guessing for ambiguous identity fields, non-editability after final send, and safe confirmation of sent/progress state through Sisko plus the official support channel. Only the exact Manufacturing 2026 online job-application document list remains HOLD.",
       "brokerReplacement": "held_official_notice",
       "warning": "The four safety baselines do not replace the missing detailed Manufacturing 2026 document checklist. Do not submit until the exact Manufacturing 2026 document list is verified.",
-      "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
-      "officialActionUrl": "https://kp2mi.go.id/gtog-korea/info",
-      "officialActionLabel": "Check latest Manufacturing notice"
+      "sourceUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+      "officialActionUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+      "officialActionLabel": "Cek Pengumuman G-to-G Korea terbaru (Manufaktur 2026)"
     },
     {
       "id": "roster",

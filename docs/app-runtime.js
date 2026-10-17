@@ -1047,6 +1047,9 @@ function exactScopeLabel(item){
 
 function exactVerificationLabel(item){
   const v=String(item.verificationStatus||'');
+  if(v==='hold_for_official_manufacturing_notice')return 'HOLD · berkas lamaran akhir Manufaktur 2026 belum terverifikasi';
+  if(v==='verified_cross_notice_platform_baseline_not_manufacturing_exact')return 'Panduan lintas pengumuman · BUKAN persyaratan exact Manufaktur 2026';
+  if(v==='verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map')return 'Panduan konsistensi identitas · BUKAN peta kolom Manufaktur 2026';
   if(v==='waiting_official_notice')return 'Menunggu pengumuman resmi · jangan menebak';
   if(v==='call_specific_follow_notice'||v==='flight_call_specific')return 'Ikuti pengumuman yang memuat nama Anda';
   if(v==='institution_specific_follow_notice')return 'Ikuti petunjuk lembaga resmi Anda';
@@ -1126,6 +1129,12 @@ function renderPreSubmitGate(stage){
 
 function evaluatePreSubmit(stage){
   const issues=[];
+  // Never let an accidentally promoted document-pack status override the
+  // current-cycle official final-job-document HOLD. This gate is independent
+  // of checklist and checkbox state, and requires a separately reviewed route.
+  if(stage.id==='job_application'&&stage.brokerReplacement==='held_official_notice'){
+    issues.push('Daftar dokumen lamaran online Manufaktur 2026 belum diverifikasi dalam pengumuman sektor yang sesuai. Jangan submit atau tandai tahap ini selesai. Buka Pengumuman resmi KP2MI dan tunggu konfirmasi dokumen final.');
+  }
   const stats=bqcStageStats(stage.id);
   const unresolvedHigh=stats.items.filter(item=>!item.resolved&&item.blocksZeroBrokerReady);
   if(unresolvedHigh.length){
