@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-16",
+  "observationCompletedAtUtc": "2026-10-16T07:02:40.829257+00:00",
+  "scope": "Shared 84-source official watch with Indonesia-only triage candidates",
+  "source": "read_only_84_source_monitor",
+  "configured": 84,
+  "checked": 84,
+  "fetchFailures": 0,
+  "changed": 12,
+  "candidateKoreaSharedIds": [
+    "kdca_qcode_input",
+    "labor_standards_wage_statement",
+    "minimum_wage",
+    "moel_1350_contact",
+    "moel_wage_arrears_2026"
+  ],
+  "candidateMultiCountryScheduleIds": [
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates"
+  ],
+  "candidateOtherCountryIds": [
+    "kg_migrant_home",
+    "lk_slbfe_home",
+    "mm_mol_dol_index",
+    "np_eps_notice_index",
+    "vn_colab_eps_notices"
+  ],
+  "sourceHashesAutomaticallyAccepted": false,
+  "manualIndonesiaSourceSignoff": false,
+  "manualManufacturingNoticeSignoff": false,
+  "betaAccess": "hold",
+  "directHttpsIntake": "hold",
+  "exactManufacturingJobDocuments": "hold",
+  "doesNotAuthorizeLaunch": true,
+  "note": "Compared to stored approval baseline (NOT yesterday-only delta): 5 Korea-common + 2 multi-country HRD EPS + 5 foreign-country. None is a reviewed semantic change or approved source SHA. No applicant details stored.",
+  "records": [
+    {
+      "id": "kdca_qcode_input",
+      "routeScope": "korea_shared",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "baselineSha256": "6e6bb168ea271bb51818c43c73aecb9976751cf6f80426e5fa09a99c5db54e6a",
+      "observedSha256": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee"
+    },
+    {
+      "id": "kg_migrant_home",
+      "routeScope": "other_country",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://migrant.kg/",
+      "baselineSha256": "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
+      "observedSha256": "c711d785855357eddef851208b32335f58112452c0ae9ee2cccc5b9203f5dfee"
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "routeScope": "korea_shared",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "baselineSha256": "4cfd5356dcfbb877401dff5d8f758426760b3111bf6835c64f51762b71803e00",
+      "observedSha256": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786"
+    },
+    {
+      "id": "lk_slbfe_home",
+      "routeScope": "other_country",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://www.slbfe.lk/",
+      "baselineSha256": "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
+      "observedSha256": "5dd07edf37428fa9067aa0ababb7b5203b3131d99a4785448225a0a915055e58"
+    },
+    {
+      "id": "minimum_wage",
+      "routeScope": "korea_shared",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://www.minimumwage.go.kr/index.jsp",
+      "baselineSha256": "c99474032bbce435844cbf20714f438ac215643890ce6d3823a2903c272dbe8e",
+      "observedSha256": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12"
+    },
+    {
+      "id": "mm_hrdk_schedule_index",
+      "routeScope": "multi_country_eps_schedule",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "baselineSha256": "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
+      "observedSha256": "d8d9b5d35f0d0fbd5afab7de5cd62c9dde888d74daa52105971780226ee25855"
+    },
+    {
+      "id": "mm_hrdk_skills_candidates",
+      "routeScope": "multi_country_eps_schedule",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "baselineSha256": "651c6940e1a6fc9f0a763464c8ff80d0c8936246339b033186817a0dc7f61e49",
+      "observedSha256": "c11843bed4810c9dfd60bfcc448c6fab21929e16ea8fc075700ab1f990e8919f"
+    },
+    {
+      "id": "mm_mol_dol_index",
+      "routeScope": "other_country",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "baselineSha256": "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0",
+      "observedSha256": "dad0fa868f0c40be73699e1ed57f916a74ec00c3f68c6fad9edb632734f1dbb9"
+    },
+    {
+      "id": "moel_1350_contact",
+      "routeScope": "korea_shared",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "baselineSha256": "49a13ada23a2d1d69be3ffc9915fcc7119e68302b49140f73b6f2a4deea0cd8b",
+      "observedSha256": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71"
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "routeScope": "korea_shared",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "baselineSha256": "7f035022c03490f13e6557dfb9643ad357181f2c567fb39dff34d67e9ad2ee7c",
+      "observedSha256": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c"
+    },
+    {
+      "id": "np_eps_notice_index",
+      "routeScope": "other_country",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://epsnepal.gov.np/notices",
+      "baselineSha256": "57da658d3f0dfed75f7199e56535ed9352eb9e73ef34c2f5dc8f75da195da863",
+      "observedSha256": "3713ef7128be376e15f0a72296d1c12395148271db7ce15292632baaddc7cdbf"
+    },
+    {
+      "id": "vn_colab_eps_notices",
+      "routeScope": "other_country",
+      "reason": "content_changed",
+      "reviewStatus": "pending_semantic_review",
+      "url": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "baselineSha256": "06548d5a97ad92acb30ed1620f45c5b184d9dfa391cc211b4cc7c5f010a9408d",
+      "observedSha256": "91cd712ae1346401ec9a1716268b409ea05eb6452b2820705b7c689965dde2ed"
+    }
+  ]
+}

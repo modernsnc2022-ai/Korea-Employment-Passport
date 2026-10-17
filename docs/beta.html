@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#071a36">
   <title>Pendaftaran tester — Korea Employment Passport</title>
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="stylesheet" href="beta.css">
 </head>
 <body>
@@ -99,6 +100,18 @@
           <span>Saya bersedia menggunakan layanan dan memberi feedback sesuai pengalaman nyata.</span>
         </label>
 
+        <div id="applicantEmailCodeFields" hidden>
+          <label>Kode verifikasi email (8 digit)
+            <input id="applicantEmailCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" pattern="[0-9]{8}" placeholder="12345678">
+          </label>
+          <small>Kode hanya berlaku 10 menit dan akan dikirim ke email yang Anda isi. Meminta kode bukan berarti pendaftaran sudah diterima. Jangan bagikan kode kepada perantara.</small>
+          <button id="applicantEmailResendBtn" class="secondary" type="button" hidden disabled>Kirim ulang kode</button>
+        </div>
+        <div id="directIntakeChallenge" hidden>
+          <p>Verifikasi keamanan sebelum mengirim langsung. Tidak perlu nomor identitas atau foto dokumen.</p>
+          <div id="intakeTurnstileMount" aria-label="Verifikasi keamanan"></div>
+          <small>Jika verifikasi gagal, gunakan Buka Gmail atau Salin teks pendaftaran.</small>
+        </div>
         <div class="actions">
           <button id="betaApplicationSubmitBtn" class="primary" type="submit">Kirim lewat aplikasi email</button>
           <button id="gmailApplicationBtn" class="secondary" type="button">Buka Gmail</button>
@@ -125,6 +138,7 @@
 
     <section class="card privacy">
       <h2>Privasi saat mendaftar</h2>
+      <p>Jika Anda mendaftar lewat email, alamat email pengirim akan terlihat oleh tim. Email hanya digunakan untuk review pendaftaran, keputusan beta, pemberian KEP ID jika disetujui, dan komunikasi beta yang diperlukan; tidak dimasukkan ke repositori publik.</p>
       <p>Untuk mendaftar sebagai calon tester, kami tidak meminta nama, nomor paspor, nomor KTP, nomor ARC, nomor telepon, alamat rumah, atau foto dokumen identitas.</p>
       <p>Jika pendaftaran dikirim lewat email, alamat email pengirim terlihat oleh tim. Jika mode kirim langsung diaktifkan, pengguna memasukkan alamat email sendiri dan hanya data minimum aplikasi yang dikirim ke penyimpanan intake privat. Dalam kedua mode, alamat email digunakan hanya untuk peninjauan, keputusan beta/KEP ID, dan komunikasi beta yang diperlukan; tidak dimasukkan ke repositori publik.</p>
       <p>Jangan kirim gambar paspor/KTP/ARC untuk mendapatkan akses beta. <a href="privacy.html">Baca pemberitahuan privasi</a>.</p>

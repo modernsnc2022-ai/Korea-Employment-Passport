@@ -1,0 +1,107 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-17",
+  "readOnlyOfficialHTMLRecheck": true,
+  "sources": [
+    {
+      "id": "minimum_wage",
+      "officialSource": "https://www.minimumwage.go.kr/index.jsp",
+      "priorOct17OriginalSha256": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12",
+      "claimIds": [
+        "minimum_wage_2026"
+      ],
+      "humanSemanticsReview": "pending",
+      "sourceHashAccepted": false,
+      "bodyRead": true,
+      "newOriginalTextSha256": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12",
+      "sameAsEarlierOct17": true,
+      "appClaimMatchesURLScope": true,
+      "finalUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "kind": "text/html",
+      "tlsVerification": "ca_verified",
+      "textLength": 1886
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "officialSource": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "priorOct17OriginalSha256": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786",
+      "claimIds": [
+        "payslip_required_items",
+        "pay_compare_slc_to_statement_components"
+      ],
+      "humanSemanticsReview": "pending",
+      "sourceHashAccepted": false,
+      "bodyRead": true,
+      "newOriginalTextSha256": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786",
+      "sameAsEarlierOct17": true,
+      "appClaimMatchesURLScope": true,
+      "finalUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "kind": "text/html",
+      "tlsVerification": "ca_verified",
+      "textLength": 397
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "officialSource": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "priorOct17OriginalSha256": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c",
+      "claimIds": [
+        "labor_unpaid_wage_first_action_current"
+      ],
+      "humanSemanticsReview": "pending",
+      "sourceHashAccepted": false,
+      "bodyRead": true,
+      "newOriginalTextSha256": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c",
+      "sameAsEarlierOct17": true,
+      "appClaimMatchesURLScope": true,
+      "finalUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "kind": "text/html",
+      "tlsVerification": "ca_verified",
+      "textLength": 1441
+    },
+    {
+      "id": "kdca_qcode_input",
+      "officialSource": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "priorOct17OriginalSha256": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee",
+      "claimIds": [
+        "departure_qcode_current_official"
+      ],
+      "humanSemanticsReview": "pending",
+      "sourceHashAccepted": false,
+      "bodyRead": true,
+      "newOriginalTextSha256": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee",
+      "sameAsEarlierOct17": true,
+      "appClaimMatchesURLScope": true,
+      "finalUrl": "https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do",
+      "kind": "text/html",
+      "tlsVerification": "ca_verified",
+      "textLength": 2075
+    },
+    {
+      "id": "moel_1350_contact",
+      "officialSource": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "priorOct17OriginalSha256": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71",
+      "claimIds": [
+        "labor_1350_scope_current"
+      ],
+      "humanSemanticsReview": "pending",
+      "sourceHashAccepted": false,
+      "bodyRead": true,
+      "newOriginalTextSha256": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71",
+      "sameAsEarlierOct17": true,
+      "appClaimMatchesURLScope": true,
+      "finalUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "kind": "text/html",
+      "tlsVerification": "ca_verified",
+      "textLength": 1057
+    }
+  ],
+  "successfulBodyFetches": 5,
+  "sameDayShaMatchesM21": 5,
+  "humanSemanticSignoff": false,
+  "actualPolicyChangeVerified": false,
+  "officialHashAutoAccepted": false,
+  "jobDocs": "hold",
+  "betaAccess": "hold",
+  "releaseAuthorized": false,
+  "limitations": "Machine normalized text SHA comparison + applicant source binding only. A matching HTML fingerprint is not the named human legal/health/labor semantic signoff."
+}

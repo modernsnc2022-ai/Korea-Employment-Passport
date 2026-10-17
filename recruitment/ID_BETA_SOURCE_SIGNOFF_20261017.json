@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "route": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "status": "pending_manual_source_signoff",
+  "reviewer": null,
+  "approvedAt": null,
+  "sourceSnapshotDate": null,
+  "sourceScopeDate": null,
+  "contentReviewedSourceIds": [
+    "minimum_wage",
+    "labor_standards_wage_statement",
+    "moel_wage_arrears_2026",
+    "kdca_qcode_input",
+    "moel_1350_contact"
+  ],
+  "multiCountryPendingSourceIds": [
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates"
+  ],
+  "otherCountryPendingSourceIds": [
+    "np_eps_notice_index",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
+  "unclassifiedPendingSourceIds": [],
+  "sourceWatchConfigured": 84,
+  "sourceWatchChecked": 84,
+  "sourceWatchChanged": 12,
+  "sourceWatchFetchFailures": 0,
+  "allChangedSourceAlertsRemainVisible": true,
+  "noOfficialHashAutopromotion": true,
+  "manualReviewNotImplicit": true,
+  "exactManufacturingJobDocumentsHeld": true,
+  "betaAccess": "hold",
+  "reason": "2026-10-17 machine read-only 84/84 watch and KP2MI 185-title index do not constitute approval. Responsible reviewer must review original semantics and relevant attachments, sign on actual release day. Other-country pending sources must remain visible. job_docs HOLD; beta OPEN separately authorized."
+}

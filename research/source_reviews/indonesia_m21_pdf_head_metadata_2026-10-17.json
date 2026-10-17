@@ -1,0 +1,210 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-17",
+  "mode": "read_only_http_head_metadata_no_pdf_body_download",
+  "pdfLinkCount": 24,
+  "reachablePdfMetadataCount": 10,
+  "unverifiedMetadataCount": 14,
+  "headRequestsOnly": true,
+  "allPdfContentReviewedToday": false,
+  "humanSourceSignoff": false,
+  "finalManufacturingJobDocsVerified": false,
+  "jobDocs": "hold",
+  "betaAccess": "hold",
+  "authorizesRelease": false,
+  "rows": [
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_06-05-2026_Daftar_CPMI_yang_Berhasil_Dilakukan_Refund_per_30_April_2026.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 451511,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_06-05-2026_Daftar_CPMI_yang_Gagal_Dilakukan_Refund_per_30_April_2026.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 415294,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_09-02-2026_Surat_Pernyataan_Pelindungan_Data_Pribadi.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 299951,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_10-02-2026_Lampiran.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 13171,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_10-09-2026_Daftar_CPMI_yang_Lulus_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 388649,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_15-02-2026_DAFTAR_ALAMAT_LOKASI_PEREKAMAN_BIOMETRIK.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 55986,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_15-02-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 712688,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_16-02-2026_PETUNJUK_TEKNIS_PERBAIKAN_DOKUMEN.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 900028,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_CONTOH_SCAN_DOKUMEN_KOMPTENSI_YANG_BENAR.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 6721943,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_SURAT_KONFIRMASI_DASAR_FAKTUAL_PENGALAMAN_KERJA.pdf",
+      "statusCode": 200,
+      "contentType": "application/pdf",
+      "contentLengthBytes": 231722,
+      "success": true,
+      "error": null
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "ConnectionResetError:[WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Jakarta).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "ConnectionResetError:[WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Semarang).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "ConnectionResetError:[WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Surabaya).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Jakarta).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Semarang).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "ConnectionResetError:[WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Surabaya).pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    },
+    {
+      "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf",
+      "statusCode": null,
+      "contentType": null,
+      "contentLengthBytes": null,
+      "success": false,
+      "error": "URLError:<urlopen error [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다>"
+    }
+  ],
+  "caveat": "HTTP HEAD 200 application/pdf does not prove PDF readability, completeness, job-application scope, or legal/policy accuracy."
+}

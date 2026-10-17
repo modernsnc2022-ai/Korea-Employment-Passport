@@ -5,7 +5,7 @@
   },
   "registration": {
     "title": "Pendaftaran online Sisko P2MI",
-    "action": "Siapkan data dan lakukan pendaftaran melalui Sisko P2MI sesuai petunjuk resmi yang berlaku."
+    "action": "Siapkan data pribadi pada Sisko P2MI sesuai petunjuk resmi. Dalam UBT Umum 2026, pilih hanya satu sektor (Manufaktur atau Perikanan) dengan cermat karena tidak dapat pindah sektor. Pendaftaran umum 2026 SUDAH BERAKHIR; pantau pengumuman baru."
   },
   "exam_fee": {
     "title": "Pembayaran biaya EPS-TOPIK",
@@ -18,7 +18,7 @@
   },
   "document_verify": {
     "title": "Verifikasi dokumen pendaftaran",
-    "action": "Periksa kualitas scan dan kecocokan data sebelum verifikasi resmi."
+    "action": "Periksa kualitas scan dan kecocokan identitas pada dokumen resmi. Untuk Manufaktur UBT Umum 2026, SKL tidak menggantikan ijazah; jika ijazah hilang, gunakan surat pengganti ijazah resmi. Alternatif screenshot mobile banking hanya contoh dokumen rekening pada pendaftaran awal."
   },
   "exam_card": {
     "title": "Cetak kartu ujian",
@@ -30,8 +30,9 @@
     "warning": "Lulus tahap pertama bukan kelulusan akhir dan tidak menjamin penempatan kerja."
   },
   "skill_competency": {
-    "title": "Skill Test + Competency Test",
-    "action": "Persiapkan kekuatan fisik, wawancara, kemampuan dasar, dan bukti kompetensi yang diakui."
+    "title": "Skill Test wajib + Penilaian Kapasitas Kerja opsional",
+    "action": "Jika resmi lulus EPS-TOPIK tahap pertama, peserta WAJIB mengikuti Skill Test (fisik, wawancara, kemampuan dasar). Job Capacity Assessment bersifat OPSIONAL bila memiliki bukti kompetensi manufaktur. KP2MI mengumumkan unggah bukti opsional melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 hingga 23 September 2026 pukul 13.00 WIB; periode tersebut SUDAH BERAKHIR. Bukti yang disebut: pengalaman kerja manufaktur minimal 1 tahun, pendidikan manufaktur minimal Diploma I, pelatihan manufaktur minimal 120 jam, atau sertifikat kompetensi nasional manufaktur yang masih berlaku. KHUSUS bagi peserta yang memilih unggah bukti kompetensi opsional pada periode yang kini ditutup, lampiran resmi mewajibkan Formulir Uji Kompetensi ikut diserahkan bersama salah satu bukti. Jika perusahaan tidak bisa menerbitkan surat pengalaman kerja, formulir pengganti Konfirmasi Dasar Faktual membutuhkan dua penjamin yang bukan keluarga sedarah/perkawinan, tanda tangan, salinan KTP/paspor dan nomor kontak tiap penjamin serta kontrak kerja atau catatan visa/imigrasi yang relevan. Syarat-syarat bersyarat ini BUKAN kewajiban semua peserta Skill Test dan BUKAN daftar dokumen lamaran kerja manufaktur. Cek pengumuman resmi baru bila ada perubahan periode; tanggal dan tempat Skill Test masih memerlukan pengumuman tersendiri.",
+    "warning": "Tidak mengikuti Skill Test menyebabkan gugur. Unggah dokumen kompetensi pada 21–23 September 2026 adalah OPSIONAL dan sudah ditutup, bukan persyaratan wajib semua peserta, dan BUKAN daftar dokumen pengajuan lamaran kerja (job application). Jangan mengunggah di luar SiskoP2MI atau menganggap EPS-TOPIK tahap pertama sebagai kelulusan akhir. Bila memilih bukti kompetensi pada periode resmi tersebut, Formulir Uji Kompetensi ikut WAJIB, tetapi proses unggah itu sudah TUTUP. Jangan menyamakan kewajiban bersyarat ini dengan kewajiban semua peserta."
   },
   "final_selection": {
     "title": "Seleksi akhir sistem poin",

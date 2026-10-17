@@ -1,0 +1,126 @@
+{
+    "version":  "1.0.0",
+    "observedAtDate":  "2026-10-15",
+    "scope":  "Shared 84-source official watch with Indonesia-only triage candidates",
+    "source":  "read_only_84_source_monitor",
+    "configured":  84,
+    "checked":  84,
+    "fetchFailures":  0,
+    "changed":  10,
+    "candidateKoreaSharedIds":  [
+                                    "labor_standards_wage_statement",
+                                    "moel_wage_arrears_2026",
+                                    "kdca_qcode_input",
+                                    "moel_1350_contact"
+                                ],
+    "candidateMultiCountryScheduleIds":  [
+                                               "mm_hrdk_schedule_index"
+                                           ],
+    "candidateOtherCountryIds":  [
+                                     "np_eps_notice_index",
+                                     "vn_colab_eps_notices",
+                                     "lk_slbfe_home",
+                                     "kg_migrant_home",
+                                     "mm_mol_dol_index"
+                                 ],
+    "sourceHashesAutomaticallyAccepted":  false,
+    "manualIndonesiaSourceSignoff":  false,
+    "manualManufacturingNoticeSignoff":  false,
+    "betaAccess":  "hold",
+    "directHttpsIntake":  "hold",
+    "exactManufacturingJobDocuments":  "hold",
+    "doesNotAuthorizeLaunch":  true,
+    "note":  "Read-only audit snapshot; the HRD Korea EPS-TOPIK schedule covers multiple countries, and its ambiguous mm_ ID must NOT be treated as Myanmar-only. All changed sources remain pending review. Do not replace official source baseline, signoff, product rules, or beta HOLD.",
+    "records":  [
+                    {
+                        "id":  "labor_standards_wage_statement",
+                        "reason":  "content_changed",
+                        "routeScope":  "korea_shared",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+                        "baselineSha256":  "4cfd5356dcfbb877401dff5d8f758426760b3111bf6835c64f51762b71803e00",
+                        "observedSha256":  "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786"
+                    },
+                    {
+                        "id":  "moel_wage_arrears_2026",
+                        "reason":  "content_changed",
+                        "routeScope":  "korea_shared",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+                        "baselineSha256":  "7f035022c03490f13e6557dfb9643ad357181f2c567fb39dff34d67e9ad2ee7c",
+                        "observedSha256":  "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c"
+                    },
+                    {
+                        "id":  "kdca_qcode_input",
+                        "reason":  "content_changed",
+                        "routeScope":  "korea_shared",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+                        "baselineSha256":  "6e6bb168ea271bb51818c43c73aecb9976751cf6f80426e5fa09a99c5db54e6a",
+                        "observedSha256":  "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee"
+                    },
+                    {
+                        "id":  "moel_1350_contact",
+                        "reason":  "content_changed",
+                        "routeScope":  "korea_shared",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+                        "baselineSha256":  "49a13ada23a2d1d69be3ffc9915fcc7119e68302b49140f73b6f2a4deea0cd8b",
+                        "observedSha256":  "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71"
+                    },
+                    {
+                        "id":  "mm_hrdk_schedule_index",
+                        "reason":  "content_changed",
+                        "routeScope":  "multi_country_eps_schedule",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+                        "baselineSha256":  "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
+                        "observedSha256":  "d8d9b5d35f0d0fbd5afab7de5cd62c9dde888d74daa52105971780226ee25855"
+                    },
+                    {
+                        "id":  "np_eps_notice_index",
+                        "reason":  "content_changed",
+                        "routeScope":  "other_country",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://epsnepal.gov.np/notices",
+                        "baselineSha256":  "57da658d3f0dfed75f7199e56535ed9352eb9e73ef34c2f5dc8f75da195da863",
+                        "observedSha256":  "06241589a60fc5372b6cc3c7f39b0739c08d98e63140f66b5223713b12a79f05"
+                    },
+                    {
+                        "id":  "vn_colab_eps_notices",
+                        "reason":  "content_changed",
+                        "routeScope":  "other_country",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+                        "baselineSha256":  "06548d5a97ad92acb30ed1620f45c5b184d9dfa391cc211b4cc7c5f010a9408d",
+                        "observedSha256":  "1f0e5daceaceb08c1fe53bf5a3aa924060b7806f4f43d0a4c0bb1c6cc2efb6f4"
+                    },
+                    {
+                        "id":  "lk_slbfe_home",
+                        "reason":  "content_changed",
+                        "routeScope":  "other_country",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://www.slbfe.lk/",
+                        "baselineSha256":  "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
+                        "observedSha256":  "5dd07edf37428fa9067aa0ababb7b5203b3131d99a4785448225a0a915055e58"
+                    },
+                    {
+                        "id":  "kg_migrant_home",
+                        "reason":  "content_changed",
+                        "routeScope":  "other_country",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://migrant.kg/",
+                        "baselineSha256":  "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
+                        "observedSha256":  "c711d785855357eddef851208b32335f58112452c0ae9ee2cccc5b9203f5dfee"
+                    },
+                    {
+                        "id":  "mm_mol_dol_index",
+                        "reason":  "content_changed",
+                        "routeScope":  "other_country",
+                        "reviewStatus":  "pending_semantic_review",
+                        "url":  "https://www.mol.gov.mm/mol-department-of-labour/",
+                        "baselineSha256":  "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0",
+                        "observedSha256":  "dad0fa868f0c40be73699e1ed57f916a74ec00c3f68c6fad9edb632734f1dbb9"
+                    }
+                ]
+}

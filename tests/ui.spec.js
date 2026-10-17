@@ -1,4 +1,7 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('node:fs');
+const path = require('node:path');
+const sourceReviewFixturePath = path.join(__dirname, '..', 'docs', 'data', 'source_review_status.json');
 
 async function freshPage(page, options = {}) {
   const errors = [];
@@ -6,8 +9,10 @@ async function freshPage(page, options = {}) {
 
   const sourceState = options.sourceState || 'clean';
   await page.route('**/data/source_review_status.json', async route => {
-    const response = await route.fetch();
-    const status = await response.json();
+    // Use this commit's official-source fixture directly, rather than making
+    // a second localhost HTTP request during the server's first-start window.
+    // The app still fetches the guarded URL, intercepted and fulfilled here.
+    const status = JSON.parse(fs.readFileSync(sourceReviewFixturePath, 'utf8'));
     if (sourceState === 'clean') {
       status.state = 'clean';
       status.reviewRequiredUrls = [];
@@ -25,7 +30,7 @@ async function freshPage(page, options = {}) {
       status.fetchFailureSourceIds = [];
       status.message = 'Test fixture: official source review required.';
     }
-    await route.fulfill({ response, json: status });
+    await route.fulfill({ status: 200, contentType: 'application/json', json: status });
   });
 
   await page.goto('/app.html', { waitUntil: 'domcontentloaded' });
@@ -952,7 +957,7 @@ test('partial departure registry never suggests another call when date is missin
   await expect(page.locator('#scopePickerSection small')).toContainText('belum lengkap');
   await expect(page.locator('#scopePickerSection small')).toContainText('jangan memakai aturan tanggal lain');
   const href=await page.locator('#scopePickerSource').getAttribute('href');
-  expect(href).toContain('kp2mi.go.id/gtog-korea/info');
+  expect(href).toContain('kp2mi.go.id/gtog-korea/pengumuman');
   expect(errors).toEqual([]);
 });
 
@@ -1002,8 +1007,11 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   await expect(page.locator('#closedPanel')).toBeHidden();
   await expect(page.locator('#applicationPanel')).toBeVisible();
 
+  // Email OTP is a temporary proof field, not an identity-number input.
+  // It stays hidden while direct intake is not configured.
+  await expect(page.locator('#applicantEmailCodeFields')).toBeHidden();
   const identityInputs = await page.locator(
-    '#betaApplicationForm input[type="text"], ' +
+    '#betaApplicationForm input[type="text"]:not(#applicantEmailCode), ' +
     '#betaApplicationForm input[type="email"], ' +
     '#betaApplicationForm input[type="tel"], ' +
     '#betaApplicationForm input[type="file"], ' +

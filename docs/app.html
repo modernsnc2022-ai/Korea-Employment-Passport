@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#071a36">
   <meta name="description" content="Korea Employment Passport — panduan resmi G-to-G Korea/EPS tanpa calo.">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="stylesheet" href="app-shell.css">
   <title>Korea Employment Passport</title>
 </head>
@@ -21,9 +22,9 @@
   <main class="shell">
     <section class="summary">
       <div>
-        <span class="eyebrow">ZERO-BROKER ROUTE</span>
+        <span class="eyebrow">JALUR TANPA CALO</span>
         <h1 id="routeTitle">Indonesia → Korea</h1>
-        <p id="routeMeta">Loading verified route…</p>
+        <p id="routeMeta">Memuat jalur resmi yang telah diverifikasi…</p>
       </div>
       <div class="meter">
         <div><span id="progressBar"></span></div>
@@ -33,6 +34,8 @@
 
     <div id="cycleStatus" class="cycle-status" hidden></div>
     <section id="betaModeBanner" class="beta-mode-banner" aria-label="Mode beta" hidden></section>
+
+    <div id="freshnessStatus" class="freshness-status" role="status" aria-live="polite" hidden></div>
 
     <section id="quickStart" class="quick-start" hidden>
       <span class="eyebrow dark">PERTAMA KALI PAKAI?</span>
@@ -66,7 +69,7 @@
 
     <details class="trust-panel">
       <summary>Kenapa jawaban di sini bisa dipercaya?</summary>
-      <div id="freshnessStatus" class="freshness-status" hidden></div>
+
       <div id="bqcStatus" class="bqc-status" hidden></div>
       <div class="progress-backup">
         <strong>Simpan progres Anda</strong>
@@ -151,13 +154,13 @@
 
     <section id="documents" class="view">
       <div class="section-head">
-        <h2>Document Copilot</h2>
+        <h2>Asisten Dokumen</h2>
         <p>Checklist berubah mengikuti tahap Anda sekarang. Jika ada pengumuman yang khusus untuk nama/gelombang Anda, pengumuman itu yang harus diikuti. File yang dipilih hanya diperiksa di perangkat Anda.</p>
       </div>
 
       <div class="panel field-copilot">
         <div>
-          <span class="eyebrow dark">FIELD COPILOT</span>
+          <span class="eyebrow dark">BANTUAN ISI KOLOM</span>
           <h3>“Kolom ini harus diisi apa?”</h3>
           <p class="muted">Ketik kata yang ada pada kolom/form. Jika jawabannya sudah terverifikasi, aplikasi memberi jawaban pasti. Jika belum, aplikasi tidak menebak.</p>
         </div>
@@ -704,6 +707,7 @@
       </section>
       <a id="stageOfficialAction" class="primary full official-action" href="#" target="_blank" rel="noopener" hidden>Buka layanan resmi ↗</a>
       <a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Baca pengumuman / sumber resmi ↗</a>
+      <a id="stageCompetencyNotice" class="source" href="#" target="_blank" rel="noopener" hidden>Bukti kompetensi manufaktur 2026 (opsional, periode berakhir) ↗</a>
       <div id="stageNextHint" class="stage-next-hint"></div>
       <button id="stageDoneBtn" value="default" class="primary full">Tandai selesai</button>
     </form>

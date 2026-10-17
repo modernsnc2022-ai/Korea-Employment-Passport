@@ -1,14 +1,106 @@
 {
-  "version": "1.1.0",
-  "state": "clean",
+  "version": "1.3.0",
+  "state": "review_required",
   "autoPublishRules": false,
   "configured": 84,
-  "checked": 84,
-  "reviewRequiredUrls": [],
-  "reviewRequiredSourceIds": [],
+  "checked": 83,
+  "reviewRequiredUrls": [
+    "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+    "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+    "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+    "https://epsnepal.gov.np/notices",
+    "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+    "https://www.slbfe.lk/",
+    "https://migrant.kg/",
+    "https://www.mol.gov.mm/mol-department-of-labour/"
+  ],
+  "reviewRequiredSourceIds": [
+    "labor_standards_wage_statement",
+    "kdca_qcode_input",
+    "moel_1350_contact",
+    "np_eps_notice_index",
+    "vn_colab_eps_notices",
+    "lk_slbfe_home",
+    "kg_migrant_home",
+    "mm_mol_dol_index"
+  ],
   "pendingBaselineUrls": [],
   "pendingBaselineSourceIds": [],
-  "fetchFailureUrls": [],
-  "fetchFailureSourceIds": [],
-  "message": "Reviewed official-source changes were accepted and no unreviewed changes remain."
+  "fetchFailureUrls": [
+    "https://epsnepal.gov.np/notices"
+  ],
+  "fetchFailureSourceIds": [
+    "np_eps_notice_index"
+  ],
+  "message": "Pemeriksaan 14 Oktober 2026: 7 sumber resmi berubah dan 1 sumber Nepal gagal diakses (HTTP 500). Delapan sumber memerlukan perhatian; 3 terkait Indonesia/Korea dan 5 terkait negara lain. Panduan tidak diperbarui atau disetujui otomatis.",
+  "detectedAt": "2026-10-14",
+  "reviewStatus": "2026-10-14 read-only scan 83/84 fetched, 7 changed vs prior baseline, 1 Nepal EPS notice-index fetch failed (HTTP 500). All eight prior source alerts remain visible: 3 Korea-common content-reviewed, 5 other-country pending. Hash baseline unchanged.",
+  "currentScan": {
+    "checkedAt": "2026-10-14",
+    "changedSourceIds": [
+      "labor_standards_wage_statement",
+      "kdca_qcode_input",
+      "moel_1350_contact",
+      "vn_colab_eps_notices",
+      "lk_slbfe_home",
+      "kg_migrant_home",
+      "mm_mol_dol_index"
+    ],
+    "failedSourceIds": [
+      "np_eps_notice_index"
+    ],
+    "failedHttpStatus": 500,
+    "acceptedCurrent": false
+  },
+  "latestReadOnlyObservation": {
+    "schemaVersion": 1,
+    "observedAtDate": "2026-10-17",
+    "evidenceKind": "machine_observation_only_not_manual_signoff",
+    "evidenceFile": "research/source_reviews/indonesia_daily_readonly_2026-10-17.json",
+    "configured": 84,
+    "checked": 84,
+    "fetchFailures": 0,
+    "fetchFailureSourceIds": [],
+    "reviewRequiredSourceIds": [
+      "kdca_qcode_input",
+      "kg_migrant_home",
+      "labor_standards_wage_statement",
+      "lk_slbfe_home",
+      "minimum_wage",
+      "mm_hrdk_schedule_index",
+      "mm_hrdk_skills_candidates",
+      "mm_mol_dol_index",
+      "moel_1350_contact",
+      "moel_wage_arrears_2026",
+      "np_eps_notice_index",
+      "vn_colab_eps_notices"
+    ],
+    "reviewRequiredUrls": [
+      "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "https://migrant.kg/",
+      "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "https://www.slbfe.lk/",
+      "https://www.minimumwage.go.kr/index.jsp",
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "https://www.mol.gov.mm/mol-department-of-labour/",
+      "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "https://epsnepal.gov.np/notices",
+      "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx"
+    ],
+    "unacceptedBaselineDriftCount": 12,
+    "groupCounts": {
+      "korea_shared": 5,
+      "multi_country_eps_schedule": 2,
+      "other_country": 5,
+      "unclassified_requires_manual_scope_review": 0
+    },
+    "humanSemanticReviewApproved": false,
+    "hashBaselineAutoAccepted": false,
+    "exactManufacturingJobDocuments": "hold",
+    "betaAccess": "hold",
+    "authorizesRelease": false,
+    "notice": "This is a dated, read-only technical source fetch. The 12 observed SHA differences are versus the last approved baseline, not 12 new policy changes. A clean fetch is NOT a human source approval. Older 2026-10-14 failures and pending alerts remain in the historical record."
+  }
 }
