@@ -142,6 +142,116 @@ def review(as_of: str, watch: dict, index: dict, manifest: dict,
     }
 
 
+def validate_committed_snapshot(snapshot: dict, manifest: dict,
+                                baseline: dict, as_of: str) -> None:
+    """Validate retained observations without pretending to re-fetch sources."""
+    if snapshot.get("observedAtDate") != as_of or (
+        snapshot.get("mode") != "read_only_official_observation_not_human_signoff"
+    ):
+        fail("wrong dated or inappropriate committed observation")
+    if (snapshot.get("configured") != 84 or snapshot.get("checked") != 84
+        or snapshot.get("fetchFailures") != 0
+        or snapshot.get("failedSourceIds") != []
+        or snapshot.get("monitorTodayComplete") is not True):
+        fail("current-day monitor evidence not complete 84/84")
+    for key, expected in (
+        ("sourceBaselineModified", False), ("sourceHashAutoAccepted", False),
+        ("humanSemanticReviewApproved", False),
+        ("manufacturingHumanSignoff", False),
+        ("readyForManualLaunchDecision", False),
+        ("authorizesRelease", False),
+        ("jobDocsExactRule", "hold"), ("betaAccess", "hold"),
+    ):
+        if snapshot.get(key) != expected:
+            fail("committed source evidence contains unauthorized " + key)
+    try:
+        observed_date = datetime.fromisoformat(
+            snapshot["indexCheckedAtUtc"].replace("Z", "+00:00")
+        ).astimezone(JAKARTA).date().isoformat()
+    except (KeyError, ValueError, TypeError, AttributeError):
+        fail("invalid index observation timestamp")
+    if observed_date != as_of:
+        fail("KP2MI index evidence reused from another day")
+    original_sources = manifest.get("sources", [])
+    ids = {x["id"]: x["url"] for x in original_sources}
+    if len(original_sources) != 84 or len(ids) != 84:
+        fail("source manifest changed")
+    observations = snapshot.get("pendingReviews")
+    if not isinstance(observations, list) or len(observations) != snapshot.get(
+        "unacceptedBaselineDriftCount"
+    ):
+        fail("inconsistent pending-source records")
+    seen, counts = set(), {k: 0 for k in (
+        "korea_shared", "multi_country_eps_schedule", "other_country",
+        "unclassified_requires_manual_scope_review"
+    )}
+    for row in observations:
+        name = row.get("id")
+        before = row.get("acceptedBaselineSha256")
+        after = row.get("observedSha256")
+        if name not in ids or name in seen or row.get("url") != ids[name]:
+            fail("unknown or duplicated official URL in snapshot")
+        seen.add(name)
+        scope = classify(name)
+        if row.get("scope") != scope or row.get("semanticReview") != "pending":
+            fail("changed-source scope or semantic review was promoted")
+        if after is None or not SHA.fullmatch(str(after)):
+            fail("invalid source digest")
+        previous = baseline.get(name)
+        if previous:
+            if (before != previous.get("sha256")
+                or before == after and ids[name] == previous.get("url")):
+                fail("observed source no longer diverges from approved baseline")
+        elif before is not None:
+            fail("unexpected baseline for new source")
+        counts[scope] += 1
+    if snapshot.get("groupCounts") != counts:
+        fail("classification group totals mismatch")
+    if (not isinstance(snapshot.get("indexed2026Count"), int)
+        or not isinstance(snapshot.get("manufacturingHeadlineCount"), int)
+        or not isinstance(snapshot.get("possibleFinalApplicationHeadlineCount"), int)
+        or not SHA.fullmatch(str(snapshot.get("kp2miTitleMetadataSha256", "")))
+        or snapshot.get("officialIndex") != "https://kp2mi.go.id/gtog-korea/pengumuman"):
+        fail("KP2MI title index evidence invalid")
+
+
+def validate_daily_source_signoff(snapshot: dict, manifest: dict,
+                                  baseline: dict, signed: dict, day: str) -> None:
+    """Manual signoff requires a real named reviewer; snapshot alone is never approval."""
+    validate_committed_snapshot(snapshot, manifest, baseline, day)
+    if signed.get("status") != "approved_manual_indonesia_scope":
+        fail("responsible official-source semantic review is not signed")
+    reviewer = signed.get("reviewer")
+    if not isinstance(reviewer, str) or len(reviewer.strip()) < 4:
+        fail("real named reviewer required")
+    try:
+        approved = datetime.fromisoformat(str(signed.get("approvedAt")).replace("Z", "+00:00"))
+    except ValueError:
+        fail("invalid manual signature timestamp")
+    if approved.tzinfo is None or approved.astimezone(JAKARTA).date().isoformat() != day:
+        fail("signature not issued on actual release day in Indonesia")
+    if signed.get("sourceSnapshotDate") != day or signed.get("sourceScopeDate") != day:
+        fail("date-specific review not tied to current watch")
+    for key, expected in (
+        ("betaAccess", "hold"), ("exactManufacturingJobDocumentsHeld", True),
+        ("allChangedSourceAlertsRemainVisible", True),
+        ("noOfficialHashAutopromotion", True), ("manualReviewNotImplicit", True),
+    ):
+        if signed.get(key) != expected:
+            fail("manual signoff cannot enable public beta or automatic SHA approval")
+    expected = {
+        "korea_shared": "contentReviewedSourceIds",
+        "multi_country_eps_schedule": "multiCountryPendingSourceIds",
+        "other_country": "otherCountryPendingSourceIds",
+        "unclassified_requires_manual_scope_review": "unclassifiedPendingSourceIds",
+    }
+    for group, key in expected.items():
+        target = {row["id"] for row in snapshot["pendingReviews"] if row["scope"] == group}
+        actual = signed.get(key, [])
+        if not isinstance(actual, list) or len(actual) != len(target) or set(actual) != target:
+            fail("manual source-signoff missed changed alerts or scope " + group)
+
+
 def self_test() -> None:
     import copy
     day = "2026-10-17"
@@ -164,6 +274,29 @@ def self_test() -> None:
     valid = review(day, monitor, idx, manifest, old, mtime)
     assert valid["monitorTodayComplete"] is True
     assert valid["authorizesRelease"] is False and valid["jobDocsExactRule"] == "hold"
+    validate_committed_snapshot(valid, manifest, old, day)
+    for mutate_snapshot in (
+        lambda o: o.update(observedAtDate="2026-10-16"),
+        lambda o: o.update(authorizesRelease=True),
+        lambda o: o.update(sourceHashAutoAccepted=True),
+        lambda o: o["groupCounts"].update(unclassified_requires_manual_scope_review=0),
+        lambda o: o["pendingReviews"][0].update(observedSha256="a" * 64),
+        lambda o: o.update(indexCheckedAtUtc="2026-10-16T01:00:00+00:00"),
+    ):
+        invalid = copy.deepcopy(valid)
+        mutate_snapshot(invalid)
+        try:
+            validate_committed_snapshot(invalid, manifest, old, day)
+        except ValueError:
+            continue
+        raise AssertionError("unsafe dated snapshot tampering passed")
+    try:
+        validate_daily_source_signoff(valid, manifest, old,
+                                      {"status": "pending_manual_source_signoff"}, day)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("unsigned source review was promoted")
     for mutate in (
         lambda m, i: m.update(acceptedCurrent=True),
         lambda m, i: m["changed"][0].update(before="c" * 64),
@@ -185,7 +318,7 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Previous-day reuse was not blocked")
-    print("M19_DAILY_SOURCE_OBSERVATION_SELF_TEST_PASS 7_fail_closed_cases")
+    print("M19_DAILY_SOURCE_OBSERVATION_SELF_TEST_PASS 14_fail_closed_cases")
 
 
 def main() -> None:
