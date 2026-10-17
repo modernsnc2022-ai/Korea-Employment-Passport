@@ -101,6 +101,19 @@ def deployment_verified(deployed: dict | None, expected_sha: str | None) -> bool
     )
 
 
+def required_gates_all_pass(gates: list[dict], required_ids: set[str]) -> bool:
+    """No vacuous PASS when a critical gate was omitted or duplicated."""
+    if not isinstance(gates, list) or not isinstance(required_ids, set):
+        return False
+    ids = [row.get("id") for row in gates if isinstance(row, dict)]
+    if len(ids) != len(gates) or len(ids) != len(set(ids)):
+        return False
+    if not required_ids.issubset(set(ids)):
+        return False
+    lookup = {row["id"]: row.get("status") for row in gates}
+    return all(lookup.get(name) == "PASS" for name in required_ids)
+
+
 def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
                  scope: dict, signed: dict, manufacturing: dict, route: dict,
                  deployed: dict | None = None, release_head: str | None = None,
@@ -249,6 +262,24 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
               "Human must review the current 2026 general Manufacturing notice contents/attachments and record a genuine same-day signoff."
               if not review_signed else "Keep signed notice review evidence."))
 
+    # M33 CRITICAL: a signed statement that the operator found NO final
+    # Manufacturing notice is NOT a verified final online job-doc checklist.
+    # Keep a separate non-waivable release blocker until a later intentionally
+    # reviewed code/data revision provides the exact applicable 2026 official
+    # original body/annex, named human approval and audited required files.
+    # Do not infer documents from optional Skill Test, initial exam enrollment,
+    # Fisheries / Special UBT, historical 2025 documents, or a notice TITLE.
+    final_docs_holding = (
+        job.get("brokerReplacement") == "held_official_notice"
+        and manufacturing.get("heldQuestions") == CRITICAL_HOLDS
+        and manufacturing.get("result") == "no_current_manufacturing_job_application_notice"
+    )
+    emit(gate("exact_2026_manufacturing_final_job_documents",
+              "PENDING" if final_docs_holding else "BLOCKED",
+              "Exact current-cycle post-Skill-Test General Manufacturing online application files and annexes are not verified; an absence notice signoff is not approval."
+              if final_docs_holding else "Unexpected change to held job documents without an independently reviewed official 2026 checklist.",
+              "Do not enable beta or final submission. Obtain exact KP2MI 2026 General Manufacturing job-doc original notice + attachments, review required files, and implement an explicit independently tested release-day signoff path."))
+
     annex = index.get("latestIndependentEvidence", {}).get("optionalCompetencyPdfAnnexReview", {})
     evidence_ready = (annex.get("officialPdfLinksFetched") == 6
                       and annex.get("allFilesVerifiedPdf") is True
@@ -314,11 +345,10 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
 
     required_ids = {"route_safety", "country_source_classification", "official_monitor_today",
                     "indonesia_source_manual_signoff", "kp2mi_manufacturing_release_day_signoff",
+                    "exact_2026_manufacturing_final_job_documents",
                     "optional_skill_annex_evidence", "published_main_source_integrity",
                     "same_head_pages_deployment"}
-    ready = (manual_still_pending and all(
-        item["status"] == "PASS" for item in result if item["id"] in required_ids
-    ))
+    ready = (manual_still_pending and required_gates_all_pass(result, required_ids))
     return {
         "version": "1.1.0",
         "scope": "Indonesia > Korea > E-9 > General Manufacturing 2026",
@@ -518,9 +548,9 @@ def self_test() -> None:
         mutated = copy.deepcopy(fake_deploy)
         mutation(mutated)
         assert deployment_verified(mutated, test_sha) is False
-    # Synthetic all-official approvals, not written to actual files: this
-    # demonstrates reaching READY *while access remains HOLD*. The final
-    # human OPEN is a separate action and NEVER auto-approved by this tool.
+    # Synthetic approvals, never written to actual records: all other
+    # technical/manual checks may pass, but absent exact 2026 Manufacturing
+    # final online application files must independently BLOCK readiness.
     synthetic_source = copy.deepcopy(source)
     synthetic_scope = copy.deepcopy(scope)
     synthetic_signed = copy.deepcopy(signed)
@@ -547,9 +577,40 @@ def self_test() -> None:
                    "signed": synthetic_signed, "manufacturing": synthetic_manufacturing}),
         deployed=fake_deploy, release_head=test_sha, pages_source=fake_pages,
     )
-    assert hypothetical["readyForManualLaunchDecision"] is True
+    # M33 regression: even with synthetic valid official-source signoff,
+    # a signed no-notice review and perfectly deployed 9/9 + 6/6 Pages,
+    # absence of the exact 2026 Manufacturing final job-doc notice is fatal.
+    assert next(g for g in hypothetical["gates"]
+        if g["id"] == "kp2mi_manufacturing_release_day_signoff")["status"] == "PASS"
+    assert next(g for g in hypothetical["gates"]
+        if g["id"] == "exact_2026_manufacturing_final_job_documents")["status"] == "PENDING"
+    assert hypothetical["liveDeploymentEvidenceChecked"] is True
+    assert hypothetical["readyForManualLaunchDecision"] is False
     assert hypothetical["manualOpenDecisionStillRequired"] is True
     assert hypothetical["authorizesRelease"] is False
+    # Critical-gate presence invariant: removing the documents gate must NEVER
+    # make the remaining all-PASS list look release-ready (vacuous truth bug).
+    test_required = {
+        "route_safety", "country_source_classification", "official_monitor_today",
+        "indonesia_source_manual_signoff", "kp2mi_manufacturing_release_day_signoff",
+        "exact_2026_manufacturing_final_job_documents", "optional_skill_annex_evidence",
+        "published_main_source_integrity", "same_head_pages_deployment",
+    }
+    all_green_synthetic = copy.deepcopy(hypothetical["gates"])
+    for entry in all_green_synthetic:
+        if entry["id"] in test_required:
+            entry["status"] = "PASS"
+    assert required_gates_all_pass(all_green_synthetic, test_required) is True
+    dropped_critical = [g for g in all_green_synthetic
+                        if g["id"] != "exact_2026_manufacturing_final_job_documents"]
+    assert required_gates_all_pass(dropped_critical, test_required) is False
+    doubled_critical = all_green_synthetic + [copy.deepcopy(all_green_synthetic[0])]
+    assert required_gates_all_pass(doubled_critical, test_required) is False
+    blocked_critical = copy.deepcopy(all_green_synthetic)
+    next(g for g in blocked_critical if g["id"] ==
+         "exact_2026_manufacturing_final_job_documents")["status"] = "PENDING"
+    assert required_gates_all_pass(blocked_critical, test_required) is False
+    assert required_gates_all_pass([], test_required) is False
     missing_proof = build_report(
         "2026-10-14",
         **(args | {"source": synthetic_source, "scope": synthetic_scope,
@@ -577,7 +638,7 @@ def self_test() -> None:
     bad_signoff["status"] = "approved_manual_indonesia_scope"
     assert next(g for g in build_report("2026-10-14", **(args | {"signed": bad_signoff}))["gates"]
                 if g["id"] == "indonesia_source_manual_signoff")["status"] == "BLOCKED"
-    print("ID_BETA_RELEASE_PREFLIGHT_SELF_TEST_PASS synthetic_READY_requires_live_sha_and_manual_OPEN_still_pending; 7 deployment fail-closed states")
+    print("ID_BETA_RELEASE_PREFLIGHT_SELF_TEST_PASS synthetic_SIGNOFF_AND_DEPLOY_still_BLOCKED_without_exact_2026_manufacturing_job_docs; manual_OPEN_remains_separate")
 
 
 def main() -> None:
