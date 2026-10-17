@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "kind": "UNSIGNED_FINAL_MANUFACTURING_DOCUMENT_EVIDENCE_INTAKE",
+  "asOfJakarta": "2026-10-17",
+  "route": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "officialIndexUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "cohort": {
+    "country": "Indonesia",
+    "visa": "E-9",
+    "sector": "General Manufacturing",
+    "year": 2026,
+    "stage": "post_Skill_Test_final_online_job_application"
+  },
+  "source": {
+    "officialNoticeUrl": null,
+    "officialNoticeTitle": null,
+    "officialNoticePublishedDate": null,
+    "verifiedOriginalHtmlSha256": null,
+    "noticeParagraphCitation": null,
+    "annexes": [],
+    "requiredDocuments": []
+  },
+  "operator": {
+    "reviewerFullName": null,
+    "reviewedAtTimeZoneAware": null,
+    "specificReasonForApplicability": null,
+    "humanSignoffNotImplied": true
+  },
+  "sourceEvidenceStatus": "official_2026_final_notice_not_established",
+  "evidenceFieldsStructurallyComplete": false,
+  "sourceOriginalBytesRetrievedByThisChecker": false,
+  "sameDayHumanSourceApproval": false,
+  "applicantChecklistPromoted": false,
+  "automaticHashAcceptance": false,
+  "manualPublicBetaApproved": false,
+  "betaAccess": "hold",
+  "releaseAuthorized": false,
+  "limitations": "Structural input validator only. Does not perform live official GET, authenticate named reviewer, accept a source hash, approve original semantics, create document-pack rules or authorize beta."
+}
