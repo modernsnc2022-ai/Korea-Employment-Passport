@@ -498,6 +498,33 @@ function renderCycleStatus(){
   }
 }
 
+function latestReadOnlyObservation(){
+  const status=sourceReviewStatus;
+  const s=status?.latestReadOnlyObservation;
+  if(!s)return null;
+  const groups=s.groupCounts||{};
+  const counts=['korea_shared','multi_country_eps_schedule','other_country','unclassified_requires_manual_scope_review'];
+  const ids=s.reviewRequiredSourceIds;
+  const urls=s.reviewRequiredUrls;
+  if(status.state!=='review_required'||status.autoPublishRules!==false||
+     s.schemaVersion!==1||s.evidenceKind!=='machine_observation_only_not_manual_signoff'||
+     !/^20\d{2}-\d{2}-\d{2}$/.test(String(s.observedAtDate||''))||
+     s.configured!==84||s.checked!==84||s.fetchFailures!==0||
+     !Array.isArray(s.fetchFailureSourceIds)||s.fetchFailureSourceIds.length!==0||
+     !Array.isArray(ids)||!Array.isArray(urls)||
+     ids.length!==urls.length||new Set(ids).size!==ids.length||
+     !ids.every(id=>typeof id==='string'&&id.length>0)||
+     !urls.every(url=>typeof url==='string'&&url.startsWith('https://'))||
+     s.unacceptedBaselineDriftCount!==ids.length||
+     !counts.every(k=>Number.isInteger(groups[k])&&groups[k]>=0)||
+     counts.reduce((sum,k)=>sum+groups[k],0)!==ids.length||
+     s.humanSemanticReviewApproved!==false||
+     s.hashBaselineAutoAccepted!==false||
+     s.exactManufacturingJobDocuments!=='hold'||
+     s.betaAccess!=='hold'||s.authorizesRelease!==false)return null;
+  return s;
+}
+
 function renderFreshnessStatus(){
   const box=$('freshnessStatus');
   if(!freshnessPolicy||!route){box.hidden=true;return}
@@ -505,6 +532,30 @@ function renderFreshnessStatus(){
   box.className='freshness-status';
   const state=sourceReviewStatus?.state||'clean';
   const trustPanel=document.querySelector('.trust-panel');
+
+  const latest=latestReadOnlyObservation();
+  if(sourceReviewStatus?.latestReadOnlyObservation&&!latest){
+    box.classList.add('fetch-warning');
+    if(trustPanel)trustPanel.open=true;
+    box.innerHTML=`
+      <span class="freshness-pill">BUKTI PEMANTAUAN TIDAK VALID</span>
+      <span><strong>Catatan pemantauan terbaru tidak dapat diverifikasi.</strong> Jangan menganggap sumber sudah disetujui atau semua persyaratan sudah pasti.</span>
+      <span>Semua jawaban yang bergantung pada sumber resmi ditahan sampai bukti valid dan tinjauan manusia tersedia.</span>`;
+    return;
+  }
+  if(state==='review_required'&&latest){
+    box.classList.add('review-required');
+    if(trustPanel)trustPanel.open=true;
+    const groups=latest.groupCounts;
+    const historicDate=String(sourceReviewStatus.detectedAt||'tanggal tidak tersedia');
+    box.innerHTML=`
+      <span class="freshness-pill">SUMBER RESMI MASIH MENUNGGU TINJAUAN MANUSIA</span>
+      <span><strong>Pemantauan teknis ${escapeHtml(latest.observedAtDate)}: ${latest.checked}/${latest.configured} sumber dapat diakses; 0 kegagalan.</strong> Ini bukan persetujuan isi kebijakan.</span>
+      <span><strong>${latest.unacceptedBaselineDriftCount} sumber berbeda dari baseline yang terakhir disetujui.</strong> ${groups.korea_shared} sumber Korea umum, ${groups.multi_country_eps_schedule} sumber jadwal HRD Korea lintas negara, dan ${groups.other_country} sumber negara lain. Perbedaan sidik jari bukan berarti perubahan kebijakan baru.</span>
+      <span><strong>Persetujuan manual: belum selesai.</strong> Aturan dan daftar dokumen lamaran akhir manufaktur 2026 belum boleh dianggap pasti, dan beta publik tetap ditahan.</span>
+      <small>Riwayat tetap disimpan: pemeriksaan ${escapeHtml(historicDate)} mengambil ${sourceReviewStatus.checked}/${sourceReviewStatus.configured}; satu sumber Nepal saat itu gagal diakses. Kegagalan lama tidak dihitung sebagai kegagalan ${escapeHtml(latest.observedAtDate)}.</small>`;
+    return;
+  }
 
   if(state==='review_required'){
     box.classList.add('review-required');
@@ -567,13 +618,21 @@ function normalizeSourceUrl(url){
 function sourceNeedsReview(url){
   if(!url||!sourceReviewStatus)return false;
   const target=normalizeSourceUrl(url);
-  return (sourceReviewStatus.reviewRequiredUrls||[])
-    .some(item=>normalizeSourceUrl(item)===target);
+  const latest=latestReadOnlyObservation();
+  // A malformed new observation cannot make an official answer look verified.
+  if(sourceReviewStatus.latestReadOnlyObservation&&!latest)return true;
+  const historical=sourceReviewStatus.reviewRequiredUrls||[];
+  const current=latest?.reviewRequiredUrls||[];
+  return [...historical,...current].some(item=>normalizeSourceUrl(item)===target);
 }
 
 function sourceHasFetchWarning(url){
   if(!url||!sourceReviewStatus)return false;
   const target=normalizeSourceUrl(url);
+  const latest=latestReadOnlyObservation();
+  if(sourceReviewStatus.latestReadOnlyObservation&&!latest)return true;
+  // The previous Nepal failure remains archived, but is not a new fetch failure.
+  if(latest)return false;
   return (sourceReviewStatus.fetchFailureUrls||[])
     .some(item=>normalizeSourceUrl(item)===target);
 }

@@ -60,6 +60,27 @@ route = load_json("docs/data/id_e9_manufacturing_2026.json")
 i18n = load_json("docs/data/id_e9_manufacturing_2026_id.json")
 bqc = load_json("docs/data/broker_question_catalog_v1.json")
 source = load_json("docs/data/source_review_status.json")
+# The public source-status file contains immutable October 14 historical
+# alerts plus an independent, unsigned October 17 84/84 observation.
+# Never let a new machine observation masquerade as human signoff.
+latest_observation = source.get("latestReadOnlyObservation")
+require(isinstance(latest_observation, dict),
+        "M20 latest read-only source evidence cannot be missing or malformed")
+if isinstance(latest_observation, dict):
+    from publish_m20_readonly_source_visibility import make_display
+    archived = {k: v for k, v in source.items() if k != "latestReadOnlyObservation"}
+    try:
+        expected_view = make_display(
+            archived,
+            load_json("research/source_reviews/indonesia_daily_readonly_2026-10-17.json"),
+            load_json("monitor/sources.json"),
+            load_json("monitor/source_hashes.json"),
+        )
+    except (ValueError, TypeError, KeyError) as exc:
+        require(False, "M20 source observation invalid: " + str(exc))
+    else:
+        require(expected_view == source,
+                "M20 published source-status must exactly match retained unsigned observation")
 forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
@@ -827,7 +848,10 @@ print(
     f"stages={len(stage_ids)} "
     f"bqc={len(questions)} "
     f"job_holds={len(holds)} "
-    f"sources={source.get('checked')}/{source.get('configured')} "
+    f"sources_historical={source.get('checked')}/{source.get('configured')} "
+    f"historical_at={source.get('detectedAt', 'unknown')} "
+    f"sources_latest_readonly={source.get('latestReadOnlyObservation', {}).get('checked', 'unavailable')}/{source.get('latestReadOnlyObservation', {}).get('configured', 'unavailable')} "
+    f"latest_at={source.get('latestReadOnlyObservation', {}).get('observedAtDate', 'unavailable')} "
     f"forms={len(form_rows)} "
     f"fields={field_count} "
     f"workplace_public={len(public_checks)} "

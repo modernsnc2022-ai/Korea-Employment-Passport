@@ -51,5 +51,56 @@
     ],
     "failedHttpStatus": 500,
     "acceptedCurrent": false
+  },
+  "latestReadOnlyObservation": {
+    "schemaVersion": 1,
+    "observedAtDate": "2026-10-17",
+    "evidenceKind": "machine_observation_only_not_manual_signoff",
+    "evidenceFile": "research/source_reviews/indonesia_daily_readonly_2026-10-17.json",
+    "configured": 84,
+    "checked": 84,
+    "fetchFailures": 0,
+    "fetchFailureSourceIds": [],
+    "reviewRequiredSourceIds": [
+      "kdca_qcode_input",
+      "kg_migrant_home",
+      "labor_standards_wage_statement",
+      "lk_slbfe_home",
+      "minimum_wage",
+      "mm_hrdk_schedule_index",
+      "mm_hrdk_skills_candidates",
+      "mm_mol_dol_index",
+      "moel_1350_contact",
+      "moel_wage_arrears_2026",
+      "np_eps_notice_index",
+      "vn_colab_eps_notices"
+    ],
+    "reviewRequiredUrls": [
+      "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "https://migrant.kg/",
+      "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "https://www.slbfe.lk/",
+      "https://www.minimumwage.go.kr/index.jsp",
+      "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "https://www.mol.gov.mm/mol-department-of-labour/",
+      "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "https://epsnepal.gov.np/notices",
+      "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx"
+    ],
+    "unacceptedBaselineDriftCount": 12,
+    "groupCounts": {
+      "korea_shared": 5,
+      "multi_country_eps_schedule": 2,
+      "other_country": 5,
+      "unclassified_requires_manual_scope_review": 0
+    },
+    "humanSemanticReviewApproved": false,
+    "hashBaselineAutoAccepted": false,
+    "exactManufacturingJobDocuments": "hold",
+    "betaAccess": "hold",
+    "authorizesRelease": false,
+    "notice": "This is a dated, read-only technical source fetch. The 12 observed SHA differences are versus the last approved baseline, not 12 new policy changes. A clean fetch is NOT a human source approval. Older 2026-10-14 failures and pending alerts remain in the historical record."
   }
 }
