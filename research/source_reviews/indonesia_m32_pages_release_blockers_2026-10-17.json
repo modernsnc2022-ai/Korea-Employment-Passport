@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "observedAtUTC": "2026-10-17T08:12:24.382893+00:00",
+  "observationDateJakarta": "2026-10-17",
+  "type": "read_only_actual_live_pages_and_official_manual_gate_triage",
+  "verifiedCandidateSHA": "726cb119ad69a2ef9e7f303ae0c9c63ca73dfb63",
+  "publicBranch": "main",
+  "publicFolder": "/docs",
+  "publicMainSHA": "29fde41e697814154e4ebfba2a53ef3a56dbf8b7",
+  "pagesSourceVerdict": "DEPLOYED_MAIN_DRAFT_HEAD_NOT_PUBLISHED",
+  "pagesSourceVerified": true,
+  "servedAssetsMatchingDeployedMain": 9,
+  "servedAssetsMatchingDraftCandidateBySourceAudit": 0,
+  "assetsMatchingDraftCandidateByHttpAudit": 0,
+  "criticalAssetCount": 9,
+  "httpsLegacyEntryPointsVerified": 6,
+  "httpsLegacyEntryPointsTotal": 6,
+  "httpsDowngradeOrRedirectProblem": false,
+  "releaseGates": [
+    {
+      "id": "applicant_route_and_2026_doc_hold",
+      "status": "PASS",
+      "evidence": "27-stage app holds exact job documents and cross-year imports"
+    },
+    {
+      "id": "source_monitor_retrieval",
+      "status": "PASS",
+      "evidence": "84/84 official sources read-only Oct17; 12 drifts not accepted"
+    },
+    {
+      "id": "official_source_human_semantic_signoff",
+      "status": "PENDING",
+      "evidence": "12 source alerts, 20 distinct reviewer tasks, 0 signed"
+    },
+    {
+      "id": "current_2026_manufacturing_final_documents",
+      "status": "PENDING",
+      "evidence": "zero explicit final online Manufacturing notice titles in M30 corrected scope, exact official final annex not verified"
+    },
+    {
+      "id": "published_main_source_integrity",
+      "status": "PASS",
+      "evidence": "authenticated GH Pages main/docs vs current served files 9/9"
+    },
+    {
+      "id": "candidate_head_deployment",
+      "status": "PENDING",
+      "evidence": "0/9 exact candidate served assets; live source 0/9"
+    },
+    {
+      "id": "legacy_https_redirects",
+      "status": "PASS",
+      "evidence": "6/6 HTTPS-only redirects, independently checked"
+    },
+    {
+      "id": "manual_public_beta_open",
+      "status": "PENDING",
+      "evidence": "candidate beta access HOLD, expression of interest intake OPEN"
+    }
+  ],
+  "humanPolicyReviewApproved": false,
+  "sourceHashBaselineAccepted": false,
+  "finalManufacturingJobDocsVerified": false,
+  "sameHeadCandidateDeploymentVerified": false,
+  "productionChangesMade": false,
+  "manualPublicBetaOpenApproved": false,
+  "readyForManualReleaseDecision": false,
+  "betaAccess": "hold",
+  "authorizesRelease": false,
+  "note": "Even 9/9 published main and secure redirects do NOT show the Draft candidate is published. This report has no operator signoff or release authority."
+}
