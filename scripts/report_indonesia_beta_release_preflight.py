@@ -31,6 +31,9 @@ def validate_dated_watch(watch: dict, manifest: dict) -> None:
         from report_daily_indonesia_source_watch import validate_committed_snapshot
         validate_committed_snapshot(watch, manifest,
                                     read_json("monitor/source_hashes.json"), day)
+    elif day == "2026-10-18":
+        from check_m39_oct18_preflight_watch import validate as validate_m39_machine_watch
+        validate_m39_machine_watch(watch, manifest)
     else:
         raise ValueError("No dated reviewed source-scope validator for this day")
 
@@ -44,6 +47,10 @@ def validate_dated_signoff(watch: dict, manifest: dict, signed: dict, day: str) 
         validate_daily_source_signoff(watch, manifest,
                                       read_json("monitor/source_hashes.json"),
                                       signed, day)
+    elif day == "2026-10-18":
+        # Machine-only M38/M39 records must NEVER be promoted to a human
+        # approval, even if a caller inserts synthetic reviewer fields.
+        raise ValueError("2026-10-18 M39 is technical monitoring only; 20 named human review decisions remain unsigned")
     else:
         raise ValueError("No dated source-scope signoff validator for release day")
 
@@ -422,6 +429,38 @@ def self_test() -> None:
     assert g16["same_head_pages_deployment"]=="PENDING"
     assert actual16["readyForManualLaunchDecision"] is False
     assert actual16["authorizesRelease"] is False
+    # M39: a genuine Oct18 machine-only 84/84 source observation is eligible
+    # for technical monitoring, not for semantic approval or release.
+    today18=read_json("research/source_reviews/indonesia_m39_oct18_preflight_technical_watch.json")
+    unsigned18=read_json("recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json")
+    ctx18=args | {"current_watch":today18,"current_signed":unsigned18}
+    report18=build_report("2026-10-18",**ctx18)
+    g18={x["id"]:x["status"] for x in report18["gates"]}
+    assert g18["country_source_classification"]=="PASS"
+    assert g18["official_monitor_today"]=="PASS"
+    assert g18["indonesia_source_manual_signoff"]=="PENDING"
+    assert g18["kp2mi_manufacturing_release_day_signoff"]=="PENDING"
+    assert g18["exact_2026_manufacturing_final_job_documents"]=="PENDING"
+    assert g18["same_head_pages_deployment"]=="PENDING"
+    assert report18["readyForManualLaunchDecision"] is False
+    assert report18["authorizesRelease"] is False
+    forged18=copy.deepcopy(today18)
+    forged18["sourceHashAutoAccepted"]=True
+    invalid18=build_report("2026-10-18",**(ctx18 | {"current_watch":forged18}))
+    assert next(x for x in invalid18["gates"]
+      if x["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    assert invalid18["readyForManualLaunchDecision"] is False
+    forged_signed=copy.deepcopy(unsigned18)
+    forged_signed["status"]="approved_manual_indonesia_scope"
+    forged_signed["reviewer"]="Invented Responsible Reviewer"
+    counterfeit=build_report("2026-10-18",**(ctx18 | {"current_signed":forged_signed}))
+    assert next(x for x in counterfeit["gates"]
+      if x["id"]=="indonesia_source_manual_signoff")["status"]=="BLOCKED"
+    assert counterfeit["readyForManualLaunchDecision"] is False
+    stale18=build_report("2026-10-19",**ctx18)
+    assert next(x for x in stale18["gates"]
+      if x["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    assert stale18["authorizesRelease"] is False
     forged16=copy.deepcopy(day16)
     forged16["candidateKoreaSharedIds"].remove("minimum_wage")
     corrupt16=build_report("2026-10-16",
@@ -692,6 +731,8 @@ def main() -> None:
         "2026-10-16": ("research/source_reviews/shared_source_watch_readonly_2026-10-16.json",
                        "recruitment/ID_BETA_SOURCE_SIGNOFF_20261016.json"),
         "2026-10-17": ("research/source_reviews/indonesia_daily_readonly_2026-10-17.json",
+                       "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"),
+        "2026-10-18": ("research/source_reviews/indonesia_m39_oct18_preflight_technical_watch.json",
                        "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"),
     }
     selected = dated_evidence.get(as_of)
