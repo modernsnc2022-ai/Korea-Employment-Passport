@@ -522,6 +522,19 @@ function latestReadOnlyObservation(){
      s.hashBaselineAutoAccepted!==false||
      s.exactManufacturingJobDocuments!=='hold'||
      s.betaAccess!=='hold'||s.authorizesRelease!==false)return null;
+  // Earlier review alerts are append-only evidence: a new or altered
+  // historical source cannot disappear behind a stale "latest" snapshot.
+  // Require every older source-ID/URL pair to be represented in the newer
+  // technical observation; otherwise all source-based guidance fails closed.
+  const olderIds=status.reviewRequiredSourceIds;
+  const olderUrls=status.reviewRequiredUrls;
+  if(!Array.isArray(olderIds)||!Array.isArray(olderUrls)||
+     olderIds.length!==olderUrls.length||
+     new Set(olderIds).size!==olderIds.length||
+     olderIds.some((id,i)=>{
+       const idx=ids.indexOf(id);
+       return idx<0||normalizeSourceUrl(olderUrls[i])!==normalizeSourceUrl(urls[idx]);
+     }))return null;
   return s;
 }
 

@@ -14,6 +14,9 @@ async function freshPage(page, options = {}) {
     // The app still fetches the guarded URL, intercepted and fulfilled here.
     const status = JSON.parse(fs.readFileSync(sourceReviewFixturePath, 'utf8'));
     if (sourceState === 'clean') {
+      // This synthetic clean fixture represents a separately reviewed
+      // source state, not the actual 12-alert read-only observation.
+      delete status.latestReadOnlyObservation;
       status.state = 'clean';
       status.reviewRequiredUrls = [];
       status.reviewRequiredSourceIds = [];
@@ -21,6 +24,9 @@ async function freshPage(page, options = {}) {
       status.fetchFailureSourceIds = [];
       status.message = 'Test fixture: no unreviewed official-source changes.';
     } else if (sourceState === 'review_required') {
+      // Isolate a known single-source alert without contradictory M41
+      // machine-only observation data masking the intended test route.
+      delete status.latestReadOnlyObservation;
       status.state = 'review_required';
       status.reviewRequiredUrls = [
         'https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-ketentuan-pelaksanaan-pemeriksaan-psikologi-bagi-calon-pekerja-migran-indonesia-program-g-to-g-ke-korea-selatan-kelulusan-sebelum-tahun-2026-dan-kelulusan-tahun-2026'

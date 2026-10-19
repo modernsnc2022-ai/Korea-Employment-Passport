@@ -196,12 +196,27 @@ test('Official source warnings remain visible until review signoff and do not au
   expect(data.fetchFailureSourceIds).toEqual(['np_eps_notice_index']);
   expect(data.fetchFailureUrls).toEqual(['https://epsnepal.gov.np/notices']);
   expect(data.currentScan.changedSourceIds).toHaveLength(7);
+  // Historical 83/84 evidence remains untouched; the newer observation is
+  // technical-only and may never promote any unresolved source policy.
+  const latest=data.latestReadOnlyObservation;
+  expect(latest?.evidenceKind).toBe('machine_observation_only_not_manual_signoff');
+  expect(latest?.checked).toBe(84);
+  expect(latest?.configured).toBe(84);
+  expect(latest?.unacceptedBaselineDriftCount).toBe(12);
+  expect(latest?.groupCounts).toMatchObject({
+    korea_shared:5,multi_country_eps_schedule:2,other_country:5,
+    unclassified_requires_manual_scope_review:0
+  });
+  expect(latest?.humanSemanticReviewApproved).toBe(false);
+  expect(latest?.hashBaselineAutoAccepted).toBe(false);
+  expect(latest?.exactManufacturingJobDocuments).toBe('hold');
+  expect(latest?.betaAccess).toBe('hold');
   await page.goto('/app.html', { waitUntil:'domcontentloaded' });
   await expect(page.locator('#freshnessStatus')).toBeVisible();
-  await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau');
-  await expect(page.locator('#freshnessStatus')).toContainText('3 sumber terkait Indonesia/Korea, 5 sumber negara lain');
-  await expect(page.locator('#freshnessStatus')).toContainText('1 sumber negara lain gagal diakses');
-  await expect(page.locator('#freshnessStatus')).toContainText('tidak diubah otomatis');
+  await expect(page.locator('#freshnessStatus')).toContainText('12 sumber berbeda');
+  await expect(page.locator('#freshnessStatus')).toContainText('5 sumber Korea umum, 2 sumber jadwal HRD Korea lintas negara');
+  await expect(page.locator('#freshnessStatus')).toContainText('Persetujuan manual: belum selesai');
+  await expect(page.locator('#freshnessStatus')).toContainText('beta publik tetap ditahan');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
 
@@ -238,7 +253,9 @@ test('offline service-worker cache refreshes 2026 Skill Test guidance and offici
   const response = await request.get('/sw.js');
   expect(response.status()).toBe(200);
   const script = await response.text();
-  expect(script).toContain("const CACHE='kep-v137'");
+  const cacheVersion=script.match(/const CACHE='kep-v(\d+)'/);
+  expect(cacheVersion).not.toBeNull();
+  expect(Number(cacheVersion[1])).toBeGreaterThanOrEqual(141);
   for (const name of ['id_e9_manufacturing_2026.json','id_e9_manufacturing_2026_id.json','exact_answer_rules_v1.json','source_review_status.json']) {
     expect(script).toContain("./data/" + name);
   }
@@ -256,9 +273,11 @@ test('Unrecognized new official source is never wrongly excluded from Indonesian
   });
   await page.goto('/app.html', {waitUntil:'domcontentloaded'});
   await expect(page.locator('#freshnessStatus')).toBeVisible();
-  await expect(page.locator('#freshnessStatus')).toContainText('9 sumber perlu ditinjau');
-  await expect(page.locator('#freshnessStatus')).toContainText('4 sumber terkait Indonesia/Korea, 5 sumber negara lain');
-  await expect(page.locator('#freshnessStatus')).toContainText('Aturan tidak diubah otomatis');
+  // The unrecognized historical alert is not in the latest signed-off-by-
+  // nobody machine snapshot: require invalid-evidence fail-closed rather than
+  // silently showing the stale count of 12.
+  await expect(page.locator('#freshnessStatus')).toContainText('BUKTI PEMANTAUAN TIDAK VALID');
+  await expect(page.locator('#freshnessStatus')).toContainText('Semua jawaban yang bergantung pada sumber resmi ditahan');
   await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
 });
 
@@ -404,8 +423,8 @@ test('critical official source warnings recover after one transient network erro
     else await route.continue();
   });
   await page.goto('/app.html');
-  await expect(page.locator('#freshnessStatus')).toContainText('8 sumber perlu ditinjau',{timeout:12000});
-  await expect(page.locator('#freshnessStatus')).toContainText('3 sumber terkait Indonesia/Korea, 5 sumber negara lain');
+  await expect(page.locator('#freshnessStatus')).toContainText('12 sumber berbeda',{timeout:12000});
+  await expect(page.locator('#freshnessStatus')).toContainText('5 sumber Korea umum, 2 sumber jadwal HRD Korea lintas negara');
   expect(attempts).toBeGreaterThanOrEqual(2);
 });
 
