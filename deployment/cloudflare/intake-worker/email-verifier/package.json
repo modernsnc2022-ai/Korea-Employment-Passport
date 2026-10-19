@@ -1,0 +1,6 @@
+{
+  "name": "kep-private-email-ownership-verifier",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test test/*.test.mjs"}
+}

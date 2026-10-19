@@ -9,7 +9,8 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "recruitment" / "MANUFACTURING_LAUNCH_CHECK.json"
-PRIMARY_INDEX = "https://kp2mi.go.id/gtog-korea/info"
+PRIMARY_INDEX = "https://kp2mi.go.id/gtog-korea/pengumuman"
+HISTORICAL_WRONG_INDEX = "https://kp2mi.go.id/gtog-korea/info"
 NO_NOTICE = "no_current_manufacturing_job_application_notice"
 NOTICE_FOUND = "notice_found_review_required"
 ALLOWED_RESULTS = {NO_NOTICE, NOTICE_FOUND}
@@ -34,6 +35,8 @@ def updated_record(
     checked_at: str,
     result: str,
     notice_url: str | None = None,
+    full_inventory_url: str | None = None,
+    confirm_full_inventory: bool = False,
 ) -> dict:
     try:
         date.fromisoformat(checked_at)
@@ -49,11 +52,65 @@ def updated_record(
     elif notice_url:
         fail("notice-url is only valid with notice_found_review_required")
 
+    if confirm_full_inventory != bool(full_inventory_url):
+        fail("a completed index review requires both --full-inventory-url and --confirm-full-inventory")
+    if full_inventory_url:
+        validate_official_url(full_inventory_url)
+        target = urlparse(full_inventory_url)
+        path = target.path.lower()
+        if path.rstrip("/") != "/gtog-korea/pengumuman" or target.query or target.fragment:
+            fail("full inventory URL must be the verified official KP2MI Pengumuman listing, not Preliminary Training or an invented index")
+
     record = json.loads(json.dumps(current))
     record["checkedAt"] = checked_at
     record["result"] = result
     record["primaryIndex"] = PRIMARY_INDEX
     record["heldQuestions"] = list(LOCKED_HOLDS)
+    # New human approval is never inherited. Preserve the independently
+    # collected *historical evidence and its original timestamps*, though:
+    # overwriting the entire coverage object used to silently delete seven
+    # official HTML + six official PDF annex provenance records.
+    previous_coverage = record.get("noticeIndexCoverage") or {}
+    if not isinstance(previous_coverage, dict):
+        fail("existing noticeIndexCoverage must be an object")
+    prior_independent_evidence = previous_coverage.get("latestIndependentEvidence")
+    if prior_independent_evidence is not None and not isinstance(prior_independent_evidence, dict):
+        fail("latestIndependentEvidence must be an object with original dates")
+    # A new daily manual check must never inherit an old index-coverage signoff.
+    record["noticeIndexCoverage"] = {
+        "status": (
+            "verified_complete_general_manufacturing_index_review"
+            if confirm_full_inventory else "correct_pengumuman_2026_inventory_read_pending_operator_signoff"
+        ),
+        "checkedAt": checked_at,
+        "previouslyAssumedIndex": HISTORICAL_WRONG_INDEX,
+        "currentCategory": "Pengumuman",
+        "currentListingUrl": PRIMARY_INDEX,
+        "serverSideAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+        "historicalMistakenPageTitle": "Preliminary Training dan Info",
+        "historicalMistakenAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
+        "completeGeneralManufacturingInventory": bool(confirm_full_inventory),
+        "officialManufacturingInventoryUrl": full_inventory_url,
+        "operatorConfirmedCompleteReview": bool(confirm_full_inventory),
+        "notes": (
+            "Operator explicitly reviewed official General Manufacturing announcement listing and confirmed the complete cohort inventory."
+            if confirm_full_inventory else
+            "The right Pengumuman category is identified, but a release-day full 2026 Manufacturing notice review and manual signoff are still required."
+        ),
+    }
+    if prior_independent_evidence is not None:
+        record["noticeIndexCoverage"]["latestIndependentEvidence"] = prior_independent_evidence
+    # Keep the nested official-evidence timestamp in sync. A new release-day
+    # audit must never look current merely because the top-level date changed.
+    record["sameDayOfficialRecheck"] = {
+        "checkedAt": checked_at,
+        "status": (
+            "completed_no_detailed_manufacturing_notice_found"
+            if result == NO_NOTICE else "notice_found_review_required"
+        ),
+        "queryScope": "KP2MI G-to-G Korea official 2026 Manufacturing notice index",
+        "repeatOnActualReleaseDay": True,
+    }
 
     if result == NOTICE_FOUND:
         evidence = list(record.get("officialEvidence", []))
@@ -86,6 +143,12 @@ def self_test() -> None:
     assert clean["checkedAt"] == "2026-10-04"
     assert clean["result"] == NO_NOTICE
     assert clean["heldQuestions"] == LOCKED_HOLDS
+    assert clean["noticeIndexCoverage"]["completeGeneralManufacturingInventory"] is False
+    assert clean["noticeIndexCoverage"]["officialManufacturingInventoryUrl"] is None
+    assert clean["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-04"
+    assert clean["sameDayOfficialRecheck"]["status"] == (
+        "completed_no_detailed_manufacturing_notice_found"
+    )
 
     found = updated_record(
         base,
@@ -94,7 +157,78 @@ def self_test() -> None:
         notice_url="https://kp2mi.go.id/gtog-detail/korea/example-manufacturing-notice",
     )
     assert found["result"] == NOTICE_FOUND
+    assert found["sameDayOfficialRecheck"]["status"] == "notice_found_review_required"
+    assert found["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-04"
     assert found["officialEvidence"][-1]["url"].startswith("https://kp2mi.go.id/")
+    # Structural self-test never fetches or attests current content.
+    example = PRIMARY_INDEX
+    signed = updated_record(base, checked_at="2026-10-04", result=NO_NOTICE,
+                            full_inventory_url=example, confirm_full_inventory=True)
+    assert signed["noticeIndexCoverage"]["completeGeneralManufacturingInventory"] is True
+    assert signed["noticeIndexCoverage"]["officialManufacturingInventoryUrl"] == example
+    assert signed["noticeIndexCoverage"]["historicalMistakenPageTitle"] == "Preliminary Training dan Info"
+    assert signed["noticeIndexCoverage"]["serverSideAjaxUrl"] == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
+    assert "actualCategory" not in signed["noticeIndexCoverage"]
+    assert "serverSideAjax" not in signed["noticeIndexCoverage"]
+    # Review evidence survives a *new* review, but prior operator approval
+    # and prior independent-fetch timestamps must never be promoted.
+    evidence_base = json.loads(json.dumps(base))
+    preserved = {
+        "retrievedAtUtc": "2026-10-14T03:14:24+00:00",
+        "index2026TitleCount": 184,
+        "metadataSha256": "example-public-hash",
+        "operatorReviewedAndApproved": False,
+        "optionalCompetencyPdfAnnexReview": {
+            "officialPdfLinksFetched": 6, "humanOperatorSignedOff": False,
+        },
+    }
+    evidence_base["noticeIndexCoverage"] = {
+        "operatorConfirmedCompleteReview": True,
+        "status": "verified_complete_general_manufacturing_index_review",
+        "latestIndependentEvidence": preserved,
+    }
+    next_day = updated_record(
+        evidence_base, checked_at="2026-10-15", result=NO_NOTICE,
+    )
+    coverage = next_day["noticeIndexCoverage"]
+    assert coverage["latestIndependentEvidence"] == preserved
+    assert coverage["latestIndependentEvidence"]["retrievedAtUtc"] == "2026-10-14T03:14:24+00:00"
+    assert coverage["checkedAt"] == "2026-10-15"
+    assert coverage["operatorConfirmedCompleteReview"] is False
+    assert coverage["latestIndependentEvidence"]["operatorReviewedAndApproved"] is False
+    assert coverage["latestIndependentEvidence"]["optionalCompetencyPdfAnnexReview"]["humanOperatorSignedOff"] is False
+    assert next_day["sameDayOfficialRecheck"]["checkedAt"] == "2026-10-15"
+    next_day_signed = updated_record(
+        evidence_base, checked_at="2026-10-15", result=NO_NOTICE,
+        full_inventory_url=PRIMARY_INDEX, confirm_full_inventory=True,
+    )
+    assert next_day_signed["noticeIndexCoverage"]["latestIndependentEvidence"] == preserved
+    try:
+        updated_record(
+            {"noticeIndexCoverage": {"latestIndependentEvidence": "untrusted"}},
+            checked_at="2026-10-15", result=NO_NOTICE,
+        )
+    except ValueError as exc:
+        assert "latestIndependentEvidence" in str(exc)
+    else:
+        raise AssertionError("Malformed public evidence accepted")
+    for bad_url in [HISTORICAL_WRONG_INDEX, "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info",
+                    "https://kp2mi.go.id/gtog-detail/korea/single-notice",
+                    "https://kp2mi.go.id/gtog-korea/verified-index-example"]:
+        try:
+            updated_record(base, checked_at="2026-10-04", result=NO_NOTICE,
+                           full_inventory_url=bad_url, confirm_full_inventory=True)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Incomplete/non-manufacturing listing was accepted")
+    try:
+        updated_record(base, checked_at="2026-10-04", result=NO_NOTICE,
+                       full_inventory_url=example)
+    except ValueError as exc:
+        assert "both" in str(exc)
+    else:
+        raise AssertionError("Complete-index review was accepted without explicit confirmation")
 
     try:
         updated_record(
@@ -122,6 +256,10 @@ def main() -> int:
     parser.add_argument("--checked-at")
     parser.add_argument("--result", choices=sorted(ALLOWED_RESULTS))
     parser.add_argument("--notice-url")
+    parser.add_argument("--full-inventory-url",
+                        help="Exact authoritative KP2MI G-to-G Korea announcements-list URL, NOT /gtog-korea/info")
+    parser.add_argument("--confirm-full-inventory", action="store_true",
+                        help="Explicit human attestation after checking current General Manufacturing notices in full")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -139,6 +277,8 @@ def main() -> int:
             checked_at=str(args.checked_at),
             result=str(args.result),
             notice_url=args.notice_url,
+            full_inventory_url=args.full_inventory_url,
+            confirm_full_inventory=args.confirm_full_inventory,
         )
     except ValueError as exc:
         raise SystemExit("MANUFACTURING_LAUNCH_CHECK_BLOCKED " + str(exc)) from exc

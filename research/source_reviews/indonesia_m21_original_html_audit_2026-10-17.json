@@ -1,0 +1,245 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-17",
+  "mode": "read_only_12_original_html_pages",
+  "koreaSourceCount": 5,
+  "kp2miManufacturingDetailCount": 7,
+  "koreaOfficialText": [
+    {
+      "id": "minimum_wage",
+      "url": "https://www.minimumwage.go.kr/index.jsp",
+      "finalUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "normalizedTextSha256": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12",
+      "matches20261017SourceMonitorSha": true,
+      "normalizedTextLength": 1886,
+      "safeTlsMode": "ca_verified",
+      "officialTextAnchorsPresent": {
+        "10,320": true,
+        "2026": true
+      },
+      "semanticReview": "pending_named_human_review",
+      "autoRuleUpdate": false
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "finalUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "normalizedTextSha256": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786",
+      "matches20261017SourceMonitorSha": true,
+      "normalizedTextLength": 397,
+      "safeTlsMode": "ca_verified",
+      "officialTextAnchorsPresent": {
+        "제48조": true,
+        "임금명세서": true
+      },
+      "semanticReview": "pending_named_human_review",
+      "autoRuleUpdate": false
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "finalUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "normalizedTextSha256": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c",
+      "matches20261017SourceMonitorSha": true,
+      "normalizedTextLength": 1441,
+      "safeTlsMode": "ca_verified",
+      "officialTextAnchorsPresent": {
+        "임금체불": true,
+        "진정": true
+      },
+      "semanticReview": "pending_named_human_review",
+      "autoRuleUpdate": false
+    },
+    {
+      "id": "kdca_qcode_input",
+      "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "finalUrl": "https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do",
+      "normalizedTextSha256": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee",
+      "matches20261017SourceMonitorSha": true,
+      "normalizedTextLength": 2075,
+      "safeTlsMode": "ca_verified",
+      "officialTextAnchorsPresent": {
+        "검역": true
+      },
+      "semanticReview": "pending_named_human_review",
+      "autoRuleUpdate": false
+    },
+    {
+      "id": "moel_1350_contact",
+      "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "finalUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "normalizedTextSha256": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71",
+      "matches20261017SourceMonitorSha": true,
+      "normalizedTextLength": 1057,
+      "safeTlsMode": "ca_verified",
+      "officialTextAnchorsPresent": {
+        "1350": true,
+        "09:00": true,
+        "18:00": true
+      },
+      "semanticReview": "pending_named_human_review",
+      "autoRuleUpdate": false
+    }
+  ],
+  "manufacturingNoticeHtml": [
+    {
+      "date": "2026-09-17",
+      "title": "PENGUMUMAN PERSYARATAN UNGGAH DOKUMEN KOMPETENSI PESERTA SKILL TEST UBT UMUM SEKTOR MANUFAKTUR EPS-TOPIK TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "category": "2026_manufacturing_skill_or_optional_competency",
+      "textSha256": "d251073135886f4bd019fb1af642786e31256e903a861fc98d47f231d8bfe3cb",
+      "normalizedTextLength": 5698,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_CONTOH_SCAN_DOKUMEN_KOMPTENSI_YANG_BENAR.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_SURAT_KONFIRMASI_DASAR_FAKTUAL_PENGALAMAN_KERJA.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf"
+      ],
+      "attachmentCount": 6,
+      "previouslyIndexedAttachmentCount": 6,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-09-10",
+      "title": "PENGUMUMAN HASIL UJIAN KEMAMPUAN BAHASA KOREA EPS-TOPIK UBT UMUM SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "b5cdd016a2026a37831fbbc17ff6a944576309ca71be82df03e17819dba32413",
+      "normalizedTextLength": 4196,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_10-09-2026_Daftar_CPMI_yang_Lulus_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026.pdf"
+      ],
+      "attachmentCount": 1,
+      "previouslyIndexedAttachmentCount": 1,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-05-05",
+      "title": "PENGUMUMAN PENGEMBALIAN BIAYA UJIAN EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026 (TAHAP PERTAMA)",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pengembalian-biaya-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026-tahap-pertama",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "1f74b6a5c17205d047723f642e6ee1e1185939099f1af8160fc264abf48bec6b",
+      "normalizedTextLength": 4260,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_06-05-2026_Daftar_CPMI_yang_Berhasil_Dilakukan_Refund_per_30_April_2026.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_06-05-2026_Daftar_CPMI_yang_Gagal_Dilakukan_Refund_per_30_April_2026.pdf"
+      ],
+      "attachmentCount": 2,
+      "previouslyIndexedAttachmentCount": 2,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-03-27",
+      "title": "PENGUMUMAN PELAKSANAAN UJIAN EPS TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "f53e6f99fc43897f6360b9120ff9deb8e2399b6bc83393b249f426fa9e92a268",
+      "normalizedTextLength": 8946,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Jakarta).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Semarang).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Surabaya).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Jakarta).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Semarang).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Surabaya).pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf"
+      ],
+      "attachmentCount": 7,
+      "previouslyIndexedAttachmentCount": 7,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-02-16",
+      "title": "PENGUMUMAN PEMANGGILAN PEREKAMAN BIOMETRIK DAN VERIFIKASI DOKUMEN ONLINE PESERTA/PENDAFTAR PROGRAM G TO G KOREA EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemanggilan-perekaman-biometrik-dan-verifikasi-dokumen-online-peserta-pendaftar-program-g-to-g-korea-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "a7733d9d03d013b2889c89ec1e69400d8b7d58c36c1a84b8f758bd78c9ac28fc",
+      "normalizedTextLength": 6107,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_15-02-2026_DAFTAR_ALAMAT_LOKASI_PEREKAMAN_BIOMETRIK.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_15-02-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_16-02-2026_PETUNJUK_TEKNIS_PERBAIKAN_DOKUMEN.pdf"
+      ],
+      "attachmentCount": 3,
+      "previouslyIndexedAttachmentCount": 3,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-02-10",
+      "title": "PENGUMUMAN PENYESUAIAN WAKTU PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGRAM G TO G KE KOREA SELATAN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-penyesuaian-waktu-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-program-g-to-g-ke-korea-selatan-tahun-2026",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "27d523230c6e206c7591ea14cda55e0b9484187c5633107d61bb16556db40e1c",
+      "normalizedTextLength": 3316,
+      "lamaranOnlineOccurrencesRawPageText": 0,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_10-02-2026_Lampiran.pdf"
+      ],
+      "attachmentCount": 1,
+      "previouslyIndexedAttachmentCount": 1,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    },
+    {
+      "date": "2026-01-27",
+      "title": "PENGUMUMAN PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGAM G TO G KE KOREA SELATAN DENGAN SISTEM POIN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "category": "2026_manufacturing_other_notice",
+      "textSha256": "71182055f08eb0000cb2729748e4572b379ff9aba3ca84a2a20a2fe82e2b710a",
+      "normalizedTextLength": 12286,
+      "lamaranOnlineOccurrencesRawPageText": 3,
+      "attachmentUrls": [
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_09-02-2026_Surat_Pernyataan_Pelindungan_Data_Pribadi.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+        "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf"
+      ],
+      "attachmentCount": 4,
+      "previouslyIndexedAttachmentCount": 4,
+      "attachmentLinkCountConsistentWithPriorReview": true,
+      "historicalHtmlTextSha256": null,
+      "semanticReview": "pending_named_human_review",
+      "attachmentPdfContentsReviewedToday": false,
+      "exactFinalManufacturingJobDocsVerified": false
+    }
+  ],
+  "attachmentLinksTotal": 24,
+  "appendixContentReviewedToday": false,
+  "allOriginalPageContentManuallyReviewed": false,
+  "sourceHashAutomaticallyAccepted": false,
+  "humanOfficialSemanticSignoff": false,
+  "jobDocs": "hold",
+  "betaAccess": "hold",
+  "authorizesRelease": false,
+  "caveat": "HTML original-text anchors and PDF LINK counts only, not policy interpretation, PDF content verification, signed decision, or final online job-document checklist."
+}

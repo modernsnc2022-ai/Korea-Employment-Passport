@@ -5,6 +5,11 @@ const RECRUITMENT_SOURCES_URL='data/beta_recruitment_sources_v1.json';
 let betaProgram=null,betaRoute=null,betaI18n={};
 let betaRecruitmentSourceCodes=new Set(['website']);
 let betaRecruitmentDefaultCode='website';
+let intakeTurnstileToken='';
+let intakeTurnstileWidgetId=null;
+let intakeTurnstileInit=false;
+let intakeEmailCodeRequested=false;
+let intakeEmailResendTimer=null;
 
 const $=(id)=>document.getElementById(id);
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -107,10 +112,81 @@ function directIntakeEndpoint(){
   return String(betaProgram?.application?.directIntake?.endpoint||'').trim();
 }
 
+function turnstileSiteKey(){
+  return String(betaProgram?.application?.directIntake?.turnstileSiteKey||'').trim();
+}
 function directIntakeEnabled(){
-  const endpoint=directIntakeEndpoint();
-  if(!endpoint)return false;
-  try{return new URL(endpoint).protocol==='https:'}catch{return false}
+  const direct=betaProgram?.application?.directIntake||{};
+  // Configuring an endpoint and public site key must NEVER open a private
+  // application form without a separate, dated manual direct-intake approval.
+  if(direct.releaseDecision!=='approved_manual'||typeof direct.approvedAt!=='string'
+    ||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(direct.approvedAt)
+    ||Number.isNaN(Date.parse(direct.approvedAt)))return false;
+  const endpoint=directIntakeEndpoint(),siteKey=turnstileSiteKey();
+  if(!endpoint||!/^[A-Za-z0-9_-]{6,128}$/.test(siteKey))return false;
+  try{
+    const u=new URL(endpoint);
+    return u.protocol==='https:'&&u.username===''&&u.password===''
+      &&u.pathname==='/v1/beta/applicant'&&!u.search&&!u.hash;
+  }catch{return false;}
+}
+function setupTurnstile(){
+  if(intakeTurnstileInit||!directIntakeEnabled())return;
+  intakeTurnstileInit=true;
+  const mount=$('intakeTurnstileMount');
+  const render=()=>{
+    if(!window.turnstile?.render)return;
+    intakeTurnstileWidgetId=window.turnstile.render(mount,{
+      sitekey:turnstileSiteKey(),
+      callback:(token)=>{intakeTurnstileToken=String(token||'');},
+      'expired-callback':()=>{intakeTurnstileToken='';},
+      'error-callback':()=>{intakeTurnstileToken='';}
+    });
+  };
+  if(window.turnstile?.render){render();return;}
+  const script=document.createElement('script');
+  script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  script.async=true;
+  script.defer=true;
+  script.onload=render;
+  script.onerror=()=>{
+    intakeTurnstileToken='';
+    const out=$('applicationResult');
+    out.hidden=false;out.className='result warn';
+    out.textContent='Verifikasi keamanan belum tersedia. Gunakan Buka Gmail atau Salin teks pendaftaran.';
+  };
+  document.head.appendChild(script);
+}
+function resetTurnstile(){
+  intakeTurnstileToken='';
+  if(window.turnstile?.reset&&intakeTurnstileWidgetId!==null){
+    try{window.turnstile.reset(intakeTurnstileWidgetId);}catch{}
+  }
+}
+
+function clearEmailCodeResend(){
+  if(intakeEmailResendTimer!==null){
+    clearTimeout(intakeEmailResendTimer);
+    intakeEmailResendTimer=null;
+  }
+  const button=$('applicantEmailResendBtn');
+  button.hidden=true;
+  button.disabled=true;
+  button.textContent='Kirim ulang kode';
+}
+function startEmailCodeResendCooldown(){
+  clearEmailCodeResend();
+  const button=$('applicantEmailResendBtn');
+  button.hidden=false;
+  button.disabled=true;
+  button.textContent='Kirim ulang kode (60 detik)';
+  intakeEmailResendTimer=setTimeout(()=>{
+    intakeEmailResendTimer=null;
+    if(intakeEmailCodeRequested){
+      button.disabled=false;
+      button.textContent='Kirim ulang kode';
+    }
+  },60000);
 }
 
 function applicantFormComplete(){
@@ -132,22 +208,39 @@ function directApplicantPayload(){
     sourceCode:recruitmentSourceCode(),
     activeProcess:$('activeProcess').checked===true,
     feedbackAgreement:$('feedbackAgreement').checked===true,
-    website:String($('intakeWebsite').value||'')
+    website:String($('intakeWebsite').value||''),
+    turnstileToken:intakeTurnstileToken
   };
 }
 
-async function submitDirectApplicant(){
-  const response=await fetch(directIntakeEndpoint(),{
+async function submitDirectApplicant(requestCode=false){
+  const body=directApplicantPayload();
+  if(!requestCode)body.verificationCode=String($('applicantEmailCode').value||'').trim();
+  const endpoint=directIntakeEndpoint()+(requestCode?'/verify-request':'');
+  const response=await fetch(endpoint,{
     method:'POST',
     mode:'cors',
     credentials:'omit',
     cache:'no-store',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(directApplicantPayload())
+    body:JSON.stringify(body)
   });
   let payload={};
   try{payload=await response.json()}catch{}
   if(!response.ok)throw new Error(String(payload?.error||'HTTP '+response.status));
+  if(requestCode){
+    if(response.status!==202||payload?.ok!==true||payload.verificationRequired!==true){
+      throw new Error('No email verification challenge confirmed');
+    }
+    return payload;
+  }
+  // Only an explicit acknowledgement with a bounded reference can mean
+  // the private intake actually stored this registration. A bare HTTP 200,
+  // empty JSON, or {ok:false} must NOT produce a false success message.
+  if(payload?.ok!==true||typeof payload.submissionId!=='string'
+    ||!/^KEP-I-[A-Za-z0-9-]{6,48}$/.test(payload.submissionId)){
+    throw new Error('Missing verified intake receipt');
+  }
   return payload;
 }
 
@@ -257,6 +350,8 @@ function renderProgram(program){
   $('communityShareSource').textContent=shareSource;
   const direct=directIntakeEnabled();
   $('directIntakeFields').hidden=!direct;
+  $('directIntakeChallenge').hidden=!direct;
+  if(direct)setupTurnstile();
   $('applicantContactEmail').required=direct;
   $('betaApplicationSubmitBtn').textContent=direct?'Kirim pendaftaran':'Kirim lewat aplikasi email';
   $('applicationSendHelp').textContent=direct
@@ -284,28 +379,105 @@ $('betaApplicationForm').addEventListener('submit',async(event)=>{
     if(!validContactEmail($('applicantContactEmail').value)){
       out.hidden=false;out.className='result warn';out.textContent='Masukkan alamat email yang valid untuk menerima keputusan beta.';return;
     }
+    if(!intakeTurnstileToken){
+      out.hidden=false;out.className='result warn';
+      out.textContent='Selesaikan verifikasi keamanan sebelum kirim langsung, atau gunakan Buka Gmail / Salin teks pendaftaran.';
+      return;
+    }
+    const requestCode=!intakeEmailCodeRequested;
+    if(!requestCode&&!/^\d{8}$/.test(String($('applicantEmailCode').value||'').trim())){
+      out.hidden=false;out.className='result warn';
+      out.textContent='Masukkan kode verifikasi 8 digit dari email Anda sebelum mengirim pendaftaran.';
+      return;
+    }
     const button=$('betaApplicationSubmitBtn');
     button.disabled=true;
     const previous=button.textContent;
     button.textContent='Mengirim…';
     try{
-      const result=await submitDirectApplicant();
-      out.hidden=false;out.className='result';
-      out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+String(result.submissionId||'diterima')+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
-      $('betaApplicationForm').reset();
+      const result=await submitDirectApplicant(requestCode);
+      out.hidden=false;
+      if(requestCode){
+        intakeEmailCodeRequested=true;
+        $('applicantEmailCodeFields').hidden=false;
+        $('applicantEmailCode').required=true;
+        startEmailCodeResendCooldown();
+        button.textContent='Konfirmasi email dan kirim';
+        out.className='result warn';
+        out.textContent='Kode verifikasi email diminta. Periksa kotak masuk dan masukkan 8 digit dalam 10 menit. Belum ada pendaftaran yang diterima.';
+        resetTurnstile();
+      }else{
+        out.className='result';
+        out.textContent='Pendaftaran diterima langsung. Simpan kode referensi: '+result.submissionId+'. Tim akan meninjau pendaftaran tanpa meminta dokumen identitas.';
+        $('betaApplicationForm').reset();
+        intakeEmailCodeRequested=false;
+        $('applicantEmailCodeFields').hidden=true;
+        $('applicantEmailCode').required=false;
+        clearEmailCodeResend();
+        resetTurnstile();
+      }
     }catch{
       out.hidden=false;out.className='result warn';
       out.textContent='Pengiriman langsung belum berhasil. Data belum dianggap terkirim. Gunakan “Buka Gmail” atau “Salin teks pendaftaran” sebagai cadangan.';
+      resetTurnstile();
     }finally{
       button.disabled=false;
-      button.textContent=previous;
+      button.textContent=intakeEmailCodeRequested?'Konfirmasi email dan kirim':previous;
     }
     return;
   }
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent('[KEP Beta Interest] Active EPS applicant');
   const body=encodeURIComponent(applicationText());
+  // mailto: opens a composer; it does not prove anything was sent.
+  out.hidden=false;out.className='result warn';
+  out.textContent='Aplikasi email akan dibuka. Pendaftaran BELUM terkirim sampai Anda menekan Kirim di aplikasi email dan memastikan pesan ada di folder Terkirim. Jika tidak terbuka, pilih Buka Gmail atau Salin teks pendaftaran.';
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+});
+
+$('applicantContactEmail').addEventListener('input',()=>{
+  // Changing the email invalidates any pending code from a previous address.
+  intakeEmailCodeRequested=false;
+  $('applicantEmailCodeFields').hidden=true;
+  $('applicantEmailCode').required=false;
+  $('applicantEmailCode').value='';
+  clearEmailCodeResend();
+  if(directIntakeEnabled())$('betaApplicationSubmitBtn').textContent='Kirim pendaftaran';
+});
+
+$('applicantEmailResendBtn').addEventListener('click',async()=>{
+  const resend=$('applicantEmailResendBtn');
+  if(resend.disabled||!intakeEmailCodeRequested||!directIntakeEnabled())return;
+  const out=$('applicationResult');
+  if(!applicantFormComplete()||!validContactEmail($('applicantContactEmail').value)){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Periksa kembali tahap, tahun proses, persetujuan, dan alamat email.';
+    return;
+  }
+  if(!intakeTurnstileToken){
+    out.hidden=false;out.className='result warn';
+    out.textContent='Selesaikan verifikasi keamanan baru sebelum meminta ulang kode.';
+    return;
+  }
+  const submit=$('betaApplicationSubmitBtn');
+  resend.disabled=true;
+  submit.disabled=true;
+  try{
+    await submitDirectApplicant(true);
+    $('applicantEmailCode').value='';
+    startEmailCodeResendCooldown();
+    out.hidden=false;out.className='result warn';
+    out.textContent='Kode baru diminta. Periksa email Anda. Kode sebelumnya tidak berlaku lagi. Pendaftaran BELUM diterima.';
+  }catch{
+    // Provider rejection does not prove the old code was invalidated.
+    // Preserve user input instead of silently losing a possibly valid code.
+    resend.disabled=false;
+    out.hidden=false;out.className='result warn';
+    out.textContent='Permintaan kode baru gagal. Periksa jeda pengiriman atau gunakan kode sebelumnya jika masih berlaku. Data belum dianggap terkirim.';
+  }finally{
+    submit.disabled=false;
+    resetTurnstile();
+  }
 });
 
 $('gmailApplicationBtn').addEventListener('click',()=>{
@@ -319,10 +491,10 @@ $('gmailApplicationBtn').addEventListener('click',()=>{
   const email=betaProgram.application?.email||'modernsnc2022@gmail.com';
   const url=gmailComposeUrl(email,'[KEP Beta Interest] Active EPS applicant',applicationText());
   const opened=window.open(url,'_blank','noopener,noreferrer');
-  if(!opened){
-    out.hidden=false;out.className='result warn';
-    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
-  }
+  out.hidden=false;out.className='result warn';
+  out.textContent=opened
+    ?'Draf Gmail dibuka, tetapi pendaftaran BELUM terkirim. Tekan Kirim di Gmail dan pastikan pesan berada di folder Terkirim.'
+    :'Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks pendaftaran.';
 });
 
 $('shareCommunityApplicantInviteBtn').addEventListener('click',async()=>{
@@ -383,6 +555,8 @@ $('workerValidatorForm').addEventListener('submit',(event)=>{
   const email=betaProgram.retrospectivePanel?.application?.email||'modernsnc2022@gmail.com';
   const subject=encodeURIComponent(betaProgram.retrospectivePanel?.application?.interestSubject||'[KEP E-9 Worker Validator Interest] Retrospective panel');
   const body=encodeURIComponent(workerValidatorText());
+  out.hidden=false;out.className='result warn';
+  out.textContent='Aplikasi email akan dibuka. Minat panel BELUM terkirim sampai Anda menekan Kirim dan memastikan pesan ada di folder Terkirim.';
   location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
 });
 
@@ -398,10 +572,10 @@ $('gmailWorkerValidatorBtn').addEventListener('click',()=>{
   const subject=betaProgram.retrospectivePanel?.application?.interestSubject||'[KEP E-9 Worker Validator Interest] Retrospective panel';
   const url=gmailComposeUrl(email,subject,workerValidatorText());
   const opened=window.open(url,'_blank','noopener,noreferrer');
-  if(!opened){
-    out.hidden=false;out.className='result warn';
-    out.textContent='Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
-  }
+  out.hidden=false;out.className='result warn';
+  out.textContent=opened
+    ?'Draf Gmail dibuka, tetapi minat panel BELUM terkirim. Tekan Kirim di Gmail dan periksa folder Terkirim.'
+    :'Browser memblokir jendela Gmail. Gunakan tombol aplikasi email atau salin teks validator.';
 });
 
 $('copyWorkerValidatorBtn').addEventListener('click',async()=>{

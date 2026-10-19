@@ -6,6 +6,14 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+from check_beta_open_readiness_doc import problems as release_doc_problems
+from check_beta_intake_backend import (
+    input_files as beta_intake_inputs,
+    errors as beta_intake_errors,
+    sql_upsert_from_worker,
+    sqlite_test,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 
 parser = argparse.ArgumentParser()
@@ -52,6 +60,27 @@ route = load_json("docs/data/id_e9_manufacturing_2026.json")
 i18n = load_json("docs/data/id_e9_manufacturing_2026_id.json")
 bqc = load_json("docs/data/broker_question_catalog_v1.json")
 source = load_json("docs/data/source_review_status.json")
+# The public source-status file contains immutable October 14 historical
+# alerts plus an independent, unsigned October 17 84/84 observation.
+# Never let a new machine observation masquerade as human signoff.
+latest_observation = source.get("latestReadOnlyObservation")
+require(isinstance(latest_observation, dict),
+        "M20 latest read-only source evidence cannot be missing or malformed")
+if isinstance(latest_observation, dict):
+    from publish_m20_readonly_source_visibility import make_display
+    archived = {k: v for k, v in source.items() if k != "latestReadOnlyObservation"}
+    try:
+        expected_view = make_display(
+            archived,
+            load_json("research/source_reviews/indonesia_daily_readonly_2026-10-17.json"),
+            load_json("monitor/sources.json"),
+            load_json("monitor/source_hashes.json"),
+        )
+    except (ValueError, TypeError, KeyError) as exc:
+        require(False, "M20 source observation invalid: " + str(exc))
+    else:
+        require(expected_view == source,
+                "M20 published source-status must exactly match retained unsigned observation")
 forms = load_json("docs/data/form_wizards_2026.json")
 workplace = load_json("docs/data/workplace_reality_v1.json")
 beta_program = load_json("docs/data/beta_program_v1.json")
@@ -136,8 +165,8 @@ require(
     "Manufacturing launch-check record indicates a notice was found or still needs review",
 )
 require(
-    manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/info",
-    "Manufacturing launch check must use the official KP2MI G-to-G Korea index",
+    manufacturing_launch_check.get("primaryIndex") == "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "Manufacturing launch check must use the actual KP2MI Pengumuman notice index",
 )
 baseline = route.get("jobApplicationBaselineEvidence", {})
 require(
@@ -170,15 +199,58 @@ require(
     and any("HIMPSI" in str(x) for x in baseline.get("facts", [])),
     "Indonesia job-application baseline must preserve MCU/HIMPSI/Sisko process evidence",
 )
+# 2026-10-06 is the baseline provenance date, not a permanent launch date.
+# Release-day source checks must be recorded on the actual date and must not
+# be blocked by a stale hardcoded timestamp in the product integrity gate.
+checked_at = str(manufacturing_launch_check.get("checkedAt", ""))
+try:
+    check_date = datetime.strptime(checked_at, "%Y-%m-%d").date()
+except ValueError:
+    check_date = None
 require(
-    manufacturing_launch_check.get("checkedAt") == "2026-10-06",
-    "Manufacturing launch evidence must be refreshed on 2026-10-06",
+    check_date is not None and check_date.isoformat() >= "2026-10-06",
+    "Manufacturing launch evidence date must be valid and no older than the verified 2026-10-06 baseline",
 )
+coverage = manufacturing_launch_check.get("noticeIndexCoverage", {})
+require(
+    coverage.get("previouslyAssumedIndex") == "https://kp2mi.go.id/gtog-korea/info"
+    and coverage.get("historicalMistakenPageTitle") == "Preliminary Training dan Info"
+    and coverage.get("historicalMistakenAjaxUrl") == "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
+    and "actualCategory" not in coverage
+    and "serverSideAjax" not in coverage
+    and coverage.get("currentCategory") == "Pengumuman"
+    and coverage.get("currentListingUrl") == "https://kp2mi.go.id/gtog-korea/pengumuman"
+    and coverage.get("serverSideAjaxUrl") == "https://kp2mi.go.id/gtog-data/korea/Pengumuman"
+    and coverage.get("status") in {
+        "unverified_preliminary_training_category_only",
+        "correct_pengumuman_2026_inventory_read_pending_operator_signoff",
+        "verified_complete_general_manufacturing_index_review",
+    },
+    "Manufacturing source inventory must preserve the historical Preliminary Training mismatch and reviewed Pengumuman category",
+)
+if not args.allow_source_review_pending:
+    from urllib.parse import urlparse
+
+    official_index = str(coverage.get("officialManufacturingInventoryUrl") or "")
+    parts = urlparse(official_index)
+    require(
+        coverage.get("status") == "verified_complete_general_manufacturing_index_review"
+        and coverage.get("checkedAt") == checked_at
+        and coverage.get("completeGeneralManufacturingInventory") is True
+        and coverage.get("operatorConfirmedCompleteReview") is True
+        and parts.scheme == "https"
+        and parts.hostname in {"kp2mi.go.id", "www.kp2mi.go.id"}
+        and parts.path.lower().rstrip("/") == "/gtog-korea/pengumuman"
+        and not parts.query and not parts.fragment
+        and coverage.get("currentCategory") == "Pengumuman",
+        "Beta OPEN requires operator-signed same-day KP2MI Pengumuman Manufacturing notice inventory; 2026 title scan alone is not approval",
+    )
 same_day = manufacturing_launch_check.get("sameDayOfficialRecheck", {})
 require(
     same_day.get("status") == "completed_no_detailed_manufacturing_notice_found"
+    and same_day.get("checkedAt") == checked_at
     and same_day.get("repeatOnActualReleaseDay") is True,
-    "Manufacturing launch check must record the completed 2026-10-06 recheck and require another check on release day",
+    "Manufacturing current review must synchronize its official-check date and preserve the release-day repeat requirement",
 )
 verified_baseline = manufacturing_launch_check.get("verifiedBaseline", {})
 require(
@@ -226,11 +298,26 @@ if args.allow_source_review_pending:
         f"unsupported official-source monitor state: {source.get('state')!r}",
     )
 else:
-    require(source.get("state") == "clean", f"official-source monitor state is {source.get('state')!r}, expected 'clean'")
-    require(source.get("configured") == source.get("checked"),
-            "official-source monitor must have checked every configured source")
-    require(not source.get("reviewRequiredUrls"), "official-source reviewRequiredUrls is not empty")
-    require(not source.get("fetchFailureUrls"), "official-source fetchFailureUrls is not empty")
+    if source.get("state") == "clean":
+        require(source.get("configured") == source.get("checked"),
+                "globally clean official-source monitor must check all configured sources")
+        require(not source.get("fetchFailureUrls") and not source.get("reviewRequiredUrls"),
+                "globally clean source state cannot include fetch failures or pending alerts")
+    else:
+        # This is not a global clean status: only a signed, current-day
+        # Indonesia-specific review may tolerate five unrelated-country alerts.
+        # Unknown/new alerts and all unsigned release attempts fail closed.
+        from check_indonesia_source_signoff import validate_scoped_signoff
+        try:
+            validate_scoped_signoff(
+                source,
+                load_json("monitor/sources.json"),
+                load_json("recruitment/ID_RELEASE_SOURCE_SCOPE_20261014.json"),
+                load_json("recruitment/ID_BETA_SOURCE_SIGNOFF.json"),
+                checked_at,
+            )
+        except (ValueError, TypeError) as exc:
+            require(False, f"Indonesia scoped official-source release review incomplete: {exc}")
 
 document_packs = load_json("docs/data/document_packs_2026.json")
 document_items = [
@@ -662,6 +749,14 @@ require("betaWorkerExperienceWrap" in app_page,
         "worker validator UI must capture experience-year context")
 require("Tahun pengalaman/proses EPS:" in runtime,
         "worker validator feedback must preserve experience-year context")
+require("payload?.ok!==true" in beta_js
+        and "typeof payload.submissionId!=='string'" in beta_js
+        and "Missing verified intake receipt" in beta_js
+        and "String(result.submissionId||'diterima')" not in beta_js,
+        "beta direct applicant intake must only show success on explicit validated server receipt")
+require("Pendaftaran BELUM terkirim sampai Anda menekan Kirim" in beta_js
+        and "Draf Gmail dibuka, tetapi pendaftaran BELUM terkirim" in beta_js,
+        "beta must not mislabel opening an email composer as a received application")
 require("Current route stage ID:" in beta_js,
         "beta application must send an exact supported route stage ID")
 require('id="applicantCycle"' in beta_page and "EPS process cycle:" in beta_js,
@@ -721,6 +816,27 @@ for row in call_rows:
 mcu_verified = [row for row in call_rows if row.get("mcuRuleVerified")]
 require(len(mcu_verified) >= 5, "expected at least five departure calls with verified final-MCU rules")
 
+# The operator snapshot must NEVER silently drift back to obsolete five-HOLD,
+# 72/72 clean-source or unverified current Pages-deployed assertions.
+for problem in release_doc_problems(
+    (ROOT / "recruitment/BETA_OPEN_READINESS.md").read_text(encoding="utf-8"),
+    program=beta_program, source=source, route=route,
+    answers=load_json("docs/data/exact_answer_rules_v1.json"),
+    broker=bqc, forms=forms, manufacturing=manufacturing_launch_check,
+):
+    require(False, "stale beta OPEN readiness document: " + problem)
+
+# Private Cloudflare D1 intake stays safely disabled until an operator
+# configures real D1/Turnstile secrets and an approved HTTPS endpoint.
+backend_evidence = beta_intake_inputs(ROOT)
+for issue in beta_intake_errors(*backend_evidence):
+    require(False, "Cloudflare D1 direct-intake safety: " + issue)
+if not beta_intake_errors(*backend_evidence):
+    try:
+        sqlite_test(backend_evidence[2], sql_upsert_from_worker(backend_evidence[0]))
+    except (AssertionError, ValueError, IndexError) as exc:
+        require(False, "D1 atomic duplicate/retention SQL verification failed: " + str(exc))
+
 if failures:
     print("BETA_PRELAUNCH_STATIC_FAIL")
     for failure in failures:
@@ -732,7 +848,10 @@ print(
     f"stages={len(stage_ids)} "
     f"bqc={len(questions)} "
     f"job_holds={len(holds)} "
-    f"sources={source.get('checked')}/{source.get('configured')} "
+    f"sources_historical={source.get('checked')}/{source.get('configured')} "
+    f"historical_at={source.get('detectedAt', 'unknown')} "
+    f"sources_latest_readonly={source.get('latestReadOnlyObservation', {}).get('checked', 'unavailable')}/{source.get('latestReadOnlyObservation', {}).get('configured', 'unavailable')} "
+    f"latest_at={source.get('latestReadOnlyObservation', {}).get('observedAtDate', 'unavailable')} "
     f"forms={len(form_rows)} "
     f"fields={field_count} "
     f"workplace_public={len(public_checks)} "

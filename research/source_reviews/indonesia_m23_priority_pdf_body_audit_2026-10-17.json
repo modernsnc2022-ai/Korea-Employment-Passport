@@ -1,0 +1,376 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-17",
+  "basis": "M22_7_P1_official_pdf_link_metadata_inconclusive",
+  "configuredP1": 7,
+  "fetchedAndOpenedPdfBodies": 6,
+  "stillInconclusive": 1,
+  "pdfRecords": [
+    {
+      "date": "2026-01-27",
+      "priority": "P1",
+      "applicationStage": "initial_eps_topik_exam_registration",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "download": "inconclusive",
+      "pdfBodyRead": false,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "errorType": "curl_exit_28",
+      "errorDetail": "curl: (28) Operation timed out after 27014 milliseconds with 1130245 out of 7989045 bytes received"
+    },
+    {
+      "date": "2026-01-27",
+      "priority": "P1",
+      "applicationStage": "initial_eps_topik_exam_registration",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "31eb8ccdd139fb36c04b1865c84c5083c38dafff9a1a97698bd595915cfd3b72",
+      "lengthBytes": 1797803,
+      "pages": 14,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 296,
+          "tokens": [
+            "PENDAFTARAN",
+            "EPS-TOPIK",
+            "SISKOP2MI",
+            "MANUFAKTUR"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 2,
+          "characters": 299,
+          "tokens": [
+            "PENDAFTARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 3,
+          "characters": 283,
+          "tokens": [
+            "SISKOP2MI"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 4,
+          "characters": 198,
+          "tokens": [],
+          "textExtractable": true
+        },
+        {
+          "page": 5,
+          "characters": 532,
+          "tokens": [
+            "MANUFAKTUR"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 6,
+          "characters": 500,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 7,
+          "characters": 116,
+          "tokens": [],
+          "textExtractable": true
+        },
+        {
+          "page": 8,
+          "characters": 664,
+          "tokens": [
+            "UJIAN",
+            "MANUFAKTUR",
+            "PEMBAYARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 9,
+          "characters": 364,
+          "tokens": [
+            "PEMBAYARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 10,
+          "characters": 394,
+          "tokens": [
+            "PENDAFTARAN",
+            "PEMBAYARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 11,
+          "characters": 394,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 12,
+          "characters": 413,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 13,
+          "characters": 683,
+          "tokens": [
+            "PENDAFTARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 14,
+          "characters": 375,
+          "tokens": [],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 14,
+      "firstPageRendered": true
+    },
+    {
+      "date": "2026-01-27",
+      "priority": "P1",
+      "applicationStage": "initial_eps_topik_exam_registration",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "5dcd470f7b50d44ea5ca658f220d87e4e99f1bc27e3131ac1f4d01698a6718e5",
+      "lengthBytes": 282862,
+      "pages": 2,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 1560,
+          "tokens": [
+            "EPS-TOPIK",
+            "PEMBAYARAN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 2,
+          "characters": 1443,
+          "tokens": [
+            "PEMBAYARAN"
+          ],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 2,
+      "firstPageRendered": true
+    },
+    {
+      "date": "2026-09-17",
+      "priority": "P1",
+      "applicationStage": "optional_skill_test_competency",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "20375fd344b7f6a1bbc9aa51f6e6852e2aaa681586b89ddbdd3baacf984c99cd",
+      "lengthBytes": 462032,
+      "pages": 2,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 2910,
+          "tokens": [
+            "PENDAFTARAN",
+            "EPS-TOPIK",
+            "UJIAN",
+            "SKILL TEST",
+            "MANUFAKTUR",
+            "PENGALAMAN KERJA",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 2,
+          "characters": 899,
+          "tokens": [],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 2,
+      "firstPageRendered": true
+    },
+    {
+      "date": "2026-09-17",
+      "priority": "P1",
+      "applicationStage": "optional_skill_test_competency",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "6a6cad95c43ceea806ed3b713d4c32d7af0c5dcc80dc3c4a1f11b656fd3b8dc0",
+      "lengthBytes": 1768276,
+      "pages": 7,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 303,
+          "tokens": [
+            "EPS-TOPIK",
+            "KOMPETENSI",
+            "SISKOP2MI",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 2,
+          "characters": 123,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 3,
+          "characters": 1617,
+          "tokens": [
+            "KOMPETENSI",
+            "MANUFAKTUR",
+            "PENGALAMAN KERJA",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 4,
+          "characters": 78,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 5,
+          "characters": 929,
+          "tokens": [
+            "KOMPETENSI",
+            "MANUFAKTUR",
+            "PENGALAMAN KERJA",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 6,
+          "characters": 551,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 7,
+          "characters": 41,
+          "tokens": [
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 7,
+      "firstPageRendered": true
+    },
+    {
+      "date": "2026-09-17",
+      "priority": "P1",
+      "applicationStage": "optional_skill_test_competency",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "afd1c586db3fc799ccda8bce4dc2bb012eb8fb7eabca75e826249bfb3ea46647",
+      "lengthBytes": 753662,
+      "pages": 2,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 862,
+          "tokens": [
+            "PENDAFTARAN",
+            "EPS-TOPIK",
+            "UJIAN",
+            "KOMPETENSI",
+            "PENGALAMAN KERJA",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        },
+        {
+          "page": 2,
+          "characters": 51,
+          "tokens": [],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 2,
+      "firstPageRendered": true
+    },
+    {
+      "date": "2026-09-17",
+      "priority": "P1",
+      "applicationStage": "optional_skill_test_competency",
+      "originalUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf",
+      "download": "official_pdf_body_verified",
+      "pdfBodyRead": true,
+      "sourcePolicySigned": false,
+      "finalJobDocsVerified": false,
+      "sha256": "1eb3c077995ee8f7097f35830fc2e78a1eb26d0c28592b09d54085ef6982e1cf",
+      "lengthBytes": 342471,
+      "pages": 1,
+      "pageEvidence": [
+        {
+          "page": 1,
+          "characters": 3390,
+          "tokens": [
+            "EPS-TOPIK",
+            "UJIAN",
+            "PENGALAMAN KERJA",
+            "DOKUMEN"
+          ],
+          "textExtractable": true
+        }
+      ],
+      "pagesWithExtractableText": 1,
+      "firstPageRendered": true
+    }
+  ],
+  "allSevenContentsSemanticallySigned": false,
+  "sourceBaselineAutoAccepted": false,
+  "exactFinalManufacturingJobDocs": "hold",
+  "humanReviewer": null,
+  "signedAt": null,
+  "publicBetaAccess": "hold",
+  "authorizesRelease": false,
+  "caveat": "Page text extraction and PDF structural opening are machine evidence. Original image/layout and application scope still require human review. These files relate to exam registration and optional competency evidence, not the final job application."
+}

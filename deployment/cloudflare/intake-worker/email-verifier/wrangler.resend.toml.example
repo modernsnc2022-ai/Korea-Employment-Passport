@@ -1,0 +1,28 @@
+# Resend free-plan alternative: 100 messages/day, 3,000/month (2026-10-14).
+# No Cloudflare Email Sending binding is required.
+# This Worker remains PRIVATE and disabled unless specifically approved.
+name = "kep-beta-email-verifier"
+main = "src/worker.js"
+compatibility_date = "2026-10-14"
+workers_dev = false
+preview_urls = false
+keep_vars = true
+
+[[d1_databases]]
+binding = "OTP_DB"
+database_name = "kep-beta-email-verification"
+database_id = "REPLACE_WITH_PRIVATE_VERIFIER_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+VERIFIER_ENABLED = "false"
+EMAIL_DELIVERY_PROVIDER = "resend"
+EMAIL_FROM = "noreply@mail.gdglobal.kr"
+
+# Register/verify mail.gdglobal.kr in Resend before use.
+# Secret: wrangler secret put RESEND_API_KEY (restricted sending key).
+# Secrets: wrangler secret put VERIFIER_CALL_SECRET
+#          wrangler secret put OTP_HMAC_SECRET
+# NEVER commit live secrets or send real verification mail in QA.
+[triggers]
+crons = ["0 3 * * *"]

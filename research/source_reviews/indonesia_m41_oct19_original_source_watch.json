@@ -1,0 +1,143 @@
+{
+  "initialized": false,
+  "acceptedCurrent": false,
+  "reviewManifestAccepted": false,
+  "reviewManifestId": null,
+  "normalizationRevision": "cross-site-volatile-widget-v5",
+  "partialAcceptance": false,
+  "acceptanceBlocked": false,
+  "acceptedSourceIds": [],
+  "preservedFailureSourceIds": [],
+  "changed": [
+    {
+      "id": "minimum_wage",
+      "agency": "Korea Minimum Wage Commission",
+      "url": "https://www.minimumwage.go.kr/index.jsp",
+      "before": "c99474032bbce435844cbf20714f438ac215643890ce6d3823a2903c272dbe8e",
+      "after": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12",
+      "beforeUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "afterUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "reason": "content_changed"
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "agency": "Korea Law Information Center",
+      "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "before": "4cfd5356dcfbb877401dff5d8f758426760b3111bf6835c64f51762b71803e00",
+      "after": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786",
+      "beforeUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "afterUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "reason": "content_changed"
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "agency": "MOEL 1350",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "before": "7f035022c03490f13e6557dfb9643ad357181f2c567fb39dff34d67e9ad2ee7c",
+      "after": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c",
+      "beforeUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "afterUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "reason": "content_changed"
+    },
+    {
+      "id": "kdca_qcode_input",
+      "agency": "Korea Disease Control and Prevention Agency",
+      "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "before": "6e6bb168ea271bb51818c43c73aecb9976751cf6f80426e5fa09a99c5db54e6a",
+      "after": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee",
+      "beforeUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "afterUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "reason": "content_changed"
+    },
+    {
+      "id": "moel_1350_contact",
+      "agency": "Ministry of Employment and Labor",
+      "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "before": "49a13ada23a2d1d69be3ffc9915fcc7119e68302b49140f73b6f2a4deea0cd8b",
+      "after": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71",
+      "beforeUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "afterUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "reason": "content_changed"
+    },
+    {
+      "id": "mm_hrdk_schedule_index",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "before": "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
+      "after": "d8d9b5d35f0d0fbd5afab7de5cd62c9dde888d74daa52105971780226ee25855",
+      "beforeUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "afterUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "reason": "content_changed"
+    },
+    {
+      "id": "mm_hrdk_skills_candidates",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "before": "651c6940e1a6fc9f0a763464c8ff80d0c8936246339b033186817a0dc7f61e49",
+      "after": "c11843bed4810c9dfd60bfcc448c6fab21929e16ea8fc075700ab1f990e8919f",
+      "beforeUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "afterUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "reason": "content_changed"
+    },
+    {
+      "id": "np_eps_notice_index",
+      "agency": "EPS Nepal",
+      "url": "https://epsnepal.gov.np/notices",
+      "before": "57da658d3f0dfed75f7199e56535ed9352eb9e73ef34c2f5dc8f75da195da863",
+      "after": "38331e9eca65702cbd5a541bf3d1d0fae86b62136b3f7cad4e22e4af3c1e94a2",
+      "beforeUrl": "https://epsnepal.gov.np/notices",
+      "afterUrl": "https://epsnepal.gov.np/notices",
+      "reason": "content_changed"
+    },
+    {
+      "id": "vn_colab_eps_notices",
+      "agency": "Vietnam COLAB EPS notices",
+      "url": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "before": "06548d5a97ad92acb30ed1620f45c5b184d9dfa391cc211b4cc7c5f010a9408d",
+      "after": "65139b3d6015d52b8d4987ff797313c161492d327c2380393c1f27fd4c805e4e",
+      "beforeUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "afterUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "reason": "content_changed"
+    },
+    {
+      "id": "lk_slbfe_home",
+      "agency": "Sri Lanka SLBFE",
+      "url": "https://www.slbfe.lk/",
+      "before": "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
+      "after": "0c45b7ed724cca6baac10d409cb724be133cbe89f60d2cba11239e6e5d06809e",
+      "beforeUrl": "https://www.slbfe.lk/",
+      "afterUrl": "https://www.slbfe.lk/",
+      "reason": "content_changed"
+    },
+    {
+      "id": "kg_migrant_home",
+      "agency": "Kyrgyzstan CEC",
+      "url": "https://migrant.kg/",
+      "before": "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
+      "after": "2f4a190943fd6e134eadc0453e5ba9782508714719692b1c364b94892467a6ab",
+      "beforeUrl": "https://migrant.kg/",
+      "afterUrl": "https://migrant.kg/",
+      "reason": "content_changed"
+    },
+    {
+      "id": "mm_mol_dol_index",
+      "agency": "Myanmar Ministry of Labour",
+      "url": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "before": "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0",
+      "after": "dad0fa868f0c40be73699e1ed57f916a74ec00c3f68c6fad9edb632734f1dbb9",
+      "beforeUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "afterUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "reason": "content_changed"
+    }
+  ],
+  "failures": [],
+  "checked": 84,
+  "configured": 84,
+  "workers": 6,
+  "perHost": 1,
+  "attempts": 1,
+  "pinnedFallbacks": [],
+  "curlCaVerifiedFallbacks": [
+    "hrdk_indonesia_eps_center_contact"
+  ]
+}

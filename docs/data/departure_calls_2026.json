@@ -5,7 +5,7 @@
   "complete": false,
   "lastChecked": "2026-10-04",
   "note": "This registry contains official 2026 departure calls verified so far. It is not a claim that every 2026 departure call has been enumerated. If the user's call is absent, use the KP2MI G-to-G Korea information index and do not infer details from another call.",
-  "indexUrl": "https://kp2mi.go.id/gtog-korea/info",
+  "indexUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
   "calls": [
     {
       "key": "departure_2026_01_05",

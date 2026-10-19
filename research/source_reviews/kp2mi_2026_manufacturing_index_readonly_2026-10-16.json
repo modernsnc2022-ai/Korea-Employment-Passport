@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "observedAtDate": "2026-10-16",
+  "generatedAtUtc": "2026-10-16T06:53:44.010935+00:00",
+  "scope": "KP2MI Pengumuman 2026 general Manufacturing — indexed headlines only",
+  "officialIndex": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "rawRowsFetchedThroughBoundary": 225,
+  "priorYearBoundaryReached": true,
+  "indexed2026Count": 185,
+  "manufacturingRelevantTitleCount": 7,
+  "possibleFinalApplicationTitlesFound": 0,
+  "manufacturingNoticesForManualReview": [
+    {
+      "date": "2026-09-17",
+      "title": "PENGUMUMAN PERSYARATAN UNGGAH DOKUMEN KOMPETENSI PESERTA SKILL TEST UBT UMUM SEKTOR MANUFAKTUR EPS-TOPIK TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "reviewCategory": "2026_manufacturing_skill_or_optional_competency"
+    },
+    {
+      "date": "2026-09-10",
+      "title": "PENGUMUMAN HASIL UJIAN KEMAMPUAN BAHASA KOREA EPS-TOPIK UBT UMUM SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    },
+    {
+      "date": "2026-05-05",
+      "title": "PENGUMUMAN PENGEMBALIAN BIAYA UJIAN EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026 (TAHAP PERTAMA)",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pengembalian-biaya-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026-tahap-pertama",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    },
+    {
+      "date": "2026-03-27",
+      "title": "PENGUMUMAN PELAKSANAAN UJIAN EPS TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    },
+    {
+      "date": "2026-02-16",
+      "title": "PENGUMUMAN PEMANGGILAN PEREKAMAN BIOMETRIK DAN VERIFIKASI DOKUMEN ONLINE PESERTA/PENDAFTAR PROGRAM G TO G KOREA EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemanggilan-perekaman-biometrik-dan-verifikasi-dokumen-online-peserta-pendaftar-program-g-to-g-korea-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    },
+    {
+      "date": "2026-02-10",
+      "title": "PENGUMUMAN PENYESUAIAN WAKTU PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGRAM G TO G KE KOREA SELATAN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-penyesuaian-waktu-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-program-g-to-g-ke-korea-selatan-tahun-2026",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    },
+    {
+      "date": "2026-01-27",
+      "title": "PENGUMUMAN PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGAM G TO G KE KOREA SELATAN DENGAN SISTEM POIN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "reviewCategory": "2026_manufacturing_other_notice"
+    }
+  ],
+  "titleIndexSha256": "66793a544d0eed3859c4b3e8c50cd2f77ee90558081934ea6a3b45bbec49e13d",
+  "manualFullArticlePdfReview": "pending",
+  "exactJobDocsVerified": false,
+  "operatorApproved": false,
+  "sourceHashAutoAccepted": false,
+  "authorizesBetaOpen": false,
+  "note": "The 2026 title index reached 2025; seven related headlines are not evidence of final job application documents or signed full article/PDF review. Other generic current-cycle notices may require separate semantic review."
+}
