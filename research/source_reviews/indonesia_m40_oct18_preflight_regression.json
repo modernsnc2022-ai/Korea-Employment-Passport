@@ -1,0 +1,81 @@
+﻿{
+  "version": "1.1.0",
+  "scope": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "asOf": "2026-10-18",
+  "mode": "read_only_evidence_summary",
+  "authorizesRelease": false,
+  "readyForManualLaunchDecision": false,
+  "manualOpenDecisionStillRequired": true,
+  "liveDeploymentEvidenceChecked": false,
+  "publishedMainSourceIntegrityVerified": false,
+  "candidateHeadPublished": false,
+  "exactManufacturingJobDocumentsHeld": true,
+  "gates": [
+    {
+      "id": "route_safety",
+      "status": "PASS",
+      "evidence": "27-stage 2026 Indonesia E-9 Manufacturing; Skill Test mandatory, optional evidence closed; job_docs held",
+      "nextAction": "Retain official-only fallback for final Manufacturing documents."
+    },
+    {
+      "id": "country_source_classification",
+      "status": "PASS",
+      "evidence": "84/84 official sources fetched; 5 Korea-common + 2 multi-country HRD Korea EPS + 5 other-country + 0 unclassified alerts; 12 unaccepted baseline drifts; fetch failures=none",
+      "nextAction": "All current source alerts must remain visible; never accept changed hashes automatically."
+    },
+    {
+      "id": "official_monitor_today",
+      "status": "PASS",
+      "evidence": "read-only observed=2026-10-18, asOf=2026-10-18",
+      "nextAction": "Current read-only watch classified; separate named approval still required."
+    },
+    {
+      "id": "indonesia_source_manual_signoff",
+      "status": "PENDING",
+      "evidence": "2026-10-18 M39 is technical monitoring only; 20 named human review decisions remain unsigned",
+      "nextAction": "Operator must review 5 Korea-common, acknowledge multi-country HRD Korea and foreign-country alerts, then sign the actual date."
+    },
+    {
+      "id": "kp2mi_manufacturing_release_day_signoff",
+      "status": "PENDING",
+      "evidence": "KP2MI Pengumuman indexChecked=2026-10-14; historicalJobCheck=2026-10-06; manualApproval=False; currentIndex=https://kp2mi.go.id/gtog-korea/pengumuman",
+      "nextAction": "Human must review the current 2026 general Manufacturing notice contents/attachments and record a genuine same-day signoff."
+    },
+    {
+      "id": "kp2mi_current_notice_index_observed",
+      "status": "PASS",
+      "evidence": "M40 320 KP2MI titles, 7 unsigned notice tasks, 2 HRD timetable refs",
+      "nextAction": "Machine observation is not an official content signoff. Review exact original notice bodies/PDF annexes and current-cycle job_docs."
+    },
+    {
+      "id": "exact_2026_manufacturing_final_job_documents",
+      "status": "PENDING",
+      "evidence": "Exact current-cycle post-Skill-Test General Manufacturing online application files and annexes are not verified; an absence notice signoff is not approval.",
+      "nextAction": "Do not enable beta or final submission. Obtain exact KP2MI 2026 General Manufacturing job-doc original notice + attachments, review required files, and implement an explicit independently tested release-day signoff path."
+    },
+    {
+      "id": "optional_skill_annex_evidence",
+      "status": "PASS",
+      "evidence": "Six PDF annexes indexed with closed optional upload; never final Manufacturing job_docs",
+      "nextAction": "Do not promote the optional annexes into final job-application requirements."
+    },
+    {
+      "id": "published_main_source_integrity",
+      "status": "PENDING",
+      "evidence": "Trusted live main/docs source and 9/9 asset match not established.",
+      "nextAction": "Use authenticated read-only Pages source diagnostics; never change Pages branch to bypass review."
+    },
+    {
+      "id": "same_head_pages_deployment",
+      "status": "PENDING",
+      "evidence": "No trusted current live 9/9 HEAD parity + 6/6 HTTPS redirects on approved candidate.",
+      "nextAction": "Run --live in a clean reviewed checkout after approved Pages deployment; independently review the actual deployment event. This check never authorizes OPEN."
+    },
+    {
+      "id": "explicit_manual_beta_open",
+      "status": "PENDING",
+      "evidence": "betaAccess=hold; decision=pending_manual_approval; intake=open",
+      "nextAction": "A responsible operator must explicitly authorize public beta OPEN after every technical/official gate passes. HOLD is the expected pre-approval state."
+    }
+  ]
+}

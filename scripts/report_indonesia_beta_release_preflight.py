@@ -126,7 +126,8 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
                  deployed: dict | None = None, release_head: str | None = None,
                  current_watch: dict | None = None,
                  current_signed: dict | None = None,
-                 pages_source: dict | None = None) -> dict:
+                 pages_source: dict | None = None,
+                 current_notice: dict | None = None) -> dict:
     # The report must never use a baseline recorded before the requested day
     # to claim that release-day official evidence has been reviewed.
     from datetime import date
@@ -269,6 +270,26 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
               "Human must review the current 2026 general Manufacturing notice contents/attachments and record a genuine same-day signoff."
               if not review_signed else "Keep signed notice review evidence."))
 
+    # M40: today's index TITLE/URL observation is a separate machine-only
+    # gate. Matching notice IDs do not approve their bodies or final job docs.
+    if current_notice is None:
+        notice_status = "PENDING"
+        notice_reason = "No independently bound current-day notice index record"
+    else:
+        try:
+            if as_of != "2026-10-18":
+                raise ValueError("M40 source date cannot be reused")
+            from verify_m40_oct18_human_notice_handoff import verify as verify_m40
+            verify_m40(current_notice)
+            notice_status = "PASS"
+            notice_reason = "M40 320 KP2MI titles, 7 unsigned notice tasks, 2 HRD timetable refs"
+        except (ValueError, TypeError, KeyError) as exc:
+            notice_status = "BLOCKED"
+            notice_reason = "Invalid M40 notice evidence: " + str(exc)
+    emit(gate("kp2mi_current_notice_index_observed", notice_status,
+              notice_reason, "Machine observation is not an official content signoff. "
+              "Review exact original notice bodies/PDF annexes and current-cycle job_docs."))
+
     # M33 CRITICAL: a signed statement that the operator found NO final
     # Manufacturing notice is NOT a verified final online job-doc checklist.
     # Keep a separate non-waivable release blocker until a later intentionally
@@ -352,6 +373,7 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
 
     required_ids = {"route_safety", "country_source_classification", "official_monitor_today",
                     "indonesia_source_manual_signoff", "kp2mi_manufacturing_release_day_signoff",
+                    "kp2mi_current_notice_index_observed",
                     "exact_2026_manufacturing_final_job_documents",
                     "optional_skill_annex_evidence", "published_main_source_integrity",
                     "same_head_pages_deployment"}
@@ -444,6 +466,24 @@ def self_test() -> None:
     assert g18["same_head_pages_deployment"]=="PENDING"
     assert report18["readyForManualLaunchDecision"] is False
     assert report18["authorizesRelease"] is False
+    # M40: dated machine-only KP2MI evidence MUST NOT sign notice contents,
+    # final online documents or beta. A counterfeit record cannot pass.
+    official40=read_json("research/source_reviews/indonesia_m40_oct18_notice_handoff.json")
+    linked40=build_report("2026-10-18",**ctx18,current_notice=official40)
+    linked_gates={x["id"]:x["status"] for x in linked40["gates"]}
+    assert linked_gates["kp2mi_current_notice_index_observed"]=="PASS"
+    assert linked_gates["kp2mi_manufacturing_release_day_signoff"]=="PENDING"
+    assert linked_gates["exact_2026_manufacturing_final_job_documents"]=="PENDING"
+    assert linked40["readyForManualLaunchDecision"] is False
+    corrupt40=copy.deepcopy(official40)
+    corrupt40["humanNoticeContentsSigned"]=True
+    bad40=build_report("2026-10-18",**ctx18,current_notice=corrupt40)
+    assert next(x for x in bad40["gates"]
+       if x["id"]=="kp2mi_current_notice_index_observed")["status"]=="BLOCKED"
+    assert bad40["authorizesRelease"] is False
+    stale40=build_report("2026-10-19",**ctx18,current_notice=official40)
+    assert next(x for x in stale40["gates"]
+       if x["id"]=="kp2mi_current_notice_index_observed")["status"]=="BLOCKED"
     forged18=copy.deepcopy(today18)
     forged18["sourceHashAutoAccepted"]=True
     invalid18=build_report("2026-10-18",**(ctx18 | {"current_watch":forged18}))
@@ -632,6 +672,7 @@ def self_test() -> None:
     test_required = {
         "route_safety", "country_source_classification", "official_monitor_today",
         "indonesia_source_manual_signoff", "kp2mi_manufacturing_release_day_signoff",
+        "kp2mi_current_notice_index_observed",
         "exact_2026_manufacturing_final_job_documents", "optional_skill_annex_evidence",
         "published_main_source_integrity", "same_head_pages_deployment",
     }
@@ -738,6 +779,8 @@ def main() -> None:
     selected = dated_evidence.get(as_of)
     latest_watch = read_json(selected[0]) if selected else None
     latest_signed = read_json(selected[1]) if selected else None
+    current_notice = (read_json("research/source_reviews/indonesia_m40_oct18_notice_handoff.json")
+                      if as_of == "2026-10-18" else None)
     report = build_report(
         as_of,
         current_watch=latest_watch, current_signed=latest_signed,
@@ -750,6 +793,7 @@ def main() -> None:
         route=read_json("docs/data/id_e9_manufacturing_2026.json"),
         deployed=deployed, release_head=release_head,
         pages_source=pages_source,
+        current_notice=current_notice,
     )
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
