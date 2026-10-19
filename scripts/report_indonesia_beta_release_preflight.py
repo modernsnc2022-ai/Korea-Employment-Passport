@@ -34,6 +34,9 @@ def validate_dated_watch(watch: dict, manifest: dict) -> None:
     elif day == "2026-10-18":
         from check_m39_oct18_preflight_watch import validate as validate_m39_machine_watch
         validate_m39_machine_watch(watch, manifest)
+    elif day == "2026-10-19":
+        from check_m41_oct19_two_current_technical_gates import validate_watch
+        validate_watch(watch, manifest)
     else:
         raise ValueError("No dated reviewed source-scope validator for this day")
 
@@ -47,10 +50,10 @@ def validate_dated_signoff(watch: dict, manifest: dict, signed: dict, day: str) 
         validate_daily_source_signoff(watch, manifest,
                                       read_json("monitor/source_hashes.json"),
                                       signed, day)
-    elif day == "2026-10-18":
-        # Machine-only M38/M39 records must NEVER be promoted to a human
-        # approval, even if a caller inserts synthetic reviewer fields.
-        raise ValueError("2026-10-18 M39 is technical monitoring only; 20 named human review decisions remain unsigned")
+    elif day in ("2026-10-18", "2026-10-19"):
+        # Dated machine-only records never replace a named, actually signed
+        # original source semantic review or current cycle document approval.
+        raise ValueError("M39/M41 are technical monitoring only; 20 responsible human reviews remain unsigned")
     else:
         raise ValueError("No dated source-scope signoff validator for release day")
 
@@ -277,12 +280,16 @@ def build_report(as_of: str, *, program: dict, source: dict, manifest: dict,
         notice_reason = "No independently bound current-day notice index record"
     else:
         try:
-            if as_of != "2026-10-18":
-                raise ValueError("M40 source date cannot be reused")
-            from verify_m40_oct18_human_notice_handoff import verify as verify_m40
-            verify_m40(current_notice)
+            if as_of == "2026-10-18":
+                from verify_m40_oct18_human_notice_handoff import verify as verify_m40
+                verify_m40(current_notice)
+            elif as_of == "2026-10-19":
+                from check_m41_oct19_two_current_technical_gates import validate_notice
+                validate_notice(current_notice)
+            else:
+                raise ValueError("Old KP2MI title index cannot authorize the current day")
             notice_status = "PASS"
-            notice_reason = "M40 320 KP2MI titles, 7 unsigned notice tasks, 2 HRD timetable refs"
+            notice_reason = "Dated 320 KP2MI titles, 7 unsigned notice tasks, 2 HRD timetable refs"
         except (ValueError, TypeError, KeyError) as exc:
             notice_status = "BLOCKED"
             notice_reason = "Invalid M40 notice evidence: " + str(exc)
@@ -484,6 +491,45 @@ def self_test() -> None:
     stale40=build_report("2026-10-19",**ctx18,current_notice=official40)
     assert next(x for x in stale40["gates"]
        if x["id"]=="kp2mi_current_notice_index_observed")["status"]=="BLOCKED"
+    # M41: independently re-fetched 2026-10-19 84-source and KP2MI
+    # machine observations may PASS technical gates ONLY.
+    evidence41=read_json("research/source_reviews/indonesia_m41_oct19_technical_release_bridge.json")
+    ctx19=args | {"current_watch":evidence41["watch"],
+                  "current_notice":evidence41["notice"],
+                  "current_signed":unsigned18}
+    report19=build_report("2026-10-19",**ctx19)
+    g19={x["id"]:x["status"] for x in report19["gates"]}
+    assert g19["official_monitor_today"]=="PASS"
+    assert g19["country_source_classification"]=="PASS"
+    assert g19["kp2mi_current_notice_index_observed"]=="PASS"
+    assert g19["indonesia_source_manual_signoff"]=="PENDING"
+    assert g19["kp2mi_manufacturing_release_day_signoff"]=="PENDING"
+    assert g19["exact_2026_manufacturing_final_job_documents"]=="PENDING"
+    assert g19["same_head_pages_deployment"]=="PENDING"
+    assert report19["readyForManualLaunchDecision"] is False
+    assert report19["authorizesRelease"] is False
+    invalid_w=copy.deepcopy(evidence41["watch"])
+    invalid_w["humanSourcePolicyApproved"]=True
+    invalid_r=build_report("2026-10-19",**(ctx19 | {"current_watch":invalid_w}))
+    assert next(x for x in invalid_r["gates"]
+       if x["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    assert invalid_r["authorizesRelease"] is False
+    incomplete_w=copy.deepcopy(evidence41["watch"])
+    incomplete_w["checked"]=83
+    incomplete_r=build_report("2026-10-19",**(ctx19 | {"current_watch":incomplete_w}))
+    assert next(x for x in incomplete_r["gates"]
+       if x["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    invalid_n=copy.deepcopy(evidence41["notice"])
+    invalid_n["exactFinalJobDocumentsVerified"]=True
+    invalid_doc_r=build_report("2026-10-19",**(ctx19 | {"current_notice":invalid_n}))
+    assert next(x for x in invalid_doc_r["gates"]
+       if x["id"]=="kp2mi_current_notice_index_observed")["status"]=="BLOCKED"
+    stale19=build_report("2026-10-20",**ctx19)
+    assert next(x for x in stale19["gates"]
+       if x["id"]=="official_monitor_today")["status"]=="BLOCKED"
+    assert next(x for x in stale19["gates"]
+       if x["id"]=="kp2mi_current_notice_index_observed")["status"]=="BLOCKED"
+    assert stale19["authorizesRelease"] is False
     forged18=copy.deepcopy(today18)
     forged18["sourceHashAutoAccepted"]=True
     invalid18=build_report("2026-10-18",**(ctx18 | {"current_watch":forged18}))
@@ -775,12 +821,17 @@ def main() -> None:
                        "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"),
         "2026-10-18": ("research/source_reviews/indonesia_m39_oct18_preflight_technical_watch.json",
                        "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"),
+        "2026-10-19": ("research/source_reviews/indonesia_m41_oct19_technical_release_bridge.json",
+                       "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"),
     }
     selected = dated_evidence.get(as_of)
-    latest_watch = read_json(selected[0]) if selected else None
+    latest_watch = (read_json(selected[0])["watch"] if as_of == "2026-10-19"
+                    else read_json(selected[0]) if selected else None)
     latest_signed = read_json(selected[1]) if selected else None
     current_notice = (read_json("research/source_reviews/indonesia_m40_oct18_notice_handoff.json")
-                      if as_of == "2026-10-18" else None)
+                      if as_of == "2026-10-18" else
+                      read_json("research/source_reviews/indonesia_m41_oct19_technical_release_bridge.json")["notice"]
+                      if as_of == "2026-10-19" else None)
     report = build_report(
         as_of,
         current_watch=latest_watch, current_signed=latest_signed,

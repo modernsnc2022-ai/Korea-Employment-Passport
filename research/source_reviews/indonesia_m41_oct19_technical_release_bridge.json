@@ -1,0 +1,74 @@
+{
+  "kind": "M41_UNAPPROVED_SOURCE_AND_NOTICE_RELEASE_EVIDENCE",
+  "day": "2026-10-19",
+  "watch": {
+    "version": "1.0.0",
+    "kind": "m41_oct19_machine_only_current_watch",
+    "observedAtDate": "2026-10-19",
+    "configured": 84,
+    "checked": 84,
+    "fetchFailures": 0,
+    "failedSourceIds": [],
+    "unacceptedBaselineDriftCount": 12,
+    "pendingAlertSourceIds": [
+      "kdca_qcode_input",
+      "kg_migrant_home",
+      "labor_standards_wage_statement",
+      "lk_slbfe_home",
+      "minimum_wage",
+      "mm_hrdk_schedule_index",
+      "mm_hrdk_skills_candidates",
+      "mm_mol_dol_index",
+      "moel_1350_contact",
+      "moel_wage_arrears_2026",
+      "np_eps_notice_index",
+      "vn_colab_eps_notices"
+    ],
+    "groupCounts": {
+      "korea_shared": 5,
+      "multi_country_eps_schedule": 2,
+      "other_country": 5,
+      "unclassified_requires_manual_scope_review": 0
+    },
+    "observedSourceRawSha256": "d82c4f01655bd15e0d0ef78edeabbae134e1cc3f3ac5463566c1d437432f4a01",
+    "completeOfficialTechnicalRead": true,
+    "sourceHashAutoAccepted": false,
+    "humanSourcePolicyApproved": false,
+    "signedCurrentDayReleaseEvidence": false,
+    "manualFinal2026ManufacturingDocumentsApproved": false,
+    "productionDeploymentApproved": false,
+    "publicBetaAccess": "hold",
+    "releaseAuthorized": false
+  },
+  "notice": {
+    "kind": "m41_oct19_current_kp2mi_notice_index_machine_only",
+    "observedAtDate": "2026-10-19",
+    "indexRawSha256": "fa8dfc770554d047ee73103b2356492bb3ddd9c774e8199120ef1868bf03a690",
+    "originalIndexUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "titleUrlSha256": "4d67a65b8af983e6567fbc3b55374e30fa10c095954aafbbc8bb15100471a4e6",
+    "titlesChecked": 320,
+    "sevenOriginalNoticeTaskIds": [
+      "NOTICE:10-February-2026",
+      "NOTICE:10-September-2026",
+      "NOTICE:16-February-2026",
+      "NOTICE:17-September-2026",
+      "NOTICE:27-January-2026",
+      "NOTICE:27-March-2026",
+      "NOTICE:5-May-2026"
+    ],
+    "hrdScheduleTaskIds": [
+      "14",
+      "15"
+    ],
+    "finalManufacturing2026ApplicationTitleCandidates": 0,
+    "humanNoticeContentsSigned": false,
+    "exactFinalJobDocumentsVerified": false,
+    "betaAccess": "hold",
+    "releaseAuthorized": false
+  },
+  "all20HumanTasksStillUnsigned": true,
+  "final2026GeneralManufacturingJobDocs": "hold",
+  "candidateHeadDeployment": "unverified",
+  "publicBetaAccess": "hold",
+  "releaseAuthorized": false
+}
