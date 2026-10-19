@@ -377,7 +377,17 @@ async function fetchJsonOptional(url,fallback,label,attempts=1){
   return fallback;
 }
 
+let bootInFlight=false;
 async function boot(){
+  if(bootInFlight)return;
+  bootInFlight=true;
+  const retryButton=$('retryRouteLoadBtn');
+  retryButton.disabled=true;
+  retryButton.textContent='Sedang memuat…';
+  $('routeLoadRecovery').hidden=true;
+  $('routeMeta').textContent='Memuat jalur resmi yang telah diverifikasi…';
+  // Never leave previously partial/stale controls operable during a retry.
+  document.body.classList.add('route-unavailable');
   try{
     [
       route,
@@ -482,9 +492,17 @@ async function boot(){
     renderGaps();
     renderUnresolvedFieldQuestions();
     updateProgress();
+    document.body.classList.remove('route-unavailable');
   }catch(err){
     $('routeMeta').textContent='Data rute terverifikasi tidak dapat dimuat. Sambungkan internet dan coba lagi.';
+    $('routeLoadRecovery').hidden=false;
+    // Failed official data must never unlock a partially rendered journey.
+    document.body.classList.add('route-unavailable');
     console.error(err);
+  }finally{
+    bootInFlight=false;
+    retryButton.disabled=false;
+    retryButton.textContent='Coba muat lagi';
   }
 }
 
@@ -3955,4 +3973,5 @@ window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredI
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(console.error));
 
+$('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();

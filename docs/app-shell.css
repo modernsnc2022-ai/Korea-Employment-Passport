@@ -31,6 +31,20 @@ body.setup-mode .flow-dashboard,
 body.setup-mode .utility-nav,
 body.setup-mode .view{display:none!important}
 body.setup-mode .shell{padding-bottom:36px}
+body.route-unavailable .how-to-use,
+body.route-unavailable .cycle-status,
+body.route-unavailable .beta-mode-banner,
+body.route-unavailable .freshness-status,
+body.route-unavailable .quick-start,
+body.route-unavailable .trust-panel,
+body.route-unavailable .flow-dashboard,
+body.route-unavailable .utility-nav,
+body.route-unavailable .view{display:none!important}
+.route-load-recovery{margin-top:14px;padding:18px 20px;background:var(--warn);border:1px solid #fdb022;border-radius:16px;color:#7a2e0e;display:grid;gap:10px;box-shadow:var(--shadow)}
+.route-load-recovery strong{font-size:1rem}
+.route-load-recovery p{margin:0;line-height:1.6}
+.route-load-recovery button{justify-self:start;min-height:44px;max-width:100%}
+.route-load-recovery button:disabled{opacity:.65;cursor:wait}
 
 .summary{background:linear-gradient(135deg,#071a36,#164b91);color:#fff;border-radius:26px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,260px);gap:30px;align-items:end;box-shadow:var(--shadow)}
 .eyebrow{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#8fb7ff}.eyebrow.dark{color:var(--blue)}
