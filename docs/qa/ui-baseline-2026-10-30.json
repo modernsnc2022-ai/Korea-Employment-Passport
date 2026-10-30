@@ -1,0 +1,46 @@
+{
+  "main-baseline": {
+    "stats": {
+      "startTime": "2026-10-30T05:52:58.152Z",
+      "duration": 105086.51,
+      "expected": 46,
+      "skipped": 0,
+      "unexpected": 10,
+      "flaky": 0
+    },
+    "failures": [
+      "visa document helper shows one field at a time on mobile",
+      "notice-specific answers stay hidden until the user selects the matching notice",
+      "form wizard exposes only one actionable field instruction at a time",
+      "mcu1 uses its verified stage-specific document pack",
+      "predeparture OPP scope resolves to verified common pack",
+      "psychology stage uses its verified 2026 pack",
+      "post SLC stage exposes verified psychology and MCU II checklist",
+      "partial departure registry never suggests another call when date is missing",
+      "beta OPEN path remains functional and identity-minimal",
+      "review-required official source suppresses affected exact document guidance"
+    ]
+  },
+  "pr326-baseline": {
+    "stats": {
+      "startTime": "2026-10-30T05:53:16.061Z",
+      "duration": 103157.54400000001,
+      "expected": 46,
+      "skipped": 0,
+      "unexpected": 10,
+      "flaky": 0
+    },
+    "failures": [
+      "visa document helper shows one field at a time on mobile",
+      "notice-specific answers stay hidden until the user selects the matching notice",
+      "form wizard exposes only one actionable field instruction at a time",
+      "mcu1 uses its verified stage-specific document pack",
+      "predeparture OPP scope resolves to verified common pack",
+      "psychology stage uses its verified 2026 pack",
+      "post SLC stage exposes verified psychology and MCU II checklist",
+      "partial departure registry never suggests another call when date is missing",
+      "beta OPEN path remains functional and identity-minimal",
+      "review-required official source suppresses affected exact document guidance"
+    ]
+  }
+}
