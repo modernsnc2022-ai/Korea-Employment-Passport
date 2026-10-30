@@ -299,3 +299,19 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .doc-status{border-radius:6px}
 .check-list article{padding:20px}
 @media(max-width:720px){.stage-preparation .secondary{width:100%;margin-right:0}.doc-context-head{flex-direction:column}.doc-status{text-align:left}}
+
+/* Evidence stays alongside the task; dates never imply a live official check. */
+.next-evidence{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.85rem}
+.next-evidence>a{color:var(--blue);font-weight:650;text-underline-offset:3px}
+.next-evidence>details{flex-basis:100%}
+.next-evidence summary{display:flex;align-items:center;cursor:pointer;text-decoration:underline;color:var(--muted)}
+.source-state{display:inline-block;font-size:.75rem;font-weight:650;padding:4px 8px;background:#eef2f0;color:#405b53;border-radius:4px}
+.source-state.review,.source-state.unknown{background:#fff1d8;color:#71480b}
+.stage-evidence{margin:20px 0;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stage-evidence>.source{margin:0 0 12px;text-decoration:underline;text-underline-offset:3px}
+#stageSourceContext>p,.next-evidence details>p{font-size:.875rem;line-height:1.6}
+.source-facts{margin:12px 0 0;font-size:.8rem}
+.source-facts>div{display:grid;grid-template-columns:minmax(100px,1fr) minmax(0,2fr);gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.source-facts dt{font-weight:650}.source-facts dd{margin:0;color:var(--muted)}
+.task-caution{border-left:3px solid #bb7918;padding:8px 12px;background:var(--warn);font-size:.85rem;margin-top:12px!important;color:#71480b!important}
+@media(max-width:420px){.source-facts>div{grid-template-columns:1fr;gap:4px}}

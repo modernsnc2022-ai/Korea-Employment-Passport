@@ -1177,6 +1177,32 @@ function renderSharedKoreaCore(stage){
     .join('');
 }
 
+function stageSourceContext(stage){
+  const url=stage?.sourceUrl||'';
+  const unavailable=!url||!sourceReviewStatus||
+    (sourceReviewStatus.state==='fetch_warning'&&(sourceReviewStatus.fetchFailureUrls||[]).includes('source_review_status'))||
+    (sourceReviewStatus.latestReadOnlyObservation&&!latestReadOnlyObservation());
+  const review=!unavailable&&(sourceNeedsReview(url)||sourceHasFetchWarning(url));
+  const label=unavailable?'Informasi belum cukup':review?'Perlu ditinjau':'Rujukan tercatat';
+  const note=unavailable
+    ?'Status pemeriksaan sumber belum dapat dipastikan. Baca sumber resmi terbaru atau hubungi petugas; jangan mengandalkan rincian lama.'
+    :review?'Sumber ini memerlukan pemeriksaan ulang. Pastikan ketentuan terbaru kepada instansi resmi sebelum melanjutkan.'
+      :'Tautan tersedia dalam panduan. Ini bukan konfirmasi bahwa ketentuan masih berlaku hari ini.';
+  let domain='Sumber resmi';
+  try{domain=new URL(url).hostname.replace(/^www\./,'');}catch{}
+  return {url,label,note,domain,kind:unavailable?'unknown':review?'review':'recorded'};
+}
+
+function stageSourceContextHtml(stage){
+  const source=stageSourceContext(stage);
+  const checked=route?.lastVerified||'Belum tercatat';
+  return '<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span>'+
+    '<p>'+escapeHtml(source.note)+'</p>'+
+    '<dl class="source-facts"><div><dt>Instansi</dt><dd>'+escapeHtml(stage.authority||'Belum tercatat')+'</dd></div>'+
+    '<div><dt>Berlaku untuk</dt><dd>Indonesia · E-9 · Manufaktur '+escapeHtml(route?.cycle||'')+'; ikuti panggilan yang memuat nama Anda.</dd></div>'+
+    '<div><dt>Pemeriksaan data rute</dt><dd>'+escapeHtml(checked)+' · bukan pemeriksaan langsung hari ini</dd></div></dl>';
+}
+
 function renderStagePreparation(stage){
   const section=$('stagePreparation');
   const pack=documentPackForStage(stage.id);
@@ -1217,6 +1243,7 @@ function openStage(stage){
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
+  $('stageSourceContext').innerHTML=stageSourceContextHtml(stage);
   // Sector/cycle-specific optional notice is only exposed when its official
   // metadata and closed timeframe are present. Never imply an active upload.
   const competencyLink=$('stageCompetencyNotice');
@@ -1375,6 +1402,20 @@ function renderNextAction(){
     position.className='current-stage-note';
     position.textContent='Tahap pilihan Anda · '+(route.stages.indexOf(next)+1)+' dari '+route.stages.length+' · bukan status resmi';
     box.prepend(position);
+  }
+
+  if(next){
+    const source=stageSourceContext(next);
+    const evidence=document.createElement('div');
+    evidence.className='next-evidence';
+    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener">Sumber resmi · '+escapeHtml(source.domain)+' ↗</a><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
+    box.append(evidence);
+    const warning=stageWarning(next);
+    if(warning){
+      const caution=document.createElement('p');caution.className='task-caution';caution.textContent=warning;
+      const action=box.querySelector('.primary, .next-scope');
+      if(action)box.insertBefore(caution,action);else box.append(caution);
+    }
   }
 
   box.querySelector('[data-next-scope]')?.addEventListener('change',e=>{
@@ -2563,6 +2604,11 @@ $('checkFeeBtn').addEventListener('click',()=>{
   }
   const known=rules.fees.find(f=>f.amountIdr===amount);
   if(known){
+    if(sourceNeedsReview(known.sourceUrl)||sourceHasFetchWarning(known.sourceUrl)){
+      out.classList.add('warn');
+      out.innerHTML='<strong>Biaya belum dapat dikonfirmasi.</strong><p>Data sumber memerlukan pemeriksaan ulang. Jangan membayar hanya karena nominal cocok dengan data lama.</p><a href="'+escapeHtml(known.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a>';
+      return;
+    }
     if(known.kind==='minimum_balance'){
       out.classList.add(payee==='bank'?'safe':'risk');
       out.innerHTML=`<strong>Ini bukan biaya.</strong> Rp${known.amountIdr.toLocaleString('id-ID')} adalah jumlah saldo minimum yang harus tersedia di rekening BNI milik pemohon untuk proses visa 2026. Jangan menyerahkan jumlah ini kepada calo atau individu. <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
@@ -2594,6 +2640,9 @@ function classifyLedgerEntry(entry){
 function renderCostLedger(){
   if(!rules)return;
   $('knownCostList').innerHTML=rules.fees.map(f=>{
+    if(sourceNeedsReview(f.sourceUrl)||sourceHasFetchWarning(f.sourceUrl)){
+      return '<article class="cost-item"><h3>Biaya perlu dikonfirmasi</h3><p>'+escapeHtml(f.purpose)+'</p><p>Jangan menggunakan nominal lama sebelum sumber ditinjau.</p><a href="'+escapeHtml(f.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a></article>';
+    }
     const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Biaya resmi';
     const scope=f.conditional&&f.scope?'<p><strong>Bersyarat:</strong> '+escapeHtml(f.scope)+'</p>':'';
     return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p>${scope}<p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
