@@ -4076,5 +4076,11 @@ window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredI
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(console.error));
 
+function updateConnectionStatus(){
+  $('offlineStatus').hidden=navigator.onLine;
+}
+window.addEventListener('online',updateConnectionStatus);
+window.addEventListener('offline',updateConnectionStatus);
+updateConnectionStatus();
 $('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();

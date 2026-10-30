@@ -369,3 +369,9 @@ body[data-active-view]:not([data-active-view="journey"]) .trust-panel{display:no
 .tool-return{display:inline-flex;align-items:center;min-height:44px;margin:16px 0 0;padding:8px 0;background:none;border:0;color:var(--blue);font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .view>.tool-return+.section-head{margin-top:12px}
 #scopePickerSection{border:1px solid #a9c8bd;background:#f4f8f5}
+
+.offline-status{padding:12px 16px;margin-bottom:16px;border-left:3px solid #bb7918;background:#fff6e6;color:#71480b;font-size:.9rem;line-height:1.6}
+
+.topbar .ghost{color:var(--blue);background:#fff;border:1px solid var(--line);min-height:44px}
+.view input,.view textarea,.view select{scroll-margin-bottom:104px}
+html{scroll-padding-bottom:calc(96px + env(safe-area-inset-bottom))}
