@@ -62,17 +62,8 @@ for cmd in "${checks[@]}"; do
   bash -lc "$cmd"
 done
 
-nohup python3 -m http.server 4173 --directory docs >/tmp/kep-http.log 2>&1 &
-HTTP_PID=$!
-cleanup(){ kill "$HTTP_PID" >/dev/null 2>&1 || true; }
-trap cleanup EXIT
-
-for i in $(seq 1 20); do
-  if curl -fsS http://127.0.0.1:4173/app.html >/dev/null; then break; fi
-  sleep 1
-done
-curl -fsS http://127.0.0.1:4173/app.html >/dev/null
-npm run test:ui
+python3 scripts/test_cloud_ui_lock.py
+python3 scripts/run_cloud_ui.py --output test-results/cloud
 
 python3 scripts/check_beta_launch_readiness.py
 

@@ -25,6 +25,8 @@ const server=spawn('python',['-m','http.server','4181','--bind','127.0.0.1','--d
    await page.locator('[data-quick-stage="exam_fee"]').click();await audit('home');
    for(const view of ['eligibility','documents','fees','gaps','contract','workplace','payroll','companyHub']){
     await page.evaluate(view=>switchView(view,false),view);await audit(view);
+    if(view==='eligibility'){await page.locator('#checkEligibilityBtn').click();await audit('eligibility-errors');}
+    if(view==='contract'){await page.locator('#checkContractBtn').click();await audit('contract-result-unconfirmed-source');}
    }
    await page.evaluate(()=>{switchView('journey',false);openStage(route.stages.find(s=>s.id==='predeparture_training'));});await audit('stage-dialog');
    await page.locator('#stageDialog .close').click();await page.waitForFunction(()=>!history.state?.kepStageDialog);

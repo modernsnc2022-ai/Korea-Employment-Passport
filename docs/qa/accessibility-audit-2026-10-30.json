@@ -24,14 +24,14 @@
           ]
         }
       ],
-      "passes": 34
+      "passes": 35
     },
     {
       "name": "home",
       "width": 390,
       "violations": [],
       "incomplete": [],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "eligibility",
@@ -47,39 +47,28 @@
           ]
         }
       ],
-      "passes": 37
+      "passes": 38
+    },
+    {
+      "name": "eligibility-errors",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 41
     },
     {
       "name": "documents",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "fees",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "gaps",
@@ -102,17 +91,9 @@
               "#gapTask"
             ]
           ]
-        },
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
         }
       ],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "contract",
@@ -126,49 +107,39 @@
               "#slcText"
             ]
           ]
-        },
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "contract-result-unconfirmed-source",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
         {
-          "id": "skip-link",
+          "id": "color-contrast",
           "nodes": [
             [
-              ".skip-link"
+              "#slcText"
             ]
           ]
         }
       ],
-      "passes": 39
+      "passes": 44
     },
     {
       "name": "workplace",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "payroll",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "companyHub",
@@ -185,17 +156,9 @@
               "#companyInvestigationQuestion"
             ]
           ]
-        },
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
         }
       ],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "stage-dialog",
@@ -209,20 +172,6 @@
               ".stage-dialog-body"
             ]
           ]
-        },
-        {
-          "id": "color-contrast",
-          "nodes": [
-            [
-              "#stageKind"
-            ],
-            [
-              "#stageTitle"
-            ],
-            [
-              ".close"
-            ]
-          ]
         }
       ],
       "passes": 32
@@ -231,33 +180,15 @@
       "name": "documents-expanded",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 38
+      "incomplete": [],
+      "passes": 39
     },
     {
       "name": "wizard-clean-source-fixture",
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 41
+      "incomplete": [],
+      "passes": 42
     },
     {
       "name": "index",
@@ -316,14 +247,14 @@
           ]
         }
       ],
-      "passes": 34
+      "passes": 35
     },
     {
       "name": "home",
       "width": 1280,
       "violations": [],
       "incomplete": [],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "eligibility",
@@ -339,39 +270,28 @@
           ]
         }
       ],
-      "passes": 37
+      "passes": 38
+    },
+    {
+      "name": "eligibility-errors",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 41
     },
     {
       "name": "documents",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "fees",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "gaps",
@@ -394,17 +314,9 @@
               "#gapTask"
             ]
           ]
-        },
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
         }
       ],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "contract",
@@ -418,49 +330,39 @@
               "#slcText"
             ]
           ]
-        },
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "contract-result-unconfirmed-source",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
         {
-          "id": "skip-link",
+          "id": "color-contrast",
           "nodes": [
             [
-              ".skip-link"
+              "#slcText"
             ]
           ]
         }
       ],
-      "passes": 39
+      "passes": 44
     },
     {
       "name": "workplace",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "payroll",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 37
+      "incomplete": [],
+      "passes": 38
     },
     {
       "name": "companyHub",
@@ -477,17 +379,9 @@
               "#companyInvestigationQuestion"
             ]
           ]
-        },
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
         }
       ],
-      "passes": 38
+      "passes": 39
     },
     {
       "name": "stage-dialog",
@@ -509,33 +403,15 @@
       "name": "documents-expanded",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 38
+      "incomplete": [],
+      "passes": 39
     },
     {
       "name": "wizard-clean-source-fixture",
       "width": 1280,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "skip-link",
-          "nodes": [
-            [
-              ".skip-link"
-            ]
-          ]
-        }
-      ],
-      "passes": 41
+      "incomplete": [],
+      "passes": 42
     },
     {
       "name": "index",

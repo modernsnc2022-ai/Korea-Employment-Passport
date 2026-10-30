@@ -1,0 +1,216 @@
+{
+  "environment": "Cloud Chromium viewport emulation, not physical-device testing",
+  "sourceState": "Unmodified checked-in source-review data",
+  "results": [
+    {
+      "name": "home",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "name": "eligibility-errors",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "name": "documents-text200",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 360,
+      "viewport": 360,
+      "documentWidth": 360,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 360,
+      "viewport": 360,
+      "documentWidth": 360,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 360,
+      "viewport": 360,
+      "documentWidth": 360,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 375,
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 375,
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 375,
+      "viewport": 375,
+      "documentWidth": 375,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "contract-source-state",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "index",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "beta",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "privacy",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 430,
+      "viewport": 430,
+      "documentWidth": 430,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 430,
+      "viewport": 430,
+      "documentWidth": 430,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 430,
+      "viewport": 430,
+      "documentWidth": 430,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 768,
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 768,
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 768,
+      "viewport": 768,
+      "documentWidth": 768,
+      "pageErrors": []
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    },
+    {
+      "name": "documents",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    },
+    {
+      "name": "notice",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    },
+    {
+      "name": "index",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    },
+    {
+      "name": "beta",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    },
+    {
+      "name": "privacy",
+      "width": 1280,
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "pageErrors": []
+    }
+  ]
+}
