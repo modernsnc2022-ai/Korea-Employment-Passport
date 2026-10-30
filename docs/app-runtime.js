@@ -1228,7 +1228,48 @@ function renderStagePreparation(stage){
   }
 }
 
+let stageDialogOpener=null;
+let stageDialogHistoryClosing=false;
+let queuedStageDialog=null;
+const stageDialog=$('stageDialog');
+// A reload does not restore a dialog, so discard its stale history marker.
+if(history.state?.kepStageDialog){
+  const {kepStageDialog,...rest}=history.state;
+  history.replaceState(rest,'',location.href);
+}
+window.addEventListener('popstate',()=>{
+  stageDialogHistoryClosing=false;
+  const id=history.state?.kepStageDialog;
+  if(!id&&stageDialog.open)stageDialog.close();
+  else if(id&&route){
+    const target=route.stages.find(stage=>stage.id===id);
+    if(target)openStage(target);
+  }
+  if(queuedStageDialog){
+    const target=queuedStageDialog;queuedStageDialog=null;
+    openStage(target);
+  }
+});
+stageDialog.addEventListener('close',()=>{
+  if(stageDialog.open)return;
+  document.documentElement.classList.remove('stage-modal-open');
+  if(history.state?.kepStageDialog){
+    stageDialogHistoryClosing=true;
+    history.back();
+  }
+  const target=stageDialogOpener?.isConnected?stageDialogOpener:document.querySelector('#nextAction .primary, .utility-tab.active');
+  target?.focus({preventScroll:true});
+});
+
 function openStage(stage){
+  if(stageDialogHistoryClosing){queuedStageDialog=stage;return;}
+  if(!stageDialog.open){
+    stageDialogOpener=document.activeElement;
+    const state={...(history.state||{}),kepStageDialog:stage.id};
+    if(history.state?.kepStageDialog)history.replaceState(state,'',location.href);
+    else history.pushState(state,'',location.href);
+  }
+  document.documentElement.classList.add('stage-modal-open');
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
   const phase=phaseForStage(stage.id);
@@ -1295,6 +1336,7 @@ function openStage(stage){
       ?(PRE_SUBMIT_STAGES.has(stage.id)?'Periksa & lanjut':'Tandai selesai & lanjut')
       :'Selesaikan tahap sebelumnya dulu';
   $('stageDialog').showModal();
+  $('stageDialog').querySelector('.stage-dialog-body').scrollTop=0;
 }
 
 $('stageDoneBtn').addEventListener('click',(event)=>{
