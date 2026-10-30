@@ -865,7 +865,7 @@ function renderJourney(){
       card.className='stage'+(isStageDone?' done':'')+(isStageCurrent?' current':'');
       card.innerHTML=`
         <div class="step-no">${isStageDone?'✓':index+1}</div>
-        <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(stage.authority)}</p></div>
+        <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(authorityLabel(stage))}</p></div>
         <span class="status">${isStageDone?'Selesai':isStageCurrent?'Sekarang':'Berikutnya'}</span>`;
       card.addEventListener('click',()=>openStage(stage));
       list.appendChild(card);
@@ -1180,6 +1180,32 @@ function renderSharedKoreaCore(stage){
     .join('');
 }
 
+// Presentation strings only: official facts and matching decisions stay in the data pack.
+const FEE_COPY_ID={
+  epsTopik:{purpose:'Biaya pendaftaran ujian EPS-TOPIK',payee:'Bank BNI melalui kode pembayaran resmi'},
+  psychology:{purpose:'Pemeriksaan psikologi resmi',payee:'Psikolog yang dipilih melalui jalur resmi HIMPSI'},
+  visaKvac:{purpose:'Biaya visa dan administrasi KVAC',payee:'Dana pada rekening BNI milik pemohon; didebit otomatis setelah persetujuan KVAC'},
+  visaBalance:{purpose:'Saldo minimum BNI untuk proses visa',payee:'Tetap pada rekening BNI milik pemohon'},
+  departureFacility2026:{purpose:'Paket keberangkatan: tiket pesawat, penanganan, dan jaket',payee:'PT. Avianca Muliatama melalui rekening pada pengumuman keberangkatan KP2MI yang berlaku'}
+};
+const feePurpose=fee=>FEE_COPY_ID[fee.id]?.purpose||fee.purpose;
+const feePayeeLabel=fee=>FEE_COPY_ID[fee.id]?.payee||fee.payee;
+function authorityLabel(stage){
+  return String(stage.authority||'Belum tercatat')
+    .replace('KP2MI-approved health provider','Penyedia kesehatan yang disetujui KP2MI')
+    .replace('KP2MI-approved provider','Penyedia yang disetujui KP2MI')
+    .replace('Korean employer','Pemberi kerja di Korea')
+    .replace('government employment system','sistem ketenagakerjaan pemerintah')
+    .replace('Employment training institution','Lembaga pelatihan kerja')
+    .replace('employment training institution','lembaga pelatihan kerja')
+    .replace('Employer','Pemberi kerja').replace('employer','pemberi kerja')
+    .replace('worker','pekerja').replace('designated bank','bank yang ditunjuk')
+    .replace('approved provider','penyedia yang disetujui')
+    .replace('sending institution','lembaga pengirim')
+    .replace('Korean mission','perwakilan Korea')
+    .replace('employment center','pusat ketenagakerjaan');
+}
+
 function stageSourceContext(stage){
   const url=stage?.sourceUrl||'';
   const unavailable=!url||!sourceReviewStatus||
@@ -1201,7 +1227,7 @@ function stageSourceContextHtml(stage){
   const checked=route?.lastVerified||'Belum tercatat';
   return '<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span>'+
     '<p>'+escapeHtml(source.note)+'</p>'+
-    '<dl class="source-facts"><div><dt>Instansi</dt><dd>'+escapeHtml((stage.authority||'Belum tercatat').replace('designated bank','bank yang ditunjuk'))+'</dd></div>'+
+    '<dl class="source-facts"><div><dt>Instansi</dt><dd>'+escapeHtml(authorityLabel(stage))+'</dd></div>'+
     '<div><dt>Berlaku untuk</dt><dd>Indonesia · E-9 · Manufaktur '+escapeHtml(route?.cycle||'')+'; ikuti panggilan yang memuat nama Anda.</dd></div>'+
     '<div><dt>Pemeriksaan data rute</dt><dd>'+escapeHtml(checked)+' · bukan pemeriksaan langsung hari ini</dd></div></dl>';
 }
@@ -1284,7 +1310,7 @@ function openStage(stage){
 
   $('stageKind').textContent='Tahap '+(index+1)+' dari '+route.stages.length+' · '+phase.short;
   $('stageTitle').textContent=stageTitle(stage);
-  $('stageAuthority').textContent=stage.authority.replace('designated bank','bank yang ditunjuk');
+  $('stageAuthority').textContent=authorityLabel(stage);
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
   $('stageSourceContext').innerHTML=stageSourceContextHtml(stage);
@@ -2684,7 +2710,7 @@ $('checkFeeBtn').addEventListener('click',()=>{
     const payeeMatches=payee===known.payeeCategory;
     out.classList.add(payeeMatches?'safe':'warn');
     const scopeNote=known.conditional&&known.scope?' <strong>Berlaku bersyarat:</strong> '+escapeHtml(known.scope)+'.':'';
-    out.innerHTML=`<strong>Nominal cocok dengan data resmi 2026:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} — ${escapeHtml(known.purpose)}. Jalur pembayaran: ${escapeHtml(known.payee)}. ${payeeMatches?'Penerima yang Anda pilih cocok dengan kategori resmi.':'Nominal cocok, tetapi kategori penerima tidak cocok; jangan bayar sebelum diverifikasi.'}${scopeNote} <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
+    out.innerHTML=`<strong>Nominal cocok dengan data resmi 2026:</strong> Rp${known.amountIdr.toLocaleString('id-ID')} — ${escapeHtml(feePurpose(known))}. Jalur pembayaran: ${escapeHtml(feePayeeLabel(known))}. ${payeeMatches?'Penerima yang Anda pilih cocok dengan kategori resmi.':'Nominal cocok, tetapi kategori penerima tidak cocok; jangan bayar sebelum diverifikasi.'}${scopeNote} <a href="${known.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a>`;
     return;
   }
   out.classList.add('warn');
@@ -2708,11 +2734,11 @@ function renderCostLedger(){
   if(!rules)return;
   $('knownCostList').innerHTML=rules.fees.map(f=>{
     if(sourceNeedsReview(f.sourceUrl)||sourceHasFetchWarning(f.sourceUrl)){
-      return '<article class="cost-item"><h3>Biaya perlu dikonfirmasi</h3><p>'+escapeHtml(f.purpose)+'</p><p>Jangan menggunakan nominal lama sebelum sumber ditinjau.</p><a href="'+escapeHtml(f.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a></article>';
+      return '<article class="cost-item"><h3>Biaya perlu dikonfirmasi</h3><p>'+escapeHtml(feePurpose(f))+'</p><p>Jangan menggunakan nominal lama sebelum sumber ditinjau.</p><a href="'+escapeHtml(f.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a></article>';
     }
     const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Nominal dalam pengumuman';
     const scope=f.conditional&&f.scope?'<p><strong>Bersyarat:</strong> '+escapeHtml(f.scope)+'</p>':'';
-    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p>${scope}<p class="cost-date">Tanggal pengumuman: ${escapeHtml(f.sourceDate||'belum tercatat')}. Periksa apakah masih berlaku untuk panggilan Anda.</p><p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
+    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(feePurpose(f))}</p><p>${escapeHtml(feePayeeLabel(f))}</p>${scope}<p class="cost-date">Tanggal pengumuman: ${escapeHtml(f.sourceDate||'belum tercatat')}. Periksa apakah masih berlaku untuk panggilan Anda.</p><p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
   }).join('');
 
   const entries=read(KEYS.ledger,[]);
@@ -3239,7 +3265,7 @@ $('analyzeBrokerBtn').addEventListener('click',()=>{
     if(!known)return {level:'warn',text:'Rp'+amount.toLocaleString('id-ID')+' tidak cocok dengan daftar nominal resmi yang sudah diverifikasi untuk rute ini.'};
     if(known.kind==='minimum_balance')return {level:'warn',text:'Rp'+amount.toLocaleString('id-ID')+' cocok dengan saldo minimum BNI, bukan biaya yang harus diberikan kepada seseorang.'};
     const scope=known.conditional&&known.scope?' Berlaku hanya pada kondisi: '+known.scope+'.':'';
-    return {level:'ok',text:'Rp'+amount.toLocaleString('id-ID')+' sama dengan nominal resmi: '+known.purpose+'. Kesamaan nominal saja tidak membuktikan penerima pembayaran benar.'+scope};
+    return {level:'ok',text:'Rp'+amount.toLocaleString('id-ID')+' sama dengan nominal resmi: '+feePurpose(known)+'. Kesamaan nominal saja tidak membuktikan penerima pembayaran benar.'+scope};
   });
 
   const hasRisk=signals.some(s=>s.level==='risk');
