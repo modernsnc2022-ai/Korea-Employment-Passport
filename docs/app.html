@@ -174,6 +174,71 @@
         <p>Checklist berubah mengikuti tahap Anda sekarang. Jika ada pengumuman yang khusus untuk nama/gelombang Anda, pengumuman itu yang harus diikuti. File yang dipilih hanya diperiksa di perangkat Anda.</p>
       </div>
 
+      <div id="docScopeWrap" class="panel doc-scope-wrap" hidden>
+        <label>Pengumuman yang memuat nama saya
+          <select id="docScopeSelect"></select>
+        </label>
+        <a id="docScopeSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
+        <small>Pilih hanya jika nama Anda memang ada di pengumuman tersebut. Checklist dan contoh akan menyesuaikan otomatis.</small>
+      </div>
+      <div id="docStageContext" class="panel doc-context"></div>
+
+      <section id="formWizardSection" class="form-wizard-section" hidden>
+        <div class="section-head">
+          <span class="eyebrow dark">ISI SATU PER SATU</span>
+          <h2>Panduan isi formulir</h2>
+          <p>Pilih formulir. Aplikasi hanya menunjukkan satu kolom pada satu waktu supaya tidak membingungkan.</p>
+        </div>
+        <div class="panel">
+          <label>Formulir yang sedang Anda isi
+            <select id="formWizardSelect"></select>
+          </label>
+          <div id="formWizardIntro" class="wizard-intro"></div>
+          <div id="formWizardCard" class="wizard-card" hidden>
+            <div class="wizard-progress">
+              <span id="formWizardProgress"></span>
+              <strong id="formWizardLabel"></strong>
+            </div>
+            <div class="wizard-instruction">
+              <small>TULIS / LAKUKAN SEPERTI INI</small>
+              <strong id="formWizardInstruction"></strong>
+            </div>
+            <div class="wizard-example">
+              <small>CONTOH</small>
+              <code id="formWizardExample"></code>
+            </div>
+            <div id="formWizardDont" class="wizard-dont"></div>
+            <details id="formFieldCheck" class="wizard-check" hidden>
+              <summary>Cek apakah isian saya sudah benar</summary>
+              <div class="wizard-check-body">
+                <input id="formFieldValue" autocomplete="off" placeholder="Tempel nilai yang Anda tulis — tidak disimpan">
+                <button id="formFieldCheckBtn" type="button" class="secondary">Periksa nilai</button>
+                <button id="formFieldConfirmBtn" type="button" class="primary" hidden>Sudah saya cek sesuai petunjuk</button>
+                <div id="formFieldCheckResult" class="result" hidden></div>
+                <small>Nilai ini tidak disimpan ke localStorage dan tidak dikirim ke server.</small>
+              </div>
+            </details>
+            <div class="wizard-actions">
+              <button id="formWizardPrev" type="button" class="secondary">← Sebelumnya</button>
+              <button id="formWizardNext" type="button" class="primary">Berikutnya →</button>
+            </div>
+          </div>
+          <p class="muted wizard-local-note">Data contoh bukan data Anda. Nilai pribadi tidak perlu diketik di beta ini.</p>
+        </div>
+      </section>
+
+      <div id="docList" class="check-list"></div>
+
+      <div id="documentExampleSection" class="document-example-section" hidden>
+        <div class="section-head">
+          <span class="eyebrow dark">CONTOH PENGISIAN</span>
+          <h2>Contoh yang sudah diisi</h2>
+          <p>Semua nama, nomor, dan nilai identitas pada contoh adalah data dummy. Jangan salin data contoh ke dokumen Anda.</p>
+        </div>
+        <div id="documentExampleList" class="document-example-list"></div>
+      </div>
+      <button id="resetDocs" class="secondary">Reset checklist dokumen</button>
+
       <div class="panel field-copilot">
         <div>
           <span class="eyebrow dark">BANTUAN ISI KOLOM</span>
@@ -258,70 +323,7 @@
         </div>
       </details>
 
-      <div id="docScopeWrap" class="panel doc-scope-wrap" hidden>
-        <label>Pengumuman yang memuat nama saya
-          <select id="docScopeSelect"></select>
-        </label>
-        <a id="docScopeSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
-        <small>Pilih hanya jika nama Anda memang ada di pengumuman tersebut. Checklist dan contoh akan menyesuaikan otomatis.</small>
-      </div>
-      <div id="docStageContext" class="panel doc-context"></div>
 
-      <section id="formWizardSection" class="form-wizard-section" hidden>
-        <div class="section-head">
-          <span class="eyebrow dark">ISI SATU PER SATU</span>
-          <h2>Panduan isi formulir</h2>
-          <p>Pilih formulir. Aplikasi hanya menunjukkan satu kolom pada satu waktu supaya tidak membingungkan.</p>
-        </div>
-        <div class="panel">
-          <label>Formulir yang sedang Anda isi
-            <select id="formWizardSelect"></select>
-          </label>
-          <div id="formWizardIntro" class="wizard-intro"></div>
-          <div id="formWizardCard" class="wizard-card" hidden>
-            <div class="wizard-progress">
-              <span id="formWizardProgress"></span>
-              <strong id="formWizardLabel"></strong>
-            </div>
-            <div class="wizard-instruction">
-              <small>TULIS / LAKUKAN SEPERTI INI</small>
-              <strong id="formWizardInstruction"></strong>
-            </div>
-            <div class="wizard-example">
-              <small>CONTOH</small>
-              <code id="formWizardExample"></code>
-            </div>
-            <div id="formWizardDont" class="wizard-dont"></div>
-            <details id="formFieldCheck" class="wizard-check" hidden>
-              <summary>Cek apakah isian saya sudah benar</summary>
-              <div class="wizard-check-body">
-                <input id="formFieldValue" autocomplete="off" placeholder="Tempel nilai yang Anda tulis — tidak disimpan">
-                <button id="formFieldCheckBtn" type="button" class="secondary">Periksa nilai</button>
-                <button id="formFieldConfirmBtn" type="button" class="primary" hidden>Sudah saya cek sesuai petunjuk</button>
-                <div id="formFieldCheckResult" class="result" hidden></div>
-                <small>Nilai ini tidak disimpan ke localStorage dan tidak dikirim ke server.</small>
-              </div>
-            </details>
-            <div class="wizard-actions">
-              <button id="formWizardPrev" type="button" class="secondary">← Sebelumnya</button>
-              <button id="formWizardNext" type="button" class="primary">Berikutnya →</button>
-            </div>
-          </div>
-          <p class="muted wizard-local-note">Data contoh bukan data Anda. Nilai pribadi tidak perlu diketik di beta ini.</p>
-        </div>
-      </section>
-
-      <div id="docList" class="check-list"></div>
-
-      <div id="documentExampleSection" class="document-example-section" hidden>
-        <div class="section-head">
-          <span class="eyebrow dark">CONTOH PENGISIAN</span>
-          <h2>Contoh yang sudah diisi</h2>
-          <p>Semua nama, nomor, dan nilai identitas pada contoh adalah data dummy. Jangan salin data contoh ke dokumen Anda.</p>
-        </div>
-        <div id="documentExampleList" class="document-example-list"></div>
-      </div>
-      <button id="resetDocs" class="secondary">Reset checklist dokumen</button>
     </section>
 
     <section id="fees" class="view">
@@ -679,9 +681,10 @@
         <button class="close" type="submit" aria-label="Tutup panduan tahap" title="Tutup">×</button>
       </header>
       <div class="stage-dialog-body" tabindex="0" aria-label="Isi panduan tahap">
-      <h3>Apa yang harus dilakukan</h3>
+      <h3>Langkah sekarang</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
+      <section id="stagePreparation" class="stage-preparation" aria-label="Persiapan tahap"></section>
       <section id="sharedKoreaCoreSection" class="shared-korea-core" hidden>
         <div class="shared-korea-core-head">
           <span class="eyebrow dark">ATURAN RESMI UMUM DI KOREA</span>

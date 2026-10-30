@@ -280,3 +280,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  body>footer{padding-bottom:32px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* A shared task template: action, conditions, preparation, evidence. */
+.stage-dialog-body>h3{font-size:1.1rem;margin:12px 0 8px}
+#stageAction{font-size:1.05rem;line-height:1.65;margin:0 0 16px}
+.stage-preparation{padding:0 0 20px;border-bottom:1px solid var(--line);margin:20px 0}
+.stage-preparation h3{font-size:1rem;margin:20px 0 8px}
+.stage-preparation p,.stage-preparation li{font-size:.9rem;line-height:1.6}
+.stage-preparation ul{padding-left:20px;margin:8px 0}
+.stage-preparation li{padding:6px 0}
+.stage-preparation li small{display:block;color:var(--muted)}
+.preparation-condition{padding:12px;border-left:3px solid #bb7918;background:var(--warn)}
+.stage-preparation .secondary{margin:8px 8px 0 0}
+#documents .field-copilot{margin-top:32px}
+.panel,.check-list article,.cost-item,.gap-item,.wizard-card,.example-card{border-radius:12px;box-shadow:none}
+#documents .doc-context{border-left:3px solid var(--blue)}
+.doc-context h3{font-size:1.125rem;line-height:1.4}
+.doc-status{border-radius:6px}
+.check-list article{padding:20px}
+@media(max-width:720px){.stage-preparation .secondary{width:100%;margin-right:0}.doc-context-head{flex-direction:column}.doc-status{text-align:left}}
