@@ -2967,7 +2967,7 @@ $('checkContractBtn').addEventListener('click',()=>{
   ].join('');
   const incomplete=missing.length?'<p><strong>'+missing.length+' kolom wajib belum diisi.</strong> Lengkapi data agar pemeriksaan lebih berguna.</p><button type="button" id="completeContractFields" class="secondary">Isi kolom pertama yang belum lengkap</button><details><summary>Lihat kolom yang belum diisi</summary><ul>'+missing.map(f=>'<li>'+escapeHtml(f.label)+'</li>').join('')+'</ul></details>':'';
   out.innerHTML='<strong>Hasil pemeriksaan SLC</strong>'+incomplete+'<div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>'+(!wageReady?wageSourceNotice():'');
-  $('completeContractFields')?.addEventListener('click',()=>$('contract_'+missing[0].id)?.focus());
+  out.querySelector('#completeContractFields')?.addEventListener('click',()=>$('contract_'+missing[0].id)?.focus());
 });
 
 $('openWorkplaceBtn').addEventListener('click',()=>{
