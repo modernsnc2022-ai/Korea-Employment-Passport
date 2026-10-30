@@ -1440,11 +1440,15 @@ function renderQuickQuestionChips(stage){
   }));
 }
 
+let lastQuestionContext=null;
 function renderNextAction(){
   if(!route||!rules)return;
   const done=new Set(read(KEYS.done,[]));
   const next=route.stages.find(s=>!done.has(s.id));
   const box=$('nextAction');
+  const context=(next?.id||'finished')+'|'+(next?selectedScope(next.id):'');
+  if(lastQuestionContext!==context)$('brokerLikeQuestionResult').hidden=true;
+  lastQuestionContext=context;
   box.hidden=false;
 
   if(done.size===0&&rules.registration.status==='closed'){
@@ -1582,6 +1586,11 @@ $('checkEligibilityBtn').addEventListener('click',()=>{
     out.classList.add('warn');
     out.innerHTML=`<strong>Pemeriksaan belum lengkap.</strong> Jawab semua item terlebih dahulu. Jawaban pada pemeriksaan ini tidak disimpan.`;
     $('eligibilityForm').querySelector('[aria-invalid="true"]')?.focus();
+    return;
+  }
+  if(!referenceReady(rules.source.url)){
+    out.classList.add('warn');
+    out.innerHTML='<strong>Belum dapat menilai kelayakan dari sumber yang tersedia.</strong><p>Syarat perlu pemeriksaan ulang. Baca pengumuman resmi terbaru; jangan menganggap hasil mandiri sebagai keputusan resmi.</p><a href="'+escapeHtml(rules.source.url)+'" target="_blank" rel="noopener">Periksa syarat resmi ↗</a>';
     return;
   }
   if(failures.length){
@@ -2697,7 +2706,7 @@ $('checkFeeBtn').addEventListener('click',()=>{
   }
   const known=rules.fees.find(f=>f.amountIdr===amount);
   if(known){
-    if(sourceNeedsReview(known.sourceUrl)||sourceHasFetchWarning(known.sourceUrl)){
+    if(!referenceReady(known.sourceUrl)){
       out.classList.add('warn');
       out.innerHTML='<strong>Biaya belum dapat dikonfirmasi.</strong><p>Data sumber memerlukan pemeriksaan ulang. Jangan membayar hanya karena nominal cocok dengan data lama.</p><a href="'+escapeHtml(known.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a>';
       return;
@@ -2733,7 +2742,7 @@ function classifyLedgerEntry(entry){
 function renderCostLedger(){
   if(!rules)return;
   $('knownCostList').innerHTML=rules.fees.map(f=>{
-    if(sourceNeedsReview(f.sourceUrl)||sourceHasFetchWarning(f.sourceUrl)){
+    if(!referenceReady(f.sourceUrl)){
       return '<article class="cost-item"><h3>Biaya perlu dikonfirmasi</h3><p>'+escapeHtml(feePurpose(f))+'</p><p>Jangan menggunakan nominal lama sebelum sumber ditinjau.</p><a href="'+escapeHtml(f.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a></article>';
     }
     const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Nominal dalam pengumuman';
@@ -2783,6 +2792,12 @@ $('addLedgerBtn').addEventListener('click',()=>{
 }
 );
 
+function referenceReady(url){
+  return Boolean(url)&&navigator.onLine&&!sourceNeedsReview(url)&&!sourceHasFetchWarning(url);
+}
+function wageSourceNotice(){
+  return '<p class="muted">Acuan upah belum dapat dikonfirmasi. Periksa sumber terbaru; kecocokan angka bukan keputusan hukum. <a href="'+escapeHtml(contractRules.source.minimumWage)+'" target="_blank" rel="noopener">Sumber upah minimum resmi ↗</a></p>';
+}
 function renderContract(){
   if(!contractRules)return;
   const saved=read(KEYS.contract,{});
@@ -2804,10 +2819,19 @@ function renderContract(){
     input.id='contract_'+field.id;
     input.value=saved[field.id]??'';
     input.addEventListener('change',saveContractLocally);
+    input.addEventListener('input',()=>$('contractResult').hidden=true);
     label.appendChild(input);
     wrap.appendChild(label);
   });
-  $('contractNotes').innerHTML=contractRules.notes.map(n=>'<li>'+escapeHtml(n)+'</li>').join('');
+  const notes={
+    'Employers must use the standard labor contract in the EPS process.':'Pemberi kerja menggunakan kontrak kerja standar pada proses EPS.',
+    "The employer must not keep the employee's bankbook or seal.":'Pemberi kerja tidak boleh menyimpan buku tabungan atau stempel milik pekerja.',
+    'Room and meal provision and employee-paid costs should be clear in the contract.':'Fasilitas tempat tinggal, makan, dan biaya yang dibayar pekerja harus tertulis jelas dalam kontrak.',
+    'Overtime/night/holiday pay rules depend on applicable labor law and workplace size.':'Ketentuan upah lembur, malam, dan hari libur bergantung pada hukum yang berlaku dan ukuran tempat kerja.'
+  };
+  $('contractNotes').innerHTML=referenceReady(contractRules.source.law)
+    ?contractRules.notes.map(n=>'<li>'+escapeHtml(notes[n]||n)+'</li>').join('')
+    :'<li>Catatan aturan perlu pemeriksaan ulang. Baca sumber resmi terbaru sebelum mengambil keputusan.</li>';
   $('contractSource').href=contractRules.source.law;
 }
 
@@ -2885,6 +2909,7 @@ $('parseSlcBtn').addEventListener('click',()=>{
 });
 
 function saveContractLocally(){
+  $('contractResult').hidden=true;
   const data={};
   contractRules.fields.forEach(field=>{data[field.id]=$('contract_'+field.id)?.value??''});
   write(KEYS.contract,data);
@@ -2912,17 +2937,20 @@ $('checkContractBtn').addEventListener('click',()=>{
   const monthly=Number(data.monthlyWage||0);
   const base=Number(data.basePay||0);
   const min=contractRules.minimumWage2026.monthly209h;
-  if(monthly>0&&monthly<min){
+  const wageReady=referenceReady(contractRules.source.minimumWage);
+  if(!wageReady)warnings.push('Perbandingan upah minimum ditahan karena sumbernya perlu diperiksa ulang.');
+  if(!referenceReady(contractRules.source.law))warnings.push('Ketentuan kontrak perlu dikonfirmasi pada sumber resmi terbaru.');
+  if(wageReady&&monthly>0&&monthly<min){
     risks.push('Upah normal bulanan '+monthly.toLocaleString('ko-KR')+' won berada di bawah acuan minimum 2026 sebesar '+min.toLocaleString('ko-KR')+' won untuk skenario 209 jam/bulan. Jam kerja aktual harus diperiksa sebelum mengambil kesimpulan.');
-  }else if(monthly>=min){
+  }else if(wageReady&&monthly>=min){
     ok.push('Upah normal bulanan tidak berada di bawah acuan 2026 untuk 209 jam/bulan.');
   }
   if(base>0&&monthly>0&&base>monthly)warnings.push('Gaji pokok lebih besar daripada upah normal bulanan. Periksa kembali angka yang dimasukkan.');
 
   const hours=contractWorkingHours(data);
   if(hours!==null){
-    if(hours>8)warnings.push('Jam kerja bersih yang dimasukkan sekitar '+hours.toFixed(1)+' jam/hari. Periksa pembagian jam normal, lembur, dan waktu istirahat pada SLC.');
-    else ok.push('Jam kerja bersih yang dimasukkan sekitar '+hours.toFixed(1)+' jam/hari.');
+    if(referenceReady(contractRules.source.law)&&hours>8)warnings.push('Jam kerja bersih yang dimasukkan sekitar '+hours.toFixed(1)+' jam/hari. Periksa pembagian jam normal, lembur, dan waktu istirahat pada SLC.');
+    else ok.push('Jam kerja bersih dari angka yang Anda masukkan sekitar '+hours.toFixed(1)+' jam/hari. Periksa kembali jadwal dan isi SLC.');
   }
 
   if(data.paymentMethod==='Lainnya')warnings.push('Cara pembayaran tidak jelas sebagai transfer ke rekening pekerja atau pembayaran langsung. Pastikan tertulis dengan jelas.');
@@ -2939,7 +2967,7 @@ $('checkContractBtn').addEventListener('click',()=>{
     ...warnings.map(x=>'<div class="contract-flag warn"><strong>Periksa:</strong> '+escapeHtml(x)+'</div>'),
     ...ok.map(x=>'<div class="contract-flag"><strong>OK:</strong> '+escapeHtml(x)+'</div>')
   ].join('');
-  out.innerHTML='<strong>Hasil pemeriksaan SLC</strong><div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>';
+  out.innerHTML='<strong>Hasil pemeriksaan SLC</strong><div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>'+(!wageReady?wageSourceNotice():'');
 });
 
 $('openWorkplaceBtn').addEventListener('click',()=>{
@@ -2948,7 +2976,7 @@ $('openWorkplaceBtn').addEventListener('click',()=>{
 });
 
 $('resetContractBtn').addEventListener('click',()=>{
-  localStorage.removeItem(KEYS.contract);
+  localStorage.removeItem(storageKeyFor(KEYS.contract));
   renderContract();
   $('contractResult').hidden=true;
 });
@@ -2962,6 +2990,7 @@ function renderPayroll(){
 }
 
 function savePayroll(){
+  $('payrollResult').hidden=true;
   const data={};
   ['payrollFullPeriod','payrollGross','payrollDeposit','payrollDeductions','payrollExplained','payrollHours','payrollMinimumBase'].forEach(id=>{
     data[id]=$(id)?.value??'';
@@ -2981,7 +3010,9 @@ $('checkPayrollBtn').addEventListener('click',()=>{
   const minBase=Number((data.payrollMinimumBase||'').replace(/[^0-9.]/g,''))||0;
   const contracted=Number(contract.monthlyWage||0);
   const minHourly=contractRules.minimumWage2026.hourly;
+  const wageReady=referenceReady(contractRules.source.minimumWage);
   const risks=[],warnings=[],ok=[];
+  if(!wageReady)warnings.push('Perbandingan upah minimum ditahan karena sumbernya perlu diperiksa ulang. Perhitungan angka Anda tetap ditampilkan.');
 
   if(!gross||!deposit)warnings.push('Masukkan gaji bruto dan jumlah yang benar-benar masuk rekening.');
   if(data.payrollFullPeriod==='yes'&&contracted>0&&gross>0){
@@ -2995,7 +3026,7 @@ $('checkPayrollBtn').addEventListener('click',()=>{
   }
   const unexplained=Math.max(0,deductions-explained);
   if(unexplained>0)warnings.push('Ada sekitar '+unexplained.toLocaleString('ko-KR')+' won potongan yang belum Anda pahami atau belum dijelaskan.');
-  if(hours>0&&minBase>0){
+  if(wageReady&&hours>0&&minBase>0){
     const implied=minBase/hours;
     if(implied<minHourly)risks.push('Upah per jam tersirat sekitar '+Math.round(implied).toLocaleString('ko-KR')+' won, di bawah upah minimum 2026 '+minHourly.toLocaleString('ko-KR')+' won. Komponen upah dan jam yang masuk perhitungan harus dikonfirmasi.');
     else ok.push('Upah per jam tersirat dari angka yang Anda masukkan tidak berada di bawah acuan minimum 2026.');
@@ -3009,11 +3040,12 @@ $('checkPayrollBtn').addEventListener('click',()=>{
     ...risks.map(x=>'<div class="contract-flag risk"><strong>Perlu perhatian:</strong> '+escapeHtml(x)+'</div>'),
     ...warnings.map(x=>'<div class="contract-flag warn"><strong>Periksa:</strong> '+escapeHtml(x)+'</div>'),
     ...ok.map(x=>'<div class="contract-flag"><strong>OK:</strong> '+escapeHtml(x)+'</div>')
-  ].join('')+'</div><p class="muted">Jika ada kekurangan upah atau potongan yang tidak dapat dijelaskan, simpan SLC, slip gaji, mutasi rekening, dan catatan jam kerja lalu gunakan jalur resmi 1350/Labor Portal.</p>';
+  ].join('')+'</div><p class="muted">Jika ada kekurangan upah atau potongan yang tidak dapat dijelaskan, simpan SLC, slip gaji, mutasi rekening, dan catatan jam kerja lalu gunakan jalur resmi 1350/Labor Portal.</p>'+(!wageReady?wageSourceNotice()+officialHelpFallbackHtml('first_payroll_check'):'');
 });
 
 ['payrollFullPeriod','payrollGross','payrollDeposit','payrollDeductions','payrollExplained','payrollHours','payrollMinimumBase'].forEach(id=>{
   $(id)?.addEventListener('change',savePayroll);
+  $(id)?.addEventListener('input',()=>$('payrollResult').hidden=true);
 });
 
 function workplaceEvidenceMeta(check){
@@ -4104,9 +4136,16 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
 
 function updateConnectionStatus(){
   $('offlineStatus').hidden=navigator.onLine;
+  if(!navigator.onLine){
+    ['feeResult','contractResult','payrollResult'].forEach(id=>$(id).hidden=true);
+  }
+  if(rules)renderCostLedger();
 }
 window.addEventListener('online',updateConnectionStatus);
 window.addEventListener('offline',updateConnectionStatus);
 updateConnectionStatus();
+['feeAmount','feePayee','feePurpose'].forEach(id=>$(id).addEventListener('input',()=>$('feeResult').hidden=true));
+$('brokerLikeQuestion').addEventListener('input',()=>$('brokerLikeQuestionResult').hidden=true);
+$('fieldHelpQuery').addEventListener('input',()=>$('fieldHelpResult').hidden=true);
 $('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();
