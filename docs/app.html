@@ -47,15 +47,20 @@
       <span class="eyebrow dark">LANGKAH 1 · TENTUKAN POSISI ANDA</span>
       <h2>Anda sedang di tahap mana?</h2>
       <p>Pilih satu kondisi untuk melihat langkah berikutnya, dokumen yang dibutuhkan, dan rujukan resmi. Belum yakin? Mulai dari awal atau pilih tahap yang lebih tepat di bawah.</p>
-      <div class="quick-choice-grid">
+      <div class="quick-choice-grid" aria-label="Tahap awal EPS">
         <button type="button" class="quick-choice" data-quick-stage="eligibility"><strong>Belum mendaftar resmi</strong><small>Baru mulai / cek syarat</small></button>
         <button type="button" class="quick-choice" data-quick-stage="exam_fee"><strong>Baru selesai daftar online</strong><small>Belum ujian EPS-TOPIK</small></button>
         <button type="button" class="quick-choice" data-quick-stage="skill_competency"><strong>Sudah ikut EPS-TOPIK</strong><small>Menunggu / menuju Skill Test</small></button>
-        <button type="button" class="quick-choice" data-quick-stage="psychology_pre_job"><strong>Sudah lulus seleksi akhir</strong><small>Menuju psikologi / MCU I</small></button>
-        <button type="button" class="quick-choice" data-quick-stage="roster"><strong>Sudah kirim lamaran</strong><small>Menunggu dipilih perusahaan</small></button>
-        <button type="button" class="quick-choice" data-quick-stage="post_slc_requirements"><strong>Sudah dapat SLC</strong><small>Psikologi / MCU II / visa</small></button>
-        <button type="button" class="quick-choice" data-quick-stage="korea_entry_training"><strong>Sudah tiba di Korea</strong><small>Pendidikan kerja / penempatan</small></button>
       </div>
+      <details class="advanced-stage-choices">
+        <summary>Sudah melewati ujian? Pilih tahap selanjutnya</summary>
+        <div class="quick-choice-grid">
+          <button type="button" class="quick-choice" data-quick-stage="psychology_pre_job"><strong>Sudah lulus seleksi akhir</strong><small>Menuju psikologi / MCU I</small></button>
+          <button type="button" class="quick-choice" data-quick-stage="roster"><strong>Sudah kirim lamaran</strong><small>Menunggu dipilih perusahaan</small></button>
+          <button type="button" class="quick-choice" data-quick-stage="post_slc_requirements"><strong>Sudah dapat SLC</strong><small>Psikologi / MCU II / visa</small></button>
+          <button type="button" class="quick-choice" data-quick-stage="korea_entry_training"><strong>Sudah tiba di Korea</strong><small>Pendidikan kerja / penempatan</small></button>
+        </div>
+      </details>
       <details class="quick-precise">
         <summary>Posisi saya berbeda → pilih lebih tepat</summary>
         <div class="quick-start-row">
@@ -74,7 +79,7 @@
     </section>
 
     <details class="trust-panel">
-      <summary>Detail panduan dan cadangan progres</summary>
+      <summary>Pengaturan dan backup progres (opsional)</summary>
 
       <div id="bqcStatus" class="bqc-status" hidden></div>
       <div class="progress-backup">
