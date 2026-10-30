@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "browserEngine": "webkit",
+    "head": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+    "startedAt": "20261030T235139438482Z",
+    "command": [
+      "npx",
+      "playwright",
+      "test",
+      "tests/participant-switch.spec.js",
+      "tests/storage-recovery.spec.js",
+      "--max-failures=1",
+      "--reporter=line,json",
+      "--output",
+      "/workspace/scratch/d4b77a1f4461/qa/storage-history-final-webkit/20261030T235139438482Z/artifacts",
+      "--retries=0",
+      "--workers=1"
+    ],
+    "runDirectory": "/workspace/scratch/d4b77a1f4461/qa/storage-history-final-webkit/20261030T235139438482Z",
+    "hostLibraryCacheValidationSkipped": true,
+    "runtimeLibraryPathOverride": true,
+    "workingTreeStatus": [
+      "?? node_modules"
+    ],
+    "trackedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-30T23:51:40.269Z",
+      "duration": 24620.04,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "scope": "participant-switch.spec.js + storage-recovery.spec.js only",
+  "physicalDeviceTesting": false,
+  "cases": [
+    {
+      "file": "participant-switch.spec.js",
+      "title": "participant switch refreshes private fields, current stage and clears temporary content",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "clearing a participant loads unscoped data and cannot be undone by the old URL",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "saving the same participant keeps their temporary question",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "a fresh participant can keep editing their ID before declaring their own stage",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "Forward to an old guide keeps the currently selected participant URL and data",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "quota failure retains current-tab progress and a privacy-safe downloadable backup",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "blocked storage still loads the guide and isolates current-tab participants",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "a failed contract deletion never claims that the saved record was erased",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "restoring a backup in current-tab mode does not reload away the restored progress",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "a mid-restore quota error rolls back previous device progress before using current-tab state",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "the storage warning and backup action remain accessible on a narrow mobile screen",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "when device rollback is blocked the original progress remains recoverable in a backup",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,664 @@
+{
+  "axeVersion": "4.10.3",
+  "automatedOnly": true,
+  "results": [
+    {
+      "name": "entry",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              "div[aria-label=\"Tahap awal EPS\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 36
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "eligibility",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#elig_education"
+            ],
+            [
+              "#elig_colorVision"
+            ],
+            [
+              "#elig_digits"
+            ],
+            [
+              "#elig_travelBan"
+            ],
+            [
+              "#elig_prison"
+            ],
+            [
+              "#elig_deportation"
+            ],
+            [
+              "#elig_infectious"
+            ],
+            [
+              "#elig_contact"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "eligibility-errors",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#elig_education"
+            ],
+            [
+              "#elig_colorVision"
+            ],
+            [
+              "#elig_digits"
+            ],
+            [
+              "#elig_travelBan"
+            ],
+            [
+              "#elig_prison"
+            ],
+            [
+              "#elig_deportation"
+            ],
+            [
+              "#elig_infectious"
+            ],
+            [
+              "#elig_contact"
+            ]
+          ]
+        }
+      ],
+      "passes": 41
+    },
+    {
+      "name": "documents",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "fees",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#feePayee"
+            ],
+            [
+              "#ledgerPayee"
+            ]
+          ]
+        }
+      ],
+      "passes": 38
+    },
+    {
+      "name": "gaps",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#brokerText"
+            ],
+            [
+              "#rejectStage"
+            ],
+            [
+              "#rejectReason"
+            ],
+            [
+              "#rejectFix"
+            ],
+            [
+              "#gapStage"
+            ],
+            [
+              "#gapTask"
+            ],
+            [
+              "#gapHelper"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "contract",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ],
+            [
+              "#contract_paymentMethod"
+            ],
+            [
+              "#contract_roomProvided"
+            ],
+            [
+              "#contract_mealsProvided"
+            ]
+          ]
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "contract-result-unconfirmed-source",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ],
+            [
+              "#contract_paymentMethod"
+            ],
+            [
+              "#contract_roomProvided"
+            ],
+            [
+              "#contract_mealsProvided"
+            ]
+          ]
+        }
+      ],
+      "passes": 44
+    },
+    {
+      "name": "workplace",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "payroll",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#payrollFullPeriod"
+            ]
+          ]
+        }
+      ],
+      "passes": 38
+    },
+    {
+      "name": "companyHub",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#companyQaQuestion"
+            ],
+            [
+              "#companyInvestigationTier"
+            ],
+            [
+              "#companyInvestigationQuestion"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "stage-dialog",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              ".stage-dialog-body"
+            ]
+          ]
+        }
+      ],
+      "passes": 32
+    },
+    {
+      "name": "documents-expanded",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "wizard-clean-source-fixture",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#docScopeSelect"
+            ],
+            [
+              "#formWizardSelect"
+            ]
+          ]
+        }
+      ],
+      "passes": 42
+    },
+    {
+      "name": "index",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 22
+    },
+    {
+      "name": "privacy",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "name": "countries",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 22
+    },
+    {
+      "name": "readiness",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 29
+    },
+    {
+      "name": "beta",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 36
+    },
+    {
+      "name": "entry",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              "div[aria-label=\"Tahap awal EPS\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 36
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "eligibility",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#elig_education"
+            ],
+            [
+              "#elig_colorVision"
+            ],
+            [
+              "#elig_digits"
+            ],
+            [
+              "#elig_travelBan"
+            ],
+            [
+              "#elig_prison"
+            ],
+            [
+              "#elig_deportation"
+            ],
+            [
+              "#elig_infectious"
+            ],
+            [
+              "#elig_contact"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "eligibility-errors",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#elig_education"
+            ],
+            [
+              "#elig_colorVision"
+            ],
+            [
+              "#elig_digits"
+            ],
+            [
+              "#elig_travelBan"
+            ],
+            [
+              "#elig_prison"
+            ],
+            [
+              "#elig_deportation"
+            ],
+            [
+              "#elig_infectious"
+            ],
+            [
+              "#elig_contact"
+            ]
+          ]
+        }
+      ],
+      "passes": 41
+    },
+    {
+      "name": "documents",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "fees",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#feePayee"
+            ],
+            [
+              "#ledgerPayee"
+            ]
+          ]
+        }
+      ],
+      "passes": 38
+    },
+    {
+      "name": "gaps",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#brokerText"
+            ],
+            [
+              "#rejectStage"
+            ],
+            [
+              "#rejectReason"
+            ],
+            [
+              "#rejectFix"
+            ],
+            [
+              "#gapStage"
+            ],
+            [
+              "#gapTask"
+            ],
+            [
+              "#gapHelper"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "contract",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ],
+            [
+              "#contract_paymentMethod"
+            ],
+            [
+              "#contract_roomProvided"
+            ],
+            [
+              "#contract_mealsProvided"
+            ]
+          ]
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "contract-result-unconfirmed-source",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ],
+            [
+              "#contract_paymentMethod"
+            ],
+            [
+              "#contract_roomProvided"
+            ],
+            [
+              "#contract_mealsProvided"
+            ]
+          ]
+        }
+      ],
+      "passes": 44
+    },
+    {
+      "name": "workplace",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "payroll",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#payrollFullPeriod"
+            ]
+          ]
+        }
+      ],
+      "passes": 38
+    },
+    {
+      "name": "companyHub",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#companyQaQuestion"
+            ],
+            [
+              "#companyInvestigationTier"
+            ],
+            [
+              "#companyInvestigationQuestion"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "stage-dialog",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              ".stage-dialog-body"
+            ]
+          ]
+        }
+      ],
+      "passes": 32
+    },
+    {
+      "name": "documents-expanded",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "wizard-clean-source-fixture",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#docScopeSelect"
+            ],
+            [
+              "#formWizardSelect"
+            ]
+          ]
+        }
+      ],
+      "passes": 42
+    },
+    {
+      "name": "index",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 22
+    },
+    {
+      "name": "privacy",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "name": "countries",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 22
+    },
+    {
+      "name": "readiness",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 29
+    },
+    {
+      "name": "beta",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 36
+    }
+  ]
+}

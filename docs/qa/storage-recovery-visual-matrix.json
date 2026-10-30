@@ -1,0 +1,113 @@
+{
+  "physicalDeviceTesting": false,
+  "records": [
+    {
+      "engine": "chromium",
+      "state": "quota",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "quota",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "quota-text200",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "blocked-read",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "deletion-blocked",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "participant-editor",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "quota",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "quota",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "quota-text200",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "blocked-read",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "deletion-blocked",
+      "width": 390,
+      "viewport": 390,
+      "documentWidth": 390,
+      "backupActionReachable": null,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "participant-editor",
+      "width": 320,
+      "viewport": 320,
+      "documentWidth": 320,
+      "backupActionReachable": null,
+      "pageErrors": []
+    }
+  ]
+}
