@@ -510,7 +510,7 @@ function renderCycleStatus(){
   const box=$('cycleStatus');
   box.hidden=false;
   if(rules.registration.status==='closed'){
-    box.innerHTML=`<strong>Pendaftaran baru Manufaktur 2026 telah ditutup.</strong> Jika sudah mendaftar, lanjutkan sesuai tahap Anda. Jika belum, tunggu pengumuman resmi berikutnya. <a href="${escapeHtml(rules.source.url)}" target="_blank" rel="noopener">Lihat pengumuman resmi ↗</a>`;
+    box.innerHTML=`<strong>Pendaftaran Manufaktur 2026 ditutup.</strong> Sudah terdaftar? Lanjutkan tahap Anda. Belum? Tunggu pengumuman baru. <a href="${escapeHtml(rules.source.url)}" target="_blank" rel="noopener">Baca pengumuman resmi ↗</a>`;
   }else{
     box.textContent=rules.registration.statusMessage||'Periksa pengumuman rekrutmen resmi terbaru.';
   }
@@ -772,9 +772,11 @@ function renderQuickStart(){
   const finished=read(KEYS.quickSetup,false);
   if(hasProgress||finished){
     box.hidden=true;
+    $('routeTitle').textContent='Langkah sekarang';
     document.body.classList.remove('setup-mode');
     return;
   }
+  $('routeTitle').textContent='Indonesia → Korea';
   document.body.classList.add('setup-mode');
   box.hidden=false;
   select.innerHTML='<option value="">Pilih hal terakhir yang sudah selesai</option>'+
@@ -785,14 +787,14 @@ $('setMilestoneBtn').addEventListener('click',()=>{
   const stageId=$('lastMilestoneSelect').value;
   if(!stageId)return;
   applyCurrentStage(stageId,true);
-  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
+  window.scrollTo({top:0,behavior:'instant'});
 });
 
 document.querySelectorAll('[data-quick-stage]').forEach(button=>button.addEventListener('click',()=>{
   const stageId=button.dataset.quickStage;
   if(!stageId)return;
   applyCurrentStage(stageId,true);
-  document.querySelector('.flow-dashboard')?.scrollIntoView({behavior:'smooth',block:'start'});
+  window.scrollTo({top:0,behavior:'instant'});
 }));
 
 $('startFromBeginningBtn').addEventListener('click',()=>{
@@ -1198,7 +1200,7 @@ function stageSourceContextHtml(stage){
   const checked=route?.lastVerified||'Belum tercatat';
   return '<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span>'+
     '<p>'+escapeHtml(source.note)+'</p>'+
-    '<dl class="source-facts"><div><dt>Instansi</dt><dd>'+escapeHtml(stage.authority||'Belum tercatat')+'</dd></div>'+
+    '<dl class="source-facts"><div><dt>Instansi</dt><dd>'+escapeHtml((stage.authority||'Belum tercatat').replace('designated bank','bank yang ditunjuk'))+'</dd></div>'+
     '<div><dt>Berlaku untuk</dt><dd>Indonesia · E-9 · Manufaktur '+escapeHtml(route?.cycle||'')+'; ikuti panggilan yang memuat nama Anda.</dd></div>'+
     '<div><dt>Pemeriksaan data rute</dt><dd>'+escapeHtml(checked)+' · bukan pemeriksaan langsung hari ini</dd></div></dl>';
 }
@@ -1281,7 +1283,7 @@ function openStage(stage){
 
   $('stageKind').textContent='Tahap '+(index+1)+' dari '+route.stages.length+' · '+phase.short;
   $('stageTitle').textContent=stageTitle(stage);
-  $('stageAuthority').textContent=stage.authority;
+  $('stageAuthority').textContent=stage.authority.replace('designated bank','bank yang ditunjuk');
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
   $('stageSourceContext').innerHTML=stageSourceContextHtml(stage);
@@ -1443,6 +1445,10 @@ function renderNextAction(){
     const position=document.createElement('p');
     position.className='current-stage-note';
     position.textContent='Tahap pilihan Anda · '+(route.stages.indexOf(next)+1)+' dari '+route.stages.length+' · bukan status resmi';
+    const sourceLink=document.createElement('a');
+    sourceLink.href=next.sourceUrl;sourceLink.target='_blank';sourceLink.rel='noopener';
+    sourceLink.className='task-source-shortcut';sourceLink.textContent='Sumber resmi ↗';
+    position.append(sourceLink);
     box.prepend(position);
   }
 
@@ -1450,7 +1456,7 @@ function renderNextAction(){
     const source=stageSourceContext(next);
     const evidence=document.createElement('div');
     evidence.className='next-evidence';
-    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener">Sumber resmi · '+escapeHtml(source.domain)+' ↗</a><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
+    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener">Sumber resmi ↗</a><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
     box.append(evidence);
     const warning=stageWarning(next);
     if(warning){
@@ -2585,10 +2591,10 @@ function renderDocuments(){
     const maxSize=pack.maxFileSizeMb||null;
     const sizeLabel=maxSize?' · maks. '+maxSize+' MB':'';
     const fileTools=doc.validation==='file'
-      ? `<div class="doc-tools"><input class="doc-file" type="file" accept="${doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg'}"><span class="file-status">Belum ada file yang diperiksa</span></div>`
+      ? `<div class="doc-tools"><label class="doc-file-field">Pilih berkas untuk diperiksa di perangkat ini<input aria-label="Pilih berkas ${escapeHtml(doc.title)}" class="doc-file" type="file" accept="${doc.format==='PDF'?'.pdf':'image/jpeg,.jpg,.jpeg'}"></label><span class="file-status">Belum ada file yang diperiksa</span></div>`
       : '';
 
-    article.innerHTML=`<input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"><div><h3>${escapeHtml(doc.title)}${formatLabel}</h3><p>${escapeHtml(optional)}${sizeLabel}. ${escapeHtml(doc.note||'')}</p>${fileTools}</div>`;
+    article.innerHTML=`<label class="doc-check-target"><input class="doc-check" type="checkbox" ${checked.has(doc.id)?'checked':''} aria-label="${escapeHtml(doc.title)}"></label><div><h3>${escapeHtml(doc.title)}${formatLabel}</h3><p>${escapeHtml(optional)}${sizeLabel}. ${escapeHtml(doc.note||'')}</p></div>${fileTools}`;
 
     article.querySelector('.doc-check').addEventListener('change',(e)=>{
       const state=new Set(read(KEYS.docs,[]));
@@ -2685,9 +2691,9 @@ function renderCostLedger(){
     if(sourceNeedsReview(f.sourceUrl)||sourceHasFetchWarning(f.sourceUrl)){
       return '<article class="cost-item"><h3>Biaya perlu dikonfirmasi</h3><p>'+escapeHtml(f.purpose)+'</p><p>Jangan menggunakan nominal lama sebelum sumber ditinjau.</p><a href="'+escapeHtml(f.sourceUrl)+'" target="_blank" rel="noopener">Periksa sumber resmi ↗</a></article>';
     }
-    const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Biaya resmi';
+    const label=f.kind==='minimum_balance'?'Saldo minimum — bukan biaya':'Nominal dalam pengumuman';
     const scope=f.conditional&&f.scope?'<p><strong>Bersyarat:</strong> '+escapeHtml(f.scope)+'</p>':'';
-    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p>${scope}<p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
+    return `<article class="cost-item"><h3>Rp${f.amountIdr.toLocaleString('id-ID')} · ${escapeHtml(label)}</h3><p>${escapeHtml(f.purpose)}</p><p>${escapeHtml(f.payee)}</p>${scope}<p class="cost-date">Tanggal pengumuman: ${escapeHtml(f.sourceDate||'belum tercatat')}. Periksa apakah masih berlaku untuk panggilan Anda.</p><p><a href="${f.sourceUrl}" target="_blank" rel="noopener">Sumber resmi ↗</a></p></article>`;
   }).join('');
 
   const entries=read(KEYS.ledger,[]);
@@ -3886,7 +3892,7 @@ function renderCompanyHub(){
     badge.textContent='TERKUNCI';
     badge.className='company-board-badge';
     boardState.className='result warn';
-    boardState.innerHTML='<strong>Papan bersama belum dibuka di build publik.</strong><p>Ini disengaja: KEP ID atau localStorage tidak dianggap login. Data anggota tidak boleh dipublikasikan sebagai JSON statis.</p>';
+    boardState.innerHTML='<strong>Ruang anggota belum dibuka.</strong><p>KEP ID tidak dianggap login ke akun anggota. Postingan tetap terkunci untuk melindungi privasi peserta.</p>';
   }
 
   const adSlot=$('companyAdSlot');
@@ -3999,6 +4005,7 @@ function switchView(viewId,scroll=true){
 
   document.querySelectorAll('.utility-tab').forEach(btn=>{
     btn.classList.toggle('active',btn.dataset.view===utilityOwner);
+    if(btn.dataset.view===utilityOwner)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');
   });
   document.querySelectorAll('.view').forEach(view=>{
     view.classList.toggle('active',view.id===viewId);

@@ -70,6 +70,13 @@
       <button id="startFromBeginningBtn" class="quick-start-link" type="button">Mulai benar-benar dari awal</button>
     </section>
 
+    <nav class="utility-nav" aria-label="Alat utama">
+      <button class="utility-tab active" data-view="journey"><span>01</span>Saat ini</button>
+      <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
+      <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
+      <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
+    </nav>
+
     <section class="flow-dashboard" aria-label="Proses resmi">
       <aside class="phase-panel">
         <div class="phase-panel-head">
@@ -96,12 +103,7 @@
       </div>
     </section>
 
-    <nav class="utility-nav" aria-label="Alat utama">
-      <button class="utility-tab active" data-view="journey"><span>01</span>Sekarang</button>
-      <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
-      <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
-      <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
-    </nav>
+
 
     <section id="journey" class="view active">
       <details id="allJourneyDetails" class="all-journey">
@@ -328,7 +330,7 @@
 
     <section id="fees" class="view">
       <div class="section-head">
-        <h2>Cek Biaya Ini</h2>
+        <h2>Periksa biaya</h2>
         <p>Nominal saja tidak cukup. Periksa nominal + penerima + tahap + sumber resmi.</p>
       </div>
       <div class="panel">
@@ -353,7 +355,7 @@
       </div>
 
       <div class="section-head">
-        <h2>Biaya resmi yang sudah diverifikasi</h2>
+        <h2>Rujukan biaya per pengumuman</h2>
         <p>Nominal di bawah hanya berlaku pada sumber/siklus yang tercantum. Jangan gunakan ulang untuk siklus berikutnya tanpa pengumuman baru.</p>
       </div>
       <div id="knownCostList" class="cost-list"></div>
@@ -387,7 +389,7 @@
 
     <section id="contract" class="view">
       <div class="section-head">
-        <h2>Contract Guardian — SLC</h2>
+        <h2>Periksa kontrak SLC</h2>
         <p>Masukkan isi utama SLC Anda. Data kontrak tetap di perangkat ini dan tidak dikirim ke server oleh beta ini.</p>
       </div>
       <div class="panel">
@@ -398,7 +400,7 @@
         <div id="parseSlcResult" class="result" hidden></div>
         <div id="contractForm" class="contract-grid"></div>
         <button id="checkContractBtn" class="primary">Periksa kontrak</button>
-        <button id="openWorkplaceBtn" class="secondary">Lanjut ke Workplace Reality Check</button>
+        <button id="openWorkplaceBtn" class="secondary">Lanjut ke Kenali tempat kerja Anda</button>
         <button id="resetContractBtn" class="secondary">Hapus data kontrak dari perangkat</button>
         <div id="contractResult" class="result" hidden></div>
       </div>
@@ -413,7 +415,7 @@
 
     <section id="workplace" class="view">
       <div class="section-head">
-        <h2>Workplace Reality Check</h2>
+        <h2>Kenali tempat kerja Anda</h2>
         <p>Periksa apakah perusahaan, lokasi kerja, akomodasi, dan kondisi praktis yang Anda pahami sebelum berangkat sesuai dengan bukti yang tersedia.</p>
       </div>
       <div class="panel">
@@ -459,7 +461,7 @@
           <span class="company-member-badge">ANGGOTA SAJA</span>
           <strong>Papan anonim tidak pernah dibuka hanya dengan KEP ID</strong>
         </div>
-        <p>KEP ID adalah kode beta, bukan autentikasi. Postingan bersama hanya boleh dimuat setelah layanan akun menerapkan autentikasi server-side. Halaman publik GitHub Pages tidak menyimpan atau menampilkan posting anggota.</p>
+        <p>KEP ID adalah kode peserta beta. Untuk melindungi privasi, komunitas perusahaan belum dibuka. Kode ini belum memberi akses ke postingan anggota.</p>
         <div id="companyMemberStatus" class="company-member-status"></div>
       </div>
 
@@ -559,7 +561,7 @@
 
     <section id="gaps" class="view">
       <div class="section-head">
-        <h2>Broker Guardian</h2>
+        <h2>Periksa pesan dan biaya</h2>
         <p>Tempel pesan WhatsApp/Telegram, penawaran jasa, atau teks tagihan. Analisis berjalan hanya di perangkat ini. Saat membuat draft email beta, pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang akan dihapus otomatis.</p>
       </div>
       <div class="panel">
@@ -613,14 +615,14 @@
       </div>
 
       <div class="section-head">
-        <h2>Pertanyaan field yang belum terverifikasi</h2>
+        <h2>Pertanyaan kolom yang belum terjawab</h2>
         <p>Ini adalah kolom kecil yang belum punya jawaban pasti. Jangan submit berdasarkan tebakan sampai ada dasar resmi yang sesuai.</p>
       </div>
       <div id="unresolvedFieldList" class="gap-list"></div>
       <button id="emailFieldQuestionsBtn" class="secondary">Kirim pertanyaan ini untuk diverifikasi</button>
 
       <div class="section-head">
-        <h2>Rejection Lab</h2>
+        <h2>Catat kendala dokumen</h2>
         <p>Jika formulir, dokumen, atau proses Anda pernah ditolak, simpan alasan persisnya. Alasan kecil ini menjadi aturan pencegahan untuk pengguna berikutnya.</p>
       </div>
       <div class="panel">

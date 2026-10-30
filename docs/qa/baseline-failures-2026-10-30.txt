@@ -1,0 +1,247 @@
+main-baseline
+{'startTime': '2026-10-30T05:52:58.152Z', 'duration': 105086.51, 'expected': 46, 'skipped': 0, 'unexpected': 10, 'flaky': 0}
+
+visa document helper shows one field at a time on mobile
+Error: expect(locator).toBeVisible() failed
+
+Locator:  locator('#formWizardSection')
+Expected: visible
+Received: hidden
+Timeout:  10000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for locator('#formWizardSection')
+    13 × locator resolved to <section hidden="" id="formWizardSection" class="form-wizard-section">…</section>
+       - unexpected value "hidden"
+
+
+notice-specific answers stay hidden until the user selects the matching notice
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#exactAnswerList')
+Expected string: "BBPPMPV Bisnis dan Pariwisata, Sawangan"
+Received string: ""
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" with timeout 5000ms
+  - waiting for locator('#exactAnswerList')
+    9 × locator resolved to <div id="exactAnswerList" class="exact-answer-list"></div>
+      - unexpected value ""
+
+
+form wizard exposes only one actionable field instruction at a time
+Error: expect(locator).toBeVisible() failed
+
+Locator:  locator('#formWizardSection')
+Expected: visible
+Received: hidden
+Timeout:  5000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for locator('#formWizardSection')
+    9 × locator resolved to <section hidden="" id="formWizardSection" class="form-wizard-section">…</section>
+      - unexpected value "hidden"
+
+
+mcu1 uses its verified stage-specific document pack
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 3
++ Received  + 3
+
+  Object {
+    "id": "mcu1_2026",
+-   "items": 4,
+-   "status": "verified_2026",
+-   "title": "Persiapan MCU I 2026",
++   "items": 0,
++   "status": "review_required",
++   "title": "Panduan tahap ini sedang ditinjau",
+  }
+
+predeparture OPP scope resolves to verified common pack
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 2
++ Received  + 2
+
+  Object {
+    "id": "opp_common_2026_pack",
+-   "items": 7,
+-   "status": "verified_across_multiple_2026_calls",
++   "items": 0,
++   "status": "review_required",
+  }
+
+psychology stage uses its verified 2026 pack
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: "verified_2026"
+Received: "review_required"
+
+post SLC stage exposes verified psychology and MCU II checklist
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 2
++ Received  + 2
+
+  Object {
+    "id": "post_slc_mcu2_2026",
+-   "items": 9,
+-   "status": "verified_across_multiple_2026_notices",
++   "items": 0,
++   "status": "review_required",
+  }
+
+partial departure registry never suggests another call when date is missing
+Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: "kp2mi.go.id/gtog-korea/info"
+Received string:    "https://kp2mi.go.id/gtog-korea/pengumuman"
+
+beta OPEN path remains functional and identity-minimal
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 0
+Received: 1
+
+review-required official source suppresses affected exact document guidance
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#freshnessStatus')
+Expected string: "PERUBAHAN SUMBER RESMI TERDETEKSI"
+Received string: ""
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" with timeout 5000ms
+  - waiting for locator('#freshnessStatus')
+    9 × locator resolved to <div hidden="" role="status" aria-live="polite" id="freshnessStatus" class="freshness-status"></div>
+      - unexpected value ""
+
+pr326-baseline
+{'startTime': '2026-10-30T05:53:16.061Z', 'duration': 103157.54400000001, 'expected': 46, 'skipped': 0, 'unexpected': 10, 'flaky': 0}
+
+visa document helper shows one field at a time on mobile
+Error: expect(locator).toBeVisible() failed
+
+Locator:  locator('#formWizardSection')
+Expected: visible
+Received: hidden
+Timeout:  10000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for locator('#formWizardSection')
+    14 × locator resolved to <section hidden="" id="formWizardSection" class="form-wizard-section">…</section>
+       - unexpected value "hidden"
+
+
+notice-specific answers stay hidden until the user selects the matching notice
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#exactAnswerList')
+Expected string: "BBPPMPV Bisnis dan Pariwisata, Sawangan"
+Received string: ""
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" with timeout 5000ms
+  - waiting for locator('#exactAnswerList')
+    9 × locator resolved to <div id="exactAnswerList" class="exact-answer-list"></div>
+      - unexpected value ""
+
+
+form wizard exposes only one actionable field instruction at a time
+Error: expect(locator).toBeVisible() failed
+
+Locator:  locator('#formWizardSection')
+Expected: visible
+Received: hidden
+Timeout:  5000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for locator('#formWizardSection')
+    9 × locator resolved to <section hidden="" id="formWizardSection" class="form-wizard-section">…</section>
+      - unexpected value "hidden"
+
+
+mcu1 uses its verified stage-specific document pack
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 3
++ Received  + 3
+
+  Object {
+    "id": "mcu1_2026",
+-   "items": 4,
+-   "status": "verified_2026",
+-   "title": "Persiapan MCU I 2026",
++   "items": 0,
++   "status": "review_required",
++   "title": "Panduan tahap ini sedang ditinjau",
+  }
+
+predeparture OPP scope resolves to verified common pack
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 2
++ Received  + 2
+
+  Object {
+    "id": "opp_common_2026_pack",
+-   "items": 7,
+-   "status": "verified_across_multiple_2026_calls",
++   "items": 0,
++   "status": "review_required",
+  }
+
+psychology stage uses its verified 2026 pack
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: "verified_2026"
+Received: "review_required"
+
+post SLC stage exposes verified psychology and MCU II checklist
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 2
++ Received  + 2
+
+  Object {
+    "id": "post_slc_mcu2_2026",
+-   "items": 9,
+-   "status": "verified_across_multiple_2026_notices",
++   "items": 0,
++   "status": "review_required",
+  }
+
+partial departure registry never suggests another call when date is missing
+Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: "kp2mi.go.id/gtog-korea/info"
+Received string:    "https://kp2mi.go.id/gtog-korea/pengumuman"
+
+beta OPEN path remains functional and identity-minimal
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 0
+Received: 1
+
+review-required official source suppresses affected exact document guidance
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#freshnessStatus')
+Expected string: "PERUBAHAN SUMBER RESMI TERDETEKSI"
+Received string: ""
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" with timeout 5000ms
+  - waiting for locator('#freshnessStatus')
+    9 × locator resolved to <div hidden="" role="status" aria-live="polite" id="freshnessStatus" class="freshness-status"></div>
+      - unexpected value ""

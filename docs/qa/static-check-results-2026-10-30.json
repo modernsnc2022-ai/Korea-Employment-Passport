@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Check JavaScript syntax",
+    "exitCode": 0
+  },
+  {
+    "name": "Validate JSON data",
+    "exitCode": 0
+  },
+  {
+    "name": "Check Python monitor scripts",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test official-source normalization",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test source-review pending baseline status",
+    "exitCode": 0
+  },
+  {
+    "name": "Check webapp DOM and route contract",
+    "exitCode": 0
+  },
+  {
+    "name": "Check multi-country Country Pack contract",
+    "exitCode": 0
+  },
+  {
+    "name": "Check HRD examNot cycle linkage",
+    "exitCode": 0
+  },
+  {
+    "name": "Check Myanmar Manufacturing promotion gate",
+    "exitCode": 0
+  },
+  {
+    "name": "Check next-review source monitor coverage",
+    "exitCode": 0
+  },
+  {
+    "name": "Check zero-broker scope coverage",
+    "exitCode": 0
+  },
+  {
+    "name": "Check beta tracker privacy and 30+20 cohort slots",
+    "exitCode": 0
+  },
+  {
+    "name": "Check beta prelaunch readiness",
+    "exitCode": 1
+  },
+  {
+    "name": "Self-test beta progress evidence aggregation",
+    "exitCode": 0
+  },
+  {
+    "name": "Report privacy-safe beta progress",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test beta interest parser",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test beta slot assignment helper",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test public beta feedback recorder",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test follow-up zero-broker evidence recorder",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test Manufacturing launch-check recorder",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test beta release-state helper",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test E-9 worker panel release helper",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test E-9 worker validator assignment",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test E-9 worker interest parser",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test outreach send guard",
+    "exitCode": 0
+  },
+  {
+    "name": "Audit outreach ledger against pre-send guard",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test worker interview recorder",
+    "exitCode": 0
+  },
+  {
+    "name": "Self-test worker evidence publisher",
+    "exitCode": 0
+  },
+  {
+    "name": "Validate worker evidence privacy",
+    "exitCode": 0
+  },
+  {
+    "name": "Check required public files",
+    "exitCode": 0
+  }
+]

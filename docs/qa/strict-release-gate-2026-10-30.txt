@@ -1,0 +1,7 @@
+exitCode=1
+BETA_PRELAUNCH_STATIC_FAIL
+- official-source monitor state is 'review_required', expected 'clean'
+- official-source monitor must have checked every configured source
+- official-source reviewRequiredUrls is not empty
+- official-source fetchFailureUrls is not empty
+- beta page must distinguish one exact HOLD, four safe baselines and beta release blockers
