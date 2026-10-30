@@ -1070,6 +1070,7 @@ function renderExactAnswers(stage){
     const item=answers.find(row=>row.id===button.dataset.exactMore);
     if(!item)return;
     if($('stageDialog')?.open)$('stageDialog').close();
+    switchView('journey',false);
     const input=$('brokerLikeQuestion');
     input.value=item.question+' — ';
     document.querySelector('.micro-help')?.scrollIntoView({behavior:'smooth',block:'center'});
@@ -4014,6 +4015,11 @@ $('openCompanyHubBtn').addEventListener('click',()=>{
 });
 
 function switchView(viewId,scroll=true){
+  const target=document.getElementById(viewId);
+  if(!target?.classList.contains('view'))return;
+  document.body.dataset.activeView=viewId;
+  const heading=target.querySelector('h2');
+  document.title=(viewId==='journey'?'Langkah sekarang':heading?.textContent.trim()||'Panduan EPS')+' · Korea Employment Passport';
   const utilityOwner={
     eligibility:'journey',
     contract:'journey',
@@ -4038,9 +4044,25 @@ function switchView(viewId,scroll=true){
   if(viewId==='companyHub'){
     renderCompanyHub();
   }
-  if(scroll)document.getElementById(viewId)?.scrollIntoView({behavior:'smooth',block:'start'});
+  if(scroll){
+    if(viewId==='journey'){
+      const action=$('nextAction');
+      action.scrollIntoView({behavior:'instant',block:'start'});
+      action.querySelector('.primary, select, button')?.focus({preventScroll:true});
+    }else{
+      if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+      target.scrollIntoView({behavior:'instant',block:'start'});
+    }
+  }
 }
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+document.querySelectorAll('.view:not(#journey)').forEach(view=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='tool-return';button.textContent='← Kembali ke langkah saya';
+  button.addEventListener('click',()=>switchView('journey'));
+  view.prepend(button);
+});
+
 document.querySelectorAll('.process-return').forEach(btn=>btn.addEventListener('click',()=>{
   switchView('journey');
   const allJourney=$('allJourneyDetails');
