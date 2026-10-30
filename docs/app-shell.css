@@ -354,3 +354,10 @@ body>footer a{min-height:44px;display:inline-flex;align-items:center}
 .task-source-shortcut{display:flex;align-items:center;min-height:44px;color:var(--blue);font-weight:650;text-underline-offset:3px}
 /* Recruitment deadlines remain visible before any stage has been selected. */
 body.setup-mode #cycleStatus{display:block!important}
+
+/* Form names, inline errors and focus feedback are part of the visible task. */
+.elig-row label{font-weight:650;cursor:pointer}
+.elig-control{display:grid;gap:8px;min-width:0}
+.elig-control input,.elig-control select{width:100%}
+.field-error{color:#b42318;font-size:.85rem;font-weight:650}
+[aria-invalid="true"]{border:2px solid #b42318!important}

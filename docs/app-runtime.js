@@ -1498,7 +1498,7 @@ function renderEligibility(){
     const row=document.createElement('div');
     row.className='elig-row';
     const info=document.createElement('div');
-    info.innerHTML=`<strong>${escapeHtml(rule.label)}</strong>`;
+    info.innerHTML=`<label for="elig_${escapeHtml(rule.id)}">${escapeHtml(rule.label)}</label>`;
     let input;
     if(rule.type==='date_range'){
       input=document.createElement('input');
@@ -1513,7 +1513,18 @@ function renderEligibility(){
       input.id='elig_'+rule.id;
       input.innerHTML='<option value="">Pilih</option><option value="yes">Ya, memenuhi</option><option value="no">Tidak / tidak yakin</option>';
     }
-    row.append(info,input);
+    const hint=info.querySelector('.hint');
+    if(hint){hint.id='elig_hint_'+rule.id;input.setAttribute('aria-describedby',hint.id);}
+    const error=document.createElement('small');
+    error.id='elig_error_'+rule.id;error.className='field-error';error.hidden=true;
+    error.textContent=rule.type==='date_range'?'Isi tanggal lahir terlebih dahulu.':'Pilih atau isi jawaban terlebih dahulu.';
+    input.addEventListener('input',()=>{
+      input.removeAttribute('aria-invalid');error.hidden=true;
+      input.setAttribute('aria-describedby',hint?.id||'');
+      $('eligibilityResult').hidden=true;
+    });
+    const control=document.createElement('div');control.className='elig-control';control.append(input,error);
+    row.append(info,control);
     wrap.appendChild(row);
   });
 }
@@ -1523,7 +1534,13 @@ $('checkEligibilityBtn').addEventListener('click',()=>{
   rules.eligibility.forEach(rule=>{
     const el=$('elig_'+rule.id);
     const value=el?.value||'';
-    if(!value){unknown.push(rule.label);return}
+    const error=$('elig_error_'+rule.id);
+    if(!value){
+      el.setAttribute('aria-invalid','true');error.hidden=false;
+      el.setAttribute('aria-describedby',[$('elig_hint_'+rule.id)?.id,error.id].filter(Boolean).join(' '));
+      unknown.push(rule.label);return;
+    }
+    el.removeAttribute('aria-invalid');error.hidden=true;
     if(rule.type==='date_range'){
       if(value<rule.min||value>rule.max)failures.push(rule.fail||rule.label);
     }else if(rule.type==='number_max'){
@@ -1537,6 +1554,7 @@ $('checkEligibilityBtn').addEventListener('click',()=>{
   if(unknown.length){
     out.classList.add('warn');
     out.innerHTML=`<strong>Pemeriksaan belum lengkap.</strong> Jawab semua item terlebih dahulu. Jawaban pada pemeriksaan ini tidak disimpan.`;
+    $('eligibilityForm').querySelector('[aria-invalid="true"]')?.focus();
     return;
   }
   if(failures.length){
