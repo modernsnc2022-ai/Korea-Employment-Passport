@@ -39,16 +39,71 @@ const BETA_SCOPED_KEYS=new Set([
   KEYS.wizardReviewed,
   KEYS.quickSetup
 ]);
+const currentTabStorage=new Map();
+let storageSessionOnly=false;
+const STORAGE_SESSION_MESSAGE='Perubahan hanya tersedia di tab ini. Penyimpanan perangkat tidak dapat digunakan. Jangan muat ulang atau tutup tab sebelum mencadangkan progres yang diperlukan.';
+function warnStorageFailure(detail=''){
+  storageSessionOnly=true;
+  const status=$('storageStatus');
+  if(status.hidden)status.hidden=false;
+  const message=detail||$('storageFailureMessage').textContent||STORAGE_SESSION_MESSAGE;
+  if($('storageFailureMessage').textContent!==message)$('storageFailureMessage').textContent=message;
+}
+function storedValue(key){
+  if(currentTabStorage.has(key))return currentTabStorage.get(key);
+  try{return localStorage.getItem(key)}catch{warnStorageFailure();return null}
+}
 function activeBetaTesterIdForStorage(){
-  try{return canonicalBetaTesterId(JSON.parse(localStorage.getItem(KEYS.betaTesterId)||'""'))}catch{return ''}
+  try{return canonicalBetaTesterId(JSON.parse(storedValue(KEYS.betaTesterId)||'""'))}catch{return ''}
 }
 function storageKeyFor(key){
   if(!BETA_SCOPED_KEYS.has(key))return key;
   const testerId=activeBetaTesterIdForStorage();
   return testerId?key+'.'+testerId:key;
 }
-const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(storageKeyFor(key)))??fallback}catch{return fallback}};
-const write=(key,value)=>localStorage.setItem(storageKeyFor(key),JSON.stringify(value));
+const read=(key,fallback)=>{try{return JSON.parse(storedValue(storageKeyFor(key)))??fallback}catch{return fallback}};
+const write=(key,value)=>{
+  const scoped=storageKeyFor(key),serialized=JSON.stringify(value);
+  if(!storageSessionOnly){
+    try{localStorage.setItem(scoped,serialized);return true}catch{warnStorageFailure()}
+  }
+  currentTabStorage.set(scoped,serialized);return false;
+};
+function removeStoredValue(key){
+  const scoped=storageKeyFor(key);
+  try{localStorage.removeItem(scoped);currentTabStorage.delete(scoped);if(storageSessionOnly)warnStorageFailure(STORAGE_SESSION_MESSAGE);return true}
+  catch{warnStorageFailure('Data perangkat belum dihapus. Perubahan lain hanya tersedia di tab ini. Jangan menganggap catatan lama sudah terhapus.');return false}
+}
+function writeProgressBatch(entries){
+  const staged=entries.map(([key,value])=>[storageKeyFor(key),JSON.stringify(value)]);
+  if(!storageSessionOnly){
+    const previous=new Map(),applied=[];
+    try{
+      staged.forEach(([key])=>previous.set(key,localStorage.getItem(key)));
+      staged.forEach(([key,value])=>{localStorage.setItem(key,value);applied.push(key)});
+      return true;
+    }catch{
+      let restored=true;
+      // Never delete pre-existing keys to make space for rollback.
+      applied.filter(key=>previous.get(key)===null).forEach(key=>{try{localStorage.removeItem(key)}catch{restored=false}});
+      let pending=applied.filter(key=>previous.get(key)!==null);
+      for(let pass=0;pass<2&&pending.length;pass++)pending=pending.filter(key=>{
+        try{localStorage.setItem(key,previous.get(key));return false}catch{return true}
+      });
+      if((!restored||pending.length)&&applied.length){
+        staged.forEach(([key])=>currentTabStorage.set(key,previous.get(key)));
+        warnStorageFailure('Pemulihan perangkat belum lengkap. Progres sebelumnya tersedia di tab ini; buat backup sebelum menutup tab. Catatan perangkat mungkin baru dipulihkan sebagian.');
+        throw new Error('Progres sebelumnya dipertahankan di tab ini. Pemulihan perangkat gagal; buat backup sebelum menutup tab.');
+      }
+      warnStorageFailure();
+    }
+  }
+  staged.forEach(([key,value])=>currentTabStorage.set(key,value));return false;
+}
+function storageSavedText(text){
+  return storageSessionOnly?text.replace('Tersimpan','Dicatat untuk tab ini').replace('tersimpan','aktif untuk tab ini'):text;
+}
+$('backupSessionProgressBtn').addEventListener('click',()=>$('backupProgressBtn').click());
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const stageTitle=(stage)=>i18n[stage.id]?.title||stage.title;
 const stageAction=(stage)=>i18n[stage.id]?.action||stage.action;
@@ -140,12 +195,11 @@ function safeRestoreProgress(payload){
     ?[...new Set(progress.wizardReviewed.filter(key=>typeof key==='string'&&validReviewedKeys.has(key)))]
     :[];
 
-  write(KEYS.done,done);
-  write(KEYS.docs,docs);
-  write(KEYS.scopeSelections,scopes);
-  write(KEYS.formWizard,wizard);
-  write(KEYS.wizardReviewed,wizardReviewed);
-  write(KEYS.quickSetup,Boolean(progress.quickSetup));
+  return writeProgressBatch([
+    [KEYS.done,done],[KEYS.docs,docs],[KEYS.scopeSelections,scopes],
+    [KEYS.formWizard,wizard],[KEYS.wizardReviewed,wizardReviewed],
+    [KEYS.quickSetup,Boolean(progress.quickSetup)]
+  ]);
 }
 
 $('backupProgressBtn').addEventListener('click',()=>{
@@ -182,9 +236,15 @@ $('restoreProgressFile').addEventListener('change',async(event)=>{
     const payload=JSON.parse(await file.text());
     safeRestoreProgress(payload);
     out.hidden=false;
-    out.className='result safe';
-    out.textContent='Progres berhasil dipulihkan. Halaman akan dimuat ulang.';
-    setTimeout(()=>location.reload(),500);
+    if(storageSessionOnly){
+      out.className='result warn';
+      out.textContent='Progres dipulihkan untuk tab ini saja. Buat backup sebelum menutup tab; halaman tidak dimuat ulang.';
+      refreshProgressViews();renderQuickStart();renderBqcStatus();
+    }else{
+      out.className='result safe';
+      out.textContent='Progres berhasil dipulihkan. Halaman akan dimuat ulang.';
+      setTimeout(()=>location.reload(),500);
+    }
   }catch(error){
     out.hidden=false;
     out.className='result risk';
@@ -1854,7 +1914,7 @@ $('fieldHelpBtn').addEventListener('click',()=>{
   saveUnresolvedBtn?.addEventListener('click',()=>{
     saveUnresolvedQuestion(query,'field_copilot');
     saveUnresolvedBtn.disabled=true;
-    saveUnresolvedBtn.textContent='Tersimpan — jangan submit sampai terverifikasi';
+    saveUnresolvedBtn.textContent=storageSavedText('Tersimpan — jangan submit sampai terverifikasi');
   });
 });
 
@@ -1926,7 +1986,7 @@ function answerBrokerLikeQuestion(){
   saveBtn?.addEventListener('click',()=>{
     saveUnresolvedQuestion(query,'global_broker_like_help');
     saveBtn.disabled=true;
-    saveBtn.textContent='Tersimpan — jangan submit sampai ada jawaban resmi';
+    saveBtn.textContent=storageSavedText('Tersimpan — jangan submit sampai ada jawaban resmi');
   });
 }
 
@@ -2976,7 +3036,7 @@ $('openWorkplaceBtn').addEventListener('click',()=>{
 });
 
 $('resetContractBtn').addEventListener('click',()=>{
-  localStorage.removeItem(storageKeyFor(KEYS.contract));
+  if(!removeStoredValue(KEYS.contract))return;
   renderContract();
   $('contractResult').hidden=true;
 });
@@ -3535,7 +3595,7 @@ function renderBetaValidation(){
       workerYearSelect.value=options.includes(savedYear)||savedYear==='unknown'?savedYear:'';
       if(workerYearStatus){
         workerYearStatus.textContent=workerYearSelect.value
-          ?'Tahun pengalaman tersimpan untuk ID beta ini.'
+          ?storageSavedText('Tahun pengalaman tersimpan untuk ID beta ini.')
           :'Pilih tahun pengalaman sebelum menyimpan penilaian tahap.';
       }
     }
@@ -3543,10 +3603,10 @@ function renderBetaValidation(){
   if(testerStatus){
     testerStatus.textContent=testerId
       ?role==='content_reviewer'
-        ?`ID reviewer konten tersimpan: ${testerId}. Gunakan untuk meninjau alur dan bahasa; hasil reviewer tidak dihitung sebagai bukti PASS rute.`
+        ?storageSavedText(`ID reviewer konten tersimpan: ${testerId}. Gunakan untuk meninjau alur dan bahasa; hasil reviewer tidak dihitung sebagai bukti PASS rute.`)
         :role==='e9_worker_validator'
-          ?`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`
-          :`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`
+          ?storageSavedText(`ID validator E-9 tersimpan: ${testerId}. Nilai hanya pengalaman yang benar-benar Anda ingat; kode ini bukan identitas pribadi.`)
+          :storageSavedText(`ID beta tersimpan: ${testerId}. Kode ini bukan nama atau nomor identitas.`)
       :'Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.';
   }
   const previous=select.value;
@@ -3626,7 +3686,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   const raw=String(input?.value||'').trim();
   const previous=betaTesterIdState();
   if(!raw){
-    localStorage.removeItem(KEYS.betaTesterId);
+    if(!removeStoredValue(KEYS.betaTesterId))return;
     if(previous){syncParticipantUrl('');refreshParticipantViews();return;}
     renderBetaModeBanner();
     renderBetaValidation();
@@ -3656,7 +3716,7 @@ $('betaWorkerExperienceYear').addEventListener('change',()=>{
   write(KEYS.betaWorkerExperienceYear,value);
   const status=$('betaWorkerExperienceStatus');
   if(status)status.textContent=value
-    ?'Tahun pengalaman tersimpan untuk ID beta ini.'
+    ?storageSavedText('Tahun pengalaman tersimpan untuk ID beta ini.')
     :'Pilih tahun pengalaman sebelum menyimpan penilaian tahap.';
 });
 
@@ -3773,7 +3833,7 @@ function betaFeedbackBundleOrWarn(){
   if(!bundle.count){
     out.hidden=false;
     out.className='result warn';
-    out.textContent='Belum ada checkpoint beta, pertanyaan, kasus penolakan, atau Celah Calo yang tersimpan di perangkat ini.';
+    out.textContent='Belum ada checkpoint beta, pertanyaan, kasus penolakan, atau Celah Calo yang dicatat.';
     return null;
   }
   return {out,bundle};
