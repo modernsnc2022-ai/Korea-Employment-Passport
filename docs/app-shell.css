@@ -375,3 +375,9 @@ body[data-active-view]:not([data-active-view="journey"]) .trust-panel{display:no
 .topbar .ghost{color:var(--blue);background:#fff;border:1px solid var(--line);min-height:44px}
 .view input,.view textarea,.view select{scroll-margin-bottom:104px}
 html{scroll-padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+@media(max-width:720px){body{padding-bottom:max(74px,calc(4rem + env(safe-area-inset-bottom)))}}
+h1,h2,h3,h4,legend{overflow-wrap:anywhere}
+.panel,.consistency-body{grid-template-columns:minmax(0,1fr)}
+.panel>*,.consistency-body>*{min-width:0}
+li{overflow-wrap:anywhere}
+.beta-validation-body input{width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:8px}
