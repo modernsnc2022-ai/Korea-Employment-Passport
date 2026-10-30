@@ -1327,6 +1327,10 @@ if(history.state?.kepStageDialog){
   history.replaceState(rest,'',location.href);
 }
 window.addEventListener('popstate',()=>{
+  // Historical guide URLs must not restore a participant selected before a live switch.
+  const historicalId=canonicalBetaTesterId(new URLSearchParams(location.search).get('beta'));
+  const selectedId=betaTesterIdState();
+  if(historicalId&&historicalId!==selectedId)syncParticipantUrl(selectedId);
   stageDialogHistoryClosing=false;
   const id=history.state?.kepStageDialog;
   if(!id&&stageDialog.open)stageDialog.close();

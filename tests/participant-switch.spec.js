@@ -45,3 +45,9 @@ test('a fresh participant can keep editing their ID before declaring their own s
  await page.locator('.utility-tab[data-view="journey"]').click();await expect(page.locator('#quickStart')).toBeVisible();await expect(page.locator('#nextAction')).toBeHidden();
  await expect(page.locator('[data-quick-stage="eligibility"]')).toBeFocused();
 });
+test('Forward to an old guide keeps the currently selected participant URL and data',async({page})=>{
+ await setup(page);await page.locator('#nextAction [data-stage="slc"]').click();await page.goBack();await expect(page.locator('#stageDialog')).toBeHidden();
+ await changeId(page,'KEP-0002');await page.goForward();await expect(page.locator('#stageDialog')).toBeVisible();
+ expect(new URL(page.url()).searchParams.get('beta')).toBe('KEP-0002');await expect(page.locator('#contract_enterpriseName')).toHaveValue('Company B');
+ await page.reload();await expect(page.locator('#contract_enterpriseName')).toHaveValue('Company B');expect(await page.evaluate(()=>read(KEYS.done,[]))).toEqual([]);
+});
