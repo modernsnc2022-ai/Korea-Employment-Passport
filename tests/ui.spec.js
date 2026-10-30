@@ -1237,7 +1237,7 @@ test('review-required official source suppresses affected exact document guidanc
     status: 'review_required',
     items: 0
   });
-  await expect(page.locator('#freshnessStatus')).toContainText('PERUBAHAN SUMBER RESMI TERDETEKSI');
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
   await expect(page.locator('#docStageContext')).toContainText('Panduan tahap ini sedang ditinjau');
   await expect(page.locator('#docStageContext')).toContainText('Jangan gunakan rincian lama');
   await expect(page.locator('#docStageContext')).not.toContainText('Rp350.000');

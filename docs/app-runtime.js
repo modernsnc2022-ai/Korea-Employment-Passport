@@ -466,7 +466,7 @@ async function boot(){
       fetchJsonRequired(SHARED_KOREA_CORE_ID_URL)
     ]);
     $('routeTitle').textContent='Indonesia → Korea';
-    $('routeMeta').textContent=`E-9 · Manufaktur · 2026 · paket ${route.packVersion} · diperiksa ${route.lastVerified}`;
+    $('routeMeta').textContent='Panduan E-9 · Manufaktur · 2026. Persyaratan terbaru tetap mengikuti pengumuman resmi.';
     renderCycleStatus();
     renderFreshnessStatus();
     renderBqcStatus();
@@ -510,7 +510,7 @@ function renderCycleStatus(){
   const box=$('cycleStatus');
   box.hidden=false;
   if(rules.registration.status==='closed'){
-    box.innerHTML=`<strong>Pendaftaran umum manufaktur 2026 sudah ditutup.</strong> ${escapeHtml(rules.registration.statusMessage)} <a href="${rules.source.url}" target="_blank" rel="noopener">Pengumuman resmi ↗</a>`;
+    box.innerHTML=`<strong>Pendaftaran baru Manufaktur 2026 telah ditutup.</strong> Jika sudah mendaftar, lanjutkan sesuai tahap Anda. Jika belum, tunggu pengumuman resmi berikutnya. <a href="${escapeHtml(rules.source.url)}" target="_blank" rel="noopener">Lihat pengumuman resmi ↗</a>`;
   }else{
     box.textContent=rules.registration.statusMessage||'Periksa pengumuman rekrutmen resmi terbaru.';
   }
@@ -556,86 +556,12 @@ function latestReadOnlyObservation(){
   return s;
 }
 
+// Operator-only source-watch details stay off the public homepage;
+// independent review/document guards still fail closed.
 function renderFreshnessStatus(){
-  const box=$('freshnessStatus');
-  if(!freshnessPolicy||!route){box.hidden=true;return}
-  box.hidden=false;
-  box.className='freshness-status';
-  const state=sourceReviewStatus?.state||'clean';
-  const trustPanel=document.querySelector('.trust-panel');
-
-  const latest=latestReadOnlyObservation();
-  if(sourceReviewStatus?.latestReadOnlyObservation&&!latest){
-    box.classList.add('fetch-warning');
-    if(trustPanel)trustPanel.open=true;
-    box.innerHTML=`
-      <span class="freshness-pill">BUKTI PEMANTAUAN TIDAK VALID</span>
-      <span><strong>Catatan pemantauan terbaru tidak dapat diverifikasi.</strong> Jangan menganggap sumber sudah disetujui atau semua persyaratan sudah pasti.</span>
-      <span>Semua jawaban yang bergantung pada sumber resmi ditahan sampai bukti valid dan tinjauan manusia tersedia.</span>`;
-    return;
-  }
-  if(state==='review_required'&&latest){
-    box.classList.add('review-required');
-    if(trustPanel)trustPanel.open=true;
-    const groups=latest.groupCounts;
-    const historicDate=String(sourceReviewStatus.detectedAt||'tanggal tidak tersedia');
-    box.innerHTML=`
-      <span class="freshness-pill">SUMBER RESMI MASIH MENUNGGU TINJAUAN MANUSIA</span>
-      <span><strong>Pemantauan teknis ${escapeHtml(latest.observedAtDate)}: ${latest.checked}/${latest.configured} sumber dapat diakses; 0 kegagalan.</strong> Ini bukan persetujuan isi kebijakan.</span>
-      <span><strong>${latest.unacceptedBaselineDriftCount} sumber berbeda dari baseline yang terakhir disetujui.</strong> ${groups.korea_shared} sumber Korea umum, ${groups.multi_country_eps_schedule} sumber jadwal HRD Korea lintas negara, dan ${groups.other_country} sumber negara lain. Perbedaan sidik jari bukan berarti perubahan kebijakan baru.</span>
-      <span><strong>Persetujuan manual: belum selesai.</strong> Aturan dan daftar dokumen lamaran akhir manufaktur 2026 belum boleh dianggap pasti, dan beta publik tetap ditahan.</span>
-      <small>Riwayat tetap disimpan: pemeriksaan ${escapeHtml(historicDate)} mengambil ${sourceReviewStatus.checked}/${sourceReviewStatus.configured}; satu sumber Nepal saat itu gagal diakses. Kegagalan lama tidak dihitung sebagai kegagalan ${escapeHtml(latest.observedAtDate)}.</small>`;
-    return;
-  }
-
-  if(state==='review_required'){
-    box.classList.add('review-required');
-    if(trustPanel)trustPanel.open=true;
-    const count=(sourceReviewStatus.reviewRequiredUrls||[]).length;
-    // Only these five known, country-exclusive indexes can be separated
-    // from Indonesia. Unknown new IDs are always counted with the
-    // Indonesia-relevant alerts (fail closed); never suppress global warnings.
-    const foreignOnly=new Set([
-      'np_eps_notice_index','vn_colab_eps_notices','lk_slbfe_home',
-      'kg_migrant_home','mm_mol_dol_index'
-    ]);
-    const changedIds=Array.isArray(sourceReviewStatus.reviewRequiredSourceIds)
-      ?sourceReviewStatus.reviewRequiredSourceIds:[];
-    const foreignCount=changedIds.slice(0,count).filter(id=>foreignOnly.has(id)).length;
-    const relevantCount=count-foreignCount;
-    const failedIds=Array.isArray(sourceReviewStatus.fetchFailureSourceIds)
-      ?sourceReviewStatus.fetchFailureSourceIds:[];
-    const failedCount=failedIds.length;
-    const fetchWarningText=failedCount
-      ?`<span><strong>${failedCount} sumber negara lain gagal diakses.</strong> Kegagalan akses tidak berarti data telah disetujui; sumber tetap dalam daftar review.</span>`
-      :'';
-    const scopeText=changedIds.length===count
-      ?`<span><strong>${relevantCount} sumber terkait Indonesia/Korea, ${foreignCount} sumber negara lain.</strong> Sumber negara lain tetap menunggu review untuk rute masing-masing.</span>`
-      :'<span>Rincian sumber belum dapat dicocokkan; perlakukan semua perubahan sebagai belum diverifikasi.</span>';
-    box.innerHTML=`
-      <span class="freshness-pill">PERUBAHAN SUMBER RESMI TERDETEKSI</span>
-      <span><strong>${count} sumber perlu ditinjau.</strong> Jawaban/formulir yang bergantung pada sumber tersebut sementara tidak dianggap “jawaban pasti”.</span>
-      ${scopeText}
-      ${fetchWarningText}
-      <span>Aturan tidak diubah otomatis sampai review selesai.</span>`;
-    return;
-  }
-
-  if(state==='fetch_warning'){
-    box.classList.add('fetch-warning');
-    const count=(sourceReviewStatus.fetchFailureUrls||[]).length;
-    box.innerHTML=`
-      <span class="freshness-pill">PEMERIKSAAN SUMBER BELUM LENGKAP</span>
-      <span><strong>${count} sumber resmi sementara tidak dapat diperiksa.</strong> Aturan tidak diubah otomatis.</span>
-      <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
-    return;
-  }
-
-  const cadenceLabel=freshnessPolicy.monitorCadence==='every 6 hours'?'SETIAP 6 JAM':String(freshnessPolicy.monitorCadence||'').toUpperCase();
-  box.innerHTML=`
-    <span class="freshness-pill">SUMBER RESMI DIPANTAU ${escapeHtml(cadenceLabel)}</span>
-    <span><strong>Tidak ada perubahan resmi yang belum direview.</strong> Aturan hanya berubah setelah verifikasi.</span>
-    <span>Data rute terakhir diverifikasi: <strong>${escapeHtml(route.lastVerified||'-')}</strong></span>`;
+  const panel=$('freshnessStatus');
+  panel.hidden=true;
+  panel.replaceChildren();
 }
 
 function normalizeSourceUrl(url){
@@ -651,7 +577,10 @@ function normalizeSourceUrl(url){
 }
 
 function sourceNeedsReview(url){
-  if(!url||!sourceReviewStatus)return false;
+  if(!url||!sourceReviewStatus)return true;
+  // An unavailable technical review feed cannot certify any official answer.
+  if(sourceReviewStatus.state==='fetch_warning'&&
+     (sourceReviewStatus.fetchFailureUrls||[]).includes('source_review_status'))return true;
   const target=normalizeSourceUrl(url);
   const latest=latestReadOnlyObservation();
   // A malformed new observation cannot make an official answer look verified.
@@ -784,12 +713,13 @@ function renderBqcStatus(){
   const all=stageIds.flatMap(id=>bqcQuestionsForStage(id));
   const answered=all.filter(item=>item.resolved).length;
   const blockers=all.filter(item=>!item.resolved&&item.blocksZeroBrokerReady).length;
+  const unresolved=all.length-answered;
   const pct=all.length?Math.round(answered/all.length*100):0;
   box.hidden=false;
   box.innerHTML=`
-    <div><strong>Kelengkapan jawaban</strong><small>${answered}/${all.length} pertanyaan kecil sudah punya jawaban pasti</small></div>
+    <div><strong>Cakupan panduan</strong><small>${answered}/${all.length} pertanyaan terjawab; ${unresolved} masih perlu konfirmasi (${blockers} penting)</small></div>
     <div class="bqc-meter"><span style="width:${pct}%"></span></div>
-    <div class="bqc-value">${pct}% · ${blockers} belum pasti</div>`;
+    <div class="bqc-value">${pct}%</div>`;
 }
 
 function renderStageBqc(stage){

@@ -38,7 +38,7 @@ test('M44 retry restores full 27-stage journey without changing local progress',
   await expect(page.locator('#routeLoadRecovery')).toBeHidden();
   await expect(page.locator('body')).not.toHaveClass(/route-unavailable/);
   await expect(page.locator('#quickStart')).toBeVisible();
-  await expect(page.locator('#freshnessStatus')).toContainText('Persetujuan manual: belum selesai');
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
   await page.locator('[data-quick-stage="eligibility"]').click();
   await expect(page.locator('#nextAction')).toBeVisible();
   expect(await page.evaluate(()=>localStorage.getItem('kep.m44-preserve-progress-sentinel'))).toBe('untouched');

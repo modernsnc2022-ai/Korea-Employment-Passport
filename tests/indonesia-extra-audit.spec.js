@@ -212,12 +212,10 @@ test('Official source warnings remain visible until review signoff and do not au
   expect(latest?.exactManufacturingJobDocuments).toBe('hold');
   expect(latest?.betaAccess).toBe('hold');
   await page.goto('/app.html', { waitUntil:'domcontentloaded' });
-  await expect(page.locator('#freshnessStatus')).toBeVisible();
-  await expect(page.locator('#freshnessStatus')).toContainText('12 sumber berbeda');
-  await expect(page.locator('#freshnessStatus')).toContainText('5 sumber Korea umum, 2 sumber jadwal HRD Korea lintas negara');
-  await expect(page.locator('#freshnessStatus')).toContainText('Persetujuan manual: belum selesai');
-  await expect(page.locator('#freshnessStatus')).toContainText('beta publik tetap ditahan');
-  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
+  // Internal review evidence must never be dumped on the applicant homepage.
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
+  await expect(page.locator('.trust-panel')).not.toHaveAttribute('open','');
+  expect(await page.evaluate(url=>sourceNeedsReview(url),data.reviewRequiredUrls[0])).toBe(true);
 });
 
 test('2026 Manufacturing Skill Test mandatory with optional Job Capacity Assessment on 320px screen', async ({page, request}) => {
@@ -272,13 +270,9 @@ test('Unrecognized new official source is never wrongly excluded from Indonesian
     await route.fulfill({status:200,contentType:'application/json',json:data});
   });
   await page.goto('/app.html', {waitUntil:'domcontentloaded'});
-  await expect(page.locator('#freshnessStatus')).toBeVisible();
-  // The unrecognized historical alert is not in the latest signed-off-by-
-  // nobody machine snapshot: require invalid-evidence fail-closed rather than
-  // silently showing the stale count of 12.
-  await expect(page.locator('#freshnessStatus')).toContainText('BUKTI PEMANTAUAN TIDAK VALID');
-  await expect(page.locator('#freshnessStatus')).toContainText('Semua jawaban yang bergantung pada sumber resmi ditahan');
-  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
+  // Invalid source evidence must still block even unrelated official guidance.
+  expect(await page.evaluate(()=>sourceNeedsReview('https://official.example/other-source'))).toBe(true);
 });
 
 
@@ -423,8 +417,8 @@ test('critical official source warnings recover after one transient network erro
     else await route.continue();
   });
   await page.goto('/app.html');
-  await expect(page.locator('#freshnessStatus')).toContainText('12 sumber berbeda',{timeout:12000});
-  await expect(page.locator('#freshnessStatus')).toContainText('5 sumber Korea umum, 2 sumber jadwal HRD Korea lintas negara');
+  await expect(page.locator('#progressText')).toContainText('/ 27',{timeout:12000});
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
   expect(attempts).toBeGreaterThanOrEqual(2);
 });
 
@@ -434,8 +428,8 @@ test('official source warning fails closed after persistent data connection fail
     attempts++;await route.abort('failed');
   });
   await page.goto('/app.html');
-  await expect(page.locator('#freshnessStatus')).toContainText('PEMERIKSAAN SUMBER BELUM LENGKAP',{timeout:12000});
-  await expect(page.locator('#freshnessStatus')).toContainText('Aturan tidak diubah otomatis');
-  await expect(page.locator('#freshnessStatus')).not.toContainText('Tidak ada perubahan resmi yang belum direview');
+  await expect(page.locator('#progressText')).toContainText('/ 27',{timeout:12000});
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
+  expect(await page.evaluate(()=>sourceNeedsReview('https://kp2mi.go.id/gtog-korea/pengumuman'))).toBe(true);
   expect(attempts).toBe(3);
 });
