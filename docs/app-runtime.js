@@ -4113,6 +4113,31 @@ function switchView(viewId,scroll=true){
     }
   }
 }
+// A skip link must enter visible content, including setup and load recovery.
+const skipNavigationLink=document.querySelector('.skip-link');
+function syncSkipNavigation(){
+  const active=document.querySelector('.view.active');
+  const target=!$('routeLoadRecovery').hidden?$('routeLoadRecovery')
+    :!$('quickStart').hidden?$('quickStart')
+    :active&&active.id!=='journey'?active
+    :!$('nextAction').hidden?$('nextAction'):$('routeTitle');
+  skipNavigationLink.href='#'+target.id;
+  skipNavigationLink.textContent=target.id==='quickStart'?'Langsung ke pilihan tahap'
+    :target.id==='routeLoadRecovery'?'Langsung ke pemulihan halaman'
+    :target.id==='nextAction'?'Langsung ke langkah sekarang':'Langsung ke isi utama';
+  return target;
+}
+skipNavigationLink.addEventListener('click',event=>{
+  event.preventDefault();
+  const target=syncSkipNavigation();target.tabIndex=-1;
+  target.focus({preventScroll:true});target.scrollIntoView({block:'start'});
+});
+const skipNavigationObserver=new MutationObserver(syncSkipNavigation);
+skipNavigationObserver.observe(document.body,{attributes:true,attributeFilter:['data-active-view']});
+[$('quickStart'),$('routeLoadRecovery'),$('nextAction')].forEach(target=>{
+  skipNavigationObserver.observe(target,{attributes:true,attributeFilter:['hidden']});
+});
+syncSkipNavigation();
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
 document.querySelectorAll('.view:not(#journey)').forEach(view=>{
   const button=document.createElement('button');
