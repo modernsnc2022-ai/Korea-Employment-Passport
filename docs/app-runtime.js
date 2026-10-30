@@ -359,18 +359,35 @@ async function fetchJsonRequired(url,attempts=3){
   throw new Error('required data unavailable: '+url+' — '+String(lastError?.message||lastError||'unknown error'));
 }
 
-async function fetchJsonOptional(url,fallback,label){
-  try{
-    const response=await fetch(url,{cache:'no-store'});
-    if(!response.ok)throw new Error('HTTP '+response.status);
-    return await response.json();
-  }catch(err){
-    console.warn('Optional data unavailable:',label||url,err);
-    return fallback;
+async function fetchJsonOptional(url,fallback,label,attempts=1){
+  let lastError=null;
+  for(let attempt=1;attempt<=attempts;attempt+=1){
+    try{
+      const response=await fetch(url,{cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      return await response.json();
+    }catch(err){
+      lastError=err;
+      if(attempt<attempts)await new Promise(resolve=>setTimeout(resolve,200*attempt));
+    }
   }
+  console.warn('Optional data unavailable:',label||url,lastError);
+  // Crucial: a real failed source review status remains a visible warning;
+  // retries never convert an unknown official source state to clean.
+  return fallback;
 }
 
+let bootInFlight=false;
 async function boot(){
+  if(bootInFlight)return;
+  bootInFlight=true;
+  const retryButton=$('retryRouteLoadBtn');
+  retryButton.disabled=true;
+  retryButton.textContent='Sedang memuat…';
+  $('routeLoadRecovery').hidden=true;
+  $('routeMeta').textContent='Memuat jalur resmi yang telah diverifikasi…';
+  // Never leave previously partial/stale controls operable during a retry.
+  document.body.classList.add('route-unavailable');
   try{
     [
       route,
@@ -422,7 +439,8 @@ async function boot(){
           fetchFailureUrls:['source_review_status'],
           fetchFailureSourceIds:['source_review_status']
         },
-        'official source review status'
+        'official source review status',
+        3
       ),
       fetchJsonOptional(
         OFFICIAL_HELP_URL,
@@ -474,9 +492,17 @@ async function boot(){
     renderGaps();
     renderUnresolvedFieldQuestions();
     updateProgress();
+    document.body.classList.remove('route-unavailable');
   }catch(err){
     $('routeMeta').textContent='Data rute terverifikasi tidak dapat dimuat. Sambungkan internet dan coba lagi.';
+    $('routeLoadRecovery').hidden=false;
+    // Failed official data must never unlock a partially rendered journey.
+    document.body.classList.add('route-unavailable');
     console.error(err);
+  }finally{
+    bootInFlight=false;
+    retryButton.disabled=false;
+    retryButton.textContent='Coba muat lagi';
   }
 }
 
@@ -490,6 +516,46 @@ function renderCycleStatus(){
   }
 }
 
+function latestReadOnlyObservation(){
+  const status=sourceReviewStatus;
+  const s=status?.latestReadOnlyObservation;
+  if(!s)return null;
+  const groups=s.groupCounts||{};
+  const counts=['korea_shared','multi_country_eps_schedule','other_country','unclassified_requires_manual_scope_review'];
+  const ids=s.reviewRequiredSourceIds;
+  const urls=s.reviewRequiredUrls;
+  if(status.state!=='review_required'||status.autoPublishRules!==false||
+     s.schemaVersion!==1||s.evidenceKind!=='machine_observation_only_not_manual_signoff'||
+     !/^20\d{2}-\d{2}-\d{2}$/.test(String(s.observedAtDate||''))||
+     s.configured!==84||s.checked!==84||s.fetchFailures!==0||
+     !Array.isArray(s.fetchFailureSourceIds)||s.fetchFailureSourceIds.length!==0||
+     !Array.isArray(ids)||!Array.isArray(urls)||
+     ids.length!==urls.length||new Set(ids).size!==ids.length||
+     !ids.every(id=>typeof id==='string'&&id.length>0)||
+     !urls.every(url=>typeof url==='string'&&url.startsWith('https://'))||
+     s.unacceptedBaselineDriftCount!==ids.length||
+     !counts.every(k=>Number.isInteger(groups[k])&&groups[k]>=0)||
+     counts.reduce((sum,k)=>sum+groups[k],0)!==ids.length||
+     s.humanSemanticReviewApproved!==false||
+     s.hashBaselineAutoAccepted!==false||
+     s.exactManufacturingJobDocuments!=='hold'||
+     s.betaAccess!=='hold'||s.authorizesRelease!==false)return null;
+  // Earlier review alerts are append-only evidence: a new or altered
+  // historical source cannot disappear behind a stale "latest" snapshot.
+  // Require every older source-ID/URL pair to be represented in the newer
+  // technical observation; otherwise all source-based guidance fails closed.
+  const olderIds=status.reviewRequiredSourceIds;
+  const olderUrls=status.reviewRequiredUrls;
+  if(!Array.isArray(olderIds)||!Array.isArray(olderUrls)||
+     olderIds.length!==olderUrls.length||
+     new Set(olderIds).size!==olderIds.length||
+     olderIds.some((id,i)=>{
+       const idx=ids.indexOf(id);
+       return idx<0||normalizeSourceUrl(olderUrls[i])!==normalizeSourceUrl(urls[idx]);
+     }))return null;
+  return s;
+}
+
 function renderFreshnessStatus(){
   const box=$('freshnessStatus');
   if(!freshnessPolicy||!route){box.hidden=true;return}
@@ -498,13 +564,59 @@ function renderFreshnessStatus(){
   const state=sourceReviewStatus?.state||'clean';
   const trustPanel=document.querySelector('.trust-panel');
 
+  const latest=latestReadOnlyObservation();
+  if(sourceReviewStatus?.latestReadOnlyObservation&&!latest){
+    box.classList.add('fetch-warning');
+    if(trustPanel)trustPanel.open=true;
+    box.innerHTML=`
+      <span class="freshness-pill">BUKTI PEMANTAUAN TIDAK VALID</span>
+      <span><strong>Catatan pemantauan terbaru tidak dapat diverifikasi.</strong> Jangan menganggap sumber sudah disetujui atau semua persyaratan sudah pasti.</span>
+      <span>Semua jawaban yang bergantung pada sumber resmi ditahan sampai bukti valid dan tinjauan manusia tersedia.</span>`;
+    return;
+  }
+  if(state==='review_required'&&latest){
+    box.classList.add('review-required');
+    if(trustPanel)trustPanel.open=true;
+    const groups=latest.groupCounts;
+    const historicDate=String(sourceReviewStatus.detectedAt||'tanggal tidak tersedia');
+    box.innerHTML=`
+      <span class="freshness-pill">SUMBER RESMI MASIH MENUNGGU TINJAUAN MANUSIA</span>
+      <span><strong>Pemantauan teknis ${escapeHtml(latest.observedAtDate)}: ${latest.checked}/${latest.configured} sumber dapat diakses; 0 kegagalan.</strong> Ini bukan persetujuan isi kebijakan.</span>
+      <span><strong>${latest.unacceptedBaselineDriftCount} sumber berbeda dari baseline yang terakhir disetujui.</strong> ${groups.korea_shared} sumber Korea umum, ${groups.multi_country_eps_schedule} sumber jadwal HRD Korea lintas negara, dan ${groups.other_country} sumber negara lain. Perbedaan sidik jari bukan berarti perubahan kebijakan baru.</span>
+      <span><strong>Persetujuan manual: belum selesai.</strong> Aturan dan daftar dokumen lamaran akhir manufaktur 2026 belum boleh dianggap pasti, dan beta publik tetap ditahan.</span>
+      <small>Riwayat tetap disimpan: pemeriksaan ${escapeHtml(historicDate)} mengambil ${sourceReviewStatus.checked}/${sourceReviewStatus.configured}; satu sumber Nepal saat itu gagal diakses. Kegagalan lama tidak dihitung sebagai kegagalan ${escapeHtml(latest.observedAtDate)}.</small>`;
+    return;
+  }
+
   if(state==='review_required'){
     box.classList.add('review-required');
     if(trustPanel)trustPanel.open=true;
     const count=(sourceReviewStatus.reviewRequiredUrls||[]).length;
+    // Only these five known, country-exclusive indexes can be separated
+    // from Indonesia. Unknown new IDs are always counted with the
+    // Indonesia-relevant alerts (fail closed); never suppress global warnings.
+    const foreignOnly=new Set([
+      'np_eps_notice_index','vn_colab_eps_notices','lk_slbfe_home',
+      'kg_migrant_home','mm_mol_dol_index'
+    ]);
+    const changedIds=Array.isArray(sourceReviewStatus.reviewRequiredSourceIds)
+      ?sourceReviewStatus.reviewRequiredSourceIds:[];
+    const foreignCount=changedIds.slice(0,count).filter(id=>foreignOnly.has(id)).length;
+    const relevantCount=count-foreignCount;
+    const failedIds=Array.isArray(sourceReviewStatus.fetchFailureSourceIds)
+      ?sourceReviewStatus.fetchFailureSourceIds:[];
+    const failedCount=failedIds.length;
+    const fetchWarningText=failedCount
+      ?`<span><strong>${failedCount} sumber negara lain gagal diakses.</strong> Kegagalan akses tidak berarti data telah disetujui; sumber tetap dalam daftar review.</span>`
+      :'';
+    const scopeText=changedIds.length===count
+      ?`<span><strong>${relevantCount} sumber terkait Indonesia/Korea, ${foreignCount} sumber negara lain.</strong> Sumber negara lain tetap menunggu review untuk rute masing-masing.</span>`
+      :'<span>Rincian sumber belum dapat dicocokkan; perlakukan semua perubahan sebagai belum diverifikasi.</span>';
     box.innerHTML=`
       <span class="freshness-pill">PERUBAHAN SUMBER RESMI TERDETEKSI</span>
       <span><strong>${count} sumber perlu ditinjau.</strong> Jawaban/formulir yang bergantung pada sumber tersebut sementara tidak dianggap “jawaban pasti”.</span>
+      ${scopeText}
+      ${fetchWarningText}
       <span>Aturan tidak diubah otomatis sampai review selesai.</span>`;
     return;
   }
@@ -531,19 +643,31 @@ function normalizeSourceUrl(url){
     .trim()
     .replace(/^http:/i,'https:')
     .replace('://www.','://')
-    .replace(/\/$/,'');
+    .replace(/\/$/,'')
+    // KDCA officially redirects the old Q-CODE input URL to Travel Health.
+    // Keep both aliases in the SAME pending-source review group.
+    .replace(/^https:\/\/qcode\.kdca\.go\.kr\/qco\/cd\/codeInput2\.do$/i,
+             'https://travelhealth.kdca.go.kr/travel/cd/qcoInfo.do');
 }
 
 function sourceNeedsReview(url){
   if(!url||!sourceReviewStatus)return false;
   const target=normalizeSourceUrl(url);
-  return (sourceReviewStatus.reviewRequiredUrls||[])
-    .some(item=>normalizeSourceUrl(item)===target);
+  const latest=latestReadOnlyObservation();
+  // A malformed new observation cannot make an official answer look verified.
+  if(sourceReviewStatus.latestReadOnlyObservation&&!latest)return true;
+  const historical=sourceReviewStatus.reviewRequiredUrls||[];
+  const current=latest?.reviewRequiredUrls||[];
+  return [...historical,...current].some(item=>normalizeSourceUrl(item)===target);
 }
 
 function sourceHasFetchWarning(url){
   if(!url||!sourceReviewStatus)return false;
   const target=normalizeSourceUrl(url);
+  const latest=latestReadOnlyObservation();
+  if(sourceReviewStatus.latestReadOnlyObservation&&!latest)return true;
+  // The previous Nepal failure remains archived, but is not a new fetch failure.
+  if(latest)return false;
   return (sourceReviewStatus.fetchFailureUrls||[])
     .some(item=>normalizeSourceUrl(item)===target);
 }
@@ -847,7 +971,7 @@ function departureRegistryFallback(stageId){
   if(!['mcu3_departure','departure'].includes(stageId))return null;
   if(departureCalls?.coverageStatus!=='partial_verified')return null;
   return {
-    url:departureCalls.indexUrl||'https://kp2mi.go.id/gtog-korea/info',
+    url:departureCalls.indexUrl||'https://kp2mi.go.id/gtog-korea/pengumuman',
     message:'Daftar panggilan keberangkatan 2026 di aplikasi belum lengkap. Jika tanggal Anda tidak ada, jangan memakai aturan tanggal lain — cari panggilan nama Anda di indeks resmi KP2MI.'
   };
 }
@@ -958,6 +1082,9 @@ function exactScopeLabel(item){
 
 function exactVerificationLabel(item){
   const v=String(item.verificationStatus||'');
+  if(v==='hold_for_official_manufacturing_notice')return 'HOLD · berkas lamaran akhir Manufaktur 2026 belum terverifikasi';
+  if(v==='verified_cross_notice_platform_baseline_not_manufacturing_exact')return 'Panduan lintas pengumuman · BUKAN persyaratan exact Manufaktur 2026';
+  if(v==='verified_current_cycle_identity_safety_baseline_not_manufacturing_field_map')return 'Panduan konsistensi identitas · BUKAN peta kolom Manufaktur 2026';
   if(v==='waiting_official_notice')return 'Menunggu pengumuman resmi · jangan menebak';
   if(v==='call_specific_follow_notice'||v==='flight_call_specific')return 'Ikuti pengumuman yang memuat nama Anda';
   if(v==='institution_specific_follow_notice')return 'Ikuti petunjuk lembaga resmi Anda';
@@ -1037,6 +1164,12 @@ function renderPreSubmitGate(stage){
 
 function evaluatePreSubmit(stage){
   const issues=[];
+  // Never let an accidentally promoted document-pack status override the
+  // current-cycle official final-job-document HOLD. This gate is independent
+  // of checklist and checkbox state, and requires a separately reviewed route.
+  if(stage.id==='job_application'&&stage.brokerReplacement==='held_official_notice'){
+    issues.push('Daftar dokumen lamaran online Manufaktur 2026 belum diverifikasi dalam pengumuman sektor yang sesuai. Jangan submit atau tandai tahap ini selesai. Buka Pengumuman resmi KP2MI dan tunggu konfirmasi dokumen final.');
+  }
   const stats=bqcStageStats(stage.id);
   const unresolvedHigh=stats.items.filter(item=>!item.resolved&&item.blocksZeroBrokerReady);
   if(unresolvedHigh.length){
@@ -1128,6 +1261,17 @@ function openStage(stage){
   $('stageAuthority').textContent=stage.authority;
   $('stageAction').textContent=stageAction(stage);
   $('stageSource').href=stage.sourceUrl;
+  // Sector/cycle-specific optional notice is only exposed when its official
+  // metadata and closed timeframe are present. Never imply an active upload.
+  const competencyLink=$('stageCompetencyNotice');
+  const competencyNotice=stage.id==='skill_competency'?stage.competencyUploadNotice:null;
+  const canShowCompetency=competencyNotice?.url===
+    'https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026' &&
+    competencyNotice.optional===true &&
+    competencyNotice.status==='closed' &&
+    competencyNotice.notJobApplicationDocuments===true;
+  competencyLink.hidden=!canShowCompetency;
+  competencyLink.href=canShowCompetency?competencyNotice.url:'#';
   renderSharedKoreaCore(stage);
   const officialAction=$('stageOfficialAction');
   if(stage.officialActionUrl){
@@ -3829,4 +3973,5 @@ window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredI
 $('installBtn').addEventListener('click',async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$('installBtn').hidden=true});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(console.error));
 
+$('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();

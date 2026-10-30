@@ -14,7 +14,7 @@
       ],
       "status": "verified",
       "title": "Dokumen pendaftaran & verifikasi awal",
-      "message": "Berdasarkan pengumuman pendaftaran umum manufaktur/perikanan 2026. Persyaratan siklus berikutnya harus diperiksa ulang.",
+      "message": "Dokumen untuk pendaftaran awal EPS-TOPIK UBT Umum Manufaktur/Perikanan 2026, bukan daftar dokumen final lamaran kerja Manufaktur setelah Skill Test. Pendaftaran umum 2026 sudah berakhir; ikuti pengumuman resmi untuk siklus baru.",
       "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
       "maxFileSizeMb": 2,
       "items": [
@@ -40,7 +40,7 @@
           "validation": "file",
           "format": "JPG",
           "required": true,
-          "note": "Terbaru ≤3 bulan, latar putih, wajah penuh, tanpa kacamata."
+          "note": "Foto digital asli, bukan hasil scan foto cetak. Terbaru ≤3 bulan, 3,5 × 4,5 cm, latar putih, wajah penuh, tanpa kacamata."
         },
         {
           "id": "reg_diploma",
@@ -48,7 +48,7 @@
           "validation": "file",
           "format": "PDF",
           "required": true,
-          "note": "Scan dokumen pendidikan sesuai pengumuman."
+          "note": "Khusus Manufaktur: minimal SLTP/SMP atau sederajat; SKL tidak diterima. Jika ijazah hilang, gunakan surat pengganti ijazah resmi dari sekolah/dinas pendidikan."
         },
         {
           "id": "reg_bankbook",
@@ -56,7 +56,7 @@
           "validation": "file",
           "format": "JPG",
           "required": true,
-          "note": "Rekening milik pendaftar."
+          "note": "Rekening milik pendaftar sendiri. Jika tidak punya buku tabungan fisik, lampiran contoh pendaftaran UBT umum 2026 memperbolehkan screenshot mobile/internet banking dengan nomor rekening terbaca; jangan samakan dengan tahap visa."
         },
         {
           "id": "reg_privacy",
@@ -118,7 +118,7 @@
       "status": "awaiting_sector_notice",
       "title": "Lamaran online Manufaktur 2026 — 1 detail exact masih menunggu",
       "message": "Hanya checklist dokumen lamaran online Manufaktur 2026 yang masih belum terverifikasi. Empat baseline aman sudah tersedia: dokumen pendukung di-scan; identitas yang sudah terdaftar harus dijaga konsisten dan field sumber yang ambigu tidak boleh ditebak; final send diperlakukan sebagai tidak dapat diedit; dan pengiriman harus dikonfirmasi melalui status terkirim/progress di Sisko dengan kanal bantuan resmi bila status tidak jelas. Baseline ini tidak menggantikan checklist sektor.",
-      "sourceUrl": "https://kp2mi.go.id/gtog-korea/info",
+      "sourceUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
       "items": [],
       "lastChecked": "2026-10-06",
       "safePlatformBaselines": [
