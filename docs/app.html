@@ -658,12 +658,17 @@
     </section>
   </main>
 
-  <dialog id="stageDialog">
+  <dialog id="stageDialog" aria-labelledby="stageTitle">
     <form method="dialog">
-      <button class="close" aria-label="Close">×</button>
-      <span id="stageKind" class="pill"></span>
-      <h2 id="stageTitle"></h2>
-      <p id="stageAuthority" class="muted"></p>
+      <header class="stage-dialog-header">
+        <div class="stage-dialog-heading">
+          <span id="stageKind" class="pill"></span>
+          <h2 id="stageTitle"></h2>
+          <p id="stageAuthority" class="muted"></p>
+        </div>
+        <button class="close" type="submit" aria-label="Tutup panduan tahap" title="Tutup">×</button>
+      </header>
+      <div class="stage-dialog-body" tabindex="0" aria-label="Isi panduan tahap">
       <h3>Apa yang harus dilakukan</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
@@ -715,7 +720,10 @@
       <a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Baca pengumuman / sumber resmi ↗</a>
       <a id="stageCompetencyNotice" class="source" href="#" target="_blank" rel="noopener" hidden>Bukti kompetensi manufaktur 2026 (opsional, periode berakhir) ↗</a>
       <div id="stageNextHint" class="stage-next-hint"></div>
-      <button id="stageDoneBtn" value="default" class="primary full">Tandai selesai</button>
+      </div>
+      <footer class="stage-dialog-footer">
+        <button id="stageDoneBtn" type="button" value="default" class="primary full">Tandai selesai</button>
+      </footer>
     </form>
   </dialog>
 
