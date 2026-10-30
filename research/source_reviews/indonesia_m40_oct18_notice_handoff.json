@@ -1,0 +1,126 @@
+{
+  "kind": "unsigned_current_day_official_notice_reviewer_binding",
+  "observationDayJakarta": "2026-10-18",
+  "officialKP2MIIndex": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "kp2miTitlesChecked": 320,
+  "kp2miManufacturingNotices": [
+    {
+      "taskId": "NOTICE:10-February-2026",
+      "sourceStage": "exam_registration_adjustment",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-penyesuaian-waktu-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-program-g-to-g-ke-korea-selatan-tahun-2026",
+      "noticeDate": "2026-02-10",
+      "noticeTitle": "PENGUMUMAN PENYESUAIAN WAKTU PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGRAM G TO G KE KOREA SELATAN TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:10-September-2026",
+      "sourceStage": "eps_topik_stage_1_result",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "noticeDate": "2026-09-10",
+      "noticeTitle": "PENGUMUMAN HASIL UJIAN KEMAMPUAN BAHASA KOREA EPS-TOPIK UBT UMUM SEKTOR MANUFAKTUR TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:16-February-2026",
+      "sourceStage": "exam_enrollment_biometrics",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemanggilan-perekaman-biometrik-dan-verifikasi-dokumen-online-peserta-pendaftar-program-g-to-g-korea-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "noticeDate": "2026-02-16",
+      "noticeTitle": "PENGUMUMAN PEMANGGILAN PEREKAMAN BIOMETRIK DAN VERIFIKASI DOKUMEN ONLINE PESERTA/PENDAFTAR PROGRAM G TO G KOREA EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:17-September-2026",
+      "sourceStage": "optional_skill_test_evidence",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "noticeDate": "2026-09-17",
+      "noticeTitle": "PENGUMUMAN PERSYARATAN UNGGAH DOKUMEN KOMPETENSI PESERTA SKILL TEST UBT UMUM SEKTOR MANUFAKTUR EPS-TOPIK TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:27-January-2026",
+      "sourceStage": "initial_exam_registration",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+      "noticeDate": "2026-01-27",
+      "noticeTitle": "PENGUMUMAN PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGAM G TO G KE KOREA SELATAN DENGAN SISTEM POIN TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:27-March-2026",
+      "sourceStage": "exam_schedule",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026",
+      "noticeDate": "2026-03-27",
+      "noticeTitle": "PENGUMUMAN PELAKSANAAN UJIAN EPS TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    },
+    {
+      "taskId": "NOTICE:5-May-2026",
+      "sourceStage": "exam_fee_refund",
+      "noticeUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pengembalian-biaya-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026-tahap-pertama",
+      "noticeDate": "2026-05-05",
+      "noticeTitle": "PENGUMUMAN PENGEMBALIAN BIAYA UJIAN EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026 (TAHAP PERTAMA)",
+      "humanOriginalHtmlReviewed": false,
+      "annexPageCitation": null,
+      "reviewerFullName": null,
+      "reviewedAt": null,
+      "semanticDecision": "pending",
+      "isFinal2026ManufacturingJobDocuments": false
+    }
+  ],
+  "HRDKoreaScheduleObservations": [
+    {
+      "examNo": "14",
+      "title": "The 13th recruitment of the point system in Indonesia(Manufacturing)_Jakarta",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=012&examNot=14&examYear=2026&lang=ko&lcnsId=001",
+      "humanApplicabilityReview": "pending",
+      "finalJobDocs": false
+    },
+    {
+      "examNo": "15",
+      "title": "The 13th recruitment of the point system in Indonesia(Manufacturing)_Semarang",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=012&examNot=15&examYear=2026&lang=ko&lcnsId=001",
+      "humanApplicabilityReview": "pending",
+      "finalJobDocs": false
+    }
+  ],
+  "unassignedOriginalReviewerTasks": 20,
+  "unacceptedSourceShaAlerts": 12,
+  "newFinalManufacturingJobApplicationTitleCandidates": 0,
+  "currentNoticeIndexMachineObserved": true,
+  "humanNoticeContentsSigned": false,
+  "final2026ManufacturingJobDocumentsVerified": false,
+  "sourceHashAutoAccepted": false,
+  "candidateDeployed": false,
+  "betaAccess": "hold",
+  "releaseAuthorized": false,
+  "evidenceLimit": "Dated M38 bounded KP2MI listing and M21 individual original HTML observations; no same-day reread of all 7 full bodies, PDF semantic signoff, official government certification, or final job-doc requirements."
+}

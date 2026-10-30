@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "asOfJakarta": "2026-10-18",
+  "kind": "new_day_official_kp2mi_hrd_source_triage_unsigned",
+  "liveOfficialDiscoveryObservedUTC": "2026-10-17T23:42:16.119942+00:00",
+  "kp2miAnnouncementsRead": 320,
+  "kp2mi2026ManufacturingNotices": 7,
+  "explicit2026FinalManufacturingApplicationHeadlineCandidates": 0,
+  "generic2026FinalApplicationReviewCandidates": 0,
+  "hrdKoreaScheduleRowsRead": 58,
+  "hrdKoreaIndonesiaManufacturingScheduleCandidates": [
+    {
+      "year": "2026",
+      "examNo": "14",
+      "title": "The 13th recruitment of the point system in Indonesia(Manufacturing)_Jakarta",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=012&examNot=14&examYear=2026&lang=ko&lcnsId=001",
+      "humanStageReview": "pending"
+    },
+    {
+      "year": "2026",
+      "examNo": "15",
+      "title": "The 13th recruitment of the point system in Indonesia(Manufacturing)_Semarang",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/sechduleDetail.do?examNation=012&examNot=15&examYear=2026&lang=ko&lcnsId=001",
+      "humanStageReview": "pending"
+    }
+  ],
+  "hrdScheduleChangesSince17": "not_comparable_first_complete_today_snapshot",
+  "sourceMonitorConfigured": 84,
+  "sourceMonitorFetched": 84,
+  "sourceMonitorFailedIds": [],
+  "sourceMonitorTechnicallyComplete": true,
+  "sourceMonitorUnacceptedDriftCount": 12,
+  "sourceMonitorCurrentUnacceptedChanges": [
+    {
+      "sourceId": "minimum_wage",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "labor_standards_wage_statement",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "moel_wage_arrears_2026",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "kdca_qcode_input",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "moel_1350_contact",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "mm_hrdk_schedule_index",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "mm_hrdk_skills_candidates",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "np_eps_notice_index",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "vn_colab_eps_notices",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "lk_slbfe_home",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "kg_migrant_home",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    },
+    {
+      "sourceId": "mm_mol_dol_index",
+      "reason": "content_changed",
+      "humanPolicyReview": "pending"
+    }
+  ],
+  "sourceAlertPreviouslyPendingOnOct17": 12,
+  "sameAlertIdsVsOct17": [
+    "kdca_qcode_input",
+    "kg_migrant_home",
+    "labor_standards_wage_statement",
+    "lk_slbfe_home",
+    "minimum_wage",
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates",
+    "mm_mol_dol_index",
+    "moel_1350_contact",
+    "moel_wage_arrears_2026",
+    "np_eps_notice_index",
+    "vn_colab_eps_notices"
+  ],
+  "newOrOtherDriftIdsVsOct17": [],
+  "noLongerSameShaDriftIdsVsOct17": [],
+  "previous20HumanReviewOrders": "PENDING_UNASSIGNED_FROM_2026_10_17",
+  "operatorRevalidationRequiredOnCurrentDay": true,
+  "currentDayReleasedApprovedSourceHashes": false,
+  "official2026FinalManufacturingJobDocListConfirmed": false,
+  "existingMainPagesAssetProofOnlyFromOct17": true,
+  "sameHeadCandidateDeployedNow": false,
+  "humanOfficialSourceSignoff": false,
+  "actualPublicBetaOpenAuthorized": false,
+  "betaAccess": "hold",
+  "releaseAuthorized": false,
+  "requiredNextActions": [
+    "Await/verify 2026 same-cohort General Manufacturing final online job application original and PDF pages; never import older/other-sector docs.",
+    "Review currently changed official source text and 20 unsigned reviewer tasks with a named responsible human, exact original source/date/semantic rationale.",
+    "Require independently approved same-HEAD Pages deployment 9/9 and live HTTPS 6/6, then a distinct manual beta OPEN decision."
+  ],
+  "evidenceLimits": "Today-only KP2MI/HRD complete listing; 84-source monitor is technical only and may contain errors. Matching text SHA does not prove unchanged policy, HRD historical previous-day change count unknown, and title-only absence does not prove no relevant annex."
+}

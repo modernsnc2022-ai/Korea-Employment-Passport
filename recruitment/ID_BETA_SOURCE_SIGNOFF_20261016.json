@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "route": "Indonesia > Korea > E-9 > General Manufacturing 2026",
+  "status": "pending_manual_source_signoff",
+  "reviewer": null,
+  "approvedAt": null,
+  "sourceSnapshotDate": null,
+  "sourceScopeDate": null,
+  "contentReviewedSourceIds": [
+    "kdca_qcode_input",
+    "labor_standards_wage_statement",
+    "minimum_wage",
+    "moel_1350_contact",
+    "moel_wage_arrears_2026"
+  ],
+  "multiCountryPendingSourceIds": [
+    "mm_hrdk_schedule_index",
+    "mm_hrdk_skills_candidates"
+  ],
+  "otherCountryPendingSourceIds": [
+    "kg_migrant_home",
+    "lk_slbfe_home",
+    "mm_mol_dol_index",
+    "np_eps_notice_index",
+    "vn_colab_eps_notices"
+  ],
+  "sourceWatchConfigured": 84,
+  "sourceWatchChecked": 84,
+  "sourceWatchChanged": 12,
+  "sourceWatchFetchFailures": 0,
+  "allChangedSourceAlertsRemainVisible": true,
+  "noOfficialHashAutopromotion": true,
+  "manualReviewNotImplicit": true,
+  "exactManufacturingJobDocumentsHeld": true,
+  "betaAccess": "hold",
+  "monitoredSourceMapSha256": "f5c196587921f07d41dabbe40d89a123425bdaf9b8544ac3c9bd491c21f27ded",
+  "reason": "2026-10-16 read-only 84/84 official source retrieval; 12 fingerprint differences vs persisted accepted baseline: 5 Korea-common, 2 multi-country HRD EPS, 5 foreign. No semantic review/approval, no job_docs release, no beta OPEN."
+}

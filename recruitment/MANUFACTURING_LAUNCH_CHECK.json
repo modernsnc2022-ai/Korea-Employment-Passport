@@ -4,7 +4,7 @@
   "scope": "2026 Manufacturing online job-application detailed notice",
   "checkedAt": "2026-10-06",
   "result": "no_current_manufacturing_job_application_notice",
-  "primaryIndex": "https://kp2mi.go.id/gtog-korea/info",
+  "primaryIndex": "https://kp2mi.go.id/gtog-korea/pengumuman",
   "officialEvidence": [
     {
       "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
@@ -92,6 +92,113 @@
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
         "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-manufaktur-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2025"
       ]
+    }
+  ],
+  "noticeIndexCoverage": {
+    "status": "correct_pengumuman_2026_inventory_read_pending_operator_signoff",
+    "checkedAt": "2026-10-14",
+    "previouslyAssumedIndex": "https://kp2mi.go.id/gtog-korea/info",
+    "completeGeneralManufacturingInventory": true,
+    "officialManufacturingInventoryUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "operatorConfirmedCompleteReview": false,
+    "notes": "Read-only 2026-10-14 official Pengumuman DataTables rows 0-224 in latest-first order, reaching November 2025; this establishes a 2026 title inventory, not final human release signoff nor verification of each underlying attachment. Newly identified 2026-09-17 OPTIONAL Manufacturing Skill Test competency-upload announcement is separate from post-exam job application documents. Release-day operator confirmation remains false.",
+    "currentCategory": "Pengumuman",
+    "currentListingUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+    "serverSideAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+    "recordsTotal": 2876,
+    "inspectedOffsets": [
+      0,
+      75,
+      150
+    ],
+    "inspectedRows": 225,
+    "latestListedNoticeDate": "2026-10-09",
+    "reachedPreviousYear": "2025-11-01",
+    "latestIndependentEvidence": {
+      "retrievedAtUtc": "2026-10-14T03:14:24.438802+00:00",
+      "indexRetrievedAtUtc": "2026-10-14T03:12:33.455039+00:00",
+      "index2026TitleCount": 184,
+      "manufacturingNoticeTitleCount": 7,
+      "manufacturingDetailHtmlFetched": 7,
+      "manufacturingDetailHtmlHttp200": 7,
+      "metadataSha256": "18c377871ba987be7fb5afd05a85cce141f6a0ee62edd417c550c09ae42130a5",
+      "january27OnlineApplicationReferencesAreMcuPsychologyBaselineNotFinalChecklist": true,
+      "htmlBodiesReviewedByAutomation": true,
+      "attachmentContentsReviewed": false,
+      "operatorReviewedAndApproved": false,
+      "postSkillManufacturingJobDocsVerified": false,
+      "evidenceDocument": "research/ID_MANUFACTURING_2026_7_NOTICE_DETAIL_AUDIT_20261014.md",
+      "evidenceScope": "Read-only official HTML and attachment links only. 2026 final Manufacturing job-application checklist still HOLD; release-day human approval needed.",
+      "optionalCompetencyPdfAnnexReview": {
+        "noticeDate": "2026-09-17",
+        "officialPdfLinksFetched": 6,
+        "totalPdfPages": 21,
+        "allFilesVerifiedPdf": true,
+        "pdfTextAndSelectedPageImagesReviewed": true,
+        "exampleScanVisualVerificationComplete": false,
+        "humanOperatorSignedOff": false,
+        "conditionalCompetencyFormRequiredWhenAnyOptionalEvidenceSubmitted": true,
+        "employerUnavailableFallbackTwoNonRelativeSureties": true,
+        "validSubmissionPeriod": "2026-09-21 09:00 to 2026-09-23 13:00 WIB",
+        "submissionStatus": "closed",
+        "exactFinalJobDocumentsVerified": false,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_OPTIONAL_COMPETENCY_PDF_ANNEX_AUDIT_20261014.md"
+      },
+      "januaryEpsRegistrationPdfAnnexReview": {
+        "noticeDate": "2026-01-27",
+        "filesRetrievedDate": "2026-10-14",
+        "officialPdfLinksFetched": 4,
+        "totalPdfPages": 27,
+        "allFilesVerifiedPdf": true,
+        "fullTextExtracted": true,
+        "allVisualPagesReviewed": false,
+        "operatorReviewedAndApproved": false,
+        "sectorScope": "2026 UBT General Manufacturing and Fisheries initial EPS-TOPIK registration only",
+        "registrationWindowStatus": "closed",
+        "manufacturingMinimumSchool": "SLTP_or_equivalent",
+        "temporarySklAccepted": false,
+        "bankScreenshotFallback": "only_if_physical_bankbook_absent_at_registration",
+        "exactFinalJobDocumentsVerified": false,
+        "mustNotPromoteJobDocs": true,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_JANUARY_EPS_REGISTRATION_4_PDF_ANNEX_20261014.md"
+      },
+      "followupIndexTitleScreen": {
+        "checkedAt": "2026-10-14",
+        "sourceCategory": "Pengumuman",
+        "sourceApi": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+        "http": 200,
+        "rowsInspected": 320,
+        "recordsTotal": 2876,
+        "oldestDateInspected": "2025-07-15",
+        "generalManufacturing2026TitleCount": 7,
+        "other2026CohortOnlineApplicationTitleCount": 3,
+        "generalManufacturing2026FinalJobOnlineApplicationTitleCandidates": 0,
+        "digestSha256": "5fe9918d95c2676222265a3169d3dfb626d65b4bfe2f076dfe6b4241c7ce3d04",
+        "sourceBaselineAccepted": false,
+        "humanOperatorSignedOff": false,
+        "exactFinalJobDocumentsVerified": false,
+        "notContentOrAllAttachmentsReviewed": true,
+        "evidenceDocument": "research/ID_MANUFACTURING_2026_LATEST_PENGUMUMAN_TITLE_SCREEN_20261014.md"
+      }
+    },
+    "historicalMistakenPageTitle": "Preliminary Training dan Info",
+    "historicalMistakenAjaxUrl": "https://kp2mi.go.id/gtog-data/korea/Preliminary%20Training%20dan%20Info"
+  },
+  "historicalIndexBefore20261014": "https://kp2mi.go.id/gtog-korea/info",
+  "historicalNegativeResultNotReleaseEvidence": true,
+  "foundOfficial2026Notices": [
+    {
+      "date": "2026-09-17",
+      "scope": "2026_general_manufacturing_optional_skill_competency_document_upload_closed",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+      "noticeNumber": "PENG.2522/04.04/PP.02.04/IX/2026",
+      "notJobApplicationDocuments": true
+    },
+    {
+      "date": "2026-09-10",
+      "scope": "2026_general_manufacturing_eps_topik_first_stage_results",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "notJobApplicationDocuments": true
     }
   ]
 }

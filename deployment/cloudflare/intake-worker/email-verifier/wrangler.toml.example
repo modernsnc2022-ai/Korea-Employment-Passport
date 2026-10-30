@@ -1,0 +1,27 @@
+# PRIVATE service-binding target, no public workers.dev hostname.
+name = "kep-beta-email-verifier"
+main = "src/worker.js"
+compatibility_date = "2026-10-14"
+workers_dev = false
+
+[[d1_databases]]
+binding = "OTP_DB"
+database_name = "kep-beta-email-verification"
+database_id = "REPLACE_WITH_PRIVATE_VERIFIER_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Cloudflare Email Service: sending domain requires separate owner onboarding.
+[[send_email]]
+name = "EMAIL"
+allowed_sender_addresses = ["noreply@gdglobal.kr"]
+
+[vars]
+VERIFIER_ENABLED = "false"
+EMAIL_FROM = "noreply@gdglobal.kr"
+
+# Required PRIVATE secrets, never committed:
+#   wrangler secret put VERIFIER_CALL_SECRET (same as intake secret)
+#   wrangler secret put OTP_HMAC_SECRET (separate random >=32 chars)
+# No remote mail binding for offline tests. No live sends before approval.
+[triggers]
+crons = ["0 3 * * *"]

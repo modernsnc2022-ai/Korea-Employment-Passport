@@ -1,0 +1,287 @@
+{
+  "version": "1.0.0",
+  "evidenceDate": "2026-10-17",
+  "createdFor": "M22_review_packet_pending_signoff",
+  "evidenceBasis": [
+    "research/source_reviews/indonesia_daily_readonly_2026-10-17.json",
+    "research/source_reviews/indonesia_m21_original_html_audit_2026-10-17.json",
+    "research/source_reviews/indonesia_m21_pdf_head_metadata_2026-10-17.json",
+    "recruitment/ID_BETA_SOURCE_SIGNOFF_20261017.json"
+  ],
+  "originalWatch": {
+    "configured": 84,
+    "checked": 84,
+    "sourceShaDifferencesVsLastAcceptedBaseline": 12,
+    "koreaShared": 5,
+    "multiCountryHRD": 2,
+    "otherCountry": 5
+  },
+  "pdfLinkCheck": {
+    "total": 24,
+    "headMetadataPdfResponses": 10,
+    "headConnectionResetInconclusive": 14,
+    "bodyReadAndApprovedByHuman": false
+  },
+  "sourceAlerts": [
+    {
+      "id": "kdca_qcode_input",
+      "scope": "korea_shared",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "kg_migrant_home",
+      "scope": "other_country",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "scope": "korea_shared",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "lk_slbfe_home",
+      "scope": "other_country",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "minimum_wage",
+      "scope": "korea_shared",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "mm_hrdk_schedule_index",
+      "scope": "multi_country_eps_schedule",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "mm_hrdk_skills_candidates",
+      "scope": "multi_country_eps_schedule",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "mm_mol_dol_index",
+      "scope": "other_country",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "moel_1350_contact",
+      "scope": "korea_shared",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "scope": "korea_shared",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "np_eps_notice_index",
+      "scope": "other_country",
+      "manualDecision": "pending",
+      "reviewer": null
+    },
+    {
+      "id": "vn_colab_eps_notices",
+      "scope": "other_country",
+      "manualDecision": "pending",
+      "reviewer": null
+    }
+  ],
+  "pdfTasks": [
+    {
+      "noticeDate": "2026-01-27",
+      "priority": "P1",
+      "proceduralScope": "initial_eps_topik_exam_registration",
+      "fileName": "data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-01-27",
+      "priority": "P1",
+      "proceduralScope": "initial_eps_topik_exam_registration",
+      "fileName": "data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-01-27",
+      "priority": "P1",
+      "proceduralScope": "initial_eps_topik_exam_registration",
+      "fileName": "data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-09-17",
+      "priority": "P1",
+      "proceduralScope": "optional_skill_test_competency",
+      "fileName": "data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-09-17",
+      "priority": "P1",
+      "proceduralScope": "optional_skill_test_competency",
+      "fileName": "data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-09-17",
+      "priority": "P1",
+      "proceduralScope": "optional_skill_test_competency",
+      "fileName": "data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-09-17",
+      "priority": "P1",
+      "proceduralScope": "optional_skill_test_competency",
+      "fileName": "data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Jakarta).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Jakarta).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Semarang).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Semarang).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Surabaya).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Manufaktur_Tahun_2026_(Surabaya).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Jakarta).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Jakarta).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Semarang).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Semarang).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Surabaya).pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_Jadwal_Ujian_EPS_TOPIK_UBT_Umum_Sektor_Perikanan_Tahun_2026_(Surabaya).pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    },
+    {
+      "noticeDate": "2026-03-27",
+      "priority": "P2",
+      "proceduralScope": "historical_eps_topik_exam_schedule",
+      "fileName": "data_27-03-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf",
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-03-2026_PETUNJUK_TEKNIS_CETAK_KARTU_UJIAN.pdf",
+      "lastHeadResult": "inconclusive_remote_connection_reset_WinError10054",
+      "bodyReviewedOnM22": false,
+      "humanReviewer": null,
+      "humanDecision": "pending",
+      "qualifiesAsFinalManufacturingJobDocs": false
+    }
+  ],
+  "requiredHumanReview": [
+    "Verify original source text and the specific product statement for each Korea-common source",
+    "Review both HRD country-scoped schedule/skills listings without pretending they are Myanmar-only",
+    "Retain five other-country alerts as pending without importing policy to Indonesia",
+    "Open essential original attached PDFs in a normal browser; record page numbers and whether content belongs to exam registration/optional Skill Test/final job application",
+    "Do not infer post-Skill-Test 2026 Manufacturing job document checklist from 2026 exam-registration or other-sector notices",
+    "Record responsible reviewer, actual source review scope, and timestamp separately on the real release date"
+  ],
+  "gates": {
+    "reviewer": null,
+    "reviewedAt": null,
+    "officialSignoff": "pending",
+    "sourceHashesAccepted": false,
+    "finalManufacturingJobDocs": "hold",
+    "publicBetaAccess": "hold",
+    "productionDeployAuthorized": false,
+    "releaseAuthorized": false
+  }
+}

@@ -8,7 +8,9 @@
 
 For every new outreach message, use the controlled recruitment-source code in the landing URL:
 
-`https://modernsnc2022-ai.github.io/Korea-Employment-Passport/?src=<source_code>`
+`https://www.gdglobal.kr/Korea-Employment-Passport/?src=<source_code>`
+
+**HTTPS security:** on 2026-10-14, the older `github.io/Korea-Employment-Passport/` address redirected first to `http://www.gdglobal.kr/...`. Its GitHub Pages `https_enforced` setting is not enabled yet, even though a valid HTTPS certificate and direct `https://www.gdglobal.kr/...` are available. Until the separately approved HTTPS enforcement change is made and verified, use the direct HTTPS custom origin above for **new** outreach. Do not silently edit historical sent-message evidence; old already-sent links need a separate redirect fix. This is a source-attribution URL change only; beta access remains HOLD.
 
 The landing page preserves that code when the person opens the beta enrollment page, and the application text records only the controlled non-identifying source code. Do not put a person's name, handle, phone number, email address, or other identity data in `src`.
 

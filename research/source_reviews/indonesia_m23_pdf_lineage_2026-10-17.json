@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "observationDate": "2026-10-17",
+  "priorOriginalVerificationDate": "2026-10-14",
+  "newlyFetchedPDFsWithOriginalSha256Match": 6,
+  "newlyUnverifiedPDFs": 1,
+  "priorAndCurrentOriginalPageCountsMatched": 6,
+  "firstPagePreviewImagesProduced": 6,
+  "wholePDFPageTextExtractionAttempted": true,
+  "allPagesVisuallySignedOff": false,
+  "verified": [
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_JUKNIS_PENDAFTARAN_CPMI_G2G_KOREA_UBT_UMUM_MANUFAKTUR_DAN_PERIKANAN_TAHUN_2026.pdf",
+      "stage": "initial_eps_topik_exam_registration",
+      "pages": 14,
+      "sha256": "31eb8ccdd139fb36c04b1865c84c5083c38dafff9a1a97698bd595915cfd3b72",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    },
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Petunjuk_Pembayaran_EPS_TOPIK_Kode_Bayar_BNI_2026.pdf",
+      "stage": "initial_eps_topik_exam_registration",
+      "pages": 2,
+      "sha256": "5dcd470f7b50d44ea5ca658f220d87e4e99f1bc27e3131ac1f4d01698a6718e5",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    },
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_FORMULIR_UJI_KOMPETENSI.pdf",
+      "stage": "optional_skill_test_competency",
+      "pages": 2,
+      "sha256": "20375fd344b7f6a1bbc9aa51f6e6852e2aaa681586b89ddbdd3baacf984c99cd",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    },
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_JUKNIS_PEMENUHAN_DOKUMEN_UJI_KOMPETENSI_UBT_UMUM_MANUFAKTUR_2026.pdf",
+      "stage": "optional_skill_test_competency",
+      "pages": 7,
+      "sha256": "6a6cad95c43ceea806ed3b713d4c32d7af0c5dcc80dc3c4a1f11b656fd3b8dc0",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    },
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_PETUNJUK_TEKNIS_PENGISIAN_FORMULIR_UJI_KOMPETENSI.pdf",
+      "stage": "optional_skill_test_competency",
+      "pages": 2,
+      "sha256": "afd1c586db3fc799ccda8bce4dc2bb012eb8fb7eabca75e826249bfb3ea46647",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    },
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_SURAT_KETERANGAN_PENGALAMAN_KERJA.pdf",
+      "stage": "optional_skill_test_competency",
+      "pages": 1,
+      "sha256": "1eb3c077995ee8f7097f35830fc2e78a1eb26d0c28592b09d54085ef6982e1cf",
+      "matchesOriginalRetrievedOn20261014": true,
+      "signedOff": false
+    }
+  ],
+  "inconclusive": [
+    {
+      "officialUrl": "https://kp2mi.go.id/uploads/gtgkorea/images/data_27-01-2026_Contoh_Scan_Persyaratan_Dokumen_Pendaftaran_yang_Benar.pdf",
+      "stage": "initial_eps_topik_exam_registration",
+      "currentOriginalVerification": "not_completed_timeout",
+      "previous20261014Sha256": "4d7b0f3d387ca5e3d7b1522ea0929f55858e693336116e09601cce830c45b654",
+      "previous20261014Pages": 10,
+      "currentSha256": null
+    }
+  ],
+  "sourcePolicyHumanSignoff": false,
+  "automaticSourceBaselineAcceptance": false,
+  "finalGeneralManufacturingJobDocuments": "hold",
+  "publicBetaAccess": "hold",
+  "authorizesRelease": false,
+  "note": "Six read-only PDF bodies exactly match 2026-10-14 bytes; 8MB illustrative scan timed out, NOT missing. This is registration and optional competency stage evidence, never final post-Skill-Test job_doc proof."
+}

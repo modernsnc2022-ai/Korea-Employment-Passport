@@ -1,15 +1,37 @@
 name = "kep-beta-intake"
 main = "src/worker.js"
-compatibility_date = "2026-10-07"
-workers_dev = true
+compatibility_date = "2026-10-14"
+# Explicitly preserve the owner's prelaunch security gate:
+# NEVER expose this Worker merely by deploying/redeploying from Git.
+workers_dev = false
+preview_urls = false
+keep_vars = true
 
-# Create this namespace first:
-# npx wrangler kv namespace create KEP_BETA_APPLICATIONS
-# Then replace REPLACE_WITH_KV_NAMESPACE_ID below.
-[[kv_namespaces]]
-binding = "KEP_BETA_APPLICATIONS"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+# PRIVATE D1, NOT KV. Use unique(email_hmac) for atomic dedup.
+# First run: npx wrangler d1 create kep-beta-applications
+# Replace the placeholder below; run D1 migrations before enabling intake.
+[[d1_databases]]
+binding = "KEP_BETA_DB"
+database_name = "kep-beta-applications"
+database_id = "REPLACE_WITH_PRIVATE_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[[services]]
+binding = "EMAIL_VERIFIER"
+service = "kep-beta-email-verifier"
 
 [vars]
-ALLOWED_ORIGINS = "https://modernsnc2022-ai.github.io"
-RETENTION_DAYS = "90"
+ALLOWED_ORIGINS = "https://www.gdglobal.kr,https://modernsnc2022-ai.github.io"
+INTAKE_ENABLED = "false"
+
+# REQUIRED private Worker secrets before any real beta intake activation:
+#   npx wrangler secret put INTAKE_HMAC_SECRET  (random >=32 chars; do NOT rotate casually)
+#   npx wrangler secret put TURNSTILE_SECRET    (real Cloudflare Turnstile siteverify secret)
+# Required: wrangler secret put VERIFIER_CALL_SECRET (identical to verifier Worker secret).
+# The private EMAIL_VERIFIER service must exist before enabling direct intake.
+# The public Turnstile SITE key belongs in an explicitly reviewed front-end
+# configuration, not this server-side secret.
+# No default fallback on either secret: endpoint fail-closes to HTTP 503.
+
+[triggers]
+crons = ["0 3 * * *"]

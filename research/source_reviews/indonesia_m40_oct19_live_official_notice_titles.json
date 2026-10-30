@@ -1,0 +1,17 @@
+{
+  "observedAtUtc": "2026-10-19T00:32:18.227740+00:00",
+  "asOfJakarta": "2026-10-19",
+  "officialIndex": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "rowsInspected": 320,
+  "totalHistoricalNotices": 2877,
+  "titleUrlSha256": "4d67a65b8af983e6567fbc3b55374e30fa10c095954aafbbc8bb15100471a4e6",
+  "generalManufacturing2026NoticeCount": 7,
+  "finalManufacturing2026ApplicationTitleCandidates": 0,
+  "ambiguousGenericApplicationTitleCandidates": 0,
+  "otherCohortApplicationTitleCount": 3,
+  "humanOriginalContentSigned": false,
+  "finalOnlineJobDocumentAnnexVerified": false,
+  "betaAccess": "hold",
+  "releaseAuthorized": false,
+  "scope": "Bounded live 320 headline+URL list only, not all official PDF annexes"
+}

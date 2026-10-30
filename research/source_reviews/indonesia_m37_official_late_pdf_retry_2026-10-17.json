@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "evidenceDateJakarta": "2026-10-17",
+  "sourceType": "original_official_index_and_optional_scan_example_retry",
+  "timestampUtc": "2026-10-17T14:44:17.514771+00:00",
+  "officialIndexUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "index": {
+    "retrieval": "official_index_read_only",
+    "titleRows": 320,
+    "historicalTotal": 2877,
+    "titleUrlSha256": "4d67a65b8af983e6567fbc3b55374e30fa10c095954aafbbc8bb15100471a4e6",
+    "sameAsM34": true,
+    "explicitGeneralManufacturingFinalApplicationCandidates": 0,
+    "unscopedReviewCandidates": 0,
+    "sourceReviewedByHuman": false
+  },
+  "retryPdf": {
+    "url": "https://kp2mi.go.id/uploads/gtgkorea/images/data_17-09-2026_CONTOH_SCAN_DOKUMEN_KOMPTENSI_YANG_BENAR.pdf",
+    "scope": "2026_09_17_optional_job_capacity_document_scan_example",
+    "attempt": "official_pdf_bytes_verified",
+    "originalPdfSha256": "d7b4b7af6e7f49457a71da1e6c7080f174191e32f3b558b3438bfcdc6705791c",
+    "originalBytes": 6721943,
+    "pdfPages": 8,
+    "firstPageRenderedToLocalTempOnly": true,
+    "individualNamesStored": false,
+    "applicationDocumentsEstablished": false,
+    "officialPolicySigned": false
+  },
+  "previouslyVerifiedRelatedOfficialPdfBytes": 6,
+  "allSevenRelatedPdfBytesVerified": true,
+  "final2026ManufacturingPostSkillTestJobDocsVerified": false,
+  "manualSourceInterpretationApproved": false,
+  "automaticSourceShaAcceptance": false,
+  "candidateDeployed": false,
+  "publicBetaAccess": "hold",
+  "releaseAuthorized": false,
+  "limitations": "Exactly one 2026-09-17 optional Job Capacity Assessment scan-example PDF retried. A PDF fetch does not prove semantic applicability to final post-Skill-Test Manufacturing job application requirements. Bounded official title index also does not inspect all original notice annexes."
+}

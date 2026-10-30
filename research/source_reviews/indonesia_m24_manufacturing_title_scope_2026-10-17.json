@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "observedAtJakartaDate": "2026-10-17",
+  "scope": "Indonesia > Korea > E-9 > UBT Umum General Manufacturing 2026",
+  "sourceApi": "https://kp2mi.go.id/gtog-data/korea/Pengumuman",
+  "officialListingUrl": "https://kp2mi.go.id/gtog-korea/pengumuman",
+  "observedAtUtc": "2026-10-17T04:44:51.057797+00:00",
+  "recordsInspected": 320,
+  "historicalRecordsTotal": 2877,
+  "firstDate": "16 October 2026",
+  "boundaryDate": "16 July 2025",
+  "titleUrlDigestSha256": "4d67a65b8af983e6567fbc3b55374e30fa10c095954aafbbc8bb15100471a4e6",
+  "generalManufacturingTitlesCount": 7,
+  "generalManufacturingTitles": [
+    {
+      "date": "17 September 2026",
+      "title": "PENGUMUMAN PERSYARATAN UNGGAH DOKUMEN KOMPETENSI PESERTA SKILL TEST UBT UMUM SEKTOR MANUFAKTUR EPS-TOPIK TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026"
+    },
+    {
+      "date": "10 September 2026",
+      "title": "PENGUMUMAN HASIL UJIAN KEMAMPUAN BAHASA KOREA EPS-TOPIK UBT UMUM SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026"
+    },
+    {
+      "date": "5 May 2026",
+      "title": "PENGUMUMAN PENGEMBALIAN BIAYA UJIAN EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026 (TAHAP PERTAMA)",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pengembalian-biaya-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026-tahap-pertama"
+    },
+    {
+      "date": "27 March 2026",
+      "title": "PENGUMUMAN PELAKSANAAN UJIAN EPS TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pelaksanaan-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026"
+    },
+    {
+      "date": "16 February 2026",
+      "title": "PENGUMUMAN PEMANGGILAN PEREKAMAN BIOMETRIK DAN VERIFIKASI DOKUMEN ONLINE PESERTA/PENDAFTAR PROGRAM G TO G KOREA EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pemanggilan-perekaman-biometrik-dan-verifikasi-dokumen-online-peserta-pendaftar-program-g-to-g-korea-eps-topik-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-tahun-2026"
+    },
+    {
+      "date": "10 February 2026",
+      "title": "PENGUMUMAN PENYESUAIAN WAKTU PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGRAM G TO G KE KOREA SELATAN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-penyesuaian-waktu-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-program-g-to-g-ke-korea-selatan-tahun-2026"
+    },
+    {
+      "date": "27 January 2026",
+      "title": "PENGUMUMAN PENDAFTARAN UBT UMUM SEKTOR PERIKANAN DAN SEKTOR MANUFAKTUR PROGAM G TO G KE KOREA SELATAN DENGAN SISTEM POIN TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026"
+    }
+  ],
+  "generalManufacturingFinalOnlineJobApplicationTitleCount": 0,
+  "generalManufacturingTitleCandidates": [],
+  "broadOnlineJobApplicationTitleCount": 3,
+  "otherCohortOnlineApplicationNotices": [
+    {
+      "date": "17 September 2026",
+      "title": "PENGUMUMAN PEMBAGIAN SERTIFIKAT KELULUSAN DIGITAL (e-SERTIFIKAT) UJIAN EPS-TOPIK DAN PENGAJUAN LAMARAN ONLINE CALON PEKERJA MIGRAN INDONESIA PROGRAM ROOT INDUSTRY BIDANG PENGELASAN DAN PENCETAKAN G TO G KOREA TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-root-industry-bidang-pengelasan-dan-pencetakan-g-to-g-korea-tahun-2026",
+      "cohort": "root_industry",
+      "mustNotImportIntoGeneralManufacturing": true
+    },
+    {
+      "date": "19 August 2026",
+      "title": "PENGUMUMAN PEMBAGIAN SERTIFIKAT KELULUSAN DIGITAL (e-SERTIFIKAT) UJIAN EPS-TOPIK UBT UMUM SEKTOR PERIKANAN DAN PENGAJUAN LAMARAN ONLINE CALON PEKERJA MIGRAN INDONESIA G to G KOREA TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-umum-sektor-perikanan-dan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-g-to-g-korea-tahun-2026",
+      "cohort": "fisheries",
+      "mustNotImportIntoGeneralManufacturing": true
+    },
+    {
+      "date": "21 July 2026",
+      "title": "PENGUMUMAN PEMBAGIAN SERTIFIKAT KELULUSAN DIGITAL (E-SERTIFIKAT) UJIAN EPS-TOPIK UBT KHUSUS DAN KETENTUAN PENGAJUAN LAMARAN ONLINE CALON PEKERJA MIGRAN INDONESIA PROGRAM G to G KOREA TAHUN 2026",
+      "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pembagian-sertifikat-kelulusan-digital-e-sertifikat-ujian-eps-topik-ubt-khusus-dan-ketentuan-pengajuan-lamaran-online-calon-pekerja-migran-indonesia-program-g-to-g-korea-tahun-2026",
+      "cohort": "special_ubt",
+      "mustNotImportIntoGeneralManufacturing": true
+    }
+  ],
+  "ambiguousGenericApplicationTitles": [],
+  "manualTriageRequired": false,
+  "titleOnlyEvidence": true,
+  "all2026DetailedNoticeContentsRead": false,
+  "allRelevantPdfContentsRead": false,
+  "humanSemanticReviewApproved": false,
+  "baselineHashAutomaticallyAccepted": false,
+  "exact2026ManufacturingFinalJobDocumentsVerified": false,
+  "jobDocs": "hold",
+  "betaAccess": "hold",
+  "authorizesRelease": false,
+  "safety": "No title matching is proof of absence from HTML/PDF annexes. Fisheries, Root Industry and special UBT notices never import their job-document lists into General Manufacturing."
+}
