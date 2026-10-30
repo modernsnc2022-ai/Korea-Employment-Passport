@@ -3612,7 +3612,7 @@ function refreshParticipantViews(){
   renderContract();renderPayroll();renderWorkplace();renderCompanyHub();renderGapStage();
   renderBqcStatus();renderBetaModeBanner();renderBetaValidation();renderRejectionStage();
   renderRejections();renderGaps();renderUnresolvedFieldQuestions();
-  if(!$('quickStart').hidden)switchView('journey',false);
+  switchView(document.body.dataset.activeView||'journey',false);
 }
 function syncParticipantUrl(testerId){
   const url=new URL(location.href);
@@ -4102,8 +4102,10 @@ function switchView(viewId,scroll=true){
   const target=document.getElementById(viewId);
   if(!target?.classList.contains('view'))return;
   document.body.dataset.activeView=viewId;
+  if(viewId==='journey')renderQuickStart();
+  else{$('quickStart').hidden=true;document.body.classList.remove('setup-mode');}
   const heading=target.querySelector('h2');
-  document.title=(viewId==='journey'?'Langkah sekarang':heading?.textContent.trim()||'Panduan EPS')+' · Korea Employment Passport';
+  document.title=(viewId==='journey'?($('quickStart').hidden?'Langkah sekarang':'Pilih tahap Anda'):heading?.textContent.trim()||'Panduan EPS')+' · Korea Employment Passport';
   const utilityOwner={
     eligibility:'journey',
     contract:'journey',
@@ -4130,7 +4132,7 @@ function switchView(viewId,scroll=true){
   }
   if(scroll){
     if(viewId==='journey'){
-      const action=$('nextAction');
+      const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
       action.scrollIntoView({behavior:'instant',block:'start'});
       action.querySelector('.primary, select, button')?.focus({preventScroll:true});
     }else{
