@@ -6,10 +6,18 @@ async function betaPage(page, directEndpoint='') {
     const program = await response.json();
     program.application.directIntake = {
       ...(program.application.directIntake || {}),
-      endpoint: directEndpoint
+      endpoint: directEndpoint,
+      releaseDecision: directEndpoint ? 'approved_manual' : 'pending_manual_approval',
+      approvedAt: directEndpoint ? '2026-10-30T00:00:00Z' : null,
+      turnstileSiteKey: directEndpoint ? 'test-public-sitekey' : ''
     };
     await route.fulfill({ response, json: program });
   });
+  // Mock the security widget and requests; tests never contact an intake service.
+  await page.route('https://challenges.cloudflare.com/**', route => route.fulfill({
+    contentType: 'application/javascript',
+    body: 'window.turnstile={render:(el,opts)=>{window.testWidgetOptions=opts;opts.callback("test-token");return "test-widget"},reset:()=>{window.testWidgetOptions.callback("test-token")}};'
+  }));
   await page.goto('/beta.html?src=website', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#applicationPanel')).toBeVisible({ timeout: 10000 });
 }
@@ -22,6 +30,9 @@ test('beta applicant intake keeps email fallback while direct endpoint is unconf
 
 test('beta applicant intake can submit directly without opening an email client', async ({ page }) => {
   let submitted = null;
+  await page.route('https://intake.example.test/v1/beta/applicant/verify-request', route => route.fulfill({
+    status: 202, json: { ok: true, verificationRequired: true }
+  }));
   await page.route('https://intake.example.test/v1/beta/applicant', async route => {
     submitted = route.request().postDataJSON();
     await route.fulfill({
@@ -43,7 +54,12 @@ test('beta applicant intake can submit directly without opening an email client'
   await page.locator('#applicantContactEmail').fill('tester@example.com');
   await page.locator('#betaApplicationSubmitBtn').click();
 
+  await expect(page.locator('#applicantEmailCodeFields')).toBeVisible();
+  expect(submitted).toBeNull();
+  await page.locator('#applicantEmailCode').fill('12345678');
+  await page.locator('#betaApplicationSubmitBtn').click();
   await expect(page.locator('#applicationResult')).toContainText('KEP-I-TEST1234');
+  expect(submitted.verificationCode).toBe('12345678');
   expect(submitted).not.toBeNull();
   expect(submitted.kind).toBe('active_applicant');
   expect(submitted.contactEmail).toBe('tester@example.com');

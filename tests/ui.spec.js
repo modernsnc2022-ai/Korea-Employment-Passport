@@ -8,6 +8,9 @@ async function freshPage(page, options = {}) {
   await page.route('**/data/source_review_status.json', async route => {
     const response = await route.fetch();
     const status = await response.json();
+    // A scenario fixture must not retain a live, incompatible observation.
+    // Production source data and fail-closed guards remain unchanged.
+    delete status.latestReadOnlyObservation;
     if (sourceState === 'clean') {
       status.state = 'clean';
       status.reviewRequiredUrls = [];
@@ -952,7 +955,7 @@ test('partial departure registry never suggests another call when date is missin
   await expect(page.locator('#scopePickerSection small')).toContainText('belum lengkap');
   await expect(page.locator('#scopePickerSection small')).toContainText('jangan memakai aturan tanggal lain');
   const href=await page.locator('#scopePickerSource').getAttribute('href');
-  expect(href).toContain('kp2mi.go.id/gtog-korea/info');
+  expect(href).toBe('https://kp2mi.go.id/gtog-korea/pengumuman');
   expect(errors).toEqual([]);
 });
 
@@ -1003,7 +1006,7 @@ test('beta OPEN path remains functional and identity-minimal', async ({ page }) 
   await expect(page.locator('#applicationPanel')).toBeVisible();
 
   const identityInputs = await page.locator(
-    '#betaApplicationForm input[type="text"], ' +
+    '#betaApplicationForm input[type="text"]:not(#applicantEmailCode), ' +
     '#betaApplicationForm input[type="email"], ' +
     '#betaApplicationForm input[type="tel"], ' +
     '#betaApplicationForm input[type="file"], ' +
@@ -1223,7 +1226,8 @@ test('review-required official source suppresses affected exact document guidanc
     status: 'review_required',
     items: 0
   });
-  await expect(page.locator('#freshnessStatus')).toContainText('PERUBAHAN SUMBER RESMI TERDETEKSI');
+  // Review warnings belong to the affected task, not an operator feed.
+  await expect(page.locator('#freshnessStatus')).toBeHidden();
   await expect(page.locator('#docStageContext')).toContainText('Panduan tahap ini sedang ditinjau');
   await expect(page.locator('#docStageContext')).toContainText('Jangan gunakan rincian lama');
   await expect(page.locator('#docStageContext')).not.toContainText('Rp350.000');
