@@ -15,3 +15,23 @@ button,select,input{font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:7px}.chips span{background:#f2f4f7;border-radius:999px;padding:7px 10px;font-size:.8rem;font-weight:800}.closed-panel{border-color:#fedf89}.closed-panel button{width:100%;border:0;border-radius:11px;padding:13px;background:#eaecf0;color:#98a2b3;font-weight:850;margin-top:8px}
 form{display:grid;gap:14px}label{display:grid;gap:6px;font-weight:800;font-size:.88rem}select,input[type="email"]{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:10px;background:#fff}.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.check{grid-template-columns:auto 1fr;align-items:start;font-weight:600}.check input{width:18px;height:18px;margin-top:3px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.send-help{display:block;color:var(--muted);line-height:1.45}.actions button{border-radius:11px;padding:12px;border:0;font-weight:850;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:1px solid var(--line)!important}.share-panel{border-color:#b2c6ff}.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.share-actions button{border-radius:11px;padding:12px;font-weight:850;cursor:pointer}.result{padding:12px;border-radius:11px;background:var(--soft);font-size:.86rem}.result.warn{background:var(--warn)}.privacy{border-color:#b2c6ff}.validator{background:#fbfcfe}
 @media(max-width:620px){.grid{grid-template-columns:1fr}.actions,.share-actions{grid-template-columns:1fr}.topbar{align-items:flex-start}.topbar a{max-width:58%;overflow-wrap:anywhere}.hero{padding:22px}.shell{padding-left:14px;padding-right:14px}}
+
+/* Match the app while keeping registration and access clearly separate. */
+:root{--bg:#f5f7f6;--ink:#172b29;--muted:#536862;--line:#dce5e1;--navy:#123e38;--blue:#17695c;--soft:#edf5f2;--shadow:none}
+.topbar{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);position:relative;flex-wrap:wrap}
+.topbar a{color:var(--ink);font-weight:750;min-height:44px;display:inline-flex;align-items:center}
+.topbar .status-pill{color:var(--muted);background:var(--soft)}
+.hero{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;padding:12px 0 24px}
+.hero h1{font-size:clamp(1.75rem,5vw,2.5rem);line-height:1.2}
+.hero>p,.benefit-card span{color:var(--muted)}
+.eyebrow{color:var(--blue)}
+.benefit-card{background:var(--soft);border-radius:8px;padding:16px}
+.benefit-card strong{font-size:1.2rem}
+.card{border-radius:12px;padding:24px}
+.closed-panel{border-left:3px solid #bb7918;border-radius:0;background:#fff6e6}
+button,select,input:not([type="checkbox"]){min-height:44px}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.check{min-height:44px;cursor:pointer;align-items:center}
+input[type="text"]{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px}
+#releaseGateNote li{margin:12px 0}
+@media(max-width:620px){.hero{padding:8px 0 20px}.topbar a{max-width:100%}.card{padding:20px}.shell{padding:20px 16px 48px}}
