@@ -1,0 +1,74 @@
+[
+  {
+    "attempt": "skip-link-before-corrected",
+    "head": "6a835212239edd2f53d3fd29fc2fedc8b8897554",
+    "stats": {
+      "startTime": "2026-10-30T11:22:28.444Z",
+      "duration": 22814.567000000003,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "cases": [
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "keyboard skip link enters the visible first-use setup",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#quickStart')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#quickStart')\u001b[22m\n\u001b[2m    9 × locator resolved to <section id=\"quickStart\" class=\"quick-start\">…</section>\u001b[22m\n\u001b[2m      - unexpected value \"inactive\"\u001b[22m\n"
+        ]
+      },
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "keyboard skip link enters the current task and the selected tool",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#nextAction')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nextAction')\u001b[22m\n\u001b[2m    8 × locator resolved to <section id=\"nextAction\" class=\"next-action\">…</section>\u001b[22m\n\u001b[2m      - unexpected value \"inactive\"\u001b[22m\n"
+        ]
+      },
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "failed initial route load exposes a working skip link to recovery",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#routeLoadRecovery')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#routeLoadRecovery')\u001b[22m\n\u001b[2m    9 × locator resolved to <section role=\"alert\" aria-live=\"assertive\" id=\"routeLoadRecovery\" class=\"route-load-recovery\">…</section>\u001b[22m\n\u001b[2m      - unexpected value \"inactive\"\u001b[22m\n"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "skip-link-after",
+    "head": "6a835212239edd2f53d3fd29fc2fedc8b8897554",
+    "stats": {
+      "startTime": "2026-10-30T11:23:07.306Z",
+      "duration": 5496.0650000000005,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "cases": [
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "keyboard skip link enters the visible first-use setup",
+        "status": "expected",
+        "errors": []
+      },
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "keyboard skip link enters the current task and the selected tool",
+        "status": "expected",
+        "errors": []
+      },
+      {
+        "file": "skip-navigation.spec.js",
+        "title": "failed initial route load exposes a working skip link to recovery",
+        "status": "expected",
+        "errors": []
+      }
+    ]
+  }
+]

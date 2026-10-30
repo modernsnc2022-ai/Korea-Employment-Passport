@@ -3,6 +3,11 @@ set -euo pipefail
 
 ROOT="${1:-$(pwd)}"
 cd "$ROOT"
+KEP_TEST_ENGINE="${KEP_BROWSER:-chromium}"
+case "$KEP_TEST_ENGINE" in
+  chromium|webkit|firefox) ;;
+  *) echo "Invalid KEP_BROWSER: $KEP_TEST_ENGINE" >&2; exit 2 ;;
+esac
 
 echo "KEP_COLAB_CI_START sha=$(git rev-parse HEAD)"
 python3 --version
@@ -10,7 +15,7 @@ node --version
 npm --version
 
 npm ci
-npx playwright install --with-deps chromium
+npx playwright install --with-deps "$KEP_TEST_ENGINE"
 
 for f in docs/app.js docs/landing.js docs/app-runtime.js docs/beta.js docs/sw.js docs/country-pack.js docs/readiness.js; do
   node --check "$f"

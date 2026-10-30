@@ -1,0 +1,67 @@
+[
+  {
+    "attempt": "mobile-parity-chromium-full",
+    "head": "a4872de37ffc1c0301edc5fefbe58903da64dfc5",
+    "stats": {
+      "startTime": "2026-10-30T11:24:41.508Z",
+      "duration": 161633.185,
+      "expected": 143,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "mobile-parity-webkit-full",
+    "head": "b791b6d018eead090f61cc4d9fcae1d72c25a927",
+    "stats": {
+      "startTime": "2026-10-30T11:29:26.864Z",
+      "duration": 453853.812,
+      "expected": 141,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "failures": [
+      {
+        "file": "responsive-reachability.spec.js",
+        "title": "tool actions remain reachable at 320x568 with text scale 2",
+        "status": "unexpected",
+        "errors": [
+          "Error: gaps width\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "webkit-reflow-focused",
+    "head": "5cd9df2c0a745b4c78ef14d9dd44e658d8035029",
+    "stats": {
+      "startTime": "2026-10-30T11:40:50.634Z",
+      "duration": 21114.25,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "firefox-focused",
+    "status": "interrupted",
+    "exitCode": 130,
+    "fullSuiteCompleted": false,
+    "caseResultsAvailable": false,
+    "note": "No test case began before the renderer stall; no pass/fail count inferred."
+  },
+  {
+    "attempt": "firefox-renderer-preflight",
+    "exitCode": 3,
+    "testSuiteStarted": false,
+    "message": "CLOUD_UI_UNAVAILABLE: browser preflight failed; no test suite started.\nSkipping host requirements validation logic because `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS` env variable is set.\nBrowser renderer preflight timed out\n\n"
+  }
+]

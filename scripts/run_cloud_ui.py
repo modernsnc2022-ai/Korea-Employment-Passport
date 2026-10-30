@@ -23,9 +23,21 @@ with (common / 'kep-cloud-ui.lock').open('a+') as lock:
     except BlockingIOError:
         print('CLOUD_UI_BUSY: another serialized run is active in this repository; no tests started.', flush=True)
         raise SystemExit(2)
-    preflight = subprocess.run(['node', '-e', "const {chromium}=require('@playwright/test'); (async()=>{const b=await chromium.launch();await b.close()})().catch(e=>{console.error(e.message);process.exit(1)})"], cwd=ROOT, text=True, capture_output=True)
+    engine = os.environ.get('KEP_BROWSER', 'chromium')
+    if engine not in ('chromium', 'webkit', 'firefox'):
+        raise SystemExit('Invalid KEP_BROWSER')
+    probe = """const p=require('@playwright/test');
+const timer=setTimeout(()=>{console.error('Browser renderer preflight timed out');process.exit(1)},15000);
+(async()=>{const b=await p[process.env.KEP_BROWSER||'chromium'].launch({timeout:10000});
+const page=await b.newPage();await page.setContent('<title>KEP browser readiness</title>');
+await b.close();clearTimeout(timer)})().catch(e=>{console.error(e.message);process.exit(1)})"""
+    try:
+        preflight = subprocess.run(['node', '-e', probe], cwd=ROOT, text=True, capture_output=True, timeout=25)
+    except subprocess.TimeoutExpired:
+        print('CLOUD_UI_UNAVAILABLE: browser renderer preflight timed out; no tests started.', flush=True)
+        raise SystemExit(3)
     if preflight.returncode:
-        print('CLOUD_UI_UNAVAILABLE: Chromium preflight failed; no test suite started.', flush=True)
+        print('CLOUD_UI_UNAVAILABLE: browser preflight failed; no test suite started.', flush=True)
         print(preflight.stderr, flush=True)
         raise SystemExit(3)
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
@@ -33,7 +45,9 @@ with (common / 'kep-cloud-ui.lock').open('a+') as lock:
     run = parent / stamp
     run.mkdir(parents=True)
     command = ['npx', 'playwright', 'test', *args.tests, '--reporter=line,json', '--output', str(run / 'artifacts'), '--retries=0', '--workers=1']
-    metadata = {'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'startedAt': stamp, 'command': command, 'runDirectory': str(run)}
+    metadata = {'browserEngine': engine, 'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'startedAt': stamp, 'command': command, 'runDirectory': str(run)}
+    metadata['hostLibraryCacheValidationSkipped'] = os.environ.get('PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS') == '1'
+    metadata['runtimeLibraryPathOverride'] = bool(os.environ.get('LD_LIBRARY_PATH'))
     metadata['workingTreeStatus'] = subprocess.check_output(['git', 'status', '--short'], cwd=ROOT, text=True).splitlines()
     metadata['trackedDiffSha256'] = hashlib.sha256(subprocess.check_output(['git', 'diff', 'HEAD', '--binary'], cwd=ROOT)).hexdigest()
     (run / 'metadata.json').write_text(json.dumps(metadata, indent=2) + '\n')
