@@ -1,0 +1,447 @@
+{
+  "environment": "Cloud Chromium; viewport emulation, not a physical device",
+  "sourceData": "Unmodified checked-in source-review data; no clean-source fixture",
+  "results": [
+    {
+      "name": "entry",
+      "width": 320,
+      "viewport": 320,
+      "pageWidth": 320,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 320,
+      "viewport": 320,
+      "pageWidth": 320,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 320,
+      "viewport": 320,
+      "pageWidth": 320,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 320,
+      "viewport": 320,
+      "pageWidth": 320,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 320,
+      "elapsedMs": 595,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "document-controls",
+      "width": 320,
+      "viewport": 320,
+      "pageWidth": 320,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "entry",
+      "width": 360,
+      "viewport": 360,
+      "pageWidth": 360,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 360,
+      "viewport": 360,
+      "pageWidth": 360,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 360,
+      "viewport": 360,
+      "pageWidth": 360,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 360,
+      "viewport": 360,
+      "pageWidth": 360,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 360,
+      "elapsedMs": 652,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "entry",
+      "width": 375,
+      "viewport": 375,
+      "pageWidth": 375,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 375,
+      "viewport": 375,
+      "pageWidth": 375,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 375,
+      "viewport": 375,
+      "pageWidth": 375,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 375,
+      "viewport": 375,
+      "pageWidth": 375,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 375,
+      "elapsedMs": 743,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "entry",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 390,
+      "elapsedMs": 595,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "document-controls",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "eligibility",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "eligibility",
+      "dialog": false
+    },
+    {
+      "name": "documents",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "fees",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "fees",
+      "dialog": false
+    },
+    {
+      "name": "gaps",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "gaps",
+      "dialog": false
+    },
+    {
+      "name": "contract",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "contract",
+      "dialog": false
+    },
+    {
+      "name": "workplace",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "workplace",
+      "dialog": false
+    },
+    {
+      "name": "payroll",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "payroll",
+      "dialog": false
+    },
+    {
+      "name": "companyHub",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "companyHub",
+      "dialog": false
+    },
+    {
+      "name": "documents-text-200",
+      "width": 390,
+      "viewport": 390,
+      "pageWidth": 390,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "entry",
+      "width": 430,
+      "viewport": 430,
+      "pageWidth": 430,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 430,
+      "viewport": 430,
+      "pageWidth": 430,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 430,
+      "viewport": 430,
+      "pageWidth": 430,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 430,
+      "viewport": 430,
+      "pageWidth": 430,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 430,
+      "elapsedMs": 699,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "entry",
+      "width": 768,
+      "viewport": 768,
+      "pageWidth": 768,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 768,
+      "viewport": 768,
+      "pageWidth": 768,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 768,
+      "viewport": 768,
+      "pageWidth": 768,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 768,
+      "viewport": 768,
+      "pageWidth": 768,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 768,
+      "elapsedMs": 652,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "entry",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "journey",
+      "dialog": false
+    },
+    {
+      "name": "stage-top",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "stage-bottom",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "journey",
+      "dialog": true
+    },
+    {
+      "name": "guided-task",
+      "width": 1280,
+      "elapsedMs": 779,
+      "actions": 3,
+      "errors": []
+    },
+    {
+      "name": "document-controls",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "eligibility",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "eligibility",
+      "dialog": false
+    },
+    {
+      "name": "documents",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "documents",
+      "dialog": false
+    },
+    {
+      "name": "fees",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "fees",
+      "dialog": false
+    },
+    {
+      "name": "gaps",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "gaps",
+      "dialog": false
+    },
+    {
+      "name": "contract",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "contract",
+      "dialog": false
+    },
+    {
+      "name": "workplace",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "workplace",
+      "dialog": false
+    },
+    {
+      "name": "payroll",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "payroll",
+      "dialog": false
+    },
+    {
+      "name": "companyHub",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "companyHub",
+      "dialog": false
+    },
+    {
+      "name": "documents-text-200",
+      "width": 1280,
+      "viewport": 1280,
+      "pageWidth": 1280,
+      "currentView": "documents",
+      "dialog": false
+    }
+  ]
+}

@@ -1,0 +1,1100 @@
+{
+  "testedProductCommit": "bfaf3614f5c9b16cc48e332cdac1c7c9bd37213e",
+  "testedTree": "bb80574c9b59727fce001f28d110dca5da961324",
+  "environment": {
+    "runtime": "Cloud Linux",
+    "node": "24.22.1",
+    "playwright": "1.55.0",
+    "chromium": "140.0.7339.16",
+    "workers": 1,
+    "retries": 0,
+    "serviceWorkers": "block"
+  },
+  "stats": {
+    "startTime": "2026-10-30T06:30:35.523Z",
+    "duration": 137708.016,
+    "expected": 85,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "runHistory": [
+    {
+      "run": "final-candidate-ui",
+      "stats": {
+        "startTime": "2026-10-30T06:19:26.659Z",
+        "duration": 99452.842,
+        "expected": 85,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "exact-final-head-ui",
+      "stats": {
+        "startTime": "2026-10-30T06:22:20.140Z",
+        "duration": 186949.981,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "cohort-timeout-recheck",
+      "stats": {
+        "startTime": "2026-10-30T06:28:23.505Z",
+        "duration": 2819.5209999999997,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "cohort-repeat-three",
+      "stats": {
+        "startTime": "2026-10-30T06:29:01.440Z",
+        "duration": 92173.554,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "isolated-final-ui",
+      "stats": {
+        "startTime": "2026-10-30T06:30:35.523Z",
+        "duration": 137708.016,
+        "expected": 85,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "tests": [
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 320px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2136,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 360px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2102,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 375px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1436,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 390px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1251,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 430px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1114,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 768px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1410,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 1280px preserves the primary journey",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1222,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "beta-intake.spec.js",
+      "title": "beta applicant intake keeps email fallback while direct endpoint is unconfigured",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 354,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "beta-intake.spec.js",
+      "title": "beta applicant intake can submit directly without opening an email client",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 861,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 320px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 852,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 360px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1415,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 375px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1577,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 390px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1297,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 430px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1406,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 768px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1031,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 1280px",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1491,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "browser Back closes the guide and leaves the current stage intact",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 807,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "Escape and keyboard focus stay within native dialog behavior",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1674,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "short viewport and 200% text keep a working close button and contained content",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1043,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "document-controls.spec.js",
+      "title": "320px document controls remain usable and validate a local file without upload",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3042,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "guided-onboarding.spec.js",
+      "title": "stage chooser starts with three clear options and discloses remaining four",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 457,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "guided-onboarding.spec.js",
+      "title": "mobile guided entry does not overflow width",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 440,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "source context gives the original link and dated scope without claiming live verification",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 965,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "a malformed source observation cannot certify documents or payment",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2682,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "a consistent source fixture is called recorded, never a current official confirmation",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2226,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "missing source-review feed remains explicit and fail-closed",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1682,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "all 27 stages share preparation guidance without changing recorded progress",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 11174,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "stage preparation cannot leak another cohort checklist",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1045,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "documents put matching notice and checklist context before optional field tools",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 23497,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "first-time flow stays simple on desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1189,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mobile flow has no horizontal overflow and keeps primary controls visible",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1082,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "optional trust and backup controls stay out of the main flow",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 945,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "visa document helper shows one field at a time on mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3953,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "shared Korea-side official core is visible without overriding country action",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1245,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "shared Korea-side panel stays hidden for sending-country-only stage",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 759,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "notice-specific answers stay hidden until the user selects the matching notice",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1444,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "simple UX lock: first-time user can identify now, ask, and continue without opening extra panels",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 975,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "form wizard exposes only one actionable field instruction at a time",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2770,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unknown broker-like question routes to official human help instead of guessing",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1177,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback removes sensitive-looking identifiers before email draft",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1062,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback bundle combines all gap types and redacts them in one draft",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 768,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback bundle includes anonymous progress context",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 755,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta zero-broker checkpoint tracks stage pass and fail without identity data",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1491,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "anonymous beta ID links feedback to tracker without identity data",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2447,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta invite URL immediately confirms the assigned anonymous tester and first stage",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1528,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta evidence stays isolated when a browser switches tester IDs",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1533,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "manual beta ID switch removes the previous tester evidence from view",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3171,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unexperienced beta stage never counts as zero-broker evidence",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1083,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace reality check separates public evidence from worker testimony",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1686,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "tester-interest intake is open while beta access remains on hold",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 594,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "community source can share or copy source-attributed applicant and worker invitations",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 513,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "attributed applicant campaigns go directly to the beta intake anchor",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 520,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "generic attribution stays on landing while preserving the beta link",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 256,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "worker-only recruitment sources go directly to worker interest intake",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 6569,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unknown recruitment source code falls back to website",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 445,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "public community recruitment sources are loaded from the shared source catalog",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 819,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "manufacturing job application cannot complete before sector notice",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1257,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "scout request excludes dorm residence details",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 502,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mcu1 uses its verified stage-specific document pack",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 762,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "predeparture OPP scope resolves to verified common pack",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1028,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "psychology stage uses its verified 2026 pack",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 811,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post SLC stage exposes verified psychology and MCU II checklist",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 717,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "departure scope picker includes partial verified 2026 registry",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 563,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "partial departure registry never suggests another call when date is missing",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1092,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "bare OPEN status cannot bypass explicit release approval",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 408,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta OPEN path remains functional and identity-minimal",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 521,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "progress backup preserves reviewed form fields without beta evidence",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 589,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta progress backup cannot cross anonymous tester IDs",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1005,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace worker evidence empty state is neutral and privacy safe",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 785,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace worker evidence renders only summarized verified facts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 729,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "E-9 worker validator panel can open independently without identity fields",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 381,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "review-required official source suppresses affected exact document guidance",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 611,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "overflow beta IDs above KEP-0050 remain active-applicant IDs",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 489,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "worker validator beta IDs show retrospective instructions and role",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 659,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post-entry document pack stays scoped to residence registration",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 331,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "quick milestones do not infer post-entry compliance from first payroll receipt",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 373,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post-entry official help uses Korea foreign worker counseling",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 398,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mid-process selector explains that prior stages are marked complete",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 916,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "retrospective worker evidence records experience year before stage validation",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1379,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "retrospective worker year keeps prior-cycle evidence out of 2026 route PASS",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 619,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback sanitizer redacts Korean phone numbers and always warns about residual privacy risk",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1408,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "company community stays fail-closed until real member auth backend exists",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 690,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "paid operator investigation request excludes private dorm and identity data by design",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 368,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "company question reports evidence scarcity instead of inventing employer facts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1763,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "content reviewer beta IDs show reviewer mode and do not count as route PASS evidence",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 352,
+          "retry": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "stats": {
+    "startTime": "2026-10-30T06:22:20.140Z",
+    "duration": 186949.981,
+    "expected": 84,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "failedSpecs": [
+    {
+      "title": "notice-specific answers stay hidden until the user selects the matching notice",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 30000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 0,
+              "parallelIndex": 0,
+              "status": "timedOut",
+              "duration": 60917,
+              "error": {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 30000ms.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/workspace/scratch/d4b77a1f4461/kep-polish/tests/ui.spec.js",
+                    "column": 38,
+                    "line": 207
+                  },
+                  "message": "Error: locator.selectOption: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('#scopePicker')\u001b[22m\n\u001b[2m    - locator resolved to <select id=\"scopePicker\">…</select>\u001b[22m\n\u001b[2m  - attempting select option action\u001b[22m\n\u001b[2m    - waiting for element to be visible and enabled\u001b[22m\n\n\n  205 |   const wave10Location='BBPPMPV Bisnis dan Pariwisata, Sawangan';\n  206 |   await expect(page.locator('#exactAnswerList')).not.toContainText(wave10Location);\n> 207 |   await page.locator('#scopePicker').selectOption('opp_sawangan_wave10_2026');\n      |                                      ^\n  208 |   await expect(page.locator('#exactAnswerList')).toContainText(wave10Location);\n  209 |\n  210 |   expect(errors).toEqual([]);\n    at /workspace/scratch/d4b77a1f4461/kep-polish/tests/ui.spec.js:207:38"
+                },
+                {
+                  "message": "Error: End of central directory record signature not found. Either not a zip file, or file is truncated."
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-30T06:23:12.435Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/workspace/scratch/d4b77a1f4461/kep-polish/test-results/ui-notice-specific-answers-fedd6-selects-the-matching-notice/error-context.md"
+                }
+              ]
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "6cacfa4b79c1be8f210f-91e62b1b81a5cc1a683c",
+      "file": "ui.spec.js",
+      "line": 193,
+      "column": 1
+    }
+  ],
+  "followup": [
+    {
+      "run": "cohort-timeout-recheck",
+      "stats": {
+        "startTime": "2026-10-30T06:28:23.505Z",
+        "duration": 2819.5209999999997,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "cohort-repeat-three",
+      "stats": {
+        "startTime": "2026-10-30T06:29:01.440Z",
+        "duration": 92173.554,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "run": "isolated-final-ui",
+      "stats": {
+        "startTime": "2026-10-30T06:30:35.523Z",
+        "duration": 137708.016,
+        "expected": 85,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "assessment": "Intermittent timeout not reproduced in isolated 1/1, repeated 3/3 and full 85/85 checks. Root cause not proven. Context teardown also timed out and trace ZIP was incomplete. No retries or source-guard relaxation."
+}

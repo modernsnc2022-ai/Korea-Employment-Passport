@@ -1,0 +1,61 @@
+- dialog "Pembayaran biaya EPS-TOPIK":
+  - banner:
+    - text: Tahap 3 dari 27 · Persiapan
+    - heading "Pembayaran biaya EPS-TOPIK" [level=2]
+    - paragraph: KP2MI / bank yang ditunjuk
+    - button "Tutup panduan tahap": ×
+  - heading "Langkah sekarang" [level=3]
+  - paragraph: Pastikan jumlah, penerima, dan kode pembayaran sesuai pengumuman resmi sebelum membayar.
+  - text: ⚠ Jangan membayar biaya tidak resmi dengan janji pasti mendapat pekerjaan.
+  - region "Dasar resmi":
+    - link "Baca pengumuman / sumber resmi ↗":
+      - /url: https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026
+    - text: Rujukan tercatat
+    - paragraph: Tautan tersedia dalam panduan. Ini bukan konfirmasi bahwa ketentuan masih berlaku hari ini.
+    - term: Instansi
+    - definition: KP2MI / bank yang ditunjuk
+    - term: Berlaku untuk
+    - definition: Indonesia · E-9 · Manufaktur 2026; ikuti panggilan yang memuat nama Anda.
+    - term: Pemeriksaan data rute
+    - definition: 2026-10-06 · bukan pemeriksaan langsung hari ini
+  - region "Persiapan tahap":
+    - heading "Dokumen yang perlu disiapkan" [level=3]
+    - list:
+      - listitem: Scan KTP Wajib
+      - listitem: Scan paspor Sesuai ketentuan
+      - listitem: Pasfoto 3.5 × 4.5 cm Wajib
+      - listitem: Ijazah minimal SLTP/SMP atau sederajat Wajib
+    - paragraph: Masih ada persyaratan lain. Periksa checklist lengkap dan sumber resmi.
+    - paragraph: Dokumen untuk pendaftaran awal EPS-TOPIK UBT Umum Manufaktur/Perikanan 2026, bukan daftar dokumen final lamaran kerja Manufaktur setelah Skill Test. Pendaftaran umum 2026 sudah berakhir; ikuti pengumuman resmi untuk siklus baru.
+    - heading "Biaya" [level=3]
+    - paragraph: Periksa nominal, penerima, dan ketentuan pada pengumuman yang berlaku untuk Anda. Informasi yang belum tersedia tidak berarti gratis. Jangan membayar jaminan pekerjaan kepada perantara.
+    - button "Periksa rincian biaya"
+  - group: Apakah tahap ini sudah cukup aman tanpa bertanya ke calo?
+  - text: JAWABAN PASTI
+  - heading "Hal kecil yang sering membuat salah isi" [level=3]
+  - group:
+    - text: Biaya EPS-TOPIK pendaftaran umum 2026 berapa?
+    - strong: "Jawaban:"
+    - text: Rp472.161.
+    - strong: "Tulis / lakukan seperti ini:"
+    - text: Bayar Rp472.161 melalui jalur pembayaran resmi/kode bayar yang ditentukan untuk pendaftaran tersebut.
+    - strong: "Mengapa:"
+    - text: Pengumuman pendaftaran 2026 menetapkan biaya ujian setara USD 28 dengan nominal rupiah tersebut pada siklus itu.
+    - strong: "Jangan:"
+    - text: • Jangan transfer ke rekening pribadi • Jangan anggap nominal ini otomatis berlaku untuk siklus berikutnya
+    - strong: "Berlaku untuk:"
+    - text: Rute Indonesia E-9 2026
+    - strong: "Status:"
+    - text: Terverifikasi · diperiksa 2026-10-02
+    - link "Lihat dasar resmi ↗":
+      - /url: https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026
+    - button "Masih bingung? Tanya lebih spesifik"
+  - group: Biaya EPS-TOPIK 2026 dibayar lewat mana?
+  - group: Batas pembayaran EPS-TOPIK umum 2026 kapan?
+  - group: Kalau pembayaran EPS-TOPIK gagal atau belum tercatat sampai batas waktu, apa yang dilakukan?
+  - link "Buka Sisko P2MI / kode bayar ↗":
+    - /url: https://siskop2mi.bp2mi.go.id/
+  - strong: "Setelah tahap ini:"
+  - text: Perekaman sidik jari dan foto
+  - contentinfo:
+    - button "Tandai selesai & lanjut"
