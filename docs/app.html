@@ -22,6 +22,7 @@
   </header>
 
   <main class="shell">
+    <section id="offlineStatus" class="offline-status" role="status" aria-live="polite" hidden><strong>Anda sedang offline.</strong> Panduan tersimpan dapat kedaluwarsa. Sambungkan internet dan periksa sumber resmi sebelum mengirim dokumen atau membayar.</section>
     <section class="summary">
       <div>
         <span class="eyebrow">PANDUAN MANDIRI · JALUR RESMI EPS</span>
@@ -250,7 +251,7 @@
         <label>Kata/kolom yang membingungkan
           <input id="fieldHelpQuery" placeholder="Contoh: buku tabungan, pasfoto, biaya visa, map manufaktur">
         </label>
-        <button id="fieldHelpBtn" class="primary">Cari jawaban pasti</button>
+        <button id="fieldHelpBtn" class="primary">Cari panduan resmi</button>
         <div id="fieldHelpResult" role="status" aria-live="polite" class="result" hidden></div>
       </div>
 
@@ -517,7 +518,7 @@
         <p class="muted">Permintaan hanya memakai nama perusahaan, alamat kerja, tingkat investigasi, dan pertanyaan. Harga/biaya perjalanan dikonfirmasi sebelum pembayaran. Jangan kirim nomor paspor/KTP/ARC, hasil medis, rekening, atau alamat asrama pribadi.</p>
       </div>
 
-      <aside id="companyAdSlot" class="company-ad-slot" hidden aria-label="Iklan sponsor"></nav>
+      <section id="companyAdSlot" class="company-ad-slot" hidden aria-label="Iklan sponsor"></section>
       <button class="secondary process-return" type="button">← Kembali ke perjalanan</button>
     </section>
 
