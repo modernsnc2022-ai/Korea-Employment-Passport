@@ -16,3 +16,38 @@ label{display:grid;gap:7px;font-weight:700;font-size:.92rem}input,select{width:1
 footer{max-width:1160px;margin:auto;padding:28px 24px 50px;border-top:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}footer strong{color:var(--ink);margin-right:auto}
 @media(max-width:850px){.hero-grid,.join-card{grid-template-columns:1fr}.passport-card{max-width:560px}.steps,.feature-grid,.trust-grid{grid-template-columns:1fr 1fr}.nav{margin-bottom:44px}}
 @media(max-width:560px){.hero{padding-bottom:54px}.section{padding-top:62px;padding-bottom:62px}.steps,.feature-grid,.trust-grid{grid-template-columns:1fr}.join-card{padding:24px}.passport-card{padding:22px}h1{font-size:3rem}}
+
+/* Shared KEP public surface: restrained typography, readable evidence, consistent controls. */
+:root{--bg:#f5f7f6;--ink:#172b29;--muted:#536862;--line:#dce5e1;--accent:#17695c;--deep:#123e38}
+html{scroll-padding-top:24px}
+body{overflow-wrap:anywhere}
+main,section,article,div,nav{min-width:0}
+.hero{background:var(--bg);color:var(--ink);border-bottom:1px solid var(--line);padding:24px max(24px,calc((100vw - 1120px)/2)) 48px}
+.nav{gap:16px;flex-wrap:wrap;margin-bottom:32px}
+.nav>div{display:flex;flex-wrap:wrap;gap:8px 16px}
+.brand{color:var(--ink)}
+.nav-link{color:var(--accent);display:inline-flex;align-items:center;min-height:44px;text-underline-offset:3px}
+h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.15;letter-spacing:-.035em;margin:16px 0 24px}
+h1 span,.eyebrow{color:var(--accent)}
+.lead,.note{color:var(--muted)}
+.hero-grid{gap:40px}
+.button{min-height:48px;border-radius:8px;font-weight:650}
+.primary{background:var(--accent);color:#fff}
+.secondary{background:#fff;color:var(--accent);border:1px solid var(--line)}
+.passport-card{border:1px solid var(--line);border-radius:12px;box-shadow:none;padding:24px}
+.passport-row{gap:16px}.passport-row span{text-align:right}
+.section{padding:56px max(24px,calc((100vw - 1120px)/2))}
+.section h2{font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.25;letter-spacing:-.025em}
+.steps article,.feature-grid article,.trust-grid p{border-radius:12px;box-shadow:none}
+.join{background:var(--bg)}
+.join-card{display:block;background:#fff;color:var(--ink);padding:32px;border-radius:12px;border:1px solid var(--line)}
+.join-card p{color:var(--muted);max-width:75ch}
+.button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+footer a{min-height:44px;display:inline-flex;align-items:center}
+.reading-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);background:#fff}
+.reading-header a{min-height:44px;display:inline-flex;align-items:center;color:var(--accent)}
+.reading-page .section{max-width:800px;margin:auto;padding:32px 24px 64px}
+.reading-page h1{font-size:2rem;line-height:1.3}
+.reading-page p{line-height:1.75;margin:20px 0}
+@media(max-width:560px){.hero{padding:16px 20px 32px}.nav{margin-bottom:24px;gap:8px}.hero-grid{gap:24px}.section{padding:32px 20px}.join-card{padding:24px}.passport-card{padding:20px}h1{font-size:2rem}.reading-header{padding:12px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
