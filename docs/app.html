@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#071a36">
+  <meta name="theme-color" content="#17695c">
   <meta name="description" content="Korea Employment Passport — panduan resmi G-to-G Korea/EPS tanpa calo.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -11,10 +11,12 @@
   <title>Korea Employment Passport</title>
 </head>
 <body>
+  <a class="skip-link" href="#nextAction">Langsung ke langkah sekarang</a>
   <header class="topbar">
     <div>
       <strong>Korea Employment Passport</strong>
       <small>Indonesia → E-9 → Manufaktur</small>
+      <span class="service-identity">Layanan independen · bukan pemerintah</span>
     </div>
     <button id="installBtn" class="ghost" hidden>Pasang</button>
   </header>
@@ -26,10 +28,7 @@
         <h1 id="routeTitle">Indonesia → Korea</h1>
         <p id="routeMeta">Memuat jalur resmi yang telah diverifikasi…</p>
       </div>
-      <div class="meter">
-        <div><span id="progressBar"></span></div>
-        <strong id="progressText">0 / 0</strong>
-      </div>
+
     </section>
 
     <section id="routeLoadRecovery" class="route-load-recovery" role="alert" aria-live="assertive" hidden>
@@ -46,7 +45,7 @@
     <section id="quickStart" class="quick-start" hidden>
       <span class="eyebrow dark">LANGKAH 1 · TENTUKAN POSISI ANDA</span>
       <h2>Anda sedang di tahap mana?</h2>
-      <p>Pilih satu kondisi untuk melihat langkah berikutnya, dokumen yang dibutuhkan, dan rujukan resmi. Belum yakin? Mulai dari awal atau pilih tahap yang lebih tepat di bawah.</p>
+      <p>Pilih kondisi Anda. Kami akan menunjukkan langkah berikutnya dan rujukan resminya.</p>
       <div class="quick-choice-grid" aria-label="Tahap awal EPS">
         <button type="button" class="quick-choice" data-quick-stage="eligibility"><strong>Belum mendaftar resmi</strong><small>Baru mulai / cek syarat</small></button>
         <button type="button" class="quick-choice" data-quick-stage="exam_fee"><strong>Baru selesai daftar online</strong><small>Belum ujian EPS-TOPIK</small></button>
@@ -71,29 +70,6 @@
       <button id="startFromBeginningBtn" class="quick-start-link" type="button">Mulai benar-benar dari awal</button>
     </section>
 
-    <section class="how-to-use" aria-label="Cara pakai">
-      <strong>Hanya 3 langkah untuk memulai</strong>
-      <span><b>1</b> Ikuti “Langkah sekarang”</span>
-      <span><b>2</b> Kalau ragu sekecil apa pun, tanya</span>
-      <span><b>3</b> Selesai → tekan lanjut</span>
-    </section>
-
-    <details class="trust-panel">
-      <summary>Pengaturan dan backup progres (opsional)</summary>
-
-      <div id="bqcStatus" class="bqc-status" hidden></div>
-      <div class="progress-backup">
-        <strong>Simpan progres Anda</strong>
-        <p>Opsional. Backup hanya menyimpan posisi tahap, checklist dokumen, pilihan pengumuman, dan posisi panduan formulir. Teks SLC, data gaji, pesan, dan data sensitif tidak ikut.</p>
-        <div class="progress-backup-actions">
-          <button id="backupProgressBtn" type="button" class="secondary">Simpan backup</button>
-          <button id="restoreProgressBtn" type="button" class="secondary">Buka backup</button>
-          <input id="restoreProgressFile" type="file" accept="application/json,.json" hidden>
-        </div>
-        <div id="backupProgressResult" class="result" hidden></div>
-      </div>
-    </details>
-
     <section class="flow-dashboard" aria-label="Proses resmi">
       <aside class="phase-panel">
         <div class="phase-panel-head">
@@ -112,8 +88,8 @@
           <p>Contoh: “rekening siapa?”, “pilih pribadi atau perusahaan?”, “alamat mana yang ditulis?”, “PDF atau JPG?”</p>
           <div id="quickQuestionChips" class="quick-question-chips" hidden></div>
           <div class="micro-help-row">
-            <input id="brokerLikeQuestion" placeholder="Ketik pertanyaan kecil yang membuat ragu">
-            <button id="brokerLikeQuestionBtn" class="primary" type="button">Jawab pasti</button>
+            <input id="brokerLikeQuestion" aria-label="Pertanyaan tentang tahap EPS Anda" placeholder="Ketik pertanyaan kecil yang membuat ragu">
+            <button id="brokerLikeQuestionBtn" class="primary" type="button">Cari panduan resmi</button>
           </div>
           <div id="brokerLikeQuestionResult" class="result" hidden></div>
         </section>
@@ -152,6 +128,35 @@
         </div>
       </details>
     </section>
+
+    <section class="how-to-use" aria-label="Cara pakai">
+      <strong>Hanya 3 langkah untuk memulai</strong>
+      <span><b>1</b> Ikuti “Langkah sekarang”</span>
+      <span><b>2</b> Kalau ragu sekecil apa pun, tanya</span>
+      <span><b>3</b> Selesai → tekan lanjut</span>
+    </section>
+
+    <details class="trust-panel">
+      <summary>Pengaturan dan backup progres (opsional)</summary>
+
+      <div class="personal-progress"><strong>Catatan progres di perangkat ini</strong>
+      <div class="meter">
+        <div><span id="progressBar"></span></div>
+        <strong id="progressText">0 / 0</strong>
+      </div>
+      <small>Berdasarkan pilihan Anda, bukan konfirmasi status resmi.</small></div>
+      <div id="bqcStatus" class="bqc-status" hidden></div>
+      <div class="progress-backup">
+        <strong>Simpan progres Anda</strong>
+        <p>Opsional. Backup hanya menyimpan posisi tahap, checklist dokumen, pilihan pengumuman, dan posisi panduan formulir. Teks SLC, data gaji, pesan, dan data sensitif tidak ikut.</p>
+        <div class="progress-backup-actions">
+          <button id="backupProgressBtn" type="button" class="secondary">Simpan backup</button>
+          <button id="restoreProgressBtn" type="button" class="secondary">Buka backup</button>
+          <input id="restoreProgressFile" type="file" accept="application/json,.json" hidden>
+        </div>
+        <div id="backupProgressResult" class="result" hidden></div>
+      </div>
+    </details>
 
     <section id="eligibility" class="view">
       <div class="section-head">

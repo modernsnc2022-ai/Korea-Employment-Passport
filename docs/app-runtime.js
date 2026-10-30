@@ -1343,6 +1343,13 @@ function renderNextAction(){
     renderContextTools(null);
   }
 
+  if(next){
+    const position=document.createElement('p');
+    position.className='current-stage-note';
+    position.textContent='Tahap pilihan Anda · '+(route.stages.indexOf(next)+1)+' dari '+route.stages.length+' · bukan status resmi';
+    box.prepend(position);
+  }
+
   box.querySelector('[data-next-scope]')?.addEventListener('change',e=>{
     const value=e.currentTarget.value;
     if(!value)return;
