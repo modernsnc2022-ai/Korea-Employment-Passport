@@ -30,6 +30,7 @@ python3 -m compileall -q scripts
 checks=(
   "python3 scripts/test_source_normalization.py"
   "python3 scripts/test_source_review_status.py"
+  "python3 scripts/test_release_copy_contract.py"
   "python3 scripts/check_webapp_contract.py"
   "python3 scripts/check_country_pack_contract.py"
   "python3 scripts/check_hrd_examnot_linkage.py"

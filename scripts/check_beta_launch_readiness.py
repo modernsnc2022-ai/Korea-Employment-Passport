@@ -5,6 +5,7 @@ import argparse
 import json
 from datetime import datetime
 from pathlib import Path
+from release_copy_contract import validate_release_gate_copy
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -440,10 +441,11 @@ require(beta_program.get("application", {}).get("intakeStatus") == "open",
         "tester-interest application intake must be OPEN")
 require('id="releaseGateNote"' in beta_page,
         "beta page must explain the actual release gates")
-require("satu detail exact lamaran online Manufaktur yang masih HOLD" in beta_page
-        and "Empat pertanyaan lain" in beta_page
-        and "tidak otomatis melarang dimulainya beta" in beta_page,
-        "beta page must distinguish one exact HOLD, four safe baselines and beta release blockers")
+# Validate the actual public release requirements. Internal one-HOLD/four-baseline
+# data invariants are independently enforced above; they must not require public
+# copy implying that pending evidence grants beta access.
+for error in validate_release_gate_copy(beta_page):
+    require(False, error)
 worker_panel = beta_program.get("retrospectivePanel", {})
 require(worker_panel.get("slots") == 20, "E-9 retrospective validation panel must preserve 20 slots")
 require(worker_panel.get("separateFromPublicBeta") is True,
