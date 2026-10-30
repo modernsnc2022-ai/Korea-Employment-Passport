@@ -23,6 +23,12 @@
 
   <main class="shell">
     <section id="offlineStatus" class="offline-status" role="status" aria-live="polite" hidden><strong>Anda sedang offline.</strong> Panduan tersimpan dapat kedaluwarsa. Sambungkan internet dan periksa sumber resmi sebelum mengirim dokumen atau membayar.</section>
+    <section id="storageStatus" class="storage-status" role="alert" hidden>
+      <strong>Penyimpanan perangkat tidak tersedia</strong>
+      <p id="storageFailureMessage"></p>
+      <button id="backupSessionProgressBtn" type="button" class="secondary">Buat backup progres</button>
+      <p class="muted">Backup hanya mencakup tahap, checklist, dan posisi panduan. Isi kontrak, gaji, pesan, dan catatan pribadi tidak ikut. Salin catatan penting secara aman sebelum menutup tab.</p>
+    </section>
     <section class="summary">
       <div>
         <span class="eyebrow">PANDUAN MANDIRI · JALUR RESMI EPS</span>

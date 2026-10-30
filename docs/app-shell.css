@@ -399,3 +399,6 @@ li{overflow-wrap:anywhere}
  background-size:.3em .3em;background-repeat:no-repeat;
 }
 @media(forced-colors:active){.view select{appearance:auto;background-image:none}}
+
+.storage-status{margin-bottom:16px;padding:16px;border:1px solid #b58117;border-left:4px solid #b58117;border-radius:8px;background:var(--warn)}
+.storage-status p{margin:8px 0}.storage-status .muted{font-size:.85rem}.storage-status button{max-width:100%}
