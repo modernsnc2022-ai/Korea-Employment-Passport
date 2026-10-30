@@ -1,32 +1,28 @@
 const {test,expect}=require('@playwright/test');
-
+const views=['eligibility','documents','fees','gaps','contract','workplace','payroll','companyHub'];
 for(const width of [390,1280]){
- test(`all visible app views and dialog have no automated accessibility violations at ${width}px`,async({page})=>{
-  await page.setViewportSize({width,height:844});
-  await page.goto('/app.html');await page.locator('#quickStart').waitFor();
-  async function audit(name){
+ for(const state of ['entry','home',...views,'stage-dialog','documents-expanded','wizard-clean-source-fixture']){
+  test(`automated accessibility: ${state} at ${width}px`,async({page})=>{
+   await page.setViewportSize({width,height:844});
+   await page.goto('/app.html');await page.locator('#quickStart').waitFor();
+   if(state!=='entry')await page.locator('[data-quick-stage="exam_fee"]').click();
+   if(views.includes(state))await page.evaluate(view=>switchView(view,false),state);
+   if(state==='stage-dialog')await page.evaluate(()=>openStage(route.stages.find(s=>s.id==='predeparture_training')));
+   if(state==='documents-expanded')await page.evaluate(()=>{switchView('documents',false);document.querySelector('.consistency-check').open=true;});
+   if(state==='wizard-clean-source-fixture'){
+    await page.evaluate(()=>{sourceReviewStatus={state:'clean',reviewRequiredUrls:[],fetchFailureUrls:[]};applyCurrentStage('visa_docs',true);switchView('documents',false);});
+    await page.locator('#docScopeSelect').selectOption('visa_sep08_2026');
+    await expect(page.locator('#formWizardSection')).toBeVisible();
+    await page.locator('#formFieldCheck').evaluate(el=>el.open=true);
+   }
    await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
    const violations=await page.evaluate(async()=>{
     const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa','best-practice']}});
     return r.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)}));
    });
-   expect(violations,`${name}: ${JSON.stringify(violations)}`).toEqual([]);
-  }
-  await audit('entry');await page.locator('[data-quick-stage="exam_fee"]').click();await audit('home');
-  for(const view of ['eligibility','documents','fees','gaps','contract','workplace','payroll','companyHub']){
-   await page.evaluate(view=>switchView(view,false),view);await audit(view);
-  }
-  await page.evaluate(()=>{switchView('journey',false);openStage(route.stages.find(s=>s.id==='predeparture_training'));});
-  await audit('stage-dialog');
-  await page.locator('#stageDialog .close').click();await page.waitForFunction(()=>!history.state?.kepStageDialog);
-  await page.evaluate(()=>{switchView('documents',false);document.querySelector('.consistency-check').open=true;});
-  await audit('documents-expanded');
-  await page.evaluate(()=>{sourceReviewStatus={state:'clean',reviewRequiredUrls:[],fetchFailureUrls:[]};applyCurrentStage('visa_docs',true);switchView('documents',false);});
-  await page.locator('#docScopeSelect').selectOption('visa_sep08_2026');
-  await expect(page.locator('#formWizardSection')).toBeVisible();
-  await page.locator('#formFieldCheck').evaluate(el=>el.open=true);
-  await audit('wizard-clean-source-fixture');
- });
+   expect(violations,`${state}: ${JSON.stringify(violations)}`).toEqual([]);
+  });
+ }
 }
 
 test('missing eligibility answers focus the first named field and clear stale feedback on edit',async({page})=>{

@@ -1,5 +1,7 @@
 # KEP 상용 서비스 UI/UX 개편 — 디자인 기준·진행 현황·작업 인계서
 
+> 최신 후속 기록: [사용자 피드백 전 개선·검증](qa/KEP_PRE_FEEDBACK_REVIEW_2026-10-30.md). 아래 현황은 최초 인계 시점의 기록이며 최신 결과는 후속 문서를 우선한다.
+
 **기준일:** 2026-10-30 (KST)  
 **프로젝트:** Korea Employment Passport (KEP), 인도네시아 G-to-G/EPS 취업 준비 및 한국 입국 후 지원  
 **저장소:** https://github.com/modernsnc2022-ai/Korea-Employment-Passport  

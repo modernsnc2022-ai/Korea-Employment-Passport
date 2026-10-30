@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Check JavaScript syntax",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "name": "Validate JSON data",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "name": "Check Python monitor scripts",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "name": "Self-test official-source normalization",
+    "exitCode": 0,
+    "output": "SOURCE_NORMALIZATION_SELFTEST_PASS\n"
+  },
+  {
+    "name": "Self-test source-review pending baseline status",
+    "exitCode": 0,
+    "output": "SOURCE_REVIEW_STATUS_SELFTEST_PASS\n"
+  },
+  {
+    "name": "Check webapp DOM and route contract",
+    "exitCode": 0,
+    "output": "WEBAPP_CONTRACT_PASS html_ids=226 views=9 stages=27 document_packs=13 exact_answers=308 document_examples=10 broker_questions=256 form_wizards=8 form_fields=113 form_validators=113 official_help_channels=5 source_review_state=review_required source_review_checked=83/84 tls_pins=4 js_literal_refs=182\n"
+  },
+  {
+    "name": "Check multi-country Country Pack contract",
+    "exitCode": 0,
+    "output": "COUNTRY_PACK_CONTRACT_PASS routes=16 stages=27 nepal=research_hold vietnam=research_hold philippines=research_hold thailand=research_hold bangladesh=research_hold srilanka=research_hold laos=research_hold uzbekistan=research_hold mongolia=research_hold china=research_hold cambodia=research_hold timorleste=research_hold pakistan=research_hold tajikistan=research_hold kyrgyzstan=research_hold\n"
+  },
+  {
+    "name": "Check HRD examNot cycle linkage",
+    "exitCode": 0,
+    "output": "HRD_EXAMNOT_LINKAGE_PASS countries=7\n"
+  },
+  {
+    "name": "Check Myanmar Manufacturing promotion gate",
+    "exitCode": 0,
+    "output": "MYANMAR_PROMOTION_GATE_PASS allowed=false qualifyingArtifacts=0 monitoredSources=5 unbaselined=0\n"
+  },
+  {
+    "name": "Check next-review source monitor coverage",
+    "exitCode": 0,
+    "output": "NEXT_REVIEW_MONITOR_COVERAGE_PASS countries=18 monitoredSources=84 nextReviewUrls=13 pendingBaselines=0\n"
+  },
+  {
+    "name": "Check zero-broker scope coverage",
+    "exitCode": 0,
+    "output": "BQC_SCOPE_SCENARIOS=38\nBQC_SCOPE_PASS all supported selected-call scenarios have zero unresolved high-severity blockers\n"
+  },
+  {
+    "name": "Check beta tracker privacy and 30+20 cohort slots",
+    "exitCode": 0,
+    "output": "BETA_TRACKER_PASS rows=50 active_applicants=30 target_active=30 e9_workers=20 assigned_public_beta=0 current_cycle_public=0 assigned_worker_validators=0 activated_public_beta=0 free_months=6\n"
+  },
+  {
+    "name": "Check beta prelaunch readiness",
+    "exitCode": 0,
+    "output": "BETA_PRELAUNCH_STATIC_PASS stages=27 bqc=256 job_holds=1 sources=83/84 forms=8 fields=113 workplace_public=5 workplace_worker=3 public_beta_target=30 overflow_allowed=true free_months=6\nPRODUCT_CI_SOURCE_HOLD state=review_required launch gate remains blocked\nBETA_ACCESS_OPEN_MANUAL_GATES_REMAIN: intake is open; final Manufacturing notice re-check and explicit access release decision remain\nROUTE_PASS_EVIDENCE_REMAINS: at least 30 active applicants, 20 E-9 worker validators, late-stage coverage, every Broker Gap resolved or official/licensed-only\n"
+  },
+  {
+    "name": "Self-test beta progress evidence aggregation",
+    "exitCode": 0,
+    "output": "BETA_PROGRESS_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Report privacy-safe beta progress",
+    "exitCode": 0,
+    "output": "# Beta progress \u2014 privacy-safe aggregate\n\nThis report contains counts only. It must not include participant names, contact details, identity numbers, addresses, or free-text notes.\n\n## Cohort\n- Active-applicant tracker rows: 30 (validation target: at least 30)\n- E-9 worker validation slots: 20/20\n- Cohort structure ready: YES\n\n## Public beta funnel\n- Approved tester applications recorded: 0 (validation target: at least 30)\n- Eligibility accepted: 0 (target: at least 30)\n- Beta accounts activated: 0 (target: at least 30)\n- Feedback started: 0\n- Feedback completed: 0 (target: at least 30)\n- Active applicants from 2026 route cycle: 0\n- Active applicants from prior route cycles: 0\n- Active applicants with unknown route cycle: 0\n- Prior-cycle/unknown active-applicant feedback is product evidence and gap discovery, but not current-cycle route-rule PASS evidence.\n\n## Retrospective validation\n- E-9 worker validators enrolled: 0/20\n- E-9 worker interviews completed: 0/20\n- Experience-year context captured: 0/20\n- Completed interviews from 2026 experience: 0\n- Completed interviews from prior-cycle experience: 0\n- Completed interviews with unknown experience year: 0\n- Prior-cycle/unknown worker interviews are retrospective gap evidence only; they are not 2026 route-rule PASS evidence.\n- Privacy-reviewed workplace evidence published: 0\n- Public WPE publication depends on separate contributor consent and is reported here, but it is not a route-PASS prerequisite.\n\n## Broker replacement evidence\n- Broker-gap assessments pending: 0\n- Participants reporting no broker gap: 0\n- Broker gaps open: 0\n- Current-cycle broker-gap assessments pending: 0\n- Current-cycle broker gaps open: 0\n- Broker gaps resolved: 0\n- Broker steps confirmed official/licensed-only: 0\n- Retests passed: 0\n- Current-cycle evidence rows: 0\n- Zero-broker stage PASS coverage: 0/27\n- Current-cycle FAIL stages: none\n- Stages with no current-cycle PASS/FAIL evidence yet: eligibility, registration, exam_fee, biometric, document_verify, exam_card, eps_topik, skill_competency, final_selection, psychology_pre_job, mcu1, job_application, roster, employer_selection, slc, post_slc_requirements, visa_docs, predeparture_training, mcu3_departure, departure, korea_entry_training, employer_handover, residence_registration, eps_insurance_check, first_payroll_check, labor_support_ready, employment_maintenance\n- Stage-level zero-broker evidence ready: NO\n- Structured official-evidence HOLDs blocking final route PASS: job_docs\n\n## Required late-stage coverage among active applicants\n- Roster / employer selection: 0\n- SLC / post-SLC: 0\n- Visa / OPP / final medical: 0\n- Departure: 0\n- Late-stage coverage ready: NO\n\n## Stage distribution\n- Active applicants (all cycles): no stages recorded\n- Active applicants (2026 cycle only): no stages recorded\n- E-9 workers: no stages recorded\n\n## Official-source readiness\n- Source review state: review_required\n- Sources checked: 83/84\n- Official-source readiness for final route PASS: NO\n\n## Evidence gate\n- Real-user evidence ready for route PASS review: NO\n- Beta access OPEN may proceed with explicit official-evidence HOLDs, but final Broker Replacement Rate 100% PASS cannot.\n- This aggregate does not itself declare Broker Replacement Rate PASS; route PASS still requires reviewing the actual sanitized beta evidence and confirming every necessary private-broker task is replaced.\n\nBETA_PROGRESS_PASS privacy_safe_counts_only=true\n"
+  },
+  {
+    "name": "Self-test beta interest parser",
+    "exitCode": 0,
+    "output": "BETA_INTEREST_PARSE_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test beta slot assignment helper",
+    "exitCode": 0,
+    "output": "BETA_SLOT_ASSIGNMENT_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test public beta feedback recorder",
+    "exitCode": 0,
+    "output": "BETA_FEEDBACK_RECORD_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test follow-up zero-broker evidence recorder",
+    "exitCode": 0,
+    "output": "ZERO_BROKER_EVIDENCE_RECORD_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test Manufacturing launch-check recorder",
+    "exitCode": 0,
+    "output": "MANUFACTURING_LAUNCH_CHECK_RECORD_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test beta release-state helper",
+    "exitCode": 0,
+    "output": "BETA_RELEASE_STATE_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test E-9 worker panel release helper",
+    "exitCode": 0,
+    "output": "WORKER_PANEL_RELEASE_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test E-9 worker validator assignment",
+    "exitCode": 0,
+    "output": "WORKER_VALIDATOR_ASSIGNMENT_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test E-9 worker interest parser",
+    "exitCode": 0,
+    "output": "WORKER_INTEREST_PARSE_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test outreach send guard",
+    "exitCode": 0,
+    "output": "OUTREACH_SEND_GUARD_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Audit outreach ledger against pre-send guard",
+    "exitCode": 0,
+    "output": "OUTREACH_LEDGER_AUDIT_PASS\n"
+  },
+  {
+    "name": "Self-test worker interview recorder",
+    "exitCode": 0,
+    "output": "WORKER_INTERVIEW_RECORD_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Self-test worker evidence publisher",
+    "exitCode": 0,
+    "output": "WORKER_EVIDENCE_PUBLISH_SELF_TEST_PASS\n"
+  },
+  {
+    "name": "Validate worker evidence privacy",
+    "exitCode": 0,
+    "output": "WORKPLACE_WORKER_EVIDENCE_PASS records=0 privacy_safe=true\n"
+  },
+  {
+    "name": "Check required public files",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "name": "python scripts/test_release_copy_contract.py",
+    "exitCode": 0,
+    "output": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.052s\n\nOK\n"
+  },
+  {
+    "name": "python scripts/check_html_structure.py",
+    "exitCode": 0,
+    "output": "HTML_STRUCTURE_PASS files=23\n"
+  },
+  {
+    "name": "python scripts/check_webapp_contract.py",
+    "exitCode": 0,
+    "output": "WEBAPP_CONTRACT_PASS html_ids=226 views=9 stages=27 document_packs=13 exact_answers=308 document_examples=10 broker_questions=256 form_wizards=8 form_fields=113 form_validators=113 official_help_channels=5 source_review_state=review_required source_review_checked=83/84 tls_pins=4 js_literal_refs=182\n"
+  },
+  {
+    "name": "python scripts/check_beta_launch_readiness.py",
+    "exitCode": 1,
+    "output": "BETA_PRELAUNCH_STATIC_FAIL\n- official-source monitor state is 'review_required', expected 'clean'\n- official-source monitor must have checked every configured source\n- official-source reviewRequiredUrls is not empty\n- official-source fetchFailureUrls is not empty\n"
+  }
+]
