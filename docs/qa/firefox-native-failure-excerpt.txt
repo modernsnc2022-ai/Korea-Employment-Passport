@@ -1,0 +1,24 @@
+Cloud Firefox 141.0 empty-page probe; not a KEP UI result.
+2026-10-30T12:35:16.547Z pw:browser <launching> /root/.cache/ms-playwright/firefox-1490/firefox/firefox -no-remote -headless -profile /tmp/playwright_firefoxdev_profile-7ok7DG -juggler-pipe -silent
+2026-10-30T12:35:16.552Z pw:browser <launched> pid=18
+2026-10-30T12:35:16.823Z pw:browser [pid=18][out] Juggler listening to the pipe
+2026-10-30T12:35:16.934Z pw:browser [pid=18][err] [91] Sandbox: writing /proc/self/uid_map: EPERM
+launched
+context
+2026-10-30T12:35:17.029Z pw:browser [pid=18][err] [93] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.033Z pw:browser [pid=18][err] [99] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.048Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 93 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.135Z pw:browser [pid=18][err] [104] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.152Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 104 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.172Z pw:browser [pid=18][err] [112] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.197Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 112 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.203Z pw:browser [pid=18][err] [119] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.281Z pw:browser [pid=18][err] [126] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.388Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 119 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.400Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 126 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.440Z pw:browser [pid=18][err] [134] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.611Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 134 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.634Z pw:browser [pid=18][err] [144] Sandbox: writing /proc/self/uid_map: EPERM
+2026-10-30T12:35:17.770Z pw:browser [pid=18][err] [Parent 18, IPC I/O Parent] WARNING: process 144 exited on signal 11: file /home/pwuser/firefox/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:134
+2026-10-30T12:35:17.932Z pw:browser [pid=18][err] [156] Sandbox: writing /proc/self/uid_map: EPERM
+browserContext.newPage: Target page, context or browser has been closed

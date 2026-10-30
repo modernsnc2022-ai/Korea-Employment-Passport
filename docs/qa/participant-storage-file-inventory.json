@@ -1,0 +1,146 @@
+{
+  "baselineLocal": "a5019da30d8ea4b22f600bea6d034c55f89a8da7",
+  "baselineRemote": "72fd80ec6d05c4841714c0435c118cfd14bb62e8",
+  "participantLocal": "4db0cceb24d107ae31823b52537f4f6cd3451f2e",
+  "participantRemote": "4627d2de2efe28fd7ac81417c1d82c7b4bee661f",
+  "storageTestedLocal": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+  "storageRemote": "bdca33cff1de19acaf6db5fcaeeb0e020294d513",
+  "inventoryExcludesItself": true,
+  "files": [
+    {
+      "path": "docs/KEP_UI_UX_REDESIGN_HANDOFF_2026-10-30.md",
+      "bytes": 13482,
+      "sha256": "f3431932e612acfa3a311de61dc8b8b801dc67d0f7faa689174c764da9669a0f"
+    },
+    {
+      "path": "docs/app-runtime.js",
+      "bytes": 195177,
+      "sha256": "5d1216f02a6c757ef6fdff86e388237127a892c030c4df40967ce6ca6b320fe0"
+    },
+    {
+      "path": "docs/app-shell.css",
+      "bytes": 54314,
+      "sha256": "b4d13889db0b106cc7ce9764baae79bd8fabc43832d5899223266747d4951fb7"
+    },
+    {
+      "path": "docs/app.html",
+      "bytes": 42681,
+      "sha256": "e11e4753f4331bbf94e5e4a11736676563bede93d665f69f348d3ea4ecef92ee"
+    },
+    {
+      "path": "docs/qa/PARTICIPANT_STORAGE_RECOVERY_REVIEW_2026-10-30.md",
+      "bytes": 10039,
+      "sha256": "8df96404a792db3908b4ee559326569c0b84c3fe2503f466791db4551dc7b20b"
+    },
+    {
+      "path": "docs/qa/firefox-native-failure-excerpt.txt",
+      "bytes": 2964,
+      "sha256": "5e30ecf252c2f91286b48ea0939f04ec608c8a88dcfd7d455a2420152a4933c8"
+    },
+    {
+      "path": "docs/qa/storage-chromium-results.json",
+      "bytes": 32427,
+      "sha256": "d24dbb1ebe21f4f606de4f6aff98486d23bde6314d701686eba074c1795683f2"
+    },
+    {
+      "path": "docs/qa/storage-normal-accessibility-audit.json",
+      "bytes": 12391,
+      "sha256": "968240111570ebe11e1bf5d05574a90defe7d2c83e47390aea30f89df36d53c1"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-blocked-read-390.jpg",
+      "bytes": 67581,
+      "sha256": "50ba4e3bf102c4f4aa1a938200ce0007694e65244e285c1c89494cbbd7faf3df"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-deletion-blocked-390.jpg",
+      "bytes": 68326,
+      "sha256": "19659514ed2066e2ed1999b397a065bd4fa65a1b1eb5e3629805af8706f0f737"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-participant-editor-320.jpg",
+      "bytes": 53850,
+      "sha256": "35903221287b030075d57b12cbe87ae68830487f521fc02af88ddac13c418e87"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-quota-320.jpg",
+      "bytes": 59753,
+      "sha256": "d21d2558ab2d3d0a10a5dde0d8ffbd5a0941442ec6ea2b0ce632d04ef3d13d22"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-quota-390.jpg",
+      "bytes": 67581,
+      "sha256": "50ba4e3bf102c4f4aa1a938200ce0007694e65244e285c1c89494cbbd7faf3df"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/chromium-quota-text200-320.jpg",
+      "bytes": 47701,
+      "sha256": "bcb00a85fe54a2ff1fac77f8df4f8f23893b1212ea68de2381234430e190ec63"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-blocked-read-390.jpg",
+      "bytes": 81383,
+      "sha256": "3cdc4298d66c45b2694868fc58e565d23d754084b6392716e5baec1bc1f9d89d"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-deletion-blocked-390.jpg",
+      "bytes": 81319,
+      "sha256": "b3034ca0d2d345b86d7600bdd1f441ab5dcc4effc8fa0c8b5d33c4879aa3fa2a"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-participant-editor-320.jpg",
+      "bytes": 59190,
+      "sha256": "ed75245ae30488986dfe749641ab430bd736bbce40deb1affb2350e6f436b3a0"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-quota-320.jpg",
+      "bytes": 73087,
+      "sha256": "1c784029129a520a7aaa1b77b15830bcfae1886faccc595b7b58d29b7ead5036"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-quota-390.jpg",
+      "bytes": 81383,
+      "sha256": "3cdc4298d66c45b2694868fc58e565d23d754084b6392716e5baec1bc1f9d89d"
+    },
+    {
+      "path": "docs/qa/storage-recovery-screenshots/webkit-quota-text200-320.jpg",
+      "bytes": 57121,
+      "sha256": "bfe4f828a517e014108b2267ce4b70369292611b88b27359a77a8b3476d666ca"
+    },
+    {
+      "path": "docs/qa/storage-recovery-visual-matrix.json",
+      "bytes": 2474,
+      "sha256": "e6c5115262577b59b06f833fd37d2cde3da6e156de4b2163109bc82d1ccf13a4"
+    },
+    {
+      "path": "docs/qa/storage-run-history.json",
+      "bytes": 9806,
+      "sha256": "9e2c2bc9bb6e0eed9a419649317eec3bd6f884476648b36ad526ed2eafacfbf2"
+    },
+    {
+      "path": "docs/qa/storage-static-results.json",
+      "bytes": 10422,
+      "sha256": "87f12bde6bc7dc7b0a774af03f921bb25335310732156000a53c86ed5d6d1f30"
+    },
+    {
+      "path": "docs/qa/storage-webkit-focused-results.json",
+      "bytes": 3856,
+      "sha256": "4a8f422a1c984983ec85d132421b4292e643f1538113b2b8e57704ade48181da"
+    },
+    {
+      "path": "scripts/capture_storage_recovery.js",
+      "bytes": 4239,
+      "sha256": "57fc3d884bfd6e3a9537bd2a4d7f718bb54493c535374e2e9ec252e6f79e0b20"
+    },
+    {
+      "path": "tests/participant-switch.spec.js",
+      "bytes": 5170,
+      "sha256": "449a718801cfff8f26de01197a175aee4433644c8b147eb729a19cf1192443a4"
+    },
+    {
+      "path": "tests/storage-recovery.spec.js",
+      "bytes": 8238,
+      "sha256": "7fa5a2b04359e36b0795730e1680542f79780adaf9d2f2df57bd9a3b5a707956"
+    }
+  ]
+}

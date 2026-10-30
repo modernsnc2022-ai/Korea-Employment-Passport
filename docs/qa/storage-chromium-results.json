@@ -1,0 +1,1129 @@
+{
+  "metadata": {
+    "browserEngine": "chromium",
+    "head": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+    "startedAt": "20261030T234933820172Z",
+    "command": [
+      "npx",
+      "playwright",
+      "test",
+      "--reporter=line,json",
+      "--output",
+      "/workspace/scratch/d4b77a1f4461/qa/storage-history-final-chromium/20261030T234933820172Z/artifacts",
+      "--retries=0",
+      "--workers=1"
+    ],
+    "runDirectory": "/workspace/scratch/d4b77a1f4461/qa/storage-history-final-chromium/20261030T234933820172Z",
+    "hostLibraryCacheValidationSkipped": false,
+    "runtimeLibraryPathOverride": false,
+    "workingTreeStatus": [
+      "?? node_modules"
+    ],
+    "trackedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-30T23:49:34.735Z",
+      "duration": 114336.852,
+      "expected": 156,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "scope": "full UI",
+  "physicalDeviceTesting": false,
+  "cases": [
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: entry at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: home at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: eligibility at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: documents at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: fees at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: gaps at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: contract at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: workplace at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: payroll at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: companyHub at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: stage-dialog at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: documents-expanded at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: wizard-clean-source-fixture at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: entry at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: home at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: eligibility at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: documents at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: fees at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: gaps at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: contract at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: workplace at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: payroll at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: companyHub at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: stage-dialog at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: documents-expanded at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "automated accessibility: wizard-clean-source-fixture at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "accessibility.spec.js",
+      "title": "missing eligibility answers focus the first named field and clear stale feedback on edit",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 320px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 360px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 375px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 390px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 430px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 768px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "action-home.spec.js",
+      "title": "action-first home at 1280px preserves the primary journey",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "beta-intake.spec.js",
+      "title": "beta applicant intake keeps email fallback while direct endpoint is unconfigured",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "beta-intake.spec.js",
+      "title": "beta applicant intake can submit directly without opening an email client",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "contract-source-guards.spec.js",
+      "title": "unconfirmed sources block eligibility and wage claims while keeping arithmetic available",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "contract-source-guards.spec.js",
+      "title": "a clean source fixture preserves the existing threshold comparison",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "contract-source-guards.spec.js",
+      "title": "contract reset removes only the active beta participant data",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "contract-source-guards.spec.js",
+      "title": "disconnect invalidates an old payment result without clearing entered values",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "contract-source-guards.spec.js",
+      "title": "changing the selected stage hides the old answer without deleting the question",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 320px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 360px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 375px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 430px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 768px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "modal header and action stay visible while reading at 1280px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "browser Back closes the guide and leaves the current stage intact",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "Escape and keyboard focus stay within native dialog behavior",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "dialog-ux.spec.js",
+      "title": "short viewport and 200% text keep a working close button and contained content",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "document-controls.spec.js",
+      "title": "320px document controls remain usable and validate a local file without upload",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "final-screen-readability.spec.js",
+      "title": "enlarged mobile navigation keeps complete words and clears the final action",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "final-screen-readability.spec.js",
+      "title": "incomplete contract fields are grouped while source warnings stay visible",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "guided-onboarding.spec.js",
+      "title": "stage chooser starts with three clear options and discloses remaining four",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "guided-onboarding.spec.js",
+      "title": "mobile guided entry does not overflow width",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "install-control.spec.js",
+      "title": "available installation control remains visible and named on the light header",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "mobile-viewport.spec.js",
+      "title": "focused payment input and its action remain usable in a reduced 320px viewport",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "mobile-viewport.spec.js",
+      "title": "open stage guide adapts to a reduced 320px viewport",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "mobile-viewport.spec.js",
+      "title": "focused payment input and its action remain usable in a reduced 390px viewport",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "mobile-viewport.spec.js",
+      "title": "open stage guide adapts to a reduced 390px viewport",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "mobile-viewport.spec.js",
+      "title": "Forward reopens the same guide after Back without marking a stage complete",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "native-select-reflow.spec.js",
+      "title": "long selections remain changeable without expanding enlarged support and company forms",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "offline-cache.spec.js",
+      "title": "real service worker preserves other apps, caches current styling and discloses offline guidance",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "participant switch refreshes private fields, current stage and clears temporary content",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "clearing a participant loads unscoped data and cannot be undone by the old URL",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "saving the same participant keeps their temporary question",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "a fresh participant can keep editing their ID before declaring their own stage",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "participant-switch.spec.js",
+      "title": "Forward to an old guide keeps the currently selected participant URL and data",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "index is readable, named and contained on narrow and wide screens",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "privacy is readable, named and contained on narrow and wide screens",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "countries is readable, named and contained on narrow and wide screens",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "readiness is readable, named and contained on narrow and wide screens",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "beta is readable, named and contained on narrow and wide screens",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "public-surfaces.spec.js",
+      "title": "signup keeps the access warning before the form and technical release details after it",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "responsive-reachability.spec.js",
+      "title": "tool actions remain reachable at 320x568 with text scale 1",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "responsive-reachability.spec.js",
+      "title": "tool actions remain reachable at 390x568 with text scale 1",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "responsive-reachability.spec.js",
+      "title": "tool actions remain reachable at 320x568 with text scale 2",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "skip-navigation.spec.js",
+      "title": "keyboard skip link enters the visible first-use setup",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "skip-navigation.spec.js",
+      "title": "keyboard skip link enters the current task and the selected tool",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "skip-navigation.spec.js",
+      "title": "failed initial route load exposes a working skip link to recovery",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "source context gives the original link and dated scope without claiming live verification",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "a malformed source observation cannot certify documents or payment",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "a consistent source fixture is called recorded, never a current official confirmation",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "source-context.spec.js",
+      "title": "missing source-review feed remains explicit and fail-closed",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "all 27 stages share preparation guidance without changing recorded progress",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "stage preparation cannot leak another cohort checklist",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "stage-guidance.spec.js",
+      "title": "documents put matching notice and checklist context before optional field tools",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "quota failure retains current-tab progress and a privacy-safe downloadable backup",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "blocked storage still loads the guide and isolates current-tab participants",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "a failed contract deletion never claims that the saved record was erased",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "restoring a backup in current-tab mode does not reload away the restored progress",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "a mid-restore quota error rolls back previous device progress before using current-tab state",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "the storage warning and backup action remain accessible on a narrow mobile screen",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "storage-recovery.spec.js",
+      "title": "when device rollback is blocked the original progress remains recoverable in a backup",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "tool-navigation.spec.js",
+      "title": "tools expose their own heading and a keyboard route back to the selected task",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "tool-navigation.spec.js",
+      "title": "notice selection is above source details and reachable on the first dialog screen at 320px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "tool-navigation.spec.js",
+      "title": "notice selection is above source details and reachable on the first dialog screen at 390px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "tool-navigation.spec.js",
+      "title": "notice selection is above source details and reachable on the first dialog screen at 430px",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui-copy.spec.js",
+      "title": "Indonesian fee and authority presentation preserves original source facts and matching behavior",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "first-time flow stays simple on desktop",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mobile flow has no horizontal overflow and keeps primary controls visible",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "optional trust and backup controls stay out of the main flow",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "visa document helper shows one field at a time on mobile",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "shared Korea-side official core is visible without overriding country action",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "shared Korea-side panel stays hidden for sending-country-only stage",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "notice-specific answers stay hidden until the user selects the matching notice",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "simple UX lock: first-time user can identify now, ask, and continue without opening extra panels",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "form wizard exposes only one actionable field instruction at a time",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unknown broker-like question routes to official human help instead of guessing",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback removes sensitive-looking identifiers before email draft",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback bundle combines all gap types and redacts them in one draft",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback bundle includes anonymous progress context",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta zero-broker checkpoint tracks stage pass and fail without identity data",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "anonymous beta ID links feedback to tracker without identity data",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta invite URL immediately confirms the assigned anonymous tester and first stage",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta evidence stays isolated when a browser switches tester IDs",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "manual beta ID switch removes the previous tester evidence from view",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unexperienced beta stage never counts as zero-broker evidence",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace reality check separates public evidence from worker testimony",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "tester-interest intake is open while beta access remains on hold",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "community source can share or copy source-attributed applicant and worker invitations",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "attributed applicant campaigns go directly to the beta intake anchor",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "generic attribution stays on landing while preserving the beta link",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "worker-only recruitment sources go directly to worker interest intake",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "unknown recruitment source code falls back to website",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "public community recruitment sources are loaded from the shared source catalog",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "manufacturing job application cannot complete before sector notice",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "scout request excludes dorm residence details",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mcu1 uses its verified stage-specific document pack",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "predeparture OPP scope resolves to verified common pack",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "psychology stage uses its verified 2026 pack",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post SLC stage exposes verified psychology and MCU II checklist",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "departure scope picker includes partial verified 2026 registry",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "partial departure registry never suggests another call when date is missing",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "bare OPEN status cannot bypass explicit release approval",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta OPEN path remains functional and identity-minimal",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "progress backup preserves reviewed form fields without beta evidence",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta progress backup cannot cross anonymous tester IDs",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace worker evidence empty state is neutral and privacy safe",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "workplace worker evidence renders only summarized verified facts",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "E-9 worker validator panel can open independently without identity fields",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "review-required official source suppresses affected exact document guidance",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "overflow beta IDs above KEP-0050 remain active-applicant IDs",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "worker validator beta IDs show retrospective instructions and role",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post-entry document pack stays scoped to residence registration",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "quick milestones do not infer post-entry compliance from first payroll receipt",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "post-entry official help uses Korea foreign worker counseling",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "mid-process selector explains that prior stages are marked complete",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "retrospective worker evidence records experience year before stage validation",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "retrospective worker year keeps prior-cycle evidence out of 2026 route PASS",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "beta feedback sanitizer redacts Korean phone numbers and always warns about residual privacy risk",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "company community stays fail-closed until real member auth backend exists",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "paid operator investigation request excludes private dorm and identity data by design",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "company question reports evidence scarcity instead of inventing employer facts",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    },
+    {
+      "file": "ui.spec.js",
+      "title": "content reviewer beta IDs show reviewer mode and do not count as route PASS evidence",
+      "status": "expected",
+      "attempts": 1,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+[
+  {
+    "attempt": "participant-switch-before",
+    "head": "a5019da30d8ea4b22f600bea6d034c55f89a8da7",
+    "stats": {
+      "startTime": "2026-10-30T12:44:06.537Z",
+      "duration": 17506.271,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "failures": [
+      {
+        "file": "participant-switch.spec.js",
+        "title": "participant switch refreshes private fields, current stage and clears temporary content",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#contract_enterpriseName')\nExpected string: \u001b[32m\"Company \u001b[7mB\u001b[27m\"\u001b[39m\nReceived string: \u001b[31m\"Company \u001b[7mA\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#contract_enterpriseName')\u001b[22m\n\u001b[2m    9 \u00d7 locator resolved to <input type=\"text\" id=\"contract_enterpriseName\"/>\u001b[22m\n\u001b[2m      - unexpected value \"Company A\"\u001b[22m\n"
+        ]
+      },
+      {
+        "file": "participant-switch.spec.js",
+        "title": "clearing a participant loads unscoped data and cannot be undone by the old URL",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#contract_enterpriseName')\nExpected string: \u001b[32m\"\u001b[7mUnscoped c\u001b[27mompany\"\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mC\u001b[27mompany\u001b[7m A\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#contract_enterpriseName')\u001b[22m\n\u001b[2m    9 \u00d7 locator resolved to <input type=\"text\" id=\"contract_enterpriseName\"/>\u001b[22m\n\u001b[2m      - unexpected value \"Company A\"\u001b[22m\n"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "participant-switch-after",
+    "head": "a5019da30d8ea4b22f600bea6d034c55f89a8da7",
+    "stats": {
+      "startTime": "2026-10-30T12:46:10.337Z",
+      "duration": 6751.478,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-before",
+    "head": "a9505f12af83d71d9e1572622ee7c8982adaa0ed",
+    "stats": {
+      "startTime": "2026-10-30T12:48:28.217Z",
+      "duration": 13106.655999999999,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "failures": [
+      {
+        "file": "storage-recovery.spec.js",
+        "title": "quota failure retains current-tab progress and a privacy-safe downloadable backup",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#quickStart')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#quickStart')\u001b[22m\n\u001b[2m    9 \u00d7 locator resolved to <section id=\"quickStart\" class=\"quick-start\">\u2026</section>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n"
+        ]
+      },
+      {
+        "file": "storage-recovery.spec.js",
+        "title": "a mid-restore quota error rolls back previous device progress before using current-tab state",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#backupProgressResult')\nExpected string: \u001b[32m\"tab ini\"\u001b[39m\nReceived string: \u001b[31m\"Backup tidak dapat dipulihkan: test mid-batch quota\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#backupProgressResult')\u001b[22m\n\u001b[2m    9 \u00d7 locator resolved to <div class=\"result risk\" id=\"backupProgressResult\">Backup tidak dapat dipulihkan: test mid-batch quo\u2026</div>\u001b[22m\n\u001b[2m      - unexpected value \"Backup tidak dapat dipulihkan: test mid-batch quota\"\u001b[22m\n"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "storage-after",
+    "head": "a9505f12af83d71d9e1572622ee7c8982adaa0ed",
+    "stats": {
+      "startTime": "2026-10-30T12:50:16.285Z",
+      "duration": 14972.638,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-mobile-focused",
+    "head": "a9505f12af83d71d9e1572622ee7c8982adaa0ed",
+    "stats": {
+      "startTime": "2026-10-30T12:52:40.300Z",
+      "duration": 12366.019,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-rollback-focused",
+    "head": "9d09662fb752ad856b27d053b3b0d9f92b657b4e",
+    "stats": {
+      "startTime": "2026-10-30T12:56:10.950Z",
+      "duration": 15376.330999999998,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-full-final",
+    "head": "1c3b50a831ebe662e358a60c618f23e66ed753c9",
+    "stats": {
+      "startTime": "2026-10-30T12:57:06.773Z",
+      "duration": 147609.19999999998,
+      "expected": 153,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "failures": [
+      {
+        "file": "ui.spec.js",
+        "title": "manual beta ID switch removes the previous tester evidence from view",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "storage-profile-regression",
+    "head": "1c3b50a831ebe662e358a60c618f23e66ed753c9",
+    "stats": {
+      "startTime": "2026-10-30T13:02:09.989Z",
+      "duration": 16873.045000000002,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-final-chromium",
+    "head": "beee6d260504c22e218642379a31cdafb9bbe652",
+    "stats": {
+      "startTime": "2026-10-30T13:04:15.527Z",
+      "duration": 123057.13500000001,
+      "expected": 155,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-final-webkit-focused",
+    "head": "beee6d260504c22e218642379a31cdafb9bbe652",
+    "stats": {
+      "startTime": "2026-10-30T13:06:20.981Z",
+      "duration": 23277.987999999998,
+      "expected": 11,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "participant-history-before",
+    "head": "e54bd114fac136595afeeac886de4a6e8bbccfe9",
+    "stats": {
+      "startTime": "2026-10-30T13:22:34.611Z",
+      "duration": 2482.712,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "failures": [
+      {
+        "file": "participant-switch.spec.js",
+        "title": "Forward to an old guide keeps the currently selected participant URL and data",
+        "status": "unexpected",
+        "attempts": 1,
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"KEP-000\u001b[7m2\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"KEP-000\u001b[7m1\u001b[27m\"\u001b[39m\n\n  49 |  await setup(page);await page.locator('#nextAction [data-stage=\"slc\"]').click();await page.goBack();await expect(page.locator('#stageDialog')).toBeHidden();\n  50 |  await changeId(page,'KEP-0002');await page.goForward();await expect(page.locator('#stageDialog')).toBeVisible();\n> 51 |  expect(new URL(page.url()).searchParams.get('beta')).toBe('KEP-0002');await expect(page.locator('#contract_enterpriseName')).toHaveValue('Company B');\n     |                                                       ^\n  52 |  await page.reload();await expect(page.locator('#contract_enterpriseName')).toHaveValue('Company B');expect(await page.evaluate(()=>read(KEYS.done,[]))).toEqual([]);\n  53 | });\n  54 |\n    at /workspace/scratch/d4b77a1f4461/kep-profile/tests/participant-switch.spec.js:51:55"
+        ]
+      }
+    ]
+  },
+  {
+    "attempt": "participant-history-after",
+    "head": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+    "stats": {
+      "startTime": "2026-10-30T23:49:06.780Z",
+      "duration": 22278.722999999998,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-history-final-chromium",
+    "head": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+    "stats": {
+      "startTime": "2026-10-30T23:49:34.735Z",
+      "duration": 114336.852,
+      "expected": 156,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  },
+  {
+    "attempt": "storage-history-final-webkit",
+    "head": "2d37f3a274033ed739c9b5e229413f12ae84adfd",
+    "stats": {
+      "startTime": "2026-10-30T23:51:40.269Z",
+      "duration": 24620.04,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "exitCode": 0,
+    "failures": []
+  }
+]
