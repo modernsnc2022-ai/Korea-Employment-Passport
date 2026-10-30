@@ -1,0 +1,991 @@
+{
+  "axeVersion": "4.10.3",
+  "automatedOnly": true,
+  "results": [
+    {
+      "name": "entry",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              "div[aria-label=\"Tahap awal EPS\"]"
+            ]
+          ]
+        },
+        {
+          "id": "skip-link",
+          "nodes": [
+            [
+              ".skip-link"
+            ]
+          ]
+        }
+      ],
+      "passes": 34
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "eligibility",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "documents",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "fees",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "gaps",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#brokerText"
+            ],
+            [
+              "#rejectReason"
+            ],
+            [
+              "#rejectFix"
+            ],
+            [
+              "#gapTask"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "contract",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ]
+          ]
+        }
+      ],
+      "passes": 41
+    },
+    {
+      "name": "workplace",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "payroll",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "companyHub",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#companyQaQuestion"
+            ],
+            [
+              "#companyInvestigationQuestion"
+            ]
+          ]
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "stage-dialog",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              ".stage-dialog-body"
+            ]
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#stageKind"
+            ],
+            [
+              "#stageTitle"
+            ],
+            [
+              ".close"
+            ]
+          ]
+        }
+      ],
+      "passes": 32
+    },
+    {
+      "name": "documents-expanded",
+      "width": 390,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "wizard-clean-source-fixture",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".phase-btn.done[type=\"button\"]:nth-child(1) > .phase-num"
+            ],
+            [
+              ".phase-btn.done[type=\"button\"]:nth-child(2) > .phase-num"
+            ]
+          ]
+        }
+      ],
+      "passes": 42
+    },
+    {
+      "name": "index",
+      "width": 390,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                "#how > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">SATU PERJALANAN</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">KENAPA BETA?</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "id": "landmark-complementary-is-top-level",
+          "impact": "moderate",
+          "help": "Aside should not be contained in another landmark",
+          "nodes": [
+            {
+              "target": [
+                "aside"
+              ],
+              "html": "<aside class=\"passport-card\">",
+              "failureSummary": "Fix any of the following:\n  The complementary landmark is contained in another landmark."
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link[href$=\"countries.html\"]"
+            ],
+            [
+              ".nav-link[href$=\"beta.html\"]"
+            ],
+            [
+              ".nav-link[href$=\"beta-global.html\"]"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ],
+            [
+              "a[href$=\"#how\"]"
+            ],
+            [
+              ".note:nth-child(5)"
+            ],
+            [
+              ".note:nth-child(6)"
+            ],
+            [
+              ".note:nth-child(6) > strong"
+            ]
+          ]
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "name": "privacy",
+      "width": 390,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                "span"
+              ],
+              "html": "<span class=\"eyebrow\">PRIVASI</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "id": "page-has-heading-one",
+          "impact": "moderate",
+          "help": "Page should contain a level-one heading",
+          "nodes": [
+            {
+              "target": [
+                "html"
+              ],
+              "html": "<html lang=\"id\">",
+              "failureSummary": "Fix all of the following:\n  Page must have a level-one heading"
+            }
+          ]
+        }
+      ],
+      "incomplete": [],
+      "passes": 17
+    },
+    {
+      "name": "countries",
+      "width": 390,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".section:nth-child(1) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">COUNTRY PACKS</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">PENDING MANUFACTURING VERIFICATION</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".section:nth-child(3) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">FUTURE DESIGNATED SENDING COUNTRY</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link[href=\"index.html\"]"
+            ],
+            [
+              "a[href$=\"readiness.html\"]"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ],
+            [
+              "a[href$=\"np.html\"]"
+            ],
+            [
+              "a[href$=\"vn.html\"]"
+            ],
+            [
+              "a[href$=\"ph.html\"]"
+            ],
+            [
+              "a[href$=\"th.html\"]"
+            ],
+            [
+              "a[href$=\"bd.html\"]"
+            ],
+            [
+              "a[href$=\"lk.html\"]"
+            ],
+            [
+              "a[href$=\"la.html\"]"
+            ],
+            [
+              "a[href$=\"uz.html\"]"
+            ],
+            [
+              "a[href$=\"mn.html\"]"
+            ],
+            [
+              "a[href$=\"cn.html\"]"
+            ],
+            [
+              "a[href$=\"kh.html\"]"
+            ],
+            [
+              "a[href$=\"tl.html\"]"
+            ],
+            [
+              "a[href$=\"pk.html\"]"
+            ],
+            [
+              "a[href$=\"tj.html\"]"
+            ],
+            [
+              "a[href$=\"kg.html\"]"
+            ],
+            [
+              "a[href$=\"mm.html\"]"
+            ],
+            [
+              "a[target=\"_blank\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "name": "readiness",
+      "width": 390,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".section:nth-child(1) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">COVERAGE</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">NEXT OFFICIAL REVIEWS</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ]
+          ]
+        }
+      ],
+      "passes": 29
+    },
+    {
+      "name": "beta",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > p"
+            ],
+            [
+              ".benefit-card > strong"
+            ],
+            [
+              ".benefit-card > span"
+            ]
+          ]
+        }
+      ],
+      "passes": 36
+    },
+    {
+      "name": "entry",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              "div[aria-label=\"Tahap awal EPS\"]"
+            ]
+          ]
+        },
+        {
+          "id": "skip-link",
+          "nodes": [
+            [
+              ".skip-link"
+            ]
+          ]
+        }
+      ],
+      "passes": 34
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "eligibility",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "documents",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "fees",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "gaps",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#brokerText"
+            ],
+            [
+              "#rejectReason"
+            ],
+            [
+              "#rejectFix"
+            ],
+            [
+              "#gapTask"
+            ]
+          ]
+        }
+      ],
+      "passes": 39
+    },
+    {
+      "name": "contract",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#slcText"
+            ]
+          ]
+        }
+      ],
+      "passes": 41
+    },
+    {
+      "name": "workplace",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 38
+    },
+    {
+      "name": "payroll",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "companyHub",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "#companyQaQuestion"
+            ],
+            [
+              "#companyInvestigationQuestion"
+            ]
+          ]
+        }
+      ],
+      "passes": 40
+    },
+    {
+      "name": "stage-dialog",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": [
+            [
+              ".stage-dialog-body"
+            ]
+          ]
+        }
+      ],
+      "passes": 32
+    },
+    {
+      "name": "documents-expanded",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [],
+      "passes": 39
+    },
+    {
+      "name": "wizard-clean-source-fixture",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".phase-btn.done[type=\"button\"]:nth-child(1) > .phase-num"
+            ],
+            [
+              ".phase-btn.done[type=\"button\"]:nth-child(2) > .phase-num"
+            ],
+            [
+              ".phase-btn.done[type=\"button\"]:nth-child(3) > .phase-num"
+            ]
+          ]
+        }
+      ],
+      "passes": 42
+    },
+    {
+      "name": "index",
+      "width": 1280,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                "#how > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">SATU PERJALANAN</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">KENAPA BETA?</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "id": "landmark-complementary-is-top-level",
+          "impact": "moderate",
+          "help": "Aside should not be contained in another landmark",
+          "nodes": [
+            {
+              "target": [
+                "aside"
+              ],
+              "html": "<aside class=\"passport-card\">",
+              "failureSummary": "Fix any of the following:\n  The complementary landmark is contained in another landmark."
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link[href$=\"countries.html\"]"
+            ],
+            [
+              ".nav-link[href$=\"beta.html\"]"
+            ],
+            [
+              ".nav-link[href$=\"beta-global.html\"]"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ],
+            [
+              "a[href$=\"#how\"]"
+            ],
+            [
+              ".note:nth-child(5)"
+            ],
+            [
+              ".note:nth-child(6)"
+            ],
+            [
+              ".note:nth-child(6) > strong"
+            ]
+          ]
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "name": "privacy",
+      "width": 1280,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                "span"
+              ],
+              "html": "<span class=\"eyebrow\">PRIVASI</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "id": "page-has-heading-one",
+          "impact": "moderate",
+          "help": "Page should contain a level-one heading",
+          "nodes": [
+            {
+              "target": [
+                "html"
+              ],
+              "html": "<html lang=\"id\">",
+              "failureSummary": "Fix all of the following:\n  Page must have a level-one heading"
+            }
+          ]
+        }
+      ],
+      "incomplete": [],
+      "passes": 17
+    },
+    {
+      "name": "countries",
+      "width": 1280,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".section:nth-child(1) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">COUNTRY PACKS</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">PENDING MANUFACTURING VERIFICATION</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".section:nth-child(3) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">FUTURE DESIGNATED SENDING COUNTRY</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link[href=\"index.html\"]"
+            ],
+            [
+              "a[href$=\"readiness.html\"]"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ],
+            [
+              "a[href$=\"np.html\"]"
+            ],
+            [
+              "a[href$=\"vn.html\"]"
+            ],
+            [
+              "a[href$=\"ph.html\"]"
+            ],
+            [
+              "a[href$=\"th.html\"]"
+            ],
+            [
+              "a[href$=\"bd.html\"]"
+            ],
+            [
+              "a[href$=\"lk.html\"]"
+            ],
+            [
+              "a[href$=\"la.html\"]"
+            ],
+            [
+              "a[href$=\"uz.html\"]"
+            ],
+            [
+              "a[href$=\"mn.html\"]"
+            ],
+            [
+              "a[href$=\"cn.html\"]"
+            ],
+            [
+              "a[href$=\"kh.html\"]"
+            ],
+            [
+              "a[href$=\"tl.html\"]"
+            ],
+            [
+              "a[href$=\"pk.html\"]"
+            ],
+            [
+              "a[href$=\"tj.html\"]"
+            ],
+            [
+              "a[href$=\"kg.html\"]"
+            ],
+            [
+              "a[href$=\"mm.html\"]"
+            ],
+            [
+              "a[target=\"_blank\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "name": "readiness",
+      "width": 1280,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".section:nth-child(1) > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">COVERAGE</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.1 (foreground color: #84adff, background color: #f7f8fb, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".alt > .section-head > .eyebrow"
+              ],
+              "html": "<span class=\"eyebrow\">NEXT OFFICIAL REVIEWS</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.23 (foreground color: #84adff, background color: #ffffff, font size: 9.4pt (12.48px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".brand"
+            ],
+            [
+              ".nav-link"
+            ],
+            [
+              "section > .eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              "h1 > span"
+            ],
+            [
+              ".lead"
+            ]
+          ]
+        }
+      ],
+      "passes": 29
+    },
+    {
+      "name": "beta",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".eyebrow"
+            ],
+            [
+              "h1"
+            ],
+            [
+              ".hero > p"
+            ],
+            [
+              ".benefit-card > strong"
+            ],
+            [
+              ".benefit-card > span"
+            ]
+          ]
+        }
+      ],
+      "passes": 36
+    }
+  ]
+}

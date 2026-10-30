@@ -78,13 +78,13 @@
     </nav>
 
     <section class="flow-dashboard" aria-label="Proses resmi">
-      <aside class="phase-panel">
+      <nav class="phase-panel" aria-label="Tahapan EPS">
         <div class="phase-panel-head">
           <span class="eyebrow dark">PROSES RESMI</span>
           <strong>Posisi Anda sekarang</strong>
         </div>
         <div id="phaseNav" class="phase-nav"></div>
-      </aside>
+      </nav>
 
       <div class="action-column">
         <section id="nextAction" class="next-action" hidden></section>
@@ -98,7 +98,7 @@
             <input id="brokerLikeQuestion" aria-label="Pertanyaan tentang tahap EPS Anda" placeholder="Ketik pertanyaan kecil yang membuat ragu">
             <button id="brokerLikeQuestionBtn" class="primary" type="button">Cari panduan resmi</button>
           </div>
-          <div id="brokerLikeQuestionResult" class="result" hidden></div>
+          <div id="brokerLikeQuestionResult" role="status" aria-live="polite" class="result" hidden></div>
         </section>
       </div>
     </section>
@@ -167,7 +167,7 @@
       </div>
       <div id="eligibilityForm" class="panel"></div>
       <button id="checkEligibilityBtn" class="primary">Periksa kelayakan</button>
-      <div id="eligibilityResult" class="result" hidden></div>
+      <div id="eligibilityResult" role="status" aria-live="polite" class="result" hidden></div>
     </section>
 
     <section id="documents" class="view">
@@ -213,7 +213,7 @@
             <details id="formFieldCheck" class="wizard-check" hidden>
               <summary>Cek apakah isian saya sudah benar</summary>
               <div class="wizard-check-body">
-                <input id="formFieldValue" autocomplete="off" placeholder="Tempel nilai yang Anda tulis — tidak disimpan">
+                <input id="formFieldValue" aria-label="Nilai kolom sesuai panduan formulir" autocomplete="off" placeholder="Tempel nilai yang Anda tulis — tidak disimpan">
                 <button id="formFieldCheckBtn" type="button" class="secondary">Periksa nilai</button>
                 <button id="formFieldConfirmBtn" type="button" class="primary" hidden>Sudah saya cek sesuai petunjuk</button>
                 <div id="formFieldCheckResult" class="result" hidden></div>
@@ -251,7 +251,7 @@
           <input id="fieldHelpQuery" placeholder="Contoh: buku tabungan, pasfoto, biaya visa, map manufaktur">
         </label>
         <button id="fieldHelpBtn" class="primary">Cari jawaban pasti</button>
-        <div id="fieldHelpResult" class="result" hidden></div>
+        <div id="fieldHelpResult" role="status" aria-live="polite" class="result" hidden></div>
       </div>
 
       <details class="consistency-check">
@@ -320,7 +320,7 @@
             <button id="checkConsistencyBtn" type="button" class="primary">Bandingkan</button>
             <button id="clearConsistencyBtn" type="button" class="secondary">Hapus nilai</button>
           </div>
-          <div id="consistencyResult" class="result" hidden></div>
+          <div id="consistencyResult" role="status" aria-live="polite" class="result" hidden></div>
           <p class="muted">Perbedaan tidak selalu berarti otomatis ditolak, tetapi jangan submit sebelum alasan perbedaannya jelas dan sesuai petunjuk resmi.</p>
         </div>
       </details>
@@ -351,7 +351,7 @@
           <input id="feePurpose" placeholder="Tes psikologi, visa, jaminan kerja…">
         </label>
         <button id="checkFeeBtn" class="primary">Periksa biaya</button>
-        <div id="feeResult" class="result" hidden></div>
+        <div id="feeResult" role="status" aria-live="polite" class="result" hidden></div>
       </div>
 
       <div class="section-head">
@@ -402,7 +402,7 @@
         <button id="checkContractBtn" class="primary">Periksa kontrak</button>
         <button id="openWorkplaceBtn" class="secondary">Lanjut ke Kenali tempat kerja Anda</button>
         <button id="resetContractBtn" class="secondary">Hapus data kontrak dari perangkat</button>
-        <div id="contractResult" class="result" hidden></div>
+        <div id="contractResult" role="status" aria-live="polite" class="result" hidden></div>
       </div>
       <div class="panel">
         <h3>Aturan penting</h3>
@@ -517,7 +517,7 @@
         <p class="muted">Permintaan hanya memakai nama perusahaan, alamat kerja, tingkat investigasi, dan pertanyaan. Harga/biaya perjalanan dikonfirmasi sebelum pembayaran. Jangan kirim nomor paspor/KTP/ARC, hasil medis, rekening, atau alamat asrama pribadi.</p>
       </div>
 
-      <aside id="companyAdSlot" class="company-ad-slot" hidden aria-label="Iklan sponsor"></aside>
+      <aside id="companyAdSlot" class="company-ad-slot" hidden aria-label="Iklan sponsor"></nav>
       <button class="secondary process-return" type="button">← Kembali ke perjalanan</button>
     </section>
 
@@ -554,7 +554,7 @@
           <input id="payrollMinimumBase" inputmode="numeric">
         </label>
         <button id="checkPayrollBtn" class="primary">Periksa slip gaji</button>
-        <div id="payrollResult" class="result" hidden></div>
+        <div id="payrollResult" role="status" aria-live="polite" class="result" hidden></div>
       </div>
       <button class="secondary process-return" type="button">← Kembali ke perjalanan</button>
     </section>
