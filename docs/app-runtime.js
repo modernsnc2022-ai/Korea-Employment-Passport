@@ -3597,12 +3597,37 @@ function renderBetaValidation(){
   });
 }
 
+// Capture transient outputs before boot; static source/membership warnings stay intact.
+const participantTransientResults=[...document.querySelectorAll('.result[hidden]')];
+function refreshParticipantViews(){
+  document.querySelectorAll('.shell input,.shell textarea,.shell select').forEach(field=>{
+    if(field.tagName==='SELECT')field.selectedIndex=Math.max(0,[...field.options].findIndex(option=>option.defaultSelected));
+    else if(field.type==='checkbox'||field.type==='radio')field.checked=field.defaultChecked;
+    else field.value=field.type==='file'?'':field.defaultValue;
+    field.removeAttribute('aria-invalid');
+  });
+  participantTransientResults.forEach(result=>{result.hidden=true;result.textContent='';});
+  consistencyRisk={stageId:null,hasMismatch:false};lastQuestionContext=null;activeStage=null;
+  refreshProgressViews();renderQuickStart();renderEligibility();renderCostLedger();
+  renderContract();renderPayroll();renderWorkplace();renderCompanyHub();renderGapStage();
+  renderBqcStatus();renderBetaModeBanner();renderBetaValidation();renderRejectionStage();
+  renderRejections();renderGaps();renderUnresolvedFieldQuestions();
+  if(!$('quickStart').hidden)switchView('journey',false);
+}
+function syncParticipantUrl(testerId){
+  const url=new URL(location.href);
+  if(testerId)url.searchParams.set('beta',testerId);else url.searchParams.delete('beta');
+  url.searchParams.delete('stage');
+  history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+}
 $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   const input=$('betaTesterId');
   const status=$('betaTesterIdStatus');
   const raw=String(input?.value||'').trim();
+  const previous=betaTesterIdState();
   if(!raw){
     localStorage.removeItem(KEYS.betaTesterId);
+    if(previous){syncParticipantUrl('');refreshParticipantViews();return;}
     renderBetaModeBanner();
     renderBetaValidation();
     renderRejections();
@@ -3616,6 +3641,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
     return;
   }
   write(KEYS.betaTesterId,testerId);
+  if(testerId!==previous){syncParticipantUrl(testerId);refreshParticipantViews();return;}
   renderBetaModeBanner();
   renderBetaValidation();
   renderRejections();
