@@ -39,3 +39,9 @@ test('saving the same participant keeps their temporary question',async({page})=
  await setup(page);await page.locator('#brokerLikeQuestion').fill('Draft for the same participant');await changeId(page,'KEP-0001');
  await expect(page.locator('#brokerLikeQuestion')).toHaveValue('Draft for the same participant');
 });
+test('a fresh participant can keep editing their ID before declaring their own stage',async({page})=>{
+ await setup(page);await page.evaluate(()=>localStorage.removeItem('kep.quickSetupDone.KEP-0002'));
+ await changeId(page,'KEP-0002');await expect(page.locator('#betaTesterId')).toBeVisible();await expect(page.locator('#quickStart')).toBeHidden();expect(await page.evaluate(()=>localStorage.getItem('kep.quickSetupDone.KEP-0002'))).toBe(null);
+ await page.locator('.utility-tab[data-view="journey"]').click();await expect(page.locator('#quickStart')).toBeVisible();await expect(page.locator('#nextAction')).toBeHidden();
+ await expect(page.locator('[data-quick-stage="eligibility"]')).toBeFocused();
+});

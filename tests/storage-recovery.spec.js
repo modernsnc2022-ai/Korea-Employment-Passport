@@ -23,7 +23,7 @@ test('blocked storage still loads the guide and isolates current-tab participant
  for(const id of ['KEP-0002','KEP-0001']){
   await page.locator('.utility-tab[data-view="gaps"]').click();await page.locator('#betaValidationPanel').evaluate(el=>el.open=true);await page.locator('#betaTesterId').fill(id);await page.locator('#saveBetaTesterIdBtn').click();
   await expect(page.locator('#betaTesterIdStatus')).not.toContainText('tersimpan');await expect(page.locator('#contract_enterpriseName')).toHaveValue(id==='KEP-0001'?'Session company A':'');
-  if(id==='KEP-0002')await page.locator('[data-quick-stage="exam_fee"]').click();
+  if(id==='KEP-0002'){await page.locator('.utility-tab[data-view="journey"]').click();await page.locator('[data-quick-stage="exam_fee"]').click();}
  }
 });
 test('a failed contract deletion never claims that the saved record was erased',async({page})=>{
