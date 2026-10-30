@@ -1001,6 +1001,7 @@ $('scopePicker').addEventListener('change',()=>{
   renderPreSubmitGate(activeStage);
   renderDocuments();
   renderBqcStatus();
+  renderStagePreparation(activeStage);
 });
 
 function exactScopeLabel(item){
@@ -1176,6 +1177,31 @@ function renderSharedKoreaCore(stage){
     .join('');
 }
 
+function renderStagePreparation(stage){
+  const section=$('stagePreparation');
+  const pack=documentPackForStage(stage.id);
+  const items=pack?.items||[];
+  const needsScope=scopeOptionsForStage(stage.id).length>0&&!selectedScope(stage.id);
+  const docs=needsScope
+    ?'<p>Pilih pengumuman yang memuat nama Anda untuk melihat persyaratan yang sesuai. Jangan memakai dokumen dari panggilan lain.</p>'
+    :items.length
+      ?'<ul>'+items.slice(0,4).map(item=>'<li>'+escapeHtml(item.title)+' <small>'+escapeHtml(item.required?'Wajib':'Sesuai ketentuan')+'</small></li>').join('')+'</ul>'+(items.length>4?'<p>Masih ada persyaratan lain. Periksa checklist lengkap dan sumber resmi.</p>':'')
+      :'<p>'+escapeHtml(pack?.message||'Belum ada checklist khusus untuk tahap ini. Periksa persyaratan pada sumber resmi; jangan memakai checklist tahap lain.')+'</p>';
+  section.innerHTML='<h3>Dokumen yang perlu disiapkan</h3>'+docs+
+    (pack?.message&&items.length&&!needsScope?'<p class="preparation-condition">'+escapeHtml(pack.message)+'</p>':'')+
+    '<h3>Biaya</h3><p>Periksa nominal, penerima, dan ketentuan pada pengumuman yang berlaku untuk Anda. Informasi yang belum tersedia tidak berarti gratis. Jangan membayar jaminan pekerjaan kepada perantara.</p>';
+  if(currentStage()?.id===stage.id){
+    const tools=STAGE_TOOLS[stage.id]||[];
+    [['documents','Buka checklist tahap saya'],['fees','Periksa rincian biaya']].forEach(([view,label])=>{
+      if(!tools.includes(view))return;
+      const button=document.createElement('button');
+      button.type='button';button.className='secondary';button.textContent=label;
+      button.addEventListener('click',()=>{$('stageDialog').close();switchView(view);});
+      section.append(button);
+    });
+  }
+}
+
 function openStage(stage){
   activeStage=stage;
   const index=route.stages.findIndex(item=>item.id===stage.id);
@@ -1217,6 +1243,7 @@ function openStage(stage){
   renderStageBqc(stage);
   renderPreSubmitGate(stage);
   renderExactAnswers(stage);
+  renderStagePreparation(stage);
   const warn=$('stageWarning');
   const warning=stageWarning(stage);
   if(warning){warn.hidden=false;warn.textContent='⚠ '+warning}else{warn.hidden=true;warn.textContent=''}
@@ -2412,6 +2439,7 @@ $('docScopeSelect').addEventListener('change',()=>{
     renderStageBqc(activeStage);
     renderExactAnswers(activeStage);
     renderPreSubmitGate(activeStage);
+    renderStagePreparation(activeStage);
   }
 });
 
