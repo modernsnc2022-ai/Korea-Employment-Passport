@@ -578,8 +578,9 @@
         <div class="consistency-body beta-validation-body">
           <p>Catat hanya hasil tahapnya. Jangan masukkan nama, nomor identitas, atau dokumen pribadi. Satu tahap yang masih membutuhkan calo/agen/LPK/teman berarti rute belum PASS.</p>
           <label>ID beta anonim (opsional)
-            <input id="betaTesterId" autocomplete="off" placeholder="Contoh: KEP-0001" maxlength="10">
+            <input id="betaTesterId" aria-describedby="betaTesterIdHint betaTesterIdStatus" autocomplete="off" placeholder="Contoh: KEP-0001" maxlength="10">
           </label>
+          <small id="betaTesterIdHint" class="muted">Mengganti atau mengosongkan ID mengosongkan input sementara yang belum dicatat dan memuat catatan milik ID tersebut. Catatan per ID tetap dipertahankan.</small>
           <button id="saveBetaTesterIdBtn" class="secondary" type="button">Simpan ID beta</button>
           <small id="betaTesterIdStatus" class="muted">Gunakan hanya kode KEP yang diberikan tim beta. Jangan masukkan nama, email, atau nomor telepon.</small>
           <div id="betaWorkerExperienceWrap" hidden>

@@ -1267,6 +1267,10 @@ if(history.state?.kepStageDialog){
   history.replaceState(rest,'',location.href);
 }
 window.addEventListener('popstate',()=>{
+  // Historical guide URLs must not restore a participant selected before a live switch.
+  const historicalId=canonicalBetaTesterId(new URLSearchParams(location.search).get('beta'));
+  const selectedId=betaTesterIdState();
+  if(historicalId&&historicalId!==selectedId)syncParticipantUrl(selectedId);
   stageDialogHistoryClosing=false;
   const id=history.state?.kepStageDialog;
   if(!id&&stageDialog.open)stageDialog.close();
@@ -3597,12 +3601,37 @@ function renderBetaValidation(){
   });
 }
 
+// Capture transient outputs before boot; static source/membership warnings stay intact.
+const participantTransientResults=[...document.querySelectorAll('.result[hidden]')];
+function refreshParticipantViews(){
+  document.querySelectorAll('.shell input,.shell textarea,.shell select').forEach(field=>{
+    if(field.tagName==='SELECT')field.selectedIndex=Math.max(0,[...field.options].findIndex(option=>option.defaultSelected));
+    else if(field.type==='checkbox'||field.type==='radio')field.checked=field.defaultChecked;
+    else field.value=field.type==='file'?'':field.defaultValue;
+    field.removeAttribute('aria-invalid');
+  });
+  participantTransientResults.forEach(result=>{result.hidden=true;result.textContent='';});
+  consistencyRisk={stageId:null,hasMismatch:false};lastQuestionContext=null;activeStage=null;
+  refreshProgressViews();renderQuickStart();renderEligibility();renderCostLedger();
+  renderContract();renderPayroll();renderWorkplace();renderCompanyHub();renderGapStage();
+  renderBqcStatus();renderBetaModeBanner();renderBetaValidation();renderRejectionStage();
+  renderRejections();renderGaps();renderUnresolvedFieldQuestions();
+  switchView(document.body.dataset.activeView||'journey',false);
+}
+function syncParticipantUrl(testerId){
+  const url=new URL(location.href);
+  if(testerId)url.searchParams.set('beta',testerId);else url.searchParams.delete('beta');
+  url.searchParams.delete('stage');
+  history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+}
 $('saveBetaTesterIdBtn').addEventListener('click',()=>{
   const input=$('betaTesterId');
   const status=$('betaTesterIdStatus');
   const raw=String(input?.value||'').trim();
+  const previous=betaTesterIdState();
   if(!raw){
     localStorage.removeItem(KEYS.betaTesterId);
+    if(previous){syncParticipantUrl('');refreshParticipantViews();return;}
     renderBetaModeBanner();
     renderBetaValidation();
     renderRejections();
@@ -3616,6 +3645,7 @@ $('saveBetaTesterIdBtn').addEventListener('click',()=>{
     return;
   }
   write(KEYS.betaTesterId,testerId);
+  if(testerId!==previous){syncParticipantUrl(testerId);refreshParticipantViews();return;}
   renderBetaModeBanner();
   renderBetaValidation();
   renderRejections();
@@ -4076,8 +4106,10 @@ function switchView(viewId,scroll=true){
   const target=document.getElementById(viewId);
   if(!target?.classList.contains('view'))return;
   document.body.dataset.activeView=viewId;
+  if(viewId==='journey')renderQuickStart();
+  else{$('quickStart').hidden=true;document.body.classList.remove('setup-mode');}
   const heading=target.querySelector('h2');
-  document.title=(viewId==='journey'?'Langkah sekarang':heading?.textContent.trim()||'Panduan EPS')+' · Korea Employment Passport';
+  document.title=(viewId==='journey'?($('quickStart').hidden?'Langkah sekarang':'Pilih tahap Anda'):heading?.textContent.trim()||'Panduan EPS')+' · Korea Employment Passport';
   const utilityOwner={
     eligibility:'journey',
     contract:'journey',
@@ -4104,7 +4136,7 @@ function switchView(viewId,scroll=true){
   }
   if(scroll){
     if(viewId==='journey'){
-      const action=$('nextAction');
+      const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
       action.scrollIntoView({behavior:'instant',block:'start'});
       action.querySelector('.primary, select, button')?.focus({preventScroll:true});
     }else{
