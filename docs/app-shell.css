@@ -381,3 +381,11 @@ h1,h2,h3,h4,legend{overflow-wrap:anywhere}
 .panel>*,.consistency-body>*{min-width:0}
 li{overflow-wrap:anywhere}
 .beta-validation-body input{width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:8px}
+
+/* Keep navigation words intact when text grows; reserve its measured height. */
+@media(max-width:720px){
+ .utility-nav{grid-template-columns:repeat(auto-fit,minmax(min(100%,6ch),1fr))}
+ .utility-tab{white-space:nowrap}
+ body{padding-bottom:max(74px,calc(4rem + env(safe-area-inset-bottom)),calc(var(--utility-nav-height,58px) + 16px + env(safe-area-inset-bottom)))}
+ html{scroll-padding-bottom:calc(var(--utility-nav-height,58px) + 24px + env(safe-area-inset-bottom))}
+}

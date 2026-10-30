@@ -2930,9 +2930,7 @@ $('checkContractBtn').addEventListener('click',()=>{
   if(!contractRules)return;
   const data=saveContractLocally();
   const risks=[],warnings=[],ok=[];
-  contractRules.fields.filter(f=>f.required).forEach(field=>{
-    if(!String(data[field.id]??'').trim())warnings.push('Belum diisi: '+field.label);
-  });
+  const missing=contractRules.fields.filter(f=>f.required&&!String(data[f.id]??'').trim());
 
   const monthly=Number(data.monthlyWage||0);
   const base=Number(data.basePay||0);
@@ -2957,17 +2955,19 @@ $('checkContractBtn').addEventListener('click',()=>{
   if(data.roomProvided==='Ya'&&!String(data.roomCost??'').trim())warnings.push('Akomodasi disediakan tetapi biaya yang ditanggung pekerja belum diisi. Pastikan apakah gratis atau ada potongan.');
   if(data.mealsProvided==='Ya'&&!String(data.mealCost??'').trim())warnings.push('Makan disediakan tetapi biaya yang ditanggung pekerja belum diisi. Pastikan apakah gratis atau ada potongan.');
   if(data.enterpriseName&&data.workplace&&!data.enterpriseLocation)warnings.push('Nama perusahaan ada, tetapi alamat perusahaan belum diisi.');
-  if(!risks.length&&!warnings.length)ok.push('Tidak ada celah dasar yang terdeteksi dari kolom yang diperiksa.');
+  if(!risks.length&&!warnings.length&&!missing.length)ok.push('Tidak ada celah dasar yang terdeteksi dari kolom yang diperiksa.');
 
   const out=$('contractResult');
   out.hidden=false;
-  out.className='result '+(risks.length?'risk':warnings.length?'warn':'safe');
+  out.className='result '+(risks.length?'risk':warnings.length||missing.length?'warn':'safe');
   const items=[
     ...risks.map(x=>'<div class="contract-flag risk"><strong>Perlu perhatian:</strong> '+escapeHtml(x)+'</div>'),
     ...warnings.map(x=>'<div class="contract-flag warn"><strong>Periksa:</strong> '+escapeHtml(x)+'</div>'),
     ...ok.map(x=>'<div class="contract-flag"><strong>OK:</strong> '+escapeHtml(x)+'</div>')
   ].join('');
-  out.innerHTML='<strong>Hasil pemeriksaan SLC</strong><div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>'+(!wageReady?wageSourceNotice():'');
+  const incomplete=missing.length?'<p><strong>'+missing.length+' kolom wajib belum diisi.</strong> Lengkapi data agar pemeriksaan lebih berguna.</p><button type="button" id="completeContractFields" class="secondary">Isi kolom pertama yang belum lengkap</button><details><summary>Lihat kolom yang belum diisi</summary><ul>'+missing.map(f=>'<li>'+escapeHtml(f.label)+'</li>').join('')+'</ul></details>':'';
+  out.innerHTML='<strong>Hasil pemeriksaan SLC</strong>'+incomplete+'<div class="contract-flags">'+items+'</div><p class="muted">Ini pemeriksaan awal, bukan keputusan hukum atau keputusan resmi HRD Korea/KP2MI.</p>'+(!wageReady?wageSourceNotice():'');
+  out.querySelector('#completeContractFields')?.addEventListener('click',()=>$('contract_'+missing[0].id)?.focus());
 });
 
 $('openWorkplaceBtn').addEventListener('click',()=>{
@@ -4141,6 +4141,10 @@ function updateConnectionStatus(){
   }
   if(rules)renderCostLedger();
 }
+const utilityNavObserver=new ResizeObserver(entries=>{
+  document.documentElement.style.setProperty('--utility-nav-height',Math.ceil(entries[0].target.getBoundingClientRect().height)+'px');
+});
+utilityNavObserver.observe(document.querySelector('.utility-nav'));
 window.addEventListener('online',updateConnectionStatus);
 window.addEventListener('offline',updateConnectionStatus);
 updateConnectionStatus();
