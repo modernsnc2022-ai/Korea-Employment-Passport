@@ -1,0 +1,113 @@
+{
+  "physicalDeviceTesting": false,
+  "records": [
+    {
+      "engine": "chromium",
+      "state": "home",
+      "width": 390,
+      "mobileTouchEmulation": false,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "documents",
+      "width": 390,
+      "mobileTouchEmulation": false,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "notice",
+      "width": 390,
+      "mobileTouchEmulation": false,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "documents-text200",
+      "width": 320,
+      "mobileTouchEmulation": false,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "support-select-text200",
+      "width": 320,
+      "mobileTouchEmulation": false,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "state": "company-select-text200",
+      "width": 320,
+      "mobileTouchEmulation": false,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "home",
+      "width": 390,
+      "mobileTouchEmulation": true,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "documents",
+      "width": 390,
+      "mobileTouchEmulation": true,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "notice",
+      "width": 390,
+      "mobileTouchEmulation": true,
+      "viewport": 390,
+      "documentWidth": 390,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "documents-text200",
+      "width": 320,
+      "mobileTouchEmulation": true,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "support-select-text200",
+      "width": 320,
+      "mobileTouchEmulation": true,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "state": "company-select-text200",
+      "width": 320,
+      "mobileTouchEmulation": true,
+      "viewport": 320,
+      "documentWidth": 320,
+      "pageErrors": []
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+[
+  {
+    "label": "before",
+    "views": [
+      {
+        "id": "eligibility",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "documents",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "fees",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "gaps",
+        "width": 288,
+        "scrollWidth": 375,
+        "internalOverflow": [
+          {
+            "tag": "DETAILS",
+            "id": "betaValidationPanel",
+            "cls": "consistency-check",
+            "width": 286,
+            "scrollWidth": 479,
+            "text": "Uji beta: apakah tahap selesai tanpa bantuan swasta?\n        \n          Catat hanya hasil tahapnya. ",
+            "overflow": "hidden",
+            "wrap": "normal",
+            "whiteSpace": "normal",
+            "display": "block"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "cls": "consistency-body beta-validation-body",
+            "width": 286,
+            "scrollWidth": 479,
+            "text": "Catat hanya hasil tahapnya. Jangan masukkan nama, nomor identitas, atau dokumen pribadi. Satu tahap ",
+            "overflow": "visible",
+            "wrap": "normal",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "LABEL",
+            "id": "",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 463,
+            "text": "Hasil\n            \n              Selesai tanpa bantuan swasta\n              Masih membutuhkan bantua",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "SELECT",
+            "id": "betaCheckOutcome",
+            "cls": "",
+            "width": 252,
+            "scrollWidth": 462,
+            "text": "Selesai tanpa bantuan swasta\n              Masih membutuhkan bantuan swasta\n              Belum menj",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "pre",
+            "display": "block"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "cls": "panel",
+            "width": 286,
+            "scrollWidth": 374,
+            "text": "Tahap sekarang\n          Cek kelayakanPendaftaran online Sisko P2MIPembayaran biaya EPS-TOPIKPerekam",
+            "overflow": "visible",
+            "wrap": "normal",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "LABEL",
+            "id": "",
+            "cls": "",
+            "width": 256,
+            "scrollWidth": 359,
+            "text": "Anda masih membutuhkan bantuan siapa?\n          \n            LPK / pusat pelatihan\n            Calo ",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "SELECT",
+            "id": "gapHelper",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 358,
+            "text": "LPK / pusat pelatihan\n            Calo / agen swasta\n            Teman / pekerja senior\n            ",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "pre",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      },
+      {
+        "id": "contract",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "workplace",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "payroll",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "companyHub",
+        "width": 288,
+        "scrollWidth": 439,
+        "internalOverflow": [
+          {
+            "tag": "DIV",
+            "id": "",
+            "cls": "panel company-investigation",
+            "width": 286,
+            "scrollWidth": 438,
+            "text": "HUMAN REALITY CHECK · BERBAYAR\n          Informasi masih kurang? Minta operator memeriksa\n          ",
+            "overflow": "visible",
+            "wrap": "normal",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "LABEL",
+            "id": "",
+            "cls": "",
+            "width": 256,
+            "scrollWidth": 423,
+            "text": "Tingkat investigasi\n          \n            1 · Riset online terperinci\n            2 · Riset + verif",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "normal",
+            "display": "grid"
+          },
+          {
+            "tag": "SELECT",
+            "id": "companyInvestigationTier",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 422,
+            "text": "1 · Riset online terperinci\n            2 · Riset + verifikasi telepon bila memungkinkan\n           ",
+            "overflow": "visible",
+            "wrap": "anywhere",
+            "whiteSpace": "pre",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      }
+    ]
+  },
+  {
+    "label": "contained-native-select",
+    "views": [
+      {
+        "id": "eligibility",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "documents",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "fees",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "gaps",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [
+          {
+            "tag": "SELECT",
+            "id": "betaCheckOutcome",
+            "cls": "",
+            "width": 252,
+            "scrollWidth": 469,
+            "text": "Selesai tanpa bantuan swasta\n              Masih membutuhkan bantuan swasta\n              Belum menj",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          },
+          {
+            "tag": "SELECT",
+            "id": "gapHelper",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 366,
+            "text": "LPK / pusat pelatihan\n            Calo / agen swasta\n            Teman / pekerja senior\n            ",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      },
+      {
+        "id": "contract",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "workplace",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "payroll",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "companyHub",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [
+          {
+            "tag": "SELECT",
+            "id": "companyInvestigationTier",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 430,
+            "text": "1 · Riset online terperinci\n            2 · Riset + verifikasi telepon bila memungkinkan\n           ",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      }
+    ]
+  },
+  {
+    "label": "label-minmax-zero",
+    "views": [
+      {
+        "id": "eligibility",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "documents",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "fees",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "gaps",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [
+          {
+            "tag": "SELECT",
+            "id": "betaCheckOutcome",
+            "cls": "",
+            "width": 252,
+            "scrollWidth": 469,
+            "text": "Selesai tanpa bantuan swasta\n              Masih membutuhkan bantuan swasta\n              Belum menj",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          },
+          {
+            "tag": "SELECT",
+            "id": "gapHelper",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 366,
+            "text": "LPK / pusat pelatihan\n            Calo / agen swasta\n            Teman / pekerja senior\n            ",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      },
+      {
+        "id": "contract",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "workplace",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "payroll",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [],
+        "overflow": []
+      },
+      {
+        "id": "companyHub",
+        "width": 288,
+        "scrollWidth": 288,
+        "internalOverflow": [
+          {
+            "tag": "SELECT",
+            "id": "companyInvestigationTier",
+            "cls": "",
+            "width": 254,
+            "scrollWidth": 430,
+            "text": "1 · Riset online terperinci\n            2 · Riset + verifikasi telepon bila memungkinkan\n           ",
+            "overflow": "hidden",
+            "wrap": "anywhere",
+            "whiteSpace": "nowrap",
+            "display": "block"
+          }
+        ],
+        "overflow": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,167 @@
+{
+  "baselineEvidenceRemoteCommit": "df7349e3f03d8b443072d49fff0cb1fc235a1c50",
+  "testedLocalCommit": "68d3a3761ed9bd3fdd3cc2b31b0b0c44a979d0ba",
+  "productPrCommits": {
+    "342": "62150901d045142a0de24173d2a2ae7bda44535d",
+    "343": "10b434ca9c97d684ef12b789f67a871fcaef60e3"
+  },
+  "sourceDataChangesSince326": [],
+  "manifestSelfExcluded": true,
+  "files": [
+    {
+      "path": "docs/KEP_UI_UX_REDESIGN_HANDOFF_2026-10-30.md",
+      "bytes": 13477,
+      "sha256": "b0869de4b92b7cbb0fd269956aed42f09e1dcb842ccab85153a017401ded36b1"
+    },
+    {
+      "path": "docs/app-runtime.js",
+      "bytes": 189567,
+      "sha256": "018ce04b59b0f7d1d66a093fb05e2239d3b8ef62715fc3648e56cf1a5f075de7"
+    },
+    {
+      "path": "docs/app-shell.css",
+      "bytes": 54058,
+      "sha256": "b960bc47fa0f7947896b3d6d8ed0788eeae6e418363691175a600b2fc021015d"
+    },
+    {
+      "path": "docs/qa/MOBILE_BROWSER_PARITY_REVIEW_2026-10-30.md",
+      "bytes": 9806,
+      "sha256": "230deb2cf6535885c5eaa9e2a0da91ca3ffa3bd558d5c22cf6e7042fbe86a62a"
+    },
+    {
+      "path": "docs/qa/browser-parity-accessibility-audit.json",
+      "bytes": 12391,
+      "sha256": "968240111570ebe11e1bf5d05574a90defe7d2c83e47390aea30f89df36d53c1"
+    },
+    {
+      "path": "docs/qa/browser-parity-chromium-results.json",
+      "bytes": 26986,
+      "sha256": "79c55fa6653c7970ba09258a1068f5a852eb59c765de5414e4198a49e1ef7ebf"
+    },
+    {
+      "path": "docs/qa/browser-parity-run-history.json",
+      "bytes": 2078,
+      "sha256": "ab1d53fe88eb49966313d41a17e79a060241eb0e46dca2f8d67685306f2df539"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-company-select-text200-320.jpg",
+      "bytes": 39955,
+      "sha256": "54b4ad017278060467bf1fb19077bd32cb0b00d9a580fecc3b517fc7933beedb"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-documents-390.jpg",
+      "bytes": 70561,
+      "sha256": "bc90b0354b3e663f01b86207e8c164253d6f04a7fef3868e30b0416b1157915a"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-documents-text200-320.jpg",
+      "bytes": 42678,
+      "sha256": "cff99bf1851787c5aee7a4e673d25516f0200a896eee6a7dba0f44dff293470c"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-home-390.jpg",
+      "bytes": 57929,
+      "sha256": "901bd7276d300b482fcc12981658f260db74c56166de3d916958fbf870daf579"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-notice-390.jpg",
+      "bytes": 60543,
+      "sha256": "e5d93ce4a69f5afe9fb57d5f360c3ad4c911bcf4bddd07368deaebce895d2901"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/chromium-support-select-text200-320.jpg",
+      "bytes": 44754,
+      "sha256": "d80c821067fb3fc98e807baecaf7800e1be91a628256bf2cf276bd85fabc541b"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-company-select-text200-320.jpg",
+      "bytes": 46074,
+      "sha256": "4bde78004913b80b8d58a71e63355c985713bfba0f91b44927bb92b1f19bbddc"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-documents-390.jpg",
+      "bytes": 78090,
+      "sha256": "e25753738a105a9e48287ffbe62979ab658e2d8826cea53d971dfd3d22bab9bf"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-documents-text200-320.jpg",
+      "bytes": 50026,
+      "sha256": "ca5c669003ba4915254cdb08be71b3b381aa4292a8d35cc18223f19c6d45650c"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-home-390.jpg",
+      "bytes": 69182,
+      "sha256": "1469b2bea1acb6635a8b2cb8ec779c571a28de333ad91996ed02a14ebd553367"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-notice-390.jpg",
+      "bytes": 71827,
+      "sha256": "5970cbd1f07ec1db1c495c8113fc2f63c3016370179a4990b71f0cabae868253"
+    },
+    {
+      "path": "docs/qa/browser-parity-screenshots/webkit-support-select-text200-320.jpg",
+      "bytes": 51642,
+      "sha256": "f52512586a583596a938a50e9fa35308ee2151843288412d2fd2895c35679726"
+    },
+    {
+      "path": "docs/qa/browser-parity-static-results.json",
+      "bytes": 10042,
+      "sha256": "b00957b2e2ef0e59ba97cfeafb4a244ab955b1b741411b41730fd59ab4000672"
+    },
+    {
+      "path": "docs/qa/browser-parity-visual-matrix.json",
+      "bytes": 2490,
+      "sha256": "9ab8527948e0dc3940a7227cff97732264b2799ee2660cb89ad81c4ae17014de"
+    },
+    {
+      "path": "docs/qa/browser-parity-webkit-results.json",
+      "bytes": 27034,
+      "sha256": "7c894f30ca23bbde0c1e2baa73b43707b13ecb80bda75de47842bb2eb7cd60cf"
+    },
+    {
+      "path": "docs/qa/keyboard-skip-regression-2026-10-30.json",
+      "bytes": 3534,
+      "sha256": "cef8dce2f632ba6bc11287a412e8999eda73ce3e173e35e2219d052617c9dce5"
+    },
+    {
+      "path": "docs/qa/webkit-select-diagnosis.json",
+      "bytes": 10675,
+      "sha256": "fc558c659aac1c1226e2dee7a3af8094fed405e4cbe0559c06afa40ec6cd7fe2"
+    },
+    {
+      "path": "playwright.config.js",
+      "bytes": 1197,
+      "sha256": "bc139aef037381296c8fa15aa9cc8029d49a87cba797578097b191346cdd1202"
+    },
+    {
+      "path": "scripts/capture_browser_parity.js",
+      "bytes": 3491,
+      "sha256": "bf17ca83e9b98ae1f492acc1e2c02104968987bce81334d76f4c717dd787f7bd"
+    },
+    {
+      "path": "scripts/run_cloud_ui.py",
+      "bytes": 4067,
+      "sha256": "dc212ed55e21d606b2c1c02ba2bed3a72b36f2c2b06b68be8481168b551a3d96"
+    },
+    {
+      "path": "scripts/run_colab_ci.sh",
+      "bytes": 2693,
+      "sha256": "6c08f6e7683b128b6590ab0f487a12afea05bf7b098cb106fd688df7a2ac937c"
+    },
+    {
+      "path": "tests/mobile-viewport.spec.js",
+      "bytes": 2854,
+      "sha256": "38d978270176f0d2dd7faf39bec59493d7c202878a4604fe9b90e1f1f5c8f2a3"
+    },
+    {
+      "path": "tests/native-select-reflow.spec.js",
+      "bytes": 1111,
+      "sha256": "d94eb7d933ea10b98a373eb717b4e1a48898cf40f5b0aae18a4eef4ccc642387"
+    },
+    {
+      "path": "tests/skip-navigation.spec.js",
+      "bytes": 1413,
+      "sha256": "ef3fd0d0d772063f9fd6558b5155ac2736e8398628535d7d1ae3ed36c4970d3d"
+    }
+  ]
+}
