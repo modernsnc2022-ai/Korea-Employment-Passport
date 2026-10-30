@@ -361,3 +361,11 @@ body.setup-mode #cycleStatus{display:block!important}
 .elig-control input,.elig-control select{width:100%}
 .field-error{color:#b42318;font-size:.85rem;font-weight:650}
 [aria-invalid="true"]{border:2px solid #b42318!important}
+
+/* Each tool is a focused view; contextual help and backup remain on home. */
+body[data-active-view]:not([data-active-view="journey"]) .flow-dashboard,
+body[data-active-view]:not([data-active-view="journey"]) .how-to-use,
+body[data-active-view]:not([data-active-view="journey"]) .trust-panel{display:none}
+.tool-return{display:inline-flex;align-items:center;min-height:44px;margin:16px 0 0;padding:8px 0;background:none;border:0;color:var(--blue);font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.view>.tool-return+.section-head{margin-top:12px}
+#scopePickerSection{border:1px solid #a9c8bd;background:#f4f8f5}

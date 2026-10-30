@@ -71,7 +71,7 @@
     </section>
 
     <nav class="utility-nav" aria-label="Alat utama">
-      <button class="utility-tab active" data-view="journey"><span>01</span>Saat ini</button>
+      <button class="utility-tab active" aria-current="page" data-view="journey"><span>01</span>Saat ini</button>
       <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
       <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
       <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
@@ -686,6 +686,13 @@
       <h3>Langkah sekarang</h3>
       <p id="stageAction"></p>
       <div id="stageWarning" class="warning" hidden></div>
+      <section id="scopePickerSection" class="scope-picker" hidden>
+        <label><span id="scopePickerLabel">Tanggal pengumuman saya</span>
+          <select id="scopePicker"></select>
+        </label>
+        <a id="scopePickerSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
+        <small>Pilih hanya jika nama Anda benar-benar ada di pengumuman tersebut. Jika belum tahu, biarkan “Belum tahu”.</small>
+      </section>
       <section id="stageEvidence" class="stage-evidence" aria-label="Dasar resmi"><a id="stageSource" class="source" href="#" target="_blank" rel="noopener">Baca pengumuman / sumber resmi ↗</a>
       <div id="stageSourceContext"></div></section>
       <section id="stagePreparation" class="stage-preparation" aria-label="Persiapan tahap"></section>
@@ -699,13 +706,7 @@
         <p class="shared-korea-authority"><strong>Otoritas:</strong> <span id="sharedKoreaCoreAuthority"></span></p>
         <div id="sharedKoreaCoreSources" class="shared-korea-sources"></div>
       </section>
-      <section id="scopePickerSection" class="scope-picker" hidden>
-        <label><span id="scopePickerLabel">Tanggal pengumuman saya</span>
-          <select id="scopePicker"></select>
-        </label>
-        <a id="scopePickerSource" class="scope-source-link" href="#" target="_blank" rel="noopener" hidden>Periksa nama saya di pengumuman resmi ↗</a>
-        <small>Pilih hanya jika nama Anda benar-benar ada di pengumuman tersebut. Jika belum tahu, biarkan “Belum tahu”.</small>
-      </section>
+
       <details id="stageBqcSection" class="stage-bqc-section" hidden>
         <summary>Apakah tahap ini sudah cukup aman tanpa bertanya ke calo?</summary>
         <div class="stage-bqc-head">
