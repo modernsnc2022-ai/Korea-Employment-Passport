@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 from release_copy_contract import RELEASE_GATES, validate_release_gate_copy
 
-PAGE = (Path(__file__).resolve().parents[1] / 'docs/beta.html').read_text()
+PAGE = (Path(__file__).resolve().parents[1] / 'docs/beta.html').read_text(encoding='utf-8')
 
 class ReleaseCopyContractTest(unittest.TestCase):
     def test_current_public_explanation(self):
