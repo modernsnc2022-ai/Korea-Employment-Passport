@@ -408,3 +408,12 @@ li{overflow-wrap:anywhere}
 .micro-help-examples>summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:36px;display:list-item;align-content:center}
 .micro-help-examples p{padding:6px 0 0;line-height:1.55}
 .micro-help-examples>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* Keep optional onboarding instructions discoverable without crowding the action-first home. */
+.how-to-use{display:block;padding:10px 14px;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.how-to-use>summary{cursor:pointer;font-size:.86rem;font-weight:750;color:var(--ink);min-height:32px;align-content:center}
+.how-to-use>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.how-to-use-steps{display:flex;flex-wrap:wrap;gap:10px 16px;padding-top:12px}
+.how-to-use-steps span{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.84rem}
+.how-to-use-steps b{width:22px;height:22px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:var(--soft);color:var(--blue)}
+@media(max-width:600px){.how-to-use-steps{display:grid;gap:10px}}
