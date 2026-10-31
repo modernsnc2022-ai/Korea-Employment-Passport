@@ -1551,7 +1551,7 @@ function renderNextAction(){
     const source=stageSourceContext(next);
     const evidence=document.createElement('div');
     evidence.className='next-evidence';
-    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener">Sumber resmi ↗</a><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
+    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
     box.append(evidence);
     const warning=stageWarning(next);
     if(warning){
