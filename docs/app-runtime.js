@@ -855,6 +855,13 @@ document.querySelectorAll('[data-quick-stage]').forEach(button=>button.addEventL
   if(!stageId)return;
   applyCurrentStage(stageId,true);
   window.scrollTo({top:0,behavior:'instant'});
+  // Keep the primary action clear of the fixed mobile navigation.
+  const primary=$('nextAction').querySelector('.primary');
+  const nav=document.querySelector('.utility-nav');
+  if(primary&&nav&&innerWidth<=430){
+    const overlap=primary.getBoundingClientRect().bottom-nav.getBoundingClientRect().top+12;
+    if(overlap>0)window.scrollBy({top:overlap,behavior:'instant'});
+  }
 }));
 
 $('startFromBeginningBtn').addEventListener('click',()=>{
