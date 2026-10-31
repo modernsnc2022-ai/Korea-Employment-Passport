@@ -62,7 +62,7 @@ test('disconnect invalidates an old payment result without clearing entered valu
 
 test('changing the selected stage hides the old answer without deleting the question',async({page})=>{
  await prepare(page,'clean');
- await page.locator('#brokerLikeQuestion').fill('Apakah tombol XYZ harus dipilih?');await page.locator('#brokerLikeQuestionBtn').click();
+ await page.locator('#toggleHomeHelpBtn').click();await page.locator('#brokerLikeQuestion').fill('Apakah tombol XYZ harus dipilih?');await page.locator('#brokerLikeQuestionBtn').click();
  await expect(page.locator('#brokerLikeQuestionResult')).toBeVisible();
  await page.evaluate(()=>applyCurrentStage('exam_fee',true));
  await expect(page.locator('#brokerLikeQuestionResult')).toBeHidden();
