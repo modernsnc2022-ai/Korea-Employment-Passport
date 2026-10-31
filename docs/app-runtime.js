@@ -4230,6 +4230,15 @@ skipNavigationObserver.observe(document.body,{attributes:true,attributeFilter:['
   skipNavigationObserver.observe(target,{attributes:true,attributeFilter:['hidden']});
 });
 syncSkipNavigation();
+const homeHelpToggle=$('toggleHomeHelpBtn');
+const homeHelpContent=$('homeHelpContent');
+homeHelpToggle.addEventListener('click',()=>{
+  const show=homeHelpContent.hidden;
+  homeHelpContent.hidden=!show;
+  homeHelpToggle.setAttribute('aria-expanded',String(show));
+  homeHelpToggle.textContent=show?'Sembunyikan pertanyaan':'Tampilkan pertanyaan';
+  if(show)$('brokerLikeQuestion').focus();
+});
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
 document.querySelectorAll('[data-worker-tool]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.workerTool)));
 document.querySelectorAll('.view:not(#journey)').forEach(view=>{
