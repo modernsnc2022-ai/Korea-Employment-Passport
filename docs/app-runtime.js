@@ -64,6 +64,7 @@ function storageKeyFor(key){
 const read=(key,fallback)=>{try{return JSON.parse(storedValue(storageKeyFor(key)))??fallback}catch{return fallback}};
 const write=(key,value)=>{
   const scoped=storageKeyFor(key),serialized=JSON.stringify(value);
+  if([KEYS.done,KEYS.docs,KEYS.scopeSelections,KEYS.formWizard,KEYS.wizardReviewed,KEYS.quickSetup].includes(key))queueMicrotask(()=>window.dispatchEvent(new Event('kep:progress-changed')));
   if(!storageSessionOnly){
     try{localStorage.setItem(scoped,serialized);return true}catch{warnStorageFailure()}
   }
@@ -98,7 +99,9 @@ function writeProgressBatch(entries){
       warnStorageFailure();
     }
   }
-  staged.forEach(([key,value])=>currentTabStorage.set(key,value));return false;
+  staged.forEach(([key,value])=>currentTabStorage.set(key,value));
+  queueMicrotask(()=>window.dispatchEvent(new Event('kep:progress-changed')));
+  return false;
 }
 function storageSavedText(text){
   return storageSessionOnly?text.replace('Tersimpan','Dicatat untuk tab ini').replace('tersimpan','aktif untuk tab ini'):text;
@@ -4328,3 +4331,10 @@ $('brokerLikeQuestion').addEventListener('input',()=>$('brokerLikeQuestionResult
 $('fieldHelpQuery').addEventListener('input',()=>$('fieldHelpResult').hidden=true);
 $('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();
+// Expose only the existing non-sensitive backup interface to optional accounts.
+// The account module never accesses contract, payroll, personal notes or form field contents.
+window.KEPAccountProgress=Object.freeze({
+  ready:()=>Boolean(route&&documentPacks&&formWizards),
+  backup:()=>makeProgressBackup(),
+  restore:payload=>safeRestoreProgress(payload)
+});

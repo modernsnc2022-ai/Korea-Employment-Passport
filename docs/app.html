@@ -22,7 +22,7 @@
         <span class="service-identity">Panduan mandiri EPS - layanan independen, bukan pemerintah</span>
       </div>
     </div>
-    <button id="installBtn" class="ghost" hidden>Pasang</button>
+    <div class="header-account-actions"><button id="accountOpenBtn" type="button" class="ghost" hidden>Akun</button><button id="installBtn" class="ghost" hidden>Pasang</button></div>
   </header>
 
   <main class="shell">
@@ -806,6 +806,37 @@
     <a href="privacy.html">Privasi</a>
   </footer>
 
+  <dialog id="accountDialog" aria-labelledby="accountTitle" class="account-dialog">
+    <div class="account-dialog-header">
+      <div><strong>KEP Account</strong><h2 id="accountTitle">Masuk akun KEP</h2></div>
+      <button type="button" id="accountCloseBtn" class="ghost" aria-label="Tutup akun">?</button>
+    </div>
+    <p class="account-intro">Semua panduan tetap gratis tanpa akun. Akun membantu menyimpan progres pada perangkat lain. Bukan akun resmi EPS/KP2MI.</p>
+    <div id="accountStatus" role="status" aria-live="polite" hidden></div>
+    <form id="accountForm" class="account-form">
+      <label>Email<input id="accountEmail" type="email" autocomplete="email" inputmode="email" required maxlength="254"></label>
+      <label id="accountPasswordLabel">Kata sandi<input id="accountPassword" type="password" autocomplete="current-password" required maxlength="128"></label>
+      <label class="account-consent" hidden><input type="checkbox" id="accountPrivacyConsent"> Saya memahami <a href="privacy.html" target="_blank" rel="noopener">kebijakan privasi KEP</a> dan setuju membuat akun (untuk pendaftaran baru).</label>
+      <button id="accountSubmit" type="submit" class="primary full">Masuk</button>
+    </form>
+    <div class="account-mode-links" id="accountModeLinks">
+      <button type="button" data-account-mode="signup">Daftar gratis</button>
+      <button type="button" data-account-mode="login">Masuk</button>
+      <button type="button" data-account-mode="forgot">Lupa kata sandi?</button>
+    </div>
+    <div id="accountSignedIn" hidden>
+      <strong id="accountIdentity"></strong>
+      <p>Sinkronisasi hanya untuk progres dan checklist. Data kontrak, gaji, nomor identitas, serta isi dokumen tidak diunggah.</p>
+      <button type="button" id="accountSaveBtn" class="primary full">Simpan progres perangkat ke cloud</button>
+      <button type="button" id="accountRestoreBtn" class="secondary full">Pulihkan progres cloud ke perangkat</button>
+      <button type="button" id="accountDeleteProgressBtn" class="secondary full">Hapus progres cloud</button>
+      <button type="button" id="accountLogoutBtn" class="ghost full">Keluar akun</button>
+    </div>
+    <p class="account-footer-note">Saat memulihkan progres, cadangkan catatan lokal terlebih dahulu. Tidak ada sinkronisasi data dengan sistem pemerintah.</p>
+  </dialog>
+
+  <script src="account-config.js"></script>
   <script src="app-runtime.js"></script>
+  <script type="module" src="account.js"></script>
 </body>
 </html>

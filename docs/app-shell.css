@@ -561,3 +561,23 @@ button.primary:hover,a.primary:hover,.next-action .primary:hover,.quick-start .p
 .next-official-link a{color:#235e8f;font-weight:750;text-underline-offset:3px;overflow-wrap:anywhere}
 .next-official-link small{color:#526477;font-size:.77rem;line-height:1.45}
 @media(max-width:560px){.official-directory-grid{grid-template-columns:1fr}}
+
+/* Optional account is separate from the four core navigation tabs. */
+.header-account-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap}
+.account-dialog{width:min(92vw,490px);max-height:calc(100dvh - 24px);border:1px solid #c9d6e5;border-radius:16px;padding:0;background:#fff;color:#172b43;overflow-y:auto}
+.account-dialog::backdrop{background:rgba(14,35,64,.55)}
+.account-dialog-header{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid #dce4ed;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:14px 16px}
+.account-dialog-header strong{font-size:.76rem;color:#526477}.account-dialog-header h2{margin:3px 0 0;font-size:1.12rem;line-height:1.4}
+.account-dialog-header button{min-width:44px;min-height:44px;font-size:1.35rem}
+.account-intro,.account-footer-note{padding:0 16px;color:#526477;font-size:.85rem;line-height:1.6}
+.account-form,.account-mode-links,#accountSignedIn{padding:0 16px 14px;display:grid;gap:12px}
+.account-form label{display:grid;gap:6px;font-size:.85rem;font-weight:700}
+.account-form input:not([type="checkbox"]){width:100%;min-height:48px;border:1px solid #b9cbdc;border-radius:8px;padding:11px;font-size:1rem}
+.account-form .account-consent{display:flex;align-items:flex-start;gap:9px;font-size:.76rem;line-height:1.5;font-weight:400}
+.account-consent input{margin-top:4px;min-width:19px;min-height:19px}
+.account-mode-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.account-mode-links button{background:#eaf2fa;color:#285c87;border:1px solid #b9cbdc;border-radius:8px;padding:9px 12px;min-height:42px;cursor:pointer}
+#accountStatus{margin:12px 16px;padding:10px 12px;line-height:1.6;font-size:.84rem}
+#accountSignedIn p{font-size:.85rem;color:#526477;line-height:1.55;margin:0}
+.account-dialog [hidden]{display:none!important}
+@media(max-width:380px){.header-account-actions{gap:4px}.header-account-actions .ghost{padding:7px 8px;font-size:.75rem}}
