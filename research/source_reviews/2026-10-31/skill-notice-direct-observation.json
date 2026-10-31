@@ -1,0 +1,23 @@
+{
+  "observedAtDate": "2026-10-31",
+  "fetchPath": "Windows single HTTPS requests with normal certificate validation",
+  "humanApproval": false,
+  "normalizedMonitorFingerprint": false,
+  "note": "Raw response hashes are evidence only and must not replace normalized monitor fingerprints. No applicant rows were copied or published. Annex readability/personal assignments not reviewed.",
+  "sources": [
+    {
+      "kind": "notice",
+      "url": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
+      "httpStatus": 200,
+      "bytes": 38517,
+      "rawSha256": "3c75ffe0d5f598c0e2b4689cd72bee35e2000cf7a7c1e1dd2b676f9499c5d16b"
+    },
+    {
+      "kind": "annex",
+      "url": "https://www.kp2mi.go.id/uploads/gtgkorea/images/data_21-10-2026_Jadwal_Skill_Test_CPMI_Sektor_Manufaktur_Tahun_2026.pdf",
+      "httpStatus": 200,
+      "bytes": 1110288,
+      "rawSha256": "af3ebde1ab66d01139ac17057350186bbbe093b2b9b7232e6dbd361be4f42b43"
+    }
+  ]
+}
