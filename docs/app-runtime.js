@@ -4202,13 +4202,15 @@ function switchView(viewId,scroll=true){
     renderCompanyHub();
   }
   if(scroll){
+    // A bottom-tab change starts at the page top so the passport brand is visible.
+    // The header remains non-sticky and naturally disappears on manual scrolling.
+    window.scrollTo({top:0,left:0,behavior:'instant'});
     if(viewId==='journey'){
       const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
-      action.scrollIntoView({behavior:'instant',block:'start'});
       action.querySelector('.primary, select, button')?.focus({preventScroll:true});
-    }else{
-      if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
-      target.scrollIntoView({behavior:'instant',block:'start'});
+    }else if(heading){
+      heading.tabIndex=-1;
+      heading.focus({preventScroll:true});
     }
   }
 }
