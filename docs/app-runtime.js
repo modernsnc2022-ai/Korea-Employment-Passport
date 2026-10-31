@@ -1361,6 +1361,26 @@ stageDialog.addEventListener('close',()=>{
   target?.focus({preventScroll:true});
 });
 
+/* Official destinations support a task; they never imply an open intake or official KEP status. */
+const OFFICIAL_STEP_VISITS=Object.freeze({
+  eligibility:{label:'Periksa pengumuman G-to-G Korea',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  biometric:{label:'Periksa panggilan biometrik KP2MI',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  final_selection:{label:'Periksa hasil akhir EPS-TOPIK',url:'https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=ko'},
+  mcu1:{label:'Periksa pengumuman pemeriksaan kesehatan',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  employer_selection:{label:'Periksa progres resmi melalui EPS',url:'https://www.eps.go.kr/eo/langMain.eo'},
+  slc:{label:'Periksa pengumuman kontrak kerja KP2MI',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  post_slc_requirements:{label:'Periksa panggilan setelah SLC',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  visa_docs:{label:'Periksa panggilan pemberkasan visa',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  predeparture_training:{label:'Periksa jadwal OPP resmi',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  mcu3_departure:{label:'Periksa panggilan pemeriksaan akhir',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  departure:{label:'Periksa pengumuman keberangkatan',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  korea_entry_training:{label:'Periksa progres kedatangan di EPS',url:'https://www.eps.go.kr/eo/langMain.eo'},
+  employer_handover:{label:'Periksa progres penempatan di EPS',url:'https://www.eps.go.kr/eo/langMain.eo'}
+});
+function officialDirectVisit(stage){
+  if(stage?.officialActionUrl)return {url:stage.officialActionUrl,label:stage.officialActionLabel||'Buka layanan resmi terkait'};
+  return OFFICIAL_STEP_VISITS[stage?.id]||null;
+}
 function openStage(stage){
   if(stageDialogHistoryClosing){queuedStageDialog=stage;return;}
   if(!stageDialog.open){
@@ -1398,14 +1418,15 @@ function openStage(stage){
   competencyLink.href=canShowCompetency?competencyNotice.url:'#';
   renderSharedKoreaCore(stage);
   const officialAction=$('stageOfficialAction');
-  if(stage.officialActionUrl){
+  const visit=officialDirectVisit(stage);
+  if(visit){
     officialAction.hidden=false;
-    officialAction.href=stage.officialActionUrl;
-    officialAction.textContent=(stage.officialActionLabel||'Buka layanan resmi')+' ↗';
+    officialAction.href=visit.url;
+    officialAction.textContent=visit.label+' ↗';
+    officialAction.title='Periksa di situs terkait; jadwal pendaftaran dan hasil hanya ditetapkan instansi resmi.';
   }else{
     officialAction.hidden=true;
-    officialAction.href='#';
-    officialAction.textContent='Buka layanan resmi ↗';
+    officialAction.removeAttribute('href');
   }
   renderScopePicker(stage);
   renderStageBqc(stage);
@@ -1537,6 +1558,17 @@ function renderNextAction(){
       ? `<div class="next-scope"><label>${escapeHtml(scopePromptForStage(next.id))}<select data-next-scope><option value="">Pilih tanggal</option>${scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('')}</select></label><small>Pilih hanya jadwal yang memang memuat nama Anda.</small></div><button class="secondary" data-stage="${escapeHtml(next.id)}">Saya belum tahu → lihat petunjuk</button>`
       : normalAction;
     box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p>${scopeAction}`;
+    const nextOfficial=officialDirectVisit(next);
+    if(nextOfficial){
+      const row=document.createElement('div');
+      row.className='next-official-link';
+      const link=document.createElement('a');
+      link.href=nextOfficial.url;link.target='_blank';link.rel='noopener noreferrer';
+      link.textContent=nextOfficial.label+' ↗';
+      const caution=document.createElement('small');
+      caution.textContent='Periksa jadwal dan status resmi sebelum mendaftar atau membayar.';
+      row.append(link,caution);box.append(row);
+    }
     renderContextTools(next);
   }else{
     box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
