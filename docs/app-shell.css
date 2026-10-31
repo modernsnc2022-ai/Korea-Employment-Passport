@@ -472,3 +472,8 @@ li{overflow-wrap:anywhere}
 .home-help-body{padding:0 16px 16px}
 .home-optional-help:not([open]) .home-help-body{display:none}
 @media(max-width:350px){.home-help-trigger{flex-wrap:wrap}.home-help-trigger span{margin-left:auto}}
+
+/* Toggle is a button inside the stable home help section; hidden content occupies no space. */
+.micro-help .home-help-toggle{min-height:44px;margin-top:10px;padding:9px 12px}
+.micro-help #homeHelpContent[hidden]{display:none!important}
+.micro-help #homeHelpContent:not([hidden]){margin-top:10px}
