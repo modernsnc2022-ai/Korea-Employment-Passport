@@ -38,7 +38,7 @@ test('beta applicant intake can submit directly without opening an email client'
     await route.fulfill({
       status: 201,
       contentType: 'application/json',
-      headers: { 'Access-Control-Allow-Origin': 'http://127.0.0.1:4173' },
+      headers: { 'Access-Control-Allow-Origin': new URL(route.request().headers().origin || 'http://127.0.0.1:4173').origin },
       body: JSON.stringify({ ok: true, submissionId: 'KEP-I-TEST1234' })
     });
   });
