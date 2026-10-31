@@ -4173,6 +4173,10 @@ function switchView(viewId,scroll=true){
   const target=document.getElementById(viewId);
   if(!target?.classList.contains('view'))return;
   document.body.dataset.activeView=viewId;
+  // The common passport brand stays, but the context heading follows the active tab.
+  const sectionTitles={journey:'Langkah sekarang',documents:'Asisten Dokumen',fees:'Periksa biaya',gaps:'Bantuan'};
+  const contextualTitle=sectionTitles[viewId]||({'documents':'Asisten Dokumen','costs':'Periksa biaya','support':'Bantuan'}[viewId]);
+  if(contextualTitle)$('routeTitle').textContent=contextualTitle;
   if(viewId==='journey')renderQuickStart();
   else{$('quickStart').hidden=true;document.body.classList.remove('setup-mode');}
   const heading=target.querySelector('h2');
