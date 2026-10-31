@@ -402,3 +402,9 @@ li{overflow-wrap:anywhere}
 
 .storage-status{margin-bottom:16px;padding:16px;border:1px solid #b58117;border-left:4px solid #b58117;border-radius:8px;background:var(--warn)}
 .storage-status p{margin:8px 0}.storage-status .muted{font-size:.85rem}.storage-status button{max-width:100%}
+
+/* Progressive disclosure for example copy: keep the question form as the visible action. */
+.micro-help-examples{margin-top:8px;color:var(--muted);font-size:.84rem}
+.micro-help-examples>summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:36px;display:list-item;align-content:center}
+.micro-help-examples p{padding:6px 0 0;line-height:1.55}
+.micro-help-examples>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
