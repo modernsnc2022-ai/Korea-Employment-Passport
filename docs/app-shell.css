@@ -528,3 +528,16 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,te
 /* Destructive, blocked, warning, and verified status retain their semantic colors. */
 .source-state.review,.source-state.unknown{background:#fff1d8;color:#71480b}
 .source-state.clean{background:#e8f3ec;color:#20563a}
+
+/* Passport Light: retain the navy emblem; lighten interactive surfaces. */
+:root{--bg:#f8fafd;--soft:#eaf2fa;--kep-action:#285c87;--kep-action-hover:#204c70;--kep-selected:#eaf2fa}
+body{background:var(--bg)}
+.topbar{background:#f8fafd;border-bottom-color:#e4ebf3;box-shadow:0 2px 10px rgba(20,45,76,.045)}
+button.primary,.primary[type="button"],a.primary,.next-action .primary,.quick-start .primary{background:var(--kep-action);border-color:var(--kep-action);color:#fff}
+button.primary:hover,a.primary:hover,.next-action .primary:hover,.quick-start .primary:hover{background:var(--kep-action-hover)}
+.utility-tab.active,.utility-tab[aria-selected="true"]{background:var(--kep-selected);color:var(--kep-action);box-shadow:inset 0 -3px var(--kep-action)}
+.phase-btn.active,.phase-btn[aria-current="step"],.quick-choice[aria-pressed="true"],.quick-choice.active{background:var(--kep-selected);color:var(--kep-navy);border-color:#bad0e4}
+.phase-btn.active .phase-number,.phase-btn.active .phase-index{background:var(--kep-action);color:#fff}
+.next-action{border-top-color:var(--kep-action)}
+.summary{background:linear-gradient(120deg,#204b70,#285c87 72%,#42749a);border-color:#467498}
+.summary::after{border-color:rgba(208,231,248,.16)}
