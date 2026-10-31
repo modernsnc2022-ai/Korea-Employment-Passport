@@ -13,7 +13,7 @@ test('real service worker preserves other apps, caches current styling and discl
   await page.evaluate(()=>navigator.serviceWorker.ready);
   await page.reload();await page.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
   const keys=await page.evaluate(()=>caches.keys());
-  expect(keys).toContain('other-app-cache');expect(keys).toContain('kep-v146-pwa-20261031');expect(keys).not.toContain('kep-v144');
+  expect(keys).toContain('other-app-cache');expect(keys).toContain('kep-v147-reading-20261031');expect(keys).not.toContain('kep-v144');
   expect(await page.evaluate(async()=>Boolean(await caches.match(new URL('styles.css',location.href).href)))).toBe(true);
   await page.locator('[data-quick-stage="exam_fee"]').click();
   const saved=await page.evaluate(()=>localStorage.getItem('kep.doneStages'));
@@ -28,7 +28,7 @@ test('real service worker preserves other apps, caches current styling and discl
   // alone does not prove that the worker cannot obtain a network response.
   const worker=context.serviceWorkers().find(w=>w.url().endsWith('/sw.js'));
   await worker.evaluate(()=>{self.kepOriginalFetch=self.fetch;self.fetch=()=>Promise.reject(new TypeError('test network loss'));});
-  const deleted=await page.evaluate(async()=>{const c=await caches.open('kep-v146-pwa-20261031');return await c.delete(new URL('data/id_e9_manufacturing_2026.json',location.href).href);});
+  const deleted=await page.evaluate(async()=>{const c=await caches.open('kep-v147-reading-20261031');return await c.delete(new URL('data/id_e9_manufacturing_2026.json',location.href).href);});
   expect(deleted).toBe(true);
   await page.reload();await expect(page.locator('#routeLoadRecovery')).toBeVisible();
   await expect(page.locator('#nextAction')).toBeHidden();
