@@ -423,3 +423,9 @@ li{overflow-wrap:anywhere}
 .utility-icon{display:block;width:19px;height:19px;flex:none}
 @media(max-width:720px){.utility-tab{display:flex;flex-direction:column;gap:3px;min-height:56px;line-height:1.15}.utility-icon{width:20px;height:20px}}
 @media(max-width:350px){.utility-tab{font-size:.72rem}.utility-icon{width:18px;height:18px}}
+
+/* Secondary document guidance: keep safety copy accessible without text-heavy first view. */
+.section-extra-guidance{margin-top:8px;font-size:.84rem;color:var(--muted);max-width:72ch}
+.section-extra-guidance>summary{cursor:pointer;color:var(--ink);font-weight:700;min-height:36px;align-content:center}
+.section-extra-guidance>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.section-extra-guidance p{margin:6px 0 0;line-height:1.55}
