@@ -417,3 +417,9 @@ li{overflow-wrap:anywhere}
 .how-to-use-steps span{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.84rem}
 .how-to-use-steps b{width:22px;height:22px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:var(--soft);color:var(--blue)}
 @media(max-width:600px){.how-to-use-steps{display:grid;gap:10px}}
+
+/* Visual, recognisable task navigation without altering view IDs or tab semantics. */
+.utility-tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.utility-icon{display:block;width:19px;height:19px;flex:none}
+@media(max-width:720px){.utility-tab{display:flex;flex-direction:column;gap:3px;min-height:56px;line-height:1.15}.utility-icon{width:20px;height:20px}}
+@media(max-width:350px){.utility-tab{font-size:.72rem}.utility-icon{width:18px;height:18px}}
