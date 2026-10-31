@@ -541,3 +541,8 @@ button.primary:hover,a.primary:hover,.next-action .primary:hover,.quick-start .p
 .next-action{border-top-color:var(--kep-action)}
 .summary{background:linear-gradient(120deg,#204b70,#285c87 72%,#42749a);border-color:#467498}
 .summary::after{border-color:rgba(208,231,248,.16)}
+
+/* Passport Light contrast fix: force readable foreground on dark hero/card surfaces. */
+.summary,.summary h1,.summary h2,.summary strong,.summary .eyebrow,.summary #routeTitle{color:#ffffff}
+.summary p,.summary small,.summary #routeMeta{color:#edf5ff}
+.summary a{color:#ffffff;text-decoration:underline;text-underline-offset:3px}
