@@ -9,7 +9,7 @@ async function choosePayment(page) {
 test('source context gives the original link and dated scope without claiming live verification', async ({ page, context }) => {
   await choosePayment(page);
   await expect(page.locator('#nextAction .next-evidence')).toBeVisible();
-  const source = page.locator('#nextAction .next-evidence>a');
+  const source = page.locator('#nextAction .task-source-shortcut');
   const url = await source.getAttribute('href');
   expect(url).toMatch(/^https:\/\/(www\.)?kp2mi\.go\.id\//);
   await page.locator('#nextAction .next-evidence>details>summary').click();
