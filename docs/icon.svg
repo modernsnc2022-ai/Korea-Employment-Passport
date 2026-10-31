@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="icon-title">
   <title id="icon-title">Korea Employment Passport</title>
-  <rect width="64" height="64" rx="14" fill="#071a36"/>
-  <rect x="15" y="11" width="37" height="44" rx="5" fill="#155eef"/>
-  <path d="M20 12v42" stroke="#b8d2ff" stroke-width="2.5"/>
+  <rect width="64" height="64" rx="14" fill="#0d4039"/>
+  <rect x="15" y="11" width="37" height="44" rx="5" fill="#17695c"/>
+  <path d="M20 12v42" stroke="#c6e4dc" stroke-width="2.5"/>
   <path d="M29 24h16M29 31h16M29 38h11" stroke="white" stroke-width="3" stroke-linecap="round"/>
   <circle cx="36" cy="47" r="3.5" fill="#fff"/>
 </svg>

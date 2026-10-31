@@ -1,13 +1,36 @@
 {
-  "name":"Korea Employment Passport",
-  "short_name":"KEP",
-  "start_url":"./app.html",
-  "scope":"./",
-  "display":"standalone",
-  "background_color":"#f6f8fc",
-  "theme_color":"#071a36",
-  "description":"Official-route companion for Indonesia → Korea E-9 manufacturing, designed to eliminate private-broker dependency.",
-  "icons":[
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  "name": "Korea Employment Passport",
+  "short_name": "KEP",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f5",
+  "theme_color": "#17695c",
+  "description": "Official-route companion for Indonesia → Korea E-9 manufacturing, designed to eliminate private-broker dependency.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
