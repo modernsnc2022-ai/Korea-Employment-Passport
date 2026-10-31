@@ -1,0 +1,108 @@
+--- a/docs/data/id_e9_manufacturing_2026.json
++++ b/docs/data/id_e9_manufacturing_2026.json
+@@ -87,10 +87,10 @@
+       "title": "Mandatory Skill Test + optional Job Capacity Assessment",
+       "authority": "HRD Korea",
+       "kind": "official_exam",
+-      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, attend the mandatory Skill Test (physical strength, interview, basic skills). Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. If a participant chose optional evidence during that closed window, the official annex also required a completed Formulir Uji Kompetensi with any of the four evidence types; when an employer could not issue experience proof, the alternative factual confirmation required two non-relative sureties, identity copies and supporting contract/visa/immigration records. These are conditional documents, NOT requirements for every Skill Test candidate or the later job application. Follow a new official notice for any later schedule; do not reuse this closed window.",
++      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, attend the mandatory Skill Test (physical strength, interview, basic skills). Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. If a participant chose optional evidence during that closed window, the official annex also required a completed Formulir Uji Kompetensi with any of the four evidence types; when an employer could not issue experience proof, the alternative factual confirmation required two non-relative sureties, identity copies and supporting contract/visa/immigration records. These are conditional documents, NOT requirements for every Skill Test candidate or the later job application. KP2MI announced 11–13 November 2026 at Grand Setos Hotel Semarang. Check your assigned session in the official annex. The September upload remains closed.",
+       "brokerReplacement": "prep_complete",
+-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+-      "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
++      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
++      "officialActionUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
+       "officialActionLabel": "Buka Skill Test resmi",
+       "warning": "The optional 21–23 September 2026 Manufacturing competency upload is closed, not required for every candidate and not the Manufacturing online job-application document checklist. EPS-TOPIK stage-one pass is not final selection; the Skill Test remains mandatory. The optional upload form and employer-evidence fallback are only conditionally mandatory within that already closed procedure.",
+       "competencyUploadNotice": {
+--- a/docs/data/id_e9_manufacturing_2026_id.json
++++ b/docs/data/id_e9_manufacturing_2026_id.json
+@@ -31,7 +31,7 @@
+   },
+   "skill_competency": {
+     "title": "Skill Test wajib + Penilaian Kapasitas Kerja opsional",
+-    "action": "Jika resmi lulus EPS-TOPIK tahap pertama, peserta WAJIB mengikuti Skill Test (fisik, wawancara, kemampuan dasar). Job Capacity Assessment bersifat OPSIONAL bila memiliki bukti kompetensi manufaktur. KP2MI mengumumkan unggah bukti opsional melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 hingga 23 September 2026 pukul 13.00 WIB; periode tersebut SUDAH BERAKHIR. Bukti yang disebut: pengalaman kerja manufaktur minimal 1 tahun, pendidikan manufaktur minimal Diploma I, pelatihan manufaktur minimal 120 jam, atau sertifikat kompetensi nasional manufaktur yang masih berlaku. KHUSUS bagi peserta yang memilih unggah bukti kompetensi opsional pada periode yang kini ditutup, lampiran resmi mewajibkan Formulir Uji Kompetensi ikut diserahkan bersama salah satu bukti. Jika perusahaan tidak bisa menerbitkan surat pengalaman kerja, formulir pengganti Konfirmasi Dasar Faktual membutuhkan dua penjamin yang bukan keluarga sedarah/perkawinan, tanda tangan, salinan KTP/paspor dan nomor kontak tiap penjamin serta kontrak kerja atau catatan visa/imigrasi yang relevan. Syarat-syarat bersyarat ini BUKAN kewajiban semua peserta Skill Test dan BUKAN daftar dokumen lamaran kerja manufaktur. Cek pengumuman resmi baru bila ada perubahan periode; tanggal dan tempat Skill Test masih memerlukan pengumuman tersendiri.",
++    "action": "Jika resmi lulus EPS-TOPIK tahap pertama, peserta WAJIB mengikuti Skill Test (fisik, wawancara, kemampuan dasar). Job Capacity Assessment bersifat OPSIONAL bila memiliki bukti kompetensi manufaktur. KP2MI mengumumkan unggah bukti opsional melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 hingga 23 September 2026 pukul 13.00 WIB; periode tersebut SUDAH BERAKHIR. Bukti yang disebut: pengalaman kerja manufaktur minimal 1 tahun, pendidikan manufaktur minimal Diploma I, pelatihan manufaktur minimal 120 jam, atau sertifikat kompetensi nasional manufaktur yang masih berlaku. KHUSUS bagi peserta yang memilih unggah bukti kompetensi opsional pada periode yang kini ditutup, lampiran resmi mewajibkan Formulir Uji Kompetensi ikut diserahkan bersama salah satu bukti. Jika perusahaan tidak bisa menerbitkan surat pengalaman kerja, formulir pengganti Konfirmasi Dasar Faktual membutuhkan dua penjamin yang bukan keluarga sedarah/perkawinan, tanda tangan, salinan KTP/paspor dan nomor kontak tiap penjamin serta kontrak kerja atau catatan visa/imigrasi yang relevan. Syarat-syarat bersyarat ini BUKAN kewajiban semua peserta Skill Test dan BUKAN daftar dokumen lamaran kerja manufaktur. Cek pengumuman resmi baru bila ada perubahan periode; jadwal diumumkan: 11–13 November 2026, Grand Setos Hotel Semarang. Cek sesi pribadi pada lampiran resmi.",
+     "warning": "Tidak mengikuti Skill Test menyebabkan gugur. Unggah dokumen kompetensi pada 21–23 September 2026 adalah OPSIONAL dan sudah ditutup, bukan persyaratan wajib semua peserta, dan BUKAN daftar dokumen pengajuan lamaran kerja (job application). Jangan mengunggah di luar SiskoP2MI atau menganggap EPS-TOPIK tahap pertama sebagai kelulusan akhir. Bila memilih bukti kompetensi pada periode resmi tersebut, Formulir Uji Kompetensi ikut WAJIB, tetapi proses unggah itu sudah TUTUP. Jangan menyamakan kewajiban bersyarat ini dengan kewajiban semua peserta."
+   },
+   "final_selection": {
+--- a/docs/data/exact_answer_rules_v1.json
++++ b/docs/data/exact_answer_rules_v1.json
+@@ -3176,9 +3176,9 @@
+         "skill_competency"
+       ],
+       "question": "Apakah semua peserta Skill Test Manufaktur 2026 harus unggah dokumen kompetensi? Apakah periodenya masih buka?",
+-      "answer": "TIDAK WAJIB: pengunggahan bukti kompetensi hanya opsional bagi pemilik pengalaman kerja manufaktur minimal 1 tahun, ijazah manufaktur minimal Diploma I, sertifikat pelatihan manufaktur minimal 120 jam, atau sertifikat nasional kompetensi manufaktur yang masih berlaku. Pengumuman KP2MI 17 September 2026 menetapkan unggah melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 sampai 23 September 2026 pukul 13.00 WIB; periode itu sudah BERAKHIR. Jika seorang peserta memilih mengunggah salah satu dari empat bukti kompetensi dalam periode yang kini sudah ditutup, ia juga WAJIB melampirkan Formulir Uji Kompetensi (lampiran resmi). Khusus bila perusahaan tidak dapat menerbitkan surat pengalaman kerja, formulir Konfirmasi Dasar Faktual memerlukan tanda tangan DUA penjamin non-keluarga, salinan KTP/Paspor dan nomor telepon tiap penjamin, disertai kontrak kerja atau bukti visa/imigrasi sesuai kondisi. Kewajiban formulir dan lampiran itu BERSYARAT atas pilihan jenis bukti, BUKAN syarat untuk semua peserta. Bukti tersebut BUKAN daftar dokumen wajib untuk pengajuan lamaran kerja manufaktur atau dokumen wajib yang dibawa semua peserta Skill Test. Daftar dokumen wajib ke lokasi dan jadwal Skill Test harus merujuk pada pengumuman Skill Test yang khusus bila terbit.",
++      "answer": "TIDAK WAJIB: pengunggahan bukti kompetensi hanya opsional bagi pemilik pengalaman kerja manufaktur minimal 1 tahun, ijazah manufaktur minimal Diploma I, sertifikat pelatihan manufaktur minimal 120 jam, atau sertifikat nasional kompetensi manufaktur yang masih berlaku. Pengumuman KP2MI 17 September 2026 menetapkan unggah melalui akun SiskoP2MI pada 21 September 2026 pukul 09.00 sampai 23 September 2026 pukul 13.00 WIB; periode itu sudah BERAKHIR. Jika seorang peserta memilih mengunggah salah satu dari empat bukti kompetensi dalam periode yang kini sudah ditutup, ia juga WAJIB melampirkan Formulir Uji Kompetensi (lampiran resmi). Khusus bila perusahaan tidak dapat menerbitkan surat pengalaman kerja, formulir Konfirmasi Dasar Faktual memerlukan tanda tangan DUA penjamin non-keluarga, salinan KTP/Paspor dan nomor telepon tiap penjamin, disertai kontrak kerja atau bukti visa/imigrasi sesuai kondisi. Kewajiban formulir dan lampiran itu BERSYARAT atas pilihan jenis bukti, BUKAN syarat untuk semua peserta. Bukti tersebut BUKAN daftar dokumen wajib untuk pengajuan lamaran kerja manufaktur atau dokumen wajib yang dibawa semua peserta Skill Test. Bawa identitas dan kartu ujian asli; bukti kompetensi asli hanya bagi yang sudah mengunggahnya, dalam stopmap kuning.",
+       "writeExactly": "Jangan unggah bukti kompetensi secara terlambat atau melalui LPK/perantara; hanya SiskoP2MI untuk periode resmi. Jangan menyebut unggah bukti opsional ini sebagai syarat semua peserta. Cek pengumuman resmi untuk jadwal dan dokumen wajib Skill Test. Lampiran resmi mewajibkan Formulir Uji Kompetensi hanya jika memilih unggah bukti pada periode tersebut; jangan menuntut dokumen itu dari semua peserta atau menganggap periode sudah dibuka kembali.",
+-      "why": "Pengumuman resmi KP2MI PENG.2522/04.04/PP.02.04/IX/2026 tanggal 17 September 2026 secara eksplisit menyatakan tidak wajib/opsional, periode 21–23 September 2026 WIB, dan kanal SiskoP2MI. Pengumuman tersebut masih menyatakan jadwal Skill Test menyusul. Lampiran resmi Petunjuk Teknis Pemenuhan Dokumen Uji Kompetensi, halaman 3 poin 6, mewajibkan Formulir Uji Kompetensi apabila salah satu dari empat bukti diunggah. Lampiran Konfirmasi Dasar Faktual Pengalaman Kerja meminta dua penjamin non-keluarga, identitas dan dukungan bukti relevan khusus jika perusahaan tidak dapat menerbitkan dokumen.",
++      "why": "Pengumuman resmi KP2MI PENG.2522/04.04/PP.02.04/IX/2026 tanggal 17 September 2026 secara eksplisit menyatakan tidak wajib/opsional, periode 21–23 September 2026 WIB, dan kanal SiskoP2MI. Jadwal telah diterbitkan melalui pengumuman 21 Oktober 2026. Lampiran resmi Petunjuk Teknis Pemenuhan Dokumen Uji Kompetensi, halaman 3 poin 6, mewajibkan Formulir Uji Kompetensi apabila salah satu dari empat bukti diunggah. Lampiran Konfirmasi Dasar Faktual Pengalaman Kerja meminta dua penjamin non-keluarga, identitas dan dukungan bukti relevan khusus jika perusahaan tidak dapat menerbitkan dokumen.",
+       "doNotDo": [
+         "Jangan membawa atau mengubah dokumen hanya berdasarkan grup/LPK.",
+         "Jangan menganggap daftar 2025 otomatis berlaku pada 2026.",
+@@ -3188,8 +3188,12 @@
+       ],
+       "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
+       "verifiedAt": "2026-10-14",
+-      "verificationStatus": "waiting_official_notice",
+-      "scopeType": "route_2026"
++      "verificationStatus": "pending_human_review",
++      "scopeType": "route_2026",
++      "additionalSourceUrls": [
++        "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026"
++      ],
++      "candidateObservedAt": "2026-10-31"
+     },
+     {
+       "id": "skill_schedule_wait_official_2026",
+@@ -3197,17 +3201,18 @@
+         "skill_competency"
+       ],
+       "question": "Jadwal dan lokasi Skill Test manufaktur 2026 dilihat di mana?",
+-      "answer": "Gunakan pengumuman lanjutan resmi KP2MI/HRD Korea untuk Skill Test manufaktur 2026. Pengumuman pendaftaran awal tidak menetapkan jadwal/lokasi final.",
+-      "writeExactly": "Pantau pengumuman G-to-G Korea KP2MI dan EPS-TOPIK. Jangan datang memakai jadwal tahun 2025 atau jadwal sektor lain.",
+-      "why": "Pengumuman pendaftaran 2026 menyatakan detail tahap kedua akan diumumkan kemudian.",
++      "answer": "KP2MI telah menerbitkan jadwal: 11–13 November 2026 di Grand Setos Hotel Semarang.",
++      "writeExactly": "Lihat sesi dan kelompok pribadi pada lampiran resmi; jangan menebak atau mengganti jadwal.",
++      "why": "Pengumuman KP2MI 21 Oktober 2026, PENG.2816/04.04/PP.02.04/X/2026.",
+       "doNotDo": [
+         "Jangan memakai jadwal Skill Test perikanan 2026 untuk manufaktur.",
+         "Jangan memakai jadwal manufaktur 2025 sebagai jadwal 2026."
+       ],
+-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+-      "verifiedAt": "2026-10-03",
+-      "verificationStatus": "waiting_official_notice",
+-      "scopeType": "route_2026"
++      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
++      "verifiedAt": "2026-10-03",
++      "verificationStatus": "pending_human_review",
++      "scopeType": "route_2026",
++      "candidateObservedAt": "2026-10-31"
+     },
+     {
+       "id": "roster_validity_one_year_with_current_expiry",
+@@ -3362,17 +3367,18 @@
+         "skill_competency"
+       ],
+       "question": "Pakaian/peralatan apa yang harus disiapkan untuk Skill Test manufaktur 2026?",
+-      "answer": "Belum ada pakaian/peralatan manufaktur 2026 yang aman untuk dikunci dari pengumuman pendaftaran awal. Ikuti pengumuman Skill Test manufaktur 2026 yang spesifik ketika terbit.",
+-      "writeExactly": "Jangan membeli/menyiapkan perlengkapan khusus berdasarkan Skill Test 2025 atau sektor perikanan 2026. Saat pengumuman manufaktur 2026 terbit, aplikasi akan menampilkan daftar tepatnya.",
+-      "why": "Pengumuman pendaftaran 2026 hanya menyebut tahap kedua Skill Test + Competency Test dan menyatakan rincian lengkap akan diumumkan kemudian.",
++      "answer": "Gunakan kaos putih berkerah, celana training gelap, dan sepatu olahraga.",
++      "writeExactly": "Ikuti ketentuan perlengkapan pada pengumuman resmi.",
++      "why": "Pengumuman KP2MI 21 Oktober 2026, PENG.2816/04.04/PP.02.04/X/2026.",
+       "doNotDo": [
+         "Jangan memakai aturan pakaian sektor perikanan untuk manufaktur.",
+         "Jangan memakai daftar 2025 sebagai aturan 2026."
+       ],
+-      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-progam-g-to-g-ke-korea-selatan-dengan-sistem-poin-tahun-2026",
+-      "verifiedAt": "2026-10-03",
+-      "verificationStatus": "waiting_official_notice",
+-      "scopeType": "route_2026"
++      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
++      "verifiedAt": "2026-10-03",
++      "verificationStatus": "pending_human_review",
++      "scopeType": "route_2026",
++      "candidateObservedAt": "2026-10-31"
+     },
+     {
+       "id": "opp_stay_follow_call_2026",
