@@ -4231,6 +4231,7 @@ skipNavigationObserver.observe(document.body,{attributes:true,attributeFilter:['
 });
 syncSkipNavigation();
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+document.querySelectorAll('[data-worker-tool]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.workerTool)));
 document.querySelectorAll('.view:not(#journey)').forEach(view=>{
   const button=document.createElement('button');
   button.type='button';button.className='tool-return';button.textContent='← Kembali ke langkah saya';
