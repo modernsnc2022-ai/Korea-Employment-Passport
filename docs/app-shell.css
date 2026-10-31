@@ -453,3 +453,13 @@ li{overflow-wrap:anywhere}
 .worker-help-prep p{color:var(--muted);margin:12px 0 8px}
 .worker-help-prep a{display:inline-block;font-weight:750;overflow-wrap:anywhere;padding:8px 0}
 .worker-help-prep small{display:block;color:var(--muted);line-height:1.5}
+
+/* 2026-10-31 visual audit: show next action, then progress stages, then optional Q&A on narrow layouts. */
+@media(max-width:900px){
+ .flow-dashboard{display:flex;flex-direction:column;gap:12px}
+ .action-column{display:contents}
+ .flow-dashboard .next-action{order:1}
+ .flow-dashboard .context-tools{order:2}
+ .flow-dashboard .phase-panel{order:3}
+ .flow-dashboard .micro-help{order:4}
+}
