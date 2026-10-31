@@ -23,7 +23,7 @@
   </header>
 
   <main class="shell">
-    <section id="offlineStatus" class="offline-status" role="status" aria-live="polite" hidden><strong>Anda sedang offline.</strong> Panduan tersimpan dapat kedaluwarsa. Sambungkan internet dan periksa sumber resmi sebelum mengirim dokumen atau membayar.</div></details>
+    <section id="offlineStatus" class="offline-status" role="status" aria-live="polite" hidden><strong>Anda sedang offline.</strong> Panduan tersimpan dapat kedaluwarsa. Sambungkan internet dan periksa sumber resmi sebelum mengirim dokumen atau membayar.</section>
     <section id="storageStatus" class="storage-status" role="alert" hidden>
       <strong>Penyimpanan perangkat tidak tersedia</strong>
       <p id="storageFailureMessage"></p>
@@ -97,7 +97,9 @@
       <div class="action-column">
         <section id="nextAction" class="next-action" hidden></section>
         <details id="contextTools" class="context-tools" hidden></details>
-        <details class="micro-help home-optional-help"><summary class="home-help-trigger">Butuh bantuan untuk langkah ini? <span>Ajukan pertanyaan</span></summary><div class="home-help-body">
+        <section class="micro-help">
+          <span class="eyebrow dark">BINGUNG?</span>
+          <h3>Butuh bantuan untuk langkah ini?</h3>
           <details class="micro-help-examples"><summary>Lihat contoh pertanyaan</summary><p>Contoh: “rekening siapa?”, “pilih pribadi atau perusahaan?”, “alamat mana yang ditulis?”, “PDF atau JPG?”</p></details>
           <div id="quickQuestionChips" class="quick-question-chips" hidden></div>
           <div class="micro-help-row">
@@ -105,8 +107,7 @@
             <button id="brokerLikeQuestionBtn" class="primary" type="button">Cari panduan resmi</button>
           </div>
           <div id="brokerLikeQuestionResult" role="status" aria-live="polite" class="result" hidden></div>
-          </div>
-        </details>
+        </section>
       </div>
     </section>
 
