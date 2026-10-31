@@ -100,6 +100,8 @@
         <section class="micro-help">
           <span class="eyebrow dark">BINGUNG?</span>
           <h3>Butuh bantuan untuk langkah ini?</h3>
+          <button id="toggleHomeHelpBtn" type="button" class="secondary home-help-toggle" aria-expanded="false" aria-controls="homeHelpContent">Tampilkan pertanyaan</button>
+          <div id="homeHelpContent" hidden>
           <details class="micro-help-examples"><summary>Lihat contoh pertanyaan</summary><p>Contoh: “rekening siapa?”, “pilih pribadi atau perusahaan?”, “alamat mana yang ditulis?”, “PDF atau JPG?”</p></details>
           <div id="quickQuestionChips" class="quick-question-chips" hidden></div>
           <div class="micro-help-row">
@@ -107,6 +109,7 @@
             <button id="brokerLikeQuestionBtn" class="primary" type="button">Cari panduan resmi</button>
           </div>
           <div id="brokerLikeQuestionResult" role="status" aria-live="polite" class="result" hidden></div>
+          </div>
         </section>
       </div>
     </section>
