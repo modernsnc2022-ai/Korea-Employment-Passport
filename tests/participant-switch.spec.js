@@ -36,7 +36,7 @@ test('clearing a participant loads unscoped data and cannot be undone by the old
  await page.reload();await expect(page.locator('#contract_enterpriseName')).toHaveValue('Unscoped company');expect(await page.evaluate(()=>localStorage.getItem('kep.betaTesterId'))).toBe(null);
 });
 test('saving the same participant keeps their temporary question',async({page})=>{
- await setup(page);await page.locator('#brokerLikeQuestion').fill('Draft for the same participant');await changeId(page,'KEP-0001');
+ await setup(page);await page.locator('#toggleHomeHelpBtn').click();await page.locator('#brokerLikeQuestion').fill('Draft for the same participant');await changeId(page,'KEP-0001');
  await expect(page.locator('#brokerLikeQuestion')).toHaveValue('Draft for the same participant');
 });
 test('a fresh participant can keep editing their ID before declaring their own stage',async({page})=>{
