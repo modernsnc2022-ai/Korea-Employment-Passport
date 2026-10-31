@@ -222,6 +222,9 @@ test('simple UX lock: first-time user can identify now, ask, and continue withou
 
   await expect(page.locator('#nextAction')).toBeVisible();
   await expect(page.locator('#nextAction')).toContainText('LANGKAH BERIKUTNYA');
+  await expect(page.locator('#toggleHomeHelpBtn')).toBeVisible();
+  await expect(page.locator('#brokerLikeQuestion')).toBeHidden();
+  await page.locator('#toggleHomeHelpBtn').click();
   await expect(page.locator('#brokerLikeQuestion')).toBeVisible();
   await expect(page.locator('#brokerLikeQuestionBtn')).toBeVisible();
 
@@ -266,6 +269,7 @@ test('unknown broker-like question routes to official human help instead of gues
   const errors = await freshPage(page);
   await setStage(page, 'eligibility');
 
+  await page.locator('#toggleHomeHelpBtn').click();
   await page.locator('#brokerLikeQuestion').fill('Apakah saya harus memilih tombol rahasia XYZ?');
   await page.locator('#brokerLikeQuestionBtn').click();
 
