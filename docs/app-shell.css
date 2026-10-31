@@ -463,3 +463,12 @@ li{overflow-wrap:anywhere}
  .flow-dashboard .phase-panel{order:3}
  .flow-dashboard .micro-help{order:4}
 }
+
+/* Keep optional Q&A accessible while giving the current stage primary visual weight. */
+.home-optional-help{display:block;padding:0;overflow:hidden}
+.home-help-trigger{cursor:pointer;display:flex;gap:8px;align-items:center;justify-content:space-between;min-height:52px;padding:14px 16px;font-size:.93rem;font-weight:800;color:var(--ink)}
+.home-help-trigger span{font-size:.8rem;color:var(--blue);font-weight:700}
+.home-help-trigger:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.home-help-body{padding:0 16px 16px}
+.home-optional-help:not([open]) .home-help-body{display:none}
+@media(max-width:350px){.home-help-trigger{flex-wrap:wrap}.home-help-trigger span{margin-left:auto}}
