@@ -4205,6 +4205,9 @@ function switchView(viewId,scroll=true){
     // A bottom-tab change starts at the page top so the passport brand is visible.
     // The header remains non-sticky and naturally disappears on manual scrolling.
     window.scrollTo({top:0,left:0,behavior:'instant'});
+    // Mobile Chrome can restore its previous scroll after a hidden view is swapped.
+    // Reapply once layout stabilizes without making the passport header sticky.
+    requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)));
     if(viewId==='journey'){
       const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
       action.querySelector('.primary, select, button')?.focus({preventScroll:true});
