@@ -17,7 +17,7 @@ service cloud.firestore {
         && p.keys().hasAll(['kind','schemaVersion','routeKey','betaTesterId','progress'])
         && p.kind == 'kep-progress-backup'
         && p.schemaVersion == 2
-        && p.routeKey is string && p.routeKey.matches('^[a-z0-9-]{1,159}$')
+        && p.routeKey is string && p.routeKey.matches('^[A-Za-z0-9-]{1,159}$')
         && p.betaTesterId == null
         && progress is map
         && progress.keys().hasOnly(['done','docs','scopeSelections','formWizard','wizardReviewed','quickSetup'])

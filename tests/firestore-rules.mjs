@@ -10,7 +10,7 @@ const otherUid='other-uid';
 const goodPayload={
   kind:'kep-progress-backup',
   schemaVersion:2,
-  routeKey:'id-e9-manufacturing-2026',
+  routeKey:'ID-E-9-manufacturing-2026',
   betaTesterId:null,
   progress:{
     done:['eligibility'],
