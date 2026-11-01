@@ -102,5 +102,42 @@
     "betaAccess": "hold",
     "authorizesRelease": false,
     "notice": "This is a dated, read-only technical source fetch. The 12 observed SHA differences are versus the last approved baseline, not 12 new policy changes. A clean fetch is NOT a human source approval. Older 2026-10-14 failures and pending alerts remain in the historical record."
+  },
+  "indonesiaManufacturing2026ManualReview": {
+    "reviewedAt": "2026-11-01",
+    "reviewType": "human-directed semantic review against official KP2MI notices",
+    "result": "partial_approval_current_stage_only",
+    "approvedCurrentStage": "skill_test_schedule",
+    "approvedSourceUrls": [
+      "https://kp2mi.go.id/gtog-detail/korea/pengumuman-penyesuaian-waktu-pendaftaran-ubt-umum-sektor-perikanan-dan-sektor-manufaktur-program-g-to-g-ke-korea-selatan-tahun-2026",
+      "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
+      "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026"
+    ],
+    "confirmedFacts": {
+      "generalRegistrationStatus": "closed since 2026-02-12 23:59 WIB",
+      "epsTopikFirstStagePassers": 2020,
+      "epsTopikFirstStageIsFinalSelection": false,
+      "skillTestMandatoryForFirstStagePassers": true,
+      "skillTestDates": [
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13"
+      ],
+      "skillTestVenue": "Grand Setos Hotel Semarang",
+      "optionalCompetencyUploadStatus": "closed",
+      "finalSelectionAnnounced": false,
+      "manufacturingOnlineJobApplicationOpen": false
+    },
+    "remainingHolds": [
+      "Basic-skill test details: official notice says details will be announced later",
+      "Final point-system result for Manufacturing 2026",
+      "Manufacturing 2026 digital pass certificate distribution",
+      "Exact Manufacturing 2026 online job-application document checklist and submission window"
+    ],
+    "authorizesRegistration": false,
+    "authorizesFinalSelectionClaim": false,
+    "authorizesOnlineJobApplication": false,
+    "authorizesRelease": false,
+    "note": "The verified Skill Test schedule may be published in KEP. Global source-review state remains review_required because unrelated source alerts and later Manufacturing stages are still unresolved."
   }
 }
