@@ -4,8 +4,8 @@
   "sector": "manufacturing",
   "cycle": 2026,
   "goal": "zero-private-broker",
-  "packVersion": "0.3.6",
-  "lastVerified": "2026-10-06",
+  "packVersion": "0.3.7",
+  "lastVerified": "2026-11-01",
   "stages": [
     {
       "id": "eligibility",
@@ -87,12 +87,12 @@
       "title": "Mandatory Skill Test + optional Job Capacity Assessment",
       "authority": "HRD Korea",
       "kind": "official_exam",
-      "action": "After a verified 2026 Manufacturing EPS-TOPIK first-stage pass, attend the mandatory Skill Test (physical strength, interview, basic skills). Job Capacity Assessment competency evidence is optional: the official 17 September 2026 notice allowed upload through SiskoP2MI only during 21 September 09:00–23 September 13:00 WIB, now CLOSED. Qualifying evidence includes ≥1 year Manufacturing experience, Manufacturing Diploma I+, Manufacturing vocational training ≥120 hours, or valid national Manufacturing competence certification. If a participant chose optional evidence during that closed window, the official annex also required a completed Formulir Uji Kompetensi with any of the four evidence types; when an employer could not issue experience proof, the alternative factual confirmation required two non-relative sureties, identity copies and supporting contract/visa/immigration records. These are conditional documents, NOT requirements for every Skill Test candidate or the later job application. Follow a new official notice for any later schedule; do not reuse this closed window.",
+      "action": "Official 2026 Manufacturing Skill Test schedule verified: attend the assigned session at Grand Setos Hotel Semarang on 11–13 November 2026. Session I starts 08:30 WIB (arrive by 06:30); Session II starts 12:30 WIB (arrive by 10:30). Bring the original identity document matching the exam card, the original EPS-TOPIK exam card, and—only if previously uploaded—the original competency evidence in a yellow folder. Wear a white collared shirt, dark track pants and sports shoes. The test covers interview, physical tests (grip strength, back strength, burpees, height and weight) and basic skills; exact basic-skill details are still pending an official follow-up. The optional competency upload window of 21–23 September 2026 remains CLOSED.",
       "brokerReplacement": "prep_complete",
-      "sourceUrl": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-hasil-ujian-kemampuan-bahasa-korea-eps-topik-ubt-umum-sektor-manufaktur-tahun-2026",
-      "officialActionUrl": "https://epstopik.hrdkorea.or.kr/epstopik/skill/SkillTest.do?lang=ko",
-      "officialActionLabel": "Buka Skill Test resmi",
-      "warning": "The optional 21–23 September 2026 Manufacturing competency upload is closed, not required for every candidate and not the Manufacturing online job-application document checklist. EPS-TOPIK stage-one pass is not final selection; the Skill Test remains mandatory. The optional upload form and employer-evidence fallback are only conditionally mandatory within that already closed procedure.",
+      "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
+      "officialActionUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
+      "officialActionLabel": "Buka jadwal Skill Test Manufaktur 2026",
+      "warning": "Missing the assigned Skill Test means withdrawal/disqualification and the exam fee is not refunded. The assigned date, session and room cannot be changed. Registration is closed, the optional competency upload is closed, and the 21 October notice does not announce final selection or open the Manufacturing online job application.",
       "competencyUploadNotice": {
         "url": "https://kp2mi.go.id/gtog-detail/korea/pengumuman-persyaratan-unggah-dokumen-kompetensi-peserta-skill-test-ubt-umum-sektor-manufaktur-eps-topik-tahun-2026",
         "issuedAt": "2026-09-17",
@@ -120,6 +120,52 @@
           "notGeneralSkillTestRequirement": true,
           "notFinalManufacturingJobApplicationChecklist": true
         }
+      },
+      "skillTestSchedule": {
+        "noticeNumber": "PENG.2816/04.04/PP.02.04/X/2026",
+        "issuedAt": "2026-10-21",
+        "status": "scheduled",
+        "periodStart": "2026-11-11",
+        "periodEnd": "2026-11-13",
+        "timeZone": "Asia/Jakarta",
+        "venue": "Grand Setos Hotel Semarang",
+        "address": "Jl. Inspeksi, Gajahmada, Semarang Tengah, Kota Semarang, Jawa Tengah 50133",
+        "sessions": [
+          {
+            "name": "I",
+            "startsAt": "08:30",
+            "arriveBy": "06:30"
+          },
+          {
+            "name": "II",
+            "startsAt": "12:30",
+            "arriveBy": "10:30"
+          }
+        ],
+        "assignedScheduleCannotBeChanged": true,
+        "requiredOriginals": [
+          "Identity document matching the exam card",
+          "EPS-TOPIK UBT Manufacturing 2026 exam card"
+        ],
+        "conditionalOriginals": [
+          "Previously uploaded competency evidence, in a yellow folder"
+        ],
+        "dressCode": [
+          "White collared shirt",
+          "Dark track pants",
+          "Sports shoes"
+        ],
+        "testedAreas": [
+          "Interview",
+          "Grip strength",
+          "Back strength",
+          "Burpee test",
+          "Height and weight measurement",
+          "Basic skills (details pending official follow-up)"
+        ],
+        "registrationReopened": false,
+        "finalSelectionAnnounced": false,
+        "exactOnlineJobApplicationChecklistAnnounced": false
       }
     },
     {
