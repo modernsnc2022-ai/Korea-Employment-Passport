@@ -96,12 +96,34 @@ $account('accountDeleteAccountBtn').addEventListener('click',async()=>{
  if(!currentUser||!confirm('Hapus akun KEP dan progres cloud secara permanen? Tindakan ini tidak dapat dibatalkan.'))return;
  const password=$account('accountDeletePassword').value;
  if(!password){notice('Masukkan kata sandi saat ini untuk menghapus akun.',true);return;}
+ const ref=userDocument();
  let previous=null,progressDeleted=false;
  try{
-   const credential=fb.EmailAuthProvider.credential(currentUser.email,password);
-   await fb.reauthenticateWithCredential(auth.currentUser,credential);
-   const ref=userDocument(),snap=await fb.getDoc(ref);
-   previous=snap.exists()?snap.data():null;
-   await fb.deleteDoc(ref);progressDeleted=true;
-   await fb.deleteUser(auth.currentUser);
-   syncEnabled=false;setLoggedIn(null);notice('Ak
+  const credential=fb.EmailAuthProvider.credential(currentUser.email,password);
+  await fb.reauthenticateWithCredential(auth.currentUser,credential);
+  const snap=await fb.getDoc(ref);
+  previous=snap.exists()?snap.data():null;
+  await fb.deleteDoc(ref);progressDeleted=true;
+  await fb.deleteUser(auth.currentUser);
+  syncEnabled=false;setLoggedIn(null);notice('Akun KEP dan progres cloud dihapus.');
+ }catch(error){
+  if(progressDeleted&&previous&&auth.currentUser){
+   try{await fb.setDoc(ref,{...previous,updatedAt:fb.serverTimestamp()});}catch(restoreError){console.warn('KEP progress rollback failed:',getError(restoreError));}
+  }
+  notice('Penghapusan akun belum selesai. Progres cloud tetap dipertahankan jika pemulihan berhasil: '+getError(error),true);
+ }finally{$account('accountDeletePassword').value='';}
+});
+openButton.addEventListener('click',()=>{dialog.showModal();if(!currentUser)emailInput.focus()});
+$account('accountCloseBtn').addEventListener('click',()=>dialog.close());
+async function boot(){
+ if(!validConfig)return;
+ try{
+  const base='https://www.gstatic.com/firebasejs/12.4.0/';
+  const [core,authentication,firestore]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
+  const app=core.initializeApp({apiKey:cfg.apiKey,authDomain:cfg.authDomain,projectId:cfg.projectId,appId:cfg.appId});
+  auth=authentication.getAuth(app);db=firestore.getFirestore(app);fb={...authentication,...firestore};
+  authentication.onAuthStateChanged(auth,user=>{if(user?.emailVerified)setLoggedIn(user);else if(!user)setLoggedIn(null);});
+  openButton.hidden=false;
+ }catch(error){console.warn('KEP account backend not ready:',getError(error));openButton.hidden=true}
+}
+boot();
