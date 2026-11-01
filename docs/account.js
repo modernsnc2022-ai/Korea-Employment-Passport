@@ -121,7 +121,7 @@ async function boot(){
   const base='https://www.gstatic.com/firebasejs/12.4.0/';
   const [core,authentication,firestore]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
   const app=core.initializeApp({apiKey:cfg.apiKey,authDomain:cfg.authDomain,projectId:cfg.projectId,appId:cfg.appId});
-  auth=authentication.getAuth(app);db=firestore.getFirestore(app);fb={...authentication,...firestore};
+  auth=authentication.getAuth(app);auth.languageCode='id';db=firestore.getFirestore(app);fb={...authentication,...firestore};
   authentication.onAuthStateChanged(auth,user=>{if(user?.emailVerified)setLoggedIn(user);else if(!user)setLoggedIn(null);});
   openButton.hidden=false;
  }catch(error){console.warn('KEP account backend not ready:',getError(error));openButton.hidden=true}
