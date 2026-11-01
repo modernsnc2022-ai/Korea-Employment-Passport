@@ -17,7 +17,7 @@ service cloud.firestore {
         && p.keys().hasAll(['kind','schemaVersion','routeKey','betaTesterId','progress'])
         && p.kind == 'kep-progress-backup'
         && p.schemaVersion == 2
-        && p.routeKey is string && p.routeKey.size() < 160
+        && p.routeKey is string && p.routeKey.matches('^[a-z0-9-]{1,159}$')
         && p.betaTesterId == null
         && progress is map
         && progress.keys().hasOnly(['done','docs','scopeSelections','formWizard','wizardReviewed','quickSetup'])
@@ -25,7 +25,19 @@ service cloud.firestore {
         && progress.done is list && progress.done.size() <= 27
         && progress.docs is list && progress.docs.size() <= 250
         && progress.scopeSelections is map && progress.scopeSelections.size() <= 30
-        && progress.formWizard is map && progress.formWizard.size() <= 3
+        && progress.formWizard is map
+        && (
+          progress.formWizard.size() == 0
+          || (
+            progress.formWizard.keys().hasOnly(['formId','index'])
+            && progress.formWizard.keys().hasAll(['formId','index'])
+            && progress.formWizard.formId is string
+            && progress.formWizard.formId.size() <= 120
+            && progress.formWizard.index is int
+            && progress.formWizard.index >= 0
+            && progress.formWizard.index <= 500
+          )
+        )
         && progress.wizardReviewed is list && progress.wizardReviewed.size() <= 1500
         && progress.quickSetup is bool;
     }

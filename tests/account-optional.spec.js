@@ -43,8 +43,42 @@ test('account UI email signup, login, sync and logout with mocked Google Cloud S
   await page.locator('#accountPassword').fill('demo-long-passphrase!');
   await page.locator('#accountSubmit').click();
   await expect(page.locator('#accountSignedIn')).toBeVisible();
+  await expect(page.locator('#accountCloseBtn')).toHaveText('×');
   await page.locator('#accountSaveBtn').click();
   await expect(page.locator('#accountStatus')).toContainText('tersimpan');
   await page.locator('#accountLogoutBtn').click();
   await expect(page.locator('#accountForm')).toBeVisible();
+});
+
+test('account deletion requires reauthentication and preserves progress if deletion fails', async ({page}) => {
+  await page.route('**/account-config.js', r=>r.fulfill({contentType:'application/javascript',body:`window.KEP_ACCOUNT_CONFIG={provider:'firebase',projectId:'kep-staging',authDomain:'kep-staging.firebaseapp.com',apiKey:'AIza${'x'.repeat(35)}',appId:'1:123:web:abcdef'};`}));
+  await page.route('https://www.gstatic.com/firebasejs/12.4.0/**', async r=>{
+    const file=r.request().url().split('/').pop();
+    const fake={
+      'firebase-app.js':`export function initializeApp(){return {}}`,
+      'firebase-auth.js':`export function getAuth(){return {currentUser:null}};
+        export const EmailAuthProvider={credential:(email,password)=>({email,password})};
+        export function onAuthStateChanged(auth,callback){callback(null)};
+        export async function signInWithEmailAndPassword(auth,email){const user={uid:'demo',email,emailVerified:true};auth.currentUser=user;return {user}};
+        export async function reload(){};export async function signOut(auth){auth.currentUser=null};
+        export async function reauthenticateWithCredential(){throw Object.assign(new Error('wrong'),{code:'auth/invalid-credential'})};
+        export async function deleteUser(){throw new Error('must not run')};`,
+      'firebase-firestore.js':`export function getFirestore(){return {}};export function doc(db,c,id){return {id}};
+        export async function getDoc(){return {exists:()=>true,data:()=>({payload:{kind:'kep-progress-backup'}})}};
+        export async function deleteDoc(){window.__deleted=true};export async function setDoc(){window.__restored=true};`
+    };
+    await r.fulfill({contentType:'application/javascript',headers:{'access-control-allow-origin':'*'},body:fake[file]||''});
+  });
+  await page.goto('/app.html');
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await page.locator('#accountOpenBtn').click();
+  await page.locator('#accountEmail').fill('demo@example.org');
+  await page.locator('#accountPassword').fill('demo-long-passphrase!');
+  await page.locator('#accountSubmit').click();
+  await page.locator('#accountDeletePassword').fill('wrong-password');
+  page.once('dialog', dialog=>dialog.accept());
+  await page.locator('#accountDeleteAccountBtn').click();
+  await expect(page.locator('#accountStatus')).toContainText('tetap dipertahankan');
+  await expect(page.locator('#accountSignedIn')).toBeVisible();
+  await expect.poll(()=>page.evaluate(()=>Boolean(window.__deleted))).toBe(false);
 });
