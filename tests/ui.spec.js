@@ -222,6 +222,9 @@ test('simple UX lock: first-time user can identify now, ask, and continue withou
 
   await expect(page.locator('#nextAction')).toBeVisible();
   await expect(page.locator('#nextAction')).toContainText('LANGKAH BERIKUTNYA');
+  await expect(page.locator('#toggleHomeHelpBtn')).toBeVisible();
+  await expect(page.locator('#brokerLikeQuestion')).toBeHidden();
+  await page.locator('#toggleHomeHelpBtn').click();
   await expect(page.locator('#brokerLikeQuestion')).toBeVisible();
   await expect(page.locator('#brokerLikeQuestionBtn')).toBeVisible();
 
@@ -266,6 +269,7 @@ test('unknown broker-like question routes to official human help instead of gues
   const errors = await freshPage(page);
   await setStage(page, 'eligibility');
 
+  await page.locator('#toggleHomeHelpBtn').click();
   await page.locator('#brokerLikeQuestion').fill('Apakah saya harus memilih tombol rahasia XYZ?');
   await page.locator('#brokerLikeQuestionBtn').click();
 
@@ -703,42 +707,23 @@ test('community source can share or copy source-attributed applicant and worker 
   expect(errors).toEqual([]);
 });
 
-test('attributed applicant campaigns go directly to the beta intake anchor', async ({ page }) => {
+test('legacy attributed applicant links open the production app and preserve attribution', async ({ page }) => {
   await page.goto('/index.html?src=lpk_master_korea', { waitUntil: 'domcontentloaded' });
-  await page.waitForURL('**/beta.html?src=lpk_master_korea#apply');
-  await expect(page.locator('#applicationPanel')).toBeVisible();
-  await expect(page.locator('#applicationPanel')).toContainText('Sekitar 30 detik');
-  await expect(page.locator('#applicationPanel')).toContainText('Tidak perlu nama atau nomor telepon');
-
-  await page.locator('#applicantStage').selectOption('eligibility');
-  await page.locator('#applicantCycle').selectOption('2026');
-  await page.locator('#activeProcess').check();
-  await page.locator('#feedbackAgreement').check();
-  const application = await page.evaluate(() => applicationText());
-  expect(application).toContain('Recruitment source code: lpk_master_korea');
+  await page.waitForURL('**/app.html?src=lpk_master_korea');
+  await expect(page.locator('#routeTitle')).toContainText('Indonesia');
 });
 
-test('generic attribution stays on landing while preserving the beta link', async ({ page }) => {
+test('generic attribution opens the production app and remains in the URL', async ({ page }) => {
   await page.goto('/index.html?src=community', { waitUntil: 'domcontentloaded' });
-  await expect(page).toHaveURL(/index\.html\?src=community$/);
-  const attributedPrimaryLinks=page.locator('a.button.primary[href="beta.html?src=community"]');
-  await expect(attributedPrimaryLinks).toHaveCount(2);
+  await page.waitForURL('**/app.html?src=community');
+  await expect(page.locator('#routeTitle')).toContainText('Indonesia');
 });
 
-test('worker-only recruitment sources go directly to worker interest intake', async ({ page }) => {
+test('legacy worker recruitment links open the production app', async ({ page }) => {
   for (const source of ['ut_korea_pmi','wongrow_pmi_korea','kbri_seoul_pmi','sbmi_korea_worker_referral','pcim_korea_referral','kp2mi_departure_worker_referral','korea_indonesia_center_referral','appik_purna_korea_referral','pui_kmi_worker_referral','hwaseong_foreign_welfare','yangsan_foreign_worker_center','seosan_foreign_worker_center','busan_global_indonesian_desk','busan_foreign_resident_center','gimpo_foreign_resident_center','ulsan_foreign_resident_center']) {
     await page.goto('/index.html?src='+source, { waitUntil: 'domcontentloaded' });
-    await page.waitForURL('**/beta.html?src='+source+'#worker-panel');
-    await expect(page.locator('#worker-panel')).toBeVisible();
-    await expect(page.locator('#workerValidatorForm')).toBeVisible();
-    await expect(page.locator('#workerPanelClosed')).toBeVisible();
-    await expect(page.locator('#applicationPanel')).toBeVisible();
-
-    await page.locator('#workerInKorea').check();
-    await page.locator('#workerUsedG2G').check();
-    await page.locator('#workerFeedbackAgreement').check();
-    const interest = await page.evaluate(() => workerValidatorText());
-    expect(interest).toContain('Recruitment source code: '+source);
+    await page.waitForURL('**/app.html?src='+source);
+    await expect(page.locator('#routeTitle')).toContainText('Indonesia');
   }
 });
 

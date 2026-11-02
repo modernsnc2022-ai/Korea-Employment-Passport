@@ -7,4 +7,6 @@ __pycache__/
 node_modules/
 test-results/
 playwright-report/
+firebase-debug.log
+firestore-debug.log
 monitor/check_result.json

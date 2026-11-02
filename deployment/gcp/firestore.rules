@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner(userId) {
+      return request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true;
+    }
+    function safePayload() {
+      let p = request.resource.data.payload;
+      let progress = p.progress;
+      return request.resource.data.keys().hasOnly(['payload','updatedAt'])
+        && request.resource.data.keys().hasAll(['payload','updatedAt'])
+        && request.resource.data.updatedAt == request.time
+        && p is map
+        && p.keys().hasOnly(['kind','schemaVersion','routeKey','betaTesterId','progress'])
+        && p.keys().hasAll(['kind','schemaVersion','routeKey','betaTesterId','progress'])
+        && p.kind == 'kep-progress-backup'
+        && p.schemaVersion == 2
+        && p.routeKey is string && p.routeKey.matches('^[A-Za-z0-9-]{1,159}$')
+        && p.betaTesterId == null
+        && progress is map
+        && progress.keys().hasOnly(['done','docs','scopeSelections','formWizard','wizardReviewed','quickSetup'])
+        && progress.keys().hasAll(['done','docs','scopeSelections','formWizard','wizardReviewed','quickSetup'])
+        && progress.done is list && progress.done.size() <= 27
+        && progress.docs is list && progress.docs.size() <= 250
+        && progress.scopeSelections is map && progress.scopeSelections.size() <= 30
+        && progress.formWizard is map
+        && (
+          progress.formWizard.size() == 0
+          || (
+            progress.formWizard.keys().hasOnly(['formId','index'])
+            && progress.formWizard.keys().hasAll(['formId','index'])
+            && progress.formWizard.formId is string
+            && progress.formWizard.formId.size() <= 120
+            && progress.formWizard.index is int
+            && progress.formWizard.index >= 0
+            && progress.formWizard.index <= 500
+          )
+        )
+        && progress.wizardReviewed is list && progress.wizardReviewed.size() <= 1500
+        && progress.quickSetup is bool;
+    }
+    match /kep_progress/{userId} {
+      allow get: if owner(userId);
+      allow list: if false;
+      allow create, update: if owner(userId) && safePayload();
+      allow delete: if owner(userId);
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

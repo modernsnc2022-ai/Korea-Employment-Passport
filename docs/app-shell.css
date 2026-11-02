@@ -28,7 +28,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 body.setup-mode .cycle-status,
 body.setup-mode .trust-panel,
 body.setup-mode .flow-dashboard,
-body.setup-mode .utility-nav,
 body.setup-mode .view{display:none!important}
 body.setup-mode .shell{padding-bottom:36px}
 body.route-unavailable .how-to-use,
@@ -402,3 +401,188 @@ li{overflow-wrap:anywhere}
 
 .storage-status{margin-bottom:16px;padding:16px;border:1px solid #b58117;border-left:4px solid #b58117;border-radius:8px;background:var(--warn)}
 .storage-status p{margin:8px 0}.storage-status .muted{font-size:.85rem}.storage-status button{max-width:100%}
+
+/* Progressive disclosure for example copy: keep the question form as the visible action. */
+.micro-help-examples{margin-top:8px;color:var(--muted);font-size:.84rem}
+.micro-help-examples>summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:36px;display:list-item;align-content:center}
+.micro-help-examples p{padding:6px 0 0;line-height:1.55}
+.micro-help-examples>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* Keep optional onboarding instructions discoverable without crowding the action-first home. */
+.how-to-use{display:block;padding:10px 14px;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.how-to-use>summary{cursor:pointer;font-size:.86rem;font-weight:750;color:var(--ink);min-height:32px;align-content:center}
+.how-to-use>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.how-to-use-steps{display:flex;flex-wrap:wrap;gap:10px 16px;padding-top:12px}
+.how-to-use-steps span{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.84rem}
+.how-to-use-steps b{width:22px;height:22px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:var(--soft);color:var(--blue)}
+@media(max-width:600px){.how-to-use-steps{display:grid;gap:10px}}
+
+/* Visual, recognisable task navigation without altering view IDs or tab semantics. */
+.utility-tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.utility-icon{display:block;width:19px;height:19px;flex:none}
+@media(max-width:720px){.utility-tab{display:flex;flex-direction:column;gap:3px;min-height:56px;line-height:1.15}.utility-icon{width:20px;height:20px}}
+@media(max-width:350px){.utility-tab{font-size:.72rem}.utility-icon{width:18px;height:18px}}
+
+/* Secondary document guidance: keep safety copy accessible without text-heavy first view. */
+.section-extra-guidance{margin-top:8px;font-size:.84rem;color:var(--muted);max-width:72ch}
+.section-extra-guidance>summary{cursor:pointer;color:var(--ink);font-weight:700;min-height:36px;align-content:center}
+.section-extra-guidance>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.section-extra-guidance p{margin:6px 0 0;line-height:1.55}
+
+/* Task-first worker checks: scannable sequence without suggesting a verified EPS status. */
+.task-step-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;counter-reset:task-steps;gap:8px;margin:12px 0;padding:0}
+.task-step-strip li{counter-increment:task-steps;display:flex;align-items:center;gap:7px;min-width:0;font-size:.8rem;font-weight:700;color:var(--ink);line-height:1.3}
+.task-step-strip li::before{content:counter(task-steps);width:25px;height:25px;flex:0 0 25px;display:grid;place-items:center;border:1px solid var(--line);background:var(--soft);border-radius:50%;color:var(--blue);font-weight:800}
+.section-head .safety-note{font-size:.8rem;color:var(--muted);line-height:1.5;margin-top:10px;max-width:75ch}
+@media(max-width:380px){.task-step-strip{gap:4px}.task-step-strip li{font-size:.71rem;gap:4px}.task-step-strip li::before{width:22px;height:22px;flex-basis:22px}}
+
+/* Worker issue picker: existing tools, no new claims or data capture. */
+.worker-help-chooser{margin:12px 0 18px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.worker-help-chooser h2{font-size:1.1rem;margin:0 0 6px}.worker-help-chooser p{font-size:.84rem;color:var(--muted);margin:0 0 12px;line-height:1.5}
+.worker-help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.worker-help-grid button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;min-height:72px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink);cursor:pointer}
+.worker-help-grid button strong{font-size:.85rem}.worker-help-grid button small{font-size:.75rem;color:var(--muted)}
+.worker-help-grid button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+@media(max-width:600px){.worker-help-grid{grid-template-columns:1fr}.worker-help-grid button{min-height:52px;padding:10px 12px}}
+
+.worker-help-prep{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;color:var(--ink);font-size:.85rem}
+.worker-help-prep>summary{cursor:pointer;font-weight:750;min-height:40px;align-content:center}
+.worker-help-prep>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.worker-help-prep ul{padding-left:20px;line-height:1.6}.worker-help-prep li{margin:7px 0}
+.worker-help-prep p{color:var(--muted);margin:12px 0 8px}
+.worker-help-prep a{display:inline-block;font-weight:750;overflow-wrap:anywhere;padding:8px 0}
+.worker-help-prep small{display:block;color:var(--muted);line-height:1.5}
+
+/* 2026-10-31 visual audit: show next action, then progress stages, then optional Q&A on narrow layouts. */
+@media(max-width:900px){
+ .flow-dashboard{display:flex;flex-direction:column;gap:12px}
+ .action-column{display:contents}
+ .flow-dashboard .next-action{order:1}
+ .flow-dashboard .context-tools{order:2}
+ .flow-dashboard .phase-panel{order:3}
+ .flow-dashboard .micro-help{order:4}
+}
+
+/* Keep optional Q&A accessible while giving the current stage primary visual weight. */
+.home-optional-help{display:block;padding:0;overflow:hidden}
+.home-help-trigger{cursor:pointer;display:flex;gap:8px;align-items:center;justify-content:space-between;min-height:52px;padding:14px 16px;font-size:.93rem;font-weight:800;color:var(--ink)}
+.home-help-trigger span{font-size:.8rem;color:var(--blue);font-weight:700}
+.home-help-trigger:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.home-help-body{padding:0 16px 16px}
+.home-optional-help:not([open]) .home-help-body{display:none}
+@media(max-width:350px){.home-help-trigger{flex-wrap:wrap}.home-help-trigger span{margin-left:auto}}
+
+/* Toggle is a button inside the stable home help section; hidden content occupies no space. */
+.micro-help .home-help-toggle{min-height:44px;margin-top:10px;padding:9px 12px}
+.micro-help #homeHelpContent[hidden]{display:none!important}
+.micro-help #homeHelpContent:not([hidden]){margin-top:10px}
+
+/* Brand-forward header; compact on small screens, independent-service notice remains visible. */
+.topbar{background:#f2f8fa;color:#123a55;border-bottom:1px solid #d7e8e9;box-shadow:0 3px 15px rgba(18,58,85,.08);padding-top:12px;padding-bottom:12px}
+.topbar .kep-brand-lockup{display:flex;align-items:center;gap:13px;min-width:0;flex:1}
+.topbar .kep-brand-mark{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;color:#fff;background:#123a55;border-radius:14px;box-shadow:0 3px 9px rgba(18,58,85,.15)}
+.topbar .kep-brand-mark svg{width:38px;height:38px}
+.topbar .kep-brand-copy{display:flex;flex-direction:column;min-width:0;gap:2px}
+.topbar .kep-brand-copy strong{font-size:1.24rem;line-height:1.2;font-weight:850;color:#123a55;letter-spacing:-.035em;white-space:normal;overflow:visible}
+.topbar .kep-brand-copy small{font-size:.85rem;font-weight:750;color:#087d82;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.topbar .kep-route-detail{font-size:.72rem;font-weight:550;color:#526877;margin-left:4px}
+.topbar .kep-route-arrow{font-size:1.08rem}
+.topbar .service-identity{font-size:.7rem;line-height:1.3;color:#526877;margin-top:1px}
+@media(max-width:430px){.topbar{padding:9px 12px;gap:8px}.topbar .kep-brand-lockup{gap:9px}.topbar .kep-brand-mark{width:44px;height:44px;flex-basis:44px;border-radius:12px}.topbar .kep-brand-mark svg{width:32px;height:32px}.topbar .kep-brand-copy strong{font-size:1.04rem}.topbar .kep-brand-copy small{font-size:.75rem;gap:4px}.topbar .kep-route-detail{font-size:.67rem;margin-left:2px}.topbar .service-identity{font-size:.65rem}}
+@media(max-width:340px){.topbar .kep-brand-copy strong{font-size:.95rem}.topbar .kep-brand-mark{width:40px;height:40px;flex-basis:40px}.topbar .kep-route-detail{display:block;width:100%;margin-left:0}}
+
+/* Korean-passport-inspired independent-service visual language. Abstract dual arcs, not the national emblem. */
+:root{--kep-navy:#142d4c;--kep-navy-deep:#0e2340;--kep-blue:#367aa8;--kep-red:#cb6567}
+.topbar{background:#f6f8fc;border-bottom:2px solid #d7e3ee;box-shadow:0 3px 14px rgba(14,35,64,.09)}
+.topbar .kep-brand-mark{background:linear-gradient(150deg,var(--kep-navy),var(--kep-navy-deep));box-shadow:0 4px 12px rgba(14,35,64,.23)}
+.topbar .kep-brand-copy strong{color:var(--kep-navy)}
+.topbar .kep-brand-copy small{color:#23658b}
+.topbar .kep-route-arrow{color:var(--kep-red);font-weight:900}
+.topbar .service-identity{color:#4e6074}
+.summary{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--kep-navy-deep),var(--kep-navy) 70%,#234e77);border:1px solid #314f71;color:white}
+.summary::after{content:"";position:absolute;width:220px;height:220px;right:-105px;top:-95px;border:28px solid rgba(117,186,222,.13);border-radius:50%;pointer-events:none;box-shadow:-18px 24px 0 -8px rgba(203,101,103,.09)}
+.summary > *{position:relative;z-index:1}
+.next-action{border-top:3px solid var(--kep-navy)}
+.next-action .primary,.quick-start .primary{background:var(--kep-navy);color:#fff}
+.next-action .primary:hover,.quick-start .primary:hover{background:#214f79}
+.next-action .primary:focus-visible,.quick-start .primary:focus-visible{outline:3px solid var(--kep-blue);outline-offset:3px}
+@media(max-width:430px){.summary::after{width:150px;height:150px;right:-90px;top:-65px;border-width:20px}}
+@media(max-width:350px){.topbar{padding-top:6px;padding-bottom:6px}.topbar .kep-brand-mark{width:36px;height:36px;flex-basis:36px}.topbar .kep-brand-copy{gap:0}.topbar .kep-brand-copy small{line-height:1.15}.topbar .service-identity{line-height:1.15}.summary{padding:12px 14px}.summary h1{font-size:1.55rem}}
+
+/* Unified KEP design tokens: primary actions navy, navigation/information blue,
+   Taegeuk red decorative only; semantic warning/success remain meaningful. */
+:root{--navy:#142d4c;--blue:#214f79;--soft:#edf3fa;--bg:#f5f7fa;--ink:#172b43;--muted:#526477;--line:#dce4ed;--kep-focus:#367aa8}
+button.primary,.primary[type="button"],a.primary{background:var(--kep-navy);color:#fff;border-color:var(--kep-navy)}
+button.primary:hover,a.primary:hover{background:#214f79;color:#fff}
+button.secondary,.secondary[type="button"]{background:#fff;border:1px solid #aabed3;color:var(--kep-navy)}
+button.secondary:hover{background:#edf3fa;border-color:#567b9e}
+button.ghost,.ghost[type="button"]{color:var(--kep-navy);background:#fff;border:1px solid #b6c8d9}
+.utility-tab{color:#41566d}
+.utility-tab.active,.utility-tab[aria-selected="true"]{background:#eaf1fa;color:var(--kep-navy);box-shadow:inset 0 -3px var(--kep-navy)}
+.phase-btn.active,.phase-btn[aria-current="step"],.quick-choice[aria-pressed="true"],.quick-choice.active{background:#eaf1fa;color:var(--kep-navy);border-color:#adc5e0}
+.phase-btn.active .phase-number,.phase-btn.active .phase-index{background:var(--kep-navy);color:#fff}
+a:not(.primary):not(.secondary):not(.ghost){text-underline-offset:3px}
+.next-action a,.source-facts a,.next-evidence a{color:#235e8f}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--kep-focus);outline-offset:2px}
+/* Destructive, blocked, warning, and verified status retain their semantic colors. */
+.source-state.review,.source-state.unknown{background:#fff1d8;color:#71480b}
+.source-state.clean{background:#e8f3ec;color:#20563a}
+
+/* Passport Light: retain the navy emblem; lighten interactive surfaces. */
+:root{--bg:#f8fafd;--soft:#eaf2fa;--kep-action:#285c87;--kep-action-hover:#204c70;--kep-selected:#eaf2fa}
+body{background:var(--bg)}
+.topbar{background:#f8fafd;border-bottom-color:#e4ebf3;box-shadow:0 2px 10px rgba(20,45,76,.045)}
+button.primary,.primary[type="button"],a.primary,.next-action .primary,.quick-start .primary{background:var(--kep-action);border-color:var(--kep-action);color:#fff}
+button.primary:hover,a.primary:hover,.next-action .primary:hover,.quick-start .primary:hover{background:var(--kep-action-hover)}
+.utility-tab.active,.utility-tab[aria-selected="true"]{background:var(--kep-selected);color:var(--kep-action);box-shadow:inset 0 -3px var(--kep-action)}
+.phase-btn.active,.phase-btn[aria-current="step"],.quick-choice[aria-pressed="true"],.quick-choice.active{background:var(--kep-selected);color:var(--kep-navy);border-color:#bad0e4}
+.phase-btn.active .phase-number,.phase-btn.active .phase-index{background:var(--kep-action);color:#fff}
+.next-action{border-top-color:var(--kep-action)}
+.summary{background:linear-gradient(120deg,#204b70,#285c87 72%,#42749a);border-color:#467498}
+.summary::after{border-color:rgba(208,231,248,.16)}
+
+/* Passport Light contrast fix: force readable foreground on dark hero/card surfaces. */
+.summary,.summary h1,.summary h2,.summary strong,.summary .eyebrow,.summary #routeTitle{color:#ffffff}
+.summary p,.summary small,.summary #routeMeta{color:#edf5ff}
+.summary a{color:#ffffff;text-decoration:underline;text-underline-offset:3px}
+
+/* Official destination directory: compact, readable on mobile, not another tab. */
+.official-directory{margin:12px 0 18px;border:1px solid #c6d7e7;border-radius:14px;background:#fff;overflow:hidden}
+.official-directory>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:14px 16px;cursor:pointer;color:#142d4c;font-weight:800;line-height:1.45}
+.official-directory-count{flex:none;font-size:.75rem;color:#285c87;background:#eaf2fa;padding:5px 8px;border-radius:10px}
+.official-directory>p,.official-directory>small{display:block;margin:0;padding:0 16px 12px;color:#526477;font-size:.83rem;line-height:1.6}
+.official-directory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 16px 14px}
+.official-directory-grid article{border:1px solid #dce4ed;border-radius:12px;padding:12px;background:#f8fafd;min-width:0}
+.official-directory-grid strong{display:block;font-size:.91rem;line-height:1.4}
+.official-directory-grid p{font-size:.81rem;line-height:1.55;color:#526477;margin:6px 0 8px}
+.official-directory-grid a{color:#235e8f;font-weight:750;font-size:.85rem;text-underline-offset:3px;overflow-wrap:anywhere}
+.next-official-link{margin:12px 0 0;padding-top:11px;border-top:1px solid #dce4ed;display:grid;gap:6px}
+.next-official-link a{color:#235e8f;font-weight:750;text-underline-offset:3px;overflow-wrap:anywhere}
+.next-official-link small{color:#526477;font-size:.77rem;line-height:1.45}
+@media(max-width:560px){.official-directory-grid{grid-template-columns:1fr}}
+
+/* Free member account remains separate from the four core navigation tabs. */
+.header-account-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap}
+.account-dialog{width:min(92vw,490px);max-height:calc(100dvh - 24px);border:1px solid #c9d6e5;border-radius:16px;padding:0;background:#fff;color:#172b43;overflow-y:auto}
+.account-dialog::backdrop{background:rgba(14,35,64,.55)}
+.account-dialog-header{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid #dce4ed;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:14px 16px}
+.account-dialog-header strong{font-size:.76rem;color:#526477}.account-dialog-header h2{margin:3px 0 0;font-size:1.12rem;line-height:1.4}
+.account-dialog-header button{min-width:44px;min-height:44px;font-size:1.35rem}
+.account-intro,.account-footer-note{padding:0 16px;color:#526477;font-size:.85rem;line-height:1.6}
+.account-form,.account-mode-links,#accountSignedIn{padding:0 16px 14px;display:grid;gap:12px}
+.account-form label{display:grid;gap:6px;font-size:.85rem;font-weight:700}
+.account-form input:not([type="checkbox"]){width:100%;min-height:48px;border:1px solid #b9cbdc;border-radius:8px;padding:11px;font-size:1rem}
+.account-form .account-consent{display:flex;align-items:flex-start;gap:9px;font-size:.76rem;line-height:1.5;font-weight:400}
+.account-consent input{margin-top:4px;min-width:19px;min-height:19px}
+.account-mode-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.account-mode-links button{background:#eaf2fa;color:#285c87;border:1px solid #b9cbdc;border-radius:8px;padding:9px 12px;min-height:42px;cursor:pointer}
+#accountStatus{margin:12px 16px;padding:10px 12px;line-height:1.6;font-size:.84rem}
+#accountSignedIn p{font-size:.85rem;color:#526477;line-height:1.55;margin:0}
+.account-dialog [hidden]{display:none!important}
+.member-access-note{display:grid;gap:14px;margin:18px 0;padding:16px;border:1px solid rgba(20,44,76,.18);border-radius:16px;background:#f4f7fb;color:#142c4c}
+.member-access-note p{margin:5px 0 0;color:#4b5d73;line-height:1.55}
+.member-access-actions{display:flex;flex-wrap:wrap;gap:8px}
+.member-access-actions button{min-height:44px}
+body.kep-member-signed-in .member-access-note{display:none}
+@media(min-width:680px){.member-access-note{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+@media(max-width:380px){.header-account-actions{gap:4px}.header-account-actions .ghost{padding:7px 8px;font-size:.75rem}}

@@ -2,10 +2,14 @@
   "name": "korea-employment-passport-web",
   "private": true,
   "scripts": {
-    "test:ui": "playwright test"
+    "test:ui": "playwright test",
+    "test:firestore": "firebase emulators:exec --project kep-rules-test --only firestore \"node --test tests/firestore-rules.mjs\""
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.0",
     "@playwright/test": "1.55.0",
-    "axe-core": "4.10.3"
+    "axe-core": "4.10.3",
+    "firebase": "12.4.0",
+    "firebase-tools": "14.24.0"
   }
 }

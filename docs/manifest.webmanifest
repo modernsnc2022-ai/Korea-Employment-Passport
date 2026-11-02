@@ -5,7 +5,7 @@
   "scope": "./",
   "display": "standalone",
   "background_color": "#f4f7f5",
-  "theme_color": "#17695c",
+  "theme_color": "#142D4C",
   "description": "Official-route companion for Indonesia → Korea E-9 manufacturing, designed to eliminate private-broker dependency.",
   "icons": [
     {

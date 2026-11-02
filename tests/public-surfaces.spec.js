@@ -26,7 +26,7 @@ test('signup keeps the access warning before the form and technical release deta
  expect(warning.y).toBeLessThan(form.y);expect(form.y).toBeLessThan(details.y);
  await expect(page.locator('#releaseGateNote [data-release-gate]')).toHaveCount(6);
  await page.goto('/index.html');
- await expect(page.locator('.progress')).toHaveCount(0);
- await expect(page.locator('.note').first()).toContainText('Bukan situs pemerintah');
- await expect(page.locator('.note').nth(1)).toContainText(/akses beta/i);
+ await page.waitForURL('**/app.html');
+ await expect(page.locator('#routeTitle')).toContainText('Indonesia');
+ await expect(page.locator('body > footer')).toContainText('Bukan layanan pemerintah');
 });

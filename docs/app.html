@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-180.png">
-  <meta name="theme-color" content="#17695c">
+  <meta name="theme-color" content="#142D4C">
   <meta name="description" content="Korea Employment Passport — panduan resmi G-to-G Korea/EPS tanpa calo.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -14,12 +14,15 @@
 <body>
   <a class="skip-link" href="#nextAction">Langsung ke langkah sekarang</a>
   <header class="topbar">
-    <div>
-      <strong>Korea Employment Passport</strong>
-      <small>Indonesia → E-9 → Manufaktur</small>
-      <span class="service-identity">Layanan independen · bukan pemerintah</span>
+    <div class="kep-brand-lockup">
+      <span class="kep-brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="28" height="38" rx="5" stroke="white" stroke-width="2.5"/><path d="M17 13h14" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M16 26c3.5-7 12-9 17-5" stroke="#F0A09D" stroke-width="4" stroke-linecap="round"/><path d="M32 25c-3 7-11 9-16 5" stroke="#7CCFE2" stroke-width="4" stroke-linecap="round"/></svg></span>
+      <div class="kep-brand-copy">
+        <strong>Korea Employment Passport</strong>
+        <small><span>Indonesia</span><span class="kep-route-arrow" aria-hidden="true">&#8594;</span><span>Korea</span><span class="kep-route-detail">E-9 &middot; Manufacturing</span></small>
+        <span class="service-identity">Panduan mandiri EPS - layanan independen, bukan pemerintah</span>
+      </div>
     </div>
-    <button id="installBtn" class="ghost" hidden>Pasang</button>
+    <div class="header-account-actions"><button id="accountOpenBtn" type="button" class="ghost" hidden>Akun</button><button id="installBtn" class="ghost" hidden>Pasang</button></div>
   </header>
 
   <main class="shell">
@@ -54,6 +57,16 @@
       <span class="eyebrow dark">LANGKAH 1 · TENTUKAN POSISI ANDA</span>
       <h2>Anda sedang di tahap mana?</h2>
       <p>Pilih kondisi Anda. Kami akan menunjukkan langkah berikutnya dan rujukan resminya.</p>
+      <aside id="memberAccessNote" class="member-access-note">
+        <div>
+          <strong>Informasi umum tetap terbuka.</strong>
+          <p>Buat akun gratis untuk memilih tahap, memakai checklist, memeriksa biaya, dan mengelola progres pribadi.</p>
+        </div>
+        <div class="member-access-actions">
+          <button type="button" id="memberAccessSignup" class="primary">Buat akun gratis</button>
+          <button type="button" id="memberAccessLogin" class="ghost">Sudah punya akun? Masuk</button>
+        </div>
+      </aside>
       <div class="quick-choice-grid" aria-label="Tahap awal EPS">
         <button type="button" class="quick-choice" data-quick-stage="eligibility"><strong>Belum mendaftar resmi</strong><small>Baru mulai / cek syarat</small></button>
         <button type="button" class="quick-choice" data-quick-stage="exam_fee"><strong>Baru selesai daftar online</strong><small>Belum ujian EPS-TOPIK</small></button>
@@ -79,10 +92,10 @@
     </section>
 
     <nav class="utility-nav" aria-label="Alat utama">
-      <button class="utility-tab active" data-view="journey" aria-current="page"><span>01</span>Saat ini</button>
-      <button class="utility-tab" data-view="documents"><span>02</span>Dokumen</button>
-      <button class="utility-tab" data-view="fees"><span>03</span>Biaya</button>
-      <button class="utility-tab" data-view="gaps"><span>04</span>Bantuan</button>
+      <button class="utility-tab active" data-view="journey" aria-current="page"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg><span>01</span>Saat ini</button>
+      <button class="utility-tab" data-view="documents"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h8l5 5v15H6z"/><path d="M14 2v5h5"/><path d="M9 12h7M9 16h7"/></svg><span>02</span>Dokumen</button>
+      <button class="utility-tab" data-view="fees"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>03</span>Biaya</button>
+      <button class="utility-tab" data-view="gaps"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 1 0-10-10"/><path d="M9 9a3 3 0 1 1 5 2c-1.5 1-2 2-2 3"/><path d="M12 18h.01"/></svg><span>04</span>Bantuan</button>
     </nav>
 
     <section class="flow-dashboard" aria-label="Proses resmi">
@@ -99,14 +112,17 @@
         <details id="contextTools" class="context-tools" hidden></details>
         <section class="micro-help">
           <span class="eyebrow dark">BINGUNG?</span>
-          <h3>Tanya apa saja, sekecil apa pun</h3>
-          <p>Contoh: “rekening siapa?”, “pilih pribadi atau perusahaan?”, “alamat mana yang ditulis?”, “PDF atau JPG?”</p>
+          <h3>Butuh bantuan untuk langkah ini?</h3>
+          <button id="toggleHomeHelpBtn" type="button" class="secondary home-help-toggle" aria-expanded="false" aria-controls="homeHelpContent">Tampilkan pertanyaan</button>
+          <div id="homeHelpContent" hidden>
+          <details class="micro-help-examples"><summary>Lihat contoh pertanyaan</summary><p>Contoh: “rekening siapa?”, “pilih pribadi atau perusahaan?”, “alamat mana yang ditulis?”, “PDF atau JPG?”</p></details>
           <div id="quickQuestionChips" class="quick-question-chips" hidden></div>
           <div class="micro-help-row">
             <input id="brokerLikeQuestion" aria-label="Pertanyaan tentang tahap EPS Anda" placeholder="Ketik pertanyaan kecil yang membuat ragu">
             <button id="brokerLikeQuestionBtn" class="primary" type="button">Cari panduan resmi</button>
           </div>
           <div id="brokerLikeQuestionResult" role="status" aria-live="polite" class="result" hidden></div>
+          </div>
         </section>
       </div>
     </section>
@@ -115,13 +131,13 @@
 
     <section id="journey" class="view active">
       <details id="allJourneyDetails" class="all-journey">
-        <summary>Lihat semua tahap / ubah posisi saya</summary>
+        <summary>Semua tahap EPS (27) dan ubah posisi</summary>
         <div class="all-journey-body">
           <div class="section-head journey-head">
             <div>
               <span class="eyebrow dark">LANGKAH DEMI LANGKAH</span>
               <h2>Perjalanan resmi Anda</h2>
-              <p>Anda tidak perlu menghafal semuanya. Buka bagian ini hanya untuk melihat seluruh proses atau mengubah posisi Anda.</p>
+              <p>Semua tahap EPS dan pilihan posisi Anda ada di sini.</p>
             </div>
             <details class="jump-stage">
               <summary>Saya sudah berada di tengah proses</summary>
@@ -139,12 +155,14 @@
       </details>
     </section>
 
-    <section class="how-to-use" aria-label="Cara pakai">
-      <strong>Hanya 3 langkah untuk memulai</strong>
-      <span><b>1</b> Ikuti “Langkah sekarang”</span>
-      <span><b>2</b> Kalau ragu sekecil apa pun, tanya</span>
-      <span><b>3</b> Selesai → tekan lanjut</span>
-    </section>
+    <details class="how-to-use" aria-label="Cara pakai">
+      <summary>Butuh petunjuk? Lihat 3 langkah penggunaan</summary>
+      <div class="how-to-use-steps">
+        <span><b>1</b> Ikuti “Langkah sekarang”</span>
+        <span><b>2</b> Kalau ragu sekecil apa pun, tanya</span>
+        <span><b>3</b> Selesai → tekan lanjut</span>
+      </div>
+    </details>
 
     <details class="trust-panel">
       <summary>Pengaturan dan backup progres (opsional)</summary>
@@ -181,7 +199,7 @@
     <section id="documents" class="view">
       <div class="section-head">
         <h2>Asisten Dokumen</h2>
-        <p>Checklist berubah mengikuti tahap Anda sekarang. Jika ada pengumuman yang khusus untuk nama/gelombang Anda, pengumuman itu yang harus diikuti. File yang dipilih hanya diperiksa di perangkat Anda.</p>
+        <p>Checklist mengikuti tahap Anda. Pengumuman resmi untuk nama/gelombang Anda selalu menjadi acuan.</p><details class="section-extra-guidance"><summary>Privasi dan cara menggunakan checklist</summary><p>File yang dipilih hanya diperiksa di perangkat Anda. Jika ada pengumuman yang khusus untuk nama/gelombang Anda, ikuti pengumuman tersebut.</p></details>
       </div>
 
       <div id="docScopeWrap" class="panel doc-scope-wrap" hidden>
@@ -197,7 +215,7 @@
         <div class="section-head">
           <span class="eyebrow dark">ISI SATU PER SATU</span>
           <h2>Panduan isi formulir</h2>
-          <p>Pilih formulir. Aplikasi hanya menunjukkan satu kolom pada satu waktu supaya tidak membingungkan.</p>
+          <p>Isi formulir satu kolom pada satu waktu.</p>
         </div>
         <div class="panel">
           <label>Formulir yang sedang Anda isi
@@ -253,7 +271,7 @@
         <div>
           <span class="eyebrow dark">BANTUAN ISI KOLOM</span>
           <h3>“Kolom ini harus diisi apa?”</h3>
-          <p class="muted">Ketik kata yang ada pada kolom/form. Jika jawabannya sudah terverifikasi, aplikasi menampilkan panduan beserta sumbernya. Jika belum, aplikasi tidak menebak.</p>
+          <details class="section-extra-guidance"><summary>Bagaimana jawaban diperiksa?</summary><p class="muted">Ketik kata yang ada pada kolom/form. Jika jawabannya sudah terverifikasi, aplikasi menampilkan panduan beserta sumbernya. Jika belum, aplikasi tidak menebak.</p></details>
         </div>
         <label>Kata/kolom yang membingungkan
           <input id="fieldHelpQuery" placeholder="Contoh: buku tabungan, pasfoto, biaya visa, map manufaktur">
@@ -339,7 +357,8 @@
     <section id="fees" class="view">
       <div class="section-head">
         <h2>Periksa biaya</h2>
-        <p>Nominal saja tidak cukup. Periksa nominal + penerima + tahap + sumber resmi.</p>
+        <p>Periksa jumlah, penerima, dan tujuan sebelum membayar.</p>
+        <details class="section-extra-guidance"><summary>Mengapa sumber resmi penting?</summary><p>Nominal saja tidak cukup. Cocokkan tahap, siklus, dan pengumuman resmi. Jangan membayar hanya berdasarkan pesan perantara.</p></details>
       </div>
       <div class="panel">
         <label>Nominal yang diminta (Rp)
@@ -364,7 +383,7 @@
 
       <div class="section-head">
         <h2>Rujukan biaya per pengumuman</h2>
-        <p>Nominal di bawah hanya berlaku pada sumber/siklus yang tercantum. Jangan gunakan ulang untuk siklus berikutnya tanpa pengumuman baru.</p>
+        <p>Periksa tahun dan pengumuman sebelum memakai angka rujukan.</p><details class="section-extra-guidance"><summary>Aturan penggunaan angka rujukan</summary><p>Nominal di bawah hanya berlaku pada sumber/siklus yang tercantum. Jangan gunakan ulang untuk siklus berikutnya tanpa pengumuman baru.</p></details>
       </div>
       <div id="knownCostList" class="cost-list"></div>
 
@@ -398,7 +417,9 @@
     <section id="contract" class="view">
       <div class="section-head">
         <h2>Periksa kontrak SLC</h2>
-        <p>Masukkan isi utama SLC Anda. Data kontrak tetap di perangkat ini dan tidak dikirim ke server oleh beta ini.</p>
+        <p>Isi data kontrak, lalu periksa hasilnya.</p>
+        <ol class="task-step-strip" aria-label="Langkah periksa kontrak"><li>Isi data</li><li>Periksa</li><li>Lihat hasil</li></ol>
+        <p class="safety-note">Data kontrak tetap di perangkat ini dan tidak dikirim ke server oleh beta ini.</p>
       </div>
       <div class="panel">
         <label>Teks SLC (opsional)
@@ -568,9 +589,44 @@
     </section>
 
     <section id="gaps" class="view">
+      <details class="official-directory" id="officialDirectory">
+        <summary><span>Situs resmi: daftar, cek hasil &amp; status</span><span class="official-directory-count">6 tautan</span></summary>
+        <p>Gunakan situs instansi untuk pendaftaran, hasil dan status resmi. KEP hanya menyimpan tahap yang Anda pilih; bukan status dari pemerintah. Periksa jadwal dan panggilan yang sesuai.</p>
+        <div class="official-directory-grid">
+          <article><strong>SiskoP2MI</strong><p>Akun, pendaftaran G-to-G Korea dan pengecekan data sesuai pengumuman KP2MI.</p><a href="https://siskop2mi.bp2mi.go.id/" target="_blank" rel="noopener noreferrer">Buka SiskoP2MI ↗</a></article>
+          <article><strong>Pengumuman KP2MI Korea</strong><p>Jadwal pendaftaran, biometrik, pemanggilan, SLC dan keberangkatan resmi.</p><a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" rel="noopener noreferrer">Baca pengumuman ↗</a></article>
+          <article><strong>EPS-TOPIK (HRD Korea)</strong><p>Informasi ujian, jadwal, pendaftaran bila dibuka dan hasil tes.</p><a href="https://epstopik.hrdkorea.or.kr/epstopik/home/main/mainPage.do?lang=en" target="_blank" rel="noopener noreferrer">Buka EPS-TOPIK ↗</a></article>
+          <article><strong>EPS Korea</strong><p>Masuk ke layanan pekerja dan periksa progres masuk Korea, jika tersedia untuk akun Anda.</p><a href="https://www.eps.go.kr/eo/langMain.eo" target="_blank" rel="noopener noreferrer">Buka layanan EPS ↗</a></article>
+          <article><strong>HiKorea</strong><p>Layanan keimigrasian di Korea, termasuk informasi kunjungan dan izin tinggal.</p><a href="https://www.hikorea.go.kr/" target="_blank" rel="noopener noreferrer">Buka HiKorea ↗</a></article>
+          <article><strong>Portal Ketenagakerjaan Korea</strong><p>Informasi dan pengaduan masalah ketenagakerjaan di Korea.</p><a href="https://labor.moel.go.kr/" target="_blank" rel="noopener noreferrer">Buka portal kerja ↗</a></article>
+        </div>
+        <small>Situs eksternal dikelola instansi masing-masing. KEP tidak meminta kata sandi atau nomor identitas resmi.</small>
+      </details>
+      <div class="worker-help-chooser" aria-label="Pilih masalah yang Anda hadapi">
+        <h2>Apa yang perlu Anda periksa?</h2>
+        <p>Pilih masalah untuk membuka alat yang sesuai. Ini bukan keputusan resmi atau layanan darurat.</p>
+        <div class="worker-help-grid">
+          <button type="button" data-worker-tool="payroll"><strong>Gaji atau slip gaji</strong><small>Periksa rincian pembayaran</small></button>
+          <button type="button" data-worker-tool="contract"><strong>Isi kontrak kerja</strong><small>Periksa data SLC</small></button>
+          <button type="button" data-worker-tool="workplace"><strong>Tempat kerja</strong><small>Periksa informasi yang tersedia</small></button>
+        </div>
+        <details class="worker-help-prep">
+          <summary>Yang perlu disiapkan dan tempat bertanya</summary>
+          <ul>
+            <li><strong>Gaji:</strong> siapkan rincian slip gaji, jam kerja, dan catatan pembayaran. Hindari memasukkan nomor rekening pribadi.</li>
+            <li><strong>Kontrak:</strong> bandingkan isi SLC dan kondisi nyata. Jangan kirim nomor identitas atau dokumen sensitif ke orang yang tidak dikenal.</li>
+            <li><strong>Tempat kerja:</strong> catat perbedaan kondisi kerja yang Anda ketahui; periksa informasi resmi dan bukti yang tersedia.</li>
+          </ul>
+          <p>Jika masalah belum selesai, gunakan saluran konsultasi resmi. KEP bukan penasihat hukum dan tidak dapat memastikan hasil kasus Anda.</p>
+          <a href="https://1350.moel.go.kr/home/hp/ch/callchat.do" target="_blank" rel="noopener noreferrer">Lihat saluran konsultasi Kementerian Ketenagakerjaan Korea (MOEL 1350) ↗</a>
+          <small>Periksa ketersediaan bahasa, jam layanan, dan alamat terbaru pada situs resmi. Tautan tidak berarti kasus atau syarat Anda sudah diverifikasi KEP.</small>
+        </details>
+      </div>
       <div class="section-head">
         <h2>Periksa pesan dan biaya</h2>
-        <p>Tempel pesan WhatsApp/Telegram, penawaran jasa, atau teks tagihan. Analisis berjalan hanya di perangkat ini. Saat membuat draft email beta, pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang akan dihapus otomatis.</p>
+        <p>Tempel pesan atau tagihan untuk melihat tanda risiko sebelum membayar.</p>
+        <ol class="task-step-strip" aria-label="Langkah periksa pesan"><li>Tempel pesan</li><li>Periksa</li><li>Tinjau risiko</li></ol>
+        <p class="safety-note">Analisis berjalan hanya di perangkat ini. Saat membuat draft email beta, pola yang tampak seperti email, nomor telepon, nomor dokumen, atau nomor panjang akan dihapus otomatis. Selalu periksa kembali hasilnya.</p>
       </div>
       <div class="panel">
         <label>Teks pesan / tagihan
@@ -756,10 +812,42 @@
 
   <footer>
     <span>Bukan layanan pemerintah. Tidak ada jaminan pekerjaan.</span>
-    <a href="index.html">Beranda beta</a>
+    <a href="index.html">Beranda</a>
     <a href="privacy.html">Privasi</a>
   </footer>
 
+  <dialog id="accountDialog" aria-labelledby="accountTitle" class="account-dialog">
+    <div class="account-dialog-header">
+      <div><strong>KEP Account</strong><h2 id="accountTitle">Masuk akun KEP</h2></div>
+      <button type="button" id="accountCloseBtn" class="ghost" aria-label="Tutup akun">×</button>
+    </div>
+    <p class="account-intro">Informasi umum dan sumber resmi tetap terbuka. Akun gratis diperlukan untuk tahap pribadi, checklist, pemeriksaan biaya, dan pengelolaan progres. Bukan akun resmi EPS/KP2MI.</p>
+    <div id="accountStatus" role="status" aria-live="polite" hidden></div>
+    <form id="accountForm" class="account-form">
+      <label>Email<input id="accountEmail" type="email" autocomplete="email" inputmode="email" required maxlength="254"></label>
+      <label id="accountPasswordLabel">Kata sandi<input id="accountPassword" type="password" autocomplete="current-password" required maxlength="128"></label>
+      <label class="account-consent" hidden><input type="checkbox" id="accountPrivacyConsent"> Saya memahami <a href="privacy.html" target="_blank" rel="noopener">kebijakan privasi KEP</a> dan setuju membuat akun (untuk pendaftaran baru).</label>
+      <button id="accountSubmit" type="submit" class="primary full">Masuk</button>
+    </form>
+    <div class="account-mode-links" id="accountModeLinks">
+      <button type="button" data-account-mode="signup">Daftar gratis</button>
+      <button type="button" data-account-mode="login">Masuk</button>
+      <button type="button" data-account-mode="forgot">Lupa kata sandi?</button>
+    </div>
+    <div id="accountSignedIn" hidden>
+      <strong id="accountIdentity"></strong>
+      <p>Sinkronisasi hanya untuk progres dan checklist. Data kontrak, gaji, nomor identitas, serta isi dokumen tidak diunggah.</p>
+      <button type="button" id="accountSaveBtn" class="primary full">Simpan progres perangkat ke cloud</button>
+      <button type="button" id="accountRestoreBtn" class="secondary full">Pulihkan progres cloud ke perangkat</button>
+      <button type="button" id="accountDeleteProgressBtn" class="secondary full">Hapus progres cloud</button>
+      <label class="account-delete-password">Kata sandi saat ini<input id="accountDeletePassword" type="password" autocomplete="current-password" maxlength="128"></label>\n      <button type="button" id="accountDeleteAccountBtn" class="secondary full">Hapus akun KEP</button>
+      <button type="button" id="accountLogoutBtn" class="ghost full">Keluar akun</button>
+    </div>
+    <p class="account-footer-note">Saat memulihkan progres, cadangkan catatan lokal terlebih dahulu. Tidak ada sinkronisasi data dengan sistem pemerintah.</p>
+  </dialog>
+
+  <script src="account-config.js"></script>
   <script src="app-runtime.js"></script>
+  <script type="module" src="account.js"></script>
 </body>
 </html>

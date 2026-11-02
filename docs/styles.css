@@ -51,3 +51,9 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
 .reading-page p{line-height:1.75;margin:20px 0}
 @media(max-width:560px){.hero{padding:16px 20px 32px}.nav{margin-bottom:24px;gap:8px}.hero-grid{gap:24px}.section{padding:32px 20px}.join-card{padding:24px}.passport-card{padding:20px}h1{font-size:2rem}.reading-header{padding:12px 20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Research previews retain their evidence HOLD within the shared reading layout. */
+.preview-status{padding:16px;border:1px solid #d6b656;border-left:4px solid #a87c20;border-radius:8px;background:#fff6da;color:#574000;font-weight:700}
+
+.reading-page .skip-link{position:absolute;top:8px;left:16px;transform:translateY(-200%);padding:12px 16px;background:#fff;color:var(--accent);z-index:1000}
+.reading-page .skip-link:focus{transform:none}

@@ -64,6 +64,7 @@ function storageKeyFor(key){
 const read=(key,fallback)=>{try{return JSON.parse(storedValue(storageKeyFor(key)))??fallback}catch{return fallback}};
 const write=(key,value)=>{
   const scoped=storageKeyFor(key),serialized=JSON.stringify(value);
+  if([KEYS.done,KEYS.docs,KEYS.scopeSelections,KEYS.formWizard,KEYS.wizardReviewed,KEYS.quickSetup].includes(key))queueMicrotask(()=>window.dispatchEvent(new Event('kep:progress-changed')));
   if(!storageSessionOnly){
     try{localStorage.setItem(scoped,serialized);return true}catch{warnStorageFailure()}
   }
@@ -98,7 +99,9 @@ function writeProgressBatch(entries){
       warnStorageFailure();
     }
   }
-  staged.forEach(([key,value])=>currentTabStorage.set(key,value));return false;
+  staged.forEach(([key,value])=>currentTabStorage.set(key,value));
+  queueMicrotask(()=>window.dispatchEvent(new Event('kep:progress-changed')));
+  return false;
 }
 function storageSavedText(text){
   return storageSessionOnly?text.replace('Tersimpan','Dicatat untuk tab ini').replace('tersimpan','aktif untuk tab ini'):text;
@@ -828,6 +831,11 @@ function renderQuickStart(){
     document.body.classList.remove('setup-mode');
     return;
   }
+  if(document.body.dataset.activeView&&document.body.dataset.activeView!=='journey'){
+    box.hidden=true;
+    document.body.classList.remove('setup-mode');
+    return;
+  }
   const hasProgress=read(KEYS.done,[]).length>0;
   const finished=read(KEYS.quickSetup,false);
   if(hasProgress||finished){
@@ -855,6 +863,13 @@ document.querySelectorAll('[data-quick-stage]').forEach(button=>button.addEventL
   if(!stageId)return;
   applyCurrentStage(stageId,true);
   window.scrollTo({top:0,behavior:'instant'});
+  // Keep the primary action clear of the fixed mobile navigation.
+  const primary=$('nextAction').querySelector('.primary');
+  const nav=document.querySelector('.utility-nav');
+  if(primary&&nav&&innerWidth<=430){
+    const overlap=primary.getBoundingClientRect().bottom-nav.getBoundingClientRect().top+12;
+    if(overlap>0)window.scrollBy({top:overlap,behavior:'instant'});
+  }
 }));
 
 $('startFromBeginningBtn').addEventListener('click',()=>{
@@ -1354,6 +1369,26 @@ stageDialog.addEventListener('close',()=>{
   target?.focus({preventScroll:true});
 });
 
+/* Official destinations support a task; they never imply an open intake or official KEP status. */
+const OFFICIAL_STEP_VISITS=Object.freeze({
+  eligibility:{label:'Periksa pengumuman G-to-G Korea',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  biometric:{label:'Periksa panggilan biometrik KP2MI',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  final_selection:{label:'Periksa hasil akhir EPS-TOPIK',url:'https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=ko'},
+  mcu1:{label:'Periksa pengumuman pemeriksaan kesehatan',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  employer_selection:{label:'Periksa progres resmi melalui EPS',url:'https://www.eps.go.kr/eo/langMain.eo'},
+  slc:{label:'Periksa pengumuman kontrak kerja KP2MI',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  post_slc_requirements:{label:'Periksa panggilan setelah SLC',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  visa_docs:{label:'Periksa panggilan pemberkasan visa',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  predeparture_training:{label:'Periksa jadwal OPP resmi',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  mcu3_departure:{label:'Periksa panggilan pemeriksaan akhir',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  departure:{label:'Periksa pengumuman keberangkatan',url:'https://kp2mi.go.id/gtog-korea/pengumuman'},
+  korea_entry_training:{label:'Periksa progres kedatangan di EPS',url:'https://www.eps.go.kr/eo/langMain.eo'},
+  employer_handover:{label:'Periksa progres penempatan di EPS',url:'https://www.eps.go.kr/eo/langMain.eo'}
+});
+function officialDirectVisit(stage){
+  if(stage?.officialActionUrl)return {url:stage.officialActionUrl,label:stage.officialActionLabel||'Buka layanan resmi terkait'};
+  return OFFICIAL_STEP_VISITS[stage?.id]||null;
+}
 function openStage(stage){
   if(stageDialogHistoryClosing){queuedStageDialog=stage;return;}
   if(!stageDialog.open){
@@ -1391,14 +1426,15 @@ function openStage(stage){
   competencyLink.href=canShowCompetency?competencyNotice.url:'#';
   renderSharedKoreaCore(stage);
   const officialAction=$('stageOfficialAction');
-  if(stage.officialActionUrl){
+  const visit=officialDirectVisit(stage);
+  if(visit){
     officialAction.hidden=false;
-    officialAction.href=stage.officialActionUrl;
-    officialAction.textContent=(stage.officialActionLabel||'Buka layanan resmi')+' ↗';
+    officialAction.href=visit.url;
+    officialAction.textContent=visit.label+' ↗';
+    officialAction.title='Periksa di situs terkait; jadwal pendaftaran dan hasil hanya ditetapkan instansi resmi.';
   }else{
     officialAction.hidden=true;
-    officialAction.href='#';
-    officialAction.textContent='Buka layanan resmi ↗';
+    officialAction.removeAttribute('href');
   }
   renderScopePicker(stage);
   renderStageBqc(stage);
@@ -1530,6 +1566,17 @@ function renderNextAction(){
       ? `<div class="next-scope"><label>${escapeHtml(scopePromptForStage(next.id))}<select data-next-scope><option value="">Pilih tanggal</option>${scoped.map(item=>`<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`).join('')}</select></label><small>Pilih hanya jadwal yang memang memuat nama Anda.</small></div><button class="secondary" data-stage="${escapeHtml(next.id)}">Saya belum tahu → lihat petunjuk</button>`
       : normalAction;
     box.innerHTML=`<small>LANGKAH BERIKUTNYA</small><h2>${escapeHtml(stageTitle(next))}</h2><p>${escapeHtml(stageAction(next))}</p>${scopeAction}`;
+    const nextOfficial=officialDirectVisit(next);
+    if(nextOfficial){
+      const row=document.createElement('div');
+      row.className='next-official-link';
+      const link=document.createElement('a');
+      link.href=nextOfficial.url;link.target='_blank';link.rel='noopener noreferrer';
+      link.textContent=nextOfficial.label+' ↗';
+      const caution=document.createElement('small');
+      caution.textContent='Periksa jadwal dan status resmi sebelum mendaftar atau membayar.';
+      row.append(link,caution);box.append(row);
+    }
     renderContextTools(next);
   }else{
     box.innerHTML='<small>RUTE SELESAI</small><h2>Semua tahap yang dilacak sudah ditandai selesai</h2><p>Periksa kembali Celah Calo sebelum menganggap rute ini benar-benar tanpa calo.</p><button class="primary" data-go="gaps">Periksa Celah Calo</button>';
@@ -1551,7 +1598,7 @@ function renderNextAction(){
     const source=stageSourceContext(next);
     const evidence=document.createElement('div');
     evidence.className='next-evidence';
-    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener">Sumber resmi ↗</a><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
+    evidence.innerHTML='<span class="source-state '+source.kind+'">'+escapeHtml(source.label)+'</span><details><summary>Ruang lingkup &amp; pemeriksaan sumber</summary>'+stageSourceContextHtml(next)+officialHelpFallbackHtml(next.id)+'</details>';
     box.append(evidence);
     const warning=stageWarning(next);
     if(warning){
@@ -4166,6 +4213,10 @@ function switchView(viewId,scroll=true){
   const target=document.getElementById(viewId);
   if(!target?.classList.contains('view'))return;
   document.body.dataset.activeView=viewId;
+  // The common passport brand stays, but the context heading follows the active tab.
+  const sectionTitles={journey:'Langkah sekarang',documents:'Asisten Dokumen',fees:'Periksa biaya',gaps:'Bantuan'};
+  const contextualTitle=sectionTitles[viewId]||({'documents':'Asisten Dokumen','costs':'Periksa biaya','support':'Bantuan'}[viewId]);
+  if(contextualTitle)$('routeTitle').textContent=contextualTitle;
   if(viewId==='journey')renderQuickStart();
   else{$('quickStart').hidden=true;document.body.classList.remove('setup-mode');}
   const heading=target.querySelector('h2');
@@ -4195,13 +4246,22 @@ function switchView(viewId,scroll=true){
     renderCompanyHub();
   }
   if(scroll){
+    // A bottom-tab change starts at the page top so the passport brand is visible.
+    // The header remains non-sticky and naturally disappears on manual scrolling.
+    window.scrollTo({top:0,left:0,behavior:'instant'});
+    // Mobile Chrome can restore its previous scroll after a hidden view is swapped.
+    // Reapply once layout stabilizes without making the passport header sticky.
+    requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)));
     if(viewId==='journey'){
       const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
-      action.scrollIntoView({behavior:'instant',block:'start'});
-      action.querySelector('.primary, select, button')?.focus({preventScroll:true});
-    }else{
-      if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
-      target.scrollIntoView({behavior:'instant',block:'start'});
+      const memberNote=$('memberAccessNote');
+      const focusTarget=memberNote&&!memberNote.hidden
+        ?memberNote.querySelector('.primary, button')
+        :action.querySelector('.quick-choice, select, button:not(#memberAccessSignup):not(#memberAccessLogin)');
+      focusTarget?.focus({preventScroll:true});
+    }else if(heading){
+      heading.tabIndex=-1;
+      heading.focus({preventScroll:true});
     }
   }
 }
@@ -4230,7 +4290,17 @@ skipNavigationObserver.observe(document.body,{attributes:true,attributeFilter:['
   skipNavigationObserver.observe(target,{attributes:true,attributeFilter:['hidden']});
 });
 syncSkipNavigation();
+const homeHelpToggle=$('toggleHomeHelpBtn');
+const homeHelpContent=$('homeHelpContent');
+homeHelpToggle.addEventListener('click',()=>{
+  const show=homeHelpContent.hidden;
+  homeHelpContent.hidden=!show;
+  homeHelpToggle.setAttribute('aria-expanded',String(show));
+  homeHelpToggle.textContent=show?'Sembunyikan pertanyaan':'Tampilkan pertanyaan';
+  if(show)$('brokerLikeQuestion').focus();
+});
 document.querySelectorAll('.utility-tab').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+document.querySelectorAll('[data-worker-tool]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.workerTool)));
 document.querySelectorAll('.view:not(#journey)').forEach(view=>{
   const button=document.createElement('button');
   button.type='button';button.className='tool-return';button.textContent='← Kembali ke langkah saya';
@@ -4270,3 +4340,10 @@ $('brokerLikeQuestion').addEventListener('input',()=>$('brokerLikeQuestionResult
 $('fieldHelpQuery').addEventListener('input',()=>$('fieldHelpResult').hidden=true);
 $('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();
+// Expose only the existing non-sensitive backup interface to member accounts.
+// The account module never accesses contract, payroll, personal notes or form field contents.
+window.KEPAccountProgress=Object.freeze({
+  ready:()=>Boolean(route&&documentPacks&&formWizards),
+  backup:()=>makeProgressBackup(),
+  restore:payload=>safeRestoreProgress(payload)
+});
