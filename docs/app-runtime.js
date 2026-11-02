@@ -831,6 +831,11 @@ function renderQuickStart(){
     document.body.classList.remove('setup-mode');
     return;
   }
+  if(document.body.dataset.activeView&&document.body.dataset.activeView!=='journey'){
+    box.hidden=true;
+    document.body.classList.remove('setup-mode');
+    return;
+  }
   const hasProgress=read(KEYS.done,[]).length>0;
   const finished=read(KEYS.quickSetup,false);
   if(hasProgress||finished){
@@ -4249,7 +4254,11 @@ function switchView(viewId,scroll=true){
     requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)));
     if(viewId==='journey'){
       const action=$('quickStart').hidden?$('nextAction'):$('quickStart');
-      action.querySelector('.primary, select, button')?.focus({preventScroll:true});
+      const memberNote=$('memberAccessNote');
+      const focusTarget=memberNote&&!memberNote.hidden
+        ?memberNote.querySelector('.primary, button')
+        :action.querySelector('.quick-choice, select, button:not(#memberAccessSignup):not(#memberAccessLogin)');
+      focusTarget?.focus({preventScroll:true});
     }else if(heading){
       heading.tabIndex=-1;
       heading.focus({preventScroll:true});
@@ -4331,7 +4340,7 @@ $('brokerLikeQuestion').addEventListener('input',()=>$('brokerLikeQuestionResult
 $('fieldHelpQuery').addEventListener('input',()=>$('fieldHelpResult').hidden=true);
 $('retryRouteLoadBtn').addEventListener('click',()=>boot());
 boot();
-// Expose only the existing non-sensitive backup interface to optional accounts.
+// Expose only the existing non-sensitive backup interface to member accounts.
 // The account module never accesses contract, payroll, personal notes or form field contents.
 window.KEPAccountProgress=Object.freeze({
   ready:()=>Boolean(route&&documentPacks&&formWizards),
