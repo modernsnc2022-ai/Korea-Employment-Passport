@@ -1,11 +1,29 @@
 const { test, expect } = require('@playwright/test');
-test('account deployment gate preserves free use and 4 navigation tabs', async ({page}) => {
+test('public information stays open while personal actions require a free account', async ({page}) => {
+  await page.route('**/account-config.js', r=>r.fulfill({contentType:'application/javascript',body:`window.KEP_ACCOUNT_CONFIG={provider:'firebase',projectId:'kep-staging',authDomain:'kep-staging.firebaseapp.com',apiKey:'AIza${'x'.repeat(35)}',appId:'1:123:web:abcdef'};`}));
+  await page.route('https://www.gstatic.com/firebasejs/12.4.0/**', async r=>{
+    const file=r.request().url().split('/').pop();
+    const fake={
+      'firebase-app.js':`export function initializeApp(){return {}}`,
+      'firebase-auth.js':`export function getAuth(){return {}};export function onAuthStateChanged(a,callback){callback(null)}`,
+      'firebase-firestore.js':`export function getFirestore(){return {}}`
+    };
+    await r.fulfill({contentType:'application/javascript',headers:{'access-control-allow-origin':'*'},body:fake[file]||''});
+  });
   await page.goto('/app.html');
-  await expect(page.locator('#accountOpenBtn')).toBeHidden();
+  await expect(page.locator('#accountOpenBtn')).toBeVisible({timeout:12000});
   await expect(page.locator('.utility-tab')).toHaveCount(4);
-  await page.locator('[data-quick-stage="eligibility"]').click();
   await page.locator('.utility-tab[data-view="gaps"]').click();
   await expect(page.locator('#routeTitle')).toHaveText('Bantuan');
+  await page.locator('.utility-tab[data-view="journey"]').click();
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await expect(page.locator('#accountDialog')).toBeVisible();
+  await expect(page.locator('#accountTitle')).toHaveText('Daftar akun gratis');
+  await expect(page.locator('#accountStatus')).toContainText('tetap gratis');
+  await page.locator('#accountCloseBtn').click();
+  await page.locator('.utility-tab[data-view="documents"]').click();
+  await page.locator('#fieldHelpQuery').click();
+  await expect(page.locator('#accountDialog')).toBeVisible();
 });
 test('account UI email signup, login, sync and logout with mocked Google Cloud SDK', async ({page}) => {
   await page.route('**/account-config.js', r=>r.fulfill({contentType:'application/javascript',body:`window.KEP_ACCOUNT_CONFIG={provider:'firebase',projectId:'kep-staging',authDomain:'kep-staging.firebaseapp.com',apiKey:'AIza${'x'.repeat(35)}',appId:'1:123:web:abcdef'};`}));
@@ -32,7 +50,6 @@ test('account UI email signup, login, sync and logout with mocked Google Cloud S
   });
   await page.goto('/app.html');
   await expect(page.locator('#accountOpenBtn')).toBeVisible({timeout:12000});
-  await page.locator('[data-quick-stage="eligibility"]').click();
   await page.locator('#accountOpenBtn').click();
   await page.locator('[data-account-mode="signup"]').click();
   await page.locator('#accountEmail').fill('demo@example.org');
@@ -44,6 +61,13 @@ test('account UI email signup, login, sync and logout with mocked Google Cloud S
   await page.locator('#accountSubmit').click();
   await expect(page.locator('#accountSignedIn')).toBeVisible();
   await expect(page.locator('#accountCloseBtn')).toHaveText('×');
+  await page.locator('#accountCloseBtn').click();
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await expect(page.locator('#quickStart')).toBeHidden();
+  await page.locator('.utility-tab[data-view="documents"]').click();
+  await page.locator('#fieldHelpQuery').fill('pasfoto');
+  await expect(page.locator('#fieldHelpQuery')).toHaveValue('pasfoto');
+  await page.locator('#accountOpenBtn').click();
   await page.locator('#accountSaveBtn').click();
   await expect(page.locator('#accountStatus')).toContainText('tersimpan');
   await page.locator('#accountLogoutBtn').click();
@@ -70,7 +94,6 @@ test('account deletion requires reauthentication and preserves progress if delet
     await r.fulfill({contentType:'application/javascript',headers:{'access-control-allow-origin':'*'},body:fake[file]||''});
   });
   await page.goto('/app.html');
-  await page.locator('[data-quick-stage="eligibility"]').click();
   await page.locator('#accountOpenBtn').click();
   await page.locator('#accountEmail').fill('demo@example.org');
   await page.locator('#accountPassword').fill('demo-long-passphrase!');
