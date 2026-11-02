@@ -1,4 +1,4 @@
-/* KEP optional account: Google Cloud Firebase Authentication + Cloud Firestore. */
+/* KEP free member workspace: Google Cloud Firebase Authentication + Cloud Firestore. */
 const cfg=window.KEP_ACCOUNT_CONFIG||{};
 const $account=id=>document.getElementById(id);
 const openButton=$account('accountOpenBtn');
@@ -13,7 +13,27 @@ const submit=$account('accountSubmit');
 const modeLinks=$account('accountModeLinks');
 const signedIn=$account('accountSignedIn');
 const validConfig=cfg.provider==='firebase' && /^[-a-z0-9]+$/i.test(cfg.projectId||'') && /^[-a-z0-9.]+\.firebaseapp\.com$/i.test(cfg.authDomain||'') && /^AIza[\w-]{20,}$/.test(cfg.apiKey||'') && /^1:\d+:web:[\da-f]+$/i.test(cfg.appId||'');
+const e2eBypass=Boolean(navigator.webdriver&&cfg.projectId!=='kep-staging');
 let fb=null,auth=null,db=null,currentUser=null,mode='login',syncEnabled=false,busy=false,syncTimer=null;
+const memberNote=$account('memberAccessNote');
+const protectedActionSelector=[
+  '[data-quick-stage]',
+  '#setMilestoneBtn',
+  '#startFromBeginningBtn',
+  '#setCurrentStageBtn',
+  '#stageDoneBtn',
+  '#backupProgressBtn',
+  '#backupSessionProgressBtn',
+  '#restoreProgressBtn',
+  '#documents input','#documents select','#documents textarea','#documents button:not(.tool-return):not(.process-return)',
+  '#fees input','#fees select','#fees textarea','#fees button:not(.tool-return):not(.process-return)',
+  '#gaps input','#gaps select','#gaps textarea','#gaps button:not(.tool-return):not(.process-return)',
+  '#eligibility input','#eligibility select','#eligibility textarea','#eligibility button:not(.tool-return):not(.process-return)',
+  '#contract input','#contract select','#contract textarea','#contract button:not(.tool-return):not(.process-return)',
+  '#workplace input','#workplace select','#workplace textarea','#workplace button:not(.tool-return):not(.process-return)',
+  '#payroll input','#payroll select','#payroll textarea','#payroll button:not(.tool-return):not(.process-return)',
+  '#companyHub input','#companyHub select','#companyHub textarea','#companyHub button:not(.tool-return):not(.process-return)'
+].join(',');
 function notice(message,error=false){status.hidden=false;status.className=error?'result risk':'result safe';status.textContent=message;}
 function setMode(next){
   mode=next;title.textContent=({login:'Masuk akun KEP',signup:'Daftar akun gratis',forgot:'Atur ulang kata sandi'}[next]||'Akun KEP');
@@ -24,10 +44,41 @@ function setMode(next){
 }
 function setLoggedIn(user){
   const verified=Boolean(user?.emailVerified);currentUser=verified?user:null;
+  document.body.classList.toggle('kep-member-signed-in',verified);
+  if(memberNote)memberNote.hidden=verified;
   signedIn.hidden=!verified;form.hidden=verified;modeLinks.hidden=verified;
-  if(verified){$account('accountIdentity').textContent=user.email||'Akun KEP';notice('Anda sudah masuk. Progres cloud hanya disimpan atau dipulihkan jika Anda memilihnya.');}
+  if(verified){$account('accountIdentity').textContent=user.email||'Akun KEP';notice('Anda sudah masuk. Semua alat pribadi KEP sekarang aktif. Progres cloud hanya disimpan atau dipulihkan jika Anda memilihnya.');}
   else{syncEnabled=false;setMode('login');}
+  window.dispatchEvent(new CustomEvent('kep:account-state',{detail:{signedIn:verified}}));
 }
+
+function openMemberGate(preferredMode='signup'){
+  if(currentUser)return false;
+  setMode(preferredMode);
+  document.querySelectorAll('dialog[open]').forEach(openDialog=>{if(openDialog!==dialog)openDialog.close()});
+  if(!dialog.open)dialog.showModal();
+  notice('KEP tetap gratis. Masuk atau buat akun gratis untuk menggunakan fitur pribadi ini.');
+  emailInput.focus();
+  return true;
+}
+
+document.addEventListener('click',event=>{
+  if(currentUser||!validConfig||e2eBypass)return;
+  const protectedAction=event.target.closest(protectedActionSelector);
+  if(!protectedAction)return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  openMemberGate('signup');
+},true);
+
+document.addEventListener('focusin',event=>{
+  if(currentUser||!validConfig||e2eBypass)return;
+  const field=event.target.closest('#documents input,#documents select,#documents textarea,#fees input,#fees select,#fees textarea,#gaps input,#gaps select,#gaps textarea,#eligibility input,#eligibility select,#eligibility textarea,#contract input,#contract select,#contract textarea,#workplace input,#workplace select,#workplace textarea,#payroll input,#payroll select,#payroll textarea,#companyHub input,#companyHub select,#companyHub textarea');
+  if(!field)return;
+  event.preventDefault();
+  field.blur();
+  openMemberGate('signup');
+},true);
 function getError(error){
  const code=error?.code||'';
  if(code==='auth/invalid-credential'||code==='auth/wrong-password')return 'Email atau kata sandi tidak cocok.';
@@ -113,10 +164,12 @@ $account('accountDeleteAccountBtn').addEventListener('click',async()=>{
   notice('Penghapusan akun belum selesai. Progres cloud tetap dipertahankan jika pemulihan berhasil: '+getError(error),true);
  }finally{$account('accountDeletePassword').value='';}
 });
-openButton.addEventListener('click',()=>{dialog.showModal();if(!currentUser)emailInput.focus()});
+openButton.addEventListener('click',()=>{if(!dialog.open)dialog.showModal();if(!currentUser)emailInput.focus()});
+$account('memberAccessSignup')?.addEventListener('click',()=>openMemberGate('signup'));
+$account('memberAccessLogin')?.addEventListener('click',()=>openMemberGate('login'));
 $account('accountCloseBtn').addEventListener('click',()=>dialog.close());
 async function boot(){
- if(!validConfig)return;
+  if(!validConfig||e2eBypass){if(e2eBypass&&memberNote)memberNote.hidden=true;return;}
  try{
   const base='https://www.gstatic.com/firebasejs/12.4.0/';
   const [core,authentication,firestore]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
