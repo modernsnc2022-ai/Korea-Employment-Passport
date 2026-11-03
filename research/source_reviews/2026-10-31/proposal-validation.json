@@ -1,0 +1,15 @@
+{
+  "proposalOnly": true,
+  "temporaryApplication": true,
+  "checks": {
+    "optional_upload_conditions_preserved": true,
+    "all_other_route_stages_identical": true,
+    "no_personal_session_assigned": true,
+    "new_answers_not_marked_approved": true,
+    "all_job_application_answers_identical": true
+  },
+  "webappContract": "PASS",
+  "productStaticWithSourcePending": "PASS_NOT_RELEASE",
+  "fullUIForProposedData": "NOT_RUN",
+  "strictRelease": "BLOCKED_UNCHANGED"
+}

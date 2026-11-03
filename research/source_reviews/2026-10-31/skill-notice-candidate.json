@@ -1,0 +1,33 @@
+{
+  "status": "PROPOSAL_ONLY_NOT_SERVED",
+  "sourceUrl": "https://www.kp2mi.go.id/gtog-detail/korea/pengumuman-jadwal-pelaksanaan-skill-test-ubt-umum-sektor-manufaktur-tahun-2026",
+  "annexUrl": "https://www.kp2mi.go.id/uploads/gtgkorea/images/data_21-10-2026_Jadwal_Skill_Test_CPMI_Sektor_Manufaktur_Tahun_2026.pdf",
+  "humanReviewer": null,
+  "humanApproval": false,
+  "applyAutomatically": false,
+  "personalSessionAssignment": "official_annex_only_not_inferred_or_copied",
+  "files": [
+    {
+      "path": "docs/data/id_e9_manufacturing_2026.json",
+      "beforeSha256": "08a6d6457d721c9cfe922432bbf0bf98e9d839fbb2fff30c0de983e79d0a88e0",
+      "proposedSha256": "7f9df9fdff0026223ecb030a1f624d075fbc9f5620d19a9266fda28b207ceb37"
+    },
+    {
+      "path": "docs/data/id_e9_manufacturing_2026_id.json",
+      "beforeSha256": "2285b6d5278b82eb34b3f02ed2404c43a6080ccddaccc0a3c4fc5c973ee92af0",
+      "proposedSha256": "15f51d2eaad69273b04de95e6046548608df2a9ea4b976265453e607bd00abaa"
+    },
+    {
+      "path": "docs/data/exact_answer_rules_v1.json",
+      "beforeSha256": "a11e98f9bea7eb51dea5ff05b5d8a91295271ca2c1ad6cd1158a98150bf96c60",
+      "proposedSha256": "0e2b6617bafec2cbad2186ab8e7eb749743c045135e82e13b9620d502979dd39"
+    }
+  ],
+  "beforeDeployment": [
+    "Review original and annex with a human reviewer and exact source fingerprints",
+    "Monitor notice and annex; explicitly approve fingerprints without bulk acceptance",
+    "Update source guards consistently; pending_human_review is not a release-ready runtime label",
+    "Run full UI and strict release checks after approved patch application",
+    "Preserve job_docs HOLD, closed September upload and beta HOLD"
+  ]
+}

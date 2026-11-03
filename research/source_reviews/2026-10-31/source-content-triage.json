@@ -1,0 +1,439 @@
+{
+  "observedSourceCount": 84,
+  "changedSourceCount": 14,
+  "technicalFetchComplete": true,
+  "reviewComplete": false,
+  "records": [
+    {
+      "id": "minimum_wage",
+      "agency": "Korea Minimum Wage Commission",
+      "url": "https://www.minimumwage.go.kr/index.jsp",
+      "before": "c99474032bbce435844cbf20714f438ac215643890ce6d3823a2903c272dbe8e",
+      "after": "39cbfabd7233a10335ef69d446e91ccc2a9ec709307c6e680f9784c8ed88bf12",
+      "beforeUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "afterUrl": "https://www.minimumwage.go.kr/index.jsp",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/np_e9_manufacturing_2026.json",
+        "docs/data/kh_e9_manufacturing_2026.json",
+        "docs/data/lk_e9_manufacturing_2026.json",
+        "docs/data/id_e9_manufacturing_2026.json",
+        "docs/data/vn_e9_manufacturing_2026.json",
+        "docs/data/mn_e9_manufacturing_2026.json",
+        "docs/data/tj_e9_manufacturing_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/slc_guardian_2026.json",
+        "docs/data/bd_e9_manufacturing_2026.json",
+        "docs/data/cn_e9_manufacturing_2026.json",
+        "docs/data/ph_e9_manufacturing_2026.json",
+        "docs/data/tl_e9_manufacturing_2026.json",
+        "docs/data/kg_e9_manufacturing_2026.json",
+        "docs/data/exact_answer_rules_v1.json",
+        "docs/data/uz_e9_manufacturing_2026.json",
+        "docs/data/pk_e9_manufacturing_2026.json",
+        "docs/data/th_e9_manufacturing_2026.json",
+        "docs/data/la_e9_manufacturing_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_body_compared",
+        "finding": "The 2026 hourly/monthly baseline matches minimum_wage_2026 and SLC guidance. A homepage hash change does not establish a wage-rule change.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "labor_standards_wage_statement",
+      "agency": "Korea Law Information Center",
+      "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "before": "4cfd5356dcfbb877401dff5d8f758426760b3111bf6835c64f51762b71803e00",
+      "after": "a8754d0fbd0d59f2164d056a6e40cdb7b7b8048cb95b8a87726481db40085786",
+      "beforeUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "afterUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1027161979",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/source_review_status.json",
+        "docs/data/exact_answer_rules_v1.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_body_compared",
+        "finding": "Article 48(2) payslip components/calculation/deductions matches existing guidance. Current law effective date is displayed; full historical text comparison remains unavailable.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "moel_wage_arrears_2026",
+      "agency": "MOEL 1350",
+      "url": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "before": "7f035022c03490f13e6557dfb9643ad357181f2c567fb39dff34d67e9ad2ee7c",
+      "after": "35fa3f7f3e67ec4a033abfe944bb9a498695f3cad8fefa15a245314bad6efe1c",
+      "beforeUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "afterUrl": "https://1350.moel.go.kr/rtmview.do?id=1000317748",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/source_review_status.json",
+        "docs/data/exact_answer_rules_v1.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_body_compared",
+        "finding": "The original unpaid-wage response supports the current first-action guidance. Later public thread entries are present; do not promise a fixed compensation date.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "kdca_qcode_input",
+      "agency": "Korea Disease Control and Prevention Agency",
+      "url": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "before": "6e6bb168ea271bb51818c43c73aecb9976751cf6f80426e5fa09a99c5db54e6a",
+      "after": "c7ff92c67b21468dbc6f8be4547ea6c4032f150c065b2fd212e7e822fa8a8aee",
+      "beforeUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "afterUrl": "https://qcode.kdca.go.kr/qco/cd/codeInput2.do",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/source_review_status.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_destination_body_compared",
+        "finding": "Current KDCA destination confirms region/symptom conditions and seven-day input window; existing conditional answer is consistent. No blanket E-9 obligation.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "moel_1350_contact",
+      "agency": "Ministry of Employment and Labor",
+      "url": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "before": "49a13ada23a2d1d69be3ffc9915fcc7119e68302b49140f73b6f2a4deea0cd8b",
+      "after": "846f066be872e653a875fb9072badc2cd9d58dbb1546252fe040ef0e06b39d71",
+      "beforeUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "afterUrl": "https://1350.moel.go.kr/home/hp/ch/callchat.do",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/official_help_channels_v1.json",
+        "docs/data/source_review_status.json",
+        "docs/data/exact_answer_rules_v1.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_body_compared",
+        "finding": "Existing paid weekday Korea-time phone-hours guidance is consistent. Indonesian telephone interpretation is not established by this page.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "mm_hrdk_schedule_index",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "before": "f9dd450131bb8d64560f324f4aa9e9692906edc885d81b3465e696933bc555c3",
+      "after": "ee4066b0e81199f0c7a99d8897781f418308391aaa084e6ef8fa057a3a08d631",
+      "beforeUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "afterUrl": "https://epstopik.hrdkorea.or.kr/epstopik/abot/exam/selectSechduleDescList.do?lang=en",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/bd_stage_readiness_2026.json",
+        "docs/data/country_coverage_matrix_2026.json",
+        "docs/data/ph_exact_answer_rules_2026.json",
+        "docs/data/ph_stage_readiness_2026.json",
+        "docs/data/th_stage_readiness_2026.json",
+        "docs/data/mm_manufacturing_verification_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/bd_e9_manufacturing_2026.json",
+        "docs/data/la_stage_readiness_2026.json",
+        "docs/data/la_document_packs_2026.json",
+        "docs/data/ph_e9_manufacturing_2026.json",
+        "docs/data/bd_exact_answer_rules_2026.json",
+        "docs/data/country_readiness_dashboard_2026.json",
+        "docs/data/la_exact_answer_rules_2026.json",
+        "docs/data/th_e9_manufacturing_2026.json",
+        "docs/data/la_e9_manufacturing_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "The list contains multiple countries and sectors. No current Myanmar Manufacturing route is established by an index hash or a generic recruitment title.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "mm_hrdk_skills_candidates",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "before": "651c6940e1a6fc9f0a763464c8ff80d0c8936246339b033186817a0dc7f61e49",
+      "after": "75652a8f247cbe47b3e39d950eb41199ab620c19ef07c86a3ea4217dc7792109",
+      "beforeUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "afterUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/functionalLevelCandidateList.do?lang=en",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/cn_stage_readiness_2026.json",
+        "docs/data/kh_e9_manufacturing_2026.json",
+        "docs/data/th_exact_answer_rules_2026.json",
+        "docs/data/th_stage_readiness_2026.json",
+        "docs/data/hrd_examnot_linkage_2026.json",
+        "docs/data/mn_e9_manufacturing_2026.json",
+        "docs/data/tj_exact_answer_rules_2026.json",
+        "docs/data/tj_e9_manufacturing_2026.json",
+        "docs/data/cn_exact_answer_rules_2026.json",
+        "docs/data/mm_manufacturing_verification_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/kh_stage_readiness_2026.json",
+        "docs/data/cn_e9_manufacturing_2026.json",
+        "docs/data/uz_stage_readiness_2026.json",
+        "docs/data/mn_stage_readiness_2026.json",
+        "docs/data/tl_e9_manufacturing_2026.json",
+        "docs/data/tl_stage_readiness_2026.json",
+        "docs/data/country_readiness_dashboard_2026.json",
+        "docs/data/uz_exact_answer_rules_2026.json",
+        "docs/data/tl_exact_answer_rules_2026.json",
+        "docs/data/tj_stage_readiness_2026.json",
+        "docs/data/kh_exact_answer_rules_2026.json",
+        "docs/data/mn_exact_answer_rules_2026.json",
+        "docs/data/uz_e9_manufacturing_2026.json",
+        "docs/data/th_e9_manufacturing_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "Myanmar candidate rows are visible but their titles do not independently establish a 2026 Manufacturing cohort. Keep sector gate.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "mm_hrdk_final_results",
+      "agency": "HRD Korea EPS-TOPIK",
+      "url": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "before": "f87a32ec92c65a049d03ce89f50a6b3b4db83cea93b700226818aa0855f6ad65",
+      "after": "a70cdccb1d513f53c4023480e409a2d2791364e6f4d9b64a7c36c9512654ad4b",
+      "beforeUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "afterUrl": "https://epstopik.hrdkorea.or.kr/epstopik/pass/candidate/sucessCandidateList.do?lang=en",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/kh_e9_manufacturing_2026.json",
+        "docs/data/pk_special_eps_topik_2026.json",
+        "docs/data/hrd_examnot_linkage_2026.json",
+        "docs/data/mn_e9_manufacturing_2026.json",
+        "docs/data/tj_exact_answer_rules_2026.json",
+        "docs/data/tj_e9_manufacturing_2026.json",
+        "docs/data/mm_manufacturing_verification_2026.json",
+        "docs/data/kh_stage_readiness_2026.json",
+        "docs/data/uz_stage_readiness_2026.json",
+        "docs/data/mn_stage_readiness_2026.json",
+        "docs/data/pk_exact_answer_rules_2026.json",
+        "docs/data/country_readiness_dashboard_2026.json",
+        "docs/data/uz_exact_answer_rules_2026.json",
+        "docs/data/pk_stage_readiness_2026.json",
+        "docs/data/tj_stage_readiness_2026.json",
+        "docs/data/kh_exact_answer_rules_2026.json",
+        "docs/data/mn_exact_answer_rules_2026.json",
+        "docs/data/uz_e9_manufacturing_2026.json",
+        "docs/data/kh_special_eps_topik_2026.json",
+        "docs/data/pk_e9_manufacturing_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "Current final-results listing includes newly dated country rows. No Myanmar Manufacturing eligibility or final-pass claim is inferred.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "np_eps_notice_index",
+      "agency": "EPS Nepal",
+      "url": "https://epsnepal.gov.np/notices",
+      "before": "57da658d3f0dfed75f7199e56535ed9352eb9e73ef34c2f5dc8f75da195da863",
+      "after": "47cbf95c2710cf02cc6a51914bc0341bd5cda63db846b307d7d98326d9921309",
+      "beforeUrl": "https://epsnepal.gov.np/notices",
+      "afterUrl": "https://epsnepal.gov.np/notices",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/np_e9_manufacturing_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/np_eps_process_baseline_2026.json",
+        "docs/data/country_readiness_dashboard_2026.json",
+        "docs/data/np_stage_readiness_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "The Nepal listing loads and contains newer notices. Specific sector/cohort documents still need separate review. No change to Indonesian rules.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "vn_colab_eps_notices",
+      "agency": "Vietnam COLAB EPS notices",
+      "url": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "before": "06548d5a97ad92acb30ed1620f45c5b184d9dfa391cc211b4cc7c5f010a9408d",
+      "after": "89480ad7e4b660c8192db673f19deb5296826b122b45615b5714f815eb30b007",
+      "beforeUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "afterUrl": "https://colab.moha.gov.vn/tin-tucs/357/Chuong-trinh-EPS.aspx",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/vn_e9_manufacturing_2026.json",
+        "docs/data/vn_stage_readiness_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/country_readiness_dashboard_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "index_fetch_failed_followup_notice_inspected",
+        "finding": "COLAB notice 5742 supplies a later Round 2 plan; the current preview still cites the earlier projected window and awaits a final notice. Flag for correction; Vietnam HOLD remains.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "lk_slbfe_home",
+      "agency": "Sri Lanka SLBFE",
+      "url": "https://www.slbfe.lk/",
+      "before": "bac51920cf8a4e5deff92bb8b59c2282875a83a44f1b8959fc8296ab789dd190",
+      "after": "e754349aa94ac0899b9b546c1c7c39fa2724ec55c99e256f097a2c71518fa3b2",
+      "beforeUrl": "https://www.slbfe.lk/",
+      "afterUrl": "https://www.slbfe.lk/",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/lk_e9_manufacturing_2026.json",
+        "docs/data/lk_special_eps_topik_2026.json",
+        "docs/data/lk_document_packs_2026.json",
+        "docs/data/lk_exact_answer_rules_2026.json",
+        "docs/data/lk_stage_readiness_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/country_packs_v1.json",
+        "docs/data/country_readiness_dashboard_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "Recent EPS admissions and roster notices are visible. Their scope is separate from the application checklist; no automatic country-pack promotion.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "kg_migrant_home",
+      "agency": "Kyrgyzstan CEC",
+      "url": "https://migrant.kg/",
+      "before": "a7cd8cc10becfbc3c95ab8c076e962145ff7afbb787617558b45c37563ad4565",
+      "after": "8136d527f34dd725ae72197e426d6fe10a3f76b9bf65ab5d9b2bede7ab555775",
+      "beforeUrl": "https://migrant.kg/",
+      "afterUrl": "https://migrant.kg/",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/country_coverage_matrix_2026.json",
+        "docs/data/kg_exact_answer_rules_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/country_packs_v1.json",
+        "docs/data/kg_document_packs_2026.json",
+        "docs/data/kg_post_contract_process_2026.json",
+        "docs/data/country_readiness_dashboard_2026.json",
+        "docs/data/kg_special_eps_topik_2026.json",
+        "docs/data/kg_e9_manufacturing_2026.json",
+        "docs/data/kg_stage_readiness_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_index_inspected",
+        "finding": "The portal redirects to /kg/ and has recent news. Portal news does not certify the downstream exact rules.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "mm_mol_dol_index",
+      "agency": "Myanmar Ministry of Labour",
+      "url": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "before": "0f4f1a28ecd8b8f0daaacb5513e9101984c3089c955ed0d9df87e974d3959bd0",
+      "after": "2fa75bd2dadab10d0cd794b2955ec0efda07a92a4aaa33fb1b494a3bd059a95f",
+      "beforeUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "afterUrl": "https://www.mol.gov.mm/mol-department-of-labour/",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/country_coverage_matrix_2026.json",
+        "docs/data/mm_manufacturing_verification_2026.json",
+        "docs/data/source_review_status.json",
+        "docs/data/country_readiness_dashboard_2026.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "direct_fetch_failed_search_identity_only",
+        "finding": "Official search identifies the labour-department listing. Full current-body and historical comparison remains pending. Do not promote Manufacturing.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    },
+    {
+      "id": "hrdk_indonesia_eps_center_contact",
+      "agency": "HRD Korea",
+      "url": "https://vb_seouls.hrdkorea.or.kr/4/1/2/1",
+      "before": "effac90e4a3527b60f9890bf2bae270172ef8cae454db51273a1c20ece9f5f16",
+      "after": "a9411d39bcc041c8d7a57761353095eba1a9cb2c32afd8a6cd1c69df23a026aa",
+      "beforeUrl": "https://vb_seouls.hrdkorea.or.kr/4/1/2/1",
+      "afterUrl": "https://vb_seouls.hrdkorea.or.kr/4/1/2/1",
+      "reason": "content_changed",
+      "referencedDataFiles": [
+        "docs/data/official_help_channels_v1.json"
+      ],
+      "humanReviewer": null,
+      "semanticDecision": "pending",
+      "baselineAcceptanceAuthorized": false,
+      "machineContentReview": {
+        "observedAtDate": "2026-10-31",
+        "evidenceStatus": "current_official_body_compared",
+        "finding": "The official Indonesia EPS Centre row matches the two phone numbers and Jakarta address already in official_help_channels_v1.json.",
+        "historicalFullTextDiffAvailable": false,
+        "humanApproval": false
+      }
+    }
+  ],
+  "machineTriageComplete": true,
+  "humanSemanticApprovalComplete": false,
+  "baselineUpdated": false
+}
