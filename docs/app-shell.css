@@ -586,3 +586,7 @@ button.primary:hover,a.primary:hover,.next-action .primary:hover,.quick-start .p
 body.kep-member-signed-in .member-access-note{display:none}
 @media(min-width:680px){.member-access-note{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
 @media(max-width:380px){.header-account-actions{gap:4px}.header-account-actions .ghost{padding:7px 8px;font-size:.75rem}}
+
+/* Keyboard access for stage cards: same action as pointer activation. */
+.phase-stage-list .stage[role="button"]:focus-visible{outline:3px solid var(--kep-focus,#367aa8);outline-offset:3px;border-color:var(--kep-navy,#142d4c)}
+@media (forced-colors:active){.phase-stage-list .stage[role="button"]:focus-visible{outline:3px solid Highlight}}
