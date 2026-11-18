@@ -8,6 +8,7 @@ test('stage cards open with Enter and Space without changing progress', async ({
   const before = await page.evaluate(() => localStorage.getItem('kep.doneStages'));
   const cards = page.locator('.phase-stage-list .stage[role="button"]');
   await expect(cards).toHaveCount(27);
+  await page.locator('#allJourneyDetails').evaluate(node => node.open = true);
   const first = cards.first();
   await first.evaluate(node => node.closest('details').open = true);
   await first.focus();
