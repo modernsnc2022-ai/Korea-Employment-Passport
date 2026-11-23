@@ -938,11 +938,19 @@ function renderJourney(){
       const isStageCurrent=current?.id===stage.id;
       const card=document.createElement('article');
       card.className='stage'+(isStageDone?' done':'')+(isStageCurrent?' current':'');
+      card.setAttribute('role','button');
+      card.tabIndex=0;
+      card.setAttribute('aria-label',`${index+1}. ${stageTitle(stage)} — ${isStageDone?'Selesai':isStageCurrent?'Sekarang':'Berikutnya'}. Buka detail tahap`);
       card.innerHTML=`
         <div class="step-no">${isStageDone?'✓':index+1}</div>
         <div><h3>${escapeHtml(stageTitle(stage))}</h3><p>${escapeHtml(authorityLabel(stage))}</p></div>
         <span class="status">${isStageDone?'Selesai':isStageCurrent?'Sekarang':'Berikutnya'}</span>`;
       card.addEventListener('click',()=>openStage(stage));
+      card.addEventListener('keydown',event=>{
+        if(event.key!=='Enter'&&event.key!==' ')return;
+        event.preventDefault();
+        openStage(stage);
+      });
       list.appendChild(card);
     });
     details.appendChild(list);

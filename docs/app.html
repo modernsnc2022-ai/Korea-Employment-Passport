@@ -54,13 +54,13 @@
     <div id="freshnessStatus" class="freshness-status" role="status" aria-live="polite" hidden></div>
 
     <section id="quickStart" class="quick-start" hidden>
-      <span class="eyebrow dark">LANGKAH 1 · TENTUKAN POSISI ANDA</span>
-      <h2>Anda sedang di tahap mana?</h2>
-      <p>Pilih kondisi Anda. Kami akan menunjukkan langkah berikutnya dan rujukan resminya.</p>
+      <span class="eyebrow dark">MULAI DI SINI</span>
+      <h2>Pilih tahap Anda</h2>
+      <p>Pilih satu kondisi untuk melihat langkah berikutnya.</p>
       <aside id="memberAccessNote" class="member-access-note">
         <div>
-          <strong>Informasi umum tetap terbuka.</strong>
-          <p>Buat akun gratis untuk memilih tahap, memakai checklist, memeriksa biaya, dan mengelola progres pribadi.</p>
+          <strong>Gratis. Simpan progres dengan akun.</strong>
+          <p>Panduan umum tetap tersedia tanpa akun.</p>
         </div>
         <div class="member-access-actions">
           <button type="button" id="memberAccessSignup" class="primary">Buat akun gratis</button>
@@ -73,7 +73,7 @@
         <button type="button" class="quick-choice" data-quick-stage="skill_competency"><strong>Sudah ikut EPS-TOPIK</strong><small>Menunggu / menuju Skill Test</small></button>
       </div>
       <details class="advanced-stage-choices">
-        <summary>Sudah melewati ujian? Pilih tahap selanjutnya</summary>
+        <summary>Sudah lebih jauh? Lihat tahap lainnya</summary>
         <div class="quick-choice-grid">
           <button type="button" class="quick-choice" data-quick-stage="psychology_pre_job"><strong>Sudah lulus seleksi akhir</strong><small>Menuju psikologi / MCU I</small></button>
           <button type="button" class="quick-choice" data-quick-stage="roster"><strong>Sudah kirim lamaran</strong><small>Menunggu dipilih perusahaan</small></button>
@@ -82,7 +82,7 @@
         </div>
       </details>
       <details class="quick-precise">
-        <summary>Posisi saya berbeda → pilih lebih tepat</summary>
+        <summary>Pilih tahap yang lebih tepat</summary>
         <div class="quick-start-row">
           <select id="lastMilestoneSelect" aria-label="Hal terakhir yang sudah selesai"></select>
           <button id="setMilestoneBtn" class="primary" type="button">Gunakan posisi ini</button>
@@ -92,10 +92,10 @@
     </section>
 
     <nav class="utility-nav" aria-label="Alat utama">
-      <button class="utility-tab active" data-view="journey" aria-current="page"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg><span>01</span>Saat ini</button>
-      <button class="utility-tab" data-view="documents"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h8l5 5v15H6z"/><path d="M14 2v5h5"/><path d="M9 12h7M9 16h7"/></svg><span>02</span>Dokumen</button>
-      <button class="utility-tab" data-view="fees"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>03</span>Biaya</button>
-      <button class="utility-tab" data-view="gaps"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 1 0-10-10"/><path d="M9 9a3 3 0 1 1 5 2c-1.5 1-2 2-2 3"/><path d="M12 18h.01"/></svg><span>04</span>Bantuan</button>
+      <button class="utility-tab active" data-view="journey" aria-current="page"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg>Saat ini</button>
+      <button class="utility-tab" data-view="documents"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h8l5 5v15H6z"/><path d="M14 2v5h5"/><path d="M9 12h7M9 16h7"/></svg>Dokumen</button>
+      <button class="utility-tab" data-view="fees"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 10h18M16 15h2"/></svg>Biaya</button>
+      <button class="utility-tab" data-view="gaps"><svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 1 0-10-10"/><path d="M9 9a3 3 0 1 1 5 2c-1.5 1-2 2-2 3"/><path d="M12 18h.01"/></svg>Bantuan</button>
     </nav>
 
     <section class="flow-dashboard" aria-label="Proses resmi">
