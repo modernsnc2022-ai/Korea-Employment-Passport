@@ -520,7 +520,7 @@ async function boot(){
         {
           version:'unavailable',
           community:{status:'backend_required',visibility:'members_only',authEnforcement:'server_side',closedMessage:'Backend anggota belum aktif.'},
-          investigation:{enabled:true,tiers:[]},
+          investigation:{enabled:false,tiers:[]},
           ads:{enabled:false,label:'IKLAN / SPONSOR'}
         },
         'company community and paid-service policy'
@@ -3365,6 +3365,7 @@ function buildScoutRequestBody(data,missing){
 }
 
 $('requestScoutBtn').addEventListener('click',()=>{
+  if(!companyServices?.investigation?.enabled)return;
   const data=saveWorkplace();
   if(!data.company&&!data.address)return;
   const checked=new Set(data.checks||[]);
@@ -4097,6 +4098,9 @@ function syncCompanyHubFromWorkplace(){
 
 function renderCompanyHub(){
   if(!companyServices)return;
+  const showInvestigation=companyServices.investigation?.enabled===true;
+  $('companyInvestigationPanel').hidden=!showInvestigation;
+  $('workplaceInvestigation').hidden=!showInvestigation;
   syncCompanyHubFromWorkplace();
 
   const community=companyServices.community||{};
@@ -4170,7 +4174,7 @@ function answerCompanyQuestion(){
     '<strong>Pertanyaan:</strong> '+escapeHtml(question)+
     '<p><strong>Perusahaan:</strong> '+escapeHtml(company)+(address?' · '+escapeHtml(address):'')+'</p>'+
     workerText+lookupText+
-    '<p>Jika bukti ini belum menjawab pertanyaan Anda, gunakan komunitas anggota setelah aktif atau buat permintaan investigasi operator di bawah. KEP tidak akan menebak kondisi perusahaan yang belum diverifikasi.</p>';
+    '<p>KEP tidak akan menebak kondisi perusahaan yang belum terverifikasi. Gunakan sumber resmi untuk memeriksa lebih lanjut.</p>';
 }
 
 function buildOperatorInvestigationBody(data){
@@ -4191,6 +4195,7 @@ function buildOperatorInvestigationBody(data){
 }
 
 function requestOperatorInvestigation(){
+  if(!companyServices?.investigation?.enabled)return;
   const company=($('companyQaCompany').value||$('wpCompany')?.value||'').trim();
   const address=($('companyQaAddress').value||$('wpAddress')?.value||'').trim();
   const tier=$('companyInvestigationTier').value;

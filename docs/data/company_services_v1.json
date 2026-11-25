@@ -38,7 +38,7 @@
     }
   },
   "investigation": {
-    "enabled": true,
+    "enabled": false,
     "fulfillment": "manual_operator",
     "payment": "quote_before_payment",
     "priceDisplay": "not_set",
