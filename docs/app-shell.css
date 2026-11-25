@@ -438,6 +438,7 @@ li{overflow-wrap:anywhere}
 
 /* Worker issue picker: existing tools, no new claims or data capture. */
 .worker-help-chooser{margin:12px 0 18px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.guide-share-link{display:inline-flex;align-items:center;min-height:44px;padding:4px 10px;color:#235e8f;text-underline-offset:3px}
 .worker-help-chooser h2{font-size:1.1rem;margin:0 0 6px}.worker-help-chooser p{font-size:.84rem;color:var(--muted);margin:0 0 12px;line-height:1.5}
 .worker-help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .worker-help-grid button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;min-height:72px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink);cursor:pointer}
