@@ -24,7 +24,7 @@ module.exports = defineConfig({
   },
   reporter: [['list']],
   webServer: {
-    command: `python -m http.server ${port} --bind 127.0.0.1 --directory docs`,
+    command: `python scripts/serve_ui_tests.py ${port}`,
     url: `http://127.0.0.1:${port}/app.html`,
     reuseExistingServer: false,
     timeout: 30000

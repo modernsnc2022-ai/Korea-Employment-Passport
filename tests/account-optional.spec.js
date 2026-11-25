@@ -1,4 +1,18 @@
 const { test, expect } = require('@playwright/test');
+test('configured accounts show recovery instructions when the SDK is unavailable', async ({page}) => {
+  await page.route('**/account-config.js', route=>route.fulfill({
+    path:require.resolve('../docs/account-config.js'),contentType:'application/javascript'
+  }));
+  await page.route('https://www.gstatic.com/firebasejs/**', route=>route.abort());
+  await page.goto('/app.html');
+  await page.locator('[data-quick-stage="eligibility"]').click();
+  await expect(page.locator('#accountDialog')).toBeVisible();
+  await page.locator('#accountEmail').fill('fixture@example.org');
+  await page.locator('#accountPassword').fill('fixture-only-password');
+  await page.locator('#accountSubmit').click();
+  await expect(page.locator('#accountStatus')).toContainText('Periksa koneksi');
+  await expect(page.locator('#quickStart')).toBeVisible();
+});
 test('public information stays open while personal actions require a free account', async ({page}) => {
   await page.route('**/account-config.js', r=>r.fulfill({contentType:'application/javascript',body:`window.KEP_ACCOUNT_CONFIG={provider:'firebase',projectId:'kep-staging',authDomain:'kep-staging.firebaseapp.com',apiKey:'AIza${'x'.repeat(35)}',appId:'1:123:web:abcdef'};`}));
   await page.route('https://www.gstatic.com/firebasejs/12.4.0/**', async r=>{
@@ -15,6 +29,10 @@ test('public information stays open while personal actions require a free accoun
   await expect(page.locator('.utility-tab')).toHaveCount(4);
   await page.locator('.utility-tab[data-view="gaps"]').click();
   await expect(page.locator('#routeTitle')).toHaveText('Bantuan');
+  const share = page.getByRole('link',{name:'Bagikan panduan KEP lewat WhatsApp'});
+  await expect(share).toBeVisible();
+  const message = new URL(await share.getAttribute('href')).searchParams.get('text');
+  expect(message).toContain('https://kepassport.gdglobal.kr/');
   await page.locator('.utility-tab[data-view="journey"]').click();
   await page.locator('[data-quick-stage="eligibility"]').click();
   await expect(page.locator('#accountDialog')).toBeVisible();
@@ -34,9 +52,9 @@ test('account UI email signup, login, sync and logout with mocked Google Cloud S
       'firebase-auth.js':`export function getAuth(){return {}};
          export function onAuthStateChanged(a,callback){callback(null)};
          export async function createUserWithEmailAndPassword(a,e,p){return {user:{uid:'demo',email:e,emailVerified:false}}};
-         export async function sendEmailVerification(){};
+         export async function sendEmailVerification(){window.__sent=(window.__sent||0)+1};
          export async function signOut(){};
-         export async function signInWithEmailAndPassword(a,e,p){return {user:{uid:'demo',email:e,emailVerified:true}}};
+         export async function signInWithEmailAndPassword(a,e,p){return {user:{uid:'demo',email:e,emailVerified:window.__sent===2}}};
          export async function reload(){};
          export async function sendPasswordResetEmail(){};`,
       'firebase-firestore.js':`export function getFirestore(){return {}};
@@ -57,6 +75,13 @@ test('account UI email signup, login, sync and logout with mocked Google Cloud S
   await page.locator('#accountPrivacyConsent').check();
   await page.locator('#accountSubmit').click();
   await expect(page.locator('#accountStatus')).toContainText('verifikasi');
+  await page.locator('#accountPassword').fill('demo-long-passphrase!');
+  await page.locator('#accountSubmit').click();
+  await expect(page.locator('#accountTitle')).toHaveText('Kirim ulang email verifikasi');
+  await expect(page.locator('#accountSignedIn')).toBeHidden();
+  await page.locator('#accountPassword').fill('demo-long-passphrase!');
+  await page.locator('#accountSubmit').click();
+  await expect(page.locator('#accountStatus')).toContainText('Email verifikasi dikirim');
   await page.locator('#accountPassword').fill('demo-long-passphrase!');
   await page.locator('#accountSubmit').click();
   await expect(page.locator('#accountSignedIn')).toBeVisible();

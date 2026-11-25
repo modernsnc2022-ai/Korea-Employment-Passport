@@ -472,8 +472,10 @@
         <div class="coverage-bar"><span id="coverageBar"></span></div>
         <div id="workplaceCoverageDetail" class="workplace-coverage-detail"></div>
         <button id="openCompanyHubBtn" class="secondary" type="button">Buka komunitas & tanya tentang perusahaan</button>
+        <div id="workplaceInvestigation" hidden>
         <button id="requestScoutBtn" class="primary" type="button">Minta investigasi operator (berbayar)</button>
         <p class="muted">Jika informasi publik dan pengalaman pekerja belum cukup, Anda dapat meminta investigasi tambahan. Harga dikonfirmasi sebelum pembayaran. Jangan kirim paspor, ARC, dokumen kesehatan, atau alamat asrama pribadi.</p>
+        </div>
       </div>
     </section>
 
@@ -481,7 +483,7 @@
     <section id="companyHub" class="view">
       <div class="section-head">
         <span class="eyebrow dark">KOMUNITAS PERUSAHAAN</span>
-        <h2>Tanya, baca pengalaman, lalu minta investigasi jika masih kurang</h2>
+        <h2>Periksa informasi tentang perusahaan</h2>
         <p>Ruang perusahaan dirancang khusus anggota. Pertanyaan dan pengalaman ditampilkan dengan nama samaran; identitas akun tidak dipublikasikan.</p>
       </div>
 
@@ -496,7 +498,7 @@
 
       <div class="panel company-question-panel">
         <h3>Apa yang ingin Anda ketahui tentang perusahaan ini?</h3>
-        <p class="muted">Versi saat ini mencari bukti yang sudah diverifikasi di KEP. Jika belum ada cukup bukti, pertanyaan dapat dibawa ke komunitas anggota setelah backend aktif atau diteruskan ke investigasi operator.</p>
+        <p class="muted">Cari informasi yang sudah diverifikasi dari nama perusahaan pada SLC Anda.</p>
         <label>Nama perusahaan
           <input id="companyQaCompany" autocomplete="off" placeholder="Nama pada SLC">
         </label>
@@ -522,10 +524,10 @@
           <span>Pertanyaan</span><span>Pengalaman kerja</span><span>Asrama</span><span>Gaji & lembur</span><span>Transportasi</span><span>Foto konteks</span>
         </div>
         <div id="companyBoardState" class="result warn"></div>
-        <p class="muted">Saat backend aktif, anggota dapat menulis dengan nama samaran. Tuduhan faktual yang serius, data pribadi, doxxing, foto wajah/plat nomor/문서 식별정보 등은 moderation 대상입니다.</p>
+        <p class="muted">Jangan bagikan nama, alamat pribadi, foto wajah, nomor kendaraan, atau nomor dokumen.</p>
       </div>
 
-      <div class="panel company-investigation">
+      <div id="companyInvestigationPanel" class="panel company-investigation" hidden>
         <div>
           <span class="eyebrow dark">HUMAN REALITY CHECK · BERBAYAR</span>
           <h3>Informasi masih kurang? Minta operator memeriksa</h3>
@@ -621,6 +623,7 @@
           <a href="https://1350.moel.go.kr/home/hp/ch/callchat.do" target="_blank" rel="noopener noreferrer">Lihat saluran konsultasi Kementerian Ketenagakerjaan Korea (MOEL 1350) ↗</a>
           <small>Periksa ketersediaan bahasa, jam layanan, dan alamat terbaru pada situs resmi. Tautan tidak berarti kasus atau syarat Anda sudah diverifikasi KEP.</small>
         </details>
+        <p><a href="https://wa.me/?text=Panduan%20gratis%20untuk%20menyiapkan%20dokumen%20dan%20mengecek%20biaya%20EPS%20Korea%3A%20https%3A%2F%2Fkepassport.gdglobal.kr%2F" target="_blank" rel="noopener noreferrer">Bagikan panduan KEP lewat WhatsApp</a></p>
       </div>
       <div class="section-head">
         <h2>Periksa pesan dan biaya</h2>
@@ -840,7 +843,8 @@
       <button type="button" id="accountSaveBtn" class="primary full">Simpan progres perangkat ke cloud</button>
       <button type="button" id="accountRestoreBtn" class="secondary full">Pulihkan progres cloud ke perangkat</button>
       <button type="button" id="accountDeleteProgressBtn" class="secondary full">Hapus progres cloud</button>
-      <label class="account-delete-password">Kata sandi saat ini<input id="accountDeletePassword" type="password" autocomplete="current-password" maxlength="128"></label>\n      <button type="button" id="accountDeleteAccountBtn" class="secondary full">Hapus akun KEP</button>
+      <label class="account-delete-password">Kata sandi saat ini<input id="accountDeletePassword" type="password" autocomplete="current-password" maxlength="128"></label>
+      <button type="button" id="accountDeleteAccountBtn" class="secondary full">Hapus akun KEP</button>
       <button type="button" id="accountLogoutBtn" class="ghost full">Keluar akun</button>
     </div>
     <p class="account-footer-note">Saat memulihkan progres, cadangkan catatan lokal terlebih dahulu. Tidak ada sinkronisasi data dengan sistem pemerintah.</p>

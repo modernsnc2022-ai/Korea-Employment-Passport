@@ -13,7 +13,6 @@ const submit=$account('accountSubmit');
 const modeLinks=$account('accountModeLinks');
 const signedIn=$account('accountSignedIn');
 const validConfig=cfg.provider==='firebase' && /^[-a-z0-9]+$/i.test(cfg.projectId||'') && /^[-a-z0-9.]+\.firebaseapp\.com$/i.test(cfg.authDomain||'') && /^AIza[\w-]{20,}$/.test(cfg.apiKey||'') && /^1:\d+:web:[\da-f]+$/i.test(cfg.appId||'');
-const e2eBypass=Boolean(navigator.webdriver&&cfg.projectId!=='kep-staging');
 let fb=null,auth=null,db=null,currentUser=null,mode='login',syncEnabled=false,busy=false,syncTimer=null;
 const memberNote=$account('memberAccessNote');
 const protectedActionSelector=[
@@ -36,14 +35,16 @@ const protectedActionSelector=[
 ].join(',');
 function notice(message,error=false){status.hidden=false;status.className=error?'result risk':'result safe';status.textContent=message;}
 function setMode(next){
-  mode=next;title.textContent=({login:'Masuk akun KEP',signup:'Daftar akun gratis',forgot:'Atur ulang kata sandi'}[next]||'Akun KEP');
+  mode=next;title.textContent=({login:'Masuk akun KEP',signup:'Daftar akun gratis',forgot:'Atur ulang kata sandi',verify:'Kirim ulang email verifikasi'}[next]||'Akun KEP');
   passwordLabel.hidden=next==='forgot';passwordInput.required=next!=='forgot';passwordInput.autocomplete=next==='signup'?'new-password':'current-password';passwordInput.minLength=next==='signup'?12:1;
   $account('accountPrivacyConsent').closest('label').hidden=next!=='signup';
-  submit.textContent=({login:'Masuk',signup:'Buat akun gratis',forgot:'Kirim email pemulihan'}[next]||'Masuk');
+  submit.textContent=({login:'Masuk',signup:'Buat akun gratis',forgot:'Kirim email pemulihan',verify:'Kirim ulang email verifikasi'}[next]||'Masuk');
   modeLinks.hidden=false;status.hidden=true;
 }
 function setLoggedIn(user){
-  const verified=Boolean(user?.emailVerified);currentUser=verified?user:null;
+  const verified=Boolean(user?.emailVerified);
+  if(currentUser?.uid!==user?.uid){clearTimeout(syncTimer);syncEnabled=false;}
+  currentUser=verified?user:null;
   document.body.classList.toggle('kep-member-signed-in',verified);
   if(memberNote)memberNote.hidden=verified;
   signedIn.hidden=!verified;form.hidden=verified;modeLinks.hidden=verified;
@@ -63,7 +64,7 @@ function openMemberGate(preferredMode='signup'){
 }
 
 document.addEventListener('click',event=>{
-  if(currentUser||!validConfig||e2eBypass)return;
+  if(currentUser||!validConfig)return;
   const protectedAction=event.target.closest(protectedActionSelector);
   if(!protectedAction)return;
   event.preventDefault();
@@ -72,7 +73,7 @@ document.addEventListener('click',event=>{
 },true);
 
 document.addEventListener('focusin',event=>{
-  if(currentUser||!validConfig||e2eBypass)return;
+  if(currentUser||!validConfig)return;
   const field=event.target.closest('#documents input,#documents select,#documents textarea,#fees input,#fees select,#fees textarea,#gaps input,#gaps select,#gaps textarea,#eligibility input,#eligibility select,#eligibility textarea,#contract input,#contract select,#contract textarea,#workplace input,#workplace select,#workplace textarea,#payroll input,#payroll select,#payroll textarea,#companyHub input,#companyHub select,#companyHub textarea');
   if(!field)return;
   event.preventDefault();
@@ -100,12 +101,14 @@ function progressPayload(){
 function userDocument(){if(!currentUser?.emailVerified||!db||!fb)throw new Error('Masuk dengan email terverifikasi terlebih dahulu.');return fb.doc(db,'kep_progress',currentUser.uid);}
 async function saveCloud(silent=false){
  if(busy||!currentUser)return;busy=true;
- try{const data=progressPayload();await fb.setDoc(userDocument(),{payload:data,updatedAt:fb.serverTimestamp()});syncEnabled=true;if(!silent)notice('Progres tersimpan di akun KEP. Perubahan berikutnya disimpan otomatis saat halaman terbuka.');}
+ const uid=currentUser.uid;
+ try{const data=progressPayload();await fb.setDoc(userDocument(),{payload:data,updatedAt:fb.serverTimestamp()});if(currentUser?.uid!==uid)return;syncEnabled=true;if(!silent)notice('Progres tersimpan di akun KEP. Perubahan berikutnya disimpan otomatis saat halaman terbuka.');}
  catch(error){syncEnabled=false;notice('Gagal menyimpan progres: '+getError(error),true)}finally{busy=false;}
 }
 async function restoreCloud(){
  if(busy||!currentUser)return;busy=true;
- try{const snap=await fb.getDoc(userDocument());if(!snap.exists())throw new Error('Belum ada progres cloud. Simpan progres perangkat terlebih dahulu.');
+ const uid=currentUser.uid;
+ try{const snap=await fb.getDoc(userDocument());if(currentUser?.uid!==uid)return;if(!snap.exists())throw new Error('Belum ada progres cloud. Simpan progres perangkat terlebih dahulu.');
    const payload=snap.data().payload,local=progressPayload();
    if(payload.routeKey!==local.routeKey)throw new Error('Progres cloud untuk jalur lain. Pemulihan dibatalkan.');
    if(!confirm('Progres perangkat akan diganti. Buat backup JSON lokal terlebih dahulu jika perlu. Lanjutkan?'))return;
@@ -115,21 +118,31 @@ async function restoreCloud(){
 function queueSync(){if(!syncEnabled||!currentUser)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>saveCloud(true),1800);}
 window.addEventListener('kep:progress-changed',queueSync);
 async function submitAccount(event){
- event.preventDefault();if(busy||!auth)return;busy=true;submit.disabled=true;
+ event.preventDefault();
+ if(!auth||!fb){notice('Layanan akun belum terhubung. Periksa koneksi, lalu muat ulang halaman. Progres perangkat tetap tersimpan.',true);return;}
+ if(busy)return;busy=true;submit.disabled=true;
  try{const email=emailInput.value.trim().toLowerCase(),password=passwordInput.value;
    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('Masukkan alamat email yang benar.');
    if(mode==='signup'){
      if(password.length<12)throw new Error('Kata sandi minimal 12 karakter.');
      if(!$account('accountPrivacyConsent').checked)throw new Error('Setujui kebijakan privasi untuk membuat akun.');
      const result=await fb.createUserWithEmailAndPassword(auth,email,password);
-     await fb.sendEmailVerification(result.user,{url:location.origin+location.pathname});
-     await fb.signOut(auth);setMode('login');notice('Email verifikasi dikirim. Konfirmasi email terlebih dahulu, lalu masuk.');
+     try{await fb.sendEmailVerification(result.user,{url:location.origin+location.pathname});}
+     finally{await fb.signOut(auth);setMode('verify');}
+     setMode('login');notice('Email verifikasi dikirim. Periksa kotak masuk dan folder spam sebelum masuk.');
    }else if(mode==='forgot'){
      await fb.sendPasswordResetEmail(auth,email);setMode('login');notice('Jika email terdaftar, Anda akan menerima pesan pemulihan.');
    }else{
      const result=await fb.signInWithEmailAndPassword(auth,email,password);
      await fb.reload(result.user);
-     if(!result.user.emailVerified){await fb.signOut(auth);throw new Error('Email belum diverifikasi. Buka pesan verifikasi pendaftaran sebelum login.');}
+     if(!result.user.emailVerified){
+       if(mode==='verify'){
+         try{await fb.sendEmailVerification(result.user,{url:location.origin+location.pathname});}
+         finally{await fb.signOut(auth);}
+         setMode('login');notice('Email verifikasi dikirim. Periksa kotak masuk dan folder spam.');return;
+       }
+       await fb.signOut(auth);setMode('verify');throw new Error('Email belum diverifikasi. Periksa kotak masuk dan spam, atau masukkan kata sandi untuk mengirim ulang.');
+     }
      setLoggedIn(result.user);
    }
  }catch(error){notice(getError(error),true)}finally{busy=false;submit.disabled=false;passwordInput.value='';}
@@ -169,14 +182,17 @@ $account('memberAccessSignup')?.addEventListener('click',()=>openMemberGate('sig
 $account('memberAccessLogin')?.addEventListener('click',()=>openMemberGate('login'));
 $account('accountCloseBtn').addEventListener('click',()=>dialog.close());
 async function boot(){
-  if(!validConfig||e2eBypass){if(e2eBypass&&memberNote)memberNote.hidden=true;return;}
+  if(!validConfig){if(memberNote)memberNote.hidden=true;return;}
  try{
   const base='https://www.gstatic.com/firebasejs/12.4.0/';
   const [core,authentication,firestore]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
   const app=core.initializeApp({apiKey:cfg.apiKey,authDomain:cfg.authDomain,projectId:cfg.projectId,appId:cfg.appId});
   auth=authentication.getAuth(app);auth.languageCode='id';db=firestore.getFirestore(app);fb={...authentication,...firestore};
-  authentication.onAuthStateChanged(auth,user=>{if(user?.emailVerified)setLoggedIn(user);else if(!user)setLoggedIn(null);});
+  authentication.onAuthStateChanged(auth,user=>{
+    if(user?.emailVerified)setLoggedIn(user);
+    else if(currentUser)setLoggedIn(null);
+  });
   openButton.hidden=false;
- }catch(error){console.warn('KEP account backend not ready:',getError(error));openButton.hidden=true}
+ }catch(error){console.warn('KEP account backend not ready:',getError(error));openButton.hidden=false}
 }
 boot();

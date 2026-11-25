@@ -1464,6 +1464,8 @@ test('company community stays fail-closed until real member auth backend exists'
   await expect(page.locator('#companyBoardBadge')).toHaveText('TERKUNCI');
   await expect(page.locator('#companyBoardState')).toContainText('tidak dianggap login');
   await expect(page.locator('#companyAdSlot')).toBeHidden();
+  await expect(page.locator('#companyInvestigationPanel')).toBeHidden();
+  await expect(page.locator('#workplaceInvestigation')).toBeHidden();
   expect(errors).toEqual([]);
 });
 

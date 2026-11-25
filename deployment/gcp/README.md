@@ -1,6 +1,6 @@
 # KEP account deployment (existing Google Cloud account; no Supabase)
 
-KEP remains on existing Cloudflare/GitHub Pages preview and keeps all 4 menus FREE without login.
+The public app is served at https://kepassport.gdglobal.kr/. All four menus are free. Official guidance is open to guests. Personal tools and cloud progress use a verified KEP account.
 
 ## Backend in Google Cloud
 1. Select a **separate KEP Google Cloud project under the existing Google account/billing**. Do not put KEP's user data in `simple-printer-pro` (currently selected on the Windows gcloud local configuration). Alternatively choose an existing project dedicated to KEP if one already exists.
@@ -13,4 +13,4 @@ KEP remains on existing Cloudflare/GitHub Pages preview and keeps all 4 menus FR
 ## Data minimization
 The account sync uses `window.KEPAccountProgress.backup()` only: stage IDs, document checkbox IDs, notice selections and wizard step/index. It never uploads contract contents, payroll, identity numbers, photos, or free-form documents. Restore always asks before overwriting local progress. Individual progress is readable only by a verified owner UID under Firestore rules.
 
-A missing config hides the account entry point entirely. Existing preview currently has **no live account backend**, so account creation and cloud sync are NOT active yet. Government EPS/SiskoP2MI accounts are independent. Public beta remains HOLD.
+Production web configuration selects `korea-employment-passport`. The Playwright fixture serves an empty configuration for public UI tests and the account tests use an isolated mock SDK. Run `npm run test:firestore` for local rules verification. Real email delivery, deployed rules and second-device restoration require a separate check with dedicated test accounts. Official-source release decisions are tracked separately.

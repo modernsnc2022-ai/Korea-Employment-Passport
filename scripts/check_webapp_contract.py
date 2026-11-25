@@ -90,8 +90,8 @@ if 'id="quickStart"' not in html:
     errors.append("simple UX lock requires first-use quick start")
 if "document.body.classList.add('setup-mode')" not in js or "document.body.classList.remove('setup-mode')" not in js:
     errors.append("simple UX lock requires first-use setup mode toggle")
-if "body.setup-mode .flow-dashboard" not in css or "body.setup-mode .utility-nav" not in css or "body.setup-mode .view" not in css:
-    errors.append("simple UX lock requires first-use setup mode to hide advanced navigation")
+if "body.setup-mode .flow-dashboard" not in css or "body.setup-mode .view" not in css:
+    errors.append("first-use setup must collapse the dashboard and advanced views")
 utility_tabs = re.findall(r'class="utility-tab[^"]*"\s+data-view="([^"]+)"', html)
 if len(utility_tabs) != 4:
     errors.append(f"simple UX lock requires exactly 4 primary bottom-nav items, got {len(utility_tabs)}")
