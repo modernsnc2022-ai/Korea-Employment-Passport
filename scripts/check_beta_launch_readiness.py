@@ -510,10 +510,11 @@ require(
     and "tidak disimpan di repositori publik" in privacy_page,
     "privacy notice must disclose sender-email handling and public-repo exclusion",
 )
-require('href="beta.html"' in landing_page,
-        "public landing must route tester enrollment to beta.html")
-require('src="landing.js"' in landing_page,
-        "public landing must load the recruitment-source attribution helper")
+require('href="app.html"' in landing_page and "window.location.replace(target.href)" in landing_page,
+        "public landing must open the production app and provide a fallback link")
+require("target.search = window.location.search" in landing_page and
+        "target.hash = window.location.hash" in landing_page,
+        "public landing must preserve campaign parameters and section links")
 require(
     "new URLSearchParams(location.search).get('src')" in landing_js
     and "a[href=\"beta.html\"]" in landing_js
